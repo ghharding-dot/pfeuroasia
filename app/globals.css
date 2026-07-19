@@ -385,6 +385,10 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .footer-brand .brand-words b { font-size: 14px; }
 .footer-brand .brand-words b:last-child { font-size: 12px; }
 .footer-brand .brand-region { font-size: 19px; }
+.footer-identity { display: flex; flex-direction: column; gap: 24px; }
+.footer-contact p { margin: 0 0 13px; color: rgba(255,255,255,.52); font-size: 11px; line-height: 1.75; }
+.footer-contact strong { color: rgba(255,255,255,.82); font-weight: 600; letter-spacing: .04em; }
+.footer-contact a { color: var(--gold-light); border-bottom: 1px solid rgba(222,194,141,.35); }
 .footer-top > p { max-width: 330px; margin: 5px 0 0; color: rgba(255,255,255,.48); font-family: var(--serif); font-size: 18px; line-height: 1.6; }
 .footer-links { display: flex; flex-direction: column; gap: 13px; font-size: 11px; letter-spacing: .06em; }
 .footer-links a:hover { color: var(--gold); }
