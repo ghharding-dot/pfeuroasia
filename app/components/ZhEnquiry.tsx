@@ -5,17 +5,50 @@ import { FormEvent, useState } from "react";
 
 export function ZhEnquiry() {
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  function submit(event: FormEvent) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSent(true);
+    setSending(true);
+    setError("");
+
+    const form = new FormData(event.currentTarget);
+    const payload = {
+      _subject: "来自 pfeuroasia.com 的新中文咨询",
+      enquiry_type: form.get("purpose"),
+      preferred_area: form.get("area"),
+      budget: form.get("budget"),
+      preferred_channel: form.get("channel"),
+      full_name: form.get("name"),
+      email: form.get("email"),
+      wechat_id: form.get("wechat"),
+      telephone: form.get("phone"),
+      requirements: form.get("message"),
+      language: "Simplified Chinese",
+      _template: "table",
+    };
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Submission failed");
+      setSent(true);
+    } catch {
+      setError("暂时无法发送。请重试，或发送电子邮件至 enquiry@pfeuroasia.com。");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (sent) {
     return <div className="zh-enquiry-success">
       <span>✓</span>
       <h3>感谢您的咨询</h3>
-      <p>目前为网站展示版本，您的资料尚未发送。接通正式邮箱或客户管理系统后，即可直接提交。</p>
+      <p>您的私人咨询已发送给我们的团队。我们将通过您首选的联系方式亲自回复。</p>
       <Link className="text-link light-link" href="/zh">返回中文首页 →</Link>
     </div>;
   }
@@ -33,6 +66,7 @@ export function ZhEnquiry() {
       <label className="full"><span>您的具体需求</span><textarea name="message" rows={4} placeholder="请简要说明物业类型、时间安排、隐私要求或其他重点…" /></label>
     </div>
     <label className="zh-consent"><input type="checkbox" required /><span>我同意就本次咨询与我联系。</span></label>
-    <button className="button button-gold" type="submit">提交私人咨询 <span>→</span></button>
+    {error && <p className="form-error" role="alert">{error}</p>}
+    <button className="button button-gold" type="submit" disabled={sending}>{sending ? "正在发送…" : "提交私人咨询"} <span>→</span></button>
   </form>;
 }
