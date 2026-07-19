@@ -24,7 +24,7 @@ export default function MalaysiaPage() {
 
         <article className="kl-feature">
           <div className="kl-feature-image">
-            <img src="/images/kl-armani-skyline.png" alt="Artist's impression showing Armani Hallson KLCC within the Kuala Lumpur skyline" />
+            <img src="/images/kl-armani-skyline.webp" alt="Artist's impression showing Armani Hallson KLCC within the Kuala Lumpur skyline" />
             <span>Artist&apos;s impression</span>
           </div>
           <div className="kl-feature-copy">
@@ -43,10 +43,10 @@ export default function MalaysiaPage() {
         </article>
 
         <div className="kl-gallery">
-          <figure><img src="/images/kl-armani-arrival.png" alt="Artist's impression of the Armani Hallson KLCC arrival and drop-off" /><figcaption><span>01</span>Arrival</figcaption></figure>
-          <figure><img src="/images/kl-armani-rooftop.png" alt="Artist's impression of Armani Hallson KLCC rooftop facilities" /><figcaption><span>02</span>Rooftop facilities</figcaption></figure>
-          <figure><img src="/images/kl-armani-pool.png" alt="Artist's impression of the level 76 pool deck overlooking the Petronas Towers" /><figcaption><span>03</span>KLCC pool deck</figcaption></figure>
-          <figure><img src="/images/kl-armani-gym.png" alt="Artist's impression of the sky gym overlooking Kuala Lumpur" /><figcaption><span>04</span>Sky gym</figcaption></figure>
+          <figure><img src="/images/kl-armani-arrival.webp" alt="Artist's impression of the Armani Hallson KLCC arrival and drop-off" /><figcaption><span>01</span>Arrival</figcaption></figure>
+          <figure><img src="/images/kl-armani-rooftop.webp" alt="Artist's impression of Armani Hallson KLCC rooftop facilities" /><figcaption><span>02</span>Rooftop facilities</figcaption></figure>
+          <figure><img src="/images/kl-armani-pool.webp" alt="Artist's impression of the level 76 pool deck overlooking the Petronas Towers" /><figcaption><span>03</span>KLCC pool deck</figcaption></figure>
+          <figure><img src="/images/kl-armani-gym.webp" alt="Artist's impression of the sky gym overlooking Kuala Lumpur" /><figcaption><span>04</span>Sky gym</figcaption></figure>
         </div>
         <p className="kl-image-note">All development imagery shown is an artist&apos;s impression supplied for marketing purposes.</p>
       </div>
