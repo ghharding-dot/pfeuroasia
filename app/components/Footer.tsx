@@ -6,22 +6,24 @@ export function Footer() {
     <footer className="site-footer">
       <PartnerStrip />
       <div className="site-shell footer-top">
-        <Link className="brand footer-brand" href="/">
-          <span className="brand-lockup" aria-hidden="true">
-            <img className="brand-symbol" src="/images/pf-gold-symbol.png" alt="" />
-            <span className="brand-words"><b>Property</b><b>Facilitators</b></span>
-            <span className="brand-region">EuroAsia</span>
-          </span>
-        </Link>
-        <div className="footer-contact">
-          <p><strong>Property Facilitators EuroAsia</strong></p>
-          <p><strong>Malaysia Office</strong><br />
-            Main Office Tower<br />
-            Financial Park Labuan Complex<br />
-            Jalan Merdeka<br />
-            87000 Labuan, Malaysia
-          </p>
-          <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
+        <div className="footer-identity">
+          <Link className="brand footer-brand" href="/">
+            <span className="brand-lockup" aria-hidden="true">
+              <img className="brand-symbol" src="/images/pf-gold-symbol.png" alt="" />
+              <span className="brand-words"><b>Property</b><b>Facilitators</b></span>
+              <span className="brand-region">EuroAsia</span>
+            </span>
+          </Link>
+          <div className="footer-contact">
+            <p><strong>Property Facilitators EuroAsia</strong></p>
+            <p><strong>Malaysia Office</strong><br />
+              Main Office Tower<br />
+              Financial Park Labuan Complex<br />
+              Jalan Merdeka<br />
+              87000 Labuan, Malaysia
+            </p>
+            <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
+          </div>
         </div>
         <p>Independent luxury property representation between Spain and Asia.</p>
         <div className="footer-links">
