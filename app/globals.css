@@ -899,3 +899,37 @@ button, a { -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Kuala Lumpur opportunities */
+.kl-opportunities { background: #efece4; }
+.kl-heading { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 100px; margin-bottom: 68px; }
+.kl-heading h2 { margin: 0; font-family: var(--serif); font-size: clamp(52px,5.4vw,78px); font-weight: 400; letter-spacing: -.04em; line-height: 1.04; }
+.kl-heading > div:last-child > p { margin: 0 0 26px; color: #60625b; font-size: 15px; line-height: 1.85; }
+.kl-heading strong { color: #8e7047; font-weight: 600; }
+.kl-feature { display: grid; grid-template-columns: 1.2fr .8fr; min-height: 620px; background: #171916; color: white; }
+.kl-feature-image { position: relative; min-height: 540px; overflow: hidden; }
+.kl-feature-image img { width: 100%; height: 100%; object-fit: cover; }
+.kl-feature-image > span { position: absolute; right: 18px; bottom: 16px; padding: 7px 9px; background: rgba(9,10,8,.72); color: rgba(255,255,255,.72); font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+.kl-feature-copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(42px,5vw,75px); }
+.kl-feature-copy h3 { margin: 4px 0 24px; font-family: var(--serif); font-size: clamp(40px,4vw,58px); font-weight: 400; line-height: 1.05; }
+.kl-feature-copy > p:not(.eyebrow) { margin: 0 0 28px; color: rgba(255,255,255,.58); font-size: 14px; line-height: 1.8; }
+.kl-feature-copy ul { margin: 0 0 26px; padding: 0; border-top: 1px solid rgba(255,255,255,.14); list-style: none; }
+.kl-feature-copy li { padding-block: 11px; border-bottom: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.76); font-size: 11px; letter-spacing: .04em; }
+.kl-feature-copy small { color: rgba(255,255,255,.34); font-size: 9px; line-height: 1.6; }
+.kl-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; margin-top: 26px; }
+.kl-gallery figure { margin: 0; }
+.kl-gallery img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.kl-gallery figcaption { display: flex; align-items: center; gap: 14px; padding-top: 13px; color: #35362f; font-family: var(--serif); font-size: 22px; }
+.kl-gallery figcaption span { color: #98784c; font-family: var(--sans); font-size: 9px; letter-spacing: .12em; }
+.kl-image-note { margin: 30px 0 0; color: #85857d; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+
+@media (max-width: 760px) {
+  .kl-heading, .kl-feature { grid-template-columns: 1fr; gap: 34px; }
+  .kl-heading { margin-bottom: 46px; }
+  .kl-heading h2 { font-size: 46px; }
+  .kl-feature-image { min-height: 360px; }
+  .kl-feature-copy { padding: 38px 26px; }
+  .kl-gallery { grid-template-columns: 1fr; }
+  .kl-gallery figcaption { font-size: 20px; }
+}
