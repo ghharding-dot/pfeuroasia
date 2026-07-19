@@ -919,7 +919,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .kl-feature-copy small { color: rgba(255,255,255,.34); font-size: 9px; line-height: 1.6; }
 .kl-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 22px; margin-top: 26px; }
 .kl-gallery figure { margin: 0; }
-.kl-gallery img { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+.kl-gallery img { display: block; width: 100%; height: auto; object-fit: contain; }
 .kl-gallery figcaption { display: flex; align-items: center; gap: 14px; padding-top: 13px; color: #35362f; font-family: var(--serif); font-size: 22px; }
 .kl-gallery figcaption span { color: #98784c; font-family: var(--sans); font-size: 9px; letter-spacing: .12em; }
 .kl-image-note { margin: 30px 0 0; color: #85857d; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
