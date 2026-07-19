@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { OwnerListingSection } from "./components/OwnerListingSection";
 
 const services = [
   {
@@ -232,6 +233,8 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <OwnerListingSection />
 
       <section className="cta-section">
         <div className="site-shell cta-inner">
