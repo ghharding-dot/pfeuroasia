@@ -13,6 +13,16 @@ export function Footer() {
             <span className="brand-region">EuroAsia</span>
           </span>
         </Link>
+        <div className="footer-contact">
+          <p><strong>Property Facilitators EuroAsia</strong></p>
+          <p><strong>Malaysia Office</strong><br />
+            Main Office Tower<br />
+            Financial Park Labuan Complex<br />
+            Jalan Merdeka<br />
+            87000 Labuan, Malaysia
+          </p>
+          <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
+        </div>
         <p>Independent luxury property representation between Spain and Asia.</p>
         <div className="footer-links">
           <Link href="/services/acquisition">Acquisition</Link>
