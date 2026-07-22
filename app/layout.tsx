@@ -41,14 +41,6 @@ export const metadata: Metadata = {
     "international property brokerage",
     "off-market Marbella property",
   ],
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en": "/",
-      "zh-CN": "/zh",
-      "x-default": "/",
-    },
-  },
   openGraph: {
     type: "website",
     locale: "en_GB",
