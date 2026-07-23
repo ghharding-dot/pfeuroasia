@@ -51,8 +51,38 @@ export default function ChineseHome() {
     </section>
 
     <section className="zh-private section-pad" id="private-zh">
-      <div className="site-shell"><div className="zh-private-intro"><div><p className="eyebrow light">私人房源</p><h2>真正稀缺的住宅，<br />未必公开出售。</h2></div><p>许多业主重视隐私与销售过程的控制。他们的住宅不会出现在普通房产平台或大众营销渠道。我们只在确认客户资质后，以私人方式介绍合适机会。</p></div>
-        <div className="zh-private-grid"><article className="zh-private-card zh-private-one"><span>示意图片</span><div><small>Benahavís · 私人机会</small><h3>大型私人庄园</h3><p>成熟园林、宽阔土地与完整生活设施。详细资料仅通过私人介绍提供。</p></div></article><article className="zh-private-card zh-private-two"><span>示意图片</span><div><small>Marbella · 私人机会</small><h3>现代海景别墅</h3><p>当代建筑、优越景观与高品质娱乐空间。详情需经客户资格确认。</p></div></article></div>
+      <div className="site-shell">
+        <div className="zh-private-intro">
+          <div><p className="eyebrow light">私人精选房源</p><h2>真正稀缺的住宅，<br />未必公开出售。</h2></div>
+          <p>我们精选西班牙太阳海岸最具代表性的豪宅与私人庄园。许多业主重视隐私与销售过程的控制，因此部分物业不会出现在普通房产平台或大众营销渠道，只会在确认客户需求与资质后，以私人方式介绍。</p>
+        </div>
+
+        <div className="zh-private-grid">
+          <article className="zh-private-card zh-private-one">
+            <span>精选图片</span>
+            <div><small>Benahavís · 私人机会</small><h3>大型私人庄园</h3><p>宽阔土地、成熟园林、优越景观及完整生活配套。价格、面积、卧室数量及详细资料可在私人咨询后提供。</p></div>
+          </article>
+          <article className="zh-private-card zh-private-two">
+            <span>精选图片</span>
+            <div><small>Marbella · 私人机会</small><h3>现代海景别墅</h3><p>当代建筑、地中海景观与高品质娱乐空间。基本规格及英文销售资料可按要求提供。</p></div>
+          </article>
+        </div>
+
+        <div className="zh-private-details">
+          <div>
+            <h3>中文基本资料</h3>
+            <p>每套精选物业将以中文展示位置、价格、卧室与浴室数量、建筑面积、土地面积、主要特色及简要介绍，并配以两张代表性照片。</p>
+          </div>
+          <div>
+            <h3>英文完整资料</h3>
+            <p>完整销售手册、技术资料、户型图及开发商文件现阶段保留英文版本，并可在确认需求后单独提供。</p>
+          </div>
+        </div>
+
+        <div className="zh-private-action">
+          <p>部分物业因业主要求不会公开展示。欢迎联系我们，获取符合您需求的私人房源推荐。</p>
+          <a className="button button-gold" href="#contact-zh">咨询私人房源 <span>→</span></a>
+        </div>
       </div>
     </section>
 
