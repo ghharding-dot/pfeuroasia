@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/about",
     "/enquire",
+    "/private-portfolio",
     "/services/acquisition",
     "/services/international-sales",
     "/services/relocation-concierge",
@@ -23,6 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: index === 0 ? "weekly" : "monthly",
-    priority: index === 0 ? 1 : route === "/enquire" ? 0.9 : 0.8,
+    priority: index === 0 ? 1 : route === "/enquire" || route === "/private-portfolio" ? 0.9 : 0.8,
   }));
 }
