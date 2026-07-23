@@ -20,6 +20,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
         <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Main navigation">
           <Link href="/#services" onClick={() => setOpen(false)}>Services</Link>
           <Link href="/#markets" onClick={() => setOpen(false)}>Markets</Link>
+          <Link href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
           <Link href="/#property-owners" onClick={() => setOpen(false)}>Property owners</Link>
           <Link href="/about" onClick={() => setOpen(false)}>Our approach</Link>
           <Link className="language-link" href="/zh" onClick={() => setOpen(false)}>中文</Link>
