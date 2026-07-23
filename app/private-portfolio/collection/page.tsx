@@ -9,6 +9,7 @@ import {
 } from "../../lib/portfolioAuth";
 import { privateProperties } from "./properties";
 import "../private-portfolio.css";
+import "../portfolio-collection.css";
 
 export const metadata: Metadata = {
   title: "Private Property Collection | Property Facilitators EuroAsia",
