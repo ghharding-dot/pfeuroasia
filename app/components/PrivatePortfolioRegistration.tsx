@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { PrivatePortfolioLogin } from "./PrivatePortfolioLogin";
 
 export function PrivatePortfolioRegistration() {
   const [submitted, setSubmitted] = useState(false);
@@ -74,6 +75,14 @@ export function PrivatePortfolioRegistration() {
         <p>
           Our private portfolio is prepared for qualified purchasers, family offices and trusted professional advisers across Asia. It includes selected off-market and discreetly marketed villas, residences and investment opportunities that are not published on conventional property portals.
         </p>
+
+        <div className="approved-access-panel">
+          <p className="eyebrow light">Already approved?</p>
+          <h2>Enter the private collection</h2>
+          <p>Use the access password supplied by Property Facilitators EuroAsia.</p>
+          <PrivatePortfolioLogin />
+        </div>
+
         <div className="registration-notes">
           <span>Applications reviewed individually</span>
           <span>Access granted at our discretion</span>
@@ -85,7 +94,7 @@ export function PrivatePortfolioRegistration() {
         <div className="registration-heading">
           <p className="eyebrow">Request access</p>
           <h2>Prospective purchaser registration</h2>
-          <p>Please provide complete and accurate details. Fields marked * are required.</p>
+          <p>New clients and professional advisers may apply below. Please provide complete and accurate details. Fields marked * are required.</p>
         </div>
 
         <fieldset>
