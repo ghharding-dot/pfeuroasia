@@ -5,12 +5,14 @@ export const privateProperties = [
     price: "€13,900,000",
     title: "Classic Andalusian Estate",
     bedrooms: 8,
-    bathrooms: 9,
+    bathrooms: 7,
     plotSize: "12,481 m²",
-    builtSize: "1,065 m²",
+    builtSize: "1,048 m²",
+    terraces: "252 m²",
     description:
       "The estate is approached through a cobbled courtyard centred around a traditional fountain, creating a strong sense of arrival. Mediterranean rooflines, shaded terraces, mature planting and hand-laid stonework establish the property's timeless architectural identity. A double garage and independent staff apartment provide practical support for family living, guests or household management.",
-    image: null,
-    brochure: null,
+    image: "/images/private-portfolio/pfea002601-pool.jpg",
+    secondaryImage: "/images/private-portfolio/pfea002601-aerial.jpg",
+    brochure: "/brochures/Villa_Goya_Sales_Brochure_PF_Iberia.pdf",
   },
 ] as const;
