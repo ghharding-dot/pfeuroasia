@@ -204,7 +204,9 @@ export default function Home() {
                 discreetly with verified, qualified clients after a confidential
                 conversation.
               </p>
-              <Link className="text-link light-link" href="/enquire">Request private access <span>→</span></Link>
+              <Link className="button button-gold private-access-button" href="/enquire">
+                Access Private Portfolio <span>→</span>
+              </Link>
             </div>
           </div>
 
