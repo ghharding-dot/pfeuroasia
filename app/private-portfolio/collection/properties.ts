@@ -11,8 +11,8 @@ export const privateProperties = [
     terraces: "252 m²",
     description:
       "The estate is approached through a cobbled courtyard centred around a traditional fountain, creating a strong sense of arrival. Mediterranean rooflines, shaded terraces, mature planting and hand-laid stonework establish the property's timeless architectural identity. A double garage and independent staff apartment provide practical support for family living, guests or household management.",
-    image: "/images/private-portfolio/pfea002601-pool.jpg",
-    secondaryImage: "/images/private-portfolio/pfea002601-aerial.jpg",
-    brochure: "/brochures/Villa_Goya_Sales_Brochure_PF_Iberia.pdf",
+    image: null,
+    secondaryImage: null,
+    brochure: null,
   },
 ] as const;
