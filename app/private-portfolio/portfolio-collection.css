@@ -1,0 +1,71 @@
+.portfolio-access {
+  min-height: 690px;
+  padding-block: 130px 150px;
+}
+
+.portfolio-access > div {
+  max-width: 760px;
+  padding: 64px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.portfolio-access h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(58px, 7vw, 92px);
+  font-weight: 400;
+  letter-spacing: -.05em;
+  line-height: .98;
+}
+
+.portfolio-access > div > p:not(.eyebrow) {
+  max-width: 620px;
+  margin: 30px 0 42px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.portfolio-login-form { display: grid; gap: 22px; max-width: 500px; }
+.portfolio-login-form label { display: grid; gap: 10px; }
+.portfolio-login-form label span { color: #55574f; font-size: 10px; font-weight: 650; letter-spacing: .09em; text-transform: uppercase; }
+.portfolio-login-form input { min-height: 54px; padding: 0 15px; border: 1px solid #d2cdbf; background: white; outline: none; }
+.portfolio-login-form input:focus { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.portfolio-login-form .button { width: fit-content; }
+
+.private-collection-page { background: var(--ivory); }
+.private-collection-hero { padding-block: 110px; background: #171815; color: white; }
+.private-collection-hero h1 { margin: 0; font-family: var(--serif); font-size: clamp(62px, 8vw, 108px); font-weight: 400; letter-spacing: -.05em; line-height: .95; }
+.private-collection-hero p:not(.eyebrow) { max-width: 700px; margin: 30px 0 0; color: rgba(255,255,255,.58); font-size: 16px; line-height: 1.8; }
+.private-collection-grid { display: grid; gap: 46px; padding-block: 90px 140px; }
+.private-property-card { display: grid; grid-template-columns: minmax(360px, .86fr) minmax(0, 1.14fr); min-height: 620px; border: 1px solid var(--line); background: var(--paper); }
+.private-property-image { min-height: 100%; background-position: center; background-size: cover; }
+.placeholder-image { display: grid; place-items: center; padding: 35px; background: linear-gradient(135deg, #292b27, #111210); color: rgba(255,255,255,.46); text-align: center; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.private-property-content { display: flex; flex-direction: column; padding: 52px; }
+.private-property-heading { display: flex; justify-content: space-between; gap: 35px; align-items: start; }
+.private-property-heading p { margin: 0 0 13px; color: #8b7450; font-size: 10px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
+.private-property-heading h2 { margin: 0; font-family: var(--serif); font-size: clamp(44px, 4.8vw, 68px); font-weight: 400; letter-spacing: -.04em; line-height: 1; }
+.private-property-heading strong { flex: 0 0 auto; color: #7d6949; font-family: var(--serif); font-size: 24px; font-weight: 400; }
+.private-property-facts { display: flex; flex-wrap: wrap; gap: 0; margin: 42px 0 34px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.private-property-facts span { padding: 15px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #55574f; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+.private-property-description { margin: 0; color: #5f615a; font-size: 15px; line-height: 1.9; }
+.private-property-actions { display: flex; justify-content: space-between; gap: 28px; align-items: end; margin-top: auto; padding-top: 45px; }
+.brochure-pending { color: #98998f; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+
+@media (max-width: 900px) {
+  .private-property-card { grid-template-columns: 1fr; }
+  .private-property-image { min-height: 430px; }
+  .private-property-heading { flex-direction: column; }
+}
+
+@media (max-width: 700px) {
+  .portfolio-access { width: min(100% - 30px, 1320px); padding-block: 35px 80px; }
+  .portfolio-access > div { padding: 34px 24px; }
+  .portfolio-login-form .button { width: 100%; }
+  .private-collection-hero { padding-block: 70px; }
+  .private-collection-grid { width: min(100% - 30px, 1320px); padding-block: 35px 80px; }
+  .private-property-image { min-height: 300px; }
+  .private-property-content { padding: 30px 24px; }
+  .private-property-actions { flex-direction: column; align-items: start; }
+}
