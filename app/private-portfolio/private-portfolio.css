@@ -13,11 +13,28 @@
   top: 120px;
   min-height: 650px;
   padding: 58px;
-  background: #171815;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(197,162,104,.09), transparent 34%),
+    linear-gradient(145deg, #181916 0%, #10110f 100%);
   color: white;
+  box-shadow: 0 28px 70px rgba(0,0,0,.14);
+}
+
+.portfolio-registration-intro::after {
+  content: "";
+  position: absolute;
+  right: -120px;
+  bottom: -130px;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(197,162,104,.11);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .portfolio-registration-intro h1 {
+  position: relative;
   margin: 0;
   font-family: var(--serif);
   font-size: clamp(52px, 5.2vw, 78px);
@@ -27,25 +44,159 @@
 }
 
 .portfolio-registration-intro > p:not(.eyebrow) {
+  position: relative;
   margin: 34px 0 0;
-  color: rgba(255,255,255,.62);
+  color: rgba(255,255,255,.64);
   font-size: 15px;
   line-height: 1.9;
 }
 
+.approved-access-panel {
+  position: relative;
+  margin-top: 48px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(197,162,104,.6);
+}
+
+.approved-access-panel h2 {
+  margin: 6px 0 10px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+
+.approved-access-panel > p:not(.eyebrow) {
+  margin: 0;
+  color: rgba(255,255,255,.58);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.portfolio-login-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.portfolio-login-form label {
+  display: grid;
+  gap: 9px;
+}
+
+.portfolio-login-form label > span {
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.portfolio-password-field {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  min-height: 58px;
+  border: 1px solid rgba(197,162,104,.8);
+  border-radius: 8px;
+  background: rgba(0,0,0,.2);
+  transition: border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.portfolio-password-field:focus-within {
+  border-color: var(--gold-light);
+  background: rgba(0,0,0,.32);
+  box-shadow: 0 0 0 1px rgba(197,162,104,.34), 0 12px 30px rgba(0,0,0,.22);
+}
+
+.portfolio-password-field input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.portfolio-password-field input::placeholder { color: rgba(255,255,255,.34); }
+
+.portfolio-lock,
+.portfolio-password-toggle,
+.portfolio-button-lock {
+  display: grid;
+  place-items: center;
+}
+
+.portfolio-lock svg,
+.portfolio-password-toggle svg,
+.portfolio-button-lock svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.portfolio-lock { color: var(--gold-light); }
+
+.portfolio-password-toggle {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,.56);
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.portfolio-password-toggle:hover { color: var(--gold-light); }
+
+.portfolio-access-button {
+  display: grid !important;
+  grid-template-columns: 24px 1fr 24px;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  min-height: 60px;
+  margin-top: 2px;
+  padding: 15px 22px !important;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.portfolio-access-button span { transform: none !important; }
+.portfolio-button-lock { color: currentColor; }
+.portfolio-button-arrow { font-size: 18px; transition: transform 220ms ease !important; }
+.portfolio-access-button:hover .portfolio-button-arrow { transform: translateX(5px) !important; }
+.portfolio-access-button:disabled { cursor: wait; opacity: .7; }
+
+.approved-access-panel .form-error {
+  margin: 0;
+  color: #efb0a9;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .registration-notes {
+  position: relative;
   display: grid;
   gap: 0;
-  margin-top: 55px;
-  border-top: 1px solid rgba(255,255,255,.16);
+  margin-top: 46px;
+  border-top: 1px solid rgba(255,255,255,.14);
 }
 
 .registration-notes span {
-  padding: 18px 0;
-  border-bottom: 1px solid rgba(255,255,255,.16);
-  color: rgba(255,255,255,.72);
-  font-size: 11px;
-  letter-spacing: .08em;
+  padding: 17px 0;
+  border-bottom: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.7);
+  font-size: 10px;
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
 
@@ -53,6 +204,7 @@
   padding: 58px;
   border: 1px solid var(--line);
   background: var(--paper);
+  box-shadow: 0 22px 60px rgba(46,40,28,.07);
 }
 
 .registration-heading { margin-bottom: 54px; }
@@ -74,6 +226,7 @@
 
 .portfolio-registration-form legend {
   padding: 0 22px 0 0;
+  color: #2a2b27;
   font-family: var(--serif);
   font-size: 27px;
 }
@@ -100,18 +253,23 @@
 .portfolio-registration-form textarea {
   width: 100%;
   border: 1px solid #d2cdbf;
-  border-radius: 0;
+  border-radius: 5px;
   background: #fff;
   color: var(--ink);
   outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease;
 }
 
 .portfolio-registration-form input,
-.portfolio-registration-form select { min-height: 52px; padding: 0 15px; }
+.portfolio-registration-form select { min-height: 54px; padding: 0 15px; }
 .portfolio-registration-form textarea { padding: 15px; resize: vertical; }
 .portfolio-registration-form input:focus,
 .portfolio-registration-form select:focus,
-.portfolio-registration-form textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.portfolio-registration-form textarea:focus {
+  border-color: var(--gold);
+  background: #fffefb;
+  box-shadow: 0 0 0 2px rgba(197,162,104,.14);
+}
 
 .portfolio-registration-form .privacy-check {
   display: grid;
@@ -120,7 +278,7 @@
   align-items: start;
   margin: 4px 0 28px;
 }
-.portfolio-registration-form .privacy-check input { width: 18px; min-height: 18px; margin: 0; }
+.portfolio-registration-form .privacy-check input { width: 18px; min-height: 18px; margin: 0; accent-color: var(--gold); }
 .portfolio-registration-form .privacy-check span { font-size: 11px; font-weight: 400; letter-spacing: 0; line-height: 1.65; text-transform: none; }
 .registration-submit { min-width: 245px; }
 .form-error { margin: 0 0 22px; color: #9f2f2f; font-size: 13px; }
@@ -143,6 +301,12 @@
   .portfolio-registration { width: min(100% - 30px, 1320px); padding-block: 34px 80px; }
   .portfolio-registration-intro,
   .portfolio-registration-form { padding: 30px 24px; }
+  .portfolio-registration-intro h1 { font-size: clamp(43px, 13vw, 62px); }
+  .approved-access-panel { margin-top: 38px; padding-top: 25px; }
+  .approved-access-panel h2 { font-size: 31px; }
+  .portfolio-password-field { grid-template-columns: 40px 1fr 40px; min-height: 56px; }
+  .portfolio-access-button { grid-template-columns: 22px 1fr 22px; padding-inline: 16px !important; font-size: 10px; letter-spacing: .08em; }
+  .registration-notes { margin-top: 36px; }
   .portfolio-registration-form .form-grid { grid-template-columns: 1fr; }
   .portfolio-registration-form label.full { grid-column: auto; }
   .registration-submit { width: 100%; min-width: 0; }
