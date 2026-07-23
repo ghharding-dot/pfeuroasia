@@ -1,0 +1,42 @@
+.button.button-gold {
+  background: #0d0d0d;
+  color: var(--gold-light);
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  padding: 17px 34px;
+  box-shadow: 0 0 0 rgba(197, 162, 104, 0);
+  transition:
+    transform 300ms ease,
+    background 300ms ease,
+    color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.button.button-gold:hover {
+  background: var(--gold);
+  color: #111210;
+  border-color: var(--gold-light);
+  box-shadow: 0 8px 25px rgba(197, 162, 104, 0.25);
+  transform: translateY(-2px);
+}
+
+.button.button-gold span {
+  display: inline-block;
+  transition: transform 300ms ease;
+}
+
+.button.button-gold:hover span {
+  transform: translateX(4px);
+}
+
+.private-access-button {
+  margin-top: 24px;
+}
+
+@media (max-width: 640px) {
+  .button.button-gold {
+    width: 100%;
+    padding: 16px 22px;
+  }
+}
