@@ -4,6 +4,10 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { PrivatePortfolioLogin } from "./PrivatePortfolioLogin";
 
+function ArrowIcon() {
+  return <span aria-hidden="true">→</span>;
+}
+
 export function PrivatePortfolioRegistration() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -46,6 +50,7 @@ export function PrivatePortfolioRegistration() {
       if (!response.ok) throw new Error("Submission failed");
       setSubmitted(true);
       event.currentTarget.reset();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
       setError("We could not send your registration. Please try again or email enquiry@pfeuroasia.com.");
     } finally {
@@ -56,13 +61,21 @@ export function PrivatePortfolioRegistration() {
   if (submitted) {
     return (
       <section className="portfolio-registration-success site-shell">
-        <span className="success-mark">✓</span>
-        <p className="eyebrow">Registration received</p>
-        <h1>Your request is now under review.</h1>
-        <p>
-          Thank you for registering. We review every application individually. Approved applicants will receive private access instructions by email or their preferred contact channel.
-        </p>
-        <Link className="text-link" href="/">Return to the website <span>→</span></Link>
+        <div className="registration-success-card">
+          <span className="success-mark" aria-hidden="true">✓</span>
+          <p className="eyebrow">Registration received</p>
+          <h1>Your request is now under review.</h1>
+          <p>
+            Thank you for your application. Every request is reviewed individually to protect the privacy of our clients and property owners. Approved applicants will receive private access instructions by email or through their preferred contact channel.
+          </p>
+          <div className="success-response-time">
+            <span>Expected response time</span>
+            <strong>24–48 hours</strong>
+          </div>
+          <Link className="button button-gold success-return-button" href="/">
+            Return to the website <ArrowIcon />
+          </Link>
+        </div>
       </section>
     );
   }
@@ -98,7 +111,7 @@ export function PrivatePortfolioRegistration() {
         </div>
 
         <fieldset>
-          <legend>Personal information</legend>
+          <legend><span>01</span> Personal information</legend>
           <div className="form-grid">
             <label><span>Full name *</span><input name="name" required autoComplete="name" /></label>
             <label><span>Nationality *</span><input name="nationality" required autoComplete="country-name" /></label>
@@ -112,7 +125,7 @@ export function PrivatePortfolioRegistration() {
         </fieldset>
 
         <fieldset>
-          <legend>Professional information</legend>
+          <legend><span>02</span> Professional information</legend>
           <div className="form-grid">
             <label><span>Company name</span><input name="company" autoComplete="organization" /></label>
             <label><span>Occupation</span><input name="occupation" /></label>
@@ -120,7 +133,7 @@ export function PrivatePortfolioRegistration() {
         </fieldset>
 
         <fieldset>
-          <legend>Property requirements</legend>
+          <legend><span>03</span> Property requirements</legend>
           <div className="form-grid">
             <label><span>Interested in *</span><select name="propertyType" required defaultValue=""><option value="" disabled>Select property type</option><option>Luxury villa</option><option>Luxury apartment or penthouse</option><option>Investment property</option><option>Development land</option><option>Commercial property</option><option>Multiple opportunities</option></select></label>
             <label><span>Preferred location *</span><select name="location" required defaultValue=""><option value="" disabled>Select location</option><option>La Zagaleta</option><option>El Madroñal</option><option>Marbella Golden Mile</option><option>Benahavís</option><option>Wider Costa del Sol</option><option>Open to recommendation</option></select></label>
@@ -131,15 +144,20 @@ export function PrivatePortfolioRegistration() {
           </div>
         </fieldset>
 
-        <label className="privacy-check">
-          <input type="checkbox" required />
-          <span>I confirm that the information provided is accurate and agree to be contacted regarding my request for access. I understand that registration does not guarantee access.</span>
-        </label>
+        <div className="registration-consent">
+          <label className="privacy-check">
+            <input type="checkbox" required />
+            <span>I confirm that the information provided is accurate and agree to be contacted regarding my request for access. I understand that registration does not guarantee access.</span>
+          </label>
 
-        {error && <p className="form-error" role="alert">{error}</p>}
-        <button className="button button-dark registration-submit" type="submit" disabled={sending}>
-          {sending ? "Sending…" : "Submit registration"} <span>→</span>
-        </button>
+          {error && <p className="form-error" role="alert">{error}</p>}
+          <div className="registration-submit-row">
+            <button className="button button-gold registration-submit" type="submit" disabled={sending}>
+              <span>{sending ? "Sending…" : "Submit registration"}</span> <ArrowIcon />
+            </button>
+            <p>Your information is treated confidentially and used only to assess this request.</p>
+          </div>
+        </div>
       </form>
     </section>
   );
