@@ -39,9 +39,16 @@ export default async function PrivatePortfolioCollectionPage() {
       <section className="private-collection-grid site-shell">
         {privateProperties.map((property) => (
           <article className="private-property-card" key={property.reference}>
-            <div className="private-property-image placeholder-image">
-              <span>Property photography to be added</span>
+            <div className="private-property-image">
+              {property.image ? (
+                <img src={property.image} alt={`${property.title} in ${property.location}`} />
+              ) : (
+                <div className="placeholder-image">
+                  <span>Property photography to be added</span>
+                </div>
+              )}
             </div>
+
             <div className="private-property-content">
               <div className="private-property-heading">
                 <div>
@@ -60,8 +67,28 @@ export default async function PrivatePortfolioCollectionPage() {
 
               <p className="private-property-description">{property.description}</p>
 
+              {property.secondaryImage && (
+                <img
+                  className="private-property-secondary-image"
+                  src={property.secondaryImage}
+                  alt={`Aerial view of ${property.title}`}
+                />
+              )}
+
               <div className="private-property-actions">
-                <span className="brochure-pending">PDF information sheet to follow</span>
+                {property.brochure ? (
+                  <a
+                    className="text-link"
+                    href={property.brochure}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View property brochure <span>→</span>
+                  </a>
+                ) : (
+                  <span className="brochure-pending">PDF information sheet to follow</span>
+                )}
+
                 <a className="text-link" href={`mailto:enquiry@pfeuroasia.com?subject=Enquiry regarding ${property.reference}`}>
                   Enquire about this property <span>→</span>
                 </a>
