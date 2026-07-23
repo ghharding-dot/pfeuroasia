@@ -10,4 +10,7 @@ export function createPortfolioToken(secret: string) {
 }
 
 export function secretsMatch(candidate: string, configured: string) {
-  const candidateHash = createHash("sha256").update
+  const candidateHash = createHash("sha256").update(candidate).digest();
+  const configuredHash = createHash("sha256").update(configured).digest();
+  return timingSafeEqual(candidateHash, configuredHash);
+}
