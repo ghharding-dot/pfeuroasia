@@ -1,0 +1,289 @@
+.villa-enquiry-page {
+  min-height: 100vh;
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.villa-enquiry-hero {
+  padding: 150px 0 110px;
+  background: #11161a;
+  color: white;
+}
+
+.villa-enquiry-hero .site-shell {
+  max-width: 1100px;
+}
+
+.villa-enquiry-hero h1,
+.villa-enquiry-success h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(54px, 7vw, 96px);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.villa-enquiry-hero h1 em {
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.villa-enquiry-hero > .site-shell > p:last-child {
+  max-width: 690px;
+  margin: 30px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+.villa-enquiry-section {
+  padding-block: 100px 130px;
+}
+
+.villa-enquiry-form {
+  max-width: 1100px;
+}
+
+.villa-enquiry-form fieldset {
+  margin: 0 0 72px;
+  padding: 0;
+  border: 0;
+}
+
+.villa-enquiry-form legend {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  margin: 0 0 34px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-size: 32px;
+}
+
+.villa-enquiry-form legend span {
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.18em;
+}
+
+.villa-enquiry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 30px;
+}
+
+.villa-enquiry-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.villa-enquiry-form label > span {
+  color: #5f605a;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.villa-enquiry-form input,
+.villa-enquiry-form select,
+.villa-enquiry-form textarea {
+  width: 100%;
+  padding: 17px 16px;
+  border: 1px solid rgba(17, 18, 16, 0.2);
+  border-radius: 0;
+  outline: none;
+  background: var(--paper);
+  color: var(--ink);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.villa-enquiry-form textarea {
+  resize: vertical;
+}
+
+.villa-enquiry-form input:focus,
+.villa-enquiry-form select:focus,
+.villa-enquiry-form textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(197, 162, 104, 0.12);
+}
+
+.villa-enquiry-hint {
+  margin: -12px 0 28px;
+  color: #696a64;
+}
+
+.villa-enquiry-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.villa-enquiry-options label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 13px;
+  min-height: 62px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.villa-enquiry-options label:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+
+.villa-enquiry-options input,
+.villa-enquiry-consent input {
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  accent-color: var(--gold);
+}
+
+.villa-enquiry-options label > span {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.villa-enquiry-full {
+  margin-top: 24px;
+}
+
+.villa-enquiry-consent {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 12px !important;
+  margin-top: 28px;
+}
+
+.villa-enquiry-consent span {
+  color: #5f605a !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.villa-enquiry-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding-top: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.villa-enquiry-footer p {
+  max-width: 650px;
+  margin: 0;
+  color: #64655f;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.villa-enquiry-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 34px;
+  min-width: 260px;
+  padding: 18px 22px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: white;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.villa-enquiry-submit:hover {
+  background: transparent;
+  color: var(--ink);
+}
+
+.villa-enquiry-submit:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.villa-enquiry-error {
+  margin: -28px 0 34px;
+  color: #9b2d26;
+  font-size: 14px;
+}
+
+.villa-enquiry-success {
+  max-width: 980px;
+  padding-block: 160px;
+  text-align: center;
+}
+
+.villa-enquiry-success-mark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 28px;
+  place-items: center;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 24px;
+}
+
+.villa-enquiry-success > p:not(.eyebrow) {
+  max-width: 690px;
+  margin: 30px auto 42px;
+  color: #5f605a;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+.villa-enquiry-success .villa-enquiry-submit {
+  margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+  .villa-enquiry-hero {
+    padding: 120px 0 82px;
+  }
+
+  .villa-enquiry-section {
+    padding-block: 72px 90px;
+  }
+
+  .villa-enquiry-grid,
+  .villa-enquiry-options {
+    grid-template-columns: 1fr;
+  }
+
+  .villa-enquiry-options label:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .villa-enquiry-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .villa-enquiry-submit {
+    width: 100%;
+  }
+}
