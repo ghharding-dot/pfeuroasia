@@ -134,47 +134,125 @@
 .villa-rentals-body-copy p,
 .villa-rentals-concierge-grid > div:first-child > p:last-child { margin: 0 0 24px; }
 
-.villa-rentals-areas { padding-block: 130px; background: var(--ink); color: white; }
+.villa-rentals-areas {
+  padding-block: 130px;
+  background: #10161c;
+  color: white;
+}
+
 .villa-rentals-section-heading { max-width: 820px; margin-bottom: 70px; }
 
 .villa-rentals-area-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
-  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  gap: 18px;
 }
 
 .villa-rentals-area-card {
   position: relative;
   display: flex;
-  min-height: 250px;
-  padding: 30px;
+  min-height: 430px;
+  padding: 28px;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  border-right: 1px solid rgba(255, 255, 255, 0.16);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-  background: linear-gradient(145deg, rgba(255,255,255,.03), rgba(255,255,255,0));
   color: white;
-  transition: background 220ms ease, transform 220ms ease;
+  isolation: isolate;
+  background: #1a2026;
+  transition: transform 260ms ease, box-shadow 260ms ease;
 }
 
 .villa-rentals-area-card::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
+  z-index: 4;
   height: 3px;
   background: var(--gold-light);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 220ms ease;
+  transition: transform 240ms ease;
 }
 
-.villa-rentals-area-card:hover { background: rgba(255,255,255,.07); transform: translateY(-3px); }
+.villa-rentals-area-photo,
+.villa-rentals-area-shade {
+  position: absolute;
+  inset: 0;
+}
+
+.villa-rentals-area-photo {
+  z-index: -2;
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.015);
+  transition: transform 650ms cubic-bezier(.2,.7,.2,1), filter 300ms ease;
+}
+
+.villa-rentals-area-shade {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(7, 11, 14, .18), rgba(7, 11, 14, .2) 30%, rgba(7, 11, 14, .88) 100%),
+    linear-gradient(90deg, rgba(7, 11, 14, .35), transparent 58%);
+}
+
+.villa-rentals-area-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.34);
+}
+
 .villa-rentals-area-card:hover::after { transform: scaleX(1); }
-.villa-rentals-area-card span { color: var(--gold-light); font-size: 10px; letter-spacing: 0.18em; }
-.villa-rentals-area-card h3 { margin: auto 0 10px; font-family: var(--serif); font-size: 31px; font-weight: 400; }
-.villa-rentals-area-card small { color: rgba(255,255,255,.55); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.villa-rentals-area-card:hover .villa-rentals-area-photo { transform: scale(1.07); filter: saturate(1.08); }
+
+.villa-rentals-area-number {
+  position: relative;
+  z-index: 2;
+  color: var(--gold-light);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+}
+
+.villa-rentals-area-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.villa-rentals-area-copy p {
+  margin: 0 0 9px;
+  color: rgba(255,255,255,.68);
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.villa-rentals-area-copy h3 {
+  margin: 0 0 18px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.villa-rentals-area-copy small {
+  color: rgba(255,255,255,.72);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.villa-rentals-area-copy small b {
+  margin-left: 8px;
+  color: var(--gold-light);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.villa-rentals-image-note {
+  margin: 22px 0 0;
+  color: rgba(255,255,255,.42);
+  font-size: 10px;
+  letter-spacing: .04em;
+  line-height: 1.55;
+}
 
 .villa-rentals-concierge { background: var(--stone); }
 .villa-rentals-service-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); }
@@ -290,7 +368,7 @@
   .villa-rentals-service-list,
   .rental-form-grid { grid-template-columns: 1fr; }
   .rental-form-grid .wide { grid-column: auto; }
-  .villa-rentals-area-card { min-height: 190px; }
+  .villa-rentals-area-card { min-height: 360px; }
   .villa-rentals-service-list div:nth-child(odd),
   .villa-rentals-service-list div:nth-child(even) { padding-inline: 0; border-right: 0; }
   .villa-rentals-branding { align-items: flex-start; gap: 18px; }
