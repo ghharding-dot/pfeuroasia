@@ -36,6 +36,29 @@ const services = [
   },
 ];
 
+const network = [
+  {
+    title: "Business Council Relationships",
+    copy: "Senior-level commercial relationships that can support credible introductions and cross-border dialogue.",
+  },
+  {
+    title: "Family Office Network",
+    copy: "Private investors and family offices seeking discreet access to suitable residential and commercial opportunities.",
+  },
+  {
+    title: "Developers & Landowners",
+    copy: "Direct relationships with owners, developers and operators across selected European, Asian and Gulf markets.",
+  },
+  {
+    title: "Legal & Tax Partners",
+    copy: "Established professional partners able to support structuring, due diligence and local execution.",
+  },
+  {
+    title: "Capital & Investment Partners",
+    copy: "Connections to investors and strategic partners for acquisitions, joint ventures and development projects.",
+  },
+];
+
 export default function CommercialPage() {
   return (
     <main className="commercial-page">
@@ -91,6 +114,28 @@ export default function CommercialPage() {
                 <span className="commercial-card-number">{service.number}</span>
                 <h3>{service.title}</h3>
                 <p>{service.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="commercial-network">
+        <div className="site-shell commercial-network-grid">
+          <div className="commercial-network-heading">
+            <p className="commercial-eyebrow">Strategic international network</p>
+            <h2>Trusted relationships across key markets.</h2>
+            <p>
+              Our network is built around credible local relationships rather than
+              public claims or mass-market coverage. Individual names and mandates
+              remain confidential unless formal permission is given.
+            </p>
+          </div>
+          <div className="commercial-network-list">
+            {network.map((item) => (
+              <article className="commercial-network-item" key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
               </article>
             ))}
           </div>
