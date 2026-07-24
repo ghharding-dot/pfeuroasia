@@ -5,12 +5,36 @@ import { RentalEnquiryForm } from "./RentalEnquiryForm";
 import "./luxury-villa-rentals.css";
 
 const areas = [
-  "La Zagaleta",
-  "El Madroñal",
-  "Marbella Golden Mile",
-  "Benahavís",
-  "Puerto Banús",
-  "Sierra Blanca",
+  {
+    name: "La Zagaleta",
+    location: "Benahavís",
+    image: "https://images.unsplash.com/photo-1757439402359-aed14d39fc1b?auto=format&fit=crop&q=84&w=1600",
+  },
+  {
+    name: "El Madroñal",
+    location: "Benahavís",
+    image: "https://images.unsplash.com/photo-1677507057691-5b5c166f6050?auto=format&fit=crop&q=84&w=1600",
+  },
+  {
+    name: "Marbella Golden Mile",
+    location: "Marbella",
+    image: "https://images.unsplash.com/photo-1759405198466-d7f97ef8b4a7?auto=format&fit=crop&q=84&w=1600",
+  },
+  {
+    name: "Benahavís",
+    location: "Mountain estates",
+    image: "https://images.unsplash.com/photo-1776761731066-c89caa8d25e6?auto=format&fit=crop&q=84&w=1600",
+  },
+  {
+    name: "Puerto Banús",
+    location: "Marina living",
+    image: "https://images.unsplash.com/photo-1751054551120-1ccbe689d091?auto=format&fit=crop&q=84&w=1600",
+  },
+  {
+    name: "Sierra Blanca",
+    location: "Marbella hills",
+    image: "https://images.unsplash.com/photo-1777919541982-dcb34c146a2d?auto=format&fit=crop&q=84&w=1600",
+  },
 ];
 
 const conciergeServices = [
@@ -72,18 +96,28 @@ export default function LuxuryVillaRentalsPage() {
       <section className="villa-rentals-areas">
         <div className="site-shell">
           <div className="villa-rentals-section-heading">
-            <p className="villa-rentals-eyebrow">Featured locations</p>
+            <p className="villa-rentals-eyebrow">Hand-picked luxury villas</p>
             <h2>Prime addresses across the Marbella region.</h2>
           </div>
           <div className="villa-rentals-area-grid">
             {areas.map((area, index) => (
-              <a className="villa-rentals-area-card" href="#villa-enquiry" key={area}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{area}</h3>
-                <small>Request villas →</small>
+              <a className="villa-rentals-area-card" href="#villa-enquiry" key={area.name}>
+                <span
+                  className="villa-rentals-area-photo"
+                  style={{ backgroundImage: `url(${area.image})` }}
+                  aria-hidden="true"
+                />
+                <span className="villa-rentals-area-shade" aria-hidden="true" />
+                <span className="villa-rentals-area-number">{String(index + 1).padStart(2, "0")}</span>
+                <div className="villa-rentals-area-copy">
+                  <p>{area.location}</p>
+                  <h3>{area.name}</h3>
+                  <small>Request villas <b>→</b></small>
+                </div>
               </a>
             ))}
           </div>
+          <p className="villa-rentals-image-note">Representative location imagery. Individual villa selections are shared privately in response to each enquiry.</p>
         </div>
       </section>
 
