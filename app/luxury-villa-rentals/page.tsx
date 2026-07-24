@@ -39,7 +39,7 @@ export default function LuxuryVillaRentalsPage() {
             <p className="villa-rentals-collaboration">
               Property Facilitators EuroAsia <span>×</span> The Luxury Villa Collection
             </p>
-            <Link className="villa-rentals-button" href="mailto:enquiries@pfeuroasia.com?cc=villas@theluxuryvillacollection.com&subject=Request%20for%20a%20Bespoke%20Villa%20Selection">
+            <Link className="villa-rentals-button" href="/luxury-villa-rentals/enquire">
               Request your bespoke villa selection <span>→</span>
             </Link>
           </div>
@@ -133,9 +133,9 @@ export default function LuxuryVillaRentalsPage() {
             approximate budget. We will respond personally with suitable options.
           </p>
           <div className="villa-rentals-actions">
-            <a className="villa-rentals-button" href="mailto:enquiries@pfeuroasia.com?cc=villas@theluxuryvillacollection.com&subject=Request%20for%20a%20Bespoke%20Villa%20Selection">
-              Email your requirements <span>→</span>
-            </a>
+            <Link className="villa-rentals-button" href="/luxury-villa-rentals/enquire">
+              Complete private enquiry <span>→</span>
+            </Link>
             <span className="villa-rentals-whatsapp-note">Asia WhatsApp concierge coming soon</span>
           </div>
         </div>
