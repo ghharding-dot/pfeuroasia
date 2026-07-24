@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { RentalEnquiryForm } from "./RentalEnquiryForm";
 import "./luxury-villa-rentals.css";
 
 const areas = [
@@ -39,7 +40,7 @@ export default function LuxuryVillaRentalsPage() {
             <p className="villa-rentals-collaboration">
               Property Facilitators EuroAsia <span>×</span> The Luxury Villa Collection
             </p>
-            <Link className="villa-rentals-button" href="/luxury-villa-rentals/enquire">
+            <Link className="villa-rentals-button" href="#villa-enquiry">
               Request your bespoke villa selection <span>→</span>
             </Link>
           </div>
@@ -76,10 +77,11 @@ export default function LuxuryVillaRentalsPage() {
           </div>
           <div className="villa-rentals-area-grid">
             {areas.map((area, index) => (
-              <article className="villa-rentals-area-card" key={area}>
+              <a className="villa-rentals-area-card" href="#villa-enquiry" key={area}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <h3>{area}</h3>
-              </article>
+                <small>Request villas →</small>
+              </a>
             ))}
           </div>
         </div>
@@ -124,20 +126,22 @@ export default function LuxuryVillaRentalsPage() {
         </div>
       </section>
 
-      <section className="villa-rentals-enquiry">
-        <div className="site-shell villa-rentals-enquiry-inner">
-          <p className="villa-rentals-eyebrow">Private enquiries</p>
-          <h2>Request your bespoke villa selection.</h2>
-          <p>
-            Send us your preferred dates, number of guests, bedroom requirement, area and
-            approximate budget. We will respond personally with suitable options.
-          </p>
-          <div className="villa-rentals-actions">
-            <Link className="villa-rentals-button" href="/luxury-villa-rentals/enquire">
-              Complete private enquiry <span>→</span>
-            </Link>
-            <span className="villa-rentals-whatsapp-note">Asia WhatsApp concierge coming soon</span>
+      <section className="villa-rentals-enquiry" id="villa-enquiry">
+        <div className="site-shell villa-rentals-enquiry-layout">
+          <div className="villa-rentals-enquiry-copy">
+            <p className="villa-rentals-eyebrow">Private enquiries</p>
+            <h2>Request your bespoke villa selection.</h2>
+            <p>
+              Share your preferred dates, group size, bedroom requirement, location and
+              approximate budget. We will respond personally with carefully selected options.
+            </p>
+            <ul>
+              <li>Confidential, individually managed enquiries</li>
+              <li>Access to on-market and privately available villas</li>
+              <li>Full concierge support before and during your stay</li>
+            </ul>
           </div>
+          <RentalEnquiryForm />
         </div>
       </section>
 
