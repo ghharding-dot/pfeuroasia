@@ -8,17 +8,17 @@ const areas = [
   {
     name: "La Zagaleta",
     location: "Benahavís",
-    image: "https://images.unsplash.com/photo-1757439402359-aed14d39fc1b?auto=format&fit=crop&q=84&w=1600",
+    image: "/images/luxury-villa-rentals/la-zagaleta.svg",
   },
   {
     name: "El Madroñal",
     location: "Benahavís",
-    image: "https://images.unsplash.com/photo-1677507057691-5b5c166f6050?auto=format&fit=crop&q=84&w=1600",
+    image: "/images/luxury-villa-rentals/el-madronal.svg",
   },
   {
     name: "Marbella Golden Mile",
     location: "Marbella",
-    image: "https://images.unsplash.com/photo-1759405198466-d7f97ef8b4a7?auto=format&fit=crop&q=84&w=1600",
+    image: "/images/luxury-villa-rentals/golden-mile.svg",
   },
   {
     name: "Benahavís",
@@ -33,7 +33,7 @@ const areas = [
   {
     name: "Sierra Blanca",
     location: "Marbella hills",
-    image: "https://images.unsplash.com/photo-1777919541982-dcb34c146a2d?auto=format&fit=crop&q=84&w=1600",
+    image: "/images/luxury-villa-rentals/sierra-blanca.svg",
   },
 ];
 
@@ -93,7 +93,38 @@ export default function LuxuryVillaRentalsPage() {
         </div>
       </section>
 
-      <section className="villa-rentals-areas">
+      <section className="villa-rentals-areas" aria-labelledby="panoramic-heading">
+        <div className="site-shell">
+          <div className="villa-rentals-section-heading">
+            <p className="villa-rentals-eyebrow">Panoramic Mediterranean living</p>
+            <h2 id="panoramic-heading">Views that define the experience.</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 18 }}>
+            <figure style={{ margin: 0 }}>
+              <img
+                src="/images/luxury-villa-rentals/panoramic-twilight.svg"
+                alt="Twilight panoramic view from a luxury Marbella villa terrace"
+                style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }}
+              />
+              <figcaption style={{ marginTop: 14, color: "rgba(255,255,255,.62)", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase" }}>
+                Evening light across the Mediterranean
+              </figcaption>
+            </figure>
+            <figure style={{ margin: 0 }}>
+              <img
+                src="/images/luxury-villa-rentals/panoramic-day.svg"
+                alt="Panoramic Mediterranean view towards Gibraltar and North Africa"
+                style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }}
+              />
+              <figcaption style={{ marginTop: 14, color: "rgba(255,255,255,.62)", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase" }}>
+                Views towards Gibraltar and North Africa
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section className="villa-rentals-areas" style={{ paddingTop: 0 }}>
         <div className="site-shell">
           <div className="villa-rentals-section-heading">
             <p className="villa-rentals-eyebrow">Hand-picked luxury villas</p>
