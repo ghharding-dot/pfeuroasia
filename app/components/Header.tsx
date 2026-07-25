@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import styles from "./HeaderMobileDirectory.module.css";
 
 export function Header({ transparent = false }: { transparent?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,8 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
             Enquire <span>→</span>
           </Link>
         </nav>
+
+        <span className={styles.mobileDirectory} aria-hidden="true">Directory</span>
 
         <button
           className="menu-button"
