@@ -1,0 +1,71 @@
+.private-registration-page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.portfolio-registration,
+.portfolio-registration > *,
+.portfolio-registration-intro,
+.approved-access-panel,
+.portfolio-login-form,
+.portfolio-password-field,
+.portfolio-access-button,
+.registration-notes,
+.portfolio-registration-form,
+.portfolio-registration-form fieldset,
+.portfolio-registration-form .form-grid,
+.portfolio-registration-form label,
+.portfolio-registration-form input,
+.portfolio-registration-form select,
+.portfolio-registration-form textarea {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.registration-notes span,
+.approved-access-panel p,
+.portfolio-registration-intro h1,
+.portfolio-registration-intro p,
+.portfolio-access-button span {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  .portfolio-registration {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 34px 15px 80px;
+  }
+
+  .portfolio-registration-intro,
+  .portfolio-registration-form {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px 22px;
+  }
+
+  .portfolio-password-field,
+  .portfolio-access-button {
+    width: 100%;
+  }
+
+  .portfolio-access-button {
+    grid-template-columns: 20px minmax(0, 1fr) 20px;
+    gap: 8px;
+    padding-inline: 12px !important;
+  }
+
+  .portfolio-access-button span {
+    min-width: 0;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .registration-notes span {
+    white-space: normal;
+    line-height: 1.55;
+  }
+}
