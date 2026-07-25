@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
-import { OwnerListingSection } from "./components/OwnerListingSection";
 
 const services = [
   {
@@ -85,8 +84,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <OwnerListingSection />
 
       <section className="services-section section-pad" id="services">
         <div className="site-shell">
