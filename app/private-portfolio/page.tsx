@@ -3,6 +3,7 @@ import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PrivatePortfolioRegistration } from "../components/PrivatePortfolioRegistration";
 import "./private-portfolio.css";
+import "./private-portfolio-mobile-fix.css";
 
 export const metadata: Metadata = {
   title: "Private Property Portfolio | Property Facilitators EuroAsia",
