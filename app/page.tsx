@@ -86,6 +86,8 @@ export default function Home() {
         </div>
       </section>
 
+      <OwnerListingSection />
+
       <section className="services-section section-pad" id="services">
         <div className="site-shell">
           <div className="section-heading-row">
@@ -235,8 +237,6 @@ export default function Home() {
           </p>
         </div>
       </section>
-
-      <OwnerListingSection />
 
       <section className="cta-section">
         <div className="site-shell cta-inner">
