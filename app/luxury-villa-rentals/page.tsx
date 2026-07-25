@@ -37,17 +37,68 @@ const areas = [
   },
 ];
 
-const conciergeServices = [
-  "Private airport transfers",
-  "Luxury vehicle hire",
-  "Chauffeur services",
-  "Yacht charter",
-  "Private aviation",
-  "Private chefs",
-  "Golf reservations",
-  "Spa and wellness",
-  "Private security",
+type ServiceIconName =
+  | "transfer"
+  | "car"
+  | "chauffeur"
+  | "yacht"
+  | "aviation"
+  | "chef"
+  | "golf"
+  | "wellness"
+  | "security";
+
+const conciergeServices: { name: string; icon: ServiceIconName }[] = [
+  { name: "Private airport transfers", icon: "transfer" },
+  { name: "Luxury vehicle hire", icon: "car" },
+  { name: "Chauffeur services", icon: "chauffeur" },
+  { name: "Yacht charter", icon: "yacht" },
+  { name: "Private aviation", icon: "aviation" },
+  { name: "Private chefs", icon: "chef" },
+  { name: "Golf reservations", icon: "golf" },
+  { name: "Spa and wellness", icon: "wellness" },
+  { name: "Private security", icon: "security" },
 ];
+
+function ServiceIcon({ name }: { name: ServiceIconName }) {
+  const common = {
+    width: 42,
+    height: 42,
+    viewBox: "0 0 48 48",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+
+  if (name === "transfer") {
+    return <svg {...common}><path d="M8 31h32M12 31l3-10h18l4 10M16 21l3-6h10l4 6M14 31v5M34 31v5"/><circle cx="17" cy="31" r="2.5"/><circle cx="31" cy="31" r="2.5"/><path d="M24 8v7M20 11l4-3 4 3"/></svg>;
+  }
+  if (name === "car") {
+    return <svg {...common}><path d="M7 30h34l-3-10H12L7 30Z"/><path d="M12 20l4-7h16l4 7M10 30v6M38 30v6"/><circle cx="15" cy="30" r="3"/><circle cx="33" cy="30" r="3"/><path d="M17 17h14"/></svg>;
+  }
+  if (name === "chauffeur") {
+    return <svg {...common}><circle cx="24" cy="14" r="6"/><path d="M13 38c1-9 5-14 11-14s10 5 11 14M18 27l6 6 6-6M24 33v6"/><path d="M17 11c2-4 12-4 14 0"/></svg>;
+  }
+  if (name === "yacht") {
+    return <svg {...common}><path d="M7 31h34c-3 6-8 9-17 9S10 37 7 31Z"/><path d="M14 31l5-17h10l5 17M24 14V7M19 14h10M10 25h28"/><path d="M5 43c4-2 7-2 11 0 4-2 7-2 11 0 4-2 7-2 11 0"/></svg>;
+  }
+  if (name === "aviation") {
+    return <svg {...common}><path d="M6 27l36-13-13 12 8 8-4 2-11-7-8 8-3-2 5-11-10 3Z"/><path d="M22 29l-2 10"/></svg>;
+  }
+  if (name === "chef") {
+    return <svg {...common}><path d="M14 21c-5-7 3-14 9-9 4-7 14-3 12 5 7 0 8 10 1 12H13c-7-1-7-8 1-8Z"/><path d="M14 29v10h22V29M20 33v6M28 33v6"/></svg>;
+  }
+  if (name === "golf") {
+    return <svg {...common}><path d="M15 41l12-33M27 8l11 5-13 5"/><circle cx="13" cy="39" r="3"/><path d="M9 43h16"/></svg>;
+  }
+  if (name === "wellness") {
+    return <svg {...common}><path d="M24 40c-1-11 3-20 12-28 3 10-1 18-12 28ZM24 40C14 35 9 28 10 18c10 3 15 10 14 22Z"/><path d="M24 40c0-9-1-16-5-22"/></svg>;
+  }
+  return <svg {...common}><path d="M24 6l15 6v10c0 10-6 17-15 21C15 39 9 32 9 22V12l15-6Z"/><path d="M18 24l4 4 8-9"/></svg>;
+}
 
 export default function LuxuryVillaRentalsPage() {
   return (
@@ -164,7 +215,23 @@ export default function LuxuryVillaRentalsPage() {
           </div>
           <div className="villa-rentals-service-list">
             {conciergeServices.map((service) => (
-              <div key={service}><span>◆</span>{service}</div>
+              <div
+                key={service.name}
+                style={{
+                  minHeight: 150,
+                  paddingBlock: 24,
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  gap: 13,
+                  color: "var(--gold)",
+                  textAlign: "center",
+                }}
+              >
+                <ServiceIcon name={service.icon} />
+                <span style={{ color: "var(--ink)", fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.45 }}>
+                  {service.name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
