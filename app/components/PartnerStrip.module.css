@@ -1,0 +1,83 @@
+.sixPartnerGrid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.lvcLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #171916;
+}
+
+.lvcEmblem {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  color: #a78550;
+}
+
+.lvcEmblem svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+}
+
+.lvcWords {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.lvcWords strong {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  white-space: nowrap;
+}
+
+.lvcWords span {
+  margin-top: 5px;
+  font-size: 8px;
+  letter-spacing: .42em;
+}
+
+@media (max-width: 1050px) {
+  .sixPartnerGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .sixPartnerGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sixPartnerGrid > :last-child {
+    grid-column: auto;
+  }
+
+  .lvcLogo {
+    gap: 8px;
+  }
+
+  .lvcEmblem {
+    width: 30px;
+    height: 30px;
+  }
+
+  .lvcWords strong {
+    font-size: 10px;
+    letter-spacing: .1em;
+  }
+
+  .lvcWords span {
+    font-size: 7px;
+    letter-spacing: .3em;
+  }
+}
