@@ -24,7 +24,7 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
           <Link href="/luxury-villa-rentals" onClick={() => setOpen(false)}>Luxury Villa Rentals</Link>
           <Link href="/commercial" onClick={() => setOpen(false)}>Commercial</Link>
           <Link href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
-          <Link href="/#property-owners" onClick={() => setOpen(false)}>Property owners</Link>
+          <Link href="/property-owners" onClick={() => setOpen(false)}>Property owners</Link>
           <Link href="/about" onClick={() => setOpen(false)}>Our approach</Link>
           <Link className="language-link" href="/zh" onClick={() => setOpen(false)}>中文</Link>
           <Link className="nav-enquire" href="/enquire" onClick={() => setOpen(false)}>
