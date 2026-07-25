@@ -1,0 +1,27 @@
+.mobileDirectory {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .mobileDirectory {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+    margin-right: 10px;
+    color: currentColor;
+    font-size: 9px;
+    font-weight: 650;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .mobileDirectory::after {
+    content: "→";
+    color: var(--gold-light);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+  }
+}
