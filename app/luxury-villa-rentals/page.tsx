@@ -8,17 +8,17 @@ const areas = [
   {
     name: "La Zagaleta",
     location: "Benahavís",
-    image: "/images/luxury-villa-rentals/la-zagaleta.webp",
+    image: "/images/luxury-villa-rentals/la-zagaleta.jpg",
   },
   {
     name: "El Madroñal",
     location: "Benahavís",
-    image: "/images/luxury-villa-rentals/el-madronal.webp",
+    image: "/images/luxury-villa-rentals/el-madronal.jpg",
   },
   {
     name: "Marbella Golden Mile",
     location: "Marbella",
-    image: "/images/luxury-villa-rentals/golden-mile.webp",
+    image: "/images/luxury-villa-rentals/golden-mile.jpg",
   },
   {
     name: "Benahavís",
@@ -33,7 +33,7 @@ const areas = [
   {
     name: "Sierra Blanca",
     location: "Marbella hills",
-    image: "/images/luxury-villa-rentals/sierra-blanca.webp",
+    image: "/images/luxury-villa-rentals/sierra-blanca.jpg",
   },
 ];
 
@@ -153,7 +153,7 @@ export default function LuxuryVillaRentalsPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 18 }}>
             <figure style={{ margin: 0 }}>
               <img
-                src="/images/luxury-villa-rentals/panoramic-twilight.webp"
+                src="/images/luxury-villa-rentals/panoramic-twilight.jpg"
                 alt="Twilight panoramic view from a luxury Marbella villa terrace"
                 style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }}
               />
@@ -163,7 +163,7 @@ export default function LuxuryVillaRentalsPage() {
             </figure>
             <figure style={{ margin: 0 }}>
               <img
-                src="/images/luxury-villa-rentals/panoramic-day.webp"
+                src="/images/luxury-villa-rentals/panoramic-day.jpg"
                 alt="Panoramic Mediterranean view towards Gibraltar and North Africa"
                 style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }}
               />
