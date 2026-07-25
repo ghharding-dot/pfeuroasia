@@ -4,48 +4,126 @@
   background: #eee9df;
 }
 
-.ownerGrid {
+.ownerHero {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  align-items: start;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  align-items: end;
   gap: clamp(70px, 9vw, 150px);
+  padding-bottom: 110px;
 }
 
-.ownerIntro h2 {
-  max-width: 620px;
+.ownerIntro h2,
+.marketHeading h3,
+.ownerLeadBlock h3,
+.buyerIntro h3,
+.rentalBridge h3,
+.ownerCta h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(52px, 5vw, 76px);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1.02;
 }
 
+.ownerIntro h2 { max-width: 700px; font-size: clamp(52px, 5vw, 76px); }
 .ownerIntro > p:not(:global(.eyebrow)) {
-  max-width: 560px;
+  max-width: 600px;
   margin: 34px 0 38px;
   color: #5f615b;
   font-size: 15px;
   line-height: 1.85;
 }
 
-.ownerDetails {
-  padding-top: 3px;
+.marketStatement {
+  padding: 34px 0 6px 34px;
+  border-left: 1px solid rgba(17,18,16,.18);
 }
-
-.ownerLead {
-  max-width: 690px;
-  margin: 0 0 42px;
+.marketStatement > span {
+  color: #967748;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.marketStatement p {
+  margin: 22px 0 0;
   color: #302e29;
   font-family: var(--serif);
-  font-size: clamp(24px, 2.2vw, 32px);
-  line-height: 1.42;
+  font-size: clamp(25px, 2.5vw, 36px);
+  line-height: 1.45;
 }
 
-.ownerServiceList {
-  border-top: 1px solid rgba(17, 18, 16, 0.16);
+.marketPanel {
+  padding-block: 110px;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(197,162,104,.12), transparent 34%),
+    linear-gradient(145deg, #181916 0%, #10110f 100%);
+  color: #fff;
+}
+.marketPanelInner { display: grid; gap: 64px; }
+.marketHeading { max-width: 820px; }
+.marketHeading h3 { font-size: clamp(44px, 5vw, 72px); }
+.marketHeading > p:not(:global(.eyebrow)) {
+  max-width: 720px;
+  margin: 28px 0 0;
+  color: rgba(255,255,255,.64);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.figureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  border-top: 1px solid rgba(255,255,255,.16);
+  border-left: 1px solid rgba(255,255,255,.16);
+}
+.figureGrid article {
+  min-height: 250px;
+  padding: 32px 28px;
+  border-right: 1px solid rgba(255,255,255,.16);
+  border-bottom: 1px solid rgba(255,255,255,.16);
+}
+.figureGrid strong {
+  display: block;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: clamp(42px,4vw,64px);
+  font-weight: 400;
+  line-height: 1;
+}
+.figureGrid h4 {
+  margin: 24px 0 10px;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.figureGrid p {
+  margin: 0;
+  color: rgba(255,255,255,.52);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.sourceNote {
+  margin: -24px 0 0;
+  color: rgba(255,255,255,.36);
+  font-size: 10px;
+  line-height: 1.6;
 }
 
+.ownerDetails {
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+  gap: clamp(70px,9vw,150px);
+  padding-block: 120px;
+}
+.ownerLeadBlock h3 { font-size: clamp(42px,4.5vw,66px); }
+.ownerLeadBlock > p:not(:global(.eyebrow)) {
+  margin: 28px 0 0;
+  color: #5f615b;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.ownerServiceList { border-top: 1px solid rgba(17, 18, 16, 0.16); }
 .ownerServiceList article {
   display: grid;
   grid-template-columns: 58px 1fr;
@@ -53,7 +131,6 @@
   padding-block: 28px;
   border-bottom: 1px solid rgba(17, 18, 16, 0.16);
 }
-
 .ownerServiceList article > span {
   padding-top: 5px;
   color: #967748;
@@ -61,7 +138,6 @@
   font-weight: 650;
   letter-spacing: 0.13em;
 }
-
 .ownerServiceList h3 {
   margin: 0 0 9px;
   font-family: var(--serif);
@@ -69,7 +145,6 @@
   font-weight: 400;
   line-height: 1.2;
 }
-
 .ownerServiceList p {
   max-width: 610px;
   margin: 0;
@@ -78,47 +153,96 @@
   line-height: 1.75;
 }
 
-.ownerNote {
-  max-width: 680px;
-  margin: 34px 0 0;
-  padding-left: 20px;
-  border-left: 2px solid var(--gold);
-  color: #696a63;
-  font-size: 12px;
-  line-height: 1.75;
+.buyerSection {
+  display: grid;
+  grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr);
+  gap: clamp(70px,9vw,150px);
+  padding-block: 110px;
+  border-top: 1px solid rgba(17,18,16,.14);
+}
+.buyerIntro h3 { font-size: clamp(40px,4.4vw,64px); }
+.buyerIntro > p:not(:global(.eyebrow)) {
+  margin: 28px 0 0;
+  color: #5f615b;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.priorityGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(17,18,16,.16);
+  border-left: 1px solid rgba(17,18,16,.16);
+}
+.priorityGrid div {
+  min-height: 125px;
+  padding: 24px;
+  border-right: 1px solid rgba(17,18,16,.16);
+  border-bottom: 1px solid rgba(17,18,16,.16);
+}
+.priorityGrid span {
+  color: #967748;
+  font-size: 9px;
+  letter-spacing: .14em;
+}
+.priorityGrid p {
+  margin: 28px 0 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.25;
 }
 
-@media (max-width: 820px) {
-  .ownerSection {
-    padding-block: 88px;
-  }
+.rentalBridge {
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+  gap: clamp(70px,9vw,150px);
+  padding: 100px 80px;
+  background: #d9d1c2;
+}
+.rentalBridge h3 { font-size: clamp(40px,4.2vw,62px); }
+.rentalBridge > div:last-child p {
+  margin: 0 0 22px;
+  color: #55574f;
+  font-size: 15px;
+  line-height: 1.8;
+}
 
-  .ownerGrid {
-    grid-template-columns: 1fr;
-    gap: 64px;
-  }
+.ownerCta {
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+  gap: clamp(70px,9vw,150px);
+  align-items: start;
+  padding-top: 110px;
+}
+.ownerCta h3 { font-size: clamp(40px,4.4vw,64px); }
+.ownerCta > div:last-child p {
+  margin: 0 0 30px;
+  color: #5f615b;
+  font-size: 15px;
+  line-height: 1.8;
+}
 
-  .ownerIntro h2 {
-    font-size: 48px;
-  }
+@media (max-width: 980px) {
+  .ownerHero,
+  .ownerDetails,
+  .buyerSection,
+  .rentalBridge,
+  .ownerCta { grid-template-columns: 1fr; gap: 54px; }
+  .figureGrid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .rentalBridge { padding: 74px 44px; }
+}
 
-  .ownerIntro > p:not(:global(.eyebrow)) {
-    margin-top: 28px;
-    font-size: 14px;
-  }
-
-  .ownerLead {
-    margin-bottom: 34px;
-    font-size: 25px;
-  }
-
-  .ownerServiceList article {
-    grid-template-columns: 42px 1fr;
-    gap: 14px;
-    padding-block: 24px;
-  }
-
-  .ownerServiceList h3 {
-    font-size: 24px;
-  }
+@media (max-width: 680px) {
+  .ownerSection { padding-block: 88px; }
+  .ownerHero { padding-bottom: 80px; }
+  .ownerIntro h2 { font-size: 48px; }
+  .marketStatement { padding: 28px 0 0; border-left: 0; border-top: 1px solid rgba(17,18,16,.18); }
+  .marketPanel { padding-block: 80px; }
+  .figureGrid { grid-template-columns: 1fr; }
+  .figureGrid article { min-height: 210px; }
+  .ownerDetails,
+  .buyerSection,
+  .ownerCta { padding-block: 82px; }
+  .ownerServiceList article { grid-template-columns: 42px 1fr; gap: 14px; padding-block: 24px; }
+  .priorityGrid { grid-template-columns: 1fr; }
+  .rentalBridge { padding: 64px 24px; }
 }
