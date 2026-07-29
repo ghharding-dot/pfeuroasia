@@ -1,5 +1,5 @@
 .partnerGrid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .aylesfordLogo {
@@ -35,6 +35,31 @@
   font-size: 8px;
   font-weight: 600;
   letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.martinezLogo {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #1f2933;
+  text-align: center;
+}
+
+.martinezLogo span {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.55vw, 24px);
+  line-height: 1;
+}
+
+.martinezLogo small {
+  margin-top: 8px;
+  color: #7d6a4f;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .2em;
   text-transform: uppercase;
 }
 
@@ -159,5 +184,9 @@
 
   .aylesfordLogo span {
     font-size: 23px;
+  }
+
+  .martinezLogo span {
+    font-size: 18px;
   }
 }
