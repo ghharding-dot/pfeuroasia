@@ -79,7 +79,7 @@ export function PartnerStrip() {
           <p className={styles.rentalStatement}>
             For exceptional short-term villa rentals, we work in collaboration with our specialist luxury rental partner.
           </p>
-          <a className={`partner-logo ${styles.rentalPartnerLogo}`} href="/enquire?type=rental" aria-label="Start a luxury villa rental enquiry">
+          <a className={`partner-logo ${styles.rentalPartnerLogo}`} href="/luxury-villa-rentals#villa-enquiry" aria-label="Request a bespoke luxury villa selection">
             <LuxuryVillaCollectionLogo />
           </a>
         </div>
