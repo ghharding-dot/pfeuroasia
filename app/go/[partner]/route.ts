@@ -24,10 +24,14 @@ async function sendNotification(details: {
   userAgent: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
-  const recipient = process.env.PARTNER_NOTIFICATION_EMAIL;
-  const sender = process.env.PARTNER_NOTIFICATION_FROM || "PF EuroAsia <notifications@pfeuroasia.com>";
+  const recipient =
+    process.env.PARTNER_NOTIFICATION_EMAIL ||
+    "partner-notifications@pfeuroasia.com";
+  const sender =
+    process.env.PARTNER_NOTIFICATION_FROM ||
+    "PF EuroAsia <notifications@pfeuroasia.com>";
 
-  if (!apiKey || !recipient) return;
+  if (!apiKey) return;
 
   const text = [
     "A collaboration partner link was clicked.",
