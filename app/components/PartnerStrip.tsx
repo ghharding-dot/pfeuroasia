@@ -28,6 +28,15 @@ function AylesfordLogo() {
   );
 }
 
+function MartinezEchevarriaLogo() {
+  return (
+    <div className={styles.martinezLogo} aria-label="Martinez-Echevarria Lawyers">
+      <span>Martínez-Echevarría</span>
+      <small>Lawyers</small>
+    </div>
+  );
+}
+
 export function PartnerStrip() {
   return (
     <section className="partner-strip" aria-labelledby="partner-strip-title">
@@ -47,6 +56,9 @@ export function PartnerStrip() {
           </a>
           <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Visit Lawbird Legal Services">
             <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
+          </a>
+          <a className="partner-logo" href="/go/martinezechevarria" aria-label="Visit Martinez-Echevarria Lawyers">
+            <MartinezEchevarriaLogo />
           </a>
         </div>
 
