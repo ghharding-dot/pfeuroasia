@@ -42,8 +42,12 @@ export function PartnerStrip() {
           </a>
           <div className="partner-logo partner-house"><img src="/images/partner-house-country.png" alt="House and Country Real Estate" /></div>
           <div className="partner-logo partner-luxo" aria-label="LuxoEstates"><span>Luxo</span><b>Estates</b></div>
-          <div className="partner-logo partner-legal"><img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" /></div>
-          <div className="partner-logo partner-lawbird"><img src="/images/partner-lawbird.png" alt="Lawbird" /></div>
+          <a className="partner-logo partner-legal" href="/go/legal10" aria-label="Visit Legal 10 Abogados Marbella">
+            <img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" />
+          </a>
+          <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Visit Lawbird Legal Services">
+            <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
+          </a>
           <div className="partner-logo"><LuxuryVillaCollectionLogo /></div>
         </div>
       </div>
