@@ -11,7 +11,7 @@ const PARTNERS: Record<string, { name: string; url: string }> = {
   },
   legal10: {
     name: "Legal 10 Abogados Marbella",
-    url: "https://www.legal10abogadosmarbella.com/",
+    url: "https://www.legal10abogadosmarbella.com/en/",
   },
   lawbird: {
     name: "Lawbird Legal Services",
