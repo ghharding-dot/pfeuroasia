@@ -15,7 +15,7 @@ export function RentalEnquiryForm() {
     const form = new FormData(event.currentTarget);
     const payload = {
       _subject: "New luxury villa availability request",
-      _cc: "villas@theluxuryvillacollection.com",
+      _cc: "reservations@theluxuryvillacollection.com",
       _template: "table",
       enquiry_type: "Luxury villa rental",
       full_name: form.get("name"),
