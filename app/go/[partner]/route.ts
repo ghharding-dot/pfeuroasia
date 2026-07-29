@@ -17,6 +17,10 @@ const PARTNERS: Record<string, { name: string; url: string }> = {
     name: "Lawbird Legal Services",
     url: "https://www.lawbird.com/",
   },
+  martinezechevarria: {
+    name: "Martinez-Echevarria Lawyers",
+    url: "https://www.martinezechevarria.com/en/expertise/",
+  },
 };
 
 function safeHeader(value: string | null, fallback = "Not available") {
