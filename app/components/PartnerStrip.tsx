@@ -41,25 +41,36 @@ export function PartnerStrip() {
   return (
     <section className="partner-strip" aria-labelledby="partner-strip-title">
       <div className="site-shell">
-        <p className="partner-strip-title" id="partner-strip-title">Collaborating with</p>
-        <div className={`partner-logo-grid ${styles.partnerGrid}`}>
-          <a className="partner-logo partner-pf" href="/go/pfiberia" aria-label="Visit Property Facilitators Iberia">
-            <img src="/images/partner-pf-iberia.png" alt="Property Facilitators Iberia" />
-          </a>
-          <a className="partner-logo" href="/go/aylesford" aria-label="Visit Aylesford Spain">
-            <AylesfordLogo />
-          </a>
-          <div className="partner-logo partner-house"><img src="/images/partner-house-country.png" alt="House and Country Real Estate" /></div>
-          <div className="partner-logo partner-luxo" aria-label="LuxoEstates"><span>Luxo</span><b>Estates</b></div>
-          <a className="partner-logo partner-legal" href="/go/legal10" aria-label="Visit Legal 10 Abogados Marbella">
-            <img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" />
-          </a>
-          <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Visit Lawbird Legal Services">
-            <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
-          </a>
-          <a className="partner-logo" href="/go/martinezechevarria" aria-label="Visit Martinez-Echevarria Lawyers">
-            <MartinezEchevarriaLogo />
-          </a>
+        <p className="partner-strip-title" id="partner-strip-title">Our collaboration network</p>
+
+        <div className={styles.partnerGroup}>
+          <p className={styles.groupEyebrow}>Property representation partners</p>
+          <div className={`partner-logo-grid ${styles.propertyGrid}`}>
+            <a className="partner-logo partner-pf" href="/go/pfiberia" aria-label="Visit Property Facilitators Iberia">
+              <img src="/images/partner-pf-iberia.png" alt="Property Facilitators Iberia" />
+            </a>
+            <a className="partner-logo" href="/go/aylesford" aria-label="Visit Aylesford Spain">
+              <AylesfordLogo />
+            </a>
+            <div className="partner-logo partner-house"><img src="/images/partner-house-country.png" alt="House and Country Real Estate" /></div>
+            <div className="partner-logo partner-luxo" aria-label="LuxoEstates"><span>Luxo</span><b>Estates</b></div>
+          </div>
+        </div>
+
+        <div className={styles.partnerGroup}>
+          <div className={styles.groupDivider} aria-hidden="true" />
+          <p className={styles.groupEyebrow}>Legal representation partners</p>
+          <div className={`partner-logo-grid ${styles.legalGrid}`}>
+            <a className="partner-logo partner-legal" href="/go/legal10" aria-label="Visit Legal 10 Abogados Marbella">
+              <img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" />
+            </a>
+            <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Visit Lawbird Legal Services">
+              <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
+            </a>
+            <a className="partner-logo" href="/go/martinezechevarria" aria-label="Visit Martinez-Echevarria Lawyers">
+              <MartinezEchevarriaLogo />
+            </a>
+          </div>
         </div>
 
         <div className={styles.rentalPartnerSection}>
