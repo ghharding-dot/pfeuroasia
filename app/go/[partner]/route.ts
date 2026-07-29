@@ -9,6 +9,14 @@ const PARTNERS: Record<string, { name: string; url: string }> = {
     name: "Property Facilitators Iberia",
     url: "https://pfiberia.com/",
   },
+  legal10: {
+    name: "Legal 10 Abogados Marbella",
+    url: "https://www.legal10abogadosmarbella.com/",
+  },
+  lawbird: {
+    name: "Lawbird Legal Services",
+    url: "https://www.lawbird.com/",
+  },
 };
 
 function safeHeader(value: string | null, fallback = "Not available") {
