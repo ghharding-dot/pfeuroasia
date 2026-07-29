@@ -6,7 +6,7 @@ const conciergeServices = [
   {
     title: "Private airport transfers",
     text: "VIP collection and departure services with luxury Mercedes V-Class vehicles, executive minibuses and luggage coordination.",
-    image: "/images/airport-transfer-vclass.svg",
+    image: "/images/airport-transfer-vclass.webp",
   },
   {
     title: "Luxury vehicle hire",
