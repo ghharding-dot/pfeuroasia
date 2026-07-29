@@ -48,7 +48,17 @@ export function PartnerStrip() {
           <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Visit Lawbird Legal Services">
             <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
           </a>
-          <div className="partner-logo"><LuxuryVillaCollectionLogo /></div>
+        </div>
+
+        <div className={styles.rentalPartnerSection}>
+          <div className={styles.rentalDivider} aria-hidden="true" />
+          <p className={styles.rentalEyebrow}>Luxury villa rental partner</p>
+          <p className={styles.rentalStatement}>
+            For exceptional short-term villa rentals, we work in collaboration with our specialist luxury rental partner.
+          </p>
+          <div className={`partner-logo ${styles.rentalPartnerLogo}`}>
+            <LuxuryVillaCollectionLogo />
+          </div>
         </div>
       </div>
     </section>
