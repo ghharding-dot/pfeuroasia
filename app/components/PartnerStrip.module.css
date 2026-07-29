@@ -1,5 +1,32 @@
-.partnerGrid {
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+.partnerGroup {
+  margin-top: 24px;
+}
+
+.propertyGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.legalGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.groupDivider {
+  width: 100%;
+  height: 1px;
+  margin: 34px 0 24px;
+  background: rgba(167, 133, 80, .35);
+}
+
+.groupEyebrow {
+  margin: 0 0 18px;
+  color: #a78550;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .aylesfordLogo {
@@ -144,14 +171,27 @@
 }
 
 @media (max-width: 1180px) {
-  .partnerGrid {
+  .propertyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .legalGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
-  .partnerGrid {
+  .propertyGrid,
+  .legalGrid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .legalGrid > :last-child {
+    grid-column: 1 / -1;
+  }
+
+  .groupDivider {
+    margin-top: 28px;
   }
 
   .rentalPartnerSection {
