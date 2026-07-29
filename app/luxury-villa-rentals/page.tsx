@@ -5,100 +5,27 @@ import { RentalEnquiryForm } from "./RentalEnquiryForm";
 import "./luxury-villa-rentals.css";
 
 const areas = [
-  {
-    name: "La Zagaleta",
-    location: "Benahavís",
-    image: "/images/luxury-villa-rentals/la-zagaleta.jpg",
-  },
-  {
-    name: "El Madroñal",
-    location: "Benahavís",
-    image: "/images/luxury-villa-rentals/el-madronal.jpg",
-  },
-  {
-    name: "Marbella Golden Mile",
-    location: "Marbella",
-    image: "/images/luxury-villa-rentals/golden-mile.jpg",
-  },
-  {
-    name: "Benahavís",
-    location: "Mountain estates",
-    image: "https://images.unsplash.com/photo-1776761731066-c89caa8d25e6?auto=format&fit=crop&q=84&w=1600",
-  },
-  {
-    name: "Puerto Banús",
-    location: "Marina living",
-    image: "https://images.unsplash.com/photo-1751054551120-1ccbe689d091?auto=format&fit=crop&q=84&w=1600",
-  },
-  {
-    name: "Sierra Blanca",
-    location: "Marbella hills",
-    image: "/images/luxury-villa-rentals/sierra-blanca.jpg",
-  },
+  { name: "La Zagaleta", location: "Benahavís", image: "/images/luxury-villa-rentals/la-zagaleta.jpg" },
+  { name: "El Madroñal", location: "Benahavís", image: "/images/luxury-villa-rentals/el-madronal.jpg" },
+  { name: "Marbella Golden Mile", location: "Marbella", image: "/images/luxury-villa-rentals/golden-mile.jpg" },
+  { name: "Benahavís", location: "Mountain estates", image: "https://images.unsplash.com/photo-1776761731066-c89caa8d25e6?auto=format&fit=crop&q=84&w=1600" },
+  { name: "Puerto Banús", location: "Marina living", image: "https://images.unsplash.com/photo-1751054551120-1ccbe689d091?auto=format&fit=crop&q=84&w=1600" },
+  { name: "Sierra Blanca", location: "Marbella hills", image: "/images/luxury-villa-rentals/sierra-blanca.jpg" },
 ];
 
-type ServiceIconName =
-  | "transfer"
-  | "car"
-  | "chauffeur"
-  | "yacht"
-  | "aviation"
-  | "chef"
-  | "golf"
-  | "wellness"
-  | "security";
-
-const conciergeServices: { name: string; icon: ServiceIconName }[] = [
-  { name: "Private airport transfers", icon: "transfer" },
-  { name: "Luxury vehicle hire", icon: "car" },
-  { name: "Chauffeur services", icon: "chauffeur" },
-  { name: "Yacht charter", icon: "yacht" },
-  { name: "Private aviation", icon: "aviation" },
-  { name: "Private chefs", icon: "chef" },
-  { name: "Golf reservations", icon: "golf" },
-  { name: "Spa and wellness", icon: "wellness" },
-  { name: "Private security", icon: "security" },
+const conciergeServices = [
+  { name: "Private airport transfers", text: "VIP collection and departure services with luxury Mercedes V-Class vehicles and executive minibuses.", image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Luxury vehicle hire", text: "Prestige, sports and luxury cars selected around your stay and preferred driving experience.", image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Chauffeur services", text: "Discreet professional drivers for individual journeys, full-day availability and events.", image: "https://images.unsplash.com/photo-1515569067071-ec3b51335dd0?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Yacht charter", text: "Private Mediterranean charters with crew, catering and marina arrangements coordinated.", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Private aviation", text: "Private jet and helicopter charter support with closely coordinated ground transfers.", image: "https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Private chefs", text: "In-villa chefs, celebration menus, restaurant reservations and private dining experiences.", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Golf experiences", text: "Tee times, tuition, equipment and transport to leading Costa del Sol courses.", image: "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Spa and wellness", text: "In-villa treatments, spa reservations, personal training, yoga and wellness programmes.", image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Private security", text: "Discreet personal, residential and event security through qualified local professionals.", image: "https://images.unsplash.com/photo-1453873531674-2151bcd01707?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Andalusian day trips", text: "Private visits to Ronda, Seville, Granada, Málaga, Córdoba and the white villages.", image: "https://images.unsplash.com/photo-1558642084-fd07fae5282e?auto=format&fit=crop&w=1200&q=84" },
+  { name: "Sports and leisure", text: "Padel, tennis, polo, riding, watersports and major sporting events arranged privately.", image: "https://images.unsplash.com/photo-1530137073520-4ea6e2f10a48?auto=format&fit=crop&w=1200&q=84" },
 ];
-
-function ServiceIcon({ name }: { name: ServiceIconName }) {
-  const common = {
-    width: 42,
-    height: 42,
-    viewBox: "0 0 48 48",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.6,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true,
-  };
-
-  if (name === "transfer") {
-    return <svg {...common}><path d="M8 31h32M12 31l3-10h18l4 10M16 21l3-6h10l4 6M14 31v5M34 31v5"/><circle cx="17" cy="31" r="2.5"/><circle cx="31" cy="31" r="2.5"/><path d="M24 8v7M20 11l4-3 4 3"/></svg>;
-  }
-  if (name === "car") {
-    return <svg {...common}><path d="M7 30h34l-3-10H12L7 30Z"/><path d="M12 20l4-7h16l4 7M10 30v6M38 30v6"/><circle cx="15" cy="30" r="3"/><circle cx="33" cy="30" r="3"/><path d="M17 17h14"/></svg>;
-  }
-  if (name === "chauffeur") {
-    return <svg {...common}><circle cx="24" cy="14" r="6"/><path d="M13 38c1-9 5-14 11-14s10 5 11 14M18 27l6 6 6-6M24 33v6"/><path d="M17 11c2-4 12-4 14 0"/></svg>;
-  }
-  if (name === "yacht") {
-    return <svg {...common}><path d="M7 31h34c-3 6-8 9-17 9S10 37 7 31Z"/><path d="M14 31l5-17h10l5 17M24 14V7M19 14h10M10 25h28"/><path d="M5 43c4-2 7-2 11 0 4-2 7-2 11 0 4-2 7-2 11 0"/></svg>;
-  }
-  if (name === "aviation") {
-    return <svg {...common}><path d="M6 27l36-13-13 12 8 8-4 2-11-7-8 8-3-2 5-11-10 3Z"/><path d="M22 29l-2 10"/></svg>;
-  }
-  if (name === "chef") {
-    return <svg {...common}><path d="M14 21c-5-7 3-14 9-9 4-7 14-3 12 5 7 0 8 10 1 12H13c-7-1-7-8 1-8Z"/><path d="M14 29v10h22V29M20 33v6M28 33v6"/></svg>;
-  }
-  if (name === "golf") {
-    return <svg {...common}><path d="M15 41l12-33M27 8l11 5-13 5"/><circle cx="13" cy="39" r="3"/><path d="M9 43h16"/></svg>;
-  }
-  if (name === "wellness") {
-    return <svg {...common}><path d="M24 40c-1-11 3-20 12-28 3 10-1 18-12 28ZM24 40C14 35 9 28 10 18c10 3 15 10 14 22Z"/><path d="M24 40c0-9-1-16-5-22"/></svg>;
-  }
-  return <svg {...common}><path d="M24 6l15 6v10c0 10-6 17-15 21C15 39 9 32 9 22V12l15-6Z"/><path d="M18 24l4 4 8-9"/></svg>;
-}
 
 export default function LuxuryVillaRentalsPage() {
   return (
@@ -112,12 +39,8 @@ export default function LuxuryVillaRentalsPage() {
             <p className="villa-rentals-eyebrow">Luxury villa rentals</p>
             <h1>Exceptional homes.<br /><em>Personal service.</em></h1>
             <p className="villa-rentals-tagline">Complete discretion.</p>
-            <p className="villa-rentals-collaboration">
-              Property Facilitators EuroAsia <span>×</span> The Luxury Villa Collection
-            </p>
-            <Link className="villa-rentals-button" href="#villa-enquiry">
-              Request your bespoke villa selection <span>→</span>
-            </Link>
+            <p className="villa-rentals-collaboration">Property Facilitators EuroAsia <span>×</span> The Luxury Villa Collection</p>
+            <Link className="villa-rentals-button" href="#villa-enquiry">Request your bespoke villa selection <span>→</span></Link>
           </div>
         </div>
       </section>
@@ -129,17 +52,8 @@ export default function LuxuryVillaRentalsPage() {
             <h2>Luxury stays, personally arranged.</h2>
           </div>
           <div className="villa-rentals-body-copy">
-            <p>
-              Through our collaboration with The Luxury Villa Collection, Property
-              Facilitators EuroAsia provides access to an exceptional portfolio of
-              personally inspected luxury villas across Marbella and the surrounding
-              prime residential areas.
-            </p>
-            <p>
-              Whether you are planning a family holiday, an extended stay, a corporate
-              retreat or a private celebration, every enquiry is handled individually
-              and in confidence.
-            </p>
+            <p>Through our collaboration with The Luxury Villa Collection, Property Facilitators EuroAsia provides access to an exceptional portfolio of personally inspected luxury villas across Marbella and the surrounding prime residential areas.</p>
+            <p>Whether you are planning a family holiday, an extended stay, a corporate retreat or a private celebration, every enquiry is handled individually and in confidence.</p>
           </div>
         </div>
       </section>
@@ -152,24 +66,12 @@ export default function LuxuryVillaRentalsPage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 18 }}>
             <figure style={{ margin: 0 }}>
-              <img
-                src="/images/luxury-villa-rentals/panoramic-twilight.jpg"
-                alt="Twilight panoramic view from a luxury Marbella villa terrace"
-                style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }}
-              />
-              <figcaption style={{ marginTop: 14, color: "rgba(255,255,255,.62)", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase" }}>
-                Evening light across the Mediterranean
-              </figcaption>
+              <img src="/images/luxury-villa-rentals/panoramic-twilight.jpg" alt="Twilight panoramic view from a luxury Marbella villa terrace" style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }} />
+              <figcaption style={{ marginTop: 14, color: "rgba(255,255,255,.62)", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase" }}>Evening light across the Mediterranean</figcaption>
             </figure>
             <figure style={{ margin: 0 }}>
-              <img
-                src="/images/luxury-villa-rentals/panoramic-day.jpg"
-                alt="Panoramic Mediterranean view towards Gibraltar and North Africa"
-                style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }}
-              />
-              <figcaption style={{ marginTop: 14, color: "rgba(255,255,255,.62)", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase" }}>
-                Views towards Gibraltar and North Africa
-              </figcaption>
+              <img src="/images/luxury-villa-rentals/panoramic-day.jpg" alt="Panoramic Mediterranean view towards Gibraltar and North Africa" style={{ display: "block", width: "100%", aspectRatio: "16 / 9", objectFit: "cover" }} />
+              <figcaption style={{ marginTop: 14, color: "rgba(255,255,255,.62)", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase" }}>Views towards Gibraltar and North Africa</figcaption>
             </figure>
           </div>
         </div>
@@ -184,18 +86,10 @@ export default function LuxuryVillaRentalsPage() {
           <div className="villa-rentals-area-grid">
             {areas.map((area, index) => (
               <a className="villa-rentals-area-card" href="#villa-enquiry" key={area.name}>
-                <span
-                  className="villa-rentals-area-photo"
-                  style={{ backgroundImage: `url(${area.image})` }}
-                  aria-hidden="true"
-                />
+                <span className="villa-rentals-area-photo" style={{ backgroundImage: `url(${area.image})` }} aria-hidden="true" />
                 <span className="villa-rentals-area-shade" aria-hidden="true" />
                 <span className="villa-rentals-area-number">{String(index + 1).padStart(2, "0")}</span>
-                <div className="villa-rentals-area-copy">
-                  <p>{area.location}</p>
-                  <h3>{area.name}</h3>
-                  <small>Request villas <b>→</b></small>
-                </div>
+                <div className="villa-rentals-area-copy"><p>{area.location}</p><h3>{area.name}</h3><small>Request villas <b>→</b></small></div>
               </a>
             ))}
           </div>
@@ -203,35 +97,26 @@ export default function LuxuryVillaRentalsPage() {
         </div>
       </section>
 
-      <section className="villa-rentals-concierge">
-        <div className="site-shell villa-rentals-concierge-grid">
-          <div>
-            <p className="villa-rentals-eyebrow dark">Concierge services</p>
-            <h2>Every detail considered.</h2>
-            <p>
-              Your villa is only the beginning. Our teams can coordinate the services
-              required to make your stay effortless, comfortable and entirely personal.
-            </p>
+      <section className="rental-photo-concierge">
+        <div className="site-shell">
+          <div className="rental-photo-heading">
+            <div>
+              <p className="villa-rentals-eyebrow">Concierge services</p>
+              <h2>Every detail considered.</h2>
+            </div>
+            <p>Your villa is only the beginning. We can coordinate every practical and lifestyle element required to make your stay effortless, comfortable and entirely personal.</p>
           </div>
-          <div className="villa-rentals-service-list">
-            {conciergeServices.map((service) => (
-              <div
-                key={service.name}
-                style={{
-                  minHeight: 150,
-                  paddingBlock: 24,
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  gap: 13,
-                  color: "var(--gold)",
-                  textAlign: "center",
-                }}
-              >
-                <ServiceIcon name={service.icon} />
-                <span style={{ color: "var(--ink)", fontSize: 12, letterSpacing: ".08em", textTransform: "uppercase", lineHeight: 1.45 }}>
-                  {service.name}
-                </span>
-              </div>
+          <div className="rental-photo-grid">
+            {conciergeServices.map((service, index) => (
+              <a className={`rental-photo-card ${index === 3 || index === 9 ? "rental-photo-card-wide" : ""}`} href="#villa-enquiry" key={service.name} style={{ backgroundImage: `url(${service.image})` }}>
+                <span className="rental-photo-shade" />
+                <span className="rental-photo-number">{String(index + 1).padStart(2, "0")}</span>
+                <div className="rental-photo-copy">
+                  <h3>{service.name}</h3>
+                  <p>{service.text}</p>
+                  <small>Request this service <b>→</b></small>
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -240,21 +125,11 @@ export default function LuxuryVillaRentalsPage() {
       <section className="villa-rentals-partnership">
         <div className="site-shell villa-rentals-partnership-inner">
           <div className="villa-rentals-branding">
-            <div className="villa-rentals-euroasia-mark">
-              <img src="/images/pf-gold-symbol.png" alt="" />
-              <strong>Property Facilitators<br />EuroAsia</strong>
-            </div>
+            <div className="villa-rentals-euroasia-mark"><img src="/images/pf-gold-symbol.png" alt="" /><strong>Property Facilitators<br />EuroAsia</strong></div>
             <span className="villa-rentals-cross">×</span>
-            <div className="villa-rentals-lvc-placeholder" aria-label="The Luxury Villa Collection">
-              <span>The</span>
-              <strong>Luxury Villa<br />Collection</strong>
-            </div>
+            <div className="villa-rentals-lvc-placeholder" aria-label="The Luxury Villa Collection"><span>The</span><strong>Luxury Villa<br />Collection</strong></div>
           </div>
-          <p>
-            Every enquiry is personally managed by Property Facilitators EuroAsia in
-            collaboration with The Luxury Villa Collection, ensuring each client receives
-            a carefully tailored villa selection together with comprehensive concierge support.
-          </p>
+          <p>Every enquiry is personally managed by Property Facilitators EuroAsia in collaboration with The Luxury Villa Collection, ensuring each client receives a carefully tailored villa selection together with comprehensive concierge support.</p>
         </div>
       </section>
 
@@ -263,21 +138,33 @@ export default function LuxuryVillaRentalsPage() {
           <div className="villa-rentals-enquiry-copy">
             <p className="villa-rentals-eyebrow">Private enquiries</p>
             <h2>Request your bespoke villa selection.</h2>
-            <p>
-              Share your preferred dates, group size, bedroom requirement, location and
-              approximate budget. We will respond personally with carefully selected options.
-            </p>
-            <ul>
-              <li>Confidential, individually managed enquiries</li>
-              <li>Access to on-market and privately available villas</li>
-              <li>Full concierge support before and during your stay</li>
-            </ul>
+            <p>Share your preferred dates, group size, bedroom requirement, location and approximate budget. We will respond personally with carefully selected options.</p>
+            <ul><li>Confidential, individually managed enquiries</li><li>Access to on-market and privately available villas</li><li>Full concierge support before and during your stay</li></ul>
           </div>
           <RentalEnquiryForm />
         </div>
       </section>
 
       <Footer />
+
+      <style>{`
+        .rental-photo-concierge { padding-block: 130px; background: #10161c; color: white; }
+        .rental-photo-heading { display: grid; grid-template-columns: 1fr 480px; gap: 90px; align-items: end; margin-bottom: 68px; }
+        .rental-photo-heading h2 { margin: 0; font-family: var(--serif); font-size: clamp(48px,5vw,74px); font-weight: 400; letter-spacing: -.04em; line-height: .98; }
+        .rental-photo-heading > p { margin: 0 0 7px; color: rgba(255,255,255,.58); font-family: var(--serif); font-size: 18px; line-height: 1.65; }
+        .rental-photo-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+        .rental-photo-card { position: relative; display: flex; min-height: 410px; padding: 28px; flex-direction: column; justify-content: space-between; overflow: hidden; background-position: center; background-size: cover; color: white; isolation: isolate; transition: transform 260ms ease, box-shadow 260ms ease; }
+        .rental-photo-card-wide { grid-column: span 2; }
+        .rental-photo-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+        .rental-photo-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg,rgba(5,8,10,.12),rgba(5,8,10,.25) 35%,rgba(5,8,10,.93) 100%); }
+        .rental-photo-number { color: var(--gold-light); font-size: 10px; letter-spacing: .18em; }
+        .rental-photo-copy h3 { margin: 0 0 12px; font-family: var(--serif); font-size: clamp(30px,3vw,42px); font-weight: 400; line-height: 1; }
+        .rental-photo-copy p { max-width: 500px; margin: 0; color: rgba(255,255,255,.68); font-size: 12px; line-height: 1.65; }
+        .rental-photo-copy small { display: inline-block; margin-top: 20px; padding-bottom: 7px; border-bottom: 1px solid var(--gold); font-size: 9px; font-weight: 650; letter-spacing: .13em; text-transform: uppercase; }
+        .rental-photo-copy small b { margin-left: 9px; color: var(--gold-light); font-size: 13px; font-weight: 400; }
+        @media (max-width: 1050px) { .rental-photo-heading { grid-template-columns: 1fr 360px; gap: 55px; } .rental-photo-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } .rental-photo-card-wide { grid-column: auto; } }
+        @media (max-width: 760px) { .rental-photo-concierge { padding-block: 90px; } .rental-photo-heading { grid-template-columns: 1fr; gap: 28px; margin-bottom: 44px; } .rental-photo-grid { grid-template-columns: 1fr; gap: 14px; } .rental-photo-card { min-height: 420px; padding: 24px; } }
+      `}</style>
     </main>
   );
 }
