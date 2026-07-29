@@ -1,5 +1,41 @@
-.sixPartnerGrid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+.partnerGrid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.aylesfordLogo {
+  position: relative;
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #64152f;
+  text-align: center;
+  line-height: .9;
+}
+
+.aylesfordLogo span {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 31px);
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+}
+
+.aylesfordLogo small {
+  margin-top: 8px;
+  font-family: var(--serif);
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.aylesfordLogo b {
+  margin-top: 7px;
+  color: #b39a54;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
 }
 
 .lvcLogo {
@@ -47,19 +83,15 @@
   letter-spacing: .42em;
 }
 
-@media (max-width: 1050px) {
-  .sixPartnerGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+@media (max-width: 1180px) {
+  .partnerGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
-  .sixPartnerGrid {
+  .partnerGrid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .sixPartnerGrid > :last-child {
-    grid-column: auto;
   }
 
   .lvcLogo {
@@ -79,5 +111,9 @@
   .lvcWords span {
     font-size: 7px;
     letter-spacing: .3em;
+  }
+
+  .aylesfordLogo span {
+    font-size: 23px;
   }
 }
