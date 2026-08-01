@@ -1,0 +1,156 @@
+/* Homepage global presence: one restrained world map with three location markers. */
+
+[class*="presenceSection"] {
+  padding-block: 74px 94px !important;
+  background: #0f100e !important;
+}
+
+[class*="presenceGrid"] {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 500px !important;
+  aspect-ratio: 12 / 5.2 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(197, 162, 104, 0.28) !important;
+  background-color: #11120f !important;
+  background-image:
+    radial-gradient(circle at 52% 47%, rgba(197, 162, 104, 0.05), transparent 34%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 520'%3E%3Cg fill='none' stroke='%23c5a268' stroke-opacity='.54' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M65 151 105 93 170 66 234 73 284 104 329 119 352 155 327 190 287 201 260 229 225 240 190 223 157 205 130 181 96 170Z'/%3E%3Cpath d='M260 244 305 254 335 286 345 330 329 365 310 402 285 455 260 426 245 380 230 340 235 300Z'/%3E%3Cpath d='M505 148 536 128 571 128 602 143 616 160 600 177 565 176 538 164Z'/%3E%3Cpath d='M519 186 584 177 624 205 620 254 601 309 570 351 540 320 516 270 500 225Z'/%3E%3Cpath d='M610 136 687 96 780 89 866 109 930 145 1000 170 1032 209 991 245 931 235 891 265 835 250 790 220 731 225 680 190 630 176Z'/%3E%3Cpath d='M895 335 951 320 1005 345 1016 385 975 410 925 395 890 365Z'/%3E%3Cpath d='M436 79 459 55 489 60 501 85 484 105 452 101Z'/%3E%3Cpath d='M1054 205 1070 190 1081 205 1074 225'/%3E%3Cpath d='M835 278 849 286 855 307 847 328 836 322 832 304 821 296Z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23dec28d' stroke-width='4' stroke-linejoin='round'%3E%3Cpath d='M536 162 548 155 563 159 565 168 553 176 539 172Z'/%3E%3Cpath d='M660 220 696 208 724 226 714 251 680 260 657 240Z'/%3E%3Cpath d='M832 287 846 292 852 309 844 328 835 323 831 305 821 297Z'/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover, 94% auto !important;
+}
+
+[class*="presenceGrid"]::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(7, 8, 7, 0.2), transparent 22%, transparent 78%, rgba(7, 8, 7, 0.2));
+  content: "";
+}
+
+[class*="presenceCard"] {
+  position: absolute !important;
+  z-index: 2 !important;
+  display: block !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+[class*="presenceCard"]:nth-child(1) {
+  top: 31%;
+  left: 45.4%;
+}
+
+[class*="presenceCard"]:nth-child(2) {
+  top: 46%;
+  left: 57.4%;
+}
+
+[class*="presenceCard"]:nth-child(3) {
+  top: 61%;
+  left: 72.7%;
+}
+
+[class*="presenceCard"]::before {
+  position: absolute;
+  top: 7px;
+  left: -19px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dec28d;
+  box-shadow: 0 0 0 6px rgba(197, 162, 104, 0.16), 0 0 22px rgba(222, 194, 141, 0.42);
+  content: "";
+}
+
+[class*="presenceCard"] [class*="map"] {
+  display: none !important;
+}
+
+[class*="presenceCard"] [class*="location"] {
+  display: flex !important;
+  align-items: flex-start !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap;
+}
+
+[class*="presenceCard"] [class*="location"] strong {
+  color: #dec28d !important;
+  font-family: var(--serif) !important;
+  font-size: clamp(20px, 2vw, 28px) !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+}
+
+[class*="presenceCard"] [class*="location"] span {
+  color: rgba(255, 255, 255, 0.64) !important;
+  font-size: 8px !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+}
+
+[class*="presenceCard"] [class*="location"] span::before {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  [class*="presenceGrid"] {
+    min-height: 440px !important;
+    aspect-ratio: 1.75 / 1 !important;
+    background-size: cover, 112% auto !important;
+  }
+
+  [class*="presenceCard"]:nth-child(1) {
+    top: 30%;
+    left: 40.5%;
+  }
+
+  [class*="presenceCard"]:nth-child(2) {
+    top: 46%;
+    left: 55%;
+  }
+
+  [class*="presenceCard"]:nth-child(3) {
+    top: 63%;
+    left: 72%;
+  }
+}
+
+@media (max-width: 640px) {
+  [class*="presenceSection"] {
+    padding-block: 54px 70px !important;
+  }
+
+  [class*="presenceGrid"] {
+    min-height: 500px !important;
+    aspect-ratio: auto !important;
+    background-position: center 42% !important;
+    background-size: cover, 168% auto !important;
+  }
+
+  [class*="presenceCard"] [class*="location"] strong {
+    font-size: 19px !important;
+  }
+
+  [class*="presenceCard"]:nth-child(1) {
+    top: 29%;
+    left: 30%;
+  }
+
+  [class*="presenceCard"]:nth-child(2) {
+    top: 47%;
+    left: 52%;
+  }
+
+  [class*="presenceCard"]:nth-child(3) {
+    top: 67%;
+    left: 67%;
+  }
+}
