@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import "./premium-buttons.css";
+import "./europe-asia-image.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
