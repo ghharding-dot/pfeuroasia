@@ -207,7 +207,9 @@
 
 .presenceSection {
   padding-block: 86px 108px;
-  background: var(--ink);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(197, 162, 104, 0.08), transparent 40%),
+    var(--ink);
   color: var(--gold-light);
 }
 
@@ -215,47 +217,44 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
-  border: 1px solid rgba(197, 162, 104, 0.24);
-  background: rgba(197, 162, 104, 0.24);
+  padding-top: clamp(350px, 48vw, 615px);
+  border: 1px solid rgba(197, 162, 104, 0.25);
+  background-color: #10120f;
+  background-image: url("/images/world-map-oval.svg");
+  background-repeat: no-repeat;
+  background-position: center 24px;
+  background-size: calc(100% - 48px) auto;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.28);
 }
 
 .presenceCard {
-  display: grid;
-  min-height: 320px;
-  grid-template-rows: 1fr auto;
-  padding: 34px;
-  background: #121310;
+  display: block;
+  min-height: 118px;
+  padding: 27px 30px;
+  border-top: 1px solid rgba(197, 162, 104, 0.24);
+  border-right: 1px solid rgba(197, 162, 104, 0.24);
+  background: rgba(18, 19, 16, 0.94);
+}
+
+.presenceCard:last-child {
+  border-right: 0;
 }
 
 .map {
-  width: 100%;
-  height: 210px;
-  color: var(--gold);
-}
-
-.map path,
-.map polygon,
-.map polyline {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
+  display: none;
 }
 
 .location {
   display: flex;
+  min-height: 62px;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  border-top: 1px solid rgba(197, 162, 104, 0.24);
-  padding-top: 22px;
 }
 
 .location strong {
   font-family: var(--serif);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 400;
 }
 
@@ -296,10 +295,14 @@
 
   .presenceGrid {
     grid-template-columns: 1fr;
+    padding-top: clamp(320px, 58vw, 530px);
+    background-position: center 18px;
+    background-size: calc(100% - 28px) auto;
   }
 
   .presenceCard {
-    min-height: 280px;
+    min-height: 90px;
+    border-right: 0;
   }
 }
 
@@ -339,16 +342,23 @@
     padding-block: 56px 72px;
   }
 
-  .presenceCard {
-    padding: 26px;
+  .presenceGrid {
+    margin-inline: -12px;
+    padding-top: clamp(225px, 61vw, 330px);
+    background-position: center 10px;
+    background-size: calc(100% - 12px) auto;
   }
 
-  .map {
-    height: 180px;
+  .presenceCard {
+    min-height: 78px;
+    padding: 17px 20px;
   }
 
   .location {
-    align-items: flex-start;
-    flex-direction: column;
+    min-height: 44px;
+  }
+
+  .location strong {
+    font-size: 24px;
   }
 }
