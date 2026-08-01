@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import styles from "./HomeRegions.module.css";
 
 const services = [
   {
@@ -32,21 +33,21 @@ export default function Home() {
         <div className="hero-shade" />
         <div className="hero-grid site-shell">
           <div className="hero-copy reveal-up">
-            <p className="eyebrow light">Private brokerage · Spain ↔ Asia</p>
+            <p className="eyebrow light">Private brokerage · Spain · Middle East · Malaysia</p>
             <h1>
               Exceptional homes.
               <span>Borderless representation.</span>
             </h1>
             <p className="hero-intro">
               Independent luxury property advice connecting discerning clients
-              in Asia with Spain&apos;s most sought-after addresses.
+              across Europe, the Middle East and Asia.
             </p>
             <div className="hero-actions">
               <Link className="button button-gold" href="/enquire">
                 Start a confidential enquiry <span>→</span>
               </Link>
-              <a className="text-link light-link" href="#services">
-                Explore our services <span>↓</span>
+              <a className="text-link light-link" href="#regions">
+                Explore our markets <span>↓</span>
               </a>
             </div>
           </div>
@@ -62,7 +63,7 @@ export default function Home() {
         </div>
 
         <div className="hero-footer site-shell">
-          <p>La Zagaleta · El Madroñal · Marbella · Costa del Sol</p>
+          <p>Spain · Middle East · Malaysia · Luxury Villa Rentals</p>
           <p className="scroll-note">Scroll to discover</p>
         </div>
       </section>
@@ -81,6 +82,120 @@ export default function Home() {
               across Asia. We advise fewer clients, more closely—bringing
               clarity, access and absolute discretion to every mandate.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.regionsSection} id="regions">
+        <div className="site-shell">
+          <div className={styles.heading}>
+            <div>
+              <p className="eyebrow">Explore our world</p>
+              <h2>Three regions.<em>One trusted relationship.</em></h2>
+            </div>
+            <p>
+              Begin with the market that interests you, then explore the
+              locations and services available through our direct network.
+            </p>
+          </div>
+
+          <div className={styles.regionGrid}>
+            <article className={`${styles.regionCard} ${styles.spain}`}>
+              <div className={styles.regionInner}>
+                <span className={styles.regionLabel}>Europe</span>
+                <div className={styles.regionCopy}>
+                  <h3>Spain</h3>
+                  <p>Luxury residential property, private estates and relocation across Marbella and the Costa del Sol.</p>
+                  <nav className={styles.subLinks} aria-label="Explore Spain">
+                    <Link href="/markets/marbella">Marbella</Link>
+                    <Link href="/areas/la-zagaleta">La Zagaleta</Link>
+                    <Link href="/areas/el-madronal">El Madroñal</Link>
+                    <Link href="/private-portfolio">Private estates</Link>
+                  </nav>
+                </div>
+                <Link className={styles.cardCta} href="/markets/marbella">Explore Spain →</Link>
+              </div>
+            </article>
+
+            <article className={`${styles.regionCard} ${styles.middleEast}`}>
+              <div className={styles.regionInner}>
+                <span className={styles.regionLabel}>Gulf region</span>
+                <div className={styles.regionCopy}>
+                  <h3>Middle East</h3>
+                  <p>Selected property, investment and private-client opportunities supported by trusted local relationships.</p>
+                  <nav className={styles.subLinks} aria-label="Explore the Middle East">
+                    <Link href="/markets/middle-east#saudi-arabia">Saudi Arabia</Link>
+                    <Link href="/markets/middle-east#uae">UAE</Link>
+                    <Link href="/markets/middle-east#qatar">Qatar</Link>
+                  </nav>
+                </div>
+                <Link className={styles.cardCta} href="/markets/middle-east">Explore Middle East →</Link>
+              </div>
+            </article>
+
+            <article className={`${styles.regionCard} ${styles.malaysia}`}>
+              <div className={styles.regionInner}>
+                <span className={styles.regionLabel}>Southeast Asia</span>
+                <div className={styles.regionCopy}>
+                  <h3>Malaysia</h3>
+                  <p>Property, residency, relocation and business connections centred on Kuala Lumpur and Labuan.</p>
+                  <nav className={styles.subLinks} aria-label="Explore Malaysia">
+                    <Link href="/markets/malaysia">Kuala Lumpur</Link>
+                    <Link href="/markets/malaysia">Developments</Link>
+                    <Link href="/services/relocation-concierge">Relocation</Link>
+                    <Link href="/enquire">Labuan</Link>
+                  </nav>
+                </div>
+                <Link className={styles.cardCta} href="/markets/malaysia">Explore Malaysia →</Link>
+              </div>
+            </article>
+          </div>
+
+          <article className={`${styles.rentalCard} ${styles.rentals}`}>
+            <div className={styles.rentalInner}>
+              <div className={styles.rentalCopy}>
+                <span className={styles.regionLabel}>Private stays · Concierge</span>
+                <h3>Luxury Villa Rentals</h3>
+                <p>Exceptional villas, discreet service and fully coordinated stays in Marbella and selected destinations.</p>
+              </div>
+              <Link className={styles.rentalCta} href="/luxury-villa-rentals">
+                View luxury villas <span>→</span>
+              </Link>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.presenceSection} aria-label="Our international presence">
+        <h2 className="sr-only">Our international presence</h2>
+        <div className="site-shell">
+          <div className={styles.presenceGrid}>
+            <article className={styles.presenceCard}>
+              <svg className={styles.map} viewBox="0 0 300 190" aria-hidden="true">
+                <path d="M48 78 61 55 91 45 114 27 151 30 170 42 201 41 226 58 247 77 237 100 211 111 193 137 164 143 144 159 118 151 93 133 72 120 55 101Z" />
+                <path d="M62 56 48 49 37 55 43 67" />
+                <path d="M207 43 217 30 227 34 225 53" />
+              </svg>
+              <div className={styles.location}><strong>Spain</strong><span>Marbella</span></div>
+            </article>
+
+            <article className={styles.presenceCard}>
+              <svg className={styles.map} viewBox="0 0 300 190" aria-hidden="true">
+                <path d="M80 37 131 29 172 42 214 48 237 71 228 91 243 117 221 145 188 156 165 143 128 149 99 132 82 104 61 81Z" />
+                <path d="M82 105 57 114 45 134 59 151 82 140 100 132" />
+                <path d="M214 49 241 42 257 53 250 72 237 72" />
+              </svg>
+              <div className={styles.location}><strong>Middle East</strong><span>Riyadh</span></div>
+            </article>
+
+            <article className={styles.presenceCard}>
+              <svg className={styles.map} viewBox="0 0 300 190" aria-hidden="true">
+                <path d="M60 40 86 48 101 67 93 83 104 102 94 125 79 145 66 136 70 116 58 96 63 76 52 59Z" />
+                <path d="M152 74 181 58 216 63 243 82 233 105 205 114 177 103 153 110 139 94Z" />
+                <path d="M119 117 128 123 124 135 114 132Z" />
+              </svg>
+              <div className={styles.location}><strong>Malaysia</strong><span>Kuala Lumpur</span></div>
+            </article>
           </div>
         </div>
       </section>
@@ -155,35 +270,6 @@ export default function Home() {
               <li><span>02</span> Commercial and legal coordination</li>
               <li><span>03</span> End-to-end ownership support</li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="destinations-section section-pad">
-        <div className="site-shell">
-          <div className="destinations-heading">
-            <div>
-              <p className="eyebrow">Our markets</p>
-              <h2>Local depth.<br /><em>International direction.</em></h2>
-            </div>
-            <p>
-              Specialist knowledge where we are strongest, supported by a
-              carefully developed network between Southern Spain and Asia.
-            </p>
-          </div>
-          <div className="destination-grid">
-            <Link className="destination-card marbella-card" href="/markets/marbella">
-              <span>Spain</span><div><h3>Marbella</h3><p>Prime coastal and hillside property across the Costa del Sol.</p></div><b>Explore →</b>
-            </Link>
-            <Link className="destination-card zagaleta-card" href="/areas/la-zagaleta">
-              <span>Benahavís</span><div><h3>La Zagaleta</h3><p>Private country-estate living and exceptional residential scale.</p></div><b>Area guide →</b>
-            </Link>
-            <Link className="destination-card madronal-card" href="/areas/el-madronal">
-              <span>Benahavís</span><div><h3>El Madroñal</h3><p>Wooded privacy, panoramic views and a true residential community.</p></div><b>Area guide →</b>
-            </Link>
-            <Link className="destination-card malaysia-card" href="/markets/malaysia">
-              <span>Asia</span><div><h3>Malaysia</h3><p>A strategic bridge for clients, agents and investment relationships.</p></div><b>Discover →</b>
-            </Link>
           </div>
         </div>
       </section>
