@@ -166,40 +166,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.presenceSection} aria-label="Our international presence">
-        <h2 className="sr-only">Our international presence</h2>
-        <div className="site-shell">
-          <div className={styles.presenceGrid}>
-            <article className={styles.presenceCard}>
-              <svg className={styles.map} viewBox="0 0 300 190" aria-hidden="true">
-                <path d="M48 78 61 55 91 45 114 27 151 30 170 42 201 41 226 58 247 77 237 100 211 111 193 137 164 143 144 159 118 151 93 133 72 120 55 101Z" />
-                <path d="M62 56 48 49 37 55 43 67" />
-                <path d="M207 43 217 30 227 34 225 53" />
-              </svg>
-              <div className={styles.location}><strong>Spain</strong><span>Marbella</span></div>
-            </article>
-
-            <article className={styles.presenceCard}>
-              <svg className={styles.map} viewBox="0 0 300 190" aria-hidden="true">
-                <path d="M80 37 131 29 172 42 214 48 237 71 228 91 243 117 221 145 188 156 165 143 128 149 99 132 82 104 61 81Z" />
-                <path d="M82 105 57 114 45 134 59 151 82 140 100 132" />
-                <path d="M214 49 241 42 257 53 250 72 237 72" />
-              </svg>
-              <div className={styles.location}><strong>Middle East</strong><span>Riyadh</span></div>
-            </article>
-
-            <article className={styles.presenceCard}>
-              <svg className={styles.map} viewBox="0 0 300 190" aria-hidden="true">
-                <path d="M60 40 86 48 101 67 93 83 104 102 94 125 79 145 66 136 70 116 58 96 63 76 52 59Z" />
-                <path d="M152 74 181 58 216 63 243 82 233 105 205 114 177 103 153 110 139 94Z" />
-                <path d="M119 117 128 123 124 135 114 132Z" />
-              </svg>
-              <div className={styles.location}><strong>Malaysia</strong><span>Kuala Lumpur</span></div>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section className="services-section section-pad" id="services">
         <div className="site-shell">
           <div className="section-heading-row">
