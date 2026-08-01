@@ -1,10 +1,10 @@
 #regions > .site-shell::after {
   display: block;
   width: 100%;
-  aspect-ratio: 800 / 414;
+  aspect-ratio: 1480 / 766;
   margin-top: 1px;
   background-color: #030506;
-  background-image: url("/images/from-europe-to-asia.png");
+  background-image: url("/images/from-europe-to-asia-exact.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
