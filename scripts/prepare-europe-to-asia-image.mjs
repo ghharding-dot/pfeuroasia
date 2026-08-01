@@ -3,7 +3,10 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 const partNames = [
-  "part-1a.txt",
+  "part-1a1.txt",
+  "part-1a2.txt",
+  "part-1a3.txt",
+  "part-1a4.txt",
   "part-1b.txt",
   "part-1c.txt",
   "part-2.txt",
