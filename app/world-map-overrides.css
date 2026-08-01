@@ -1,4 +1,4 @@
-/* Approved homepage Europe-to-Asia section artwork. */
+/* Exact approved homepage Europe-to-Asia artwork. */
 
 [class*="presenceSection"] {
   padding-block: 64px 82px !important;
@@ -9,10 +9,10 @@
   display: block !important;
   width: 100% !important;
   min-height: 0 !important;
-  aspect-ratio: 1200 / 619 !important;
+  aspect-ratio: 1800 / 1022 !important;
   overflow: hidden !important;
   border: 0 !important;
-  background: #0d0e0c url("/images/euroasia-approved-section.svg?v=20260801-approved") center / contain no-repeat !important;
+  background: #0d0e0c url("https://raw.githubusercontent.com/ghharding-dot/pfeuroasia/agent/homepage-regional-gateways/public/images/from-europe-to-asia-exact.webp") center / contain no-repeat !important;
   box-shadow: none !important;
 }
 
@@ -30,7 +30,7 @@
   }
 
   [class*="presenceGrid"] {
-    aspect-ratio: 1200 / 619 !important;
+    aspect-ratio: 1800 / 1022 !important;
     background-size: contain !important;
   }
 }
@@ -41,9 +41,9 @@
   }
 
   [class*="presenceGrid"] {
-    width: calc(100% + 24px) !important;
-    margin-inline: -12px !important;
-    aspect-ratio: 1200 / 619 !important;
+    width: 100% !important;
+    margin-inline: 0 !important;
+    aspect-ratio: 1800 / 1022 !important;
     background-position: center !important;
     background-size: contain !important;
   }
