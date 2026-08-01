@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 
 const partNames = [
   "part-1a1.txt",
+  "part-1a1-tail.txt",
   "part-1a2.txt",
   "part-1a3.txt",
   "part-1a4.txt",
