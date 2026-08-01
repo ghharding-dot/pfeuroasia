@@ -1,0 +1,19 @@
+#regions > .site-shell::after {
+  display: block;
+  width: 100%;
+  aspect-ratio: 800 / 414;
+  margin-top: 1px;
+  background-color: #030506;
+  background-image: url("/images/from-europe-to-asia.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+}
+
+@media (max-width: 640px) {
+  #regions > .site-shell::after {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+  }
+}
