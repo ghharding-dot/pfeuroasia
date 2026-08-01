@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">Property Facilitators EuroAsia global presence</title>
+  <desc id="desc">Oval world map highlighting Spain, the Middle East and Malaysia.</desc>
+  <defs>
+    <clipPath id="ovalClip">
+      <ellipse cx="600" cy="325" rx="570" ry="292"/>
+    </clipPath>
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="ocean" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#171914"/>
+      <stop offset="1" stop-color="#0e100d"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="600" cy="325" rx="570" ry="292" fill="url(#ocean)" stroke="#8f7447" stroke-width="1.5"/>
+
+  <g clip-path="url(#ovalClip)" fill="none" stroke="#7f6c4d" stroke-width="1" opacity="0.25">
+    <path d="M30 325H1170"/>
+    <path d="M48 229C262 270 938 270 1152 229"/>
+    <path d="M48 421C262 380 938 380 1152 421"/>
+    <path d="M90 138C300 199 900 199 1110 138"/>
+    <path d="M90 512C300 451 900 451 1110 512"/>
+    <path d="M600 33C515 140 493 510 600 617"/>
+    <path d="M600 33C685 140 707 510 600 617"/>
+    <path d="M600 33C400 150 345 500 600 617"/>
+    <path d="M600 33C800 150 855 500 600 617"/>
+    <path d="M600 33C245 170 160 480 600 617"/>
+    <path d="M600 33C955 170 1040 480 600 617"/>
+  </g>
+
+  <g clip-path="url(#ovalClip)" fill="#6f735f" fill-opacity="0.24" stroke="#c0aa82" stroke-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M399 105l34-26 48 8 18 29-16 34-43 19-41-20-11-25z"/>
+    <path d="M126 182l35-49 67-35 89 5 63 31 19 42-20 32 18 25-35 26-25 42-48 18-25 37-33-21-2-42-45-25-25-46-39-19z"/>
+    <path d="M287 333l29 18 27 41-10 32-24-16-15-35-25-18z"/>
+    <path d="M333 413l31 15 20 29-17 10-18-22-30-11z"/>
+    <path d="M380 397l13 2 12 10-18 4z"/>
+    <path d="M384 446l38-19 55 9 39 36 7 45-22 48-20 45-30 21-20-39-13-48-31-38-20-34z"/>
+    <path d="M549 218l9-22 15-4 7 18-10 21z"/>
+    <path d="M535 220l8-12 7 9-5 12z"/>
+    <path d="M574 211l26-24 45-13 48 8 31 25-14 24 19 22-30 21-12 35-30-7-23 18-15-25-29-8-10-31-26-17z"/>
+    <path d="M624 293l15 15 3 31-13 18-10-27z"/>
+    <path d="M676 287l18 10 9 24-17 14-10-20z"/>
+    <path d="M579 305l42-28 68 13 50 43 5 55-28 55-32 56-43 36-35-32-18-57-28-42-5-57z"/>
+    <path d="M704 491l16 23-7 33-18 9-8-34z"/>
+    <path d="M689 170l44-39 82-24 104 7 79 28 63 46 6 45-37 20-24 35-56 12-42 28-59-1-35-30-42-2-31-32-42-12-18-37-42-20z"/>
+    <path d="M818 292l38 8 35 35-6 42-34 5-17-29-31-20z"/>
+    <path d="M910 322l48-23 55 18 26 37-19 42-48 8-43-27-34-14z"/>
+    <path d="M742 344l40-20 39 14 24 42-24 37-44-14-28-30z"/>
+    <path d="M841 386l33 5 28 34-11 53-24 42-21-34-6-45-19-22z"/>
+    <path d="M929 393l29 18 15 39-22 35-12-25-27-21-8-27z"/>
+    <path d="M959 470l26 8 15 24-18 11-19-18z"/>
+    <path d="M995 508l37 8 31 20-14 11-40-13z"/>
+    <path d="M1051 535l31 11 15 18-30 3-28-17z"/>
+    <path d="M1047 293l13 14-7 22-12-5z"/>
+    <path d="M1065 268l8 12-8 15-7-10z"/>
+    <path d="M974 500l50-20 67 16 36 40-22 45-59 20-47-31-27-36z"/>
+    <path d="M1132 576l13 7-8 25-10-9z"/>
+  </g>
+
+  <g clip-path="url(#ovalClip)">
+    <path d="M586 267l17-5 15 8-4 13-18 7-14-9z" fill="#d2a95f" stroke="#f1d39a" stroke-width="1.5"/>
+    <path d="M747 345l34-17 35 12 24 39-21 32-39-12-27-28z" fill="#d2a95f" fill-opacity="0.88" stroke="#f1d39a" stroke-width="1.5"/>
+    <path d="M958 468l25 8 13 21-15 9-18-15z" fill="#d2a95f" stroke="#f1d39a" stroke-width="1.5"/>
+    <path d="M1001 509l28 7 22 14-11 9-32-11z" fill="#d2a95f" stroke="#f1d39a" stroke-width="1.5"/>
+  </g>
+
+  <g fill="#f1d39a" stroke="#171914" stroke-width="3" filter="url(#softGlow)">
+    <circle cx="601" cy="276" r="7"/>
+    <circle cx="791" cy="366" r="7"/>
+    <circle cx="980" cy="489" r="7"/>
+  </g>
+</svg>
