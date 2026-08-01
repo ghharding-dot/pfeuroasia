@@ -2,11 +2,19 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
-const parts = Array.from({ length: 6 }, (_, index) =>
-  readFileSync(
-    resolve(`assets/from-europe-to-asia/part-${index + 1}.txt`),
-    "utf8",
-  ).trim(),
+const partNames = [
+  "part-1a.txt",
+  "part-1b.txt",
+  "part-1c.txt",
+  "part-2.txt",
+  "part-3.txt",
+  "part-4.txt",
+  "part-5.txt",
+  "part-6.txt",
+];
+
+const parts = partNames.map((partName) =>
+  readFileSync(resolve(`assets/from-europe-to-asia/${partName}`), "utf8").trim(),
 );
 
 console.log(`Europe-to-Asia base64 parts: ${parts.map((part) => part.length).join(", ")}`);
