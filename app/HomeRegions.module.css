@@ -220,7 +220,7 @@
   padding-top: clamp(350px, 48vw, 615px);
   border: 1px solid rgba(197, 162, 104, 0.25);
   background-color: #10120f;
-  background-image: url("/images/world-map-oval.svg");
+  background-image: url("/images/world-map-oval.svg?v=20260801-1305");
   background-repeat: no-repeat;
   background-position: center 24px;
   background-size: calc(100% - 48px) auto;
