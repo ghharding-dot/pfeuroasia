@@ -205,93 +205,6 @@
   transform: translateY(-2px);
 }
 
-.presenceSection {
-  padding-block: 72px 92px;
-  background: #0d0e0c;
-  color: var(--gold-light);
-}
-
-.presenceGrid {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1000 / 563;
-  background-color: #0d0e0c;
-  background-image: url("/images/world-map-oval.svg?v=20260801-clean");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
-.presenceCard {
-  position: absolute;
-  z-index: 2;
-  width: max-content;
-  min-height: 0;
-  padding: 0;
-  background: transparent;
-  pointer-events: none;
-}
-
-.presenceCard:nth-child(1) {
-  left: 48.3%;
-  top: 30.5%;
-}
-
-.presenceCard:nth-child(2) {
-  left: 61.4%;
-  top: 42%;
-}
-
-.presenceCard:nth-child(3) {
-  left: 78.4%;
-  top: 52.5%;
-}
-
-.map {
-  display: none;
-}
-
-.location {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 8px 10px;
-  border: 0;
-  background: rgba(13, 14, 12, 0.76);
-  box-shadow: 0 0 24px rgba(13, 14, 12, 0.9);
-}
-
-.location strong {
-  color: #e3c68d;
-  font-family: var(--serif);
-  font-size: clamp(15px, 1.55vw, 23px);
-  font-weight: 400;
-  line-height: 1;
-  text-shadow: 0 1px 12px #000;
-}
-
-.location span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: clamp(6px, 0.65vw, 9px);
-  font-weight: 650;
-  letter-spacing: 0.14em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.location span::before {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #d8b97d;
-  box-shadow: 0 0 0 4px rgba(216, 185, 125, 0.15);
-  content: "";
-}
-
 @media (max-width: 980px) {
   .heading {
     grid-template-columns: 1fr;
@@ -305,15 +218,6 @@
   .regionCard,
   .regionInner {
     min-height: 480px;
-  }
-
-  .presenceSection {
-    padding-block: 54px 68px;
-  }
-
-  .location {
-    gap: 3px;
-    padding: 6px 8px;
   }
 }
 
@@ -347,51 +251,5 @@
 
   .rentalCta {
     width: 100%;
-  }
-
-  .presenceSection {
-    padding-block: 34px 46px;
-  }
-
-  .presenceGrid {
-    width: calc(100% + 24px);
-    margin-inline: -12px;
-  }
-
-  .presenceCard:nth-child(1) {
-    left: 47.5%;
-    top: 29%;
-  }
-
-  .presenceCard:nth-child(2) {
-    left: 60.5%;
-    top: 41%;
-  }
-
-  .presenceCard:nth-child(3) {
-    left: 77%;
-    top: 51%;
-  }
-
-  .location {
-    gap: 2px;
-    padding: 4px 5px;
-    box-shadow: 0 0 12px rgba(13, 14, 12, 0.92);
-  }
-
-  .location strong {
-    font-size: 11px;
-  }
-
-  .location span {
-    gap: 4px;
-    font-size: 5px;
-    letter-spacing: 0.1em;
-  }
-
-  .location span::before {
-    width: 4px;
-    height: 4px;
-    box-shadow: 0 0 0 2px rgba(216, 185, 125, 0.15);
   }
 }
