@@ -9,6 +9,8 @@ const parts = Array.from({ length: 6 }, (_, index) =>
   ).trim(),
 );
 
+console.log(`Europe-to-Asia base64 parts: ${parts.map((part) => part.length).join(", ")}`);
+
 const image = Buffer.from(parts.join(""), "base64");
 const expectedBytes = 25018;
 const expectedSha256 =
