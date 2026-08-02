@@ -41,16 +41,19 @@
 }
 
 .fixerLogo {
-  background: #050505 !important;
+  overflow: hidden;
+  background: #f7f4e8 !important;
 }
 
 .fixerLogo:hover {
-  background: #111 !important;
+  background: #fbf8ee !important;
 }
 
 .fixerLogo img {
   width: 100%;
   max-height: 92px !important;
+  transform: scale(1.72) translateY(-1%);
+  transform-origin: center;
 }
 
 .groupDivider {
@@ -238,6 +241,10 @@
   .propertyGrid > :last-child,
   .legalGrid > :last-child {
     grid-column: 1 / -1;
+  }
+
+  .fixerLogo img {
+    transform: scale(1.62) translateY(-1%);
   }
 
   .groupDivider {
