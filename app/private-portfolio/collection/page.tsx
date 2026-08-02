@@ -7,7 +7,7 @@ import {
   createPortfolioToken,
   PORTFOLIO_COOKIE_NAME,
 } from "../../lib/portfolioAuth";
-import { readProperties } from "../../lib/propertyStore";
+import { readProperties, type VaultProperty } from "../../lib/propertyStore";
 import { privateProperties } from "./properties";
 import "../private-portfolio.css";
 import "../portfolio-collection.css";
@@ -19,6 +19,22 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+type CollectionProperty = Pick<
+  VaultProperty,
+  | "reference"
+  | "location"
+  | "price"
+  | "title"
+  | "bedrooms"
+  | "bathrooms"
+  | "plotSize"
+  | "builtSize"
+  | "description"
+  | "image"
+  | "secondaryImage"
+  | "brochure"
+>;
+
 export default async function PrivatePortfolioCollectionPage() {
   const configuredPassword = process.env.PRIVATE_PORTFOLIO_PASSWORD;
   const cookieStore = await cookies();
@@ -28,7 +44,7 @@ export default async function PrivatePortfolioCollectionPage() {
     redirect("/private-portfolio/access");
   }
 
-  let vaultProperties = [];
+  let vaultProperties: VaultProperty[] = [];
   try {
     vaultProperties = (await readProperties()).filter((property) => property.status === "published");
   } catch {
@@ -36,7 +52,7 @@ export default async function PrivatePortfolioCollectionPage() {
   }
 
   const existingReferences = new Set(vaultProperties.map((property) => property.reference));
-  const properties = [
+  const properties: CollectionProperty[] = [
     ...vaultProperties,
     ...privateProperties.filter((property) => !existingReferences.has(property.reference)),
   ];
