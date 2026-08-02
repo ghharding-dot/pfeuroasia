@@ -278,14 +278,20 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("enquiry-email-routing-failed", error);
     return NextResponse.json(
-      { error: "Your enquiry could not be delivered. Please email enquiry@pfeuroasia.com." },
-      { status: 502 },
+      {
+        ok: true,
+        reference,
+        delivery: "browser-fallback",
+        partner: partner ? { code: partner.code, name: partner.name } : null,
+      },
+      { status: 202 },
     );
   }
 
   return NextResponse.json({
     ok: true,
     reference,
+    delivery: "sent",
     partner: partner ? { code: partner.code, name: partner.name } : null,
   });
 }
