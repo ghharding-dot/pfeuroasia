@@ -1,34 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-
-const PARTNERS: Record<string, { name: string; url: string }> = {
-  aylesford: {
-    name: "Aylesford Spain",
-    url: "https://www.aylesfordspain.com/",
-  },
-  pfiberia: {
-    name: "Property Facilitators Iberia",
-    url: "https://pfiberia.com/",
-  },
-  legal10: {
-    name: "Legal 10 Abogados Marbella",
-    url: "https://www.legal10abogadosmarbella.com/en/",
-  },
-  lawbird: {
-    name: "Lawbird Legal Services",
-    url: "https://www.lawbird.com/",
-  },
-  martinezechevarria: {
-    name: "Martinez-Echevarria Lawyers",
-    url: "https://www.martinezechevarria.com/en/expertise/",
-  },
-};
+import { getPartnerReferral } from "../../lib/partner-referrals";
 
 function safeHeader(value: string | null, fallback = "Not available") {
   return value?.slice(0, 500) || fallback;
 }
 
-async function sendNotification(details: {
+async function sendClickNotification(details: {
   partner: string;
+  code: string;
   timestamp: string;
   country: string;
   city: string;
@@ -37,8 +16,7 @@ async function sendNotification(details: {
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   const recipient =
-    process.env.PARTNER_NOTIFICATION_EMAIL ||
-    "partner-notifications@pfeuroasia.com";
+    process.env.PARTNER_NOTIFICATION_EMAIL || "enquiry@pfeuroasia.com";
   const sender =
     process.env.PARTNER_NOTIFICATION_FROM ||
     "PF EuroAsia <notifications@pfeuroasia.com>";
@@ -46,9 +24,10 @@ async function sendNotification(details: {
   if (!apiKey) return;
 
   const text = [
-    "A collaboration partner link was clicked.",
+    "A collaboration partner enquiry route was opened.",
     "",
     `Partner: ${details.partner}`,
+    `Partner code: ${details.code}`,
     `Date and time: ${details.timestamp}`,
     `Country: ${details.country}`,
     `City: ${details.city}`,
@@ -65,7 +44,7 @@ async function sendNotification(details: {
     body: JSON.stringify({
       from: sender,
       to: [recipient],
-      subject: `Partner link clicked: ${details.partner}`,
+      subject: `Partner enquiry opened: ${details.partner}`,
       text,
     }),
   });
@@ -76,14 +55,15 @@ export async function GET(
   context: { params: Promise<{ partner: string }> },
 ) {
   const { partner: slug } = await context.params;
-  const partner = PARTNERS[slug.toLowerCase()];
+  const partner = getPartnerReferral(slug);
 
   if (!partner) {
-    return NextResponse.redirect(new URL("/", request.url), 302);
+    return NextResponse.redirect(new URL("/enquire", request.url), 302);
   }
 
   const details = {
     partner: partner.name,
+    code: partner.code,
     timestamp: new Date().toISOString(),
     country: safeHeader(request.headers.get("x-vercel-ip-country")),
     city: safeHeader(request.headers.get("x-vercel-ip-city")),
@@ -91,13 +71,15 @@ export async function GET(
     userAgent: safeHeader(request.headers.get("user-agent")),
   };
 
-  console.info("partner-link-click", details);
+  console.info("partner-enquiry-opened", details);
 
   try {
-    await sendNotification(details);
+    await sendClickNotification(details);
   } catch (error) {
-    console.error("partner-link-notification-failed", error);
+    console.error("partner-enquiry-open-notification-failed", error);
   }
 
-  return NextResponse.redirect(partner.url, 302);
+  const destination = new URL("/enquire", request.url);
+  destination.searchParams.set("partner", slug.toLowerCase());
+  return NextResponse.redirect(destination, 302);
 }
