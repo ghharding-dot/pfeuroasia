@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
+import { getPartnerReferral } from "../lib/partner-referrals";
 
 const goals = [
   { value: "buy", title: "Acquire a property", text: "Private search and buyer representation in Spain." },
@@ -11,11 +12,23 @@ const goals = [
 
 const initialDetails = { location: "", budget: "", message: "" };
 
-export function EnquiryFlow() {
+type EnquiryFlowProps = {
+  partnerSlug?: string;
+};
+
+type SubmissionResponse = {
+  ok?: boolean;
+  reference?: string;
+  error?: string;
+};
+
+export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
+  const partner = getPartnerReferral(partnerSlug);
   const [step, setStep] = useState(1);
-  const [goal, setGoal] = useState("");
+  const [goal, setGoal] = useState(partner ? "buy" : "");
   const [details, setDetails] = useState(initialDetails);
   const [submitted, setSubmitted] = useState(false);
+  const [reference, setReference] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,7 +39,6 @@ export function EnquiryFlow() {
 
     const form = new FormData(event.currentTarget);
     const payload = {
-      _subject: "New enquiry from pfeuroasia.com",
       enquiry_type: goal,
       preferred_area_or_property: details.location,
       indicative_budget_or_value: details.budget,
@@ -38,19 +50,30 @@ export function EnquiryFlow() {
       telephone_or_whatsapp: form.get("phone"),
       wechat_id: form.get("wechat"),
       current_location: form.get("country"),
-      _template: "table",
+      partner_slug: partnerSlug || "",
+      language: document.documentElement.lang || "en",
+      website_region: form.get("desk") || "International",
+      company_website: form.get("company_website"),
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
+      const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!response.ok) throw new Error("Submission failed");
+      const result = (await response.json()) as SubmissionResponse;
+      if (!response.ok || !result.reference) {
+        throw new Error(result.error || "Submission failed");
+      }
+      setReference(result.reference);
       setSubmitted(true);
-    } catch {
-      setError("We could not send your enquiry. Please try again or email enquiry@pfeuroasia.com.");
+    } catch (submissionError) {
+      setError(
+        submissionError instanceof Error
+          ? submissionError.message
+          : "We could not send your enquiry. Please try again or email enquiry@pfeuroasia.com.",
+      );
     } finally {
       setSending(false);
     }
@@ -62,7 +85,11 @@ export function EnquiryFlow() {
         <span className="success-mark">✓</span>
         <p className="eyebrow">Enquiry sent</p>
         <h1>Thank you.<br />Your conversation starts here.</h1>
-        <p>Your confidential enquiry has been sent to our team. We will respond personally using your preferred contact method.</p>
+        <p>
+          Your confidential enquiry has been sent to our team
+          {partner ? ` and ${partner.name}` : ""}. We will respond personally using your preferred contact method.
+        </p>
+        <p><strong>Your enquiry reference: {reference}</strong></p>
         <Link className="text-link" href="/">Return to the website <span>→</span></Link>
       </section>
     );
@@ -74,6 +101,12 @@ export function EnquiryFlow() {
         <p className="eyebrow light">Confidential enquiry</p>
         <h1>How may we help?</h1>
         <p>Share a little about your objectives. Your enquiry will be handled personally and in confidence.</p>
+        {partner && (
+          <p>
+            <strong>Collaboration source:</strong><br />
+            {partner.name} · {partner.code}
+          </p>
+        )}
         <div className="enquiry-progress" aria-label={`Step ${step} of 3`}>
           {[1, 2, 3].map((item) => <span className={item <= step ? "active" : ""} key={item} />)}
         </div>
@@ -81,10 +114,19 @@ export function EnquiryFlow() {
       </aside>
 
       <form className="enquiry-form" onSubmit={submit}>
+        <label aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+          Company website
+          <input name="company_website" tabIndex={-1} autoComplete="off" />
+        </label>
+
         {step === 1 && (
           <fieldset>
             <legend>What would you like to discuss?</legend>
-            <p className="form-hint">Choose the option that best describes your enquiry.</p>
+            <p className="form-hint">
+              {partner
+                ? `This enquiry will be shared with ${partner.name} and Property Facilitators EuroAsia.`
+                : "Choose the option that best describes your enquiry."}
+            </p>
             <div className="goal-options">
               {goals.map((item) => (
                 <label className={goal === item.value ? "selected" : ""} key={item.value}>
@@ -118,14 +160,14 @@ export function EnquiryFlow() {
             <div className="form-grid">
               <label><span>Full name *</span><input name="name" required autoComplete="name" /></label>
               <label><span>Email address *</span><input name="email" type="email" required autoComplete="email" /></label>
-              <label><span>Contact desk</span><select name="desk" defaultValue=""><option value="" disabled>Select a desk</option><option>Spain desk</option><option>Asia & Malaysia desk</option><option>China enquiry</option></select></label>
+              <label><span>Contact desk</span><select name="desk" defaultValue=""><option value="" disabled>Select a desk</option><option>Spain desk</option><option>Asia & Malaysia desk</option><option>China enquiry</option><option>Middle East desk</option></select></label>
               <label><span>Preferred channel</span><select name="channel" defaultValue="email"><option value="email">Email</option><option value="whatsapp">WhatsApp</option><option value="wechat">WeChat</option><option value="telephone">Telephone</option></select></label>
               <label><span>Telephone / WhatsApp</span><input name="phone" type="tel" autoComplete="tel" /></label>
               <label><span>WeChat ID</span><input name="wechat" placeholder="For mainland China enquiries" /></label>
               <label><span>Current location</span><input name="country" placeholder="Country or city" /></label>
             </div>
             <p className="china-channel-note">Mainland China: email, WeChat and this secure form are the recommended contact routes.</p>
-            <label className="privacy-check"><input type="checkbox" required /><span>I agree to be contacted regarding this enquiry.</span></label>
+            <label className="privacy-check"><input type="checkbox" required /><span>I agree to be contacted regarding this enquiry and understand that a referred collaboration partner may receive the details.</span></label>
             {error && <p className="form-error" role="alert">{error}</p>}
             <div className="form-actions"><button className="back-button" type="button" disabled={sending} onClick={() => setStep(2)}>← Back</button><button className="button button-dark" type="submit" disabled={sending}>{sending ? "Sending…" : "Send enquiry"} <span>→</span></button></div>
           </fieldset>
