@@ -3,10 +3,10 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-async function uploadFile(file: File, reference: string) {
+async function uploadFile(file: File, uploadKey: string) {
   const form = new FormData();
   form.append("file", file);
-  form.append("reference", reference);
+  form.append("reference", uploadKey);
   const response = await fetch("/api/vault/upload", { method: "POST", body: form });
   const result = await response.json();
   if (!response.ok) throw new Error(result.error || "Upload failed.");
@@ -25,14 +25,14 @@ export function PropertyForm() {
 
     try {
       const form = new FormData(event.currentTarget);
-      const reference = String(form.get("reference") || "property");
+      const uploadKey = `property-${Date.now()}`;
       const main = form.get("mainImage") as File;
       const second = form.get("secondaryImage") as File;
       const pdf = form.get("brochure") as File;
 
-      const image = await uploadFile(main, reference);
-      const secondaryImage = second?.size ? await uploadFile(second, reference) : "";
-      const brochure = pdf?.size ? await uploadFile(pdf, reference) : "";
+      const image = await uploadFile(main, uploadKey);
+      const secondaryImage = second?.size ? await uploadFile(second, uploadKey) : "";
+      const brochure = pdf?.size ? await uploadFile(pdf, uploadKey) : "";
 
       setMessage("Saving property...");
       const payload = Object.fromEntries(form.entries());
@@ -60,8 +60,8 @@ export function PropertyForm() {
     <form className="vault-property-form" onSubmit={submit}>
       <section className="vault-panel">
         <h2>Property details</h2>
+        <p className="vault-form-note">The property reference will be generated automatically when the listing is saved.</p>
         <div className="vault-form-grid">
-          <label>Reference<input name="reference" required /></label>
           <label>Property title<input name="title" required /></label>
           <label>Location<input name="location" required /></label>
           <label>Price<input name="price" placeholder="€13,900,000" /></label>
