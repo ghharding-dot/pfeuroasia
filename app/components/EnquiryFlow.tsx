@@ -19,8 +19,89 @@ type EnquiryFlowProps = {
 type SubmissionResponse = {
   ok?: boolean;
   reference?: string;
+  delivery?: "sent" | "browser-fallback";
   error?: string;
 };
+
+type EnquiryPayload = {
+  enquiry_type: string;
+  preferred_area_or_property: string;
+  indicative_budget_or_value: string;
+  requirements: string;
+  full_name: FormDataEntryValue | null;
+  email: FormDataEntryValue | null;
+  contact_desk: FormDataEntryValue | null;
+  preferred_channel: FormDataEntryValue | null;
+  telephone_or_whatsapp: FormDataEntryValue | null;
+  wechat_id: FormDataEntryValue | null;
+  current_location: FormDataEntryValue | null;
+  partner_slug: string;
+  language: string;
+  website_region: FormDataEntryValue | string;
+  company_website: FormDataEntryValue | null;
+};
+
+function asText(value: FormDataEntryValue | string | null) {
+  return typeof value === "string" ? value : "";
+}
+
+async function deliverFromBrowser(
+  payload: EnquiryPayload,
+  reference: string,
+  partner: ReturnType<typeof getPartnerReferral>,
+) {
+  const recipients = ["enquiry@pfeuroasia.com"];
+
+  if (partner?.code === "FIX") {
+    recipients.push("robert@bazothefixer.com");
+  }
+
+  const record = {
+    reference,
+    submitted_at: new Date().toISOString(),
+    status: "New",
+    priority: "Unqualified",
+    partner_code: partner?.code || "DIRECT",
+    partner_name: partner?.name || "Direct website enquiry",
+    partner_slug: payload.partner_slug || "direct",
+    website_region: asText(payload.website_region) || "International",
+    language: payload.language || "en",
+    enquiry_type: payload.enquiry_type,
+    preferred_area_or_property: payload.preferred_area_or_property,
+    indicative_budget_or_value: payload.indicative_budget_or_value,
+    requirements: payload.requirements,
+    full_name: asText(payload.full_name),
+    email: asText(payload.email),
+    contact_desk: asText(payload.contact_desk),
+    preferred_channel: asText(payload.preferred_channel),
+    telephone_or_whatsapp: asText(payload.telephone_or_whatsapp),
+    wechat_id: asText(payload.wechat_id),
+    current_location: asText(payload.current_location),
+    _subject: `[${reference}] New ${partner ? partner.name : "website"} enquiry`,
+    _template: "table",
+    _replyto: asText(payload.email),
+  };
+
+  await Promise.all(
+    recipients.map(async (recipient) => {
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(record),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`Browser delivery failed: ${response.status}`);
+      }
+    }),
+  );
+}
 
 export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
   const partner = getPartnerReferral(partnerSlug);
@@ -38,7 +119,7 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
     setError("");
 
     const form = new FormData(event.currentTarget);
-    const payload = {
+    const payload: EnquiryPayload = {
       enquiry_type: goal,
       preferred_area_or_property: details.location,
       indicative_budget_or_value: details.budget,
@@ -66,14 +147,15 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
       if (!response.ok || !result.reference) {
         throw new Error(result.error || "Submission failed");
       }
+
+      if (result.delivery === "browser-fallback") {
+        await deliverFromBrowser(payload, result.reference, partner);
+      }
+
       setReference(result.reference);
       setSubmitted(true);
-    } catch (submissionError) {
-      setError(
-        submissionError instanceof Error
-          ? submissionError.message
-          : "We could not send your enquiry. Please try again or email enquiry@pfeuroasia.com.",
-      );
+    } catch {
+      setError("Your enquiry could not be delivered. Please try again or email enquiry@pfeuroasia.com.");
     } finally {
       setSending(false);
     }
