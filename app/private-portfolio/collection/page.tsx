@@ -7,6 +7,7 @@ import {
   createPortfolioToken,
   PORTFOLIO_COOKIE_NAME,
 } from "../../lib/portfolioAuth";
+import { readProperties } from "../../lib/propertyStore";
 import { privateProperties } from "./properties";
 import "../private-portfolio.css";
 import "../portfolio-collection.css";
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function PrivatePortfolioCollectionPage() {
   const configuredPassword = process.env.PRIVATE_PORTFOLIO_PASSWORD;
   const cookieStore = await cookies();
@@ -24,6 +27,19 @@ export default async function PrivatePortfolioCollectionPage() {
   if (!configuredPassword || accessCookie !== createPortfolioToken(configuredPassword)) {
     redirect("/private-portfolio/access");
   }
+
+  let vaultProperties = [];
+  try {
+    vaultProperties = (await readProperties()).filter((property) => property.status === "published");
+  } catch {
+    vaultProperties = [];
+  }
+
+  const existingReferences = new Set(vaultProperties.map((property) => property.reference));
+  const properties = [
+    ...vaultProperties,
+    ...privateProperties.filter((property) => !existingReferences.has(property.reference)),
+  ];
 
   return (
     <main className="private-collection-page">
@@ -37,7 +53,7 @@ export default async function PrivatePortfolioCollectionPage() {
       </section>
 
       <section className="private-collection-grid site-shell">
-        {privateProperties.map((property) => (
+        {properties.map((property) => (
           <article className="private-property-card" key={property.reference}>
             <div className="private-property-image">
               {property.image ? (
@@ -71,7 +87,7 @@ export default async function PrivatePortfolioCollectionPage() {
                 <img
                   className="private-property-secondary-image"
                   src={property.secondaryImage}
-                  alt={`Aerial view of ${property.title}`}
+                  alt={`Additional view of ${property.title}`}
                 />
               )}
 
