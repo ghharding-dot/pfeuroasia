@@ -3,7 +3,7 @@
 }
 
 .propertyGrid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
 .legalGrid {
@@ -38,6 +38,19 @@
   max-width: 100%;
   max-height: 78px;
   object-fit: contain;
+}
+
+.fixerLogo {
+  background: #050505 !important;
+}
+
+.fixerLogo:hover {
+  background: #111 !important;
+}
+
+.fixerLogo img {
+  width: 100%;
+  max-height: 92px !important;
 }
 
 .groupDivider {
@@ -200,7 +213,7 @@
 
 @media (max-width: 1180px) {
   .propertyGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .legalGrid {
@@ -222,6 +235,7 @@
     border-radius: 8px;
   }
 
+  .propertyGrid > :last-child,
   .legalGrid > :last-child {
     grid-column: 1 / -1;
   }
