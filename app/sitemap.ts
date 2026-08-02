@@ -18,12 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh",
     "/zh/la-zagaleta",
     "/zh/el-madronal",
+    "/ar",
   ];
 
   return routes.map((route, index) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: index === 0 ? "weekly" : "monthly",
-    priority: index === 0 ? 1 : route === "/enquire" || route === "/private-portfolio" ? 0.9 : 0.8,
+    priority: index === 0 ? 1 : route === "/enquire" || route === "/private-portfolio" || route === "/ar" ? 0.9 : 0.8,
   }));
 }
