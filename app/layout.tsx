@@ -29,6 +29,14 @@ export const metadata: Metadata = {
   },
   description:
     "Independent luxury property advisers connecting qualified buyers and property owners across Marbella, La Zagaleta, El Madroñal, Malaysia and Asia.",
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-GB": "/",
+      "zh-CN": "/zh",
+      "ar-SA": "/ar",
+    },
+  },
   applicationName: "Property Facilitators EuroAsia",
   authors: [{ name: "Property Facilitators EuroAsia", url: siteUrl }],
   creator: "Property Facilitators EuroAsia",
@@ -41,18 +49,19 @@ export const metadata: Metadata = {
     "Costa del Sol luxury real estate",
     "Spain property for Asian buyers",
     "Malaysia Spain property",
+    "Saudi buyers Spain property",
     "international property brokerage",
     "off-market Marbella property",
   ],
   openGraph: {
     type: "website",
     locale: "en_GB",
-    alternateLocale: ["zh_CN"],
+    alternateLocale: ["zh_CN", "ar_SA"],
     url: siteUrl,
     siteName: "Property Facilitators EuroAsia",
     title: "Luxury Property Marbella & Asia | Property Facilitators EuroAsia",
     description:
-      "Independent luxury property representation connecting Southern Spain with qualified buyers, owners and professional networks across Asia.",
+      "Independent luxury property representation connecting Southern Spain with qualified buyers, owners and professional networks across Asia and the Middle East.",
     images: [
       {
         url: "/images/hero-villa.webp",
@@ -66,7 +75,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Property Facilitators EuroAsia",
     description:
-      "Independent luxury property representation between Marbella, Southern Spain and Asia.",
+      "Independent luxury property representation between Marbella, Southern Spain, the Middle East and Asia.",
     images: ["/images/hero-villa.webp"],
   },
   robots: {
@@ -95,12 +104,13 @@ const organizationSchema = {
   image: `${siteUrl}/images/hero-villa.webp`,
   email: "enquiry@pfeuroasia.com",
   description:
-    "Independent luxury property advisers connecting Southern Spain and Asia.",
+    "Independent luxury property advisers connecting Southern Spain, the Middle East and Asia.",
   areaServed: [
     { "@type": "Place", name: "Marbella" },
     { "@type": "Place", name: "La Zagaleta" },
     { "@type": "Place", name: "El Madroñal" },
     { "@type": "Country", name: "Spain" },
+    { "@type": "Country", name: "Saudi Arabia" },
     { "@type": "Country", name: "Malaysia" },
   ],
   address: {
