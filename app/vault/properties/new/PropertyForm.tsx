@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 async function uploadFile(file: File, reference: string) {
@@ -13,18 +13,61 @@ async function uploadFile(file: File, reference: string) {
   return result.url as string;
 }
 
+function formatSize(size: number) {
+  if (!size) return "";
+  if (size < 1024 * 1024) return `${Math.round(size / 1024)} KB`;
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function ImageUpload({ name, title, required = false }: { name: string; title: string; required?: boolean }) {
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState("");
+
+  useEffect(() => {
+    if (!file) {
+      setPreview("");
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    setPreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+
+  return (
+    <label className={`vault-upload-box ${preview ? "has-file" : ""}`}>
+      {preview ? <img className="vault-upload-preview" src={preview} alt="Selected property" /> : <span className="vault-upload-icon">＋</span>}
+      <strong>{title}</strong>
+      <small>{required ? "Required" : "Optional"} · JPG, PNG or WebP</small>
+      <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select an image"}</em>
+      <span className="vault-file-action">{file ? "Replace image" : "Choose image"}</span>
+      <input name={name} type="file" accept="image/jpeg,image/png,image/webp" required={required} onChange={(e) => setFile(e.target.files?.[0] || null)} />
+    </label>
+  );
+}
+
+function PdfUpload() {
+  const [file, setFile] = useState<File | null>(null);
+  return (
+    <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
+      <span className="vault-upload-icon">PDF</span>
+      <strong>Property brochure PDF</strong>
+      <small>Optional · PDF document</small>
+      <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the brochure"}</em>
+      <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
+      <input name="brochure" type="file" accept="application/pdf" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+    </label>
+  );
+}
+
 export function PropertyForm() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
-  const [mainName, setMainName] = useState("");
-  const [secondName, setSecondName] = useState("");
-  const [pdfName, setPdfName] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSaving(true);
-    setMessage("Uploading files...");
+    setMessage("Uploading photographs and brochure...");
 
     try {
       const form = new FormData(event.currentTarget);
@@ -37,7 +80,7 @@ export function PropertyForm() {
       const secondaryImage = second?.size ? await uploadFile(second, uploadKey) : "";
       const brochure = pdf?.size ? await uploadFile(pdf, uploadKey) : "";
 
-      setMessage("Saving property...");
+      setMessage("Saving property details...");
       const payload = Object.fromEntries(form.entries());
       delete payload.mainImage;
       delete payload.secondaryImage;
@@ -62,61 +105,44 @@ export function PropertyForm() {
   return (
     <form className="vault-property-form" onSubmit={submit}>
       <section className="vault-panel vault-form-section">
-        <h2>Property details</h2>
-        <div className="vault-form-grid">
-          <label>Property title<input name="title" required /></label>
-          <label>Location<input name="location" required /></label>
-          <label>Price<input name="price" placeholder="€13,900,000" /></label>
-          <label>Bedrooms<input name="bedrooms" type="number" min="0" /></label>
-          <label>Bathrooms<input name="bathrooms" type="number" min="0" /></label>
-          <label>Plot size<input name="plotSize" placeholder="12,481 m²" /></label>
-          <label>Built size<input name="builtSize" placeholder="1,048 m²" /></label>
-          <label>Terraces<input name="terraces" placeholder="252 m²" /></label>
-          <label>Status<select name="status" defaultValue="draft"><option value="draft">Draft</option><option value="published">Published</option></select></label>
+        <div className="vault-section-heading">
+          <div><p className="vault-kicker">Step 1</p><h2>Property details</h2></div>
+          <p>The property reference is generated automatically when saved.</p>
         </div>
-        <label className="vault-full-field">Description<textarea name="description" rows={8} /></label>
+        <div className="vault-form-grid">
+          <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
+          <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
+          <label><span>Price</span><input name="price" placeholder="€11,600,000" /></label>
+          <label><span>Status</span><select name="status" defaultValue="draft"><option value="draft">Draft</option><option value="published">Published</option></select></label>
+          <label><span>Bedrooms</span><input name="bedrooms" type="number" min="0" placeholder="6" /></label>
+          <label><span>Bathrooms</span><input name="bathrooms" type="number" min="0" placeholder="6" /></label>
+          <label><span>Built size</span><input name="builtSize" placeholder="958 m²" /></label>
+          <label><span>Plot size</span><input name="plotSize" placeholder="5,394 m²" /></label>
+          <label><span>Terraces</span><input name="terraces" placeholder="490 m²" /></label>
+        </div>
+        <label className="vault-full-field"><span>Description</span><textarea name="description" rows={8} placeholder="Enter the property description shown in the Private Collection." /></label>
       </section>
 
       <section className="vault-panel vault-form-section vault-upload-section">
-        <div className="vault-upload-heading">
-          <div>
-            <p className="vault-kicker">Media uploads</p>
-            <h2>Add photographs and brochure</h2>
-          </div>
-          <p>Click each box below to select the file from your computer.</p>
+        <div className="vault-section-heading">
+          <div><p className="vault-kicker">Step 2</p><h2>Photographs and brochure</h2></div>
+          <p>Select the two website images and the downloadable sales brochure.</p>
         </div>
-
         <div className="vault-upload-grid">
-          <label className="vault-upload-box">
-            <span className="vault-upload-icon">＋</span>
-            <strong>Main property image</strong>
-            <small>Required · JPG, PNG or WebP</small>
-            <em>{mainName || "Click here to choose the main photo"}</em>
-            <input name="mainImage" type="file" accept="image/jpeg,image/png,image/webp" required onChange={(e) => setMainName(e.target.files?.[0]?.name || "")} />
-          </label>
-
-          <label className="vault-upload-box">
-            <span className="vault-upload-icon">＋</span>
-            <strong>Second property image</strong>
-            <small>Optional · JPG, PNG or WebP</small>
-            <em>{secondName || "Click here to choose the second photo"}</em>
-            <input name="secondaryImage" type="file" accept="image/jpeg,image/png,image/webp" onChange={(e) => setSecondName(e.target.files?.[0]?.name || "")} />
-          </label>
-
-          <label className="vault-upload-box vault-upload-pdf">
-            <span className="vault-upload-icon">PDF</span>
-            <strong>Property brochure</strong>
-            <small>Optional · PDF document</small>
-            <em>{pdfName || "Click here to choose the brochure PDF"}</em>
-            <input name="brochure" type="file" accept="application/pdf" onChange={(e) => setPdfName(e.target.files?.[0]?.name || "")} />
-          </label>
+          <ImageUpload name="mainImage" title="Main property image" required />
+          <ImageUpload name="secondaryImage" title="Second property image" />
+          <PdfUpload />
         </div>
       </section>
 
-      <div className="vault-form-actions">
-        <button className="vault-primary-button" type="submit" disabled={saving}>{saving ? "Working..." : "Save Property"}</button>
-        {message && <p>{message}</p>}
-      </div>
+      <section className="vault-publish-bar">
+        <div>
+          <strong>Ready to save?</strong>
+          <p>Choose Draft above to keep it private, or Published to display it in the Private Collection.</p>
+        </div>
+        <button className="vault-primary-button" type="submit" disabled={saving}>{saving ? "Saving property..." : "Save Property"}</button>
+      </section>
+      {message && <p className="vault-form-message">{message}</p>}
     </form>
   );
 }
