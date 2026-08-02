@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 180" role="img" aria-labelledby="title desc">
+  <title id="title">The Fixer</title>
+  <desc id="desc">The Fixer property adviser logo</desc>
+  <rect width="480" height="180" rx="12" fill="#050505"/>
+  <g transform="translate(38 20)" fill="none" stroke="#fff">
+    <circle cx="70" cy="70" r="61" stroke-width="2.5"/>
+    <circle cx="70" cy="70" r="52" stroke-width="1.3"/>
+    <path d="M28 55h11v46H28zM42 45h12v56H42zM57 34h13v67H57zM74 23h14v78H74zM92 42h14v59H92zM109 57h12v44h-12z" fill="#fff" stroke="none"/>
+    <path d="M22 101h104" stroke-width="3"/>
+  </g>
+  <g fill="#fff" font-family="Arial, Helvetica, sans-serif">
+    <text x="180" y="92" font-size="43" font-weight="800" letter-spacing="3">THE FIXER</text>
+    <text x="183" y="121" font-size="12" letter-spacing="5">PROPERTY ADVISORY</text>
+  </g>
+</svg>
