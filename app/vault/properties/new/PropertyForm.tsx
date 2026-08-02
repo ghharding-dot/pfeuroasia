@@ -3,10 +3,10 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-async function uploadFile(file: File, uploadKey: string) {
+async function uploadFile(file: File, reference: string) {
   const form = new FormData();
   form.append("file", file);
-  form.append("reference", uploadKey);
+  form.append("reference", reference);
   const response = await fetch("/api/vault/upload", { method: "POST", body: form });
   const result = await response.json();
   if (!response.ok) throw new Error(result.error || "Upload failed.");
@@ -17,6 +17,9 @@ export function PropertyForm() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [mainName, setMainName] = useState("");
+  const [secondName, setSecondName] = useState("");
+  const [pdfName, setPdfName] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -58,9 +61,8 @@ export function PropertyForm() {
 
   return (
     <form className="vault-property-form" onSubmit={submit}>
-      <section className="vault-panel">
+      <section className="vault-panel vault-form-section">
         <h2>Property details</h2>
-        <p className="vault-form-note">The property reference will be generated automatically when the listing is saved.</p>
         <div className="vault-form-grid">
           <label>Property title<input name="title" required /></label>
           <label>Location<input name="location" required /></label>
@@ -75,12 +77,39 @@ export function PropertyForm() {
         <label className="vault-full-field">Description<textarea name="description" rows={8} /></label>
       </section>
 
-      <section className="vault-panel">
-        <h2>Images and brochure</h2>
-        <div className="vault-form-grid">
-          <label>Main image<input name="mainImage" type="file" accept="image/jpeg,image/png,image/webp" required /></label>
-          <label>Second image<input name="secondaryImage" type="file" accept="image/jpeg,image/png,image/webp" /></label>
-          <label>PDF brochure<input name="brochure" type="file" accept="application/pdf" /></label>
+      <section className="vault-panel vault-form-section vault-upload-section">
+        <div className="vault-upload-heading">
+          <div>
+            <p className="vault-kicker">Media uploads</p>
+            <h2>Add photographs and brochure</h2>
+          </div>
+          <p>Click each box below to select the file from your computer.</p>
+        </div>
+
+        <div className="vault-upload-grid">
+          <label className="vault-upload-box">
+            <span className="vault-upload-icon">＋</span>
+            <strong>Main property image</strong>
+            <small>Required · JPG, PNG or WebP</small>
+            <em>{mainName || "Click here to choose the main photo"}</em>
+            <input name="mainImage" type="file" accept="image/jpeg,image/png,image/webp" required onChange={(e) => setMainName(e.target.files?.[0]?.name || "")} />
+          </label>
+
+          <label className="vault-upload-box">
+            <span className="vault-upload-icon">＋</span>
+            <strong>Second property image</strong>
+            <small>Optional · JPG, PNG or WebP</small>
+            <em>{secondName || "Click here to choose the second photo"}</em>
+            <input name="secondaryImage" type="file" accept="image/jpeg,image/png,image/webp" onChange={(e) => setSecondName(e.target.files?.[0]?.name || "")} />
+          </label>
+
+          <label className="vault-upload-box vault-upload-pdf">
+            <span className="vault-upload-icon">PDF</span>
+            <strong>Property brochure</strong>
+            <small>Optional · PDF document</small>
+            <em>{pdfName || "Click here to choose the brochure PDF"}</em>
+            <input name="brochure" type="file" accept="application/pdf" onChange={(e) => setPdfName(e.target.files?.[0]?.name || "")} />
+          </label>
         </div>
       </section>
 
