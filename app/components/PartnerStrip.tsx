@@ -46,14 +46,21 @@ export function PartnerStrip() {
         <div className={styles.partnerGroup}>
           <p className={styles.groupEyebrow}>Property representation partners</p>
           <div className={`partner-logo-grid ${styles.propertyGrid}`}>
-            <a className="partner-logo partner-pf" href="/go/pfiberia" aria-label="Visit Property Facilitators Iberia">
+            <a className="partner-logo partner-pf" href="/go/pfiberia" aria-label="Enquire through Property Facilitators Iberia">
               <img src="/images/partner-pf-iberia.png" alt="Property Facilitators Iberia" />
             </a>
-            <a className="partner-logo" href="/go/aylesford" aria-label="Visit Aylesford Spain">
+            <a className="partner-logo" href="/go/aylesford" aria-label="Enquire through Aylesford Spain">
               <AylesfordLogo />
             </a>
-            <div className="partner-logo partner-house"><img src="/images/partner-house-country.png" alt="House and Country Real Estate" /></div>
-            <div className="partner-logo partner-luxo" aria-label="LuxoEstates"><span>Luxo</span><b>Estates</b></div>
+            <a className="partner-logo partner-house" href="/go/house-country" aria-label="Enquire through House and Country Real Estate">
+              <img src="/images/partner-house-country.png" alt="House and Country Real Estate" />
+            </a>
+            <a className="partner-logo partner-luxo" href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
+              <span>Luxo</span><b>Estates</b>
+            </a>
+            <a className={`partner-logo ${styles.fixerLogo}`} href="/go/the-fixer" aria-label="Enquire through The Fixer">
+              <img src="/images/partner-the-fixer.svg" alt="The Fixer property advisory" />
+            </a>
           </div>
         </div>
 
@@ -61,13 +68,13 @@ export function PartnerStrip() {
           <div className={styles.groupDivider} aria-hidden="true" />
           <p className={styles.groupEyebrow}>Legal representation partners</p>
           <div className={`partner-logo-grid ${styles.legalGrid}`}>
-            <a className="partner-logo partner-legal" href="/go/legal10" aria-label="Visit Legal 10 Abogados Marbella">
+            <a className="partner-logo partner-legal" href="/go/legal10" aria-label="Enquire through Legal 10 Abogados Marbella">
               <img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" />
             </a>
-            <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Visit Lawbird Legal Services">
+            <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Enquire through Lawbird Legal Services">
               <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
             </a>
-            <a className="partner-logo" href="/go/martinezechevarria" aria-label="Visit Martinez-Echevarria Lawyers">
+            <a className="partner-logo" href="/go/martinezechevarria" aria-label="Enquire through Martinez-Echevarria Lawyers">
               <MartinezEchevarriaLogo />
             </a>
           </div>
