@@ -1,0 +1,37 @@
+/* Prevent accidental horizontal page movement on mobile and narrow screens. */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+main,
+header,
+footer,
+section,
+nav {
+  max-width: 100%;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+/* Grid and flex children can otherwise force their parent wider than the viewport. */
+main *,
+header *,
+footer * {
+  min-width: 0;
+}
