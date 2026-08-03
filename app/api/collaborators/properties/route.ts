@@ -50,7 +50,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PF EuroAsia Collaborator Portal <enquiries@pfeuroasia.com>",
+        from: "PF EuroAsia Collaborator Portal <enquiry@pfeuroasia.com>",
         to: [adminEmail],
         subject: `Collaborator property awaiting review — ${property.reference}`,
         text: adminText,
@@ -61,7 +61,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PF EuroAsia Collaborator Portal <enquiries@pfeuroasia.com>",
+        from: "PF EuroAsia Collaborator Portal <enquiry@pfeuroasia.com>",
         to: [collaboratorEmail],
         subject: `Property submitted for PF EuroAsia review — ${property.reference}`,
         text: collaboratorText,
