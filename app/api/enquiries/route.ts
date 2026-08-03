@@ -85,11 +85,19 @@ function partnerEmail(code?: string) {
   return code ? emails[code] : undefined;
 }
 
+function notificationAddress() {
+  const configured =
+    process.env.ENQUIRY_NOTIFICATION_FROM || "enquiries@pfeuroasia.com";
+  const match = configured.match(/<([^>]+)>/);
+  return (match?.[1] || configured).trim();
+}
+
 async function sendWithResend(args: {
   to: string[];
   subject: string;
   text: string;
   replyTo?: string;
+  fromName?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
@@ -101,9 +109,7 @@ async function sendWithResend(args: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from:
-        process.env.ENQUIRY_NOTIFICATION_FROM ||
-        "PF EuroAsia <enquiries@pfeuroasia.com>",
+      from: `${args.fromName || "PF EuroAsia"} <${notificationAddress()}>`,
       to: args.to,
       subject: args.subject,
       text: args.text,
@@ -126,7 +132,7 @@ async function sendFormSubmitFallback(recipient: string, record: Record<string, 
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
         ...record,
-        _subject: `[${record.reference}] New enquiry from pfeuroasia.com`,
+        _subject: `New confidential property enquiry via ${record.partner_name}`,
         _template: "table",
       }),
     },
@@ -264,9 +270,12 @@ export async function POST(request: NextRequest) {
   try {
     const sentWithResend = await sendWithResend({
       to: recipients,
-      subject: `[${reference}] New ${partner ? partner.name : "website"} enquiry`,
+      subject: `New confidential property enquiry via ${
+        partner ? partner.name : "PF EuroAsia website"
+      }`,
       text: internalText,
       replyTo: email,
+      fromName: "PF EuroAsia Partner Enquiries",
     });
 
     if (sentWithResend) {
