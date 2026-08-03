@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
-const UPLOAD_TIMEOUT_MS = 2 * 60 * 1000;
+const UPLOAD_TIMEOUT_MS = 10 * 60 * 1000;
+const FINALIZE_TIMEOUT_MS = 5 * 60 * 1000;
 
 function safeFilename(name: string) {
   return name
@@ -29,27 +30,70 @@ async function uploadFile(
   onProgress: (message: string) => void,
 ) {
   const pathname = `collaborator-submissions/${partnerCode.toLowerCase()}/${uploadKey}/${kind}-${safeFilename(file.name)}`;
-  const label = kind === "brochure" ? "private brochure PDF" : "photograph";
+  const label = kind === "brochure" ? "brochure PDF" : "photograph";
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), UPLOAD_TIMEOUT_MS);
+  let highestPercentage = 0;
 
   onProgress(`Preparing ${label} upload...`);
 
   try {
     const result = await upload(pathname, file, {
-      access: kind === "brochure" ? "private" : "public",
+      access: "public",
       handleUploadUrl: "/api/vault/upload",
       clientPayload: JSON.stringify({ reference: uploadKey, kind }),
-      multipart: file.size > 25 * 1024 * 1024,
+      contentType: file.type || (kind === "brochure" ? "application/pdf" : undefined),
+      multipart: file.size > 10 * 1024 * 1024,
       abortSignal: controller.signal,
       onUploadProgress: ({ percentage }) => {
-        onProgress(`Uploading ${label} · ${Math.round(percentage)}%`);
+        highestPercentage = Math.max(highestPercentage, Math.round(percentage));
+        onProgress(`Uploading ${label} · ${highestPercentage}%`);
       },
     });
     return result.url;
   } catch (error) {
     if (controller.signal.aborted) {
-      throw new Error(`${kind === "brochure" ? "The brochure PDF" : "A photograph"} upload timed out. Please check the connection and try again.`);
+      throw new Error(
+        `${kind === "brochure" ? "The brochure PDF" : "A photograph"} upload timed out after ten minutes. Please check the connection and try again.`,
+      );
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function secureBrochure(
+  temporaryUrl: string,
+  partnerCode: string,
+  file: File,
+  onProgress: (message: string) => void,
+) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), FINALIZE_TIMEOUT_MS);
+  onProgress("Encrypting and securing the brochure PDF...");
+
+  try {
+    const response = await fetch("/api/vault/brochure/finalize", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: temporaryUrl,
+        ownerCode: partnerCode,
+        name: file.name,
+      }),
+      signal: controller.signal,
+    });
+    const result = await response.json();
+    if (!response.ok || !result.brochure) {
+      throw new Error(result.error || "The brochure PDF could not be secured.");
+    }
+    return String(result.brochure);
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new Error(
+        "The brochure reached the server but took too long to secure. Please try again.",
+      );
     }
     throw error;
   } finally {
@@ -108,8 +152,8 @@ function PdfUpload() {
   return (
     <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
       <span className="vault-upload-icon">PDF</span>
-      <strong>One private sales brochure PDF</strong>
-      <small>Required · stored privately · personalised for each verified client · maximum 60 MB</small>
+      <strong>One protected sales brochure PDF</strong>
+      <small>Required · encrypted immediately after upload · maximum 60 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the sales brochure"}</em>
       <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
       <input
@@ -128,15 +172,22 @@ function validateImage(file: File | null, required: boolean) {
     if (required) throw new Error("Please select the main property image.");
     return;
   }
-  if (!file.type.startsWith("image/")) throw new Error(`${file.name} is not a supported image.`);
-  if (file.size > MAX_IMAGE_SIZE) throw new Error(`${file.name} is larger than 20 MB.`);
+  if (!file.type.startsWith("image/")) {
+    throw new Error(`${file.name} is not a supported image.`);
+  }
+  if (file.size > MAX_IMAGE_SIZE) {
+    throw new Error(`${file.name} is larger than 20 MB.`);
+  }
 }
 
 function validatePdf(file: File | null) {
   if (!file?.size) throw new Error("Please attach one sales brochure PDF.");
-  const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+  const isPdf =
+    file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
   if (!isPdf) throw new Error("The property brochure must be a PDF.");
-  if (file.size > MAX_PDF_SIZE) throw new Error(`${file.name} is larger than 60 MB.`);
+  if (file.size > MAX_PDF_SIZE) {
+    throw new Error(`${file.name} is larger than 60 MB.`);
+  }
 }
 
 export function CollaboratorPropertyForm({
@@ -158,7 +209,9 @@ export function CollaboratorPropertyForm({
 
     try {
       if (!authorityConfirmed) {
-        throw new Error("Please confirm that your company is authorised to present this property.");
+        throw new Error(
+          "Please confirm that your company is authorised to present this property.",
+        );
       }
 
       const form = new FormData(event.currentTarget);
@@ -171,11 +224,36 @@ export function CollaboratorPropertyForm({
       validateImage(second, false);
       validatePdf(pdf);
 
-      const image = await uploadFile(main as File, partnerCode, uploadKey, "main", setMessage);
+      const temporaryBrochure = await uploadFile(
+        pdf as File,
+        partnerCode,
+        uploadKey,
+        "brochure",
+        setMessage,
+      );
+      const brochure = await secureBrochure(
+        temporaryBrochure,
+        partnerCode,
+        pdf as File,
+        setMessage,
+      );
+
+      const image = await uploadFile(
+        main as File,
+        partnerCode,
+        uploadKey,
+        "main",
+        setMessage,
+      );
       const secondaryImage = second?.size
-        ? await uploadFile(second, partnerCode, uploadKey, "secondary", setMessage)
+        ? await uploadFile(
+            second,
+            partnerCode,
+            uploadKey,
+            "secondary",
+            setMessage,
+          )
         : "";
-      const brochure = await uploadFile(pdf as File, partnerCode, uploadKey, "brochure", setMessage);
 
       setMessage("Submitting property for PF EuroAsia review...");
       const payload = Object.fromEntries(form.entries());
@@ -195,7 +273,9 @@ export function CollaboratorPropertyForm({
         }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Property could not be submitted.");
+      if (!response.ok) {
+        throw new Error(result.error || "Property could not be submitted.");
+      }
 
       setMessage("Property submitted. Opening your preview...");
       router.push(`/collaborators/properties/${result.id}/preview`);
@@ -235,7 +315,7 @@ export function CollaboratorPropertyForm({
 
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
-          <div><p className="vault-kicker">Step 2</p><h2>Photography and private brochure</h2></div>
+          <div><p className="vault-kicker">Step 2</p><h2>Photography and protected brochure</h2></div>
           <p>Upload one main image, one optional second image, and exactly one current sales brochure PDF.</p>
         </div>
         <div className="vault-upload-grid">
