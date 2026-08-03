@@ -3,7 +3,7 @@
 import { upload } from "@vercel/blob/client";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { VaultProperty } from "../../../../../lib/propertyStore";
+import type { VaultProperty } from "../../../../lib/propertyStore";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
