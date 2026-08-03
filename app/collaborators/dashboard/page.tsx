@@ -88,9 +88,14 @@ export default async function CollaboratorDashboardPage() {
                       <p>{property.price || "Price on application"}</p>
                     </div>
                     <span className={`vault-status vault-status-${statusClass}`}>{label}</span>
-                    <Link className="vault-row-action" href={`/collaborators/properties/${property.id}/preview`}>
-                      Preview
-                    </Link>
+                    <div className="vault-row-actions">
+                      <Link className="vault-row-action" href={`/collaborators/properties/${property.id}/preview`}>
+                        Preview
+                      </Link>
+                      <Link className="vault-row-action" href={`/collaborators/properties/${property.id}/edit`}>
+                        Edit
+                      </Link>
+                    </div>
                   </article>
                 );
               })}
