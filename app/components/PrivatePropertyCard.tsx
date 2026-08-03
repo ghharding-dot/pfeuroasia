@@ -1,3 +1,4 @@
+import { BrochureAccessButton } from "./BrochureAccessButton";
 import type { VaultProperty } from "../lib/propertyStore";
 
 export type PrivatePropertyDisplay = Readonly<
@@ -16,6 +17,8 @@ export type PrivatePropertyDisplay = Readonly<
     | "image"
     | "secondaryImage"
     | "brochure"
+    | "listingPartnerCode"
+    | "listingPartnerName"
   >
 >;
 
@@ -27,9 +30,11 @@ function countLabel(value: number, singular: string, plural: string) {
 export function PrivatePropertyCard({
   property,
   showEnquiry = true,
+  brochureMode = "verified",
 }: {
   property: PrivatePropertyDisplay;
   showEnquiry?: boolean;
+  brochureMode?: "verified" | "preview" | "direct";
 }) {
   const facts = [
     countLabel(property.bedrooms, "bedroom", "bedrooms"),
@@ -38,6 +43,7 @@ export function PrivatePropertyCard({
     property.plotSize ? `${property.plotSize} plot` : "",
     property.terraces ? `${property.terraces} terraces` : "",
   ].filter(Boolean);
+  const partnerName = property.listingPartnerName || "Property Facilitators EuroAsia";
 
   return (
     <article className="private-property-card">
@@ -71,6 +77,8 @@ export function PrivatePropertyCard({
           <p className="private-property-description">{property.description}</p>
         )}
 
+        <p className="private-property-partner">Listed in collaboration with {partnerName}</p>
+
         {property.secondaryImage && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -82,14 +90,24 @@ export function PrivatePropertyCard({
 
         <div className="private-property-actions">
           {property.brochure ? (
-            <a
-              className="text-link"
-              href={property.brochure}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View sales brochure PDF <span>→</span>
-            </a>
+            brochureMode === "verified" ? (
+              <BrochureAccessButton
+                propertyReference={property.reference}
+                propertyTitle={property.title}
+                partnerName={partnerName}
+              />
+            ) : brochureMode === "direct" ? (
+              <a
+                className="text-link"
+                href={property.brochure}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View sales brochure PDF <span>→</span>
+              </a>
+            ) : (
+              <span className="brochure-pending brochure-attached">Protected sales brochure attached</span>
+            )
           ) : (
             <span className="brochure-pending">Sales brochure PDF not attached</span>
           )}
