@@ -77,7 +77,7 @@ async function deliverFromBrowser(
     telephone_or_whatsapp: asText(payload.telephone_or_whatsapp),
     wechat_id: asText(payload.wechat_id),
     current_location: asText(payload.current_location),
-    _subject: `[${reference}] New ${partner ? partner.name : "website"} enquiry`,
+    _subject: `New confidential property enquiry via ${partner ? partner.name : "PF EuroAsia website"}`,
     _template: "table",
     _replyto: asText(payload.email),
   };
@@ -249,7 +249,7 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
               <label><span>Current location</span><input name="country" placeholder="Country or city" /></label>
             </div>
             <p className="china-channel-note">Mainland China: email, WeChat and this secure form are the recommended contact routes.</p>
-            <label className="privacy-check"><input type="checkbox" required /><span>I agree to be contacted regarding this enquiry and understand that a referred collaboration partner may receive the details.</span></label>
+            <label className="privacy-check"><input type="checkbox" required /><span>I agree to be contacted regarding this enquiry. I understand that a referred collaboration partner may receive the details and that approximate network location plus a masked IP address may be recorded for security, routing and fraud prevention. <Link href="/privacy">Privacy notice</Link>.</span></label>
             {error && <p className="form-error" role="alert">{error}</p>}
             <div className="form-actions"><button className="back-button" type="button" disabled={sending} onClick={() => setStep(2)}>← Back</button><button className="button button-dark" type="submit" disabled={sending}>{sending ? "Sending…" : "Send enquiry"} <span>→</span></button></div>
           </fieldset>
