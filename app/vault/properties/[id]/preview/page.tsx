@@ -38,6 +38,16 @@ export default async function PropertyPreviewPage({
           </div>
           <div className="vault-header-actions">
             <Link className="vault-secondary-button" href="/vault/dashboard">← Back to Vault</Link>
+            {property.brochure && (
+              <a
+                className="vault-secondary-button"
+                href={`/api/vault/properties/${property.id}/brochure`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Check Secured Brochure
+              </a>
+            )}
             <StatusButton id={property.id} status={property.status} />
           </div>
         </header>
