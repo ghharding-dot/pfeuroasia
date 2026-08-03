@@ -5,6 +5,7 @@ import { getCollaboratorSession } from "../../lib/collaboratorSession";
 import { readProperties } from "../../lib/propertyStore";
 import { LogoutButton } from "./LogoutButton";
 import "../../vault/vault.css";
+import "../portal.css";
 
 export const metadata: Metadata = {
   title: "Collaborator Dashboard | Property Facilitators EuroAsia",
