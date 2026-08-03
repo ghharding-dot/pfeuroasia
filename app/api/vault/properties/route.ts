@@ -25,6 +25,7 @@ export async function POST(request: Request) {
   const body = await request.json();
   const properties = await readProperties();
   const now = new Date().toISOString();
+  const status: VaultProperty["status"] = body.status === "published" ? "published" : "draft";
   const property: VaultProperty = {
     id: crypto.randomUUID(),
     reference: generateReference(properties),
@@ -40,13 +41,20 @@ export async function POST(request: Request) {
     image: String(body.image || "").trim(),
     secondaryImage: String(body.secondaryImage || "").trim(),
     brochure: String(body.brochure || "").trim(),
-    status: body.status === "published" ? "published" : "draft",
+    status,
     createdAt: now,
     updatedAt: now,
   };
 
   if (!property.title || !property.location || !property.image) {
     return NextResponse.json({ error: "Title, location and main image are required." }, { status: 400 });
+  }
+
+  if (property.status === "published" && !property.brochure) {
+    return NextResponse.json(
+      { error: "Attach one sales brochure PDF before publishing. Save as Draft if the brochure is not ready." },
+      { status: 400 },
+    );
   }
 
   properties.unshift(property);
