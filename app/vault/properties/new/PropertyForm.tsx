@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
+const UPLOAD_TIMEOUT_MS = 10 * 60 * 1000;
+const FINALIZE_TIMEOUT_MS = 5 * 60 * 1000;
 
 const listingPartners = [
   ["DIRECT", "Property Facilitators EuroAsia"],
@@ -30,16 +32,75 @@ async function uploadFile(
   onProgress: (message: string) => void,
 ) {
   const pathname = `private-portfolio/${reference}/${kind}-${safeFilename(file.name)}`;
-  const result = await upload(pathname, file, {
-    access: kind === "brochure" ? "private" : "public",
-    handleUploadUrl: "/api/vault/upload",
-    clientPayload: JSON.stringify({ reference, kind }),
-    multipart: file.size > 10 * 1024 * 1024,
-    onUploadProgress: ({ percentage }) => {
-      onProgress(`Uploading ${kind === "brochure" ? "private brochure PDF" : "photograph"} · ${Math.round(percentage)}%`);
-    },
-  });
-  return result.url;
+  const label = kind === "brochure" ? "brochure PDF" : "photograph";
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), UPLOAD_TIMEOUT_MS);
+  let highestPercentage = 0;
+
+  onProgress(`Preparing ${label} upload...`);
+
+  try {
+    const result = await upload(pathname, file, {
+      access: "public",
+      handleUploadUrl: "/api/vault/upload",
+      clientPayload: JSON.stringify({ reference, kind }),
+      contentType: file.type || (kind === "brochure" ? "application/pdf" : undefined),
+      multipart: file.size > 10 * 1024 * 1024,
+      abortSignal: controller.signal,
+      onUploadProgress: ({ percentage }) => {
+        highestPercentage = Math.max(highestPercentage, Math.round(percentage));
+        onProgress(`Uploading ${label} · ${highestPercentage}%`);
+      },
+    });
+    return result.url;
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new Error(
+        `${kind === "brochure" ? "The brochure PDF" : "A photograph"} upload timed out after ten minutes. Please check the connection and try again.`,
+      );
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
+async function secureBrochure(
+  temporaryUrl: string,
+  ownerCode: string,
+  file: File,
+  onProgress: (message: string) => void,
+) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), FINALIZE_TIMEOUT_MS);
+  onProgress("Encrypting and securing the brochure PDF...");
+
+  try {
+    const response = await fetch("/api/vault/brochure/finalize", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        url: temporaryUrl,
+        ownerCode,
+        name: file.name,
+      }),
+      signal: controller.signal,
+    });
+    const result = await response.json();
+    if (!response.ok || !result.brochure) {
+      throw new Error(result.error || "The brochure PDF could not be secured.");
+    }
+    return String(result.brochure);
+  } catch (error) {
+    if (controller.signal.aborted) {
+      throw new Error(
+        "The brochure reached the server but took too long to secure. Please try again.",
+      );
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
 }
 
 function formatSize(size: number) {
@@ -99,8 +160,8 @@ function PdfUpload() {
   return (
     <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
       <span className="vault-upload-icon">PDF</span>
-      <strong>One private sales brochure PDF</strong>
-      <small>Stored privately · watermarked for each verified client · maximum 60 MB</small>
+      <strong>One protected sales brochure PDF</strong>
+      <small>Encrypted immediately after upload · maximum 60 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the property brochure"}</em>
       <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
       <input
@@ -118,18 +179,29 @@ function validateImage(file: File | null, required: boolean) {
     if (required) throw new Error("Please select the main property image.");
     return;
   }
-  if (!file.type.startsWith("image/")) throw new Error(`${file.name} is not a supported image.`);
-  if (file.size > MAX_IMAGE_SIZE) throw new Error(`${file.name} is larger than 20 MB.`);
+  if (!file.type.startsWith("image/")) {
+    throw new Error(`${file.name} is not a supported image.`);
+  }
+  if (file.size > MAX_IMAGE_SIZE) {
+    throw new Error(`${file.name} is larger than 20 MB.`);
+  }
 }
 
 function validatePdf(file: File | null, required: boolean) {
   if (!file?.size) {
-    if (required) throw new Error("Attach one sales brochure PDF before publishing. You can save the property as a draft without it.");
+    if (required) {
+      throw new Error(
+        "Attach one sales brochure PDF before publishing. You can save the property as a draft without it.",
+      );
+    }
     return;
   }
-  const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
+  const isPdf =
+    file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
   if (!isPdf) throw new Error("The property brochure must be a PDF.");
-  if (file.size > MAX_PDF_SIZE) throw new Error(`${file.name} is larger than 60 MB.`);
+  if (file.size > MAX_PDF_SIZE) {
+    throw new Error(`${file.name} is larger than 60 MB.`);
+  }
 }
 
 export function PropertyForm() {
@@ -149,17 +221,36 @@ export function PropertyForm() {
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
       const pdf = form.get("brochure") as File | null;
+      const ownerCode = String(form.get("listingPartnerCode") || "DIRECT");
 
       validateImage(main, true);
       validateImage(second, false);
       validatePdf(pdf, status === "published");
 
-      const image = await uploadFile(main as File, uploadKey, "main", setMessage);
+      let brochure = "";
+      if (pdf?.size) {
+        const temporaryBrochure = await uploadFile(
+          pdf,
+          uploadKey,
+          "brochure",
+          setMessage,
+        );
+        brochure = await secureBrochure(
+          temporaryBrochure,
+          ownerCode,
+          pdf,
+          setMessage,
+        );
+      }
+
+      const image = await uploadFile(
+        main as File,
+        uploadKey,
+        "main",
+        setMessage,
+      );
       const secondaryImage = second?.size
         ? await uploadFile(second, uploadKey, "secondary", setMessage)
-        : "";
-      const brochure = pdf?.size
-        ? await uploadFile(pdf, uploadKey, "brochure", setMessage)
         : "";
 
       setMessage("Saving property details...");
@@ -171,10 +262,18 @@ export function PropertyForm() {
       const response = await fetch("/api/vault/properties", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, status, image, secondaryImage, brochure }),
+        body: JSON.stringify({
+          ...payload,
+          status,
+          image,
+          secondaryImage,
+          brochure,
+        }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Property could not be saved.");
+      if (!response.ok) {
+        throw new Error(result.error || "Property could not be saved.");
+      }
 
       setMessage("Property saved. Opening the layout preview...");
       router.push(`/vault/properties/${result.id}/preview`);
@@ -232,7 +331,7 @@ export function PropertyForm() {
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
           <div><p className="vault-kicker">Step 2</p><h2>Website images and protected brochure</h2></div>
-          <p>Use one main image, one optional secondary image, and one private sales brochure PDF per property.</p>
+          <p>Use one main image, one optional secondary image, and one protected sales brochure PDF per property.</p>
         </div>
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
