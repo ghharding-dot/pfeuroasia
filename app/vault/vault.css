@@ -48,6 +48,7 @@
 .vault-status { display:inline-flex; align-items:center; justify-content:center; min-width:92px; padding:8px 11px; border:1px solid rgba(255,255,255,.16); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
 .vault-status-published { border-color:rgba(98,190,139,.54); color:#9fe0ba; background:rgba(98,190,139,.08); }
 .vault-status-draft { border-color:rgba(201,168,97,.48); color:var(--vault-gold); background:rgba(201,168,97,.07); }
+.vault-row-actions { display:flex; align-items:center; justify-content:flex-end; gap:14px; flex-wrap:wrap; }
 .vault-row-action { color:var(--vault-cream); text-decoration:none; font-size:.78rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; border-bottom:1px solid var(--vault-gold); padding-bottom:4px; }
 .vault-property-form { display:grid; gap:26px; }
 .vault-form-section { padding:30px; }
@@ -91,7 +92,7 @@
   .vault-upload-box{min-height:240px;}
   .vault-property-row{grid-template-columns:96px minmax(0,1fr) auto;}
   .vault-property-thumb{width:96px;height:70px;}
-  .vault-row-action{grid-column:2;justify-self:start;}
+  .vault-row-actions{grid-column:2;justify-self:start;}
 }
 @media (max-width:720px){
   .vault-page,.vault-dashboard-page{padding:26px 14px;}
@@ -107,6 +108,6 @@
   .vault-property-row{grid-template-columns:82px minmax(0,1fr);gap:14px;padding:16px;}
   .vault-property-thumb{width:82px;height:68px;}
   .vault-status{grid-column:2;justify-self:start;}
-  .vault-row-action{grid-column:2;}
+  .vault-row-actions{grid-column:2;justify-self:start;}
   .vault-preview-grid{padding-top:20px;}
 }
