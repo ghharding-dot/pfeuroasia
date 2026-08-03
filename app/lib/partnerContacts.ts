@@ -65,3 +65,18 @@ export const PROPERTY_LISTING_PARTNERS = [
   PARTNER_CONTACTS.LUX,
   PARTNER_CONTACTS.FIX,
 ] as const;
+
+export const COLLABORATOR_LOGIN_PARTNERS = PROPERTY_LISTING_PARTNERS.filter(
+  (partner) => partner.code !== "DIRECT" && Boolean(partner.email),
+);
+
+export function getCollaboratorByEmail(email?: string | null) {
+  const normalized = String(email || "").trim().toLowerCase();
+  if (!normalized) return null;
+
+  return (
+    COLLABORATOR_LOGIN_PARTNERS.find(
+      (partner) => partner.email?.trim().toLowerCase() === normalized,
+    ) || null
+  );
+}
