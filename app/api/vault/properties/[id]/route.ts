@@ -36,6 +36,7 @@ export async function PATCH(
   const updated: VaultProperty = {
     ...existing,
     status,
+    approvalStatus: status === "published" ? "approved" : existing.approvalStatus,
     updatedAt: new Date().toISOString(),
   };
   properties[index] = updated;
