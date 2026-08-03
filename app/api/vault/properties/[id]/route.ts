@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
-import { readProperties, writeProperties } from "../../../../lib/propertyStore";
+import {
+  readProperties,
+  writeProperties,
+  type VaultProperty,
+} from "../../../../lib/propertyStore";
 
 export async function PATCH(
   request: Request,
@@ -12,7 +16,8 @@ export async function PATCH(
 
   const { id } = await context.params;
   const body = await request.json();
-  const status = body.status === "published" ? "published" : "draft";
+  const status: VaultProperty["status"] =
+    body.status === "published" ? "published" : "draft";
   const properties = await readProperties();
   const index = properties.findIndex((property) => property.id === id);
 
@@ -28,7 +33,7 @@ export async function PATCH(
     );
   }
 
-  const updated = {
+  const updated: VaultProperty = {
     ...existing,
     status,
     updatedAt: new Date().toISOString(),
