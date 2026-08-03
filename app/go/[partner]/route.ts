@@ -5,6 +5,22 @@ function safeHeader(value: string | null, fallback = "Not available") {
   return value?.slice(0, 500) || fallback;
 }
 
+function isAutomatedRequest(request: NextRequest) {
+  const userAgent = request.headers.get("user-agent") || "";
+  const purpose = [
+    request.headers.get("purpose"),
+    request.headers.get("sec-purpose"),
+    request.headers.get("x-purpose"),
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const botPattern =
+    /bot|crawler|spider|slurp|facebookexternalhit|whatsapp|telegrambot|discordbot|linkedinbot|pinterest|preview|fetcher|monitor|lighthouse|headless|gptbot|chatgpt-user|claudebot|anthropic-ai|perplexitybot|googleother|bingpreview/i;
+
+  return botPattern.test(userAgent) || /prefetch|prerender|preview/i.test(purpose);
+}
+
 async function sendClickNotification(details: {
   partner: string;
   code: string;
@@ -24,7 +40,10 @@ async function sendClickNotification(details: {
   if (!apiKey) return;
 
   const text = [
-    "A collaboration partner enquiry route was opened.",
+    "A visitor opened a collaboration partner enquiry page.",
+    "",
+    "Important: this is a page-open notification only. No enquiry form has been submitted yet.",
+    "A completed enquiry will arrive separately with the subject 'New confidential property enquiry'.",
     "",
     `Partner: ${details.partner}`,
     `Partner code: ${details.code}`,
@@ -44,7 +63,7 @@ async function sendClickNotification(details: {
     body: JSON.stringify({
       from: sender,
       to: [recipient],
-      subject: `Partner enquiry opened: ${details.partner}`,
+      subject: `Partner page opened — no enquiry submitted: ${details.partner}`,
       text,
     }),
   });
@@ -71,12 +90,16 @@ export async function GET(
     userAgent: safeHeader(request.headers.get("user-agent")),
   };
 
-  console.info("partner-enquiry-opened", details);
+  if (isAutomatedRequest(request)) {
+    console.info("partner-route-automated-visit-ignored", details);
+  } else {
+    console.info("partner-enquiry-opened", details);
 
-  try {
-    await sendClickNotification(details);
-  } catch (error) {
-    console.error("partner-enquiry-open-notification-failed", error);
+    try {
+      await sendClickNotification(details);
+    } catch (error) {
+      console.error("partner-enquiry-open-notification-failed", error);
+    }
   }
 
   const destination = new URL("/enquire", request.url);
