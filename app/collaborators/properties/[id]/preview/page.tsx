@@ -44,9 +44,14 @@ export default async function CollaboratorPropertyPreviewPage({
             <h1>{property.title}</h1>
             <p>{property.reference} · {property.location}</p>
           </div>
-          <Link className="vault-secondary-button" href="/collaborators/dashboard">
-            ← Back to Dashboard
-          </Link>
+          <div className="vault-header-actions">
+            <Link className="vault-secondary-button" href="/collaborators/dashboard">
+              ← Back to Dashboard
+            </Link>
+            <Link className="vault-primary-button" href={`/collaborators/properties/${property.id}/edit`}>
+              Edit Property
+            </Link>
+          </div>
         </header>
 
         <section className="vault-preview-notice">
@@ -54,7 +59,7 @@ export default async function CollaboratorPropertyPreviewPage({
             <strong>{status}</strong>
             <p>
               {property.status === "published"
-                ? "This property is live inside the password-protected Private Collection."
+                ? "This property is live inside the password-protected Private Collection. Editing it will return it to PF EuroAsia for review."
                 : "PF EuroAsia will review the details, photography and brochure before publication."}
             </p>
           </div>
