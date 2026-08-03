@@ -1,5 +1,6 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
+import { getCollaboratorSession } from "../../../lib/collaboratorSession";
 import { hasVaultAccess } from "../../../lib/vaultSession";
 
 const MAX_UPLOAD_SIZE = 60 * 1024 * 1024;
@@ -12,11 +13,22 @@ export async function POST(request: Request) {
       body,
       request,
       onBeforeGenerateToken: async (pathname, clientPayload) => {
-        if (!(await hasVaultAccess())) {
+        const vaultAccess = await hasVaultAccess();
+        const collaborator = vaultAccess ? null : await getCollaboratorSession();
+
+        if (!vaultAccess && !collaborator) {
           throw new Error("Unauthorized");
         }
 
-        if (!pathname.startsWith("private-portfolio/")) {
+        const validAdminPath = vaultAccess && pathname.startsWith("private-portfolio/");
+        const collaboratorPrefix = collaborator
+          ? `collaborator-submissions/${collaborator.partnerCode.toLowerCase()}/`
+          : "";
+        const validCollaboratorPath = Boolean(
+          collaborator && pathname.startsWith(collaboratorPrefix),
+        );
+
+        if (!validAdminPath && !validCollaboratorPath) {
           throw new Error("Invalid upload destination.");
         }
 
@@ -42,11 +54,15 @@ export async function POST(request: Request) {
           ],
           maximumSizeInBytes: MAX_UPLOAD_SIZE,
           addRandomSuffix: true,
-          tokenPayload: JSON.stringify({ reference, kind }),
+          tokenPayload: JSON.stringify({
+            reference,
+            kind,
+            uploadedBy: collaborator?.partnerCode || "ADMIN",
+          }),
         };
       },
       onUploadCompleted: async ({ blob, tokenPayload }) => {
-        console.info("vault-upload-completed", {
+        console.info("property-upload-completed", {
           pathname: blob.pathname,
           tokenPayload,
         });
