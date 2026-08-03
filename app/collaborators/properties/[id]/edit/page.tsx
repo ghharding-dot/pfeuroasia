@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { CollaboratorEditPropertyForm } from "./CollaboratorEditPropertyForm";
-import { getCollaboratorSession } from "../../../../../lib/collaboratorSession";
-import { readProperties } from "../../../../../lib/propertyStore";
-import "../../../../../vault/vault.css";
-import "../../../../portal.css";
+import { getCollaboratorSession } from "../../../../lib/collaboratorSession";
+import { readProperties } from "../../../../lib/propertyStore";
+import "../../../../vault/vault.css";
+import "../../../portal.css";
 
 export const metadata: Metadata = {
   title: "Edit Property | PF EuroAsia Collaborator Portal",
