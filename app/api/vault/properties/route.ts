@@ -1,19 +1,12 @@
 import { NextResponse } from "next/server";
 import { getPartnerContact } from "../../../lib/partnerContacts";
 import { hasVaultAccess } from "../../../lib/vaultSession";
-import { readProperties, writeProperties, type VaultProperty } from "../../../lib/propertyStore";
-
-function generateReference(properties: VaultProperty[]) {
-  const year = new Date().getFullYear().toString().slice(-2);
-  const prefix = `PFEA00${year}`;
-  const highest = properties.reduce((max, property) => {
-    if (!property.reference.startsWith(prefix)) return max;
-    const sequence = Number(property.reference.slice(prefix.length));
-    return Number.isFinite(sequence) ? Math.max(max, sequence) : max;
-  }, 0);
-
-  return `${prefix}${String(highest + 1).padStart(2, "0")}`;
-}
+import {
+  generatePropertyReference,
+  readProperties,
+  writeProperties,
+  type VaultProperty,
+} from "../../../lib/propertyStore";
 
 export async function GET() {
   if (!(await hasVaultAccess())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -30,7 +23,7 @@ export async function POST(request: Request) {
   const listingPartner = getPartnerContact(String(body.listingPartnerCode || "DIRECT"));
   const property: VaultProperty = {
     id: crypto.randomUUID(),
-    reference: generateReference(properties),
+    reference: generatePropertyReference(properties),
     title: String(body.title || "").trim(),
     location: String(body.location || "").trim(),
     price: String(body.price || "").trim(),
@@ -45,6 +38,8 @@ export async function POST(request: Request) {
     brochure: String(body.brochure || "").trim(),
     listingPartnerCode: listingPartner.code,
     listingPartnerName: listingPartner.name,
+    submittedBy: "admin",
+    approvalStatus: "approved",
     status,
     createdAt: now,
     updatedAt: now,
