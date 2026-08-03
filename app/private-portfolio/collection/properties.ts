@@ -14,5 +14,7 @@ export const privateProperties = [
     image: "/portfolio/pfea002601/pfea002601-main.jpg",
     secondaryImage: "/portfolio/pfea002601/pfea002601-aerial.jpg",
     brochure: "/portfolio/pfea002601/pfea002601-villa-goya.pdf",
+    listingPartnerCode: "PFI",
+    listingPartnerName: "Property Facilitators Iberia",
   },
 ] as const;
