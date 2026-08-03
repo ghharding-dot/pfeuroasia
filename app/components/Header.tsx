@@ -19,13 +19,13 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
         </Link>
 
         <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Main navigation">
-          <Link href="/#services" onClick={() => setOpen(false)}>Services</Link>
-          <Link href="/#markets" onClick={() => setOpen(false)}>Markets</Link>
-          <Link href="/luxury-villa-rentals" onClick={() => setOpen(false)}>Luxury Villa Rentals</Link>
-          <Link href="/commercial" onClick={() => setOpen(false)}>Commercial</Link>
-          <Link href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
-          <Link href="/property-owners" onClick={() => setOpen(false)}>Property owners</Link>
-          <Link href="/about" onClick={() => setOpen(false)}>Our approach</Link>
+          <Link className={styles.navButton} href="/#services" onClick={() => setOpen(false)}>Services</Link>
+          <Link className={styles.navButton} href="/#markets" onClick={() => setOpen(false)}>Markets</Link>
+          <Link className={styles.navButton} href="/luxury-villa-rentals" onClick={() => setOpen(false)}>Luxury Villa Rentals</Link>
+          <Link className={styles.navButton} href="/commercial" onClick={() => setOpen(false)}>Commercial</Link>
+          <Link className={styles.navButton} href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
+          <Link className={styles.navButton} href="/property-owners" onClick={() => setOpen(false)}>Property owners</Link>
+          <Link className={styles.navButton} href="/about" onClick={() => setOpen(false)}>Our approach</Link>
           <Link className={styles.collaboratorLogin} href="/collaborators" onClick={() => setOpen(false)}>
             Collaborator Login <span>→</span>
           </Link>
