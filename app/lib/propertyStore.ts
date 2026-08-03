@@ -15,6 +15,8 @@ export type VaultProperty = {
   image: string;
   secondaryImage?: string;
   brochure?: string;
+  listingPartnerCode?: string;
+  listingPartnerName?: string;
   status: "draft" | "published";
   createdAt: string;
   updatedAt: string;
