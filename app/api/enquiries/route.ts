@@ -71,7 +71,7 @@ function partnerEmail(code?: string) {
   const emails: Record<string, string | undefined> = {
     PFI: process.env.PARTNER_EMAIL_PFI || "ghh@pfiberia.com",
     AYL: process.env.PARTNER_EMAIL_AYL || "michael@aylesfordspain.com",
-    HOU: process.env.PARTNER_EMAIL_HOU || "info@houseandcountry.com",
+    HOU: process.env.PARTNER_EMAIL_HOU || "jaime@houseandcountry.com",
     LUX: process.env.PARTNER_EMAIL_LUX,
     FIX: process.env.PARTNER_EMAIL_FIXER || "robert@bazothefixer.com",
     LEG:
