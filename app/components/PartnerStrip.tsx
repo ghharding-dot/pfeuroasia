@@ -86,7 +86,7 @@ export function PartnerStrip() {
           <p className={styles.rentalStatement}>
             Securely submit your direct property listings, photography and private brochure for PF EuroAsia review.
           </p>
-          <a className="button button-dark" href="/collaborators">
+          <a className={styles.collaboratorButton} href="/collaborators">
             Collaborator Login <span>→</span>
           </a>
         </div>
