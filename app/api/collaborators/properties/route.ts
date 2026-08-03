@@ -26,6 +26,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     `Location: ${property.location}`,
     `Price: ${property.price || "Price on application"}`,
     `Brochure: ${property.brochure ? "Attached privately" : "Missing"}`,
+    "Authority confirmation: Confirmed by collaborator",
     "",
     `Review in the Vault: https://www.pfeuroasia.com/vault/properties/${property.id}/preview`,
   ].join("\n");
@@ -86,6 +87,12 @@ export async function POST(request: Request) {
 
   const body = await request.json().catch(() => null);
   if (!body) return NextResponse.json({ error: "Invalid property submission." }, { status: 400 });
+  if (body.authorityConfirmed !== true) {
+    return NextResponse.json(
+      { error: "Confirm that your company is directly authorised to present this property." },
+      { status: 400 },
+    );
+  }
 
   const properties = await readProperties();
   const now = new Date().toISOString();
