@@ -33,9 +33,9 @@ export default async function VaultDashboardPage() {
           <div>
             <p className="vault-kicker">Property Facilitators EuroAsia</p>
             <h1>The Vault</h1>
-            <p>Private Collection Management</p>
+            <p>Upload, preview and publish Private Collection properties.</p>
           </div>
-          <Link className="vault-primary-button" href="/vault/properties/new">Add Property</Link>
+          <Link className="vault-primary-button" href="/vault/properties/new">Add New Property</Link>
         </header>
 
         <section className="vault-stats" aria-label="Vault summary">
@@ -45,7 +45,7 @@ export default async function VaultDashboardPage() {
         </section>
 
         <section className="vault-panel">
-          <div className="vault-panel-header"><h2>Properties</h2></div>
+          <div className="vault-panel-header"><h2>Vault Properties</h2></div>
           {properties.length === 0 ? (
             <div className="vault-empty">No Vault-managed properties yet. Add the first property to begin.</div>
           ) : (
@@ -57,11 +57,17 @@ export default async function VaultDashboardPage() {
                     <img src={property.image} alt="" />
                   </div>
                   <div className="vault-property-copy">
-                    <span>{property.reference} · {property.location}</span>
+                    <span>
+                      {property.reference} · {property.location}
+                      {property.brochure ? " · PDF attached" : " · PDF pending"}
+                    </span>
                     <h3>{property.title}</h3>
                     <p>{property.price || "Price on application"}</p>
                   </div>
                   <span className={`vault-status vault-status-${property.status}`}>{property.status}</span>
+                  <Link className="vault-row-action" href={`/vault/properties/${property.id}/preview`}>
+                    Preview
+                  </Link>
                 </article>
               ))}
             </div>
