@@ -1,0 +1,134 @@
+import { NextResponse } from "next/server";
+import { getCollaboratorSession } from "../../../lib/collaboratorSession";
+import {
+  generatePropertyReference,
+  readProperties,
+  writeProperties,
+  type VaultProperty,
+} from "../../../lib/propertyStore";
+
+function clean(value: unknown, maxLength = 5000) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
+
+async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: string) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+
+  const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
+  const adminText = [
+    "A collaborator has submitted a new property for PF EuroAsia review.",
+    "",
+    `Collaborator: ${property.listingPartnerName}`,
+    `Collaborator email: ${collaboratorEmail}`,
+    `Property: ${property.title}`,
+    `Reference: ${property.reference}`,
+    `Location: ${property.location}`,
+    `Price: ${property.price || "Price on application"}`,
+    `Brochure: ${property.brochure ? "Attached privately" : "Missing"}`,
+    "",
+    `Review in the Vault: https://www.pfeuroasia.com/vault/properties/${property.id}/preview`,
+  ].join("\n");
+
+  const collaboratorText = [
+    `Dear ${property.listingPartnerName},`,
+    "",
+    "Your property has been submitted successfully to Property Facilitators EuroAsia.",
+    "",
+    `Property: ${property.title}`,
+    `Reference: ${property.reference}`,
+    `Status: Pending PF EuroAsia approval`,
+    "",
+    "The property will not appear in the Private Collection until PF EuroAsia has reviewed and approved the presentation.",
+    "",
+    "Property Facilitators EuroAsia",
+  ].join("\n");
+
+  await Promise.all([
+    fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "PF EuroAsia Collaborator Portal <enquiries@pfeuroasia.com>",
+        to: [adminEmail],
+        subject: `Collaborator property awaiting review — ${property.reference}`,
+        text: adminText,
+        reply_to: collaboratorEmail,
+      }),
+    }),
+    fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: "PF EuroAsia Collaborator Portal <enquiries@pfeuroasia.com>",
+        to: [collaboratorEmail],
+        subject: `Property submitted for PF EuroAsia review — ${property.reference}`,
+        text: collaboratorText,
+        reply_to: adminEmail,
+      }),
+    }),
+  ]);
+}
+
+export async function GET() {
+  const collaborator = await getCollaboratorSession();
+  if (!collaborator) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const properties = await readProperties();
+  return NextResponse.json(
+    properties.filter((property) => property.listingPartnerCode === collaborator.partnerCode),
+  );
+}
+
+export async function POST(request: Request) {
+  const collaborator = await getCollaboratorSession();
+  if (!collaborator) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const body = await request.json().catch(() => null);
+  if (!body) return NextResponse.json({ error: "Invalid property submission." }, { status: 400 });
+
+  const properties = await readProperties();
+  const now = new Date().toISOString();
+  const property: VaultProperty = {
+    id: crypto.randomUUID(),
+    reference: generatePropertyReference(properties),
+    title: clean(body.title, 180),
+    location: clean(body.location, 180),
+    price: clean(body.price, 120),
+    bedrooms: Number(body.bedrooms || 0),
+    bathrooms: Number(body.bathrooms || 0),
+    plotSize: clean(body.plotSize, 120),
+    builtSize: clean(body.builtSize, 120),
+    terraces: clean(body.terraces, 120),
+    description: clean(body.description),
+    image: clean(body.image, 1000),
+    secondaryImage: clean(body.secondaryImage, 1000),
+    brochure: clean(body.brochure, 1000),
+    listingPartnerCode: collaborator.partnerCode,
+    listingPartnerName: collaborator.partnerName,
+    submittedBy: "collaborator",
+    submittedByEmail: collaborator.email,
+    approvalStatus: "pending-review",
+    status: "draft",
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  if (!property.title || !property.location || !property.image || !property.brochure) {
+    return NextResponse.json(
+      { error: "Property title, location, main image and one brochure PDF are required." },
+      { status: 400 },
+    );
+  }
+
+  properties.unshift(property);
+  await writeProperties(properties);
+
+  try {
+    await sendSubmissionEmails(property, collaborator.email);
+  } catch (error) {
+    console.error("collaborator-property-email-failed", error);
+  }
+
+  return NextResponse.json(property, { status: 201 });
+}
