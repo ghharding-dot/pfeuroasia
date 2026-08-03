@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getPartnerContact } from "../../../lib/partnerContacts";
 import { hasVaultAccess } from "../../../lib/vaultSession";
 import { readProperties, writeProperties, type VaultProperty } from "../../../lib/propertyStore";
 
@@ -26,6 +27,7 @@ export async function POST(request: Request) {
   const properties = await readProperties();
   const now = new Date().toISOString();
   const status: VaultProperty["status"] = body.status === "published" ? "published" : "draft";
+  const listingPartner = getPartnerContact(String(body.listingPartnerCode || "DIRECT"));
   const property: VaultProperty = {
     id: crypto.randomUUID(),
     reference: generateReference(properties),
@@ -41,6 +43,8 @@ export async function POST(request: Request) {
     image: String(body.image || "").trim(),
     secondaryImage: String(body.secondaryImage || "").trim(),
     brochure: String(body.brochure || "").trim(),
+    listingPartnerCode: listingPartner.code,
+    listingPartnerName: listingPartner.name,
     status,
     createdAt: now,
     updatedAt: now,
