@@ -270,12 +270,20 @@ export default function Home() {
                 <span>Significant grounds, mature landscape and extensive lifestyle amenities. Full particulars by private introduction.</span>
               </div>
             </article>
-            <article className="portfolio-card portfolio-contemporary">
+            <article
+              className="portfolio-card portfolio-contemporary"
+              style={{
+                backgroundImage:
+                  "url('https://casaservetta.com/__l5e/assets-v1/d1d5a68a-0f5c-4795-a0e6-9f6b84942c68/setting-aerial-wide.jpg')",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+              }}
+            >
               <span className="image-note">Representative image</span>
               <div className="portfolio-card-copy">
-                <p>Private opportunity · Marbella</p>
-                <h3>Contemporary villa</h3>
-                <span>Architectural living, exceptional entertaining spaces and a privileged Mediterranean setting. Details on qualification.</span>
+                <p>Private opportunity · La Zagaleta</p>
+                <h3>Andalusian estate</h3>
+                <span>Timeless architecture, exceptional privacy and a privileged natural setting. Details on qualification.</span>
               </div>
             </article>
           </div>
