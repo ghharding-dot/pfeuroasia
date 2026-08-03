@@ -1,0 +1,35 @@
+.vault-panel-note {
+  margin: 6px 0 0;
+  color: var(--vault-muted);
+  font-size: .82rem;
+}
+
+.collaborator-authority-panel {
+  border-color: rgba(201, 168, 97, .38);
+}
+
+.collaborator-authority-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--vault-cream);
+  font-size: .92rem;
+  line-height: 1.65;
+  cursor: pointer;
+}
+
+.collaborator-authority-check input {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 auto;
+  margin-top: 3px;
+  accent-color: var(--vault-gold);
+}
+
+.collaborator-authority-check span {
+  max-width: 900px;
+}
+
+@media (max-width: 720px) {
+  .collaborator-authority-check { font-size: .86rem; }
+}
