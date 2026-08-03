@@ -82,6 +82,17 @@ export function PartnerStrip() {
 
         <div className={styles.rentalPartnerSection}>
           <div className={styles.rentalDivider} aria-hidden="true" />
+          <p className={styles.rentalEyebrow}>Approved PF EuroAsia collaborators</p>
+          <p className={styles.rentalStatement}>
+            Securely submit your direct property listings, photography and private brochure for PF EuroAsia review.
+          </p>
+          <a className="button button-dark" href="/collaborators">
+            Collaborator Login <span>→</span>
+          </a>
+        </div>
+
+        <div className={styles.rentalPartnerSection}>
+          <div className={styles.rentalDivider} aria-hidden="true" />
           <p className={styles.rentalEyebrow}>Luxury villa rental partner</p>
           <p className={styles.rentalStatement}>
             For exceptional short-term villa rentals, we work in collaboration with our specialist luxury rental partner.
