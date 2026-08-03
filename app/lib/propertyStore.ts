@@ -17,12 +17,27 @@ export type VaultProperty = {
   brochure?: string;
   listingPartnerCode?: string;
   listingPartnerName?: string;
+  submittedBy?: "admin" | "collaborator";
+  submittedByEmail?: string;
+  approvalStatus?: "approved" | "pending-review" | "changes-requested";
   status: "draft" | "published";
   createdAt: string;
   updatedAt: string;
 };
 
 const CATALOGUE_PATH = "private-portfolio/catalogue.json";
+
+export function generatePropertyReference(properties: VaultProperty[]) {
+  const year = new Date().getFullYear().toString().slice(-2);
+  const prefix = `PFEA00${year}`;
+  const highest = properties.reduce((max, property) => {
+    if (!property.reference.startsWith(prefix)) return max;
+    const sequence = Number(property.reference.slice(prefix.length));
+    return Number.isFinite(sequence) ? Math.max(max, sequence) : max;
+  }, 0);
+
+  return `${prefix}${String(highest + 1).padStart(2, "0")}`;
+}
 
 export async function readProperties(): Promise<VaultProperty[]> {
   const result = await list({ prefix: CATALOGUE_PATH, limit: 1 });
