@@ -2,24 +2,44 @@ import { get, list, put } from "@vercel/blob";
 import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { NextRequest, NextResponse } from "next/server";
 import { verifyBrochureDownloadToken } from "../../../../lib/brochureAccess";
+import {
+  decryptStoredBrochure,
+  encryptPrivateRecord,
+  parseEncryptedBrochure,
+} from "../../../../lib/brochureStorage";
 import { getPartnerContact } from "../../../../lib/partnerContacts";
 import { findPublishedPrivateProperty } from "../../../../lib/privatePropertyLookup";
 import { hasPrivatePortfolioRequestAccess } from "../../../../lib/privatePortfolioRequest";
+
+export const runtime = "nodejs";
+export const maxDuration = 300;
 
 function ascii(value: string, maxLength = 180) {
   return value.replace(/[^\x20-\x7E]/g, "").trim().slice(0, maxLength);
 }
 
 function safeFilename(value: string) {
-  return ascii(value, 80).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "property-brochure";
+  return ascii(value, 80)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "") || "property-brochure";
 }
 
 async function readBrochureBytes(source: string, request: NextRequest) {
+  if (parseEncryptedBrochure(source)) {
+    return decryptStoredBrochure(source);
+  }
+
   if (/^https?:\/\//i.test(source)) {
     try {
-      const privateResult = await get(source, { access: "private", useCache: false });
+      const privateResult = await get(source, {
+        access: "private",
+        useCache: false,
+      });
       if (privateResult?.statusCode === 200 && privateResult.stream) {
-        return new Uint8Array(await new Response(privateResult.stream).arrayBuffer());
+        return new Uint8Array(
+          await new Response(privateResult.stream).arrayBuffer(),
+        );
       }
     } catch {
       // Older brochures may still be public and are fetched below.
@@ -30,7 +50,9 @@ async function readBrochureBytes(source: string, request: NextRequest) {
     return new Uint8Array(await response.arrayBuffer());
   }
 
-  const response = await fetch(new URL(source, request.url), { cache: "no-store" });
+  const response = await fetch(new URL(source, request.url), {
+    cache: "no-store",
+  });
   if (!response.ok) throw new Error("Brochure could not be retrieved.");
   return new Uint8Array(await response.arrayBuffer());
 }
@@ -95,16 +117,20 @@ async function createWatermarkedPdf(
   return pdf.save();
 }
 
-async function recordFirstAccess(nonce: string, record: Record<string, unknown>) {
-  const pathname = `private-portfolio/access-log/${nonce}.json`;
+async function recordFirstAccess(
+  nonce: string,
+  record: Record<string, unknown>,
+) {
+  const pathname = `private-portfolio/access-log/${nonce}.pfea`;
   try {
     const existing = await list({ prefix: pathname, limit: 1 });
     if (existing.blobs.some((blob) => blob.pathname === pathname)) return false;
 
-    await put(pathname, JSON.stringify(record, null, 2), {
-      access: "private",
+    const encrypted = encryptPrivateRecord(record, nonce);
+    await put(pathname, encrypted, {
+      access: "public",
       addRandomSuffix: false,
-      contentType: "application/json",
+      contentType: "application/octet-stream",
     });
     return true;
   } catch (error) {
@@ -129,9 +155,12 @@ async function sendAccessNotification(args: {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
 
-  const mainRecipient = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
+  const mainRecipient =
+    process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
   const partner = getPartnerContact(args.partnerCode);
-  const recipients = Array.from(new Set([mainRecipient, partner.email].filter(Boolean) as string[]));
+  const recipients = Array.from(
+    new Set([mainRecipient, partner.email].filter(Boolean) as string[]),
+  );
   const partnerName = args.partnerName || partner.name;
 
   const text = [
@@ -147,7 +176,9 @@ async function sendAccessNotification(args: {
     `Email: ${args.email}`,
     `Telephone/WhatsApp: ${args.telephone || "Not provided"}`,
     `Downloaded: ${args.downloadedAt}`,
-    `Approximate location: ${[args.city, args.country].filter(Boolean).join(", ") || "Unavailable"}`,
+    `Approximate location: ${
+      [args.city, args.country].filter(Boolean).join(", ") || "Unavailable"
+    }`,
     `Masked IP: ${args.maskedIp || "Unavailable"}`,
     "",
     "The client confirmed that their details and interest in this property may be shared with the listing collaborator.",
@@ -169,33 +200,54 @@ async function sendAccessNotification(args: {
     }),
   });
 
-  if (!response.ok) console.error("brochure-access-notification-failed", await response.text());
+  if (!response.ok) {
+    console.error(
+      "brochure-access-notification-failed",
+      await response.text(),
+    );
+  }
 }
 
 function maskedIp(request: NextRequest) {
-  const value = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
+  const value =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "";
   if (value.includes(".")) {
     const parts = value.split(".");
-    if (parts.length === 4) return `${parts[0]}.${parts[1]}.${parts[2]}.xxx`;
+    if (parts.length === 4) {
+      return `${parts[0]}.${parts[1]}.${parts[2]}.xxx`;
+    }
   }
-  if (value.includes(":")) return `${value.split(":").slice(0, 3).join(":")}:…`;
+  if (value.includes(":")) {
+    return `${value.split(":").slice(0, 3).join(":")}:…`;
+  }
   return value ? "Masked" : "";
 }
 
 export async function GET(request: NextRequest) {
   if (!hasPrivatePortfolioRequestAccess(request)) {
-    return NextResponse.json({ error: "Private Collection access has expired." }, { status: 401 });
+    return NextResponse.json(
+      { error: "Private Collection access has expired." },
+      { status: 401 },
+    );
   }
 
   const token = request.nextUrl.searchParams.get("token") || "";
   const client = verifyBrochureDownloadToken(token);
   if (!client || !client.consent) {
-    return NextResponse.json({ error: "This brochure link is invalid or has expired." }, { status: 401 });
+    return NextResponse.json(
+      { error: "This brochure link is invalid or has expired." },
+      { status: 401 },
+    );
   }
 
-  const property = await findPublishedPrivateProperty(client.propertyReference);
+  const property = await findPublishedPrivateProperty(
+    client.propertyReference,
+  );
   if (!property?.brochure) {
-    return NextResponse.json({ error: "This brochure is not currently available." }, { status: 404 });
+    return NextResponse.json(
+      { error: "This brochure is not currently available." },
+      { status: 404 },
+    );
   }
 
   try {
@@ -213,7 +265,8 @@ export async function GET(request: NextRequest) {
       propertyReference: property.reference,
       propertyTitle: property.title,
       listingPartnerCode: property.listingPartnerCode || "DIRECT",
-      listingPartnerName: property.listingPartnerName || "Property Facilitators EuroAsia",
+      listingPartnerName:
+        property.listingPartnerName || "Property Facilitators EuroAsia",
       clientName: client.fullName,
       clientEmail: client.email,
       clientTelephone: client.telephone,
@@ -246,7 +299,9 @@ export async function GET(request: NextRequest) {
     return new NextResponse(Buffer.from(watermarked), {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${safeFilename(property.title)}-${property.reference}-verified.pdf"`,
+        "Content-Disposition": `attachment; filename="${safeFilename(
+          property.title,
+        )}-${property.reference}-verified.pdf"`,
         "Cache-Control": "private, no-store, max-age=0",
         "X-Content-Type-Options": "nosniff",
       },
@@ -254,7 +309,10 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("brochure-watermark-failed", error);
     return NextResponse.json(
-      { error: "The brochure could not be prepared. PF EuroAsia has been notified." },
+      {
+        error:
+          "The brochure could not be prepared. PF EuroAsia has been notified.",
+      },
       { status: 500 },
     );
   }
