@@ -29,7 +29,7 @@ async function uploadFile(
   onProgress: (message: string) => void,
 ) {
   const pathname = `collaborator-submissions/${partnerCode.toLowerCase()}/${uploadKey}/${kind}-${safeFilename(file.name)}`;
-  const label = kind === "brochure" ? "brochure PDF" : "photograph";
+  const label = kind === "brochure" ? "private brochure PDF" : "photograph";
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), UPLOAD_TIMEOUT_MS);
 
@@ -37,9 +37,7 @@ async function uploadFile(
 
   try {
     const result = await upload(pathname, file, {
-      // The connected Blob store currently accepts public-access objects. Brochure URLs are
-      // retained only in the authenticated property workflow and are never published directly.
-      access: "public",
+      access: kind === "brochure" ? "private" : "public",
       handleUploadUrl: "/api/vault/upload",
       clientPayload: JSON.stringify({ reference: uploadKey, kind }),
       multipart: file.size > 25 * 1024 * 1024,
@@ -51,7 +49,7 @@ async function uploadFile(
     return result.url;
   } catch (error) {
     if (controller.signal.aborted) {
-      throw new Error(`${label === "brochure PDF" ? "The brochure PDF" : "A photograph"} upload timed out. Please check the connection and try again.`);
+      throw new Error(`${kind === "brochure" ? "The brochure PDF" : "A photograph"} upload timed out. Please check the connection and try again.`);
     }
     throw error;
   } finally {
@@ -110,8 +108,8 @@ function PdfUpload() {
   return (
     <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
       <span className="vault-upload-icon">PDF</span>
-      <strong>One sales brochure PDF</strong>
-      <small>Required · held for private review and not published directly · maximum 60 MB</small>
+      <strong>One private sales brochure PDF</strong>
+      <small>Required · stored privately · personalised for each verified client · maximum 60 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the sales brochure"}</em>
       <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
       <input
@@ -237,7 +235,7 @@ export function CollaboratorPropertyForm({
 
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
-          <div><p className="vault-kicker">Step 2</p><h2>Photography and brochure</h2></div>
+          <div><p className="vault-kicker">Step 2</p><h2>Photography and private brochure</h2></div>
           <p>Upload one main image, one optional second image, and exactly one current sales brochure PDF.</p>
         </div>
         <div className="vault-upload-grid">
