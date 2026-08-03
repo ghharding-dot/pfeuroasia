@@ -3,11 +3,12 @@ import {
   createDecipheriv,
   createHmac,
   randomBytes,
+  randomUUID,
 } from "node:crypto";
 
 export const ENCRYPTED_BROCHURE_PREFIX = "pfea-brochure-v1.";
 
-type EncryptedBrochureDescriptor = {
+export type EncryptedBrochureDescriptor = {
   v: 1;
   url: string;
   iv: string;
@@ -34,12 +35,50 @@ export function deriveBrochureStorageKey(ownerCode: string, keyId: string) {
     .digest();
 }
 
+export function encryptBrochureBytes(
+  source: Uint8Array,
+  ownerCode: string,
+  name?: string,
+) {
+  const keyId = randomUUID();
+  const iv = randomBytes(12);
+  const key = deriveBrochureStorageKey(ownerCode, keyId);
+  const cipher = createCipheriv("aes-256-gcm", key, iv, {
+    authTagLength: 16,
+  });
+  const ciphertext = Buffer.concat([
+    cipher.update(Buffer.from(source)),
+    cipher.final(),
+  ]);
+  const payload = Buffer.concat([ciphertext, cipher.getAuthTag()]);
+
+  return {
+    payload,
+    keyId,
+    iv: iv.toString("base64url"),
+    ownerCode: ownerCode.toUpperCase(),
+    name,
+    originalSize: source.byteLength,
+  };
+}
+
+export function createEncryptedBrochureReference(
+  descriptor: EncryptedBrochureDescriptor,
+) {
+  return `${ENCRYPTED_BROCHURE_PREFIX}${Buffer.from(
+    JSON.stringify(descriptor),
+    "utf8",
+  ).toString("base64url")}`;
+}
+
 export function parseEncryptedBrochure(value: string) {
   if (!value.startsWith(ENCRYPTED_BROCHURE_PREFIX)) return null;
 
   try {
     const encoded = value.slice(ENCRYPTED_BROCHURE_PREFIX.length);
-    const parsed = JSON.parse(Buffer.from(encoded, "base64url").toString("utf8")) as EncryptedBrochureDescriptor;
+    const parsed = JSON.parse(
+      Buffer.from(encoded, "base64url").toString("utf8"),
+    ) as EncryptedBrochureDescriptor;
     if (
       parsed.v !== 1 ||
       !parsed.url ||
@@ -72,7 +111,9 @@ export async function decryptStoredBrochure(value: string) {
   if (!response.ok) throw new Error("Encrypted brochure could not be retrieved.");
 
   const payload = Buffer.from(await response.arrayBuffer());
-  if (payload.length <= 16) throw new Error("Encrypted brochure payload is incomplete.");
+  if (payload.length <= 16) {
+    throw new Error("Encrypted brochure payload is incomplete.");
+  }
 
   const iv = Buffer.from(descriptor.iv, "base64url");
   const authenticationTag = payload.subarray(payload.length - 16);
