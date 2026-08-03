@@ -24,7 +24,15 @@ export default async function VaultDashboardPage() {
 
   const properties = await readProperties();
   const published = properties.filter((property) => property.status === "published").length;
-  const drafts = properties.length - published;
+  const pendingReview = properties.filter(
+    (property) => property.status === "draft" && property.approvalStatus === "pending-review",
+  ).length;
+  const orderedProperties = [...properties].sort((a, b) => {
+    const aPending = a.status === "draft" && a.approvalStatus === "pending-review" ? 1 : 0;
+    const bPending = b.status === "draft" && b.approvalStatus === "pending-review" ? 1 : 0;
+    if (aPending !== bPending) return bPending - aPending;
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
 
   return (
     <main className="vault-dashboard-page">
@@ -33,15 +41,15 @@ export default async function VaultDashboardPage() {
           <div>
             <p className="vault-kicker">Property Facilitators EuroAsia</p>
             <h1>The Vault</h1>
-            <p>Upload, preview and publish Private Collection properties.</p>
+            <p>Upload, review and publish Private Collection properties.</p>
           </div>
           <Link className="vault-primary-button" href="/vault/properties/new">Add New Property</Link>
         </header>
 
         <section className="vault-stats" aria-label="Vault summary">
           <article className="vault-stat"><strong>{properties.length}</strong><span>Properties</span></article>
+          <article className="vault-stat"><strong>{pendingReview}</strong><span>Pending review</span></article>
           <article className="vault-stat"><strong>{published}</strong><span>Published</span></article>
-          <article className="vault-stat"><strong>{drafts}</strong><span>Drafts</span></article>
         </section>
 
         <section className="vault-panel">
@@ -50,27 +58,37 @@ export default async function VaultDashboardPage() {
             <div className="vault-empty">No Vault-managed properties yet. Add the first property to begin.</div>
           ) : (
             <div className="vault-property-list">
-              {properties.map((property) => (
-                <article className="vault-property-row" key={property.id}>
-                  <div className="vault-property-thumb">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={property.image} alt="" />
-                  </div>
-                  <div className="vault-property-copy">
-                    <span>
-                      {property.reference} · {property.location}
-                      {property.brochure ? " · Protected PDF attached" : " · PDF pending"}
-                    </span>
-                    <h3>{property.title}</h3>
-                    <p>{property.price || "Price on application"}</p>
-                    <small>Listing collaborator: {property.listingPartnerName || "Property Facilitators EuroAsia"}</small>
-                  </div>
-                  <span className={`vault-status vault-status-${property.status}`}>{property.status}</span>
-                  <Link className="vault-row-action" href={`/vault/properties/${property.id}/preview`}>
-                    Preview
-                  </Link>
-                </article>
-              ))}
+              {orderedProperties.map((property) => {
+                const isPendingReview =
+                  property.status === "draft" && property.approvalStatus === "pending-review";
+                const statusLabel = property.status === "published"
+                  ? "Published"
+                  : isPendingReview
+                    ? "Pending review"
+                    : "Draft";
+
+                return (
+                  <article className="vault-property-row" key={property.id}>
+                    <div className="vault-property-thumb">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={property.image} alt="" />
+                    </div>
+                    <div className="vault-property-copy">
+                      <span>
+                        {property.reference} · {property.location}
+                        {property.brochure ? " · Protected PDF attached" : " · PDF pending"}
+                      </span>
+                      <h3>{property.title}</h3>
+                      <p>{property.price || "Price on application"}</p>
+                      <small>Listing collaborator: {property.listingPartnerName || "Property Facilitators EuroAsia"}</small>
+                    </div>
+                    <span className={`vault-status vault-status-${property.status}`}>{statusLabel}</span>
+                    <Link className="vault-row-action" href={`/vault/properties/${property.id}/preview`}>
+                      Preview
+                    </Link>
+                  </article>
+                );
+              })}
             </div>
           )}
         </section>
