@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { PrivatePropertyCard, type PrivatePropertyDisplay } from "../../components/PrivatePropertyCard";
 import {
   createPortfolioToken,
   PORTFOLIO_COOKIE_NAME,
@@ -18,22 +19,6 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = "force-dynamic";
-
-type CollectionProperty = Pick<
-  VaultProperty,
-  | "reference"
-  | "location"
-  | "price"
-  | "title"
-  | "bedrooms"
-  | "bathrooms"
-  | "plotSize"
-  | "builtSize"
-  | "description"
-  | "image"
-  | "secondaryImage"
-  | "brochure"
->;
 
 export default async function PrivatePortfolioCollectionPage() {
   const configuredPassword = process.env.PRIVATE_PORTFOLIO_PASSWORD;
@@ -52,7 +37,7 @@ export default async function PrivatePortfolioCollectionPage() {
   }
 
   const existingReferences = new Set(vaultProperties.map((property) => property.reference));
-  const properties: CollectionProperty[] = [
+  const properties: PrivatePropertyDisplay[] = [
     ...vaultProperties,
     ...privateProperties.filter((property) => !existingReferences.has(property.reference)),
   ];
@@ -70,63 +55,7 @@ export default async function PrivatePortfolioCollectionPage() {
 
       <section className="private-collection-grid site-shell">
         {properties.map((property) => (
-          <article className="private-property-card" key={property.reference}>
-            <div className="private-property-image">
-              {property.image ? (
-                <img src={property.image} alt={`${property.title} in ${property.location}`} />
-              ) : (
-                <div className="placeholder-image">
-                  <span>Property photography to be added</span>
-                </div>
-              )}
-            </div>
-
-            <div className="private-property-content">
-              <div className="private-property-heading">
-                <div>
-                  <p>{property.reference} · {property.location}</p>
-                  <h2>{property.title}</h2>
-                </div>
-                <strong>{property.price}</strong>
-              </div>
-
-              <div className="private-property-facts">
-                <span>{property.bedrooms} bedrooms</span>
-                <span>{property.bathrooms} bathrooms</span>
-                <span>{property.builtSize} built</span>
-                <span>{property.plotSize} plot</span>
-              </div>
-
-              <p className="private-property-description">{property.description}</p>
-
-              {property.secondaryImage && (
-                <img
-                  className="private-property-secondary-image"
-                  src={property.secondaryImage}
-                  alt={`Additional view of ${property.title}`}
-                />
-              )}
-
-              <div className="private-property-actions">
-                {property.brochure ? (
-                  <a
-                    className="text-link"
-                    href={property.brochure}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View property brochure <span>→</span>
-                  </a>
-                ) : (
-                  <span className="brochure-pending">PDF information sheet to follow</span>
-                )}
-
-                <a className="text-link" href={`mailto:enquiry@pfeuroasia.com?subject=Enquiry regarding ${property.reference}`}>
-                  Enquire about this property <span>→</span>
-                </a>
-              </div>
-            </div>
-          </article>
+          <PrivatePropertyCard property={property} key={property.reference} />
         ))}
       </section>
       <Footer />
