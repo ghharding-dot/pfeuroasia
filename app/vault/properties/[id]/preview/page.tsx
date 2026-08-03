@@ -47,7 +47,7 @@ export default async function PropertyPreviewPage({
             <strong>{property.status === "published" ? "Published" : "Draft preview"}</strong>
             <p>
               {property.status === "published"
-                ? "This property is visible inside the password-protected Private Collection."
+                ? "This property is visible inside the password-protected Private Collection. Client brochure access requires email verification."
                 : "This is the exact property-card presentation, but the listing is not visible to clients yet."}
             </p>
           </div>
@@ -55,7 +55,7 @@ export default async function PropertyPreviewPage({
         </section>
 
         <section className="private-collection-grid vault-preview-grid">
-          <PrivatePropertyCard property={property} showEnquiry={false} />
+          <PrivatePropertyCard property={property} showEnquiry={false} brochureMode="preview" />
         </section>
       </div>
     </main>
