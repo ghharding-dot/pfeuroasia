@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   const email = cleanEmail(body?.email);
   const partner = getCollaboratorByEmail(email);
 
-  if (!email.includes("@") || !partner?.email) {
+  if (!email.includes("@") || !partner?.loginEmail) {
     return NextResponse.json(
       { error: "This email address is not registered as an approved PF EuroAsia collaborator." },
       { status: 401 },
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     {
       partnerCode: partner.code,
       partnerName: partner.name,
-      email: partner.email.toLowerCase(),
+      email: partner.loginEmail,
     },
     code,
   );
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     "",
     "The code expires in 10 minutes.",
     "",
-    "This portal allows you to submit your own properties for PF EuroAsia review. Submitted properties cannot be published without PF EuroAsia approval.",
+    "This portal allows you to submit and update Aylesford Spain properties for PF EuroAsia review. Submitted or edited properties cannot be published without PF EuroAsia approval.",
     "",
     "Property Facilitators EuroAsia",
   ].join("\n");
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
     },
     body: JSON.stringify({
       from: "PF EuroAsia Collaborator Portal <enquiry@pfeuroasia.com>",
-      to: [partner.email],
+      to: [partner.loginEmail],
       subject: "Your PF EuroAsia collaborator login code",
       text,
       reply_to: "enquiry@pfeuroasia.com",
@@ -80,7 +80,7 @@ export async function POST(request: Request) {
     console.error("collaborator-login-email-failed", {
       status: response.status,
       partnerCode: partner.code,
-      to: maskEmail(partner.email),
+      to: maskEmail(partner.loginEmail),
       response: responseText,
     });
     return NextResponse.json({ error: "The login email could not be sent." }, { status: 502 });
@@ -89,13 +89,13 @@ export async function POST(request: Request) {
   console.info("collaborator-login-email-accepted", {
     resendEmailId: resendResult?.id || "not-returned",
     partnerCode: partner.code,
-    to: maskEmail(partner.email),
+    to: maskEmail(partner.loginEmail),
   });
 
   return NextResponse.json({
     success: true,
     challenge,
     partnerName: partner.name,
-    maskedEmail: maskEmail(email),
+    maskedEmail: maskEmail(partner.loginEmail),
   });
 }
