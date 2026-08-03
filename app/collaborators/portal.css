@@ -30,6 +30,12 @@
   max-width: 900px;
 }
 
+.collaborator-remove-check {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
 @media (max-width: 720px) {
   .collaborator-authority-check { font-size: .86rem; }
 }
