@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getCollaboratorSession } from "../../../lib/collaboratorSession";
 import { CollaboratorPropertyForm } from "./CollaboratorPropertyForm";
 import "../../../vault/vault.css";
+import "../../portal.css";
 
 export const metadata: Metadata = {
   title: "Submit Property | PF EuroAsia Collaborator Portal",
