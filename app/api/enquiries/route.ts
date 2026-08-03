@@ -25,6 +25,68 @@ function clean(value: unknown, maxLength = 2000) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
+function decodeHeader(value: string | null) {
+  if (!value) return "";
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function maskIp(value: string | null) {
+  const ip = value?.split(",")[0]?.trim() || "";
+  if (!ip) return "";
+
+  if (ip.includes(".")) {
+    const parts = ip.split(".");
+    return parts.length === 4 ? `${parts[0]}.${parts[1]}.${parts[2]}.xxx` : "Masked";
+  }
+
+  if (ip.includes(":")) {
+    const parts = ip.split(":").filter(Boolean);
+    return parts.length ? `${parts.slice(0, 3).join(":")}:…` : "Masked";
+  }
+
+  return "Masked";
+}
+
+function countryName(countryCode: string) {
+  if (!countryCode) return "";
+  try {
+    return (
+      new Intl.DisplayNames(["en"], { type: "region" }).of(countryCode.toUpperCase()) ||
+      countryCode.toUpperCase()
+    );
+  } catch {
+    return countryCode.toUpperCase();
+  }
+}
+
+function detectRequestLocation(request: NextRequest) {
+  const countryCode = decodeHeader(request.headers.get("x-vercel-ip-country")).toUpperCase();
+  const country = countryName(countryCode);
+  const city = decodeHeader(request.headers.get("x-vercel-ip-city"));
+  const region = decodeHeader(request.headers.get("x-vercel-ip-country-region"));
+  const timezone = decodeHeader(request.headers.get("x-vercel-ip-timezone"));
+  const continent = decodeHeader(request.headers.get("x-vercel-ip-continent"));
+  const maskedIp = maskIp(
+    request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip"),
+  );
+  const summary = [city, region, country].filter(Boolean).join(", ") || "Unavailable";
+
+  return {
+    summary,
+    country,
+    countryCode,
+    city,
+    region,
+    timezone,
+    continent,
+    maskedIp,
+  };
+}
+
 function redisConfig() {
   const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -196,6 +258,7 @@ export async function POST(request: NextRequest) {
   const partner = getPartnerReferral(partnerSlug);
   const reference = await createReference();
   const submittedAt = new Date().toISOString();
+  const detected = detectRequestLocation(request);
 
   const record: Record<string, string> = {
     reference,
@@ -218,6 +281,14 @@ export async function POST(request: NextRequest) {
     telephone_or_whatsapp: clean(payload.telephone_or_whatsapp, 120),
     wechat_id: clean(payload.wechat_id, 120),
     current_location: clean(payload.current_location, 160),
+    detected_location: detected.summary,
+    detected_country: detected.country,
+    detected_country_code: detected.countryCode,
+    detected_city: detected.city,
+    detected_region: detected.region,
+    detected_timezone: detected.timezone,
+    detected_continent: detected.continent,
+    detected_ip_masked: detected.maskedIp,
   };
 
   try {
@@ -250,7 +321,16 @@ export async function POST(request: NextRequest) {
     `WeChat: ${record.wechat_id || "Not provided"}`,
     `Preferred channel: ${record.preferred_channel || "Not provided"}`,
     `Contact desk: ${record.contact_desk || "Not provided"}`,
-    `Current location: ${record.current_location || "Not provided"}`,
+    `Location entered by client: ${record.current_location || "Not provided"}`,
+    "",
+    `Detected location (approximate): ${record.detected_location}`,
+    `Detected country: ${record.detected_country || "Unavailable"}${
+      record.detected_country_code ? ` (${record.detected_country_code})` : ""
+    }`,
+    `Detected region: ${record.detected_region || "Unavailable"}`,
+    `Detected time zone: ${record.detected_timezone || "Unavailable"}`,
+    `Detected IP address: ${record.detected_ip_masked || "Unavailable"}`,
+    "Detection may be affected by VPNs, mobile networks or corporate routing.",
   ].join("\n");
 
   const clientText = [
