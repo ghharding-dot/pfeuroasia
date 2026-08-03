@@ -59,10 +59,11 @@ export default async function VaultDashboardPage() {
                   <div className="vault-property-copy">
                     <span>
                       {property.reference} · {property.location}
-                      {property.brochure ? " · PDF attached" : " · PDF pending"}
+                      {property.brochure ? " · Protected PDF attached" : " · PDF pending"}
                     </span>
                     <h3>{property.title}</h3>
                     <p>{property.price || "Price on application"}</p>
+                    <small>Listing collaborator: {property.listingPartnerName || "Property Facilitators EuroAsia"}</small>
                   </div>
                   <span className={`vault-status vault-status-${property.status}`}>{property.status}</span>
                   <Link className="vault-row-action" href={`/vault/properties/${property.id}/preview`}>
