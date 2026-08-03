@@ -7,6 +7,15 @@ import { useRouter } from "next/navigation";
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
 
+const listingPartners = [
+  ["DIRECT", "Property Facilitators EuroAsia"],
+  ["PFI", "Property Facilitators Iberia"],
+  ["AYL", "Aylesford Spain"],
+  ["HOU", "House and Country Real Estate"],
+  ["LUX", "LuxoEstates"],
+  ["FIX", "The Fixer"],
+] as const;
+
 function safeFilename(name: string) {
   return name
     .toLowerCase()
@@ -22,12 +31,12 @@ async function uploadFile(
 ) {
   const pathname = `private-portfolio/${reference}/${kind}-${safeFilename(file.name)}`;
   const result = await upload(pathname, file, {
-    access: "public",
+    access: kind === "brochure" ? "private" : "public",
     handleUploadUrl: "/api/vault/upload",
     clientPayload: JSON.stringify({ reference, kind }),
     multipart: file.size > 10 * 1024 * 1024,
     onUploadProgress: ({ percentage }) => {
-      onProgress(`Uploading ${kind === "brochure" ? "brochure PDF" : "photograph"} · ${Math.round(percentage)}%`);
+      onProgress(`Uploading ${kind === "brochure" ? "private brochure PDF" : "photograph"} · ${Math.round(percentage)}%`);
     },
   });
   return result.url;
@@ -90,8 +99,8 @@ function PdfUpload() {
   return (
     <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
       <span className="vault-upload-icon">PDF</span>
-      <strong>One sales brochure PDF</strong>
-      <small>One PDF per property · required before publishing · maximum 60 MB</small>
+      <strong>One private sales brochure PDF</strong>
+      <small>Stored privately · watermarked for each verified client · maximum 60 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the property brochure"}</em>
       <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
       <input
@@ -188,6 +197,12 @@ export function PropertyForm() {
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
           <label><span>Price</span><input name="price" placeholder="€11,600,000" /></label>
           <label>
+            <span>Listing collaborator</span>
+            <select name="listingPartnerCode" defaultValue="DIRECT">
+              {listingPartners.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+            </select>
+          </label>
+          <label>
             <span>Status</span>
             <select
               name="status"
@@ -216,8 +231,8 @@ export function PropertyForm() {
 
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
-          <div><p className="vault-kicker">Step 2</p><h2>Website images and brochure</h2></div>
-          <p>Use one main image, one optional secondary image, and one sales brochure PDF per property.</p>
+          <div><p className="vault-kicker">Step 2</p><h2>Website images and protected brochure</h2></div>
+          <p>Use one main image, one optional secondary image, and one private sales brochure PDF per property.</p>
         </div>
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
@@ -231,7 +246,7 @@ export function PropertyForm() {
           <strong>{status === "published" ? "Publish and preview" : "Save draft and preview"}</strong>
           <p>
             {status === "published"
-              ? "The property will appear in the password-protected Private Collection and must include its PDF."
+              ? "The property will appear in the password-protected Private Collection and its brochure will require client verification."
               : "The property remains inside the Vault while we inspect its website presentation."}
           </p>
         </div>
