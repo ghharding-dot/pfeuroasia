@@ -69,14 +69,18 @@ async function createReference() {
 
 function partnerEmail(code?: string) {
   const emails: Record<string, string | undefined> = {
-    PFI: process.env.PARTNER_EMAIL_PFI,
-    AYL: process.env.PARTNER_EMAIL_AYL,
-    HOU: process.env.PARTNER_EMAIL_HOU,
+    PFI: process.env.PARTNER_EMAIL_PFI || "ghh@pfiberia.com",
+    AYL: process.env.PARTNER_EMAIL_AYL || "michael@aylesfordspain.com",
+    HOU: process.env.PARTNER_EMAIL_HOU || "info@houseandcountry.com",
     LUX: process.env.PARTNER_EMAIL_LUX,
     FIX: process.env.PARTNER_EMAIL_FIXER || "robert@bazothefixer.com",
-    LEG: process.env.PARTNER_EMAIL_LEG,
-    LAW: process.env.PARTNER_EMAIL_LAW,
-    MEC: process.env.PARTNER_EMAIL_MEC,
+    LEG:
+      process.env.PARTNER_EMAIL_LEG ||
+      "juanlopez@legal10abogadosmarbella.com",
+    LAW: process.env.PARTNER_EMAIL_LAW || "aflores@lawbird.com",
+    MEC:
+      process.env.PARTNER_EMAIL_MEC ||
+      "luis.recio@martinezechevarria.com",
   };
   return code ? emails[code] : undefined;
 }
