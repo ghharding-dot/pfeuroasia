@@ -2,6 +2,11 @@ export type PartnerContact = {
   code: string;
   name: string;
   email?: string;
+  loginEmails?: readonly string[];
+};
+
+export type CollaboratorLogin = PartnerContact & {
+  loginEmail: string;
 };
 
 const PARTNER_CONTACTS: Record<string, PartnerContact> = {
@@ -19,6 +24,10 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
     code: "AYL",
     name: "Aylesford Spain",
     email: "michael@aylesfordspain.com",
+    loginEmails: [
+      "michael@aylesfordspain.com",
+      "david.neeson@me.com",
+    ],
   },
   HOU: {
     code: "HOU",
@@ -67,16 +76,26 @@ export const PROPERTY_LISTING_PARTNERS = [
 ] as const;
 
 export const COLLABORATOR_LOGIN_PARTNERS = PROPERTY_LISTING_PARTNERS.filter(
-  (partner) => partner.code !== "DIRECT" && Boolean(partner.email),
+  (partner) =>
+    partner.code !== "DIRECT" &&
+    (Boolean(partner.email) || Boolean(partner.loginEmails?.length)),
 );
 
-export function getCollaboratorByEmail(email?: string | null) {
+export function getCollaboratorByEmail(email?: string | null): CollaboratorLogin | null {
   const normalized = String(email || "").trim().toLowerCase();
   if (!normalized) return null;
 
-  return (
-    COLLABORATOR_LOGIN_PARTNERS.find(
-      (partner) => partner.email?.trim().toLowerCase() === normalized,
-    ) || null
-  );
+  for (const partner of COLLABORATOR_LOGIN_PARTNERS) {
+    const approvedEmails = new Set(
+      [partner.email, ...(partner.loginEmails || [])]
+        .filter(Boolean)
+        .map((value) => String(value).trim().toLowerCase()),
+    );
+
+    if (approvedEmails.has(normalized)) {
+      return { ...partner, loginEmail: normalized };
+    }
+  }
+
+  return null;
 }
