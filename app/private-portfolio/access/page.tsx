@@ -11,6 +11,7 @@ import {
 import { findPrivateClientById } from "../../lib/privateClientStore";
 import "../private-portfolio.css";
 import "../portfolio-collection.css";
+import "../client-access.css";
 
 export const metadata: Metadata = {
   title: "Private Portfolio Access",
