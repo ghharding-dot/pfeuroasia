@@ -1,0 +1,169 @@
+.portfolio-login-wrap {
+  max-width: 560px;
+}
+
+.portfolio-login-wrap .portfolio-login-form {
+  max-width: 100%;
+}
+
+.portfolio-login-wrap .portfolio-password-field {
+  grid-template-columns: 48px minmax(0, 1fr) 20px;
+}
+
+.portfolio-field-end {
+  display: block;
+  width: 20px;
+  height: 1px;
+}
+
+.portfolio-code-input {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 21px !important;
+  font-weight: 700;
+  letter-spacing: .26em;
+}
+
+.portfolio-code-sent {
+  padding: 15px 17px;
+  border-left: 2px solid var(--gold);
+  background: rgba(197, 162, 104, .08);
+}
+
+.portfolio-code-sent strong,
+.portfolio-code-sent p {
+  display: block;
+}
+
+.portfolio-code-sent strong {
+  margin-bottom: 5px;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.portfolio-code-sent p {
+  margin: 0;
+  color: rgba(255, 255, 255, .62);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.portfolio-change-email {
+  width: fit-content;
+  padding: 0 0 4px;
+  border: 0;
+  border-bottom: 1px solid rgba(197, 162, 104, .68);
+  background: transparent;
+  color: var(--gold-light);
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.portfolio-change-email:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+
+.portfolio-registration-link {
+  margin: 22px 0 0;
+  color: rgba(255, 255, 255, .58);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.portfolio-registration-link a {
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--gold);
+  color: var(--gold-light);
+}
+
+.portfolio-login-light .portfolio-password-field {
+  border-color: #c5a268;
+  background: #fff;
+}
+
+.portfolio-login-light .portfolio-password-field:focus-within {
+  border-color: #a78349;
+  background: #fffefb;
+  box-shadow: 0 0 0 2px rgba(197, 162, 104, .14);
+}
+
+.portfolio-login-light .portfolio-password-field input {
+  color: var(--ink);
+}
+
+.portfolio-login-light .portfolio-password-field input::placeholder {
+  color: #98998f;
+}
+
+.portfolio-login-light .portfolio-lock {
+  color: #8b7450;
+}
+
+.portfolio-login-light .portfolio-code-sent {
+  background: #f8f3e9;
+}
+
+.portfolio-login-light .portfolio-code-sent strong {
+  color: #725d3d;
+}
+
+.portfolio-login-light .portfolio-code-sent p {
+  color: #66675f;
+}
+
+.portfolio-login-light .portfolio-change-email {
+  color: #725d3d;
+}
+
+.portfolio-login-light .portfolio-registration-link {
+  color: #66675f;
+}
+
+.portfolio-login-light .portfolio-registration-link a {
+  color: #725d3d;
+}
+
+.portfolio-login-light .form-error {
+  color: #9f2f2f;
+}
+
+.portfolio-registration-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+.private-client-session-label {
+  display: inline-block;
+  margin-top: 22px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(197, 162, 104, .48);
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 700px) {
+  .portfolio-login-wrap .portfolio-password-field {
+    grid-template-columns: 42px minmax(0, 1fr) 14px;
+  }
+
+  .portfolio-code-input {
+    font-size: 19px !important;
+    letter-spacing: .18em;
+  }
+
+  .portfolio-change-email {
+    width: 100%;
+    text-align: left;
+  }
+}
