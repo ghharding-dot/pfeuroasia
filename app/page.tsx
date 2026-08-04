@@ -1,7 +1,17 @@
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import {
+  PublicPropertyCarousel,
+  type PublicPropertySlide,
+} from "./components/PublicPropertyCarousel";
+import {
+  imageObjectPosition,
+  readProperties,
+} from "./lib/propertyStore";
 import styles from "./HomeRegions.module.css";
+
+export const dynamic = "force-dynamic";
 
 const services = [
   {
@@ -24,7 +34,45 @@ const services = [
   },
 ];
 
-export default function Home() {
+async function getPublicPropertySlides(): Promise<PublicPropertySlide[]> {
+  try {
+    const properties = await readProperties();
+    return properties
+      .filter(
+        (property) =>
+          property.status === "published" &&
+          (property.visibility === "teaser" || property.visibility === "public") &&
+          property.publicImageApproved === true &&
+          Boolean(property.image),
+      )
+      .map((property) => {
+        const isTeaser = property.visibility === "teaser";
+        return {
+          id: property.id,
+          image: property.image,
+          imagePosition: imageObjectPosition(property.imagePosition),
+          title:
+            property.publicTitle ||
+            (isTeaser ? "Private property opportunity" : property.title),
+          location:
+            property.publicLocation ||
+            (isTeaser ? "Southern Spain" : property.location),
+          visibility: property.visibility as "teaser" | "public",
+          price:
+            property.visibility === "public"
+              ? property.price || "Price on application"
+              : undefined,
+        };
+      });
+  } catch (error) {
+    console.error("homepage-property-carousel-unavailable", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const publicPropertySlides = await getPublicPropertySlides();
+
   return (
     <main>
       <Header transparent />
@@ -166,6 +214,8 @@ export default function Home() {
         </div>
       </section>
 
+      <PublicPropertyCarousel slides={publicPropertySlides} />
+
       <section className="services-section section-pad" id="services">
         <div className="site-shell">
           <div className="section-heading-row">
@@ -255,7 +305,7 @@ export default function Home() {
                 discreetly with verified, qualified clients after a confidential
                 conversation.
               </p>
-              <Link className="button button-gold private-access-button" href="/enquire">
+              <Link className="button button-gold private-access-button" href="/private-portfolio/access">
                 Access Private Portfolio <span>→</span>
               </Link>
             </div>
