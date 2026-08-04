@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { PrivatePropertyCard } from "../../../../components/PrivatePropertyCard";
-import { readProperties } from "../../../../lib/propertyStore";
+import {
+  normalizePropertyAccessLevel,
+  readProperties,
+} from "../../../../lib/propertyStore";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
 import { StatusButton } from "./StatusButton";
 import { VisibilityControls } from "./VisibilityControls";
@@ -17,8 +20,8 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 function visibilityLabel(value?: string) {
-  if (value === "teaser") return "Public teaser";
-  if (value === "public") return "Public listing";
+  if (value === "teaser") return "Private teaser";
+  if (value === "public") return "Public carousel listing";
   return "Fully confidential";
 }
 
@@ -34,6 +37,10 @@ export default async function PropertyPreviewPage({
   const property = properties.find((item) => item.id === id);
   if (!property) notFound();
 
+  const accessLevel = normalizePropertyAccessLevel(
+    property.accessLevel,
+    property.visibility,
+  );
   const carouselEligible =
     property.status === "published" &&
     (property.visibility === "teaser" || property.visibility === "public") &&
@@ -44,7 +51,7 @@ export default async function PropertyPreviewPage({
       <div className="vault-dashboard-shell">
         <header className="vault-dashboard-header vault-preview-header">
           <div>
-            <p className="vault-kicker">Private Collection layout preview</p>
+            <p className="vault-kicker">Property layout preview</p>
             <h1>{property.title}</h1>
             <p>{property.reference} · {property.location}</p>
           </div>
@@ -69,11 +76,14 @@ export default async function PropertyPreviewPage({
             <strong>{property.status === "published" ? "Published" : "Draft preview"}</strong>
             <p>
               {property.status === "published"
-                ? "This property is visible inside the password-protected Private Collection. Client brochure access requires email verification."
+                ? accessLevel === "registered"
+                  ? "This is a registered market listing. Full particulars open automatically after the visitor verifies their name, email and telephone details."
+                  : "This is a Private Off-Market listing. Full particulars are limited to individually approved Private Collection clients."
                 : "This is the exact property-card presentation, but the listing is not visible to clients yet."}
             </p>
             <p>
-              Public exposure: <strong>{visibilityLabel(property.visibility)}</strong>
+              Client access: <strong>{accessLevel === "registered" ? "Registered listing" : "Private off-market"}</strong>
+              {" · "}Public presentation: <strong>{visibilityLabel(property.visibility)}</strong>
               {carouselEligible
                 ? " · Approved for the homepage carousel."
                 : " · Not currently visible in the homepage carousel."}
