@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { Footer } from "../../../../components/Footer";
-import { Header } from "../../../../components/Header";
-import { RegisteredPropertyAccess } from "../../../../components/RegisteredPropertyAccess";
+import { Footer } from "../../../components/Footer";
+import { Header } from "../../../components/Header";
+import { RegisteredPropertyAccess } from "../../../components/RegisteredPropertyAccess";
 import {
   normalizePropertyAccessLevel,
   readProperties,
-} from "../../../../lib/propertyStore";
+} from "../../../lib/propertyStore";
 import {
   REGISTERED_PROPERTY_COOKIE_NAME,
   verifyRegisteredPropertySession,
-} from "../../../../lib/registeredPropertyAuth";
+} from "../../../lib/registeredPropertyAuth";
 import "../../registered-property.css";
 
 export const metadata: Metadata = {
