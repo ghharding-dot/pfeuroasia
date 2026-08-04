@@ -21,6 +21,7 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          accessLevel: String(form.get("accessLevel") || "private"),
           visibility: String(form.get("visibility") || "confidential"),
           publicTitle: String(form.get("publicTitle") || ""),
           publicLocation: String(form.get("publicLocation") || ""),
@@ -29,11 +30,11 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
         }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result.error || "Visibility could not be updated.");
-      setMessage("Visibility settings saved.");
+      if (!response.ok) throw new Error(result.error || "Access settings could not be updated.");
+      setMessage("Access and visibility settings saved.");
       router.refresh();
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Visibility could not be updated.");
+      setMessage(error instanceof Error ? error.message : "Access settings could not be updated.");
     } finally {
       setWorking(false);
     }
@@ -43,6 +44,7 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
     <form className="vault-property-form" onSubmit={save}>
       <PropertyVisibilityFields
         defaultVisibility={property.visibility || "confidential"}
+        defaultAccessLevel={property.accessLevel}
         defaultPublicTitle={property.publicTitle || ""}
         defaultPublicLocation={property.publicLocation || ""}
         defaultPublicImageApproved={property.publicImageApproved || false}
@@ -50,13 +52,13 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
       />
       <section className="vault-publish-bar">
         <div>
-          <strong>Approve public exposure</strong>
+          <strong>Approve the client access route</strong>
           <p>
-            A property joins the homepage carousel only when it is published, set to Public Teaser or Public Listing, and the photograph permission is confirmed.
+            Registered listings open automatically after contact verification. Private off-market properties require a detailed application and your approval.
           </p>
         </div>
         <button className="vault-primary-button" type="submit" disabled={working}>
-          {working ? "Saving..." : "Save Visibility"}
+          {working ? "Saving..." : "Save Access Settings"}
         </button>
       </section>
       {message && <p className="vault-form-message" role="status">{message}</p>}
