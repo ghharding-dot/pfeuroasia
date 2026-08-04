@@ -11,7 +11,7 @@ export type PublicPropertySlide = {
   title: string;
   location: string;
   visibility: "teaser" | "public";
-  accessLevel: "registered" | "private";
+  accessLevel?: "registered" | "private";
   price?: string;
 };
 
@@ -54,7 +54,9 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
         <div className={styles.carousel}>
           <div className={styles.slides} aria-live="polite">
             {slides.map((slide, slideIndex) => {
-              const registered = slide.accessLevel === "registered";
+              const registered = slide.accessLevel
+                ? slide.accessLevel === "registered"
+                : slide.visibility === "public";
               return (
                 <article
                   className={`${styles.slide} ${slideIndex === index ? styles.active : ""}`}
