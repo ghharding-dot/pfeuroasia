@@ -5,6 +5,7 @@ import { PrivatePropertyCard } from "../../../../components/PrivatePropertyCard"
 import {
   normalizePropertyAccessLevel,
   readProperties,
+  type VaultProperty,
 } from "../../../../lib/propertyStore";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
 import { StatusButton } from "./StatusButton";
@@ -25,6 +26,20 @@ function visibilityLabel(value?: string) {
   return "Fully confidential";
 }
 
+async function findPropertyWithRetry(id: string): Promise<VaultProperty | undefined> {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const properties = await readProperties();
+    const property = properties.find((item) => item.id === id);
+    if (property) return property;
+
+    if (attempt < 5) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+  }
+
+  return undefined;
+}
+
 export default async function PropertyPreviewPage({
   params,
 }: {
@@ -33,8 +48,7 @@ export default async function PropertyPreviewPage({
   if (!(await hasVaultAccess())) redirect("/vault");
 
   const { id } = await params;
-  const properties = await readProperties();
-  const property = properties.find((item) => item.id === id);
+  const property = await findPropertyWithRetry(id);
   if (!property) notFound();
 
   const accessLevel = normalizePropertyAccessLevel(
