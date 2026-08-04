@@ -1,0 +1,19 @@
+.cardAction {
+  display: inline-flex !important;
+  width: fit-content;
+  margin-top: 24px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--gold-light);
+  color: #f1d9a7 !important;
+  font-size: 9px !important;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.cardAction:hover {
+  border-color: white;
+  color: white !important;
+  transform: translateX(3px);
+}
