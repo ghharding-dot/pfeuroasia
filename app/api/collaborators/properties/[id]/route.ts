@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../../lib/collaboratorSession";
 import {
   normalizeImagePosition,
+  normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
   writeProperties,
@@ -19,10 +20,14 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
   const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
   const visibilityLabel =
     property.visibility === "public"
-      ? "Public listing requested"
+      ? "Public carousel listing"
       : property.visibility === "teaser"
-        ? "Public teaser requested"
+        ? "Private teaser requested"
         : "Fully confidential";
+  const accessLabel =
+    property.accessLevel === "registered"
+      ? "Registered listing — automatic access after contact verification"
+      : "Private off-market — detailed application and PF EuroAsia approval";
   const text = [
     "A collaborator has updated a property and returned it for PF EuroAsia review.",
     "",
@@ -31,6 +36,7 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
     `Property: ${property.title}`,
     `Reference: ${property.reference}`,
     `Location: ${property.location}`,
+    `Requested access route: ${accessLabel}`,
     `Requested visibility: ${visibilityLabel}`,
     `Public image permission: ${property.publicImageApproved ? "Confirmed" : "Not confirmed"}`,
     `Brochure: ${property.brochure ? "Protected brochure attached" : "Missing"}`,
@@ -87,7 +93,14 @@ export async function PATCH(
   }
 
   const existing = properties[index];
-  const visibility = normalizePropertyVisibility(body.visibility);
+  const requestedVisibility = normalizePropertyVisibility(body.visibility);
+  const accessLevel = normalizePropertyAccessLevel(body.accessLevel, requestedVisibility);
+  const visibility: VaultProperty["visibility"] =
+    accessLevel === "registered"
+      ? "public"
+      : requestedVisibility === "public"
+        ? "teaser"
+        : requestedVisibility;
   const updated: VaultProperty = {
     ...existing,
     title: clean(body.title, 180) || existing.title,
@@ -105,6 +118,7 @@ export async function PATCH(
         ? ""
         : clean(body.secondaryImage, 1200) || existing.secondaryImage || "",
     brochure: clean(body.brochure, 2000) || existing.brochure || "",
+    accessLevel,
     visibility,
     publicTitle: clean(body.publicTitle, 120),
     publicLocation: clean(body.publicLocation, 120),
