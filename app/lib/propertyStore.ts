@@ -1,6 +1,7 @@
 import { list, put } from "@vercel/blob";
 
 export type PropertyVisibility = "confidential" | "teaser" | "public";
+export type PropertyAccessLevel = "registered" | "private";
 export type PropertyImagePosition = "center" | "top" | "bottom" | "left" | "right";
 
 export type VaultProperty = {
@@ -19,6 +20,7 @@ export type VaultProperty = {
   secondaryImage?: string;
   brochure?: string;
   visibility?: PropertyVisibility;
+  accessLevel?: PropertyAccessLevel;
   publicTitle?: string;
   publicLocation?: string;
   publicImageApproved?: boolean;
@@ -37,6 +39,10 @@ const CATALOGUE_PATH = "private-portfolio/catalogue.json";
 
 export function normalizePropertyVisibility(value: unknown): PropertyVisibility {
   return value === "teaser" || value === "public" ? value : "confidential";
+}
+
+export function normalizePropertyAccessLevel(value: unknown): PropertyAccessLevel {
+  return value === "registered" ? "registered" : "private";
 }
 
 export function normalizeImagePosition(value: unknown): PropertyImagePosition {
