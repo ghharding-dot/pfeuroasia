@@ -4,7 +4,10 @@ import { notFound, redirect } from "next/navigation";
 import { Footer } from "../../../../components/Footer";
 import { Header } from "../../../../components/Header";
 import { RegisteredPropertyAccess } from "../../../../components/RegisteredPropertyAccess";
-import { readProperties } from "../../../../lib/propertyStore";
+import {
+  normalizePropertyAccessLevel,
+  readProperties,
+} from "../../../../lib/propertyStore";
 import {
   REGISTERED_PROPERTY_COOKIE_NAME,
   verifyRegisteredPropertySession,
@@ -29,7 +32,7 @@ export default async function RegisteredPropertyAccessPage({
     (item) =>
       item.id === id &&
       item.status === "published" &&
-      item.accessLevel === "registered",
+      normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
   );
 
   if (!property) notFound();
