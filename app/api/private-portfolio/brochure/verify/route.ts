@@ -7,7 +7,7 @@ import { findPublishedPrivateProperty } from "../../../../lib/privatePropertyLoo
 import { hasPrivatePortfolioRequestAccess } from "../../../../lib/privatePortfolioRequest";
 
 export async function POST(request: NextRequest) {
-  if (!hasPrivatePortfolioRequestAccess(request)) {
+  if (!(await hasPrivatePortfolioRequestAccess(request))) {
     return NextResponse.json({ error: "Private Collection access has expired." }, { status: 401 });
   }
 
