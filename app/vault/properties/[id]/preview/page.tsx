@@ -5,6 +5,7 @@ import { PrivatePropertyCard } from "../../../../components/PrivatePropertyCard"
 import { readProperties } from "../../../../lib/propertyStore";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
 import { StatusButton } from "./StatusButton";
+import { VisibilityControls } from "./VisibilityControls";
 import "../../../vault.css";
 import "../../../../private-portfolio/portfolio-collection.css";
 
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = "force-dynamic";
+
+function visibilityLabel(value?: string) {
+  if (value === "teaser") return "Public teaser";
+  if (value === "public") return "Public listing";
+  return "Fully confidential";
+}
 
 export default async function PropertyPreviewPage({
   params,
@@ -26,6 +33,11 @@ export default async function PropertyPreviewPage({
   const properties = await readProperties();
   const property = properties.find((item) => item.id === id);
   if (!property) notFound();
+
+  const carouselEligible =
+    property.status === "published" &&
+    (property.visibility === "teaser" || property.visibility === "public") &&
+    property.publicImageApproved === true;
 
   return (
     <main className="vault-dashboard-page vault-preview-page">
@@ -60,9 +72,17 @@ export default async function PropertyPreviewPage({
                 ? "This property is visible inside the password-protected Private Collection. Client brochure access requires email verification."
                 : "This is the exact property-card presentation, but the listing is not visible to clients yet."}
             </p>
+            <p>
+              Public exposure: <strong>{visibilityLabel(property.visibility)}</strong>
+              {carouselEligible
+                ? " · Approved for the homepage carousel."
+                : " · Not currently visible in the homepage carousel."}
+            </p>
           </div>
           <span className={`vault-status vault-status-${property.status}`}>{property.status}</span>
         </section>
+
+        <VisibilityControls property={property} />
 
         <section className="private-collection-grid vault-preview-grid">
           <PrivatePropertyCard property={property} showEnquiry={false} brochureMode="preview" />
