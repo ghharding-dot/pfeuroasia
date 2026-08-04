@@ -149,7 +149,9 @@ function partnerEmail(code?: string) {
 
 function notificationAddress() {
   const configured =
-    process.env.ENQUIRY_NOTIFICATION_FROM || "enquiries@pfeuroasia.com";
+    process.env.ENQUIRY_NOTIFICATION_FROM ||
+    process.env.PARTNER_NOTIFICATION_FROM ||
+    "PF EuroAsia <notifications@pfeuroasia.com>";
   const match = configured.match(/<([^>]+)>/);
   return (match?.[1] || configured).trim();
 }
@@ -359,12 +361,16 @@ export async function POST(request: NextRequest) {
     });
 
     if (sentWithResend) {
-      await sendWithResend({
-        to: [email],
-        subject: `Your PF EuroAsia enquiry ${reference}`,
-        text: clientText,
-        replyTo: mainRecipient,
-      });
+      try {
+        await sendWithResend({
+          to: [email],
+          subject: `Your PF EuroAsia enquiry ${reference}`,
+          text: clientText,
+          replyTo: mainRecipient,
+        });
+      } catch (error) {
+        console.error("enquiry-client-confirmation-failed", error);
+      }
     } else {
       await Promise.all(recipients.map((recipient) => sendFormSubmitFallback(recipient, record)));
     }
