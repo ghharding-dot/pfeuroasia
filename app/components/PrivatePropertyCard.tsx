@@ -35,7 +35,7 @@ export function PrivatePropertyCard({
 }: {
   property: PrivatePropertyDisplay;
   showEnquiry?: boolean;
-  brochureMode?: "verified" | "preview" | "direct";
+  brochureMode?: "verified" | "preview" | "direct" | "enquiry";
 }) {
   const facts = [
     countLabel(property.bedrooms, "bedroom", "bedrooms"),
@@ -45,6 +45,8 @@ export function PrivatePropertyCard({
     property.terraces ? `${property.terraces} terraces` : "",
   ].filter(Boolean);
   const partnerName = property.listingPartnerName || "Property Facilitators EuroAsia";
+  const enquirySubject = encodeURIComponent(`Enquiry regarding ${property.reference}`);
+  const brochureSubject = encodeURIComponent(`Sales brochure request regarding ${property.reference}`);
 
   return (
     <article className="private-property-card">
@@ -110,6 +112,13 @@ export function PrivatePropertyCard({
               >
                 View sales brochure PDF <span>→</span>
               </a>
+            ) : brochureMode === "enquiry" ? (
+              <a
+                className="text-link"
+                href={`mailto:enquiry@pfeuroasia.com?subject=${brochureSubject}`}
+              >
+                Request sales brochure <span>→</span>
+              </a>
             ) : (
               <span className="brochure-pending brochure-attached">Protected sales brochure attached</span>
             )
@@ -120,7 +129,7 @@ export function PrivatePropertyCard({
           {showEnquiry && (
             <a
               className="text-link"
-              href={`mailto:enquiry@pfeuroasia.com?subject=Enquiry regarding ${encodeURIComponent(property.reference)}`}
+              href={`mailto:enquiry@pfeuroasia.com?subject=${enquirySubject}`}
             >
               Enquire about this property <span>→</span>
             </a>
