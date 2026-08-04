@@ -10,10 +10,85 @@ const goals = [
   { value: "partner", title: "Discuss a partnership", text: "Cross-border brokerage and professional collaboration." },
 ];
 
+const standardBudgetOptions = [
+  "€2m – €5m",
+  "€5m – €10m",
+  "€10m – €20m",
+  "€20m+",
+  "Prefer to discuss",
+];
+
+export type EnquiryInterest = "country-estates" | "investment-opportunities";
+
+const interestConfig: Record<
+  EnquiryInterest,
+  {
+    enquiryType: string;
+    kicker: string;
+    heading: string;
+    intro: string;
+    scope: string;
+    formLegend: string;
+    formHint: string;
+    locationLabel: string;
+    locationPlaceholder: string;
+    defaultLocation: string;
+    messagePlaceholder: string;
+    budgetOptions: string[];
+    successText: string;
+  }
+> = {
+  "country-estates": {
+    enquiryType: "country-estates",
+    kicker: "Country estates · Andalusia",
+    heading: "Register your requirements.",
+    intro:
+      "For substantial private estates with more than 20,000 m² of land, introduced discreetly through our direct network.",
+    scope: "Large estates · Fincas · Cortijos · Equestrian · Agricultural · Lifestyle",
+    formLegend: "Tell us about the country estate you are seeking.",
+    formHint:
+      "An outline is enough. We will discuss location, land, intended use and privacy requirements personally.",
+    locationLabel: "Preferred area or estate type",
+    locationPlaceholder: "e.g. Málaga, Cádiz, Seville, equestrian estate",
+    defaultLocation: "Andalusia",
+    messagePlaceholder:
+      "Minimum land area, intended use, privacy, equestrian, agricultural, hunting or other priorities…",
+    budgetOptions: standardBudgetOptions,
+    successText:
+      "Your country-estate requirements have been registered. We will contact you personally to discuss suitable public and privately available opportunities.",
+  },
+  "investment-opportunities": {
+    enquiryType: "investment-opportunities",
+    kicker: "Private investment opportunities",
+    heading: "Register your interest.",
+    intro:
+      "For selected property-led investment opportunities handled discreetly and often outside conventional public marketing.",
+    scope: "Hotels · Commercial · Development sites · Land · Refurbishment · Income-producing assets",
+    formLegend: "Tell us what type of opportunity interests you.",
+    formHint:
+      "An outline is enough. We will qualify the opportunity type, geography, investment level and timing with you directly.",
+    locationLabel: "Preferred market or opportunity type",
+    locationPlaceholder: "e.g. hotel, commercial building, development land",
+    defaultLocation: "Spain",
+    messagePlaceholder:
+      "Target asset class, preferred location, investment criteria, timing or operating requirements…",
+    budgetOptions: [
+      "€1m – €5m",
+      "€5m – €10m",
+      "€10m – €25m",
+      "€25m+",
+      "Prefer to discuss",
+    ],
+    successText:
+      "Your investment criteria have been registered. We will contact you personally regarding appropriate public and privately introduced opportunities.",
+  },
+};
+
 const initialDetails = { location: "", budget: "", message: "" };
 
 type EnquiryFlowProps = {
   partnerSlug?: string;
+  interest?: EnquiryInterest;
 };
 
 type SubmissionResponse = {
@@ -103,15 +178,24 @@ async function deliverFromBrowser(
   );
 }
 
-export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
+export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
   const partner = getPartnerReferral(partnerSlug);
-  const [step, setStep] = useState(1);
-  const [goal, setGoal] = useState(partner ? "buy" : "");
-  const [details, setDetails] = useState(initialDetails);
+  const preset = interest ? interestConfig[interest] : undefined;
+  const [step, setStep] = useState(preset ? 2 : 1);
+  const [goal, setGoal] = useState(preset?.enquiryType || (partner ? "buy" : ""));
+  const [details, setDetails] = useState(() =>
+    preset
+      ? { ...initialDetails, location: preset.defaultLocation }
+      : initialDetails,
+  );
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
+
+  const totalSteps = preset ? 2 : 3;
+  const progressStep = preset ? step - 1 : step;
+  const budgetOptions = preset?.budgetOptions || standardBudgetOptions;
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -165,11 +249,13 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
     return (
       <section className="enquiry-success site-shell">
         <span className="success-mark">✓</span>
-        <p className="eyebrow">Enquiry sent</p>
+        <p className="eyebrow">Registration sent</p>
         <h1>Thank you.<br />Your conversation starts here.</h1>
         <p>
-          Your confidential enquiry has been sent to our team
-          {partner ? ` and ${partner.name}` : ""}. We will respond personally using your preferred contact method.
+          {preset?.successText ||
+            `Your confidential enquiry has been sent to our team${
+              partner ? ` and ${partner.name}` : ""
+            }. We will respond personally using your preferred contact method.`}
         </p>
         <p><strong>Your enquiry reference: {reference}</strong></p>
         <Link className="text-link" href="/">Return to the website <span>→</span></Link>
@@ -180,19 +266,30 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
   return (
     <section className="enquiry-shell site-shell">
       <aside className="enquiry-aside">
-        <p className="eyebrow light">Confidential enquiry</p>
-        <h1>How may we help?</h1>
-        <p>Share a little about your objectives. Your enquiry will be handled personally and in confidence.</p>
+        <p className="eyebrow light">{preset?.kicker || "Confidential enquiry"}</p>
+        <h1>{preset?.heading || "How may we help?"}</h1>
+        <p>
+          {preset?.intro ||
+            "Share a little about your objectives. Your enquiry will be handled personally and in confidence."}
+        </p>
+        {preset && (
+          <p>
+            <strong>Opportunity scope:</strong><br />
+            {preset.scope}
+          </p>
+        )}
         {partner && (
           <p>
             <strong>Collaboration source:</strong><br />
             {partner.name} · {partner.code}
           </p>
         )}
-        <div className="enquiry-progress" aria-label={`Step ${step} of 3`}>
-          {[1, 2, 3].map((item) => <span className={item <= step ? "active" : ""} key={item} />)}
+        <div className="enquiry-progress" aria-label={`Step ${progressStep} of ${totalSteps}`}>
+          {Array.from({ length: totalSteps }, (_, index) => index + 1).map((item) => (
+            <span className={item <= progressStep ? "active" : ""} key={item} />
+          ))}
         </div>
-        <small>Step {step} of 3</small>
+        <small>Step {progressStep} of {totalSteps}</small>
       </aside>
 
       <form className="enquiry-form" onSubmit={submit}>
@@ -201,7 +298,7 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
           <input name="company_website" tabIndex={-1} autoComplete="off" />
         </label>
 
-        {step === 1 && (
+        {!preset && step === 1 && (
           <fieldset>
             <legend>What would you like to discuss?</legend>
             <p className="form-hint">
@@ -224,14 +321,46 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
 
         {step === 2 && (
           <fieldset>
-            <legend>Tell us about your requirements.</legend>
-            <p className="form-hint">An outline is enough—we will explore the details together.</p>
+            <legend>{preset?.formLegend || "Tell us about your requirements."}</legend>
+            <p className="form-hint">
+              {preset?.formHint || "An outline is enough—we will explore the details together."}
+            </p>
             <div className="form-grid">
-              <label><span>Preferred area or property</span><input name="location" value={details.location} onChange={(e) => setDetails({ ...details, location: e.target.value })} placeholder="e.g. La Zagaleta, Marbella" /></label>
-              <label><span>Indicative budget / value</span><select name="budget" value={details.budget} onChange={(e) => setDetails({ ...details, budget: e.target.value })}><option value="" disabled>Select a range</option><option>€2m – €5m</option><option>€5m – €10m</option><option>€10m – €20m</option><option>€20m+</option><option>Prefer to discuss</option></select></label>
-              <label className="full"><span>Anything else we should know?</span><textarea name="message" rows={5} value={details.message} onChange={(e) => setDetails({ ...details, message: e.target.value })} placeholder="Timing, priorities, privacy requirements or relevant background…" /></label>
+              <label>
+                <span>{preset?.locationLabel || "Preferred area or property"}</span>
+                <input
+                  name="location"
+                  value={details.location}
+                  onChange={(e) => setDetails({ ...details, location: e.target.value })}
+                  placeholder={preset?.locationPlaceholder || "e.g. La Zagaleta, Marbella"}
+                />
+              </label>
+              <label>
+                <span>Indicative budget / investment level</span>
+                <select name="budget" value={details.budget} onChange={(e) => setDetails({ ...details, budget: e.target.value })}>
+                  <option value="" disabled>Select a range</option>
+                  {budgetOptions.map((option) => <option key={option}>{option}</option>)}
+                </select>
+              </label>
+              <label className="full">
+                <span>Anything else we should know?</span>
+                <textarea
+                  name="message"
+                  rows={5}
+                  value={details.message}
+                  onChange={(e) => setDetails({ ...details, message: e.target.value })}
+                  placeholder={preset?.messagePlaceholder || "Timing, priorities, privacy requirements or relevant background…"}
+                />
+              </label>
             </div>
-            <div className="form-actions"><button className="back-button" type="button" onClick={() => setStep(1)}>← Back</button><button className="button button-dark" type="button" onClick={() => setStep(3)}>Continue <span>→</span></button></div>
+            <div className="form-actions">
+              {preset ? (
+                <Link className="back-button" href="/#private-portfolio">← Back to opportunities</Link>
+              ) : (
+                <button className="back-button" type="button" onClick={() => setStep(1)}>← Back</button>
+              )}
+              <button className="button button-dark" type="button" onClick={() => setStep(3)}>Continue <span>→</span></button>
+            </div>
           </fieldset>
         )}
 
@@ -242,7 +371,7 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
             <div className="form-grid">
               <label><span>Full name *</span><input name="name" required autoComplete="name" /></label>
               <label><span>Email address *</span><input name="email" type="email" required autoComplete="email" /></label>
-              <label><span>Contact desk</span><select name="desk" defaultValue=""><option value="" disabled>Select a desk</option><option>Spain desk</option><option>Asia & Malaysia desk</option><option>China enquiry</option><option>Middle East desk</option></select></label>
+              <label><span>Contact desk</span><select name="desk" defaultValue={preset ? "Spain desk" : ""}><option value="" disabled>Select a desk</option><option>Spain desk</option><option>Asia & Malaysia desk</option><option>China enquiry</option><option>Middle East desk</option></select></label>
               <label><span>Preferred channel</span><select name="channel" defaultValue="email"><option value="email">Email</option><option value="whatsapp">WhatsApp</option><option value="wechat">WeChat</option><option value="telephone">Telephone</option></select></label>
               <label><span>Telephone / WhatsApp</span><input name="phone" type="tel" autoComplete="tel" /></label>
               <label><span>WeChat ID</span><input name="wechat" placeholder="For mainland China enquiries" /></label>
@@ -251,7 +380,7 @@ export function EnquiryFlow({ partnerSlug }: EnquiryFlowProps) {
             <p className="china-channel-note">Mainland China: email, WeChat and this secure form are the recommended contact routes.</p>
             <label className="privacy-check"><input type="checkbox" required /><span>I agree to be contacted regarding this enquiry. I understand that a referred collaboration partner may receive the details and that approximate network location plus a masked IP address may be recorded for security, routing and fraud prevention. <Link href="/privacy">Privacy notice</Link>.</span></label>
             {error && <p className="form-error" role="alert">{error}</p>}
-            <div className="form-actions"><button className="back-button" type="button" disabled={sending} onClick={() => setStep(2)}>← Back</button><button className="button button-dark" type="submit" disabled={sending}>{sending ? "Sending…" : "Send enquiry"} <span>→</span></button></div>
+            <div className="form-actions"><button className="back-button" type="button" disabled={sending} onClick={() => setStep(2)}>← Back</button><button className="button button-dark" type="submit" disabled={sending}>{sending ? "Sending…" : "Register interest"} <span>→</span></button></div>
           </fieldset>
         )}
       </form>
