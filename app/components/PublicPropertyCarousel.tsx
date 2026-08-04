@@ -11,6 +11,7 @@ export type PublicPropertySlide = {
   title: string;
   location: string;
   visibility: "teaser" | "public";
+  accessLevel: "registered" | "private";
   price?: string;
 };
 
@@ -36,60 +37,66 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
       <div className="site-shell">
         <div className={styles.heading}>
           <div>
-            <p className="eyebrow">Selected private opportunities</p>
+            <p className="eyebrow">Selected property opportunities</p>
             <h2 id="selected-opportunities-heading">
               A glimpse of what is available.
-              <em>Full details remain private.</em>
+              <em>General listings and private introductions.</em>
             </h2>
           </div>
           <div className={styles.headingCopy}>
             <strong>{slides.length} approved {slides.length === 1 ? "opportunity" : "opportunities"}</strong>
             <p>
-              A carefully approved selection from our private portfolio. Register for access to full particulars, additional photography and protected brochures.
+              Registered listings open after simple contact verification. Genuine private and off-market opportunities remain subject to a fuller application and approval.
             </p>
           </div>
         </div>
 
         <div className={styles.carousel}>
           <div className={styles.slides} aria-live="polite">
-            {slides.map((slide, slideIndex) => (
-              <article
-                className={`${styles.slide} ${slideIndex === index ? styles.active : ""}`}
-                aria-hidden={slideIndex !== index}
-                key={slide.id}
-              >
-                <div className={styles.imageWrap}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    style={{ objectPosition: slide.imagePosition }}
-                  />
-                  <span className={styles.imageLabel}>
-                    {slide.visibility === "teaser" ? "Private teaser" : "Selected listing"}
-                  </span>
-                </div>
+            {slides.map((slide, slideIndex) => {
+              const registered = slide.accessLevel === "registered";
+              return (
+                <article
+                  className={`${styles.slide} ${slideIndex === index ? styles.active : ""}`}
+                  aria-hidden={slideIndex !== index}
+                  key={slide.id}
+                >
+                  <div className={styles.imageWrap}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      style={{ objectPosition: slide.imagePosition }}
+                    />
+                    <span className={styles.imageLabel}>
+                      {registered ? "Registered listing" : "Private opportunity"}
+                    </span>
+                  </div>
 
-                <div className={styles.copy}>
-                  <p className={styles.count}>
-                    {String(slideIndex + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-                  </p>
-                  <p className={styles.location}>{slide.location}</p>
-                  <h3>{slide.title}</h3>
-                  {slide.visibility === "public" && slide.price && (
-                    <strong className={styles.price}>{slide.price}</strong>
-                  )}
-                  <p className={styles.description}>
-                    {slide.visibility === "teaser"
-                      ? "The property identity, specifications and brochure are available only to registered private-collection clients."
-                      : "Selected summary information is public. Full particulars and brochure access remain protected."}
-                  </p>
-                  <Link className="button button-gold" href="/private-portfolio/access">
-                    Request private access <span>→</span>
-                  </Link>
-                </div>
-              </article>
-            ))}
+                  <div className={styles.copy}>
+                    <p className={styles.count}>
+                      {String(slideIndex + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
+                    </p>
+                    <p className={styles.location}>{slide.location}</p>
+                    <h3>{slide.title}</h3>
+                    {slide.visibility === "public" && slide.price && (
+                      <strong className={styles.price}>{slide.price}</strong>
+                    )}
+                    <p className={styles.description}>
+                      {registered
+                        ? "Register your name, email and telephone number, then verify your email to view the full property particulars. No manual approval is required."
+                        : "This is a private or off-market introduction. Full particulars are disclosed only after a detailed client application and PF EuroAsia approval."}
+                    </p>
+                    <Link
+                      className="button button-gold"
+                      href={registered ? `/properties/${slide.id}/access` : "/private-portfolio"}
+                    >
+                      {registered ? "View full details" : "Request private access"} <span>→</span>
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
 
           {slides.length > 1 && (
