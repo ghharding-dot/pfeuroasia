@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
 import {
   normalizeImagePosition,
+  normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
   writeProperties,
@@ -48,27 +49,38 @@ export async function PATCH(
     );
   }
 
-  const hasVisibilityUpdate = typeof body.visibility === "string";
-  const visibility = hasVisibilityUpdate
+  const hasAccessUpdate =
+    typeof body.visibility === "string" || typeof body.accessLevel === "string";
+  const requestedVisibility = hasAccessUpdate
     ? normalizePropertyVisibility(body.visibility)
     : existing.visibility || "confidential";
+  const accessLevel = hasAccessUpdate
+    ? normalizePropertyAccessLevel(body.accessLevel, requestedVisibility)
+    : normalizePropertyAccessLevel(existing.accessLevel, existing.visibility);
+  const visibility: VaultProperty["visibility"] =
+    accessLevel === "registered"
+      ? "public"
+      : requestedVisibility === "public"
+        ? "teaser"
+        : requestedVisibility;
 
   const updated: VaultProperty = {
     ...existing,
     status,
+    accessLevel,
     visibility,
-    publicTitle: hasVisibilityUpdate
+    publicTitle: hasAccessUpdate
       ? clean(body.publicTitle, 120)
       : existing.publicTitle || "",
-    publicLocation: hasVisibilityUpdate
+    publicLocation: hasAccessUpdate
       ? clean(body.publicLocation, 120)
       : existing.publicLocation || "",
-    publicImageApproved: hasVisibilityUpdate
+    publicImageApproved: hasAccessUpdate
       ? visibility === "confidential"
         ? false
         : body.publicImageApproved === true
       : existing.publicImageApproved || false,
-    imagePosition: hasVisibilityUpdate
+    imagePosition: hasAccessUpdate
       ? normalizeImagePosition(body.imagePosition)
       : existing.imagePosition || "center",
     approvalStatus: status === "published" ? "approved" : existing.approvalStatus,
