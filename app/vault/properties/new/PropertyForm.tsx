@@ -3,6 +3,7 @@
 import { upload } from "@vercel/blob/client";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PropertyVisibilityFields } from "../../../components/PropertyVisibilityFields";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
@@ -268,6 +269,7 @@ export function PropertyForm() {
           image,
           secondaryImage,
           brochure,
+          publicImageApproved: form.get("publicImageApproved") === "true",
         }),
       });
       const result = await response.json();
@@ -328,6 +330,8 @@ export function PropertyForm() {
         </label>
       </section>
 
+      <PropertyVisibilityFields />
+
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
           <div><p className="vault-kicker">Step 2</p><h2>Website images and protected brochure</h2></div>
@@ -345,7 +349,7 @@ export function PropertyForm() {
           <strong>{status === "published" ? "Publish and preview" : "Save draft and preview"}</strong>
           <p>
             {status === "published"
-              ? "The property will appear in the password-protected Private Collection and its brochure will require client verification."
+              ? "The property will appear in the password-protected Private Collection. Public carousel exposure still follows the visibility controls above."
               : "The property remains inside the Vault while we inspect its website presentation."}
           </p>
         </div>
