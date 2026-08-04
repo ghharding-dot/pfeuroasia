@@ -1,6 +1,9 @@
 import { randomInt } from "node:crypto";
 import { NextResponse } from "next/server";
-import { readProperties } from "../../../lib/propertyStore";
+import {
+  normalizePropertyAccessLevel,
+  readProperties,
+} from "../../../lib/propertyStore";
 import { createRegisteredPropertyChallenge } from "../../../lib/registeredPropertyAuth";
 
 export const runtime = "nodejs";
@@ -40,7 +43,7 @@ export async function POST(request: Request) {
     (item) =>
       item.id === propertyId &&
       item.status === "published" &&
-      item.accessLevel === "registered",
+      normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
   );
 
   if (!property) {
