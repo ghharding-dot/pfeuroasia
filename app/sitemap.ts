@@ -8,6 +8,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/enquire",
     "/private-portfolio",
+    "/opportunities/country-estates",
+    "/opportunities/investment-opportunities",
     "/services/acquisition",
     "/services/international-sales",
     "/services/relocation-concierge",
@@ -25,6 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: index === 0 ? "weekly" : "monthly",
-    priority: index === 0 ? 1 : route === "/enquire" || route === "/private-portfolio" || route === "/ar" ? 0.9 : 0.8,
+    priority:
+      index === 0
+        ? 1
+        : route === "/enquire" ||
+            route === "/private-portfolio" ||
+            route.startsWith("/opportunities/") ||
+            route === "/ar"
+          ? 0.9
+          : 0.8,
   }));
 }
