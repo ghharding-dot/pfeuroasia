@@ -41,8 +41,13 @@ export function normalizePropertyVisibility(value: unknown): PropertyVisibility 
   return value === "teaser" || value === "public" ? value : "confidential";
 }
 
-export function normalizePropertyAccessLevel(value: unknown): PropertyAccessLevel {
-  return value === "registered" ? "registered" : "private";
+export function normalizePropertyAccessLevel(
+  value: unknown,
+  visibility?: PropertyVisibility,
+): PropertyAccessLevel {
+  if (value === "registered") return "registered";
+  if (value === "private") return "private";
+  return visibility === "public" ? "registered" : "private";
 }
 
 export function normalizeImagePosition(value: unknown): PropertyImagePosition {
