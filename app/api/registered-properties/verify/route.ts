@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
-import { readProperties } from "../../../lib/propertyStore";
+import {
+  normalizePropertyAccessLevel,
+  readProperties,
+} from "../../../lib/propertyStore";
 import {
   createRegisteredPropertySession,
   REGISTERED_PROPERTY_COOKIE_NAME,
@@ -74,7 +77,7 @@ export async function POST(request: Request) {
     (item) =>
       item.id === verified.propertyId &&
       item.status === "published" &&
-      item.accessLevel === "registered",
+      normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
   );
 
   if (!property) {
