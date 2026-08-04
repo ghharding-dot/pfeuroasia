@@ -7,10 +7,19 @@ import {
   readPrivateClients,
   type PrivateClient,
 } from "../../lib/privateClientStore";
-import { readProperties, type VaultProperty } from "../../lib/propertyStore";
+import {
+  readRegisteredListingLeads,
+  type RegisteredListingLead,
+} from "../../lib/registeredLeadStore";
+import {
+  normalizePropertyAccessLevel,
+  readProperties,
+  type VaultProperty,
+} from "../../lib/propertyStore";
 import { VaultClientActions } from "../VaultClientActions";
 import "../vault.css";
 import "../client-access.css";
+import "../registered-leads.css";
 
 export const metadata: Metadata = {
   title: "Vault Dashboard | Property Facilitators EuroAsia",
@@ -57,6 +66,12 @@ function orderClients(clients: PrivateClient[]) {
   });
 }
 
+function orderRegisteredLeads(leads: RegisteredListingLead[]) {
+  return [...leads].sort(
+    (a, b) => new Date(b.lastLoginAt).getTime() - new Date(a.lastLoginAt).getTime(),
+  );
+}
+
 export default async function VaultDashboardPage() {
   const configuredPassword = getVaultPassword();
   const cookieStore = await cookies();
@@ -66,14 +81,19 @@ export default async function VaultDashboardPage() {
     redirect("/vault");
   }
 
-  const [properties, clientResult] = await Promise.all([
+  const [properties, clientResult, registeredLeadResult] = await Promise.all([
     readProperties(),
     readPrivateClients().catch((error) => {
       console.error("vault-private-clients-unavailable", error);
       return [] as PrivateClient[];
     }),
+    readRegisteredListingLeads().catch((error) => {
+      console.error("vault-registered-leads-unavailable", error);
+      return [] as RegisteredListingLead[];
+    }),
   ]);
   const clients = orderClients(clientResult);
+  const registeredLeads = orderRegisteredLeads(registeredLeadResult);
   const published = properties.filter((property) => property.status === "published").length;
   const carouselLive = properties.filter(
     (property) => carouselStatus(property).state === "live",
@@ -97,28 +117,71 @@ export default async function VaultDashboardPage() {
           <div>
             <p className="vault-kicker">Property Facilitators EuroAsia</p>
             <h1>The Vault</h1>
-            <p>Manage Private Collection properties and approved client access.</p>
+            <p>Manage properties, registered listing leads and approved Private Collection access.</p>
           </div>
           <Link className="vault-primary-button" href="/vault/properties/new">Add New Property</Link>
         </header>
 
-        <section className="vault-stats vault-stats-expanded" aria-label="Vault summary">
+        <section className="vault-stats vault-stats-expanded vault-stats-access" aria-label="Vault summary">
           <article className="vault-stat"><strong>{properties.length}</strong><span>Properties</span></article>
           <article className="vault-stat"><strong>{pendingReview}</strong><span>Property reviews</span></article>
           <article className="vault-stat"><strong>{published}</strong><span>Published</span></article>
           <article className="vault-stat"><strong>{carouselLive}</strong><span>Carousel live</span></article>
-          <article className="vault-stat vault-stat-attention"><strong>{pendingClients}</strong><span>Client approvals</span></article>
-          <article className="vault-stat"><strong>{approvedClients}</strong><span>Approved clients</span></article>
+          <article className="vault-stat"><strong>{registeredLeads.length}</strong><span>Verified listing leads</span></article>
+          <article className="vault-stat vault-stat-attention"><strong>{pendingClients}</strong><span>Private approvals</span></article>
+          <article className="vault-stat"><strong>{approvedClients}</strong><span>Approved private clients</span></article>
+        </section>
+
+        <section className="vault-panel vault-registered-panel">
+          <div className="vault-panel-header vault-client-panel-header">
+            <div>
+              <h2>Registered Listing Leads</h2>
+              <p>Visitors who supplied their name, email and telephone number and successfully verified their email. Access was granted automatically.</p>
+            </div>
+          </div>
+
+          {registeredLeads.length === 0 ? (
+            <div className="vault-empty">No registered-listing contact verifications have been completed yet.</div>
+          ) : (
+            <div className="vault-registered-lead-list">
+              {registeredLeads.map((lead) => {
+                const viewedProperties = lead.viewedPropertyIds
+                  .map((id) => properties.find((property) => property.id === id))
+                  .filter((property): property is VaultProperty => Boolean(property));
+
+                return (
+                  <article className="vault-registered-lead-row" key={lead.id}>
+                    <div className="vault-client-main">
+                      <span className="vault-client-status vault-registered-badge">Verified</span>
+                      <div>
+                        <h3>{lead.fullName}</h3>
+                        <p>{lead.email} · {lead.telephone}</p>
+                        <small>
+                          {viewedProperties.length > 0
+                            ? viewedProperties.map((property) => `${property.reference} — ${property.title}`).join(" · ")
+                            : `${lead.viewedPropertyIds.length} registered listing access record(s)`}
+                        </small>
+                      </div>
+                    </div>
+                    <div className="vault-client-dates">
+                      <span>First verified <strong>{formatDate(lead.createdAt)}</strong></span>
+                      <span>Latest access <strong>{formatDate(lead.lastLoginAt)}</strong></span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
         </section>
 
         <section className="vault-panel vault-client-panel">
           <div className="vault-panel-header vault-client-panel-header">
             <div>
-              <h2>Private Collection Clients</h2>
-              <p>Approve registered applicants, review their requirements or withdraw access immediately.</p>
+              <h2>Private Off-Market Clients</h2>
+              <p>Approve detailed applications, review client requirements or withdraw access immediately.</p>
             </div>
             <Link className="vault-row-action" href="/private-portfolio/access" target="_blank">
-              Open client login
+              Open private client login
             </Link>
           </div>
 
@@ -184,6 +247,10 @@ export default async function VaultDashboardPage() {
                     ? "Pending review"
                     : "Draft";
                 const carousel = carouselStatus(property);
+                const accessLevel = normalizePropertyAccessLevel(
+                  property.accessLevel,
+                  property.visibility,
+                );
 
                 return (
                   <article className="vault-property-row" key={property.id}>
@@ -199,6 +266,11 @@ export default async function VaultDashboardPage() {
                       <h3>{property.title}</h3>
                       <p>{property.price || "Price on application"}</p>
                       <small>Listing collaborator: {property.listingPartnerName || "Property Facilitators EuroAsia"}</small>
+                      <small className="vault-property-access">
+                        {accessLevel === "registered"
+                          ? "Registered listing · automatic verified access"
+                          : "Private off-market · manual client approval"}
+                      </small>
                       <small className={`vault-carousel-note vault-carousel-${carousel.state}`}>
                         <strong>{carousel.label}</strong> · {carousel.reason}
                       </small>
