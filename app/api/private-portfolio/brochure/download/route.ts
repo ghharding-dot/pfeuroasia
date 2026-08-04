@@ -224,7 +224,7 @@ function maskedIp(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  if (!hasPrivatePortfolioRequestAccess(request)) {
+  if (!(await hasPrivatePortfolioRequestAccess(request))) {
     return NextResponse.json(
       { error: "Private Collection access has expired." },
       { status: 401 },
