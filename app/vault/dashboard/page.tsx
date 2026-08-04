@@ -3,7 +3,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createVaultToken, getVaultPassword, VAULT_COOKIE_NAME } from "../../lib/vaultAuth";
-import { readProperties } from "../../lib/propertyStore";
+import { readProperties, type VaultProperty } from "../../lib/propertyStore";
 import "../vault.css";
 
 export const metadata: Metadata = {
@@ -12,6 +12,22 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = "force-dynamic";
+
+function carouselStatus(property: VaultProperty) {
+  if (property.status !== "published") {
+    return { label: "Not on carousel", reason: "Property is not published", state: "off" };
+  }
+  if (property.visibility !== "teaser" && property.visibility !== "public") {
+    return { label: "Not on carousel", reason: "Visibility is fully confidential", state: "off" };
+  }
+  if (property.publicImageApproved !== true) {
+    return { label: "Not on carousel", reason: "Public photograph not approved", state: "warning" };
+  }
+  if (!property.image) {
+    return { label: "Not on carousel", reason: "Main photograph missing", state: "warning" };
+  }
+  return { label: "Carousel live", reason: "Visible on the homepage carousel", state: "live" };
+}
 
 export default async function VaultDashboardPage() {
   const configuredPassword = getVaultPassword();
@@ -24,6 +40,9 @@ export default async function VaultDashboardPage() {
 
   const properties = await readProperties();
   const published = properties.filter((property) => property.status === "published").length;
+  const carouselLive = properties.filter(
+    (property) => carouselStatus(property).state === "live",
+  ).length;
   const pendingReview = properties.filter(
     (property) => property.status === "draft" && property.approvalStatus === "pending-review",
   ).length;
@@ -50,6 +69,7 @@ export default async function VaultDashboardPage() {
           <article className="vault-stat"><strong>{properties.length}</strong><span>Properties</span></article>
           <article className="vault-stat"><strong>{pendingReview}</strong><span>Pending review</span></article>
           <article className="vault-stat"><strong>{published}</strong><span>Published</span></article>
+          <article className="vault-stat"><strong>{carouselLive}</strong><span>Carousel live</span></article>
         </section>
 
         <section className="vault-panel">
@@ -66,6 +86,7 @@ export default async function VaultDashboardPage() {
                   : isPendingReview
                     ? "Pending review"
                     : "Draft";
+                const carousel = carouselStatus(property);
 
                 return (
                   <article className="vault-property-row" key={property.id}>
@@ -81,6 +102,9 @@ export default async function VaultDashboardPage() {
                       <h3>{property.title}</h3>
                       <p>{property.price || "Price on application"}</p>
                       <small>Listing collaborator: {property.listingPartnerName || "Property Facilitators EuroAsia"}</small>
+                      <small className={`vault-carousel-note vault-carousel-${carousel.state}`}>
+                        <strong>{carousel.label}</strong> · {carousel.reason}
+                      </small>
                     </div>
                     <span className={`vault-status vault-status-${property.status}`}>{statusLabel}</span>
                     <Link className="vault-row-action" href={`/vault/properties/${property.id}/preview`}>
