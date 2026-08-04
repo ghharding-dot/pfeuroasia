@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../../lib/collaboratorSession";
 import {
+  normalizeImagePosition,
+  normalizePropertyVisibility,
   readProperties,
   writeProperties,
   type VaultProperty,
@@ -15,6 +17,12 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
   if (!apiKey) return;
 
   const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
+  const visibilityLabel =
+    property.visibility === "public"
+      ? "Public listing requested"
+      : property.visibility === "teaser"
+        ? "Public teaser requested"
+        : "Fully confidential";
   const text = [
     "A collaborator has updated a property and returned it for PF EuroAsia review.",
     "",
@@ -23,6 +31,8 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
     `Property: ${property.title}`,
     `Reference: ${property.reference}`,
     `Location: ${property.location}`,
+    `Requested visibility: ${visibilityLabel}`,
+    `Public image permission: ${property.publicImageApproved ? "Confirmed" : "Not confirmed"}`,
     `Brochure: ${property.brochure ? "Protected brochure attached" : "Missing"}`,
     "",
     `Review in the Vault: https://www.pfeuroasia.com/vault/properties/${property.id}/preview`,
@@ -77,6 +87,7 @@ export async function PATCH(
   }
 
   const existing = properties[index];
+  const visibility = normalizePropertyVisibility(body.visibility);
   const updated: VaultProperty = {
     ...existing,
     title: clean(body.title, 180) || existing.title,
@@ -94,6 +105,11 @@ export async function PATCH(
         ? ""
         : clean(body.secondaryImage, 1200) || existing.secondaryImage || "",
     brochure: clean(body.brochure, 2000) || existing.brochure || "",
+    visibility,
+    publicTitle: clean(body.publicTitle, 120),
+    publicLocation: clean(body.publicLocation, 120),
+    publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
+    imagePosition: normalizeImagePosition(body.imagePosition),
     status: "draft",
     approvalStatus: "pending-review",
     updatedAt: new Date().toISOString(),
