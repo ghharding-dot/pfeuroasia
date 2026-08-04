@@ -1,5 +1,5 @@
 import { BrochureAccessButton } from "./BrochureAccessButton";
-import type { VaultProperty } from "../lib/propertyStore";
+import { imageObjectPosition, type VaultProperty } from "../lib/propertyStore";
 
 export type PrivatePropertyDisplay = Readonly<
   Pick<
@@ -17,6 +17,7 @@ export type PrivatePropertyDisplay = Readonly<
     | "image"
     | "secondaryImage"
     | "brochure"
+    | "imagePosition"
     | "listingPartnerCode"
     | "listingPartnerName"
   >
@@ -50,7 +51,11 @@ export function PrivatePropertyCard({
       <div className="private-property-image">
         {property.image ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={property.image} alt={`${property.title} in ${property.location}`} />
+          <img
+            src={property.image}
+            alt={`${property.title} in ${property.location}`}
+            style={{ objectPosition: imageObjectPosition(property.imagePosition) }}
+          />
         ) : (
           <div className="placeholder-image">
             <span>Property photography to be added</span>
