@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { Footer } from "../../../components/Footer";
-import { Header } from "../../../components/Header";
-import { PrivatePropertyCard } from "../../../components/PrivatePropertyCard";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
+import { PrivatePropertyCard } from "../../components/PrivatePropertyCard";
 import {
   normalizePropertyAccessLevel,
   readProperties,
-} from "../../../lib/propertyStore";
+} from "../../lib/propertyStore";
 import {
   REGISTERED_PROPERTY_COOKIE_NAME,
   verifyRegisteredPropertySession,
-} from "../../../lib/registeredPropertyAuth";
+} from "../../lib/registeredPropertyAuth";
 import "../registered-property.css";
 import "../../private-portfolio/portfolio-collection.css";
 
