@@ -3,6 +3,7 @@
 import { upload } from "@vercel/blob/client";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PropertyVisibilityFields } from "../../../../components/PropertyVisibilityFields";
 import type { VaultProperty } from "../../../../lib/propertyStore";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
@@ -205,6 +206,7 @@ export function CollaboratorEditPropertyForm({
           image,
           secondaryImage,
           brochure,
+          publicImageApproved: form.get("publicImageApproved") === "true",
           removeSecondaryImage: form.get("removeSecondaryImage") === "on",
           authorityConfirmed: true,
         }),
@@ -242,6 +244,15 @@ export function CollaboratorEditPropertyForm({
           <textarea name="description" rows={8} defaultValue={property.description} />
         </label>
       </section>
+
+      <PropertyVisibilityFields
+        collaboratorRequest
+        defaultVisibility={property.visibility || "confidential"}
+        defaultPublicTitle={property.publicTitle || ""}
+        defaultPublicLocation={property.publicLocation || ""}
+        defaultPublicImageApproved={property.publicImageApproved || false}
+        defaultImagePosition={property.imagePosition || "center"}
+      />
 
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
@@ -284,7 +295,7 @@ export function CollaboratorEditPropertyForm({
       <section className="vault-publish-bar">
         <div>
           <strong>Save changes for review</strong>
-          <p>The edited property will return to Pending Review for PF EuroAsia approval.</p>
+          <p>The edited property and any revised public exposure request will return to Pending Review for PF EuroAsia approval.</p>
         </div>
         <button className="vault-primary-button" type="submit" disabled={saving || !authorityConfirmed}>
           {saving ? "Working..." : "Save Changes"}
