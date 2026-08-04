@@ -13,7 +13,7 @@ function maskedEmail(email: string) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!hasPrivatePortfolioRequestAccess(request)) {
+  if (!(await hasPrivatePortfolioRequestAccess(request))) {
     console.warn("brochure-verification-rejected", { reason: "portfolio-access-expired" });
     return NextResponse.json({ error: "Private Collection access has expired. Please sign in again." }, { status: 401 });
   }
