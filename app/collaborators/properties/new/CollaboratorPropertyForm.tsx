@@ -3,6 +3,7 @@
 import { upload } from "@vercel/blob/client";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PropertyVisibilityFields } from "../../../components/PropertyVisibilityFields";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
@@ -269,6 +270,7 @@ export function CollaboratorPropertyForm({
           image,
           secondaryImage,
           brochure,
+          publicImageApproved: form.get("publicImageApproved") === "true",
           authorityConfirmed: true,
         }),
       });
@@ -313,6 +315,8 @@ export function CollaboratorPropertyForm({
         </label>
       </section>
 
+      <PropertyVisibilityFields collaboratorRequest />
+
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
           <div><p className="vault-kicker">Step 2</p><h2>Photography and protected brochure</h2></div>
@@ -341,7 +345,7 @@ export function CollaboratorPropertyForm({
       <section className="vault-publish-bar">
         <div>
           <strong>Submit for PF EuroAsia approval</strong>
-          <p>The property will remain private and unpublished until PF EuroAsia has reviewed the presentation.</p>
+          <p>The property and any requested public exposure remain unpublished until PF EuroAsia has reviewed the presentation.</p>
         </div>
         <button className="vault-primary-button" type="submit" disabled={saving || !authorityConfirmed}>
           {saving ? "Working..." : "Submit Property"}
