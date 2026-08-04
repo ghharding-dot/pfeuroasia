@@ -35,3 +35,71 @@ header *,
 footer * {
   min-width: 0;
 }
+
+/*
+ * The specialist registration pages use a full-width split enquiry layout.
+ * Mobile Safari can still allow a small sideways rubber-band movement even
+ * when the document itself reports no horizontal overflow. Restrict these
+ * pages to vertical panning and contain every form element within the viewport.
+ */
+.enquiry-page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  touch-action: pan-y pinch-zoom;
+}
+
+@supports (overflow: clip) {
+  .enquiry-page {
+    overflow-x: clip;
+  }
+}
+
+.enquiry-page .enquiry-shell,
+.enquiry-page .enquiry-aside,
+.enquiry-page .enquiry-form,
+.enquiry-page .enquiry-form fieldset,
+.enquiry-page .form-grid,
+.enquiry-page .form-grid > *,
+.enquiry-page .form-actions,
+.enquiry-page .privacy-check {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.enquiry-page .enquiry-form legend,
+.enquiry-page .enquiry-aside h1,
+.enquiry-page .enquiry-aside p,
+.enquiry-page .privacy-check span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.enquiry-page .form-grid input,
+.enquiry-page .form-grid select,
+.enquiry-page .form-grid textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .enquiry-page .form-actions {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .enquiry-page .back-button {
+    flex: 1 1 120px;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+  }
+
+  .enquiry-page .form-actions .button {
+    flex: 0 1 auto;
+    max-width: 100%;
+  }
+}
