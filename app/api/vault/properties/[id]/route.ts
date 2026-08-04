@@ -1,10 +1,16 @@
 import { NextResponse } from "next/server";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
 import {
+  normalizeImagePosition,
+  normalizePropertyVisibility,
   readProperties,
   writeProperties,
   type VaultProperty,
 } from "../../../../lib/propertyStore";
+
+function clean(value: unknown, maxLength = 5000) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
+}
 
 export async function PATCH(
   request: Request,
@@ -15,9 +21,11 @@ export async function PATCH(
   }
 
   const { id } = await context.params;
-  const body = await request.json();
-  const status: VaultProperty["status"] =
-    body.status === "published" ? "published" : "draft";
+  const body = await request.json().catch(() => null);
+  if (!body) {
+    return NextResponse.json({ error: "Invalid property update." }, { status: 400 });
+  }
+
   const properties = await readProperties();
   const index = properties.findIndex((property) => property.id === id);
 
@@ -26,6 +34,13 @@ export async function PATCH(
   }
 
   const existing = properties[index];
+  const hasStatusUpdate = body.status === "published" || body.status === "draft";
+  const status: VaultProperty["status"] = hasStatusUpdate
+    ? body.status === "published"
+      ? "published"
+      : "draft"
+    : existing.status;
+
   if (status === "published" && !existing.brochure) {
     return NextResponse.json(
       { error: "Attach one sales brochure PDF before publishing this property." },
@@ -33,12 +48,33 @@ export async function PATCH(
     );
   }
 
+  const hasVisibilityUpdate = typeof body.visibility === "string";
+  const visibility = hasVisibilityUpdate
+    ? normalizePropertyVisibility(body.visibility)
+    : existing.visibility || "confidential";
+
   const updated: VaultProperty = {
     ...existing,
     status,
+    visibility,
+    publicTitle: hasVisibilityUpdate
+      ? clean(body.publicTitle, 120)
+      : existing.publicTitle || "",
+    publicLocation: hasVisibilityUpdate
+      ? clean(body.publicLocation, 120)
+      : existing.publicLocation || "",
+    publicImageApproved: hasVisibilityUpdate
+      ? visibility === "confidential"
+        ? false
+        : body.publicImageApproved === true
+      : existing.publicImageApproved || false,
+    imagePosition: hasVisibilityUpdate
+      ? normalizeImagePosition(body.imagePosition)
+      : existing.imagePosition || "center",
     approvalStatus: status === "published" ? "approved" : existing.approvalStatus,
     updatedAt: new Date().toISOString(),
   };
+
   properties[index] = updated;
   await writeProperties(properties);
 
