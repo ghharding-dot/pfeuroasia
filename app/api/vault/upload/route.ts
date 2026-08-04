@@ -3,10 +3,26 @@ import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../lib/collaboratorSession";
 import { hasVaultAccess } from "../../../lib/vaultSession";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 const MAX_UPLOAD_SIZE = 60 * 1024 * 1024;
+const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp"];
+
+function hasAllowedExtension(pathname: string, extensions: string[]) {
+  const normalized = pathname.toLowerCase();
+  return extensions.some((extension) => normalized.endsWith(extension));
+}
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as HandleUploadBody;
+  let body: HandleUploadBody;
+
+  try {
+    body = (await request.json()) as HandleUploadBody;
+  } catch (error) {
+    console.error("property-upload-invalid-request", error);
+    return NextResponse.json({ error: "Invalid upload request." }, { status: 400 });
+  }
 
   try {
     const response = await handleUpload({
@@ -17,7 +33,7 @@ export async function POST(request: Request) {
         const collaborator = vaultAccess ? null : await getCollaboratorSession();
 
         if (!vaultAccess && !collaborator) {
-          throw new Error("Unauthorized");
+          throw new Error("Your secure upload session has expired. Sign in again and retry without closing this page.");
         }
 
         const validAdminPath = vaultAccess && pathname.startsWith("private-portfolio/");
@@ -42,16 +58,32 @@ export async function POST(request: Request) {
           reference = String(parsed.reference || reference).slice(0, 100);
           kind = String(parsed.kind || kind).slice(0, 40);
         } catch {
-          // The pathname and content type checks below still protect the upload.
+          throw new Error("Invalid upload information.");
+        }
+
+        const isBrochure = kind === "brochure";
+        const isImage = kind === "main" || kind === "secondary";
+
+        if (isBrochure && !hasAllowedExtension(pathname, [".pdf"])) {
+          throw new Error("The brochure must be a PDF file.");
+        }
+        if (isImage && !hasAllowedExtension(pathname, IMAGE_EXTENSIONS)) {
+          throw new Error("The property photograph must be JPG, PNG or WebP.");
+        }
+        if (!isBrochure && !isImage) {
+          throw new Error("Unsupported upload type.");
         }
 
         return {
-          allowedContentTypes: [
-            "image/jpeg",
-            "image/png",
-            "image/webp",
-            "application/pdf",
-          ],
+          allowedContentTypes: isBrochure
+            ? ["application/pdf", "application/x-pdf", "application/octet-stream"]
+            : [
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/webp",
+                "application/octet-stream",
+              ],
           maximumSizeInBytes: MAX_UPLOAD_SIZE,
           addRandomSuffix: true,
           tokenPayload: JSON.stringify({
@@ -71,9 +103,11 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Upload failed." },
-      { status: 400 },
-    );
+    const message = error instanceof Error ? error.message : "Upload failed.";
+    console.error("property-upload-token-failed", {
+      message,
+      name: error instanceof Error ? error.name : "UnknownError",
+    });
+    return NextResponse.json({ error: message }, { status: 400 });
   }
 }
