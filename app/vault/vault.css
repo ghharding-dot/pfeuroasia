@@ -28,7 +28,7 @@
 .vault-header-actions { display:flex; align-items:center; justify-content:flex-end; gap:12px; flex-wrap:wrap; }
 .vault-status-action { display:grid; gap:8px; }
 .vault-status-action .vault-error { max-width:340px; font-size:.82rem; }
-.vault-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:26px; }
+.vault-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:26px; }
 .vault-stat { padding:22px; border:1px solid rgba(201,168,97,.22); background:rgba(13,27,45,.8); }
 .vault-stat strong { display:block; font-size:2rem; font-family:Georgia,serif; color:var(--vault-gold); }
 .vault-stat span { color:var(--vault-muted); font-size:.82rem; text-transform:uppercase; letter-spacing:.08em; }
@@ -45,6 +45,12 @@
 .vault-property-copy span { color:var(--vault-gold); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
 .vault-property-copy h3 { margin:5px 0 4px; font-family:Georgia,"Times New Roman",serif; font-size:1.45rem; font-weight:400; }
 .vault-property-copy p { margin:0; color:var(--vault-muted); }
+.vault-property-copy small { display:block; margin-top:5px; color:var(--vault-muted); }
+.vault-carousel-note { margin-top:10px !important; font-size:.76rem; line-height:1.45; }
+.vault-carousel-note strong { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+.vault-carousel-live { color:#9fe0ba !important; }
+.vault-carousel-warning { color:#f4c97b !important; }
+.vault-carousel-off { color:#9aa7b5 !important; }
 .vault-status { display:inline-flex; align-items:center; justify-content:center; min-width:92px; padding:8px 11px; border:1px solid rgba(255,255,255,.16); font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
 .vault-status-published { border-color:rgba(98,190,139,.54); color:#9fe0ba; background:rgba(98,190,139,.08); }
 .vault-status-draft { border-color:rgba(201,168,97,.48); color:var(--vault-gold); background:rgba(201,168,97,.07); }
@@ -87,6 +93,7 @@
 .vault-preview-grid { width:100%; padding:28px 0 10px; }
 .vault-preview-grid .private-property-card { color:#171815; }
 @media (max-width:960px){
+  .vault-stats{grid-template-columns:repeat(2,1fr);}
   .vault-form-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .vault-upload-grid{grid-template-columns:1fr;}
   .vault-upload-box{min-height:240px;}
