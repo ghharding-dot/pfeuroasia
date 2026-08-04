@@ -13,6 +13,7 @@ import { readProperties, type VaultProperty } from "../../lib/propertyStore";
 import { privateProperties } from "./properties";
 import "../private-portfolio.css";
 import "../portfolio-collection.css";
+import "../client-access.css";
 
 export const metadata: Metadata = {
   title: "Private Property Collection",
