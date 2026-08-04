@@ -3,8 +3,14 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createVaultToken, getVaultPassword, VAULT_COOKIE_NAME } from "../../lib/vaultAuth";
+import {
+  readPrivateClients,
+  type PrivateClient,
+} from "../../lib/privateClientStore";
 import { readProperties, type VaultProperty } from "../../lib/propertyStore";
+import { VaultClientActions } from "../VaultClientActions";
 import "../vault.css";
+import "../client-access.css";
 
 export const metadata: Metadata = {
   title: "Vault Dashboard | Property Facilitators EuroAsia",
@@ -29,6 +35,28 @@ function carouselStatus(property: VaultProperty) {
   return { label: "Carousel live", reason: "Visible on the homepage carousel", state: "live" };
 }
 
+function formatDate(value?: string) {
+  if (!value) return "Never";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+
+function orderClients(clients: PrivateClient[]) {
+  const priority = { pending: 3, approved: 2, revoked: 1 } as const;
+  return [...clients].sort((a, b) => {
+    const statusDifference = priority[b.status] - priority[a.status];
+    if (statusDifference !== 0) return statusDifference;
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
+}
+
 export default async function VaultDashboardPage() {
   const configuredPassword = getVaultPassword();
   const cookieStore = await cookies();
@@ -38,7 +66,14 @@ export default async function VaultDashboardPage() {
     redirect("/vault");
   }
 
-  const properties = await readProperties();
+  const [properties, clientResult] = await Promise.all([
+    readProperties(),
+    readPrivateClients().catch((error) => {
+      console.error("vault-private-clients-unavailable", error);
+      return [] as PrivateClient[];
+    }),
+  ]);
+  const clients = orderClients(clientResult);
   const published = properties.filter((property) => property.status === "published").length;
   const carouselLive = properties.filter(
     (property) => carouselStatus(property).state === "live",
@@ -46,6 +81,8 @@ export default async function VaultDashboardPage() {
   const pendingReview = properties.filter(
     (property) => property.status === "draft" && property.approvalStatus === "pending-review",
   ).length;
+  const pendingClients = clients.filter((client) => client.status === "pending").length;
+  const approvedClients = clients.filter((client) => client.status === "approved").length;
   const orderedProperties = [...properties].sort((a, b) => {
     const aPending = a.status === "draft" && a.approvalStatus === "pending-review" ? 1 : 0;
     const bPending = b.status === "draft" && b.approvalStatus === "pending-review" ? 1 : 0;
@@ -60,16 +97,76 @@ export default async function VaultDashboardPage() {
           <div>
             <p className="vault-kicker">Property Facilitators EuroAsia</p>
             <h1>The Vault</h1>
-            <p>Upload, review and publish Private Collection properties.</p>
+            <p>Manage Private Collection properties and approved client access.</p>
           </div>
           <Link className="vault-primary-button" href="/vault/properties/new">Add New Property</Link>
         </header>
 
-        <section className="vault-stats" aria-label="Vault summary">
+        <section className="vault-stats vault-stats-expanded" aria-label="Vault summary">
           <article className="vault-stat"><strong>{properties.length}</strong><span>Properties</span></article>
-          <article className="vault-stat"><strong>{pendingReview}</strong><span>Pending review</span></article>
+          <article className="vault-stat"><strong>{pendingReview}</strong><span>Property reviews</span></article>
           <article className="vault-stat"><strong>{published}</strong><span>Published</span></article>
           <article className="vault-stat"><strong>{carouselLive}</strong><span>Carousel live</span></article>
+          <article className="vault-stat vault-stat-attention"><strong>{pendingClients}</strong><span>Client approvals</span></article>
+          <article className="vault-stat"><strong>{approvedClients}</strong><span>Approved clients</span></article>
+        </section>
+
+        <section className="vault-panel vault-client-panel">
+          <div className="vault-panel-header vault-client-panel-header">
+            <div>
+              <h2>Private Collection Clients</h2>
+              <p>Approve registered applicants, review their requirements or withdraw access immediately.</p>
+            </div>
+            <Link className="vault-row-action" href="/private-portfolio/access" target="_blank">
+              Open client login
+            </Link>
+          </div>
+
+          {clients.length === 0 ? (
+            <div className="vault-empty">No Private Collection client registrations have been received yet.</div>
+          ) : (
+            <div className="vault-client-list">
+              {clients.map((client) => (
+                <article className="vault-client-row" key={client.id}>
+                  <div className="vault-client-main">
+                    <span className={`vault-client-status vault-client-status-${client.status}`}>
+                      {client.status}
+                    </span>
+                    <div>
+                      <h3>{client.fullName}</h3>
+                      <p>{client.email} · {client.telephone}</p>
+                      <small>
+                        {client.propertyType} · {client.preferredLocation} · {client.indicativeBudget}
+                      </small>
+                    </div>
+                  </div>
+
+                  <div className="vault-client-dates">
+                    <span>Registered <strong>{formatDate(client.createdAt)}</strong></span>
+                    <span>Last login <strong>{formatDate(client.lastLoginAt)}</strong></span>
+                  </div>
+
+                  <VaultClientActions clientId={client.id} status={client.status} />
+
+                  <details className="vault-client-details">
+                    <summary>Review full application</summary>
+                    <div className="vault-client-detail-grid">
+                      <div><span>Nationality</span><strong>{client.nationality}</strong></div>
+                      <div><span>Country of residence</span><strong>{client.countryOfResidence}</strong></div>
+                      <div><span>Preferred language</span><strong>{client.preferredLanguage}</strong></div>
+                      <div><span>Company</span><strong>{client.companyName || "Not provided"}</strong></div>
+                      <div><span>Occupation</span><strong>{client.occupation || "Not provided"}</strong></div>
+                      <div><span>Purchase timeframe</span><strong>{client.purchaseTimeframe}</strong></div>
+                      <div><span>Referral source</span><strong>{client.referralSource || "Not provided"}</strong></div>
+                      <div><span>WeChat</span><strong>{client.wechatId || "Not provided"}</strong></div>
+                      <div className="vault-client-detail-full"><span>Residential address</span><strong>{client.residentialAddress}</strong></div>
+                      <div className="vault-client-detail-full"><span>Additional requirements</span><strong>{client.additionalRequirements || "Not provided"}</strong></div>
+                    </div>
+                  </details>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="vault-panel">
