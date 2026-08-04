@@ -294,16 +294,15 @@ export default async function Home() {
         <div className="site-shell">
           <div className="portfolio-intro">
             <div>
-              <p className="eyebrow light">The private portfolio</p>
-              <h2>Not every exceptional home is publicly for sale.</h2>
+              <p className="eyebrow light">Specialist private opportunities</p>
+              <h2>Some requirements begin beyond the conventional market.</h2>
             </div>
             <div>
               <p>
-                Many of the owners we represent value privacy above publicity.
-                Their properties will not appear on conventional portals or
-                normal marketing channels. Selected opportunities are shared
-                discreetly with verified, qualified clients after a confidential
-                conversation.
+                We maintain discreet access to specialist residential and
+                property-led investment opportunities. Register your criteria
+                and we will respond personally with suitable public and private
+                introductions.
               </p>
               <Link className="button button-gold private-access-button" href="/private-portfolio/access">
                 Access Private Portfolio <span>→</span>
@@ -312,35 +311,44 @@ export default async function Home() {
           </div>
 
           <div className="portfolio-grid">
-            <article className="portfolio-card portfolio-estate">
-              <span className="image-note">Representative image</span>
-              <div className="portfolio-card-copy">
-                <p>Private opportunity · Benahavís</p>
-                <h3>Country estate</h3>
-                <span>Significant grounds, mature landscape and extensive lifestyle amenities. Full particulars by private introduction.</span>
-              </div>
-            </article>
-            <article
-              className="portfolio-card portfolio-contemporary"
-              style={{
-                backgroundImage:
-                  "url('https://casaservetta.com/__l5e/assets-v1/d1d5a68a-0f5c-4795-a0e6-9f6b84942c68/setting-aerial-wide.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
+            <Link
+              className="portfolio-card portfolio-estate"
+              href="/opportunities/country-estates"
+              aria-label="Register requirements for country estates in Andalusia"
             >
-              <span className="image-note">Representative image</span>
+              <span className="image-note">Specialist search</span>
               <div className="portfolio-card-copy">
-                <p>Private opportunity · La Zagaleta</p>
-                <h3>Andalusian estate</h3>
-                <span>Timeless architecture, exceptional privacy and a privileged natural setting. Details on qualification.</span>
+                <p>Andalusia · More than 20,000 m² of land</p>
+                <h3>Country Estates</h3>
+                <span>
+                  Large private estates, fincas, cortijos, equestrian,
+                  agricultural and lifestyle properties with substantial land.
+                </span>
+                <span className="portfolio-card-action">Register requirements →</span>
               </div>
-            </article>
+            </Link>
+
+            <Link
+              className="portfolio-card portfolio-contemporary"
+              href="/opportunities/investment-opportunities"
+              aria-label="Register interest in private investment opportunities"
+            >
+              <span className="image-note">Confidential introductions</span>
+              <div className="portfolio-card-copy">
+                <p>Property-led investment · Selected opportunities</p>
+                <h3>Private Investment Opportunities</h3>
+                <span>
+                  Hotels, commercial property, development sites, land,
+                  refurbishment projects and income-producing assets.
+                </span>
+                <span className="portfolio-card-action">Register interest →</span>
+              </div>
+            </Link>
           </div>
 
           <p className="portfolio-disclaimer">
-            To protect our clients, locations, identifying details and approved
-            photography are disclosed only at the appropriate stage.
+            Opportunities may be available publicly or by private introduction.
+            Identifying details are disclosed only after appropriate qualification.
           </p>
         </div>
       </section>
