@@ -5,6 +5,7 @@ import type {
   PropertyImagePosition,
   PropertyVisibility,
 } from "../lib/propertyStore";
+import styles from "./PropertyVisibilityFields.module.css";
 
 export function PropertyVisibilityFields({
   defaultVisibility = "confidential",
@@ -24,7 +25,7 @@ export function PropertyVisibilityFields({
   const [visibility, setVisibility] = useState<PropertyVisibility>(defaultVisibility);
 
   return (
-    <section className="vault-panel vault-form-section vault-visibility-panel">
+    <section className={`vault-panel vault-form-section ${styles.panel}`}>
       <div className="vault-section-heading">
         <div>
           <p className="vault-kicker">Public exposure</p>
@@ -37,7 +38,7 @@ export function PropertyVisibilityFields({
         </p>
       </div>
 
-      <div className="vault-form-grid vault-visibility-grid">
+      <div className={`vault-form-grid ${styles.grid}`}>
         <label>
           <span>Exposure level</span>
           <select
@@ -81,7 +82,7 @@ export function PropertyVisibilityFields({
                 <option value="right">Right</option>
               </select>
             </label>
-            <label className="vault-public-image-consent">
+            <label className={styles.publicConsent}>
               <input
                 name="publicImageApproved"
                 type="checkbox"
@@ -96,7 +97,7 @@ export function PropertyVisibilityFields({
         )}
       </div>
 
-      <div className="vault-visibility-note">
+      <div className={styles.note}>
         {visibility === "confidential" && (
           <p><strong>Fully confidential:</strong> nothing from this property appears on the public website.</p>
         )}
