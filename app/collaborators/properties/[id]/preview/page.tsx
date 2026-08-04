@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { PrivatePropertyCard } from "../../../../components/PrivatePropertyCard";
 import { getCollaboratorSession } from "../../../../lib/collaboratorSession";
-import { readProperties } from "../../../../lib/propertyStore";
+import { readProperties, type VaultProperty } from "../../../../lib/propertyStore";
 import "../../../../vault/vault.css";
 import "../../../../private-portfolio/portfolio-collection.css";
 
@@ -14,6 +14,25 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+async function findCollaboratorPropertyWithRetry(
+  id: string,
+  partnerCode: string,
+): Promise<VaultProperty | undefined> {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const properties = await readProperties();
+    const property = properties.find(
+      (item) => item.id === id && item.listingPartnerCode === partnerCode,
+    );
+    if (property) return property;
+
+    if (attempt < 5) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+  }
+
+  return undefined;
+}
+
 export default async function CollaboratorPropertyPreviewPage({
   params,
 }: {
@@ -23,9 +42,9 @@ export default async function CollaboratorPropertyPreviewPage({
   if (!collaborator) redirect("/collaborators");
 
   const { id } = await params;
-  const properties = await readProperties();
-  const property = properties.find(
-    (item) => item.id === id && item.listingPartnerCode === collaborator.partnerCode,
+  const property = await findCollaboratorPropertyWithRetry(
+    id,
+    collaborator.partnerCode,
   );
   if (!property) notFound();
 
