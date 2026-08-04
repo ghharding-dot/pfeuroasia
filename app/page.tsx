@@ -9,6 +9,7 @@ import {
   imageObjectPosition,
   readProperties,
 } from "./lib/propertyStore";
+import opportunityStyles from "./HomeOpportunities.module.css";
 import styles from "./HomeRegions.module.css";
 
 export const dynamic = "force-dynamic";
@@ -324,7 +325,7 @@ export default async function Home() {
                   Large private estates, fincas, cortijos, equestrian,
                   agricultural and lifestyle properties with substantial land.
                 </span>
-                <span className="portfolio-card-action">Register requirements →</span>
+                <span className={opportunityStyles.cardAction}>Register requirements →</span>
               </div>
             </Link>
 
@@ -341,7 +342,7 @@ export default async function Home() {
                   Hotels, commercial property, development sites, land,
                   refurbishment projects and income-producing assets.
                 </span>
-                <span className="portfolio-card-action">Register interest →</span>
+                <span className={opportunityStyles.cardAction}>Register interest →</span>
               </div>
             </Link>
           </div>
