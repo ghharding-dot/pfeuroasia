@@ -3,6 +3,7 @@ import { getCollaboratorSession } from "../../../lib/collaboratorSession";
 import {
   generatePropertyReference,
   normalizeImagePosition,
+  normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
   writeProperties,
@@ -20,10 +21,14 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
   const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
   const visibilityLabel =
     property.visibility === "public"
-      ? "Public listing requested"
+      ? "Public carousel listing"
       : property.visibility === "teaser"
-        ? "Public teaser requested"
+        ? "Private teaser requested"
         : "Fully confidential";
+  const accessLabel =
+    property.accessLevel === "registered"
+      ? "Registered listing — automatic access after contact verification"
+      : "Private off-market — detailed application and PF EuroAsia approval";
   const adminText = [
     "A collaborator has submitted a new property for PF EuroAsia review.",
     "",
@@ -33,6 +38,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     `Reference: ${property.reference}`,
     `Location: ${property.location}`,
     `Price: ${property.price || "Price on application"}`,
+    `Requested access route: ${accessLabel}`,
     `Requested visibility: ${visibilityLabel}`,
     `Public image permission: ${property.publicImageApproved ? "Confirmed" : "Not confirmed"}`,
     `Brochure: ${property.brochure ? "Attached privately" : "Missing"}`,
@@ -49,9 +55,10 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     `Property: ${property.title}`,
     `Reference: ${property.reference}`,
     `Status: Pending PF EuroAsia approval`,
+    `Requested access route: ${accessLabel}`,
     `Requested visibility: ${visibilityLabel}`,
     "",
-    "Nothing will appear publicly until PF EuroAsia has reviewed and approved the presentation and visibility settings.",
+    "Nothing will appear publicly until PF EuroAsia has reviewed and approved the presentation, access route and visibility settings.",
     "",
     "Property Facilitators EuroAsia",
   ].join("\n");
@@ -107,7 +114,14 @@ export async function POST(request: Request) {
 
   const properties = await readProperties();
   const now = new Date().toISOString();
-  const visibility = normalizePropertyVisibility(body.visibility);
+  const requestedVisibility = normalizePropertyVisibility(body.visibility);
+  const accessLevel = normalizePropertyAccessLevel(body.accessLevel, requestedVisibility);
+  const visibility: VaultProperty["visibility"] =
+    accessLevel === "registered"
+      ? "public"
+      : requestedVisibility === "public"
+        ? "teaser"
+        : requestedVisibility;
   const property: VaultProperty = {
     id: crypto.randomUUID(),
     reference: generatePropertyReference(properties),
@@ -123,6 +137,7 @@ export async function POST(request: Request) {
     image: clean(body.image, 1000),
     secondaryImage: clean(body.secondaryImage, 1000),
     brochure: clean(body.brochure, 2000),
+    accessLevel,
     visibility,
     publicTitle: clean(body.publicTitle, 120),
     publicLocation: clean(body.publicLocation, 120),
