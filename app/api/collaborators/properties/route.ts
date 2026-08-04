@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../lib/collaboratorSession";
 import {
   generatePropertyReference,
+  normalizeImagePosition,
+  normalizePropertyVisibility,
   readProperties,
   writeProperties,
   type VaultProperty,
@@ -16,6 +18,12 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
   if (!apiKey) return;
 
   const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
+  const visibilityLabel =
+    property.visibility === "public"
+      ? "Public listing requested"
+      : property.visibility === "teaser"
+        ? "Public teaser requested"
+        : "Fully confidential";
   const adminText = [
     "A collaborator has submitted a new property for PF EuroAsia review.",
     "",
@@ -25,6 +33,8 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     `Reference: ${property.reference}`,
     `Location: ${property.location}`,
     `Price: ${property.price || "Price on application"}`,
+    `Requested visibility: ${visibilityLabel}`,
+    `Public image permission: ${property.publicImageApproved ? "Confirmed" : "Not confirmed"}`,
     `Brochure: ${property.brochure ? "Attached privately" : "Missing"}`,
     "Authority confirmation: Confirmed by collaborator",
     "",
@@ -39,8 +49,9 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     `Property: ${property.title}`,
     `Reference: ${property.reference}`,
     `Status: Pending PF EuroAsia approval`,
+    `Requested visibility: ${visibilityLabel}`,
     "",
-    "The property will not appear in the Private Collection until PF EuroAsia has reviewed and approved the presentation.",
+    "Nothing will appear publicly until PF EuroAsia has reviewed and approved the presentation and visibility settings.",
     "",
     "Property Facilitators EuroAsia",
   ].join("\n");
@@ -96,6 +107,7 @@ export async function POST(request: Request) {
 
   const properties = await readProperties();
   const now = new Date().toISOString();
+  const visibility = normalizePropertyVisibility(body.visibility);
   const property: VaultProperty = {
     id: crypto.randomUUID(),
     reference: generatePropertyReference(properties),
@@ -110,7 +122,12 @@ export async function POST(request: Request) {
     description: clean(body.description),
     image: clean(body.image, 1000),
     secondaryImage: clean(body.secondaryImage, 1000),
-    brochure: clean(body.brochure, 1000),
+    brochure: clean(body.brochure, 2000),
+    visibility,
+    publicTitle: clean(body.publicTitle, 120),
+    publicLocation: clean(body.publicLocation, 120),
+    publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
+    imagePosition: normalizeImagePosition(body.imagePosition),
     listingPartnerCode: collaborator.partnerCode,
     listingPartnerName: collaborator.partnerName,
     submittedBy: "collaborator",
