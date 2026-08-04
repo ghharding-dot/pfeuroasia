@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import { PrivatePortfolioRegistration } from "../components/PrivatePortfolioRegistration";
 import "./private-portfolio.css";
 import "./private-portfolio-mobile-fix.css";
+import "./client-access.css";
 
 export const metadata: Metadata = {
   title: "Private Property Portfolio | Property Facilitators EuroAsia",
