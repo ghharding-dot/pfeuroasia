@@ -16,15 +16,14 @@ export type PublicPropertySlide = {
 
 export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide[] }) {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (slides.length < 2 || paused) return;
+    if (slides.length < 2) return;
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % slides.length);
     }, 7000);
     return () => window.clearInterval(timer);
-  }, [paused, slides.length]);
+  }, [slides.length]);
 
   if (slides.length === 0) return null;
 
@@ -43,18 +42,15 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
               <em>Full details remain private.</em>
             </h2>
           </div>
-          <p>
-            A carefully approved selection from our private portfolio. Register for access to full particulars, additional photography and protected brochures.
-          </p>
+          <div className={styles.headingCopy}>
+            <strong>{slides.length} approved {slides.length === 1 ? "opportunity" : "opportunities"}</strong>
+            <p>
+              A carefully approved selection from our private portfolio. Register for access to full particulars, additional photography and protected brochures.
+            </p>
+          </div>
         </div>
 
-        <div
-          className={styles.carousel}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
-          onBlurCapture={() => setPaused(false)}
-        >
+        <div className={styles.carousel}>
           <div className={styles.slides} aria-live="polite">
             {slides.map((slide, slideIndex) => (
               <article
@@ -102,16 +98,21 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
                 <button type="button" onClick={() => move(-1)} aria-label="Previous property">←</button>
                 <button type="button" onClick={() => move(1)} aria-label="Next property">→</button>
               </div>
-              <div className={styles.dots} aria-label="Choose property">
-                {slides.map((slide, dotIndex) => (
+
+              <div className={styles.thumbnails} aria-label="Choose a property">
+                {slides.map((slide, thumbnailIndex) => (
                   <button
                     type="button"
-                    className={dotIndex === index ? styles.activeDot : ""}
-                    onClick={() => setIndex(dotIndex)}
-                    aria-label={`Show property ${dotIndex + 1}`}
-                    aria-current={dotIndex === index ? "true" : undefined}
+                    className={`${styles.thumbnail} ${thumbnailIndex === index ? styles.activeThumbnail : ""}`}
+                    onClick={() => setIndex(thumbnailIndex)}
+                    aria-label={`Show property ${thumbnailIndex + 1}: ${slide.title}`}
+                    aria-current={thumbnailIndex === index ? "true" : undefined}
                     key={slide.id}
-                  />
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={slide.image} alt="" style={{ objectPosition: slide.imagePosition }} />
+                    <span>{String(thumbnailIndex + 1).padStart(2, "0")}</span>
+                  </button>
                 ))}
               </div>
             </div>
