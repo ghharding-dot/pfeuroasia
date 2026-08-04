@@ -1,5 +1,8 @@
 import { list, put } from "@vercel/blob";
 
+export type PropertyVisibility = "confidential" | "teaser" | "public";
+export type PropertyImagePosition = "center" | "top" | "bottom" | "left" | "right";
+
 export type VaultProperty = {
   id: string;
   reference: string;
@@ -15,6 +18,11 @@ export type VaultProperty = {
   image: string;
   secondaryImage?: string;
   brochure?: string;
+  visibility?: PropertyVisibility;
+  publicTitle?: string;
+  publicLocation?: string;
+  publicImageApproved?: boolean;
+  imagePosition?: PropertyImagePosition;
   listingPartnerCode?: string;
   listingPartnerName?: string;
   submittedBy?: "admin" | "collaborator";
@@ -26,6 +34,31 @@ export type VaultProperty = {
 };
 
 const CATALOGUE_PATH = "private-portfolio/catalogue.json";
+
+export function normalizePropertyVisibility(value: unknown): PropertyVisibility {
+  return value === "teaser" || value === "public" ? value : "confidential";
+}
+
+export function normalizeImagePosition(value: unknown): PropertyImagePosition {
+  return value === "top" || value === "bottom" || value === "left" || value === "right"
+    ? value
+    : "center";
+}
+
+export function imageObjectPosition(position?: PropertyImagePosition) {
+  switch (position) {
+    case "top":
+      return "center top";
+    case "bottom":
+      return "center bottom";
+    case "left":
+      return "left center";
+    case "right":
+      return "right center";
+    default:
+      return "center center";
+  }
+}
 
 export function generatePropertyReference(properties: VaultProperty[]) {
   const year = new Date().getFullYear().toString().slice(-2);
