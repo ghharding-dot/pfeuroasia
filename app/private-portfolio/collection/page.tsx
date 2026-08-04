@@ -9,7 +9,11 @@ import {
   verifyPrivateClientSession,
 } from "../../lib/portfolioAuth";
 import { findPrivateClientById } from "../../lib/privateClientStore";
-import { readProperties, type VaultProperty } from "../../lib/propertyStore";
+import {
+  normalizePropertyAccessLevel,
+  readProperties,
+  type VaultProperty,
+} from "../../lib/propertyStore";
 import { privateProperties } from "./properties";
 import "../private-portfolio.css";
 import "../portfolio-collection.css";
@@ -43,7 +47,11 @@ export default async function PrivatePortfolioCollectionPage() {
 
   let vaultProperties: VaultProperty[] = [];
   try {
-    vaultProperties = (await readProperties()).filter((property) => property.status === "published");
+    vaultProperties = (await readProperties()).filter(
+      (property) =>
+        property.status === "published" &&
+        normalizePropertyAccessLevel(property.accessLevel, property.visibility) === "private",
+    );
   } catch {
     vaultProperties = [];
   }
@@ -59,9 +67,9 @@ export default async function PrivatePortfolioCollectionPage() {
       <Header />
       <section className="private-collection-hero">
         <div className="site-shell">
-          <p className="eyebrow light">Approved client access</p>
-          <h1>Private Property Collection</h1>
-          <p>Selected opportunities shared confidentially with registered and approved clients.</p>
+          <p className="eyebrow light">Approved private access</p>
+          <h1>Private Off-Market Collection</h1>
+          <p>Genuine private and off-market opportunities shared only with individually approved clients.</p>
           <small className="private-client-session-label">Access approved for {client.fullName}</small>
         </div>
       </section>
