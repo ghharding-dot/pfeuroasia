@@ -20,39 +20,44 @@ export function PrivatePortfolioRegistration() {
 
     const form = new FormData(event.currentTarget);
     const payload = {
-      _subject: "Private Portfolio access request — pfeuroasia.com",
-      request_type: "Private Portfolio registration",
-      full_name: form.get("name"),
+      fullName: form.get("name"),
       nationality: form.get("nationality"),
-      country_of_residence: form.get("country"),
-      residential_address: form.get("address"),
-      telephone_or_whatsapp: form.get("phone"),
+      countryOfResidence: form.get("country"),
+      residentialAddress: form.get("address"),
+      telephone: form.get("phone"),
       email: form.get("email"),
-      wechat_id: form.get("wechat"),
-      preferred_language: form.get("language"),
-      company_name: form.get("company"),
+      wechatId: form.get("wechat"),
+      preferredLanguage: form.get("language"),
+      companyName: form.get("company"),
       occupation: form.get("occupation"),
-      property_type: form.get("propertyType"),
-      preferred_location: form.get("location"),
-      indicative_budget: form.get("budget"),
-      purchase_timeframe: form.get("timeframe"),
-      referral_source: form.get("source"),
-      additional_requirements: form.get("requirements"),
-      _template: "table",
+      propertyType: form.get("propertyType"),
+      preferredLocation: form.get("location"),
+      indicativeBudget: form.get("budget"),
+      purchaseTimeframe: form.get("timeframe"),
+      referralSource: form.get("source"),
+      additionalRequirements: form.get("requirements"),
+      companyWebsite: form.get("companyWebsite"),
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
+      const response = await fetch("/api/private-portfolio/register", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
-      if (!response.ok) throw new Error("Submission failed");
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || "Registration failed");
+      }
       setSubmitted(true);
       event.currentTarget.reset();
       window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch {
-      setError("We could not send your registration. Please try again or email enquiry@pfeuroasia.com.");
+    } catch (caught) {
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "We could not save your registration. Please try again or email enquiry@pfeuroasia.com.",
+      );
     } finally {
       setSending(false);
     }
@@ -66,7 +71,7 @@ export function PrivatePortfolioRegistration() {
           <p className="eyebrow">Registration received</p>
           <h1>Your request is now under review.</h1>
           <p>
-            Thank you for your application. Every request is reviewed individually to protect the privacy of our clients and property owners. Approved applicants will receive private access instructions by email or through their preferred contact channel.
+            Thank you for your application. Every request is reviewed individually to protect the privacy of our clients and property owners. Once approved, you will receive an email explaining how to enter the Private Collection using your email address and a secure one-time code.
           </p>
           <div className="success-response-time">
             <span>Expected response time</span>
@@ -92,8 +97,8 @@ export function PrivatePortfolioRegistration() {
         <div className="approved-access-panel">
           <p className="eyebrow light">Already approved?</p>
           <h2>Enter the private collection</h2>
-          <p>Use the access password supplied by Property Facilitators EuroAsia.</p>
-          <PrivatePortfolioLogin />
+          <p>Use your approved email address. We will send you a secure six-digit access code.</p>
+          <PrivatePortfolioLogin theme="dark" />
         </div>
 
         <div className="registration-notes">
@@ -104,6 +109,11 @@ export function PrivatePortfolioRegistration() {
       </aside>
 
       <form className="portfolio-registration-form" onSubmit={submit}>
+        <label className="portfolio-registration-honeypot" aria-hidden="true">
+          Company website
+          <input name="companyWebsite" tabIndex={-1} autoComplete="off" />
+        </label>
+
         <div className="registration-heading">
           <p className="eyebrow">Request access</p>
           <h2>Prospective purchaser registration</h2>
@@ -153,9 +163,9 @@ export function PrivatePortfolioRegistration() {
           {error && <p className="form-error" role="alert">{error}</p>}
           <div className="registration-submit-row">
             <button className="button button-gold registration-submit" type="submit" disabled={sending}>
-              <span>{sending ? "Sending…" : "Submit registration"}</span> <ArrowIcon />
+              <span>{sending ? "Saving registration…" : "Submit registration"}</span> <ArrowIcon />
             </button>
-            <p>Your information is treated confidentially and used only to assess this request.</p>
+            <p>Your information is encrypted and used only to assess and manage this access request.</p>
           </div>
         </div>
       </form>
