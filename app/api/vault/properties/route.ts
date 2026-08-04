@@ -3,6 +3,8 @@ import { getPartnerContact } from "../../../lib/partnerContacts";
 import { hasVaultAccess } from "../../../lib/vaultSession";
 import {
   generatePropertyReference,
+  normalizeImagePosition,
+  normalizePropertyVisibility,
   readProperties,
   writeProperties,
   type VaultProperty,
@@ -21,6 +23,7 @@ export async function POST(request: Request) {
   const now = new Date().toISOString();
   const status: VaultProperty["status"] = body.status === "published" ? "published" : "draft";
   const listingPartner = getPartnerContact(String(body.listingPartnerCode || "DIRECT"));
+  const visibility = normalizePropertyVisibility(body.visibility);
   const property: VaultProperty = {
     id: crypto.randomUUID(),
     reference: generatePropertyReference(properties),
@@ -36,6 +39,11 @@ export async function POST(request: Request) {
     image: String(body.image || "").trim(),
     secondaryImage: String(body.secondaryImage || "").trim(),
     brochure: String(body.brochure || "").trim(),
+    visibility,
+    publicTitle: String(body.publicTitle || "").trim().slice(0, 120),
+    publicLocation: String(body.publicLocation || "").trim().slice(0, 120),
+    publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
+    imagePosition: normalizeImagePosition(body.imagePosition),
     listingPartnerCode: listingPartner.code,
     listingPartnerName: listingPartner.name,
     submittedBy: "admin",
