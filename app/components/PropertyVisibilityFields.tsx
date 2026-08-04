@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type {
+  PropertyAccessLevel,
   PropertyImagePosition,
   PropertyVisibility,
 } from "../lib/propertyStore";
@@ -9,6 +10,7 @@ import styles from "./PropertyVisibilityFields.module.css";
 
 export function PropertyVisibilityFields({
   defaultVisibility = "confidential",
+  defaultAccessLevel,
   defaultPublicTitle = "",
   defaultPublicLocation = "",
   defaultPublicImageApproved = false,
@@ -16,39 +18,75 @@ export function PropertyVisibilityFields({
   collaboratorRequest = false,
 }: {
   defaultVisibility?: PropertyVisibility;
+  defaultAccessLevel?: PropertyAccessLevel;
   defaultPublicTitle?: string;
   defaultPublicLocation?: string;
   defaultPublicImageApproved?: boolean;
   defaultImagePosition?: PropertyImagePosition;
   collaboratorRequest?: boolean;
 }) {
-  const [visibility, setVisibility] = useState<PropertyVisibility>(defaultVisibility);
+  const initialAccessLevel =
+    defaultAccessLevel || (defaultVisibility === "public" ? "registered" : "private");
+  const [accessLevel, setAccessLevel] = useState<PropertyAccessLevel>(initialAccessLevel);
+  const [visibility, setVisibility] = useState<PropertyVisibility>(
+    initialAccessLevel === "registered"
+      ? "public"
+      : defaultVisibility === "public"
+        ? "teaser"
+        : defaultVisibility,
+  );
+
+  function changeAccessLevel(next: PropertyAccessLevel) {
+    setAccessLevel(next);
+    if (next === "registered") {
+      setVisibility("public");
+    } else if (visibility === "public") {
+      setVisibility("teaser");
+    }
+  }
 
   return (
     <section className={`vault-panel vault-form-section ${styles.panel}`}>
       <div className="vault-section-heading">
         <div>
-          <p className="vault-kicker">Public exposure</p>
-          <h2>{collaboratorRequest ? "Requested visibility" : "Website visibility"}</h2>
+          <p className="vault-kicker">Client access and public exposure</p>
+          <h2>{collaboratorRequest ? "Requested access route" : "Website access route"}</h2>
         </div>
         <p>
           {collaboratorRequest
-            ? "PF EuroAsia reviews and approves every public image and visibility request before publication."
-            : "Choose exactly what may appear publicly. Full property details and brochures remain protected."}
+            ? "PF EuroAsia reviews and approves the requested access route, public image and presentation before publication."
+            : "Choose whether this is a general registered listing or a genuinely private off-market opportunity."}
         </p>
       </div>
 
       <div className={`vault-form-grid ${styles.grid}`}>
         <label>
-          <span>Exposure level</span>
+          <span>Client access level</span>
+          <select
+            name="accessLevel"
+            value={accessLevel}
+            onChange={(event) => changeAccessLevel(event.target.value as PropertyAccessLevel)}
+          >
+            <option value="registered">Registered listing — automatic access after contact verification</option>
+            <option value="private">Private off-market — detailed application and PF EuroAsia approval</option>
+          </select>
+        </label>
+
+        <label>
+          <span>Public presentation</span>
           <select
             name="visibility"
             value={visibility}
             onChange={(event) => setVisibility(event.target.value as PropertyVisibility)}
           >
-            <option value="confidential">Fully confidential — no public photograph</option>
-            <option value="teaser">Public teaser — one photograph, private details</option>
-            <option value="public">Public listing — approved summary details</option>
+            {accessLevel === "registered" ? (
+              <option value="public">Public carousel listing — approved summary and one photograph</option>
+            ) : (
+              <>
+                <option value="confidential">Fully confidential — nothing appears publicly</option>
+                <option value="teaser">Private teaser — one photograph and discreet wording</option>
+              </>
+            )}
           </select>
         </label>
 
@@ -59,7 +97,7 @@ export function PropertyVisibilityFields({
               <input
                 name="publicTitle"
                 defaultValue={defaultPublicTitle}
-                placeholder="Contemporary private estate"
+                placeholder={accessLevel === "registered" ? "Fairways" : "Private property opportunity"}
                 maxLength={120}
               />
             </label>
@@ -98,14 +136,20 @@ export function PropertyVisibilityFields({
       </div>
 
       <div className={styles.note}>
-        {visibility === "confidential" && (
-          <p><strong>Fully confidential:</strong> nothing from this property appears on the public website.</p>
+        {accessLevel === "registered" && (
+          <p>
+            <strong>Registered listing:</strong> the visitor provides their name, email and telephone number, verifies a six-digit email code and receives immediate access to full particulars for 30 days. Your approval is not required.
+          </p>
         )}
-        {visibility === "teaser" && (
-          <p><strong>Public teaser:</strong> one approved photograph and generic wording appear publicly. Visitors must register to see the property details.</p>
+        {accessLevel === "private" && visibility === "teaser" && (
+          <p>
+            <strong>Private off-market teaser:</strong> one approved photograph and discreet wording appear publicly. The client must complete the detailed Private Collection application and receive your approval.
+          </p>
         )}
-        {visibility === "public" && (
-          <p><strong>Public listing:</strong> one approved photograph and selected summary wording appear publicly. The full listing and brochure remain behind registration and verification.</p>
+        {accessLevel === "private" && visibility === "confidential" && (
+          <p>
+            <strong>Fully confidential:</strong> nothing from this property appears publicly. Access remains limited to approved Private Collection clients.
+          </p>
         )}
       </div>
     </section>
