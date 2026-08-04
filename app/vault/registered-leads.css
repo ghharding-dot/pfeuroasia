@@ -1,3 +1,7 @@
+.vault-stats-access {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
 .vault-registered-panel {
   margin-bottom: 26px;
   border-color: rgba(98, 190, 139, .28);
@@ -35,9 +39,19 @@
   text-transform: uppercase;
 }
 
+@media (max-width: 1180px) {
+  .vault-stats-access {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 760px) {
+  .vault-stats-access,
   .vault-registered-lead-row {
     grid-template-columns: 1fr;
+  }
+
+  .vault-registered-lead-row {
     padding: 18px 16px;
   }
 }
