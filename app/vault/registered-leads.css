@@ -1,0 +1,43 @@
+.vault-registered-panel {
+  margin-bottom: 26px;
+  border-color: rgba(98, 190, 139, .28);
+}
+
+.vault-registered-lead-list {
+  display: grid;
+}
+
+.vault-registered-lead-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr);
+  gap: 24px;
+  align-items: center;
+  padding: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.vault-registered-lead-row:last-child {
+  border-bottom: 0;
+}
+
+.vault-registered-badge {
+  border-color: rgba(98, 190, 139, .54) !important;
+  background: rgba(98, 190, 139, .08) !important;
+  color: #9fe0ba !important;
+}
+
+.vault-property-access {
+  margin-top: 9px !important;
+  color: #c9a861 !important;
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .vault-registered-lead-row {
+    grid-template-columns: 1fr;
+    padding: 18px 16px;
+  }
+}
