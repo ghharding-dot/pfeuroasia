@@ -5,27 +5,38 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { PrivatePropertyCard, type PrivatePropertyDisplay } from "../../components/PrivatePropertyCard";
 import {
-  createPortfolioToken,
   PORTFOLIO_COOKIE_NAME,
+  verifyPrivateClientSession,
 } from "../../lib/portfolioAuth";
+import { findPrivateClientById } from "../../lib/privateClientStore";
 import { readProperties, type VaultProperty } from "../../lib/propertyStore";
 import { privateProperties } from "./properties";
 import "../private-portfolio.css";
 import "../portfolio-collection.css";
 
 export const metadata: Metadata = {
-  title: "Private Property Collection | Property Facilitators EuroAsia",
+  title: "Private Property Collection",
   robots: { index: false, follow: false },
 };
 
 export const dynamic = "force-dynamic";
 
 export default async function PrivatePortfolioCollectionPage() {
-  const configuredPassword = process.env.PRIVATE_PORTFOLIO_PASSWORD;
   const cookieStore = await cookies();
-  const accessCookie = cookieStore.get(PORTFOLIO_COOKIE_NAME)?.value;
+  const session = verifyPrivateClientSession(
+    cookieStore.get(PORTFOLIO_COOKIE_NAME)?.value,
+  );
 
-  if (!configuredPassword || accessCookie !== createPortfolioToken(configuredPassword)) {
+  if (!session) {
+    redirect("/private-portfolio/access");
+  }
+
+  const client = await findPrivateClientById(session.clientId);
+  if (
+    !client ||
+    client.status !== "approved" ||
+    client.email !== session.email
+  ) {
     redirect("/private-portfolio/access");
   }
 
@@ -50,6 +61,7 @@ export default async function PrivatePortfolioCollectionPage() {
           <p className="eyebrow light">Approved client access</p>
           <h1>Private Property Collection</h1>
           <p>Selected opportunities shared confidentially with registered and approved clients.</p>
+          <small className="private-client-session-label">Access approved for {client.fullName}</small>
         </div>
       </section>
 
