@@ -19,7 +19,8 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
 
-  const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
+  const partnerNotificationsEmail =
+    process.env.PARTNER_NOTIFICATIONS_EMAIL || "partner-notifications@pfeuroasia.com";
   const visibilityLabel =
     property.visibility === "public"
       ? "Public carousel listing"
@@ -72,8 +73,8 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PF EuroAsia Collaborator Portal <enquiry@pfeuroasia.com>",
-        to: [adminEmail],
+        from: "PF EuroAsia Partner Notifications <partner-notifications@pfeuroasia.com>",
+        to: [partnerNotificationsEmail],
         subject: `Collaborator property awaiting review — ${property.reference}`,
         text: adminText,
         reply_to: collaboratorEmail,
@@ -83,11 +84,11 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "PF EuroAsia Collaborator Portal <enquiry@pfeuroasia.com>",
+        from: "PF EuroAsia Partner Notifications <partner-notifications@pfeuroasia.com>",
         to: [collaboratorEmail],
         subject: `Property submitted for PF EuroAsia review — ${property.reference}`,
         text: collaboratorText,
-        reply_to: adminEmail,
+        reply_to: partnerNotificationsEmail,
       }),
     }),
   ]);
