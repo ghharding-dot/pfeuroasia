@@ -28,7 +28,7 @@
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(8, 10, 9, .08) 10%, rgba(8, 10, 9, .78) 100%),
+    linear-gradient(180deg, rgba(8, 10, 9, .05) 8%, rgba(8, 10, 9, .82) 100%),
     linear-gradient(90deg, rgba(8, 10, 9, .48), transparent 72%);
 }
 
@@ -64,7 +64,7 @@
   display: block;
   max-width: 520px;
   margin-top: 13px;
-  color: rgba(255, 255, 255, .68);
+  color: rgba(255, 255, 255, .72);
   font-size: 12px;
   line-height: 1.65;
 }
@@ -83,22 +83,23 @@
 }
 
 .countryEstates {
-  background-image: url("/images/hero-villa.webp");
-  background-position: center 58%;
+  background-image: url("/images/opportunity-country-estate.webp");
+  background-position: center 52%;
 }
 
 .investment {
-  background-image: url("/images/advisory-interior.webp");
+  background-image: url("/images/opportunity-investment.webp");
+  background-position: center 45%;
 }
 
 .golf {
-  background-image: url("/images/hero-villa.webp");
-  background-position: center 72%;
+  background-image: url("/images/opportunity-golf.webp");
+  background-position: center 52%;
 }
 
 .beachfront {
-  background-image: url("/images/asia-network.webp");
-  background-position: center 64%;
+  background-image: url("/images/opportunity-beachfront.webp");
+  background-position: center 48%;
 }
 
 @media (max-width: 860px) {
