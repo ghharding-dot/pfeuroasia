@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { HomePhase2 } from "./components/HomePhase2";
 import {
   PublicPropertyCarousel,
   type PublicPropertySlide,
@@ -117,23 +118,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="intro-section section-pad">
-        <div className="site-shell intro-grid">
-          <p className="eyebrow">A trusted bridge</p>
-          <div>
-            <h2 className="display-heading">
-              The right property is only half the equation.
-              <em>The right representation is everything.</em>
-            </h2>
-            <p className="large-copy">
-              Property Facilitators EuroAsia combines more than 25 years of
-              prime Costa del Sol market experience with trusted relationships
-              across Asia. We advise fewer clients, more closely—bringing
-              clarity, access and absolute discretion to every mandate.
-            </p>
-          </div>
-        </div>
-      </section>
+      <HomePhase2 />
 
       <section className={styles.regionsSection} id="regions">
         <div className="site-shell">
