@@ -1,0 +1,129 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 54px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  min-height: 285px;
+  overflow: hidden;
+  border: 1px solid rgba(222, 194, 141, .42);
+  background-position: center;
+  background-size: cover;
+  color: white;
+  isolation: isolate;
+  transition: transform 220ms ease, border-color 220ms ease;
+}
+
+.card:hover {
+  border-color: var(--gold-light);
+  transform: translateY(-3px);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(8, 10, 9, .08) 10%, rgba(8, 10, 9, .78) 100%),
+    linear-gradient(90deg, rgba(8, 10, 9, .48), transparent 72%);
+}
+
+.copy {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+}
+
+.copy p {
+  margin: 0 0 10px;
+  color: #ead5aa;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.copy h3 {
+  max-width: 430px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(29px, 3vw, 40px);
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1.03;
+}
+
+.description {
+  display: block;
+  max-width: 520px;
+  margin-top: 13px;
+  color: rgba(255, 255, 255, .68);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.action {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 20px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--gold-light);
+  color: #f1d9a7;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.countryEstates {
+  background-image: url("/images/country-estate.webp");
+}
+
+.investment {
+  background-image: url("/images/investment-opportunity.webp");
+}
+
+.golf {
+  background-image: url("/images/golf-country-club.webp");
+}
+
+.beachfront {
+  background-image: url("/images/beachfront-collection.webp");
+}
+
+@media (max-width: 860px) {
+  .grid {
+    gap: 16px;
+  }
+
+  .card {
+    min-height: 250px;
+  }
+
+  .copy {
+    padding: 22px;
+  }
+}
+
+@media (max-width: 620px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 38px;
+  }
+
+  .card {
+    min-height: 235px;
+  }
+
+  .copy h3 {
+    font-size: 31px;
+  }
+}
