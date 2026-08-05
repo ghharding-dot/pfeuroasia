@@ -6,6 +6,7 @@ import "./globals.css";
 import "./premium-buttons.css";
 import "./europe-asia-image.css";
 import "./horizontal-overflow-fix.css";
+import "./homepage-refinement.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
