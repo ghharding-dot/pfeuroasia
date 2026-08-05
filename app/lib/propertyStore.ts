@@ -1,4 +1,9 @@
 import { list, put } from "@vercel/blob";
+import {
+  normalizePriceAmount,
+  normalizePropertyCurrency,
+  type PropertyCurrency,
+} from "./propertyPrice";
 
 export type PropertyVisibility = "confidential" | "teaser" | "public";
 export type PropertyAccessLevel = "registered" | "private";
@@ -9,7 +14,12 @@ export type VaultProperty = {
   reference: string;
   title: string;
   location: string;
-  price: string;
+  /** Legacy formatted price retained temporarily for existing catalogue records. */
+  price?: string;
+  /** Canonical numeric listing price used for all new and migrated records. */
+  priceAmount?: number;
+  /** ISO-style base currency code for the canonical listing price. */
+  priceCurrency?: PropertyCurrency;
   bedrooms: number;
   bathrooms: number;
   plotSize: string;
@@ -83,6 +93,20 @@ export function generatePropertyReference(properties: VaultProperty[]) {
   return `${prefix}${String(highest + 1).padStart(2, "0")}`;
 }
 
+function normalizeStoredProperty(value: unknown): VaultProperty | null {
+  if (!value || typeof value !== "object") return null;
+  const property = value as VaultProperty;
+
+  const priceAmount = normalizePriceAmount(property.priceAmount ?? property.price);
+  const priceCurrency = normalizePropertyCurrency(property.priceCurrency);
+
+  return {
+    ...property,
+    priceAmount,
+    priceCurrency,
+  };
+}
+
 export async function readProperties(): Promise<VaultProperty[]> {
   const result = await list({ prefix: CATALOGUE_PATH, limit: 1 });
   const blob = result.blobs.find((item) => item.pathname === CATALOGUE_PATH);
@@ -91,7 +115,11 @@ export async function readProperties(): Promise<VaultProperty[]> {
   const response = await fetch(blob.url, { cache: "no-store" });
   if (!response.ok) return [];
   const parsed = await response.json();
-  return Array.isArray(parsed) ? parsed : [];
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed
+    .map(normalizeStoredProperty)
+    .filter((property): property is VaultProperty => Boolean(property));
 }
 
 export async function writeProperties(properties: VaultProperty[]) {
