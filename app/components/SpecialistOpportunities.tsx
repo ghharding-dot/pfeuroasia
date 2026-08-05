@@ -6,16 +6,16 @@ const opportunities = [
     title: "Andalucía Country Estates",
     descriptor: "Properties with more than 20,000 m² of land.",
     description:
-      "Large private estates, fincas, cortijos, equestrian, agricultural and lifestyle properties with substantial land.",
+      "Exclusive estates, fincas and country homes offering privacy, established grounds and substantial land.",
     action: "Register requirements",
     href: "/opportunities/country-estates",
     imageClass: styles.countryEstates,
   },
   {
-    title: "Private Investment Opportunities",
-    descriptor: "Selected property-led investment opportunities.",
+    title: "International Investment Opportunities",
+    descriptor: "Selected international property-led opportunities.",
     description:
-      "Hotels, commercial property, development sites, refurbishment projects and income-producing assets.",
+      "Residential, commercial and development opportunities across Spain, the Middle East and Malaysia through our trusted collaboration network.",
     action: "Register interest",
     href: "/opportunities/investment-opportunities",
     imageClass: styles.investment,
@@ -24,7 +24,7 @@ const opportunities = [
     title: "Golf & Country Club Homes",
     descriptor: "Residences within prestigious golf communities.",
     description:
-      "Selected villas and apartments in established golf and country club settings across Southern Spain.",
+      "Luxury villas and residences in established golf and country club settings across Southern Spain.",
     action: "Register requirements",
     href: "/enquire",
     imageClass: styles.golf,
@@ -33,7 +33,7 @@ const opportunities = [
     title: "Beachfront Collection",
     descriptor: "Prime homes in exceptional coastal settings.",
     description:
-      "Beachfront and beachside residences selected for position, quality, privacy and lifestyle appeal.",
+      "Frontline beachfront and beachside residences selected for position, quality, privacy and lifestyle appeal.",
     action: "Register interest",
     href: "/enquire",
     imageClass: styles.beachfront,
