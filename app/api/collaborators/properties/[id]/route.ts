@@ -22,7 +22,8 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return;
 
-  const adminEmail = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
+  const partnerNotificationsEmail =
+    process.env.PARTNER_NOTIFICATIONS_EMAIL || "partner-notifications@pfeuroasia.com";
   const visibilityLabel =
     property.visibility === "public"
       ? "Public carousel listing"
@@ -60,8 +61,8 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "PF EuroAsia Collaborator Portal <enquiry@pfeuroasia.com>",
-      to: [adminEmail],
+      from: "PF EuroAsia Partner Notifications <partner-notifications@pfeuroasia.com>",
+      to: [partnerNotificationsEmail],
       subject: `Collaborator property updated — ${property.reference}`,
       text,
       reply_to: collaboratorEmail,
