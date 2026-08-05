@@ -1,5 +1,6 @@
 import { list, put } from "@vercel/blob";
 import {
+  inferLegacyCurrency,
   normalizePriceAmount,
   normalizePropertyCurrency,
   type PropertyCurrency,
@@ -98,7 +99,9 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
   const property = value as VaultProperty;
 
   const priceAmount = normalizePriceAmount(property.priceAmount ?? property.price);
-  const priceCurrency = normalizePropertyCurrency(property.priceCurrency);
+  const priceCurrency = property.priceCurrency
+    ? normalizePropertyCurrency(property.priceCurrency)
+    : inferLegacyCurrency(property.price);
 
   return {
     ...property,
