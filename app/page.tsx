@@ -19,20 +19,26 @@ const services = [
   {
     number: "01",
     title: "Acquisition advisory",
-    text: "Private search, rigorous qualification and discreet representation for exceptional homes across Southern Spain.",
+    text: "Strategic property acquisition for private clients, family offices and investors, including on-market and discreet off-market opportunities across Spain, Portugal, the Middle East and Asia.",
     href: "/services/acquisition",
   },
   {
     number: "02",
     title: "International sales",
-    text: "Positioning Spanish property for qualified buyers through trusted private networks across Europe and Asia.",
+    text: "Positioning exceptional Spanish, Middle Eastern and Malaysian properties for qualified international buyers through trusted private networks across Europe, the Middle East and Asia.",
     href: "/services/international-sales",
   },
   {
     number: "03",
-    title: "Relocation & concierge",
-    text: "Practical, trusted support from first viewing to settled-in ownership—before, during and long after completion.",
+    title: "Relocation",
+    text: "Assistance with residency and visa applications, company formation and ownership structures through our trusted legal collaboration network in Spain, Portugal, Saudi Arabia and Asia.",
     href: "/services/relocation-concierge",
+  },
+  {
+    number: "04",
+    title: "Concierge services & luxury rentals",
+    text: "Access to high-quality villa rentals throughout Southern Spain, together with private aviation, luxury car hire, yacht charter, security and bespoke lifestyle services through our trusted partners.",
+    href: "/luxury-villa-rentals",
   },
 ];
 
@@ -210,8 +216,9 @@ export default async function Home() {
               <h2>Private service.<br />Global perspective.</h2>
             </div>
             <p>
-              A focused advisory model for buying, selling and establishing a
-              life in Spain—with one point of contact throughout.
+              A focused international advisory model for acquiring, selling,
+              relocating and arranging exceptional stays—with one trusted point
+              of contact throughout.
             </p>
           </div>
 
