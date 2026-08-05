@@ -6,11 +6,11 @@ import {
   PublicPropertyCarousel,
   type PublicPropertySlide,
 } from "./components/PublicPropertyCarousel";
+import { SpecialistOpportunities } from "./components/SpecialistOpportunities";
 import {
   imageObjectPosition,
   readProperties,
 } from "./lib/propertyStore";
-import opportunityStyles from "./HomeOpportunities.module.css";
 import styles from "./HomeRegions.module.css";
 
 export const dynamic = "force-dynamic";
@@ -303,41 +303,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="portfolio-grid">
-            <Link
-              className="portfolio-card portfolio-estate"
-              href="/opportunities/country-estates"
-              aria-label="Register requirements for country estates in Andalusia"
-            >
-              <span className="image-note">Specialist search</span>
-              <div className="portfolio-card-copy">
-                <p>Andalusia · More than 20,000 m² of land</p>
-                <h3>Country Estates</h3>
-                <span>
-                  Large private estates, fincas, cortijos, equestrian,
-                  agricultural and lifestyle properties with substantial land.
-                </span>
-                <span className={opportunityStyles.cardAction}>Register requirements →</span>
-              </div>
-            </Link>
-
-            <Link
-              className="portfolio-card portfolio-contemporary"
-              href="/opportunities/investment-opportunities"
-              aria-label="Register interest in private investment opportunities"
-            >
-              <span className="image-note">Confidential introductions</span>
-              <div className="portfolio-card-copy">
-                <p>Property-led investment · Selected opportunities</p>
-                <h3>Private Investment Opportunities</h3>
-                <span>
-                  Hotels, commercial property, development sites, land,
-                  refurbishment projects and income-producing assets.
-                </span>
-                <span className={opportunityStyles.cardAction}>Register interest →</span>
-              </div>
-            </Link>
-          </div>
+          <SpecialistOpportunities />
 
           <p className="portfolio-disclaimer">
             Opportunities may be available publicly or by private introduction.
