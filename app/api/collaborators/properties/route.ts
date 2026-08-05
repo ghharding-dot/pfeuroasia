@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../lib/collaboratorSession";
+import { formatPropertyCurrency, normalizePriceAmount, normalizePropertyCurrency } from "../../../lib/propertyPrice";
 import {
   generatePropertyReference,
   normalizeImagePosition,
@@ -29,6 +30,9 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     property.accessLevel === "registered"
       ? "Registered listing — automatic access after contact verification"
       : "Private off-market — detailed application and PF EuroAsia approval";
+  const priceLabel = property.priceAmount
+    ? formatPropertyCurrency(property.priceAmount, property.priceCurrency || "EUR")
+    : "Price on application";
   const adminText = [
     "A collaborator has submitted a new property for PF EuroAsia review.",
     "",
@@ -37,7 +41,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     `Property: ${property.title}`,
     `Reference: ${property.reference}`,
     `Location: ${property.location}`,
-    `Price: ${property.price || "Price on application"}`,
+    `Price: ${priceLabel}`,
     `Requested access route: ${accessLabel}`,
     `Requested visibility: ${visibilityLabel}`,
     `Public image permission: ${property.publicImageApproved ? "Confirmed" : "Not confirmed"}`,
@@ -112,6 +116,14 @@ export async function POST(request: Request) {
     );
   }
 
+  const priceAmount = normalizePriceAmount(body.priceAmount);
+  if (body.priceAmount && !priceAmount) {
+    return NextResponse.json(
+      { error: "Enter the listing price as numbers only, for example 8900000." },
+      { status: 400 },
+    );
+  }
+
   const properties = await readProperties();
   const now = new Date().toISOString();
   const requestedVisibility = normalizePropertyVisibility(body.visibility);
@@ -127,7 +139,8 @@ export async function POST(request: Request) {
     reference: generatePropertyReference(properties),
     title: clean(body.title, 180),
     location: clean(body.location, 180),
-    price: clean(body.price, 120),
+    priceAmount,
+    priceCurrency: normalizePropertyCurrency(body.priceCurrency),
     bedrooms: Number(body.bedrooms || 0),
     bathrooms: Number(body.bathrooms || 0),
     plotSize: clean(body.plotSize, 120),
