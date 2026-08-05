@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./PublicPropertyCarousel.module.css";
 
 export type PublicPropertySlide = {
@@ -15,8 +15,25 @@ export type PublicPropertySlide = {
   price?: string;
 };
 
+const FALLBACK_EUR_USD_RATE = 1.16;
+
+function extractEuroAmount(price?: string) {
+  if (!price || !price.includes("€")) return undefined;
+  const amount = Number(price.replace(/[^0-9]/g, ""));
+  return Number.isFinite(amount) && amount > 0 ? amount : undefined;
+}
+
+function formatUsd(amount: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
 export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide[] }) {
   const [index, setIndex] = useState(0);
+  const [eurUsdRate, setEurUsdRate] = useState(FALLBACK_EUR_USD_RATE);
 
   useEffect(() => {
     if (slides.length < 2) return;
@@ -25,6 +42,33 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
     }, 7000);
     return () => window.clearInterval(timer);
   }, [slides.length]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    fetch("https://api.frankfurter.app/latest?from=EUR&to=USD", {
+      signal: controller.signal,
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        const rate = Number(data?.rates?.USD);
+        if (Number.isFinite(rate) && rate > 0) setEurUsdRate(rate);
+      })
+      .catch(() => {
+        // The fallback rate keeps the display available if the rate service is unreachable.
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const approximateUsdPrices = useMemo(
+    () =>
+      slides.map((slide) => {
+        const euroAmount = extractEuroAmount(slide.price);
+        return euroAmount ? `Approx. ${formatUsd(euroAmount * eurUsdRate)}` : "";
+      }),
+    [slides, eurUsdRate],
+  );
 
   if (slides.length === 0) return null;
 
@@ -82,7 +126,14 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
                     <p className={styles.location}>{slide.location}</p>
                     <h3>{slide.title}</h3>
                     {slide.visibility === "public" && slide.price && (
-                      <strong className={styles.price}>{slide.price}</strong>
+                      <div className={styles.priceBlock}>
+                        <strong className={styles.price}>{slide.price}</strong>
+                        {approximateUsdPrices[slideIndex] && (
+                          <span className={styles.convertedPrice}>
+                            {approximateUsdPrices[slideIndex]}
+                          </span>
+                        )}
+                      </div>
                     )}
                     <p className={styles.description}>
                       {registered
