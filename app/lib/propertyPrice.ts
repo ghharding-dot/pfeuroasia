@@ -9,14 +9,23 @@ export function normalizePriceAmount(value: unknown): number | undefined {
   const cleaned = value.replace(/[^0-9.,]/g, "").trim();
   if (!cleaned) return undefined;
 
+  const separators = cleaned.match(/[.,]/g) || [];
   let normalized = cleaned;
-  const lastComma = cleaned.lastIndexOf(",");
-  const lastDot = cleaned.lastIndexOf(".");
 
-  if (lastComma > lastDot && cleaned.length - lastComma <= 3) {
-    normalized = cleaned.replace(/\./g, "").replace(",", ".");
-  } else {
-    normalized = cleaned.replace(/,/g, "");
+  if (separators.length > 1) {
+    const groups = cleaned.split(/[.,]/);
+    const finalGroup = groups.at(-1) || "";
+    const looksLikeThousands = groups.slice(1).every((group) => group.length === 3);
+
+    normalized = looksLikeThousands
+      ? groups.join("")
+      : `${groups.slice(0, -1).join("")}.${finalGroup}`;
+  } else if (separators.length === 1) {
+    const separator = separators[0];
+    const [whole, fraction = ""] = cleaned.split(separator);
+    normalized = fraction.length === 3 && whole.length >= 1
+      ? `${whole}${fraction}`
+      : `${whole}.${fraction}`;
   }
 
   const amount = Number(normalized);
@@ -27,6 +36,16 @@ export function normalizePropertyCurrency(value: unknown): PropertyCurrency {
   return value === "USD" || value === "GBP" || value === "MYR" || value === "AED"
     ? value
     : "EUR";
+}
+
+export function inferLegacyCurrency(value: unknown): PropertyCurrency {
+  if (typeof value !== "string") return "EUR";
+  const upper = value.toUpperCase();
+  if (upper.includes("USD") || upper.includes("US$") || upper.includes("$")) return "USD";
+  if (upper.includes("GBP") || upper.includes("£")) return "GBP";
+  if (upper.includes("MYR") || upper.includes("RM")) return "MYR";
+  if (upper.includes("AED")) return "AED";
+  return "EUR";
 }
 
 export function formatPropertyCurrency(amount: number, currency: PropertyCurrency) {
