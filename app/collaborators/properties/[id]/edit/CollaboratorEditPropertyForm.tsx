@@ -232,7 +232,29 @@ export function CollaboratorEditPropertyForm({
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" defaultValue={property.title} required /></label>
           <label><span>Location</span><input name="location" defaultValue={property.location} required /></label>
-          <label><span>Price</span><input name="price" defaultValue={property.price} /></label>
+          <label>
+            <span>Listing price</span>
+            <input
+              name="priceAmount"
+              type="number"
+              min="0"
+              step="1"
+              inputMode="numeric"
+              defaultValue={property.priceAmount || ""}
+              placeholder="8900000"
+            />
+            <small>Numbers only. Currency formatting is added automatically.</small>
+          </label>
+          <label>
+            <span>Currency</span>
+            <select name="priceCurrency" defaultValue={property.priceCurrency || "EUR"}>
+              <option value="EUR">EUR — Euro</option>
+              <option value="USD">USD — US Dollar</option>
+              <option value="GBP">GBP — British Pound</option>
+              <option value="MYR">MYR — Malaysian Ringgit</option>
+              <option value="AED">AED — UAE Dirham</option>
+            </select>
+          </label>
           <label><span>Bedrooms</span><input name="bedrooms" type="number" min="0" defaultValue={property.bedrooms} /></label>
           <label><span>Bathrooms</span><input name="bathrooms" type="number" min="0" defaultValue={property.bathrooms} /></label>
           <label><span>Built size</span><input name="builtSize" defaultValue={property.builtSize} /></label>
