@@ -27,6 +27,7 @@ function formatUsd(amount: number) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
+    currencyDisplay: "narrowSymbol",
     maximumFractionDigits: 0,
   }).format(amount);
 }
@@ -65,7 +66,7 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
     () =>
       slides.map((slide) => {
         const euroAmount = extractEuroAmount(slide.price);
-        return euroAmount ? `Approx. ${formatUsd(euroAmount * eurUsdRate)}` : "";
+        return euroAmount ? `Approx. US${formatUsd(euroAmount * eurUsdRate)} USD` : "";
       }),
     [slides, eurUsdRate],
   );
