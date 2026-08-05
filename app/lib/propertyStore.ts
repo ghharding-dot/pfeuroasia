@@ -1,5 +1,6 @@
 import { list, put } from "@vercel/blob";
 import {
+  formatPropertyCurrency,
   inferLegacyCurrency,
   normalizePriceAmount,
   normalizePropertyCurrency,
@@ -15,7 +16,7 @@ export type VaultProperty = {
   reference: string;
   title: string;
   location: string;
-  /** Legacy formatted price retained temporarily for existing catalogue records. */
+  /** Formatted compatibility value generated from the canonical numeric fields. */
   price?: string;
   /** Canonical numeric listing price used for all new and migrated records. */
   priceAmount?: number;
@@ -102,9 +103,13 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
   const priceCurrency = property.priceCurrency
     ? normalizePropertyCurrency(property.priceCurrency)
     : inferLegacyCurrency(property.price);
+  const price = priceAmount
+    ? formatPropertyCurrency(priceAmount, priceCurrency)
+    : property.price || undefined;
 
   return {
     ...property,
+    price,
     priceAmount,
     priceCurrency,
   };
