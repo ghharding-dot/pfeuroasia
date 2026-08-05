@@ -83,19 +83,22 @@
 }
 
 .countryEstates {
-  background-image: url("/images/country-estate.webp");
+  background-image: url("/images/hero-villa.webp");
+  background-position: center 58%;
 }
 
 .investment {
-  background-image: url("/images/investment-opportunity.webp");
+  background-image: url("/images/advisory-interior.webp");
 }
 
 .golf {
-  background-image: url("/images/golf-country-club.webp");
+  background-image: url("/images/hero-villa.webp");
+  background-position: center 72%;
 }
 
 .beachfront {
-  background-image: url("/images/beachfront-collection.webp");
+  background-image: url("/images/asia-network.webp");
+  background-position: center 64%;
 }
 
 @media (max-width: 860px) {
@@ -114,16 +117,34 @@
 
 @media (max-width: 620px) {
   .grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     margin-top: 38px;
   }
 
   .card {
-    min-height: 235px;
+    min-height: 245px;
+  }
+
+  .copy {
+    padding: 16px;
+  }
+
+  .copy p {
+    font-size: 7px;
   }
 
   .copy h3 {
-    font-size: 31px;
+    font-size: 23px;
+  }
+
+  .description {
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .action {
+    margin-top: 14px;
+    font-size: 7px;
   }
 }
