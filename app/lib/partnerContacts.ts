@@ -43,6 +43,10 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
     code: "FIX",
     name: "The Fixer",
     email: "robert@bazothefixer.com",
+    loginEmails: [
+      "robert@bazothefixer.com",
+      "bazo.estate@gmail.com",
+    ],
   },
   LEG: {
     code: "LEG",
