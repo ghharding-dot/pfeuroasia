@@ -135,22 +135,23 @@ export default async function Home() {
         <div className="site-shell">
           <div className={styles.heading}>
             <div>
-              <p className="eyebrow">Explore our world</p>
-              <h2>Three regions.<em>One trusted relationship.</em></h2>
+              <p className="eyebrow">Property in Spain</p>
+              <h2>Marbella & Benahavís.<em>The Costa del Sol.</em></h2>
             </div>
             <p>
-              Begin with the market that interests you, then explore the
-              locations and services available through our direct network.
+              Continue through our established Spain property service, including
+              Marbella, La Zagaleta, El Madroñal, private estates and luxury
+              villa rentals.
             </p>
           </div>
 
           <div className={styles.regionGrid}>
             <article className={`${styles.regionCard} ${styles.spain}`}>
               <div className={styles.regionInner}>
-                <span className={styles.regionLabel}>Europe</span>
+                <span className={styles.regionLabel}>Spain · Costa del Sol</span>
                 <div className={styles.regionCopy}>
                   <h3>Spain</h3>
-                  <p>Luxury residential property, private estates and relocation across Marbella and the Costa del Sol.</p>
+                  <p>Luxury residential property, private estates and relocation across Marbella, Benahavís and the Costa del Sol.</p>
                   <nav className={styles.subLinks} aria-label="Explore Spain">
                     <Link href="/markets/marbella">Marbella</Link>
                     <Link href="/areas/la-zagaleta">La Zagaleta</Link>
@@ -158,40 +159,7 @@ export default async function Home() {
                     <Link href="/private-portfolio">Private estates</Link>
                   </nav>
                 </div>
-                <Link className={styles.cardCta} href="/markets/marbella">Explore Spain →</Link>
-              </div>
-            </article>
-
-            <article className={`${styles.regionCard} ${styles.middleEast}`}>
-              <div className={styles.regionInner}>
-                <span className={styles.regionLabel}>Gulf region</span>
-                <div className={styles.regionCopy}>
-                  <h3>Middle East</h3>
-                  <p>Selected property, investment and private-client opportunities supported by trusted local relationships.</p>
-                  <nav className={styles.subLinks} aria-label="Explore the Middle East">
-                    <Link href="/markets/middle-east#saudi-arabia">Saudi Arabia</Link>
-                    <Link href="/markets/middle-east#uae">UAE</Link>
-                    <Link href="/markets/middle-east#qatar">Qatar</Link>
-                  </nav>
-                </div>
-                <Link className={styles.cardCta} href="/markets/middle-east">Explore Middle East →</Link>
-              </div>
-            </article>
-
-            <article className={`${styles.regionCard} ${styles.malaysia}`}>
-              <div className={styles.regionInner}>
-                <span className={styles.regionLabel}>Southeast Asia</span>
-                <div className={styles.regionCopy}>
-                  <h3>Malaysia</h3>
-                  <p>Property, residency, relocation and business connections centred on Kuala Lumpur and Labuan.</p>
-                  <nav className={styles.subLinks} aria-label="Explore Malaysia">
-                    <Link href="/markets/malaysia">Kuala Lumpur</Link>
-                    <Link href="/markets/malaysia">Developments</Link>
-                    <Link href="/services/relocation-concierge">Relocation</Link>
-                    <Link href="/enquire">Labuan</Link>
-                  </nav>
-                </div>
-                <Link className={styles.cardCta} href="/markets/malaysia">Explore Malaysia →</Link>
+                <Link className={styles.cardCta} href="/markets/marbella">Explore Spain property →</Link>
               </div>
             </article>
           </div>
