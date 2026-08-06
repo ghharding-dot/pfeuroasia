@@ -4,10 +4,40 @@ import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { getPartnerReferral } from "../lib/partner-referrals";
 
-const goals = [
-  { value: "buy", title: "Acquire a property", text: "Private search and buyer representation in Spain." },
-  { value: "sell", title: "Sell a property", text: "International positioning for an exceptional Spanish home." },
-  { value: "partner", title: "Discuss a partnership", text: "Cross-border brokerage and professional collaboration." },
+const spainGoals = [
+  {
+    value: "buy",
+    title: "Acquire a property",
+    text: "Private search and buyer representation in Spain.",
+  },
+  {
+    value: "sell",
+    title: "Sell a property",
+    text: "International positioning for an exceptional Spanish home.",
+  },
+  {
+    value: "partner",
+    title: "Discuss a partnership",
+    text: "Cross-border brokerage and professional collaboration.",
+  },
+];
+
+const asiaGoals = [
+  {
+    value: "asia-residency-company",
+    title: "Residency & company setup",
+    text: "Residency pathways, relocation and company formation in Malaysia and selected Asian jurisdictions.",
+  },
+  {
+    value: "asia-partnership",
+    title: "Discuss a partnership",
+    text: "Business expansion, professional collaboration and regional introductions.",
+  },
+  {
+    value: "asia-property",
+    title: "Acquire a property in Asia",
+    text: "Selected residential and investment opportunities, beginning with Malaysia.",
+  },
 ];
 
 const standardBudgetOptions = [
@@ -18,7 +48,59 @@ const standardBudgetOptions = [
   "Prefer to discuss",
 ];
 
+const asiaBudgetOptions = [
+  "Under US$250,000",
+  "US$250,000 – US$500,000",
+  "US$500,000 – US$1m",
+  "US$1m+",
+  "Prefer to discuss",
+];
+
+const asiaGoalDetails: Record<
+  string,
+  {
+    legend: string;
+    hint: string;
+    locationLabel: string;
+    locationPlaceholder: string;
+    budgetLabel: string;
+    messagePlaceholder: string;
+  }
+> = {
+  "asia-residency-company": {
+    legend: "Tell us about your residency or company plans.",
+    hint:
+      "An outline is enough. We will identify the appropriate local specialists and discuss the process with you personally.",
+    locationLabel: "Preferred country or jurisdiction",
+    locationPlaceholder: "e.g. Malaysia, Labuan, Singapore or Hong Kong",
+    budgetLabel: "Indicative setup / investment level",
+    messagePlaceholder:
+      "Residency objectives, family requirements, company activity, preferred timing or other priorities…",
+  },
+  "asia-partnership": {
+    legend: "Tell us about the partnership you would like to discuss.",
+    hint:
+      "Share the market, opportunity or professional relationship you are considering.",
+    locationLabel: "Target market or partnership area",
+    locationPlaceholder: "e.g. Malaysia property, business expansion or professional services",
+    budgetLabel: "Indicative project / investment level",
+    messagePlaceholder:
+      "Your organisation, proposed collaboration, target markets, timing and intended outcome…",
+  },
+  "asia-property": {
+    legend: "Tell us about the property you are seeking in Asia.",
+    hint:
+      "An outline is enough. We will discuss location, use, investment objectives and suitable opportunities personally.",
+    locationLabel: "Preferred market or property type",
+    locationPlaceholder: "e.g. Kuala Lumpur apartment, investment property or development",
+    budgetLabel: "Indicative property budget",
+    messagePlaceholder:
+      "Preferred location, property type, intended use, timing, yield expectations or lifestyle priorities…",
+  },
+};
+
 export type EnquiryInterest = "country-estates" | "investment-opportunities";
+export type EnquiryJourney = "spain" | "asia";
 
 const interestConfig: Record<
   EnquiryInterest,
@@ -89,6 +171,7 @@ const initialDetails = { location: "", budget: "", message: "" };
 type EnquiryFlowProps = {
   partnerSlug?: string;
   interest?: EnquiryInterest;
+  journey?: EnquiryJourney;
 };
 
 type SubmissionResponse = {
@@ -113,6 +196,7 @@ type EnquiryPayload = {
   partner_slug: string;
   language: string;
   website_region: FormDataEntryValue | string;
+  website_journey: EnquiryJourney;
   company_website: FormDataEntryValue | null;
 };
 
@@ -131,6 +215,7 @@ async function deliverFromBrowser(
     recipients.push("robert@bazothefixer.com");
   }
 
+  const subjectType = payload.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
   const record = {
     reference,
     submitted_at: new Date().toISOString(),
@@ -140,6 +225,7 @@ async function deliverFromBrowser(
     partner_name: partner?.name || "Direct website enquiry",
     partner_slug: payload.partner_slug || "direct",
     website_region: asText(payload.website_region) || "International",
+    website_journey: payload.website_journey,
     language: payload.language || "en",
     enquiry_type: payload.enquiry_type,
     preferred_area_or_property: payload.preferred_area_or_property,
@@ -152,7 +238,7 @@ async function deliverFromBrowser(
     telephone_or_whatsapp: asText(payload.telephone_or_whatsapp),
     wechat_id: asText(payload.wechat_id),
     current_location: asText(payload.current_location),
-    _subject: `New confidential property enquiry via ${partner ? partner.name : "PF EuroAsia website"}`,
+    _subject: `New confidential ${subjectType} via ${partner ? partner.name : "PF EuroAsia website"}`,
     _template: "table",
     _replyto: asText(payload.email),
   };
@@ -178,11 +264,19 @@ async function deliverFromBrowser(
   );
 }
 
-export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
+export function EnquiryFlow({
+  partnerSlug,
+  interest,
+  journey = "spain",
+}: EnquiryFlowProps) {
   const partner = getPartnerReferral(partnerSlug);
   const preset = interest ? interestConfig[interest] : undefined;
+  const isAsia = journey === "asia";
+  const goals = isAsia ? asiaGoals : spainGoals;
   const [step, setStep] = useState(preset ? 2 : 1);
-  const [goal, setGoal] = useState(preset?.enquiryType || (partner ? "buy" : ""));
+  const [goal, setGoal] = useState(
+    preset?.enquiryType || (partner ? (isAsia ? "asia-property" : "buy") : ""),
+  );
   const [details, setDetails] = useState(() =>
     preset
       ? { ...initialDetails, location: preset.defaultLocation }
@@ -195,7 +289,8 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
 
   const totalSteps = preset ? 2 : 3;
   const progressStep = preset ? step - 1 : step;
-  const budgetOptions = preset?.budgetOptions || standardBudgetOptions;
+  const asiaDetail = isAsia ? asiaGoalDetails[goal] : undefined;
+  const budgetOptions = preset?.budgetOptions || (isAsia ? asiaBudgetOptions : standardBudgetOptions);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -217,7 +312,8 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
       current_location: form.get("country"),
       partner_slug: partnerSlug || "",
       language: document.documentElement.lang || "en",
-      website_region: form.get("desk") || "International",
+      website_region: form.get("desk") || (isAsia ? "Asia & Malaysia desk" : "International"),
+      website_journey: journey,
       company_website: form.get("company_website"),
     };
 
@@ -253,12 +349,16 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
         <h1>Thank you.<br />Your conversation starts here.</h1>
         <p>
           {preset?.successText ||
-            `Your confidential enquiry has been sent to our team${
-              partner ? ` and ${partner.name}` : ""
-            }. We will respond personally using your preferred contact method.`}
+            (isAsia
+              ? "Your confidential Asia enquiry has been sent to our team. We will respond personally using your preferred contact method."
+              : `Your confidential enquiry has been sent to our team${
+                  partner ? ` and ${partner.name}` : ""
+                }. We will respond personally using your preferred contact method.`)}
         </p>
         <p><strong>Your enquiry reference: {reference}</strong></p>
-        <Link className="text-link" href="/">Return to the website <span>→</span></Link>
+        <Link className="text-link" href={isAsia ? "/asia-gateway" : "/"}>
+          Return to the website <span>→</span>
+        </Link>
       </section>
     );
   }
@@ -266,11 +366,15 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
   return (
     <section className="enquiry-shell site-shell">
       <aside className="enquiry-aside">
-        <p className="eyebrow light">{preset?.kicker || "Confidential enquiry"}</p>
-        <h1>{preset?.heading || "How may we help?"}</h1>
+        <p className="eyebrow light">
+          {preset?.kicker || (isAsia ? "Asia Gateway · Confidential enquiry" : "Confidential enquiry")}
+        </p>
+        <h1>{preset?.heading || (isAsia ? "How may we help in Asia?" : "How may we help?")}</h1>
         <p>
           {preset?.intro ||
-            "Share a little about your objectives. Your enquiry will be handled personally and in confidence."}
+            (isAsia
+              ? "Tell us whether you are considering residency, company setup, a professional partnership or property acquisition in Asia. Your enquiry will be handled personally and in confidence."
+              : "Share a little about your objectives. Your enquiry will be handled personally and in confidence.")}
         </p>
         {preset && (
           <p>
@@ -309,35 +413,51 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
             <div className="goal-options">
               {goals.map((item) => (
                 <label className={goal === item.value ? "selected" : ""} key={item.value}>
-                  <input type="radio" name="goal" value={item.value} checked={goal === item.value} onChange={() => setGoal(item.value)} />
+                  <input
+                    type="radio"
+                    name="goal"
+                    value={item.value}
+                    checked={goal === item.value}
+                    onChange={() => setGoal(item.value)}
+                  />
                   <span className="radio-mark" />
                   <span><strong>{item.title}</strong><small>{item.text}</small></span>
                 </label>
               ))}
             </div>
-            <button className="button button-dark form-next" type="button" disabled={!goal} onClick={() => setStep(2)}>Continue <span>→</span></button>
+            <button className="button button-dark form-next" type="button" disabled={!goal} onClick={() => setStep(2)}>
+              Continue <span>→</span>
+            </button>
           </fieldset>
         )}
 
         {step === 2 && (
           <fieldset>
-            <legend>{preset?.formLegend || "Tell us about your requirements."}</legend>
+            <legend>{preset?.formLegend || asiaDetail?.legend || "Tell us about your requirements."}</legend>
             <p className="form-hint">
-              {preset?.formHint || "An outline is enough—we will explore the details together."}
+              {preset?.formHint || asiaDetail?.hint || "An outline is enough—we will explore the details together."}
             </p>
             <div className="form-grid">
               <label>
-                <span>{preset?.locationLabel || "Preferred area or property"}</span>
+                <span>{preset?.locationLabel || asiaDetail?.locationLabel || "Preferred area or property"}</span>
                 <input
                   name="location"
                   value={details.location}
                   onChange={(e) => setDetails({ ...details, location: e.target.value })}
-                  placeholder={preset?.locationPlaceholder || "e.g. La Zagaleta, Marbella"}
+                  placeholder={
+                    preset?.locationPlaceholder ||
+                    asiaDetail?.locationPlaceholder ||
+                    "e.g. La Zagaleta, Marbella"
+                  }
                 />
               </label>
               <label>
-                <span>Indicative budget / investment level</span>
-                <select name="budget" value={details.budget} onChange={(e) => setDetails({ ...details, budget: e.target.value })}>
+                <span>{asiaDetail?.budgetLabel || "Indicative budget / investment level"}</span>
+                <select
+                  name="budget"
+                  value={details.budget}
+                  onChange={(e) => setDetails({ ...details, budget: e.target.value })}
+                >
                   <option value="" disabled>Select a range</option>
                   {budgetOptions.map((option) => <option key={option}>{option}</option>)}
                 </select>
@@ -349,7 +469,11 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
                   rows={5}
                   value={details.message}
                   onChange={(e) => setDetails({ ...details, message: e.target.value })}
-                  placeholder={preset?.messagePlaceholder || "Timing, priorities, privacy requirements or relevant background…"}
+                  placeholder={
+                    preset?.messagePlaceholder ||
+                    asiaDetail?.messagePlaceholder ||
+                    "Timing, priorities, privacy requirements or relevant background…"
+                  }
                 />
               </label>
             </div>
@@ -359,28 +483,66 @@ export function EnquiryFlow({ partnerSlug, interest }: EnquiryFlowProps) {
               ) : (
                 <button className="back-button" type="button" onClick={() => setStep(1)}>← Back</button>
               )}
-              <button className="button button-dark" type="button" onClick={() => setStep(3)}>Continue <span>→</span></button>
+              <button className="button button-dark" type="button" onClick={() => setStep(3)}>
+                Continue <span>→</span>
+              </button>
             </div>
           </fieldset>
         )}
 
         {step === 3 && (
           <fieldset>
-            <legend>Where may we reach you?</legend>
+            <legend>{isAsia ? "Where may our Asia team reach you?" : "Where may we reach you?"}</legend>
             <p className="form-hint">We will use these details only to respond to this enquiry.</p>
             <div className="form-grid">
               <label><span>Full name *</span><input name="name" required autoComplete="name" /></label>
               <label><span>Email address *</span><input name="email" type="email" required autoComplete="email" /></label>
-              <label><span>Contact desk</span><select name="desk" defaultValue={preset ? "Spain desk" : ""}><option value="" disabled>Select a desk</option><option>Spain desk</option><option>Asia & Malaysia desk</option><option>China enquiry</option><option>Middle East desk</option></select></label>
-              <label><span>Preferred channel</span><select name="channel" defaultValue="email"><option value="email">Email</option><option value="whatsapp">WhatsApp</option><option value="wechat">WeChat</option><option value="telephone">Telephone</option></select></label>
+              <label>
+                <span>Contact desk</span>
+                {isAsia ? (
+                  <select name="desk" defaultValue="Asia & Malaysia desk">
+                    <option>Asia & Malaysia desk</option>
+                    <option>Middle East desk</option>
+                    <option>China enquiry</option>
+                    <option>Other Asia market</option>
+                  </select>
+                ) : (
+                  <select name="desk" defaultValue={preset ? "Spain desk" : ""}>
+                    <option value="" disabled>Select a desk</option>
+                    <option>Spain desk</option>
+                    <option>Asia & Malaysia desk</option>
+                    <option>China enquiry</option>
+                    <option>Middle East desk</option>
+                  </select>
+                )}
+              </label>
+              <label>
+                <span>Preferred channel</span>
+                <select name="channel" defaultValue="email">
+                  <option value="email">Email</option>
+                  <option value="whatsapp">WhatsApp</option>
+                  <option value="wechat">WeChat</option>
+                  <option value="telephone">Telephone</option>
+                </select>
+              </label>
               <label><span>Telephone / WhatsApp</span><input name="phone" type="tel" autoComplete="tel" /></label>
               <label><span>WeChat ID</span><input name="wechat" placeholder="For mainland China enquiries" /></label>
               <label><span>Current location</span><input name="country" placeholder="Country or city" /></label>
             </div>
             <p className="china-channel-note">Mainland China: email, WeChat and this secure form are the recommended contact routes.</p>
-            <label className="privacy-check"><input type="checkbox" required /><span>I agree to be contacted regarding this enquiry. I understand that a referred collaboration partner may receive the details and that approximate network location plus a masked IP address may be recorded for security, routing and fraud prevention. <Link href="/privacy">Privacy notice</Link>.</span></label>
+            <label className="privacy-check">
+              <input type="checkbox" required />
+              <span>
+                I agree to be contacted regarding this enquiry. I understand that a referred collaboration partner may receive the details and that approximate network location plus a masked IP address may be recorded for security, routing and fraud prevention. <Link href="/privacy">Privacy notice</Link>.
+              </span>
+            </label>
             {error && <p className="form-error" role="alert">{error}</p>}
-            <div className="form-actions"><button className="back-button" type="button" disabled={sending} onClick={() => setStep(2)}>← Back</button><button className="button button-dark" type="submit" disabled={sending}>{sending ? "Sending…" : "Register interest"} <span>→</span></button></div>
+            <div className="form-actions">
+              <button className="back-button" type="button" disabled={sending} onClick={() => setStep(2)}>← Back</button>
+              <button className="button button-dark" type="submit" disabled={sending}>
+                {sending ? "Sending…" : "Register interest"} <span>→</span>
+              </button>
+            </div>
           </fieldset>
         )}
       </form>
