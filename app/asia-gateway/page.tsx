@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import regionStyles from "../HomeRegions.module.css";
 import styles from "./AsiaGateway.module.css";
 
 const services = [
@@ -88,6 +89,57 @@ export default function AsiaGatewayPage() {
               useful introductions and coordinate the journey from initial
               enquiry to an informed decision.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={regionStyles.regionsSection}>
+        <div className="site-shell">
+          <div className={regionStyles.heading}>
+            <div>
+              <p className="eyebrow">Explore our international markets</p>
+              <h2>Malaysia & the Middle East.<em>Distinct opportunities.</em></h2>
+            </div>
+            <p>
+              These markets now sit within the Asia Gateway rather than the
+              Spain property pathway, keeping each client journey clear and
+              relevant.
+            </p>
+          </div>
+
+          <div className={regionStyles.regionGrid}>
+            <article className={`${regionStyles.regionCard} ${regionStyles.malaysia}`}>
+              <div className={regionStyles.regionInner}>
+                <span className={regionStyles.regionLabel}>Southeast Asia</span>
+                <div className={regionStyles.regionCopy}>
+                  <h3>Malaysia</h3>
+                  <p>Property, residency, relocation and business connections centred on Kuala Lumpur and Labuan.</p>
+                  <nav className={regionStyles.subLinks} aria-label="Explore Malaysia">
+                    <Link href="/markets/malaysia">Kuala Lumpur</Link>
+                    <Link href="/markets/malaysia">Developments</Link>
+                    <Link href="/asia-gateway">Relocation</Link>
+                    <Link href="/enquire">Labuan</Link>
+                  </nav>
+                </div>
+                <Link className={regionStyles.cardCta} href="/markets/malaysia">Explore Malaysia →</Link>
+              </div>
+            </article>
+
+            <article className={`${regionStyles.regionCard} ${regionStyles.middleEast}`}>
+              <div className={regionStyles.regionInner}>
+                <span className={regionStyles.regionLabel}>Gulf region</span>
+                <div className={regionStyles.regionCopy}>
+                  <h3>Middle East</h3>
+                  <p>Selected property, investment and private-client opportunities supported by trusted local relationships.</p>
+                  <nav className={regionStyles.subLinks} aria-label="Explore the Middle East">
+                    <Link href="/markets/middle-east#saudi-arabia">Saudi Arabia</Link>
+                    <Link href="/markets/middle-east#uae">UAE</Link>
+                    <Link href="/markets/middle-east#qatar">Qatar</Link>
+                  </nav>
+                </div>
+                <Link className={regionStyles.cardCta} href="/markets/middle-east">Explore Middle East →</Link>
+              </div>
+            </article>
           </div>
         </div>
       </section>
