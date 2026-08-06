@@ -101,9 +101,10 @@ export default function AsiaGatewayPage() {
               <h2>Malaysia & the Middle East.<em>Distinct opportunities.</em></h2>
             </div>
             <p>
-              These markets now sit within the Asia Gateway rather than the
-              Spain property pathway, keeping each client journey clear and
-              relevant.
+              Begin with the market most relevant to your objectives. Malaysia
+              offers property, lifestyle, residency and business possibilities,
+              while the Gulf region adds selected investment and private-client
+              opportunities through trusted local relationships.
             </p>
           </div>
 
