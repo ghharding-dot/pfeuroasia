@@ -1,0 +1,301 @@
+.hero {
+  position: relative;
+  min-height: 760px;
+  display: flex;
+  align-items: end;
+  overflow: hidden;
+  background: #11161a url('/images/asia-network.webp') center/cover no-repeat;
+  color: #fff;
+  isolation: isolate;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(5, 9, 13, 0.86), rgba(5, 9, 13, 0.42) 58%, rgba(5, 9, 13, 0.2)),
+    linear-gradient(0deg, rgba(4, 7, 10, 0.74), transparent 58%);
+}
+
+.heroInner {
+  padding-block: 210px 104px;
+}
+
+.heroInner h1 {
+  max-width: 850px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(66px, 7vw, 108px);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+}
+
+.heroInner h1 em {
+  display: block;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.heroInner > p:not(.eyebrow) {
+  max-width: 700px;
+  margin: 32px 0 0;
+  color: rgba(255, 255, 255, 0.74);
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.introSection {
+  padding: 108px 0;
+  background: var(--stone);
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 520px);
+  gap: 90px;
+  align-items: start;
+}
+
+.introGrid h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(46px, 4.8vw, 72px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.introGrid h2 em {
+  display: block;
+  color: #8e7754;
+  font-weight: 400;
+}
+
+.introCopy p {
+  margin: 0 0 22px;
+  color: #5d6059;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.servicesSection {
+  padding: 104px 0;
+  background: var(--ink);
+  color: #fff;
+}
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 440px);
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 54px;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(48px, 5vw, 76px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.sectionHeading > p {
+  margin: 0 0 4px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.serviceGrid article {
+  min-height: 235px;
+  padding: 28px 30px;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.serviceGrid article > span {
+  display: block;
+  margin-bottom: 46px;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 13px;
+}
+
+.serviceGrid h3 {
+  margin: 0 0 13px;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.serviceGrid p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.malaysiaSection {
+  padding: 108px 0;
+  background: var(--ivory);
+}
+
+.malaysiaGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 84px;
+  align-items: center;
+}
+
+.malaysiaImage {
+  min-height: 620px;
+  background: url('/images/kl-armani-skyline.webp') center/cover no-repeat;
+}
+
+.malaysiaCopy h2 {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: clamp(54px, 5.3vw, 82px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.malaysiaCopy > p {
+  margin: 0 0 22px;
+  color: #5d6059;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.priceNote {
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.malaysiaCopy .button-dark {
+  margin-top: 12px;
+}
+
+.comingSoon {
+  padding: 96px 0;
+  background: #171916;
+  color: #fff;
+}
+
+.comingSoonInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 520px);
+  gap: 90px;
+  align-items: start;
+}
+
+.comingSoon h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(48px, 4.7vw, 72px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.comingSoonInner > div:last-child > p {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.comingSoonInner .text-link {
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 680px;
+  }
+
+  .heroInner {
+    padding-block: 180px 80px;
+  }
+
+  .introGrid,
+  .sectionHeading,
+  .malaysiaGrid,
+  .comingSoonInner {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .serviceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .malaysiaImage {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    min-height: 640px;
+  }
+
+  .heroInner {
+    padding-block: 150px 64px;
+  }
+
+  .heroInner h1 {
+    font-size: clamp(54px, 15vw, 74px);
+  }
+
+  .heroInner > p:not(.eyebrow) {
+    font-size: 18px;
+  }
+
+  .heroActions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .introSection,
+  .servicesSection,
+  .malaysiaSection,
+  .comingSoon {
+    padding-block: 72px;
+  }
+
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceGrid article {
+    min-height: 205px;
+  }
+
+  .malaysiaImage {
+    min-height: 390px;
+  }
+}
