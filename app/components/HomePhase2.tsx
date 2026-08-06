@@ -92,7 +92,7 @@ export function HomePhase2() {
           <div className={phase2Styles.gatewayCards}>
             <Link
               className={`${phase2Styles.gatewayCard} ${phase2Styles.spainPath}`}
-              href="/markets/marbella"
+              href="#regions"
             >
               <div className={phase2Styles.cardOverlay} />
               <div className={phase2Styles.gatewayCardCopy}>
@@ -109,7 +109,7 @@ export function HomePhase2() {
                   <span>Rent</span>
                   <span>Concierge</span>
                 </div>
-                <strong>Explore Spain <span aria-hidden="true">→</span></strong>
+                <strong>Continue to Spain <span aria-hidden="true">↓</span></strong>
               </div>
             </Link>
 
