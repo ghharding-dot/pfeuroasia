@@ -4,7 +4,17 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "./HeaderMobileDirectory.module.css";
 
-export function Header({ transparent = false }: { transparent?: boolean }) {
+type HeaderProps = {
+  transparent?: boolean;
+  enquireHref?: string;
+  enquireLabel?: string;
+};
+
+export function Header({
+  transparent = false,
+  enquireHref = "/enquire",
+  enquireLabel = "Enquire",
+}: HeaderProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -31,8 +41,8 @@ export function Header({ transparent = false }: { transparent?: boolean }) {
           </Link>
           <Link className="language-link" href="/zh" onClick={() => setOpen(false)}>中文</Link>
           <Link className="language-link" href="/ar" onClick={() => setOpen(false)}>العربية</Link>
-          <Link className="nav-enquire" href="/enquire" onClick={() => setOpen(false)}>
-            Enquire <span>→</span>
+          <Link className="nav-enquire" href={enquireHref} onClick={() => setOpen(false)}>
+            {enquireLabel} <span>→</span>
           </Link>
         </nav>
 
