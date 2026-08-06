@@ -89,37 +89,42 @@ export default async function Home() {
         <div className="hero-shade" />
         <div className="hero-grid site-shell">
           <div className="hero-copy reveal-up">
-            <p className="eyebrow light">Private brokerage · Spain · Middle East · Malaysia</p>
+            <p className="eyebrow light">Europe & Asia connected</p>
             <h1>
-              Exceptional homes.
-              <span>Borderless representation.</span>
+              Your gateway to
+              <span>international opportunities.</span>
             </h1>
             <p className="hero-intro">
-              Independent luxury property advice connecting discerning clients
-              across Europe, the Middle East and Asia.
+              Property · Relocation · Residency · Business Expansion
+            </p>
+            <p className="hero-intro">
+              Helping investors, entrepreneurs, families and internationally mobile professionals unlock new opportunities across Europe and Asia through a trusted network of experienced local partners.
+            </p>
+            <p className="hero-intro">
+              From luxury real estate in Spain to business and residency opportunities in Malaysia, Hong Kong, Singapore and beyond, we make international investment, relocation and expansion straightforward and professionally supported.
             </p>
             <div className="hero-actions">
-              <Link className="button button-gold" href="/enquire">
-                Start a confidential enquiry <span>→</span>
-              </Link>
-              <a className="text-link light-link" href="#regions">
-                Explore our markets <span>↓</span>
+              <a className="button button-gold" href="#regions">
+                Explore opportunities <span>→</span>
               </a>
+              <Link className="text-link light-link" href="/enquire">
+                Book a confidential consultation <span>→</span>
+              </Link>
             </div>
           </div>
 
           <aside className="hero-note reveal-up delay-1">
             <span className="gold-rule" />
-            <p>Collaboration partner</p>
+            <p>Trusted network across Europe & Asia</p>
+            <small>Spain · Malaysia · Hong Kong · Singapore<br />UAE · Thailand</small>
             <a className="iberia-logo-link" href="https://pfiberia.com" target="_blank" rel="noreferrer" aria-label="Visit Property Facilitators Iberia">
               <img src="/images/property-facilitators-iberia-logo.png" alt="Property Facilitators Iberia" />
             </a>
-            <small>Based in Marbella · Asia connected<br />Local intelligence. International reach.</small>
           </aside>
         </div>
 
         <div className="hero-footer site-shell">
-          <p>Spain · Middle East · Malaysia · Luxury Villa Rentals</p>
+          <p>Property · Relocation · Residency · Business Expansion</p>
           <p className="scroll-note">Scroll to discover</p>
         </div>
       </section>
