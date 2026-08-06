@@ -26,7 +26,7 @@ const marketCards = [
 export default function MiddleEastPage() {
   return (
     <main>
-      <Header />
+      <Header enquireHref="/asia-gateway/enquire" enquireLabel="Asia enquiry" />
       <section
         className="market-landing-hero"
         style={{
@@ -85,7 +85,7 @@ export default function MiddleEastPage() {
             Tell us the market, property type or investment objective and we
             will respond personally and in confidence.
           </p>
-          <Link className="button button-gold" href="/enquire">
+          <Link className="button button-gold" href="/asia-gateway/enquire">
             Contact us <span>→</span>
           </Link>
         </div>
