@@ -40,7 +40,11 @@ const services = [
 export default function AsiaGatewayPage() {
   return (
     <main>
-      <Header transparent />
+      <Header
+        transparent
+        enquireHref="/asia-gateway/enquire"
+        enquireLabel="Asia enquiry"
+      />
 
       <section className={styles.hero}>
         <div className={styles.heroOverlay} />
@@ -56,7 +60,7 @@ export default function AsiaGatewayPage() {
             local professionals.
           </p>
           <div className={styles.heroActions}>
-            <Link className="button button-gold" href="/enquire">
+            <Link className="button button-gold" href="/asia-gateway/enquire">
               Arrange a confidential consultation <span>→</span>
             </Link>
             <Link className="text-link light-link" href="/markets/malaysia">
@@ -69,7 +73,7 @@ export default function AsiaGatewayPage() {
       <section className={styles.introSection}>
         <div className={`site-shell ${styles.introGrid}`}>
           <div>
-            <p className="eyebrow">A separate Asia pathway</p>
+            <p className="eyebrow">A dedicated Asia pathway</p>
             <h2>
               Understand the opportunity
               <em>before making the move.</em>
@@ -118,8 +122,8 @@ export default function AsiaGatewayPage() {
                   <nav className={regionStyles.subLinks} aria-label="Explore Malaysia">
                     <Link href="/markets/malaysia">Kuala Lumpur</Link>
                     <Link href="/markets/malaysia">Developments</Link>
-                    <Link href="/asia-gateway">Relocation</Link>
-                    <Link href="/enquire">Labuan</Link>
+                    <Link href="/asia-gateway/enquire">Relocation</Link>
+                    <Link href="/asia-gateway/enquire">Labuan</Link>
                   </nav>
                 </div>
                 <Link className={regionStyles.cardCta} href="/markets/malaysia">Explore Malaysia →</Link>
@@ -212,7 +216,7 @@ export default function AsiaGatewayPage() {
               Hospitality brands and collaborative partners will only be named
               where the relationship has been appropriately authorised.
             </p>
-            <Link className="text-link light-link" href="/enquire">
+            <Link className="text-link light-link" href="/asia-gateway/enquire">
               Register your interest <span>→</span>
             </Link>
           </div>
