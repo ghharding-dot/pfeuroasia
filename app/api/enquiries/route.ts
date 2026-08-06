@@ -18,6 +18,7 @@ type EnquiryPayload = {
   partner_slug?: unknown;
   language?: unknown;
   website_region?: unknown;
+  website_journey?: unknown;
   company_website?: unknown;
 };
 
@@ -188,6 +189,10 @@ async function sendWithResend(args: {
   return true;
 }
 
+function enquirySubjectType(record: Record<string, string>) {
+  return record.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
+}
+
 async function sendFormSubmitFallback(recipient: string, record: Record<string, string>) {
   const response = await fetch(
     `https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`,
@@ -196,7 +201,7 @@ async function sendFormSubmitFallback(recipient: string, record: Record<string, 
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
         ...record,
-        _subject: `New confidential property enquiry via ${record.partner_name}`,
+        _subject: `New confidential ${enquirySubjectType(record)} via ${record.partner_name}`,
         _template: "table",
       }),
     },
@@ -261,6 +266,7 @@ export async function POST(request: NextRequest) {
   const reference = await createReference();
   const submittedAt = new Date().toISOString();
   const detected = detectRequestLocation(request);
+  const websiteJourney = clean(payload.website_journey, 20) === "asia" ? "asia" : "spain";
 
   const record: Record<string, string> = {
     reference,
@@ -271,6 +277,7 @@ export async function POST(request: NextRequest) {
     partner_name: partner?.name || "Direct website enquiry",
     partner_slug: partnerSlug || "direct",
     website_region: clean(payload.website_region, 80) || "International",
+    website_journey: websiteJourney,
     language: clean(payload.language, 40) || "English",
     enquiry_type: enquiryType,
     preferred_area_or_property: clean(payload.preferred_area_or_property),
@@ -309,6 +316,7 @@ export async function POST(request: NextRequest) {
     `Enquiry reference: ${reference}`,
     `Submitted: ${submittedAt}`,
     `Source partner: ${record.partner_name} (${record.partner_code})`,
+    `Website journey: ${record.website_journey}`,
     `Website region: ${record.website_region}`,
     `Language: ${record.language}`,
     "",
@@ -352,12 +360,15 @@ export async function POST(request: NextRequest) {
   try {
     const sentWithResend = await sendWithResend({
       to: recipients,
-      subject: `New confidential property enquiry via ${
+      subject: `New confidential ${enquirySubjectType(record)} via ${
         partner ? partner.name : "PF EuroAsia website"
       }`,
       text: internalText,
       replyTo: email,
-      fromName: "PF EuroAsia Partner Enquiries",
+      fromName:
+        websiteJourney === "asia"
+          ? "PF EuroAsia Asia Enquiries"
+          : "PF EuroAsia Partner Enquiries",
     });
 
     if (sentWithResend) {
