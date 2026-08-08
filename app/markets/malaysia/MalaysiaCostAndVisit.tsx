@@ -149,41 +149,49 @@ export function MalaysiaCostAndVisit() {
           </div>
 
           <div className={styles.hotelRates}>
-            <article>
-              <div className={styles.hotelImage}>
-                <img
-                  src="/images/jw-marriott-kuala-lumpur.webp"
-                  alt="JW Marriott Kuala Lumpur in Bukit Bintang"
-                />
+            <article className={styles.visualCard}>
+              <img
+                className={styles.visualCardImage}
+                src="/images/jw-marriott-kuala-lumpur.webp"
+                alt="JW Marriott Kuala Lumpur in Bukit Bintang"
+              />
+              <div className={styles.visualCardShade} />
+              <div className={styles.visualCardCopy}>
+                <span className={styles.hotelTag}>Indicative stay</span>
+                <h3>JW Marriott Kuala Lumpur</h3>
+                <p className={styles.hotelPrice}>from around <strong>RM500</strong> <span>(€104)</span> / night</p>
+                <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
               </div>
-              <span className={styles.hotelTag}>Indicative stay</span>
-              <h3>JW Marriott Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>from around <strong>RM500</strong> <span>(€104)</span> / night</p>
-              <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
             </article>
-            <article>
-              <div className={`${styles.hotelImage} ${styles.ritzImage}`}>
-                <img
-                  src="/images/ritz-carlton-kuala-lumpur.webp"
-                  alt="Entrance of The Ritz-Carlton, Kuala Lumpur"
-                />
+
+            <article className={`${styles.visualCard} ${styles.ritzCard}`}>
+              <img
+                className={styles.visualCardImage}
+                src="/images/ritz-carlton-kuala-lumpur.webp"
+                alt="Entrance of The Ritz-Carlton, Kuala Lumpur"
+              />
+              <div className={styles.visualCardShade} />
+              <div className={styles.visualCardCopy}>
+                <span className={styles.hotelTag}>Indicative stay</span>
+                <h3>The Ritz-Carlton, Kuala Lumpur</h3>
+                <p className={styles.hotelPrice}>from around <strong>RM650</strong> <span>(€135)</span> / night</p>
+                <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
               </div>
-              <span className={styles.hotelTag}>Indicative stay</span>
-              <h3>The Ritz-Carlton, Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>from around <strong>RM650</strong> <span>(€135)</span> / night</p>
-              <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
             </article>
-            <article className={styles.transferCard}>
-              <div className={styles.hotelImage}>
-                <img
-                  src="/images/luxury-mpv-kuala-lumpur.webp"
-                  alt="Representative black luxury executive MPV for Kuala Lumpur airport transfers"
-                />
+
+            <article className={`${styles.visualCard} ${styles.transferCard}`}>
+              <img
+                className={styles.visualCardImage}
+                src="/images/luxury-mpv-kuala-lumpur.webp"
+                alt="Representative black luxury executive MPV for Kuala Lumpur airport transfers"
+              />
+              <div className={styles.visualCardShade} />
+              <div className={styles.visualCardCopy}>
+                <span className={styles.hotelTag}>Private arrival</span>
+                <h3>KLIA → central Kuala Lumpur</h3>
+                <p className={styles.hotelPrice}>luxury executive MPV from around <strong>RM250</strong> <span>(€52)</span></p>
+                <small>Representative Toyota Alphard / Vellfire-style vehicle shown. Indicative daytime private-transfer pricing; actual vehicle, timing and route affect cost.</small>
               </div>
-              <span className={styles.hotelTag}>Private arrival</span>
-              <h3>KLIA → central Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>luxury executive MPV from around <strong>RM250</strong> <span>(€52)</span></p>
-              <small>Representative Toyota Alphard / Vellfire-style vehicle shown. Indicative daytime private-transfer pricing; actual vehicle, timing and route affect cost.</small>
             </article>
           </div>
 
