@@ -55,7 +55,7 @@ const visitSteps = [
   {
     number: "02",
     title: "Private airport collection",
-    text: "Arrival at Kuala Lumpur International Airport can be met with a pre-arranged private car or luxury MPV, taking you directly to your hotel in central Kuala Lumpur.",
+    text: "Arrival at Kuala Lumpur International Airport can be met with a pre-arranged private car or luxury executive MPV, taking you directly to your hotel in central Kuala Lumpur.",
   },
   {
     number: "03",
@@ -150,22 +150,40 @@ export function MalaysiaCostAndVisit() {
 
           <div className={styles.hotelRates}>
             <article>
+              <div className={styles.hotelImage}>
+                <img
+                  src="/images/jw-marriott-kuala-lumpur.webp"
+                  alt="JW Marriott Kuala Lumpur in Bukit Bintang"
+                />
+              </div>
               <span className={styles.hotelTag}>Indicative stay</span>
               <h3>JW Marriott Kuala Lumpur</h3>
               <p className={styles.hotelPrice}>from around <strong>RM500</strong> <span>(€104)</span> / night</p>
               <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
             </article>
             <article>
+              <div className={`${styles.hotelImage} ${styles.ritzImage}`}>
+                <img
+                  src="/images/ritz-carlton-kuala-lumpur.webp"
+                  alt="Entrance of The Ritz-Carlton, Kuala Lumpur"
+                />
+              </div>
               <span className={styles.hotelTag}>Indicative stay</span>
               <h3>The Ritz-Carlton, Kuala Lumpur</h3>
               <p className={styles.hotelPrice}>from around <strong>RM650</strong> <span>(€135)</span> / night</p>
               <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
             </article>
             <article className={styles.transferCard}>
+              <div className={styles.hotelImage}>
+                <img
+                  src="/images/luxury-mpv-kuala-lumpur.webp"
+                  alt="Representative black luxury executive MPV for Kuala Lumpur airport transfers"
+                />
+              </div>
               <span className={styles.hotelTag}>Private arrival</span>
               <h3>KLIA → central Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>luxury Alphard / Vellfire from around <strong>RM250</strong> <span>(€52)</span></p>
-              <small>Indicative daytime private-transfer pricing; vehicle, timing and final route affect cost.</small>
+              <p className={styles.hotelPrice}>luxury executive MPV from around <strong>RM250</strong> <span>(€52)</span></p>
+              <small>Representative Toyota Alphard / Vellfire-style vehicle shown. Indicative daytime private-transfer pricing; actual vehicle, timing and route affect cost.</small>
             </article>
           </div>
 
