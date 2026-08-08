@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { MalaysiaCostAndVisit } from "./MalaysiaCostAndVisit";
 
 export default function MalaysiaPage() {
   return <main>
@@ -53,6 +54,9 @@ export default function MalaysiaPage() {
     </section>
 
     <section className="china-contact section-pad"><div className="site-shell china-contact-grid"><div><p className="eyebrow">Serving wider Asia</p><h2>Malaysia first.<br />China ready.</h2></div><div><p>Malaysia provides the operational bridge, while mainland China requires a different communication approach. China enquiries should use email, WeChat or the secure enquiry form rather than relying on WhatsApp.</p><div className="channel-tags"><span>Email</span><span>WeChat</span><span>Secure form</span></div><Link className="button button-dark" href="/asia-gateway/enquire">Contact the Asia desk <span>→</span></Link></div></div></section>
+
+    <MalaysiaCostAndVisit />
+
     <Footer />
   </main>;
 }
