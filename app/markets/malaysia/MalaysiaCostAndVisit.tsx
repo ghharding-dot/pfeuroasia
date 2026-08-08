@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./MalaysiaCostAndVisit.module.css";
+import cardStyles from "./MalaysiaDiscoveryCards.module.css";
 
 const comparisonRows = [
   {
@@ -149,14 +150,14 @@ export function MalaysiaCostAndVisit() {
           </div>
 
           <div className={styles.hotelRates}>
-            <article className={styles.visualCard}>
+            <article className={cardStyles.visualCard}>
               <img
-                className={styles.visualCardImage}
+                className={cardStyles.visualCardImage}
                 src="/images/jw-marriott-kuala-lumpur.webp"
                 alt="JW Marriott Kuala Lumpur in Bukit Bintang"
               />
-              <div className={styles.visualCardShade} />
-              <div className={styles.visualCardCopy}>
+              <div className={cardStyles.visualCardShade} />
+              <div className={cardStyles.visualCardCopy}>
                 <span className={styles.hotelTag}>Indicative stay</span>
                 <h3>JW Marriott Kuala Lumpur</h3>
                 <p className={styles.hotelPrice}>from around <strong>RM500</strong> <span>(€104)</span> / night</p>
@@ -164,14 +165,14 @@ export function MalaysiaCostAndVisit() {
               </div>
             </article>
 
-            <article className={`${styles.visualCard} ${styles.ritzCard}`}>
+            <article className={`${cardStyles.visualCard} ${cardStyles.ritzCard}`}>
               <img
-                className={styles.visualCardImage}
+                className={cardStyles.visualCardImage}
                 src="/images/ritz-carlton-kuala-lumpur.webp"
                 alt="Entrance of The Ritz-Carlton, Kuala Lumpur"
               />
-              <div className={styles.visualCardShade} />
-              <div className={styles.visualCardCopy}>
+              <div className={cardStyles.visualCardShade} />
+              <div className={cardStyles.visualCardCopy}>
                 <span className={styles.hotelTag}>Indicative stay</span>
                 <h3>The Ritz-Carlton, Kuala Lumpur</h3>
                 <p className={styles.hotelPrice}>from around <strong>RM650</strong> <span>(€135)</span> / night</p>
@@ -179,14 +180,14 @@ export function MalaysiaCostAndVisit() {
               </div>
             </article>
 
-            <article className={`${styles.visualCard} ${styles.transferCard}`}>
+            <article className={`${cardStyles.visualCard} ${cardStyles.transferCard}`}>
               <img
-                className={styles.visualCardImage}
+                className={cardStyles.visualCardImage}
                 src="/images/luxury-mpv-kuala-lumpur.webp"
                 alt="Representative black luxury executive MPV for Kuala Lumpur airport transfers"
               />
-              <div className={styles.visualCardShade} />
-              <div className={styles.visualCardCopy}>
+              <div className={cardStyles.visualCardShade} />
+              <div className={cardStyles.visualCardCopy}>
                 <span className={styles.hotelTag}>Private arrival</span>
                 <h3>KLIA → central Kuala Lumpur</h3>
                 <p className={styles.hotelPrice}>luxury executive MPV from around <strong>RM250</strong> <span>(€52)</span></p>
