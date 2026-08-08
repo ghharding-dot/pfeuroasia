@@ -120,11 +120,12 @@ export function HomePhase2() {
               <div className={phase2Styles.cardOverlay} />
               <div className={phase2Styles.gatewayCardCopy}>
                 <span className={phase2Styles.pathLabel}>Asia gateway</span>
-                <h2>Have you considered Asia and Malaysia?</h2>
+                <h2>Thinking of Dubai for residency or tax planning? Have you considered Malaysia and Asia?</h2>
                 <p>
-                  Explore property investment, residency programmes, company
-                  formation, relocation and future discovery visits supported
-                  by our growing professional network.
+                  Before making the conventional move to Dubai, compare the
+                  alternatives available across Malaysia and selected Asian
+                  markets—from residency and relocation to property investment,
+                  company formation and business expansion.
                 </p>
                 <div className={phase2Styles.pathTags}>
                   <span>Invest</span>
@@ -132,7 +133,7 @@ export function HomePhase2() {
                   <span>Residency</span>
                   <span>Business</span>
                 </div>
-                <strong>Explore Asia & Malaysia <span aria-hidden="true">→</span></strong>
+                <strong>Compare Malaysia & Asia <span aria-hidden="true">→</span></strong>
               </div>
             </Link>
           </div>
