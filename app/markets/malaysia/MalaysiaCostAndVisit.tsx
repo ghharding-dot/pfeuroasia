@@ -116,9 +116,11 @@ export function MalaysiaCostAndVisit() {
           <p className={styles.comparisonNote}>
             Ringgit-to-euro equivalents use RM4.8 = €1. Figures are indicative
             only and vary by location, specification, consumption, season and
-            market conditions. Fuel prices in Malaysia are adjusted frequently;
-            the comparison uses unsubsidised Peninsular Malaysia pricing rather
-            than citizen-only subsidised rates.
+            market conditions. Malaysia fuel figures use non-subsidised
+            Peninsular market rates published for 30 July–5 August 2026;
+            subsidised citizen rates can be lower. Electricity is shown as an
+            indicative household benchmark based on the current Peninsular
+            tariff structure.
           </p>
         </div>
       </section>
@@ -150,19 +152,19 @@ export function MalaysiaCostAndVisit() {
             <article>
               <span className={styles.hotelTag}>Indicative stay</span>
               <h3>JW Marriott Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>from around <strong>RM600</strong> <span>(€125)</span> / night</p>
-              <small>Selected-date public rate indication. Actual rates vary by date, room type and availability.</small>
+              <p className={styles.hotelPrice}>from around <strong>RM500</strong> <span>(€104)</span> / night</p>
+              <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
             </article>
             <article>
               <span className={styles.hotelTag}>Indicative stay</span>
               <h3>The Ritz-Carlton, Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>from around <strong>RM750</strong> <span>(€155)</span> / night</p>
-              <small>Selected-date public rate indication. Actual rates vary by date, room type and availability.</small>
+              <p className={styles.hotelPrice}>from around <strong>RM650</strong> <span>(€135)</span> / night</p>
+              <small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small>
             </article>
             <article className={styles.transferCard}>
               <span className={styles.hotelTag}>Private arrival</span>
               <h3>KLIA → central Kuala Lumpur</h3>
-              <p className={styles.hotelPrice}>luxury MPV from around <strong>RM230</strong> <span>(€48)</span></p>
+              <p className={styles.hotelPrice}>luxury Alphard / Vellfire from around <strong>RM250</strong> <span>(€52)</span></p>
               <small>Indicative daytime private-transfer pricing; vehicle, timing and final route affect cost.</small>
             </article>
           </div>
