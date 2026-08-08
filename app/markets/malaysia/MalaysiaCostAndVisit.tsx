@@ -150,24 +150,7 @@ export function MalaysiaCostAndVisit() {
           </div>
 
           <div className={styles.hotelRates}>
-            <article className={`${cardStyles.visualCard} ${cardStyles.jwCard}`}>
-              <img
-                className={cardStyles.visualCardImage}
-                src="/images/jw-marriott-kuala-lumpur.webp?v=20260808c"
-                alt="JW Marriott Kuala Lumpur in Bukit Bintang"
-                style={{
-                  top: 0,
-                  bottom: 0,
-                  left: "50%",
-                  right: "auto",
-                  width: "auto",
-                  maxWidth: "none",
-                  height: "100%",
-                  objectFit: "fill",
-                  transform: "translateX(-50%)",
-                }}
-              />
-              <div className={cardStyles.visualCardShade} />
+            <article className={cardStyles.visualCard}>
               <div className={cardStyles.visualCardCopy}>
                 <span className={styles.hotelTag}>Indicative stay</span>
                 <h3>JW Marriott Kuala Lumpur</h3>
@@ -176,13 +159,7 @@ export function MalaysiaCostAndVisit() {
               </div>
             </article>
 
-            <article className={`${cardStyles.visualCard} ${cardStyles.ritzCard}`}>
-              <img
-                className={cardStyles.visualCardImage}
-                src="/images/ritz-carlton-kuala-lumpur.webp"
-                alt="Entrance of The Ritz-Carlton, Kuala Lumpur"
-              />
-              <div className={cardStyles.visualCardShade} />
+            <article className={cardStyles.visualCard}>
               <div className={cardStyles.visualCardCopy}>
                 <span className={styles.hotelTag}>Indicative stay</span>
                 <h3>The Ritz-Carlton, Kuala Lumpur</h3>
@@ -191,18 +168,12 @@ export function MalaysiaCostAndVisit() {
               </div>
             </article>
 
-            <article className={`${cardStyles.visualCard} ${cardStyles.transferCard}`}>
-              <img
-                className={cardStyles.visualCardImage}
-                src="/images/luxury-mpv-kuala-lumpur.webp"
-                alt="Representative black luxury executive MPV for Kuala Lumpur airport transfers"
-              />
-              <div className={cardStyles.visualCardShade} />
+            <article className={cardStyles.visualCard}>
               <div className={cardStyles.visualCardCopy}>
                 <span className={styles.hotelTag}>Private arrival</span>
                 <h3>KLIA → central Kuala Lumpur</h3>
                 <p className={styles.hotelPrice}>luxury executive MPV from around <strong>RM250</strong> <span>(€52)</span></p>
-                <small>Representative Toyota Alphard / Vellfire-style vehicle shown. Indicative daytime private-transfer pricing; actual vehicle, timing and route affect cost.</small>
+                <small>Indicative daytime private-transfer pricing; actual vehicle, timing and route affect cost.</small>
               </div>
             </article>
           </div>
