@@ -22,6 +22,22 @@
   object-position: center;
 }
 
+.jwCard .visualCardImage {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: auto;
+  width: auto;
+  max-width: none;
+  height: 100%;
+  transform: translateX(-50%);
+  object-fit: initial;
+}
+
+.jwCard .visualCardCopy {
+  bottom: 54px;
+}
+
 .ritzCard .visualCardImage {
   object-position: center 88%;
 }
@@ -98,6 +114,10 @@
 
   .visualCardCopy {
     padding: 38px 25px 26px;
+  }
+
+  .jwCard .visualCardCopy {
+    bottom: 34px;
   }
 
   .visualCardCopy h3 {
