@@ -2,10 +2,11 @@
   position: relative;
   min-width: 0;
   min-height: 560px;
+  padding: 0 !important;
   overflow: hidden;
   border-right: 1px solid #cbbd9f;
   border-bottom: 1px solid #cbbd9f;
-  background: #171916;
+  background: #171916 !important;
   color: white;
   isolation: isolate;
 }
@@ -34,8 +35,8 @@
   inset: 0;
   z-index: -2;
   background:
-    linear-gradient(180deg, rgba(8, 10, 9, 0.05) 20%, rgba(8, 10, 9, 0.25) 48%, rgba(8, 10, 9, 0.94) 100%),
-    linear-gradient(90deg, rgba(8, 10, 9, 0.2), transparent 70%);
+    linear-gradient(180deg, rgba(8, 10, 9, 0.04) 15%, rgba(8, 10, 9, 0.18) 43%, rgba(8, 10, 9, 0.96) 100%),
+    linear-gradient(90deg, rgba(8, 10, 9, 0.18), transparent 70%);
 }
 
 .visualCardCopy {
@@ -43,7 +44,11 @@
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 42px 34px 34px;
+  padding: 44px 34px 34px;
+}
+
+.visualCardCopy > span:first-child {
+  color: var(--gold-light);
 }
 
 .visualCardCopy h3 {
@@ -57,28 +62,24 @@
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
-.visualCardCopy :global(.hotelTag) {
-  color: var(--gold-light);
-}
-
-.visualCardCopy :global(.hotelPrice) {
+.visualCardCopy p {
   margin: 0 0 14px;
   color: white;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.42);
 }
 
-.visualCardCopy :global(.hotelPrice) strong {
+.visualCardCopy p strong {
   color: var(--gold-light);
 }
 
-.visualCardCopy :global(.hotelPrice) span {
+.visualCardCopy p span {
   color: rgba(255, 255, 255, 0.76);
 }
 
 .visualCardCopy small {
   display: block;
   max-width: 390px;
-  color: rgba(255, 255, 255, 0.68);
+  color: rgba(255, 255, 255, 0.68) !important;
   font-size: 10px;
   line-height: 1.6;
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
