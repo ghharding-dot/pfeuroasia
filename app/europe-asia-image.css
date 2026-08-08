@@ -1,19 +1,19 @@
 #regions > .site-shell::after {
-  display: block;
-  width: 100%;
-  aspect-ratio: 800 / 414;
-  margin-top: 1px;
-  background-color: #030506;
-  background-image: url("/images/from-europe-to-asia.png?v=working2");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
+  display: none;
   content: "";
 }
 
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   #regions > .site-shell::after {
+    display: block;
     width: calc(100% + 32px);
+    aspect-ratio: 800 / 414;
+    margin-top: 1px;
     margin-left: -16px;
+    background-color: #030506;
+    background-image: url("/images/from-europe-to-asia.png?v=working2");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }
