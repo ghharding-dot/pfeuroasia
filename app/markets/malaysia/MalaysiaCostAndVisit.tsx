@@ -51,7 +51,7 @@ export function MalaysiaCostAndVisit() {
 
           <div className={styles.hotelRates}>
             <article className={cardStyles.visualCard}>
-              <img className={cardStyles.jwFreshImage} src="/images/jw-marriott-kuala-lumpur-clean.jpg?v=20260808-2" alt="JW Marriott Kuala Lumpur exterior" />
+              <img className={cardStyles.jwFreshImage} src="/images/jw-marriott-20260808-fresh.svg" alt="JW Marriott Kuala Lumpur exterior" />
               <div className={cardStyles.visualCardShade} />
               <div className={cardStyles.visualCardCopy}><span className={styles.hotelTag}>Indicative stay</span><h3>JW Marriott Kuala Lumpur</h3><p className={styles.hotelPrice}>from around <strong>RM500</strong> <span>(€104)</span> / night</p><small>Selected-date public rate indication. Actual rates vary by date, room type, taxes and availability.</small></div>
             </article>
