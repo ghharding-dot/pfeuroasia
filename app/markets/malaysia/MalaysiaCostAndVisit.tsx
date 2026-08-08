@@ -153,8 +153,19 @@ export function MalaysiaCostAndVisit() {
             <article className={`${cardStyles.visualCard} ${cardStyles.jwCard}`}>
               <img
                 className={cardStyles.visualCardImage}
-                src="/images/jw-marriott-kuala-lumpur.webp"
+                src="/images/jw-marriott-kuala-lumpur.webp?v=20260808c"
                 alt="JW Marriott Kuala Lumpur in Bukit Bintang"
+                style={{
+                  top: 0,
+                  bottom: 0,
+                  left: "50%",
+                  right: "auto",
+                  width: "auto",
+                  maxWidth: "none",
+                  height: "100%",
+                  objectFit: "fill",
+                  transform: "translateX(-50%)",
+                }}
               />
               <div className={cardStyles.visualCardShade} />
               <div className={cardStyles.visualCardCopy}>
