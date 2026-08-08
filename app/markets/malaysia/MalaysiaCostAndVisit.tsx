@@ -150,7 +150,7 @@ export function MalaysiaCostAndVisit() {
           </div>
 
           <div className={styles.hotelRates}>
-            <article className={cardStyles.visualCard}>
+            <article className={`${cardStyles.visualCard} ${cardStyles.jwCard}`}>
               <img
                 className={cardStyles.visualCardImage}
                 src="/images/jw-marriott-kuala-lumpur.webp"
