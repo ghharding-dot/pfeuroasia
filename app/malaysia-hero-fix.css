@@ -3,6 +3,7 @@
   overflow: hidden;
   background-image: none !important;
   isolation: isolate;
+  container-type: size;
 }
 
 .malaysia-landing::before {
@@ -10,11 +11,11 @@
   z-index: -2;
   top: 50%;
   left: 50%;
-  width: 145%;
-  height: 145%;
+  width: 100cqh;
+  height: 100cqw;
   background: url("/images/kl%20BACK%20GORUND.avif") center / cover no-repeat;
   content: "";
-  transform: translate(-50%, -50%) rotate(90deg) scale(1.08);
+  transform: translate(-50%, -50%) rotate(90deg);
   transform-origin: center;
 }
 
@@ -36,10 +37,9 @@
   z-index: 2;
 }
 
-@media (max-width: 760px) {
+@supports not (width: 1cqw) {
   .malaysia-landing::before {
-    width: 180%;
-    height: 180%;
-    transform: translate(-50%, -50%) rotate(90deg) scale(1.04);
+    width: 72vh;
+    height: 100vw;
   }
 }
