@@ -1,13 +1,45 @@
 .malaysia-landing {
-  background-image:
-    linear-gradient(180deg, rgba(8, 12, 14, 0.18), rgba(8, 12, 14, 0.48)),
-    url("/images/kl%20BACK%20GORUND.avif") !important;
-  background-position: center 46% !important;
-  background-size: cover !important;
+  position: relative;
+  overflow: hidden;
+  background-image: none !important;
+  isolation: isolate;
+  container-type: size;
 }
 
-@media (max-width: 760px) {
-  .malaysia-landing {
-    background-position: center 50% !important;
+.malaysia-landing::before {
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+  width: 100cqh;
+  height: 100cqw;
+  background: url("/images/kl%20BACK%20GORUND.avif") center / cover no-repeat;
+  content: "";
+  transform: translate(-50%, -50%) rotate(90deg);
+  transform-origin: center;
+}
+
+.malaysia-landing::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 12, 14, 0.18), rgba(8, 12, 14, 0.48));
+  content: "";
+  pointer-events: none;
+}
+
+.malaysia-landing .area-overlay {
+  z-index: 0;
+}
+
+.malaysia-landing .market-landing-copy {
+  position: relative;
+  z-index: 2;
+}
+
+@supports not (width: 1cqw) {
+  .malaysia-landing::before {
+    width: 72vh;
+    height: 100vw;
   }
 }
