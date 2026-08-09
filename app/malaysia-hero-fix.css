@@ -13,6 +13,9 @@
   z-index: -3;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 14px;
+  background: #111;
 }
 
 .malaysia-city-panel,
@@ -110,6 +113,8 @@
   .malaysia-split-images {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
   }
 
   .malaysia-city-panel img {
