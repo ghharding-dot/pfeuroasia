@@ -8,6 +8,7 @@ import "./news-ticker.css";
 import "./europe-asia-image.css";
 import "./horizontal-overflow-fix.css";
 import "./homepage-refinement.css";
+import "./malaysia-hero-fix.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
