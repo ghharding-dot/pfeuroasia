@@ -6,11 +6,29 @@ import { MalaysiaCostAndVisit } from "./MalaysiaCostAndVisit";
 export default function MalaysiaPage() {
   return <main>
     <Header enquireHref="/asia-gateway/enquire" enquireLabel="Asia enquiry" />
-    <section className="market-landing-hero malaysia-landing"><div className="area-overlay"/><div className="site-shell market-landing-copy"><p className="eyebrow light">Asia desk</p><h1>Malaysia</h1><p>A practical, relationship-led bridge between Malaysian clients, professional partners and Spanish property.</p></div></section>
+
+    <section className="malaysia-split-hero">
+      <div className="malaysia-split-images" aria-hidden="true">
+        <div className="malaysia-city-panel"><img src="/images/kl%20BACK%20GORUND.avif" alt="" /></div>
+        <div className="malaysia-island-panel"><img src="/images/Emerald%20bay%20pkl.jpg" alt="" /></div>
+      </div>
+      <div className="malaysia-split-shade" />
+      <div className="site-shell malaysia-split-copy">
+        <p className="eyebrow light">Malaysia · City & lifestyle</p>
+        <h1>Super city to beautiful beaches and islands.</h1>
+        <p className="malaysia-split-line">There&apos;s more to Malaysia.</p>
+        <p className="malaysia-split-intro">From Kuala Lumpur&apos;s international business, property and connectivity to tropical islands and coastal living, Malaysia combines opportunity with an exceptional quality of life.</p>
+        <div className="malaysia-split-actions">
+          <Link className="button button-gold" href="/asia-gateway/enquire">Explore Malaysia <span>→</span></Link>
+          <a className="text-link light-link" href="#malaysia-opportunities">See property opportunities <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
     <section className="market-landing-intro section-pad"><div className="site-shell narrow-grid"><p className="eyebrow">Spain made closer</p><div><h2>Local representation across borders.</h2><p>For clients based in Malaysia, we provide an accountable presence in Spain—qualifying opportunities, arranging focused visits, coordinating advisers and representing the client through the commercial process.</p></div></div></section>
     <section className="malaysia-services section-pad"><div className="site-shell"><p className="eyebrow light">How we connect the markets</p><div className="area-feature-grid"><article><span>01</span><h2>Private clients</h2><p>Spanish acquisition advice built around lifestyle, residency plans and long-term ownership.</p></article><article><span>02</span><h2>Professional partners</h2><p>A Spain-side brokerage relationship for trusted agents, advisers and family offices in Asia.</p></article><article><span>03</span><h2>Cross-border coordination</h2><p>One point of contact to organise property, legal, tax and relocation workstreams.</p></article></div></div></section>
 
-    <section className="kl-opportunities section-pad">
+    <section className="kl-opportunities section-pad" id="malaysia-opportunities">
       <div className="site-shell">
         <div className="kl-heading">
           <div>
