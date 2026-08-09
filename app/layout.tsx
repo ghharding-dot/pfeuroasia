@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 import "./premium-buttons.css";
+import "./news-ticker.css";
 import "./europe-asia-image.css";
 import "./horizontal-overflow-fix.css";
 import "./homepage-refinement.css";
