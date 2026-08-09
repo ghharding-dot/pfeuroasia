@@ -1,45 +1,154 @@
-.malaysia-landing {
+.malaysia-split-hero {
+  position: relative;
+  min-height: 760px;
+  overflow: hidden;
+  background: #111;
+  color: white;
+  isolation: isolate;
+}
+
+.malaysia-split-images {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.malaysia-city-panel,
+.malaysia-island-panel {
   position: relative;
   overflow: hidden;
-  background-image: none !important;
-  isolation: isolate;
-  container-type: size;
 }
 
-.malaysia-landing::before {
+.malaysia-city-panel img {
   position: absolute;
-  z-index: -2;
   top: 50%;
   left: 50%;
-  width: 100cqh;
-  height: 100cqw;
-  background: url("/images/kl%20BACK%20GORUND.avif") center / cover no-repeat;
-  content: "";
+  width: 760px;
+  max-width: none;
+  height: 760px;
+  object-fit: cover;
   transform: translate(-50%, -50%) rotate(90deg);
-  transform-origin: center;
 }
 
-.malaysia-landing::after {
+.malaysia-island-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.malaysia-split-shade {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 12, 14, 0.18), rgba(8, 12, 14, 0.48));
-  content: "";
-  pointer-events: none;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(6, 10, 14, .78) 0%, rgba(6, 10, 14, .48) 42%, rgba(6, 10, 14, .24) 58%, rgba(6, 10, 14, .38) 100%),
+    linear-gradient(0deg, rgba(6, 9, 12, .62), transparent 54%);
 }
 
-.malaysia-landing .area-overlay {
-  z-index: 0;
+.malaysia-split-copy {
+  display: flex;
+  min-height: 760px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-block: 150px 92px;
 }
 
-.malaysia-landing .market-landing-copy {
-  position: relative;
-  z-index: 2;
+.malaysia-split-copy h1 {
+  max-width: 980px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(58px, 6.1vw, 94px);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+  text-shadow: 0 4px 28px rgba(0,0,0,.34);
 }
 
-@supports not (width: 1cqw) {
-  .malaysia-landing::before {
-    width: 72vh;
-    height: 100vw;
+.malaysia-split-line {
+  margin: 22px 0 0;
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  font-style: italic;
+}
+
+.malaysia-split-intro {
+  max-width: 760px;
+  margin: 24px 0 0;
+  color: rgba(255,255,255,.78);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.malaysia-split-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+@media (max-width: 980px) {
+  .malaysia-split-hero,
+  .malaysia-split-copy {
+    min-height: 700px;
+  }
+
+  .malaysia-city-panel img {
+    width: 700px;
+    height: 700px;
+  }
+}
+
+@media (max-width: 760px) {
+  .malaysia-split-hero {
+    min-height: 860px;
+  }
+
+  .malaysia-split-images {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .malaysia-city-panel img {
+    width: 440px;
+    height: 440px;
+  }
+
+  .malaysia-split-shade {
+    background:
+      linear-gradient(180deg, rgba(6,10,14,.24) 0%, rgba(6,10,14,.22) 42%, rgba(6,10,14,.54) 62%, rgba(6,10,14,.84) 100%);
+  }
+
+  .malaysia-split-copy {
+    min-height: 860px;
+    justify-content: flex-end;
+    padding-block: 120px 56px;
+  }
+
+  .malaysia-split-copy h1 {
+    max-width: 640px;
+    font-size: 50px;
+  }
+
+  .malaysia-split-line {
+    font-size: 30px;
+  }
+
+  .malaysia-split-intro {
+    font-size: 14px;
+  }
+
+  .malaysia-split-actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .malaysia-split-actions .button,
+  .malaysia-split-actions .text-link {
+    width: 100%;
   }
 }
