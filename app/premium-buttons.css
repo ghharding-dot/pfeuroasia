@@ -1,33 +1,92 @@
+/* Site-wide action treatment: important clickable actions read as deliberate buttons,
+   while normal navigation and footer links remain visually quiet. */
+
+.button,
+.text-link,
+.nav-enquire {
+  border: 1px solid var(--gold) !important;
+  border-radius: 5px;
+  box-shadow: 0 0 0 rgba(197, 162, 104, 0);
+  transition:
+    transform 220ms ease,
+    background 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.button {
+  min-height: 54px;
+  padding: 15px 24px;
+}
+
+.text-link {
+  min-height: 46px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--gold) !important;
+  background: transparent;
+}
+
+.button:hover,
+.text-link:hover,
+.nav-enquire:hover {
+  border-color: var(--gold-light) !important;
+  box-shadow: 0 7px 22px rgba(197, 162, 104, 0.18);
+  transform: translateY(-2px);
+}
+
 .button.button-gold {
   background: #0d0d0d;
   color: var(--gold-light);
-  border: 2px solid var(--gold);
-  border-radius: 8px;
+  border: 2px solid var(--gold) !important;
+  border-radius: 6px;
   padding: 17px 34px;
-  box-shadow: 0 0 0 rgba(197, 162, 104, 0);
-  transition:
-    transform 300ms ease,
-    background 300ms ease,
-    color 300ms ease,
-    border-color 300ms ease,
-    box-shadow 300ms ease;
 }
 
 .button.button-gold:hover {
   background: var(--gold);
   color: #111210;
-  border-color: var(--gold-light);
+  border-color: var(--gold-light) !important;
   box-shadow: 0 8px 25px rgba(197, 162, 104, 0.25);
-  transform: translateY(-2px);
 }
 
-.button.button-gold span {
+.button.button-dark {
+  border-color: var(--gold) !important;
+}
+
+.button.button-dark:hover {
+  background: var(--gold);
+  color: #111210;
+}
+
+.button span,
+.text-link span,
+.nav-enquire span {
   display: inline-block;
-  transition: transform 300ms ease;
+  transition: transform 220ms ease;
 }
 
-.button.button-gold:hover span {
+.button:hover span,
+.text-link:hover span,
+.nav-enquire:hover span {
   transform: translateX(4px);
+}
+
+/* Light-background text CTAs keep their premium outlined appearance. */
+.text-link:not(.light-link) {
+  color: var(--ink);
+}
+
+/* Dark/photo sections retain readable white text until hover. */
+.light-link,
+.site-header.is-transparent .nav-enquire {
+  color: white;
+}
+
+.light-link:hover,
+.site-header.is-transparent .nav-enquire:hover {
+  background: var(--gold);
+  color: #111210;
 }
 
 .private-access-button {
@@ -35,8 +94,18 @@
 }
 
 @media (max-width: 640px) {
+  .button,
+  .text-link {
+    min-height: 50px;
+    padding: 14px 18px;
+  }
+
   .button.button-gold {
     width: 100%;
     padding: 16px 22px;
+  }
+
+  .nav-enquire {
+    min-height: 46px;
   }
 }
