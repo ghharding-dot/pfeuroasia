@@ -10,6 +10,9 @@ type HeaderProps = {
   enquireLabel?: string;
 };
 
+const tickerText =
+  "FORMULA 1 RETURNS TO SEPANG — Malaysia confirmed to host the 2026 Gulf Air Bahrain Grand Prix at Sepang International Circuit, 2–4 October 2026 · Discover why international attention is returning to Malaysia";
+
 export function Header({
   transparent = false,
   enquireHref = "/enquire",
@@ -19,6 +22,16 @@ export function Header({
 
   return (
     <header className={`site-header ${transparent ? "is-transparent" : ""}`}>
+      <div className="news-ticker" role="region" aria-label="Latest news">
+        <span className="news-ticker-label">Latest</span>
+        <div className="news-ticker-window">
+          <Link className="news-ticker-track" href="/markets/malaysia">
+            <span>{tickerText}</span>
+            <span aria-hidden="true">{tickerText}</span>
+          </Link>
+        </div>
+      </div>
+
       <div className="site-shell header-inner">
         <Link className="brand" href="/" aria-label="Property Facilitators EuroAsia home">
           <span className="brand-lockup" aria-hidden="true">
