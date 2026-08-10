@@ -21,7 +21,7 @@ const partners: Partner[] = [
   {
     key: "pfiberia",
     name: "Property Facilitators Iberia",
-    representative: "Jeff Harding",
+    representative: "Geoff Harding",
     href: "/go/pfiberia",
     kicker: "Marbella property representation",
     description:
@@ -51,7 +51,7 @@ const partners: Partner[] = [
   {
     key: "fixer",
     name: "The Fixer",
-    representative: "Robert Basil",
+    representative: "Robert Bazo",
     href: "/go/the-fixer",
     kicker: "Property advisory & problem solving",
     description:
@@ -130,7 +130,8 @@ export function InteractivePropertyPartners() {
       })}
 
       <a className={styles.luxoCard} href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
-        <span>Luxo</span><b>Estates</b>
+        <span className={styles.luxoName}><span>Luxo</span><b>Estates</b></span>
+        <small className={styles.luxoRepresentative}>Representative · Diogo Meira</small>
       </a>
     </div>
   );
