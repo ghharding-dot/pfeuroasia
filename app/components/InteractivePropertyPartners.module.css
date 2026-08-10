@@ -5,9 +5,13 @@
   margin-top: 18px;
 }
 
+.grid > article,
+.luxoCard {
+  min-height: 290px;
+}
+
 .luxoCard {
   display: flex;
-  min-height: 190px;
   align-items: center;
   justify-content: center;
   gap: 3px;
@@ -51,15 +55,16 @@
 
 @media (max-width: 760px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
+  .grid > article,
   .luxoCard {
-    min-height: 170px;
+    min-height: 235px;
   }
 
   .grid > :last-child {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 }
