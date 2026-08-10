@@ -44,10 +44,15 @@ export function PartnerStrip() {
           <p className={styles.rentalEyebrow}>Luxury villa rental partner</p>
           <div className={styles.rentalFeature}>
             <div className={styles.rentalFeatureCopy}>
+              <p className={styles.rentalFeatureLead}>A collection of Spanish luxury villas, curated with you in mind.</p>
               <h3>The Luxury Villa Collection</h3>
               <p>
-                Our specialist partner for exceptional short-term villa rentals, providing carefully selected luxury homes and a highly personal service for clients seeking an outstanding stay in Southern Spain.
+                Whether you are planning time away with friends or family, or a special event or celebration, The Luxury Villa Collection focuses on finding the right villa for the way you want to travel.
               </p>
+              <p>
+                Each villa is personally vetted and hand-selected. The I-PRAC Approved portfolio is curated with care, combining distinctive homes with exceptional service possibilities to help create memorable stays in style, comfort and luxury.
+              </p>
+              <p className={styles.lvcDifference}>The <strong>LVC Difference</strong>.</p>
               <a className={styles.rentalFeatureLink} href="/luxury-villa-rentals#villa-enquiry">
                 Explore luxury villa rentals <span>→</span>
               </a>
