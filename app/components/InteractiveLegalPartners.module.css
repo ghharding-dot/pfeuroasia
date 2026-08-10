@@ -135,7 +135,7 @@
 
 .visitLink {
   position: relative;
-  z-index: 4;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -164,29 +164,14 @@
 
 .card[data-active="true"] .reveal,
 .card:hover .reveal {
+  z-index: 3;
   opacity: 1;
   transform: scale(1);
 }
 
 .card[data-active="true"] .revealButton,
 .card:hover .revealButton {
-  z-index: 3;
-}
-
-.card[data-active="true"] .revealButton::after,
-.card:hover .revealButton::after {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  color: rgba(255,255,255,.5);
-  content: "×";
-  font-size: 18px;
-  font-weight: 300;
-}
-
-.card[data-active="true"] .visitLink,
-.card:hover .visitLink {
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .martinezLogo {
@@ -215,6 +200,10 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .card {
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+
   .card:hover {
     border-color: #a78550;
     box-shadow: 0 15px 34px rgba(21,18,13,.2);
