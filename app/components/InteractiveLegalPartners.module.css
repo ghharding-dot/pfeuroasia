@@ -87,9 +87,9 @@
   z-index: 1;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  padding: 24px 24px 22px;
+  padding: 22px 22px 20px;
   background:
     radial-gradient(circle at 92% 12%, rgba(197,162,104,.16), transparent 34%),
     linear-gradient(145deg, #171916 0%, #24211c 100%);
@@ -113,11 +113,12 @@
 .kicker {
   position: relative;
   z-index: 1;
-  margin: 0 0 8px;
+  margin: 0 0 9px;
   color: var(--gold-light);
   font-size: 8px;
   font-weight: 650;
   letter-spacing: .16em;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
@@ -128,17 +129,37 @@
   font-family: var(--serif);
   font-size: clamp(21px, 1.7vw, 28px);
   font-weight: 400;
-  line-height: 1.05;
+  line-height: 1.02;
+}
+
+.representative {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 10px 0 0;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.representative span {
+  color: var(--gold-light);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
 }
 
 .description {
   position: relative;
   z-index: 1;
   max-width: 310px;
-  margin: 13px 0 17px;
+  margin: 12px 0 16px;
   color: rgba(255,255,255,.66);
   font-size: 11px;
-  line-height: 1.55;
+  line-height: 1.48;
 }
 
 .visitLink {
@@ -147,6 +168,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  margin-top: auto;
   padding: 9px 12px;
   border: 1px solid rgba(197,162,104,.75);
   color: var(--gold-light);
@@ -226,11 +248,11 @@
   }
 
   .card {
-    min-height: 170px;
+    min-height: 210px;
   }
 
   .front {
-    min-height: 170px;
+    min-height: 210px;
     padding: 20px 16px 16px;
   }
 
@@ -243,16 +265,22 @@
   }
 
   .reveal {
-    padding: 20px 18px 18px;
+    padding: 18px 18px 16px;
   }
 
   .reveal h3 {
     font-size: 22px;
   }
 
+  .representative {
+    margin-top: 8px;
+    font-size: 9px;
+  }
+
   .description {
-    margin: 10px 0 14px;
+    margin: 9px 0 12px;
     font-size: 10px;
+    line-height: 1.42;
   }
 
   .visitLink {
