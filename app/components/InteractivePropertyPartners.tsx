@@ -92,7 +92,7 @@ export function InteractivePropertyPartners() {
 
         return (
           <article
-            className={cardStyles.card}
+            className={`${cardStyles.card} ${styles.propertyCard}`}
             data-active={revealed ? "true" : "false"}
             key={partner.key}
             onPointerEnter={(event) => {
@@ -115,7 +115,7 @@ export function InteractivePropertyPartners() {
               </span>
             </button>
 
-            <div className={cardStyles.reveal} aria-hidden={!revealed}>
+            <div className={`${cardStyles.reveal} ${styles.propertyReveal}`} aria-hidden={!revealed}>
               <span className={cardStyles.watermark} aria-hidden="true">{partner.mark}</span>
               <p className={cardStyles.kicker}>{partner.kicker}</p>
               <h3>{partner.name}</h3>
