@@ -172,9 +172,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
   gap: 34px;
-  width: min(100%, 980px);
+  width: min(100%, 1040px);
   margin: 22px auto 0;
-  padding: 34px;
+  padding: 38px;
   border: 1px solid rgba(167, 133, 80, .48);
   border-radius: 14px;
   background: linear-gradient(145deg, #fffdf8 0%, #f4efe4 100%);
@@ -188,46 +188,67 @@
   flex-direction: column;
 }
 
-.rentalFeatureCopy h3 {
+.rentalFeatureLead {
   margin: 0 0 12px;
+  color: #9a7b4e;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.rentalFeatureCopy h3 {
+  margin: 0 0 16px;
   color: #171916;
   font-family: var(--serif);
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(34px, 3.2vw, 48px);
   font-weight: 400;
   letter-spacing: -.035em;
   line-height: 1;
 }
 
-.rentalFeatureCopy p {
-  max-width: 590px;
-  margin: 0;
+.rentalFeatureCopy > p:not(.rentalFeatureLead):not(.lvcDifference) {
+  max-width: 640px;
+  margin: 0 0 14px;
   color: rgba(23, 25, 22, .72);
   font-size: 14px;
   line-height: 1.72;
 }
 
+.lvcDifference {
+  margin: 6px 0 0;
+  color: #8e7754;
+  font-family: var(--serif);
+  font-size: 21px;
+  font-style: italic;
+}
+
+.lvcDifference strong {
+  font-weight: 500;
+}
+
 .rentalFeatureLink {
   display: inline-flex;
   width: fit-content;
-  min-height: 46px;
+  min-height: 48px;
   align-items: center;
   gap: 20px;
   margin-top: 22px;
-  padding: 11px 15px;
+  padding: 12px 16px;
   border: 1px solid #a78550;
-  color: #8d6c39;
+  background: #171916;
+  color: #fff;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: .11em;
   text-transform: uppercase;
-  box-shadow: 0 8px 18px rgba(44, 36, 24, .08);
+  box-shadow: 0 9px 20px rgba(44, 36, 24, .13);
   transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
 }
 
 .rentalFeatureLink:hover {
   background: #a78550;
   color: #fff;
-  box-shadow: 0 13px 26px rgba(44, 36, 24, .16);
+  box-shadow: 0 13px 26px rgba(44, 36, 24, .2);
   transform: translateY(-2px);
 }
 
@@ -266,10 +287,10 @@
 
 .rentalPartnerLogoLarge {
   width: 100%;
-  min-height: 190px;
+  min-height: 100%;
   align-self: stretch;
   margin: 0;
-  padding: 32px 28px;
+  padding: 34px 28px;
 }
 
 .lvcLogo {
@@ -281,7 +302,8 @@
 }
 
 .rentalPartnerLogoLarge .lvcLogo {
-  gap: 18px;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .lvcEmblem {
@@ -292,8 +314,8 @@
 }
 
 .rentalPartnerLogoLarge .lvcEmblem {
-  width: 58px;
-  height: 58px;
+  width: 72px;
+  height: 72px;
 }
 
 .lvcEmblem svg {
@@ -312,6 +334,10 @@
   text-transform: uppercase;
 }
 
+.rentalPartnerLogoLarge .lvcWords {
+  align-items: center;
+}
+
 .lvcWords strong {
   font-family: var(--sans);
   font-size: 13px;
@@ -321,7 +347,7 @@
 }
 
 .rentalPartnerLogoLarge .lvcWords strong {
-  font-size: 18px;
+  font-size: clamp(20px, 2vw, 27px);
 }
 
 .lvcWords span {
@@ -332,7 +358,8 @@
 
 .rentalPartnerLogoLarge .lvcWords span {
   margin-top: 8px;
-  font-size: 10px;
+  font-size: 11px;
+  letter-spacing: .48em;
 }
 
 @media (max-width: 1180px) {
@@ -384,15 +411,27 @@
   .rentalFeature {
     grid-template-columns: 1fr;
     gap: 22px;
-    padding: 24px 20px;
+    padding: 26px 22px;
   }
 
   .rentalFeatureCopy {
     text-align: center;
   }
 
-  .rentalFeatureCopy p {
+  .rentalFeatureLead {
+    font-size: 18px;
+  }
+
+  .rentalFeatureCopy h3 {
+    font-size: 34px;
+  }
+
+  .rentalFeatureCopy > p:not(.rentalFeatureLead):not(.lvcDifference) {
     font-size: 13px;
+  }
+
+  .lvcDifference {
+    font-size: 19px;
   }
 
   .rentalFeatureLink {
@@ -405,7 +444,7 @@
   }
 
   .rentalPartnerLogoLarge {
-    min-height: 150px;
+    min-height: 220px;
   }
 
   .lvcLogo {
@@ -418,8 +457,8 @@
   }
 
   .rentalPartnerLogoLarge .lvcEmblem {
-    width: 46px;
-    height: 46px;
+    width: 60px;
+    height: 60px;
   }
 
   .lvcWords strong {
@@ -428,7 +467,7 @@
   }
 
   .rentalPartnerLogoLarge .lvcWords strong {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .lvcWords span {
