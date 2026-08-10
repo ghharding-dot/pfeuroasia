@@ -29,12 +29,7 @@ export function PartnerStrip() {
         <div className={styles.partnerGroup}>
           <p className={styles.groupEyebrow}>Property representation partners</p>
           <p className={styles.rentalStatement}>Hover on desktop or tap once on mobile to discover each partner.</p>
-          <div className={styles.interactivePropertyGrid}>
-            <InteractivePropertyPartners />
-            <a className="partner-logo partner-luxo" href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
-              <span>Luxo</span><b>Estates</b>
-            </a>
-          </div>
+          <InteractivePropertyPartners />
         </div>
 
         <div className={styles.partnerGroup}>
