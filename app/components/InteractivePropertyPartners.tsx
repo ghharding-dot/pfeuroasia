@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import cardStyles from "./InteractiveLegalPartners.module.css";
-import styles from "./PartnerStrip.module.css";
+import partnerStyles from "./PartnerStrip.module.css";
+import styles from "./InteractivePropertyPartners.module.css";
 
 type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer";
 
@@ -61,7 +62,7 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
   if (partner.key === "aylesford") {
     return (
-      <div className={styles.aylesfordLogo} aria-label="Aylesford Spain">
+      <div className={partnerStyles.aylesfordLogo} aria-label="Aylesford Spain">
         <span>Aylesford</span>
         <small>Spain</small>
         <b>Est. 1966</b>
@@ -73,14 +74,14 @@ function FrontLogo({ partner }: { partner: Partner }) {
     return <img src="/images/partner-house-country.png" alt="House and Country Real Estate" />;
   }
 
-  return <img className={styles.interactiveFixerImage} src="/images/partner-the-fixer.svg" alt="The Fixer property advisory" />;
+  return <img className={styles.fixerImage} src="/images/partner-the-fixer.svg" alt="The Fixer property advisory" />;
 }
 
 export function InteractivePropertyPartners() {
   const [active, setActive] = useState<PartnerKey | null>(null);
 
   return (
-    <>
+    <div className={styles.grid}>
       {partners.map((partner) => {
         const revealed = active === partner.key;
 
@@ -121,6 +122,10 @@ export function InteractivePropertyPartners() {
           </article>
         );
       })}
-    </>
+
+      <a className={styles.luxoCard} href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
+        <span>Luxo</span><b>Estates</b>
+      </a>
+    </div>
   );
 }
