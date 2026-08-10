@@ -19,18 +19,18 @@ const partners: Partner[] = [
     key: "lawbird",
     name: "Lawbird Legal Services",
     href: "/go/lawbird",
-    kicker: "Spanish legal services",
+    kicker: "Local Marbella lawyers",
     description:
-      "Property, corporate, litigation and immigration advice for international clients operating in or moving to Spain.",
+      "Marbella-based legal support for international clients, including property, corporate, litigation and immigration matters in Spain.",
     mark: "LB",
   },
   {
     key: "legal10",
     name: "Legal 10 Abogados Marbella",
     href: "/go/legal10",
-    kicker: "Marbella legal · tax · financial",
+    kicker: "Specialist criminal services",
     description:
-      "Personal legal, tax and financial advice with particular experience supporting foreign residents, non-residents and businesses.",
+      "Legal, tax and financial advice with specialist criminal law services and offices in Marbella and Madrid.",
     mark: "10",
   },
   {
@@ -39,7 +39,7 @@ const partners: Partner[] = [
     href: "/go/martinezechevarria",
     kicker: "International legal counsel",
     description:
-      "Marbella-based legal support for international private and business clients, including real estate, tax and wider commercial matters.",
+      "International legal support with offices across Portugal, Madrid, Marbella, Málaga, Turkey and Dubai, covering real estate, tax and wider commercial matters.",
     mark: "ME",
   },
 ];
