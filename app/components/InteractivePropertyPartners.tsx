@@ -10,6 +10,7 @@ type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer";
 type Partner = {
   key: PartnerKey;
   name: string;
+  representative: string;
   href: string;
   kicker: string;
   description: string;
@@ -20,6 +21,7 @@ const partners: Partner[] = [
   {
     key: "pfiberia",
     name: "Property Facilitators Iberia",
+    representative: "Geoff Harding",
     href: "/go/pfiberia",
     kicker: "Marbella property representation",
     description:
@@ -29,15 +31,17 @@ const partners: Partner[] = [
   {
     key: "aylesford",
     name: "Aylesford Spain",
+    representative: "Michael Cory-Reed",
     href: "/go/aylesford",
     kicker: "Prime residential property",
     description:
-      "An established property specialist working with international buyers and sellers across Marbella, the Golden Mile and surrounding prime residential areas.",
+      "Established property specialists working with international buyers and sellers across Marbella, the Golden Mile and surrounding prime residential areas.",
     mark: "AY",
   },
   {
     key: "housecountry",
     name: "House & Country Real Estate",
+    representative: "Jaime Paralade",
     href: "/go/house-country",
     kicker: "Marbella & country property",
     description:
@@ -47,10 +51,11 @@ const partners: Partner[] = [
   {
     key: "fixer",
     name: "The Fixer",
+    representative: "Robert Bazo",
     href: "/go/the-fixer",
     kicker: "Property advisory & problem solving",
     description:
-      "Practical on-the-ground support for property owners and buyers, helping coordinate solutions, trusted contacts and the details that make transactions work.",
+      "Practical on-the-ground support for property owners and buyers, coordinating solutions, trusted contacts and the details that make transactions work.",
     mark: "FX",
   },
 ];
@@ -114,6 +119,7 @@ export function InteractivePropertyPartners() {
               <span className={cardStyles.watermark} aria-hidden="true">{partner.mark}</span>
               <p className={cardStyles.kicker}>{partner.kicker}</p>
               <h3>{partner.name}</h3>
+              <p className={cardStyles.representative}><span>Representative</span>{partner.representative}</p>
               <p className={cardStyles.description}>{partner.description}</p>
               <a className={cardStyles.visitLink} href={partner.href}>
                 Visit partner <span>→</span>
