@@ -1,5 +1,6 @@
 import styles from "./PartnerStrip.module.css";
 import { InteractiveLegalPartners } from "./InteractiveLegalPartners";
+import { InteractivePropertyPartners } from "./InteractivePropertyPartners";
 
 function LuxuryVillaCollectionLogo() {
   return (
@@ -19,16 +20,6 @@ function LuxuryVillaCollectionLogo() {
   );
 }
 
-function AylesfordLogo() {
-  return (
-    <div className={styles.aylesfordLogo} aria-label="Aylesford Spain">
-      <span>Aylesford</span>
-      <small>Spain</small>
-      <b>Est. 1966</b>
-    </div>
-  );
-}
-
 export function PartnerStrip() {
   return (
     <section className="partner-strip" aria-labelledby="partner-strip-title">
@@ -37,21 +28,11 @@ export function PartnerStrip() {
 
         <div className={styles.partnerGroup}>
           <p className={styles.groupEyebrow}>Property representation partners</p>
-          <div className={`partner-logo-grid ${styles.propertyGrid}`}>
-            <a className="partner-logo partner-pf" href="/go/pfiberia" aria-label="Enquire through Property Facilitators Iberia">
-              <img src="/images/partner-pf-iberia.png" alt="Property Facilitators Iberia" />
-            </a>
-            <a className="partner-logo" href="/go/aylesford" aria-label="Enquire through Aylesford Spain">
-              <AylesfordLogo />
-            </a>
-            <a className="partner-logo partner-house" href="/go/house-country" aria-label="Enquire through House and Country Real Estate">
-              <img src="/images/partner-house-country.png" alt="House and Country Real Estate" />
-            </a>
+          <p className={styles.rentalStatement}>Hover on desktop or tap once on mobile to discover each partner.</p>
+          <div className={styles.interactivePropertyGrid}>
+            <InteractivePropertyPartners />
             <a className="partner-logo partner-luxo" href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
               <span>Luxo</span><b>Estates</b>
-            </a>
-            <a className={`partner-logo ${styles.fixerLogo}`} href="/go/the-fixer" aria-label="Enquire through The Fixer">
-              <img src="/images/partner-the-fixer.svg" alt="The Fixer property advisory" />
             </a>
           </div>
         </div>
