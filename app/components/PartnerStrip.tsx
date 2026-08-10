@@ -59,10 +59,8 @@ export function PartnerStrip() {
         <div className={styles.partnerGroup}>
           <div className={styles.groupDivider} aria-hidden="true" />
           <p className={styles.groupEyebrow}>Legal representation partners</p>
-          <p className={styles.interactionHint}>Hover on desktop or tap once on mobile to discover each firm.</p>
-          <div className={styles.interactiveLegalGrid}>
-            <InteractiveLegalPartners />
-          </div>
+          <p className={styles.rentalStatement}>Hover on desktop or tap once on mobile to discover each firm.</p>
+          <InteractiveLegalPartners />
         </div>
 
         <div className={styles.rentalPartnerSection}>
