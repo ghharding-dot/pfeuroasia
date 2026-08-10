@@ -39,6 +39,29 @@ export function PartnerStrip() {
           <InteractiveLegalPartners />
         </div>
 
+        <div className={`${styles.rentalPartnerSection} ${styles.featuredRentalSection}`}>
+          <div className={styles.rentalDivider} aria-hidden="true" />
+          <p className={styles.rentalEyebrow}>Luxury villa rental partner</p>
+          <div className={styles.rentalFeature}>
+            <div className={styles.rentalFeatureCopy}>
+              <h3>The Luxury Villa Collection</h3>
+              <p>
+                Our specialist partner for exceptional short-term villa rentals, providing carefully selected luxury homes and a highly personal service for clients seeking an outstanding stay in Southern Spain.
+              </p>
+              <a className={styles.rentalFeatureLink} href="/luxury-villa-rentals#villa-enquiry">
+                Explore luxury villa rentals <span>→</span>
+              </a>
+            </div>
+            <a
+              className={`partner-logo ${styles.rentalPartnerLogo} ${styles.rentalPartnerLogoLarge}`}
+              href="/luxury-villa-rentals#villa-enquiry"
+              aria-label="Request a bespoke luxury villa selection"
+            >
+              <LuxuryVillaCollectionLogo />
+            </a>
+          </div>
+        </div>
+
         <div className={styles.rentalPartnerSection}>
           <div className={styles.rentalDivider} aria-hidden="true" />
           <p className={styles.rentalEyebrow}>Approved PF EuroAsia collaborators</p>
@@ -47,21 +70,6 @@ export function PartnerStrip() {
           </p>
           <a className={styles.collaboratorButton} href="/collaborators">
             Collaborator Login <span>→</span>
-          </a>
-        </div>
-
-        <div className={styles.rentalPartnerSection}>
-          <div className={styles.rentalDivider} aria-hidden="true" />
-          <p className={styles.rentalEyebrow}>Luxury villa rental partner</p>
-          <p className={styles.rentalStatement}>
-            For exceptional short-term villa rentals, we work in collaboration with our specialist luxury rental partner.
-          </p>
-          <a
-            className={`partner-logo ${styles.rentalPartnerLogo}`}
-            href="/luxury-villa-rentals#villa-enquiry"
-            aria-label="Request a bespoke luxury villa selection"
-          >
-            <LuxuryVillaCollectionLogo />
           </a>
         </div>
       </div>
