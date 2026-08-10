@@ -96,7 +96,7 @@ export function HomePhase2() {
             >
               <div className={phase2Styles.cardOverlay} />
               <div className={phase2Styles.gatewayCardCopy}>
-                <span className={phase2Styles.pathLabel}>Spain property</span>
+                <span className={phase2Styles.pathLabel}>Spanish property</span>
                 <h2>Looking to buy property in Spain?</h2>
                 <p>
                   Explore luxury homes, private opportunities, buyer
@@ -119,7 +119,7 @@ export function HomePhase2() {
             >
               <div className={phase2Styles.cardOverlay} />
               <div className={phase2Styles.gatewayCardCopy}>
-                <span className={phase2Styles.pathLabel}>Asia gateway</span>
+                <span className={phase2Styles.pathLabel}>Asia Gateway</span>
                 <h2>Thinking of Dubai for residency or tax planning? Have you considered Malaysia and Asia?</h2>
                 <p>
                   Before making the conventional move to Dubai, compare the
