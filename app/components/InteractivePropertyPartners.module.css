@@ -1,13 +1,20 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
   gap: 14px;
   margin-top: 18px;
 }
 
 .grid > article,
+.propertyCard,
 .luxoCard {
   min-height: 290px;
+}
+
+.propertyReveal {
+  justify-content: flex-start;
+  padding: 22px 22px 20px;
 }
 
 .luxoCard {
@@ -60,8 +67,13 @@
   }
 
   .grid > article,
+  .propertyCard,
   .luxoCard {
     min-height: 235px;
+  }
+
+  .propertyReveal {
+    padding: 18px 18px 16px;
   }
 
   .grid > :last-child {
