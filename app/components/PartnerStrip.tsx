@@ -1,4 +1,5 @@
 import styles from "./PartnerStrip.module.css";
+import { InteractiveLegalPartners } from "./InteractiveLegalPartners";
 
 function LuxuryVillaCollectionLogo() {
   return (
@@ -24,15 +25,6 @@ function AylesfordLogo() {
       <span>Aylesford</span>
       <small>Spain</small>
       <b>Est. 1966</b>
-    </div>
-  );
-}
-
-function MartinezEchevarriaLogo() {
-  return (
-    <div className={styles.martinezLogo} aria-label="Martinez-Echevarria Lawyers">
-      <span>Martínez-Echevarría</span>
-      <small>Lawyers</small>
     </div>
   );
 }
@@ -67,16 +59,9 @@ export function PartnerStrip() {
         <div className={styles.partnerGroup}>
           <div className={styles.groupDivider} aria-hidden="true" />
           <p className={styles.groupEyebrow}>Legal representation partners</p>
-          <div className={`partner-logo-grid ${styles.legalGrid}`}>
-            <a className="partner-logo partner-legal" href="/go/legal10" aria-label="Enquire through Legal 10 Abogados Marbella">
-              <img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" />
-            </a>
-            <a className="partner-logo partner-lawbird" href="/go/lawbird" aria-label="Enquire through Lawbird Legal Services">
-              <img src="/images/partner-lawbird.png" alt="Lawbird Legal Services" />
-            </a>
-            <a className="partner-logo" href="/go/martinezechevarria" aria-label="Enquire through Martinez-Echevarria Lawyers">
-              <MartinezEchevarriaLogo />
-            </a>
+          <p className={styles.interactionHint}>Hover on desktop or tap once on mobile to discover each firm.</p>
+          <div className={styles.interactiveLegalGrid}>
+            <InteractiveLegalPartners />
           </div>
         </div>
 
