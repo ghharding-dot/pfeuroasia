@@ -21,7 +21,7 @@ const partners: Partner[] = [
   {
     key: "pfiberia",
     name: "Property Facilitators Iberia",
-    representative: "Geoff Harding",
+    representative: "Jeff Harding",
     href: "/go/pfiberia",
     kicker: "Marbella property representation",
     description:
@@ -51,7 +51,7 @@ const partners: Partner[] = [
   {
     key: "fixer",
     name: "The Fixer",
-    representative: "Robert Bazo",
+    representative: "Robert Basil",
     href: "/go/the-fixer",
     kicker: "Property advisory & problem solving",
     description:
