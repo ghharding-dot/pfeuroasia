@@ -1,0 +1,65 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.luxoCard {
+  display: flex;
+  min-height: 190px;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 24px;
+  border: 1px solid rgba(167, 133, 80, .72);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fff 0%, #fffdf8 100%);
+  box-shadow: 0 8px 22px rgba(44, 36, 24, .07);
+  color: #171916;
+  font-family: var(--serif);
+  font-size: 24px;
+  letter-spacing: -.035em;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.luxoCard b {
+  color: #a78550;
+  font-weight: 400;
+}
+
+.luxoCard:hover {
+  transform: translateY(-3px);
+  border-color: #a78550;
+  box-shadow: 0 15px 34px rgba(21,18,13,.16);
+}
+
+.fixerImage {
+  width: 100%;
+  max-width: 92%;
+  max-height: 86px !important;
+  object-fit: contain;
+  transform: scale(1.55);
+  transform-origin: center;
+}
+
+@media (max-width: 1180px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .luxoCard {
+    min-height: 170px;
+  }
+
+  .grid > :last-child {
+    grid-column: 1 / -1;
+  }
+}
