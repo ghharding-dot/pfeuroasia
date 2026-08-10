@@ -65,7 +65,7 @@ export function InteractiveLegalPartners() {
   const [active, setActive] = useState<PartnerKey | null>(null);
 
   return (
-    <>
+    <div className={styles.grid}>
       {partners.map((partner) => {
         const revealed = active === partner.key;
 
@@ -106,6 +106,6 @@ export function InteractiveLegalPartners() {
           </article>
         );
       })}
-    </>
+    </div>
   );
 }
