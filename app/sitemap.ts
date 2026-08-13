@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/acquisition",
     "/services/international-sales",
     "/services/relocation-concierge",
+    "/services/labuan-company-residency",
     "/markets/marbella",
     "/markets/malaysia",
     "/areas/la-zagaleta",
