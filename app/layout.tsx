@@ -118,8 +118,7 @@ const organizationSchema = {
   ],
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Main Office Tower, Financial Park Labuan Complex, Jalan Merdeka",
-    postalCode: "87000",
+    streetAddress: "Level 11(A), Main Office Tower, Financial Park Labuan",
     addressLocality: "Labuan",
     addressCountry: "MY",
   },
