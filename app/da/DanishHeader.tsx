@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "../components/HeaderMobileDirectory.module.css";
 
-export function DanishHeader() {
+export function DanishHeader({ transparent = true }: { transparent?: boolean }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
-  return <header className="site-header is-transparent">
+  return <header className={`site-header ${transparent ? "is-transparent" : ""}`}>
     <div className="site-shell header-inner">
       <Link className="brand" href="/da" aria-label="Property Facilitators EuroAsia dansk forside"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link>
       <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Hovednavigation">
