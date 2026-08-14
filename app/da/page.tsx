@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "../HomeRegions.module.css";
 import { DanishHeader } from "./DanishHeader";
+import { DanishHomePhase2 } from "./DanishHomePhase2";
 
 const services = [
   ["01", "Købsrådgivning", "Strategisk ejendomskøb for private kunder, family offices og investorer – både offentligt markedsførte og diskrete off-market muligheder.", "/da/services/acquisition"],
@@ -12,6 +13,7 @@ const services = [
 export default function DanishHome() {
   return <main>
     <DanishHeader />
+    <DanishHomePhase2 />
 
     <section className="hero"><div className="hero-shade"/><div className="hero-grid site-shell"><div className="hero-copy reveal-up"><p className="eyebrow light">Europa og Asien forbundet</p><h1>Din indgang til <span>internationale muligheder.</span></h1><p className="hero-intro">Ejendom · Relocation · Ophold · Virksomhedsudvidelse</p><p className="hero-intro">Vi hjælper investorer, iværksættere, familier og internationalt mobile fagfolk med at skabe nye muligheder i Europa og Asien gennem et betroet netværk af erfarne lokale partnere.</p><p className="hero-intro">Fra luksusejendomme i Spanien til virksomheds- og opholdsmuligheder i Malaysia, Hongkong, Singapore og videre – vi gør international investering, relocation og ekspansion overskuelig og professionelt understøttet.</p><div className="hero-actions"><a className="button button-gold" href="#markets-da">Se mulighederne <span>→</span></a><Link className="text-link light-link" href="/enquire">Book en fortrolig samtale <span>→</span></Link></div></div><aside className="hero-note"><span className="gold-rule"/><p>Betroet netværk i Europa og Asien</p><small>Spanien · Malaysia · Hongkong · Singapore<br/>UAE · Thailand</small></aside></div><div className="hero-footer site-shell"><p>Ejendom · Relocation · Ophold · Virksomhedsudvidelse</p><p className="scroll-note">Rul ned og oplev mere</p></div></section>
 
