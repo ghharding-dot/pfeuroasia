@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 };
 
 const formationItems = [
-  ["Name search & reservation", "US$187.50"],
-  ["Incorporation & LFSA registration", "US$2,250"],
-  ["Statutory documents & company kit", "US$437.50"],
-  ["Registered office & resident secretary - year one", "US$1,875"],
-  ["Regulatory filing & compliance setup", "US$875"],
+  ["Name search & reservation", "US$202.50"],
+  ["Incorporation & LFSA registration", "US$2,430"],
+  ["Statutory documents & company kit", "US$472.50"],
+  ["Registered office & resident secretary - year one", "US$2,025"],
+  ["Regulatory filing & compliance setup", "US$945"],
 ];
 
 const residencyItems = [
-  ["Employment Pass processing - principal", "US$3,312.50"],
-  ["Immigration filing & approval fees", "US$1,875"],
-  ["Dependent / associate residency processing", "US$1,687.50"],
+  ["Employment Pass processing - principal", "US$3,577.50"],
+  ["Immigration filing & approval fees", "US$2,025"],
+  ["Dependent / associate residency processing", "US$1,822.50"],
 ];
 
 export default function LabuanCompanyResidencyPage() {
@@ -125,21 +125,21 @@ export default function LabuanCompanyResidencyPage() {
         <div className="site-shell">
           <div className={styles.packageHeading}>
             <div><p className="eyebrow light">Indicative professional package</p><h2>Formation through residency.</h2></div>
-            <div><strong>US$12,500</strong><span>Total for the stated scope</span></div>
+            <div><strong>US$13,500</strong><span>Total for the stated scope</span></div>
           </div>
           <div className={styles.priceColumns}>
             <article>
-              <header><div><span>Phase 1</span><h3>Company formation</h3></div><strong>US$5,625</strong></header>
+              <header><div><span>Phase 1</span><h3>Company formation</h3></div><strong>US$6,075</strong></header>
               <ul>{formationItems.map(([label, price]) => <li key={label}><span>{label}</span><b>{price}</b></li>)}</ul>
             </article>
             <article>
-              <header><div><span>Phase 2</span><h3>Visa & residency</h3></div><strong>US$6,875</strong></header>
+              <header><div><span>Phase 2</span><h3>Visa & residency</h3></div><strong>US$7,425</strong></header>
               <ul>{residencyItems.map(([label, price]) => <li key={label}><span>{label}</span><b>{price}</b></li>)}</ul>
             </article>
           </div>
           <div className={styles.packageNotes}>
             <p><strong>Expected timing:</strong> approximately 3-4 weeks from receipt of complete documentation through company formation and LFSA approval; immigration timing can vary.</p>
-            <p><strong>Ongoing administration:</strong> budget from approximately US$3,750 per year, subject to the company&apos;s activity, compliance, accounting, audit, licence and substance requirements.</p>
+            <p><strong>Ongoing administration:</strong> budget from approximately US$4,050 per year, subject to the company&apos;s activity, compliance, accounting, audit, licence and substance requirements.</p>
             <p><strong>Scope:</strong> pricing reflects one principal and one dependent / associate as described. Additional applicants, bank requirements, tax advice and out-of-scope government or professional fees are quoted separately.</p>
           </div>
         </div>
