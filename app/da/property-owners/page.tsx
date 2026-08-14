@@ -1,0 +1,1 @@
+import { DanishHeader } from "../DanishHeader";import { DanishFooter } from "../DanishFooter";import { DanishOwnerListingSection } from "../DanishOwnerListingSection";export default function DanishOwners(){return <main><DanishHeader/><DanishOwnerListingSection/><DanishFooter/></main>}
