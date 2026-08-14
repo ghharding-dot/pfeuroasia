@@ -54,6 +54,7 @@ export function Header({
           </Link>
           <Link className="language-link" href="/zh" onClick={() => setOpen(false)}>中文</Link>
           <Link className="language-link" href="/ar" onClick={() => setOpen(false)}>العربية</Link>
+          <Link className="language-link" href="/da" onClick={() => setOpen(false)}>Dansk</Link>
           <Link className="nav-enquire" href={enquireHref} onClick={() => setOpen(false)}>
             {enquireLabel} <span>→</span>
           </Link>

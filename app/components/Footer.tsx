@@ -39,6 +39,7 @@ export function Footer() {
           <Link href="/areas/el-madronal">El Madroñal</Link>
           <Link href="/markets/malaysia">Malaysia & Asia</Link>
           <Link href="/zh">简体中文</Link>
+          <Link href="/da">Dansk</Link>
           <Link href="/enquire">Contact our desks</Link>
         </div>
       </div>

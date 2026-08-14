@@ -38,6 +38,7 @@ export const metadata: Metadata = {
       "en-GB": "/",
       "zh-CN": "/zh",
       "ar-SA": "/ar",
+      "da-DK": "/da",
     },
   },
   applicationName: "Property Facilitators EuroAsia",
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_GB",
-    alternateLocale: ["zh_CN", "ar_SA"],
+    alternateLocale: ["zh_CN", "ar_SA", "da_DK"],
     url: siteUrl,
     siteName: "Property Facilitators EuroAsia",
     title: "Luxury Property Marbella & Asia | Property Facilitators EuroAsia",
