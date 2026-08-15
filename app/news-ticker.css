@@ -1,6 +1,6 @@
 .site-header,
 .site-header.is-transparent {
-  height: 126px;
+  height: 160px;
 }
 
 .site-header > .header-inner {
@@ -86,7 +86,7 @@
 @media (max-width: 760px) {
   .site-header,
   .site-header.is-transparent {
-    height: 108px;
+    height: 146px;
   }
 
   .site-header > .header-inner {
@@ -120,6 +120,6 @@
   }
 
   .site-header .main-nav {
-    top: 108px;
+    top: 146px;
   }
 }
