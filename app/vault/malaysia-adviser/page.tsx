@@ -48,6 +48,10 @@ export default async function MalaysiaAdviserRegisterPage() {
     (total, lead) => total + (lead.questions || []).filter((question) => question.status === "pending").length,
     0,
   );
+  const totalQuestions = ordered.reduce(
+    (total, lead) => total + (lead.questions || []).length,
+    0,
+  );
 
   return (
     <main className="vault-dashboard-page">
@@ -56,13 +60,14 @@ export default async function MalaysiaAdviserRegisterPage() {
           <div>
             <p className="vault-kicker">PF EuroAsia · Ask EuroAsia</p>
             <h1>Malaysia Adviser Register</h1>
-            <p>Registered adviser users and questions requiring human or specialist follow-up.</p>
+            <p>Registered adviser users, answered Q&A history and questions requiring human or specialist follow-up.</p>
           </div>
           <Link className="vault-primary-button" href="/vault/dashboard">Back to The Vault</Link>
         </header>
 
         <section className="vault-stats vault-stats-access" aria-label="Malaysia adviser summary">
           <article className="vault-stat"><strong>{ordered.length}</strong><span>Registered adviser users</span></article>
+          <article className="vault-stat"><strong>{totalQuestions}</strong><span>Questions recorded</span></article>
           <article className="vault-stat vault-stat-attention"><strong>{pendingQuestions}</strong><span>Questions awaiting answer</span></article>
           <article className="vault-stat"><strong>{ordered.reduce((sum, lead) => sum + (lead.accessCount || 0), 0)}</strong><span>Total adviser accesses</span></article>
         </section>
@@ -70,8 +75,8 @@ export default async function MalaysiaAdviserRegisterPage() {
         <section className="vault-panel vault-client-panel">
           <div className="vault-panel-header vault-client-panel-header">
             <div>
-              <h2>Malaysia Adviser Leads</h2>
-              <p>Name and email are captured before access. Unanswered questions are attached to the same visitor record.</p>
+              <h2>Malaysia Adviser Leads & Q&A</h2>
+              <p>Name and email are captured before access. New adviser answers are logged with the exact visitor question, answer, source and timestamp; unanswered questions remain in the follow-up queue.</p>
             </div>
           </div>
 
@@ -90,7 +95,7 @@ export default async function MalaysiaAdviserRegisterPage() {
                       <div>
                         <h3>{lead.fullName}</h3>
                         <p><a href={`mailto:${lead.email}`}>{lead.email}</a></p>
-                        <small>{lead.source} · {lead.accessCount || 1} access{(lead.accessCount || 1) === 1 ? "" : "es"}</small>
+                        <small>{lead.source} · {lead.accessCount || 1} access{(lead.accessCount || 1) === 1 ? "" : "es"} · {(lead.questions || []).length} recorded question{(lead.questions || []).length === 1 ? "" : "s"}</small>
                       </div>
                     </div>
                     <div className="vault-client-dates">
@@ -100,13 +105,14 @@ export default async function MalaysiaAdviserRegisterPage() {
 
                     {(lead.questions || []).length > 0 ? (
                       <details className="vault-client-details" open={pending.length > 0}>
-                        <summary>Review adviser questions</summary>
+                        <summary>Review adviser Q&A history</summary>
                         <div className="vault-client-detail-grid">
                           {[...(lead.questions || [])].reverse().map((question) => (
                             <div className="vault-client-detail-full" key={question.id}>
                               <span>{question.status === "pending" ? "Awaiting answer" : "Answered"} · {formatDate(question.askedAt)}</span>
                               <strong>{question.question}</strong>
                               {question.answer ? <p>{question.answer}</p> : null}
+                              {question.source ? <small>Answer source: {question.source}</small> : null}
                               {question.status === "pending" ? (
                                 <a href={`mailto:${lead.email}?subject=${encodeURIComponent("Your PF EuroAsia Malaysia Adviser question")}&body=${encodeURIComponent(`Dear ${lead.fullName},\n\nThank you for your question to the PF EuroAsia Malaysia Adviser:\n\n${question.question}\n\n`)}`}>
                                   Reply by email →
