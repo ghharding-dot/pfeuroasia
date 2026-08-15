@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./MalaysiaCostAndVisit.module.css";
 import cardStyles from "./MalaysiaDiscoveryCards.module.css";
+import { SkyscannerFlightSearch } from "./SkyscannerFlightSearch";
 
 const comparisonRows = [
   { icon: "⛽", label: "Petrol / gasoline", unit: "per litre", europe: "€1.80", malaysia: "RM3.82 (€0.80)" },
@@ -67,6 +68,20 @@ export function MalaysiaCostAndVisit() {
               <div className={cardStyles.visualCardShade} />
               <div className={cardStyles.visualCardCopy}><span className={styles.hotelTag}>Private arrival</span><h3>KLIA → central Kuala Lumpur</h3><p className={styles.hotelPrice}>luxury executive MPV from around <strong>RM250</strong> <span>(€52)</span></p><small>Indicative daytime private-transfer pricing; actual vehicle, timing and route affect cost.</small></div>
             </article>
+          </div>
+
+          <div className={styles.flightPlanner}>
+            <div className={styles.flightPlannerCopy}>
+              <p className="eyebrow">Plan your journey</p>
+              <h3>Search live flights to Kuala Lumpur.</h3>
+              <p>
+                Compare current flight options with Skyscanner. Kuala Lumpur International Airport (KUL) is preselected, and your departure point can be suggested from your location where available.
+              </p>
+              <small>Flight availability, schedules and fares are supplied by Skyscanner and can change at any time. Search results open on Skyscanner.</small>
+            </div>
+            <div className={styles.flightWidget}>
+              <SkyscannerFlightSearch />
+            </div>
           </div>
 
           <div className={styles.visitSteps}>{visitSteps.map((step) => (<article key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.text}</p></article>))}</div>
