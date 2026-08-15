@@ -1,10 +1,22 @@
 import Link from "next/link";
 import { PartnerStrip } from "./PartnerStrip";
+import styles from "./FooterCollaborators.module.css";
 
 export function Footer() {
   return (
     <footer className="site-footer">
       <PartnerStrip />
+      <div className="site-shell">
+        <div className={styles.collaboratorBar}>
+          <div className={styles.collaboratorCopy}>
+            <strong>Collaborators & professional partners</strong>
+            <span>Access the private collaborator area, shared resources and partner information.</span>
+          </div>
+          <Link className={`button button-gold ${styles.collaboratorButton}`} href="/collaborators">
+            Collaborator access <span>→</span>
+          </Link>
+        </div>
+      </div>
       <div className="site-shell footer-top">
         <div className="footer-identity">
           <Link className="brand footer-brand" href="/">
@@ -30,7 +42,6 @@ export function Footer() {
           <Link href="/services/international-sales">International sales</Link>
           <Link href="/services/relocation-concierge">Relocation & concierge</Link>
           <Link href="/about">Our approach</Link>
-          <Link href="/collaborators">Collaborator login</Link>
           <Link href="/privacy">Privacy notice</Link>
         </div>
         <div className="footer-links footer-markets">
