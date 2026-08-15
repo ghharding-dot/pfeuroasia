@@ -60,16 +60,16 @@ export default function AsiaGatewayPage() {
             through a growing network of experienced local professionals.
           </p>
           <div className={styles.heroActions}>
-            <Link className="button button-gold" href="/asia-gateway/enquire">
+            <Link className={`${styles.heroAction} ${styles.heroActionPrimary}`} href="/asia-gateway/enquire">
               Arrange a confidential consultation <span>→</span>
             </Link>
-            <Link className="text-link light-link" href="/services/labuan-company-residency/adviser">
+            <Link className={styles.heroAction} href="/services/labuan-company-residency/adviser">
               Ask the Malaysia &amp; Labuan Adviser <span>→</span>
             </Link>
-            <Link className="text-link light-link" href="/markets/malaysia">
+            <Link className={styles.heroAction} href="/markets/malaysia">
               View Malaysia property <span>→</span>
             </Link>
-            <Link className="text-link light-link" href="/services/labuan-company-residency">
+            <Link className={styles.heroAction} href="/services/labuan-company-residency">
               Labuan company setup &amp; tax residency <span>→</span>
             </Link>
           </div>

@@ -32,7 +32,7 @@ const services = [
     number: "03",
     title: "Relocation",
     text: "Assistance with residency and visa applications, company formation and ownership structures through our trusted legal collaboration network in Spain, Portugal, Saudi Arabia and Asia.",
-    href: "/services/relocation-concierge",
+    href: "/services/labuan-company-residency",
   },
   {
     number: "04",
@@ -136,7 +136,7 @@ export default async function Home() {
           <div className={styles.heading}>
             <div>
               <p className="eyebrow">Property in Spain</p>
-              <h2>Marbella & Benahavís.<em>The Costa del Sol.</em></h2>
+              <h2>Marbella Golden Mile &amp; Benahavís.<em>The Costa del Sol.</em></h2>
             </div>
             <p>
               Continue through our established Spain property service, including

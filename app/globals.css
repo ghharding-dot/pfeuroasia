@@ -513,6 +513,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .area-feature-grid article > span { color: var(--gold); font-size: 10px; letter-spacing: .14em; }
 .area-feature-grid h2 { margin: 86px 0 20px; font-family: var(--serif); font-size: 32px; font-weight: 400; }
 .area-feature-grid p { margin: 0; color: rgba(255,255,255,.5); font-size: 13px; line-height: 1.75; }
+.hotel-recommendation-card { min-height: 0 !important; padding: 0 !important; overflow: hidden; }
+.hotel-recommendation-image { position: relative; height: 250px; overflow: hidden; background: #20231f; }
+.hotel-recommendation-image img { object-fit: cover; transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
+.hotel-recommendation-card:hover .hotel-recommendation-image img { transform: scale(1.035); }
+.hotel-recommendation-copy { padding: 32px 34px 36px; }
+.hotel-recommendation-copy > span { color: var(--gold); font-size: 10px; letter-spacing: .14em; }
+.hotel-recommendation-copy h2 { margin: 30px 0 20px; }
+.hotel-recommendation-copy .text-link { margin-top: 26px; }
 .area-advice { background: var(--ivory); }
 .area-advice-grid { display: grid; grid-template-columns: 1fr .85fr; gap: 120px; align-items: start; }
 .area-advice h2 { max-width: 590px; margin: 0; font-family: var(--serif); font-size: clamp(48px,5vw,72px); font-weight: 400; line-height: 1.05; }

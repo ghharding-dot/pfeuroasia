@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -31,23 +32,38 @@ export default function MalaysiaPage() {
       <div className="site-shell">
         <p className="eyebrow light">PF EuroAsia recommends · YTL Hotels</p>
         <div className="area-feature-grid">
-          <article>
-            <span>01</span>
-            <h2>The Ritz-Carlton, Kuala Lumpur</h2>
-            <p>Our preferred Kuala Lumpur choice for a refined five-star stay, with a quieter luxury atmosphere, award-winning dining and spa facilities.</p>
-            <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+          <article className="hotel-recommendation-card">
+            <div className="hotel-recommendation-image">
+              <Image src="/images/Ritz%20CARLTON.webp" alt="The Ritz-Carlton, Kuala Lumpur" fill sizes="(max-width: 620px) 100vw, 33vw" />
+            </div>
+            <div className="hotel-recommendation-copy">
+              <span>01</span>
+              <h2>The Ritz-Carlton, Kuala Lumpur</h2>
+              <p>Our preferred Kuala Lumpur choice for a refined five-star stay, with a quieter luxury atmosphere, award-winning dining and spa facilities.</p>
+              <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+            </div>
           </article>
-          <article>
-            <span>02</span>
-            <h2>JW Marriott Kuala Lumpur</h2>
-            <p>Our city-centre recommendation for visitors who want to be close to Kuala Lumpur&apos;s business, shopping, dining and social districts.</p>
-            <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+          <article className="hotel-recommendation-card">
+            <div className="hotel-recommendation-image">
+              <Image src="/images/JW%20Marriott%20STREET.jpg" alt="JW Marriott Kuala Lumpur" fill sizes="(max-width: 620px) 100vw, 33vw" />
+            </div>
+            <div className="hotel-recommendation-copy">
+              <span>02</span>
+              <h2>JW Marriott Kuala Lumpur</h2>
+              <p>Our city-centre recommendation for visitors who want to be close to Kuala Lumpur&apos;s business, shopping, dining and social districts.</p>
+              <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+            </div>
           </article>
-          <article>
-            <span>03</span>
-            <h2>Pangkor Laut Resort</h2>
-            <p>Our recommended retreat: an island setting in Perak for privacy, nature and relaxation when the trip is about switching off rather than staying in the city.</p>
-            <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/" target="_blank" rel="noreferrer">Explore Pangkor Laut at YTL Hotels <span>→</span></a>
+          <article className="hotel-recommendation-card">
+            <div className="hotel-recommendation-image">
+              <Image src="/images/Emerald%20bay%20pkl.jpg" alt="Pangkor Laut Resort and Emerald Bay" fill sizes="(max-width: 620px) 100vw, 33vw" />
+            </div>
+            <div className="hotel-recommendation-copy">
+              <span>03</span>
+              <h2>Pangkor Laut Resort</h2>
+              <p>Our recommended retreat: an island setting in Perak for privacy, nature and relaxation when the trip is about switching off rather than staying in the city.</p>
+              <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/" target="_blank" rel="noreferrer">Explore Pangkor Laut at YTL Hotels <span>→</span></a>
+            </div>
           </article>
         </div>
       </div>

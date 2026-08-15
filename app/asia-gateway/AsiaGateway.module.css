@@ -48,11 +48,51 @@
 }
 
 .heroActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  align-items: center;
+  display: grid;
+  width: min(100%, 820px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   margin-top: 40px;
+}
+
+.heroAction {
+  display: inline-flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 18px;
+  border: 1px solid rgba(222, 194, 141, 0.88);
+  background: rgba(9, 13, 15, 0.58);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.heroAction span {
+  flex: 0 0 auto;
+  color: var(--gold-light);
+  font-size: 14px;
+}
+
+.heroActionPrimary,
+.heroAction:hover,
+.heroAction:focus-visible,
+.heroAction:active {
+  background: var(--gold);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.heroActionPrimary span,
+.heroAction:hover span,
+.heroAction:focus-visible span,
+.heroAction:active span {
+  color: var(--ink);
 }
 
 .introSection {
@@ -276,8 +316,7 @@
   }
 
   .heroActions {
-    align-items: flex-start;
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .introSection,
