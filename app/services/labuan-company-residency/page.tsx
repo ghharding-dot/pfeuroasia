@@ -48,8 +48,8 @@ export default function LabuanCompanyResidencyPage() {
             Labuan incorporation and compliance to work permit and dependent residency applications.
           </p>
           <div className={styles.heroActions}>
-            <Link className="button button-gold" href="/asia-gateway/enquire">
-              Request a private assessment <span>→</span>
+            <Link className="button button-gold" href="/services/labuan-company-residency/adviser">
+              Ask the Malaysia & Labuan adviser <span>→</span>
             </Link>
             <a className="text-link light-link" href="#package">View the package <span>↓</span></a>
           </div>
