@@ -5,7 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { LabuanAdviser } from "./LabuanAdviser";
 import styles from "./LabuanAdviserAccess.module.css";
 
-const SESSION_KEY = "pfe-labuan-adviser-access";
+const SESSION_KEY = "pfe-malaysia-adviser-access";
 
 type AccessDetails = {
   fullName: string;
@@ -21,7 +21,12 @@ export function LabuanAdviserAccess() {
   useEffect(() => {
     try {
       const stored = window.sessionStorage.getItem(SESSION_KEY);
-      if (stored) setUnlocked(true);
+      if (!stored) return;
+      const parsed = JSON.parse(stored) as Partial<AccessDetails>;
+      if (parsed.fullName && parsed.email) {
+        setDetails({ fullName: parsed.fullName, email: parsed.email });
+        setUnlocked(true);
+      }
     } catch {
       // Session storage is optional; the gate still works without it.
     }
@@ -48,7 +53,7 @@ export function LabuanAdviserAccess() {
         body: JSON.stringify({
           full_name: fullName,
           email,
-          source: "Malaysia living & Labuan Q&A adviser",
+          source: "Ask EuroAsia — Malaysia Adviser",
           company_website: "",
         }),
       });
@@ -58,8 +63,10 @@ export function LabuanAdviserAccess() {
         throw new Error(result?.error || "We could not register your access details.");
       }
 
+      const registered = { fullName, email };
+      setDetails(registered);
       try {
-        window.sessionStorage.setItem(SESSION_KEY, "granted");
+        window.sessionStorage.setItem(SESSION_KEY, JSON.stringify(registered));
       } catch {
         // Access should not depend on browser storage being available.
       }
@@ -80,10 +87,10 @@ export function LabuanAdviserAccess() {
     return (
       <div className={styles.unlocked}>
         <div className={styles.accessBar}>
-          <span>Malaysia & Labuan adviser access</span>
+          <span>Malaysia Adviser access</span>
           <strong>{details.fullName || "Access granted"}</strong>
         </div>
-        <LabuanAdviser />
+        <LabuanAdviser visitor={details} />
       </div>
     );
   }
@@ -94,12 +101,12 @@ export function LabuanAdviserAccess() {
         <p className={styles.kicker}>Complimentary adviser access</p>
         <h2 id="adviser-access-title">Enter your details to continue.</h2>
         <p>
-          Access the PF EuroAsia Malaysia & Labuan knowledge adviser for practical questions about living in Malaysia, Kuala Lumpur property and costs, healthcare, travel connections, destinations, company formation, residency and the Labuan tax framework.
+          Access the PF EuroAsia Malaysia Adviser for practical questions about living in Malaysia, Kuala Lumpur, travel, property, healthcare, food, lifestyle, company formation, residency and Labuan.
         </p>
         <ul>
-          <li>Malaysia living, travel, property and lifestyle guidance</li>
-          <li>PF EuroAsia Labuan company and residency information</li>
-          <li>Market-sensitive answers are dated and unverified figures are flagged</li>
+          <li>Malaysia living, property, food, travel and lifestyle information</li>
+          <li>Controlled Labuan company, tax and residency guidance</li>
+          <li>If we cannot verify an answer, your question can be sent to our team for email follow-up</li>
         </ul>
       </div>
 
@@ -135,11 +142,11 @@ export function LabuanAdviserAccess() {
         {error ? <p className={styles.error} role="alert">{error}</p> : null}
 
         <button className="button button-dark" type="submit" disabled={submitting}>
-          {submitting ? "Opening adviser…" : "Access Malaysia & Labuan adviser"} <span>→</span>
+          {submitting ? "Opening adviser…" : "Access Malaysia Adviser"} <span>→</span>
         </button>
 
         <p className={styles.privacy}>
-          By continuing, you agree that PF EuroAsia may use these details to provide this information service and follow up about your Malaysia/Labuan enquiry. See our <Link href="/privacy">privacy notice</Link>.
+          By continuing, you agree that PF EuroAsia may store these details to provide the adviser service and follow up by email when a question needs human or specialist confirmation. See our <Link href="/privacy">privacy notice</Link>.
         </p>
       </form>
     </section>
