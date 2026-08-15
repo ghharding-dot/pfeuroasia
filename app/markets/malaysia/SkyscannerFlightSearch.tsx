@@ -45,7 +45,6 @@ export function SkyscannerFlightSearch() {
         id="skyscanner-flight-widget-loader"
         src={SKYSCRANNER_LOADER}
         strategy="afterInteractive"
-        onLoad={loadWidget}
         onReady={loadWidget}
       />
     </div>
