@@ -7,6 +7,7 @@ import {
   formatHybridKnowledgeContext,
   retrieveMalaysiaAdviserKnowledge,
 } from "../../services/labuan-company-residency/adviser/MalaysiaAdviserHybridRetrieval";
+import { adviserSourceLink } from "../../services/labuan-company-residency/adviser/MalaysiaAdviserSourceLinks";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -46,6 +47,16 @@ function cleanHistory(value: unknown): HistoryMessage[] {
 
 function unique(values: string[]) {
   return [...new Set(values.filter(Boolean))];
+}
+
+function uniqueSourceLinks(values: { label: string; url?: string }[]) {
+  const seen = new Set<string>();
+  return values.filter((value) => {
+    const key = `${value.label}|${value.url || ""}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function shouldPersistAudit() {
@@ -96,6 +107,7 @@ function controlledResponse(args: {
   if (!match || match.needsConfirmation) return null;
 
   const source = match.source;
+  const sourceLink = adviserSourceLink(match.id, match.source);
   void persistAnswer({
     fullName: args.fullName,
     email: args.email,
@@ -113,7 +125,7 @@ function controlledResponse(args: {
     topic: args.topic,
     answer: match.answer,
     source,
-    sources: [{ label: match.source }],
+    sources: [sourceLink],
     followUps: match.followUps || [],
   });
 }
@@ -201,12 +213,14 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const sources = unique(retrieval.matches.map(({ entry }) => entry.source));
+    const sources = uniqueSourceLinks(
+      retrieval.matches.map(({ entry }) => adviserSourceLink(entry.id, entry.source)),
+    );
     const knowledgeIds = retrieval.matches.map(({ entry }) => entry.id);
     const followUps = unique(
       retrieval.matches.flatMap(({ entry }) => entry.followUps || []),
     ).slice(0, 4);
-    const source = sources.join(" · ").slice(0, 1000);
+    const source = unique(sources.map(({ label }) => label)).join(" · ").slice(0, 1000);
 
     void persistAnswer({
       fullName,
@@ -226,7 +240,7 @@ export async function POST(request: NextRequest) {
       topic: retrieval.intent,
       answer,
       source,
-      sources: sources.map((label) => ({ label })),
+      sources,
       followUps,
     });
   } catch (error) {
