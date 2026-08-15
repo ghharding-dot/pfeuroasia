@@ -41,8 +41,8 @@ export const malaysiaGeneralKnowledge: MalaysiaGeneralKnowledgeEntry[] = [
     title: "Madrid to Kuala Lumpur flights",
     keywords: ["madrid to kuala lumpur", "madrid kl", "mad kul", "flight from madrid", "spain to malaysia", "how long from madrid"],
     answer:
-      "As of late July 2026 there is no nonstop Madrid–Kuala Lumpur service. There are numerous one-stop options through hubs including Istanbul, Dubai, Abu Dhabi, Doha, Paris, Amsterdam and London. The fastest routings can have roughly 14 to 15 hours of flying and connection time, while individual schedules can be longer; for example Emirates currently publishes a Madrid–Kuala Lumpur itinerary of about 17 hours via Dubai. Always check the live schedule for the intended dates.",
-    source: "FlightConnections, Emirates and Turkish Airlines schedules — checked August 2026",
+      "Current major-airline schedules checked for August 2026 show Madrid–Kuala Lumpur as a one-stop journey rather than a nonstop route. Common options include Emirates via Dubai and Turkish Airlines via Istanbul; other connecting hubs may also be available. Journey time depends heavily on the connection — for example Emirates currently publishes Madrid–Kuala Lumpur itineraries of about 17 hours via Dubai. Always check the live schedule for the intended dates.",
+    source: "Emirates and Turkish Airlines schedules — checked August 2026",
     followUps: ["How long is London to Kuala Lumpur?", "Is Kuala Lumpur a good international hub?", "How close is Singapore?"],
   },
   {
@@ -92,19 +92,28 @@ export const malaysiaGeneralKnowledge: MalaysiaGeneralKnowledgeEntry[] = [
   },
   {
     id: "kl-new-condos",
-    title: "New condominium pricing in Kuala Lumpur",
+    title: "New and recent condominium pricing in Kuala Lumpur",
     keywords: ["new condo", "new condominium", "new development", "off plan", "new build", "serviced residence price", "new apartment price"],
     answer:
-      "New-build pricing depends heavily on district and branding. Current examples illustrate the spread: new or recent two-bedroom stock in areas such as Bukit Jalil can sit around the RM500,000–RM800,000 range, a current Mont Kiara launch starts around RM1.1 million for two-bedroom layouts, while new branded or prime KLCC two-bedroom residences can be around RM1.6–RM2 million and above. PF EuroAsia should quote a current development rather than present one city-wide average because unit size, tenure, completion date and location vary significantly.",
-    source: "Current Kuala Lumpur developer and resale listings — July/August 2026",
+      "New-build and recent condominium pricing varies sharply by district, size and branding. Current July/August 2026 asking examples show two-bedroom stock in Bukit Jalil roughly from RM400,000 to around RM1 million, Mont Kiara examples broadly from about RM630,000 to RM1.5 million, and prime KLCC two-bedroom residences around RM950,000 to RM2.4 million or more. New branded product can exceed these ranges. PF EuroAsia should therefore quote a current development and unit rather than present one city-wide average.",
+    source: "PropertyGuru and iProperty Kuala Lumpur listings — July/August 2026",
     followUps: ["What does a two-bedroom condo cost to buy?", "What properties does PF EuroAsia have access to?", "What are serviced apartments like?"],
+  },
+  {
+    id: "kl-serviced-apartments",
+    title: "Serviced apartments and serviced residences",
+    keywords: ["serviced apartment", "serviced apartments", "serviced residence", "serviced residences", "furnished apartment", "short stay apartment"],
+    answer:
+      "Kuala Lumpur has a large serviced-apartment and serviced-residence market, particularly around KLCC, Bukit Bintang, TRX, Bangsar and Mont Kiara. The label does not always mean hotel-style daily service: some are residential-style apartments with reception, security, pool, gym and shared facilities, while others operate more like aparthotels. Rental and purchase pricing therefore varies widely, and buyers should check the building's title, permitted use, management charges and utility arrangements rather than relying on the word 'serviced' alone.",
+    source: "PF EuroAsia market guidance based on current Kuala Lumpur listings — August 2026",
+    followUps: ["What does a two-bedroom apartment rent for?", "What do new condominiums cost?", "Where are good areas to live in Kuala Lumpur?"],
   },
   {
     id: "malaysia-healthcare",
     title: "Healthcare in Malaysia",
     keywords: ["healthcare", "hospital", "hospitals", "doctor", "medical care", "health insurance", "older", "retirement health", "private healthcare", "medical treatment"],
     answer:
-      "Malaysia has a large public and private healthcare sector and is an established medical-tourism destination. The Malaysia Healthcare Travel Council says its network includes internationally and nationally accredited hospitals, multilingual teams and modern medical technology, and markets many treatments at roughly 30–60% below Western-country costs. For perspective, published Ministry of Health charges for foreign patients at government facilities include RM40 for a general outpatient visit, RM120 for a specialist outpatient visit and RM100 for an emergency-department visit, with hospital and treatment charges additional. Private-hospital pricing varies by hospital, specialist and procedure, so insurance and exact costs should be checked individually.",
+      "Malaysia has a large public and private healthcare sector and is an established medical-travel destination. The Malaysia Healthcare Travel Council highlights internationally and nationally accredited hospitals, skilled specialists, multilingual patient support, modern medical technology and cost-effectiveness. For perspective, published Ministry of Health charges for foreign patients at government facilities include RM40 for a general outpatient visit, RM120 for a specialist outpatient visit and RM100 for an emergency-department visit, with tests, treatment and hospital charges additional. Private-hospital pricing varies by hospital, specialist and procedure, so insurance and exact costs should be checked individually.",
     source: "Malaysia Healthcare Travel Council and Ministry of Health Malaysia — 2025/2026 published information",
     followUps: ["Is English widely spoken?", "What is Malaysia like for older residents?", "What is Kuala Lumpur like to live in?"],
   },
