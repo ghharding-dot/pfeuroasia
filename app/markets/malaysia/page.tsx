@@ -26,6 +26,33 @@ export default function MalaysiaPage() {
     </section>
 
     <section className="market-landing-intro section-pad"><div className="site-shell narrow-grid"><p className="eyebrow">Spain made closer</p><div><h2>Local representation across borders.</h2><p>For clients based in Malaysia, we provide an accountable presence in Spain—qualifying opportunities, arranging focused visits, coordinating advisers and representing the client through the commercial process.</p></div></div></section>
+
+    <section className="malaysia-services section-pad">
+      <div className="site-shell">
+        <p className="eyebrow light">PF EuroAsia recommends · YTL Hotels</p>
+        <div className="area-feature-grid">
+          <article>
+            <span>01</span>
+            <h2>The Ritz-Carlton, Kuala Lumpur</h2>
+            <p>Our preferred Kuala Lumpur choice for a refined five-star stay, with a quieter luxury atmosphere, award-winning dining and spa facilities.</p>
+            <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+          </article>
+          <article>
+            <span>02</span>
+            <h2>JW Marriott Kuala Lumpur</h2>
+            <p>Our city-centre recommendation for visitors who want to be close to Kuala Lumpur&apos;s business, shopping, dining and social districts.</p>
+            <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+          </article>
+          <article>
+            <span>03</span>
+            <h2>Pangkor Laut Resort</h2>
+            <p>Our recommended retreat: an island setting in Perak for privacy, nature and relaxation when the trip is about switching off rather than staying in the city.</p>
+            <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/" target="_blank" rel="noreferrer">Explore Pangkor Laut at YTL Hotels <span>→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section className="china-contact section-pad"><div className="site-shell china-contact-grid"><div><p className="eyebrow">Residency & company formation</p><h2>Build a base<br />in Malaysia.</h2></div><div><p>For international entrepreneurs and families, we coordinate Labuan company formation, work permit and dependent residency applications with an established local corporate and advisory specialist.</p><div className="channel-tags"><span>Labuan company</span><span>Work permit</span><span>Family residency</span></div><Link className="button button-dark" href="/services/labuan-company-residency">Explore the Labuan pathway <span>→</span></Link></div></div></section>
     <section className="malaysia-services section-pad"><div className="site-shell"><p className="eyebrow light">How we connect the markets</p><div className="area-feature-grid"><article><span>01</span><h2>Private clients</h2><p>Spanish acquisition advice built around lifestyle, residency plans and long-term ownership.</p></article><article><span>02</span><h2>Professional partners</h2><p>A Spain-side brokerage relationship for trusted agents, advisers and family offices in Asia.</p></article><article><span>03</span><h2>Cross-border coordination</h2><p>One point of contact to organise property, legal, tax and relocation workstreams.</p></article></div></div></section>
 
