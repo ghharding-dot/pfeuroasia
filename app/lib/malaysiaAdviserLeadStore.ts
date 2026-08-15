@@ -13,6 +13,7 @@ export type MalaysiaAdviserQuestion = {
   askedAt: string;
   status: "pending" | "answered";
   answer?: string;
+  source?: string;
   answeredAt?: string;
 };
 
@@ -109,6 +110,32 @@ async function writeMalaysiaAdviserLeads(leads: MalaysiaAdviserLead[]) {
   });
 }
 
+function ensureLead(
+  leads: MalaysiaAdviserLead[],
+  args: { fullName: string; email: string; source: string },
+) {
+  const email = normalizeMalaysiaAdviserEmail(args.email);
+  const now = new Date().toISOString();
+  let index = leads.findIndex((lead) => normalizeMalaysiaAdviserEmail(lead.email) === email);
+
+  if (index < 0) {
+    leads.push({
+      id: randomUUID(),
+      fullName: args.fullName,
+      email,
+      source: args.source,
+      createdAt: now,
+      updatedAt: now,
+      lastAccessAt: now,
+      accessCount: 1,
+      questions: [],
+    });
+    index = leads.length - 1;
+  }
+
+  return { index, email, now };
+}
+
 export async function recordMalaysiaAdviserAccess(args: {
   fullName: string;
   email: string;
@@ -158,30 +185,54 @@ export async function recordMalaysiaAdviserQuestion(args: {
   source?: string;
 }) {
   const leads = await readMalaysiaAdviserLeads();
-  const email = normalizeMalaysiaAdviserEmail(args.email);
-  const now = new Date().toISOString();
-  let index = leads.findIndex((lead) => normalizeMalaysiaAdviserEmail(lead.email) === email);
-
-  if (index < 0) {
-    leads.push({
-      id: randomUUID(),
-      fullName: args.fullName,
-      email,
-      source: args.source || "Malaysia adviser unanswered question",
-      createdAt: now,
-      updatedAt: now,
-      lastAccessAt: now,
-      accessCount: 1,
-      questions: [],
-    });
-    index = leads.length - 1;
-  }
+  const { index, email, now } = ensureLead(leads, {
+    fullName: args.fullName,
+    email: args.email,
+    source: args.source || "Malaysia adviser unanswered question",
+  });
 
   const question: MalaysiaAdviserQuestion = {
     id: randomUUID(),
     question: args.question.trim().slice(0, 3000),
     askedAt: now,
     status: "pending",
+  };
+
+  const current = leads[index];
+  leads[index] = {
+    ...current,
+    fullName: args.fullName,
+    email,
+    updatedAt: now,
+    questions: [...(current.questions || []), question],
+  };
+
+  await writeMalaysiaAdviserLeads(leads);
+  return question;
+}
+
+export async function recordMalaysiaAdviserAnswer(args: {
+  fullName: string;
+  email: string;
+  question: string;
+  answer: string;
+  answerSource?: string;
+}) {
+  const leads = await readMalaysiaAdviserLeads();
+  const { index, email, now } = ensureLead(leads, {
+    fullName: args.fullName,
+    email: args.email,
+    source: "Ask EuroAsia — Malaysia Adviser",
+  });
+
+  const question: MalaysiaAdviserQuestion = {
+    id: randomUUID(),
+    question: args.question.trim().slice(0, 3000),
+    askedAt: now,
+    status: "answered",
+    answer: args.answer.trim().slice(0, 8000),
+    source: args.answerSource?.trim().slice(0, 1000),
+    answeredAt: now,
   };
 
   const current = leads[index];
