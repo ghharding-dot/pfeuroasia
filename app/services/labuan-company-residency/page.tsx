@@ -139,8 +139,11 @@ export default function LabuanCompanyResidencyPage() {
           </div>
           <div className={styles.packageNotes}>
             <p><strong>Expected timing:</strong> approximately 3-4 weeks from receipt of complete documentation through company formation and LFSA approval; immigration timing can vary.</p>
-            <p><strong>Ongoing administration:</strong> budget from approximately US$4,050 per year, subject to the company&apos;s activity, compliance, accounting, audit, licence and substance requirements.</p>
-            <p><strong>Scope:</strong> pricing reflects one principal and one dependent / associate as described. Additional applicants, bank requirements, tax advice and out-of-scope government or professional fees are quoted separately.</p>
+            <p><strong>Annual company renewal:</strong> approximately US$3,000 per year, including the underlying government fee and local corporate service provider fee, subject to the company remaining within the stated scope.</p>
+            <p><strong>Employment Pass renewal:</strong> after two years, the current underlying cost for the principal is approximately US$2,650, plus approximately US$850 for the associated office renewal - approximately US$3,500 in total.</p>
+            <p><strong>Dependent renewal:</strong> approximately US$800 per dependent after two years.</p>
+            <p><strong>PF EuroAsia renewal assistance:</strong> optional coordination and renewal assistance is available for a fixed professional service fee quoted in advance, rather than a percentage-based renewal markup.</p>
+            <p><strong>Scope:</strong> initial package pricing reflects one principal and one dependent / associate as described. Additional applicants, bank requirements, tax advice and out-of-scope government or professional fees are quoted separately.</p>
           </div>
         </div>
       </section>
