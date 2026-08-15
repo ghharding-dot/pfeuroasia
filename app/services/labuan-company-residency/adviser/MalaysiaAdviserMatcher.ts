@@ -24,6 +24,7 @@ export const adviserSuggestions = [
   "What should I do in Kuala Lumpur?",
   "Can you recommend some hotels?",
   "Where should I go in Malaysia for beaches?",
+  "What are the ten best things to see in Malaysia?",
   "What is the best time of year to visit Malaysia?",
   "What is the cost of living in Kuala Lumpur?",
   "How much does the Labuan package cost?",
@@ -57,6 +58,8 @@ const hotelSignals = [
 
 const tourismSignals = [
   "what to do", "things to do", "where to go", "where should i go", "what should i see",
+  "best things to see", "best things to do", "best places to see", "best places to visit",
+  "best items to see", "top 10", "top ten", "must see", "must-see", "what not to miss",
   "places to visit", "tourist", "tourism", "attractions", "sightseeing", "itinerary",
   "trip ideas", "holiday ideas", "romantic weekend", "family holiday", "wildlife",
   "diving", "snorkelling", "snorkeling", "heritage", "george town", "petronas",
