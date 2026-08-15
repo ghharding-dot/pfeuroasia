@@ -3,10 +3,12 @@ import { labuanKnowledge } from "./LabuanKnowledge";
 import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
 import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
+import { malaysiaTourismKnowledge } from "./MalaysiaTourismKnowledge";
 import { malaysiaTravelClimateKnowledge } from "./MalaysiaTravelClimateKnowledge";
 
-type AdviserIntent =
+export type AdviserIntent =
   | "labuan"
+  | "tourism"
   | "travel-weather"
   | "property"
   | "food"
@@ -17,10 +19,10 @@ type AdviserIntent =
   | "general";
 
 export const adviserSuggestions = [
+  "What should I do in Kuala Lumpur?",
+  "Where should I go in Malaysia for beaches?",
   "What is the best time of year to visit Malaysia?",
-  "What is the weather like in Kuala Lumpur through the year?",
   "What is the cost of living in Kuala Lumpur?",
-  "What is Malaysian food like and what does it cost?",
   "What does a two-bedroom apartment rent for in Kuala Lumpur?",
   "How much does the Labuan package cost?",
 ];
@@ -42,6 +44,14 @@ const labuanSignals = [
   "work permit", "director", "dependant", "dependent", "renewal", "lfsa",
   "substance", "corporate tax", "holding company", "trading company", "bank account",
   "banking for the company",
+];
+
+const tourismSignals = [
+  "what to do", "things to do", "where to go", "where should i go", "what should i see",
+  "places to visit", "tourist", "tourism", "attractions", "sightseeing", "itinerary",
+  "trip ideas", "holiday ideas", "romantic weekend", "family holiday", "wildlife",
+  "diving", "snorkelling", "snorkeling", "heritage", "george town", "petronas",
+  "mount kinabalu", "sipadan", "mangrove", "national park",
 ];
 
 const travelWeatherSignals = [
@@ -137,7 +147,7 @@ function contentTokens(value: string) {
     );
 }
 
-function detectIntent(question: string): AdviserIntent {
+export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   const q = normalise(question);
 
   // Explicit professional / Labuan language wins. This stops a question such as
@@ -145,7 +155,10 @@ function detectIntent(question: string): AdviserIntent {
   // as a leisure-travel question simply because it contains the word "travel".
   if (containsAny(q, labuanSignals)) return "labuan";
 
-  // The order below deliberately favours the subject over generic words such as cost.
+  // Tourism intent is checked before general travel/weather so questions such as
+  // "What should I do in Langkawi?" do not become a climate answer just because
+  // the destination name is also present in the weather knowledge section.
+  if (containsAny(q, tourismSignals)) return "tourism";
   if (containsAny(q, travelWeatherSignals)) return "travel-weather";
   if (containsAny(q, propertySignals)) return "property";
   if (containsAny(q, foodSignals)) return "food";
@@ -161,34 +174,41 @@ function generalEntries(ids: Set<string>) {
   return malaysiaGeneralKnowledge.filter((entry) => ids.has(entry.id));
 }
 
-function entriesForIntent(intent: AdviserIntent): AdviserKnowledgeEntry[] {
+export function entriesForMalaysiaAdviserIntent(intent: AdviserIntent): AdviserKnowledgeEntry[] {
   switch (intent) {
     case "labuan":
       return labuanKnowledge;
+    case "tourism":
+      return [
+        ...malaysiaTourismKnowledge,
+        ...malaysiaTravelClimateKnowledge,
+        ...generalEntries(new Set(["malaysia-destinations", "kl-shopping", "kl-public-transport", "kl-airport-city"])),
+      ];
     case "travel-weather":
-      return [...malaysiaTravelClimateKnowledge, ...generalEntries(travelGeneralIds)];
+      return [...malaysiaTravelClimateKnowledge, ...malaysiaTourismKnowledge, ...generalEntries(travelGeneralIds)];
     case "property":
       return generalEntries(propertyIds);
     case "food":
-      return malaysiaFoodKnowledge;
+      return [...malaysiaFoodKnowledge, ...malaysiaTourismKnowledge.filter((entry) => entry.id === "tourism-penang" || entry.id === "tourism-kuala-lumpur")];
     case "healthcare":
       return generalEntries(healthcareIds);
     case "transport":
       return [...generalEntries(transportIds), ...malaysiaCostKnowledge.filter((entry) => entry.id === "kl-everyday-costs")];
     case "culture":
-      return generalEntries(cultureIds);
+      return [...generalEntries(cultureIds), ...malaysiaTourismKnowledge.filter((entry) => entry.id === "tourism-penang" || entry.id === "tourism-sarawak")];
     case "living-cost":
       return malaysiaCostKnowledge;
     case "general":
     default:
       return [
         ...generalEntries(generalIds),
+        ...malaysiaTourismKnowledge,
         ...malaysiaTravelClimateKnowledge.filter((entry) => entry.id === "malaysia-best-time-to-visit"),
       ];
   }
 }
 
-function scoreEntry(question: string, entry: AdviserKnowledgeEntry) {
+export function scoreMalaysiaAdviserEntry(question: string, entry: AdviserKnowledgeEntry) {
   const q = normalise(question);
   const qTokens = new Set(contentTokens(q));
   const matchedContentTokens = new Set<string>();
@@ -229,10 +249,10 @@ function scoreEntry(question: string, entry: AdviserKnowledgeEntry) {
 }
 
 export function findMalaysiaAdviserAnswer(question: string): AdviserKnowledgeEntry | null {
-  const intent = detectIntent(question);
-  const candidates = entriesForIntent(intent);
+  const intent = detectMalaysiaAdviserIntent(question);
+  const candidates = entriesForMalaysiaAdviserIntent(intent);
   const ranked = candidates
-    .map((entry) => ({ entry, score: scoreEntry(question, entry) }))
+    .map((entry) => ({ entry, score: scoreMalaysiaAdviserEntry(question, entry) }))
     .sort((a, b) => b.score - a.score);
 
   const first = ranked[0];
