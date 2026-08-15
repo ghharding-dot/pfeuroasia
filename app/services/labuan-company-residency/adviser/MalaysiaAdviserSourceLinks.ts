@@ -28,6 +28,10 @@ const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
     label: "Tourism Malaysia — Sarawak",
     url: "https://www.malaysia.travel/explore?state=11",
   },
+  "tourism-labuan": {
+    label: "Tourism Malaysia — Labuan",
+    url: "https://www.malaysia.travel/explore?state=15",
+  },
   "tourism-beaches-islands": {
     label: "Tourism Malaysia — Islands & Beaches",
     url: "https://www.malaysia.travel/explore?category%5B%5D=1",
