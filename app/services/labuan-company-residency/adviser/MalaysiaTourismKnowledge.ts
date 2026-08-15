@@ -14,6 +14,25 @@ export const malaysiaTourismKnowledge: AdviserKnowledgeEntry[] = [
     followUps: ["What should I do in Kuala Lumpur?", "Which is better for me, Penang or Langkawi?", "What can I do in Sabah?"],
   },
   {
+    id: "tourism-malaysia-first-visit-top-ten",
+    title: "What are the ten best things to see in Malaysia on a first visit?",
+    keywords: [
+      "top 10 malaysia", "top ten malaysia", "ten best things malaysia", "10 best things malaysia",
+      "ten best places malaysia", "10 best places malaysia", "best things to see malaysia",
+      "best things to do malaysia", "best tourist attractions malaysia", "must see malaysia",
+      "must-see malaysia", "malaysia highlights", "first visit malaysia", "first time malaysia",
+      "what not to miss malaysia", "best items to see malaysia", "ten best items to see malaysia",
+    ],
+    answer: "For a first-time visitor, PF EuroAsia's national shortlist — based on Tourism Malaysia's official destination and attraction guides rather than presented as an official Tourism Malaysia ranking — is: 1) Petronas Twin Towers and KLCC in Kuala Lumpur for Malaysia's signature modern city landmark; 2) Batu Caves in Selangor for its limestone caves, Hindu temple complex and famous colourful staircase; 3) George Town, Penang for UNESCO-listed heritage, multicultural street life and food; 4) historic Melaka for its UNESCO-listed old city and layers of Portuguese, Dutch and British heritage; 5) Langkawi for beaches, its geopark landscapes, mangroves, SkyCab and Sky Bridge; 6) Cameron Highlands for tea estates, cooler highland scenery and the Mossy Forest; 7) Taman Negara for ancient tropical rainforest, jungle experiences and canopy walking; 8) Kinabalu Park and Mount Kinabalu in Sabah for mountain scenery and exceptional biodiversity; 9) Gunung Mulu National Park in Sarawak for UNESCO-listed rainforest, major cave systems and limestone pinnacles; and 10) the Sipadan and Semporna marine area in Sabah for world-class marine life and diving. That is deliberately a varied first-visit list covering city, culture, islands, highlands, rainforest, mountains and Borneo rather than ten similar attractions. The right ten for an individual traveller should be adjusted for trip length, month, diving ability, mobility and whether they prefer luxury, culture, beaches or adventure.",
+    source: "Tourism Malaysia — official Explore, destination and attraction guides for Kuala Lumpur, Selangor, Penang, Melaka, Langkawi, Pahang, Sabah and Sarawak; checked August 2026",
+    followUps: [
+      "Can you turn those ten into a two-week Malaysia itinerary?",
+      "Which five would you choose for a first one-week trip?",
+      "Which of those are best for a luxury holiday?",
+      "Which are best if I do not want strenuous activities?",
+    ],
+  },
+  {
     id: "tourism-kuala-lumpur",
     title: "What should I do in Kuala Lumpur?",
     keywords: [
