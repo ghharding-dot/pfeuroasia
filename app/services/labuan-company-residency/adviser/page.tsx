@@ -6,9 +6,9 @@ import { LabuanAdviserAccess } from "./LabuanAdviserAccess";
 import pageStyles from "./AdviserPage.module.css";
 
 export const metadata: Metadata = {
-  title: "Ask EuroAsia | Malaysia & Labuan Adviser",
+  title: "Ask EuroAsia | Malaysia Living & Labuan Adviser",
   description:
-    "Ask questions about the PF EuroAsia Malaysia and Labuan company, tax and residency pathway using our controlled knowledge base.",
+    "Ask practical questions about living in Malaysia, Kuala Lumpur, travel, property, healthcare and the PF EuroAsia Labuan company and residency pathway.",
 };
 
 export default function LabuanAdviserPage() {
@@ -18,7 +18,7 @@ export default function LabuanAdviserPage() {
 
       <section className={pageStyles.section}>
         <div className={`site-shell ${pageStyles.shell}`}>
-          <p className="eyebrow">Malaysia · Labuan IBFC</p>
+          <p className="eyebrow">Malaysia · Living · Property · Labuan</p>
           <div className={pageStyles.introGrid}>
             <div>
               <h1>
@@ -27,7 +27,7 @@ export default function LabuanAdviserPage() {
             </div>
             <div className={pageStyles.introCopy}>
               <p>
-                Ask practical questions about the current PF EuroAsia Labuan company and residency pathway. The adviser only answers from our controlled Malaysia/Labuan knowledge base and flags anything that still needs professional confirmation.
+                Ask practical questions about living in Malaysia, Kuala Lumpur property and costs, healthcare, transport, international connections, destinations and the PF EuroAsia Labuan company and residency pathway. Answers are drawn from a controlled, sourced knowledge base and market-sensitive information is dated so it can be kept current.
               </p>
               <Link href="/services/labuan-company-residency" className="text-link">
                 Read the full Labuan guide <span>→</span>
