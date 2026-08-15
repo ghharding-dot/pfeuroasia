@@ -63,6 +63,9 @@ export default function AsiaGatewayPage() {
             <Link className="button button-gold" href="/asia-gateway/enquire">
               Arrange a confidential consultation <span>→</span>
             </Link>
+            <Link className="text-link light-link" href="/services/labuan-company-residency/adviser">
+              Ask the Malaysia Adviser <span>→</span>
+            </Link>
             <Link className="text-link light-link" href="/markets/malaysia">
               View Malaysia property <span>→</span>
             </Link>
