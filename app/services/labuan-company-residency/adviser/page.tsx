@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "../../../components/Footer";
 import { Header } from "../../../components/Header";
-import { LabuanAdviser } from "./LabuanAdviser";
+import { LabuanAdviserAccess } from "./LabuanAdviserAccess";
 import pageStyles from "./AdviserPage.module.css";
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function LabuanAdviserPage() {
             </div>
           </div>
 
-          <LabuanAdviser />
+          <LabuanAdviserAccess />
         </div>
       </section>
 
