@@ -55,16 +55,16 @@ export default function AsiaGatewayPage() {
             <em>Begin with Malaysia.</em>
           </h1>
           <p>
-            Property investment, residency, relocation and business
-            opportunities introduced through a growing network of experienced
-            local professionals.
+            Property investment, residency and relocation in Malaysia — including
+            Labuan company setup, residency and tax-residency guidance — introduced
+            through a growing network of experienced local professionals.
           </p>
           <div className={styles.heroActions}>
             <Link className="button button-gold" href="/asia-gateway/enquire">
               Arrange a confidential consultation <span>→</span>
             </Link>
             <Link className="text-link light-link" href="/services/labuan-company-residency/adviser">
-              Ask the Malaysia Adviser <span>→</span>
+              Ask the Malaysia &amp; Labuan Adviser <span>→</span>
             </Link>
             <Link className="text-link light-link" href="/markets/malaysia">
               View Malaysia property <span>→</span>
