@@ -117,9 +117,12 @@ export default async function VaultDashboardPage() {
           <div>
             <p className="vault-kicker">Property Facilitators EuroAsia</p>
             <h1>The Vault</h1>
-            <p>Manage properties, registered listing leads and approved Private Collection access.</p>
+            <p>Manage properties, registered listing leads, Malaysia Adviser leads and approved Private Collection access.</p>
           </div>
-          <Link className="vault-primary-button" href="/vault/properties/new">Add New Property</Link>
+          <div className="vault-header-actions">
+            <Link className="vault-row-action" href="/vault/malaysia-adviser">Malaysia Adviser Register</Link>
+            <Link className="vault-primary-button" href="/vault/properties/new">Add New Property</Link>
+          </div>
         </header>
 
         <section className="vault-stats vault-stats-expanded vault-stats-access" aria-label="Vault summary">
