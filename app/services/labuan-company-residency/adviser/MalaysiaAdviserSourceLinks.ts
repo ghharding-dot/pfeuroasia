@@ -4,6 +4,22 @@ export type AdviserSourceLink = {
 };
 
 const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
+  "hotel-recommendations-overview": {
+    label: "YTL Hotels — Malaysia",
+    url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/",
+  },
+  "hotel-ritz-carlton-kl": {
+    label: "YTL Hotels — The Ritz-Carlton, Kuala Lumpur",
+    url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/",
+  },
+  "hotel-jw-marriott-kl": {
+    label: "YTL Hotels — JW Marriott Kuala Lumpur",
+    url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/",
+  },
+  "hotel-pangkor-laut": {
+    label: "YTL Hotels — Pangkor Laut Resort",
+    url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/",
+  },
   "tourism-overview": {
     label: "Tourism Malaysia — Explore Malaysia",
     url: "https://www.malaysia.travel/explore",

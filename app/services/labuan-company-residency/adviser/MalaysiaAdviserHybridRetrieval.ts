@@ -3,6 +3,7 @@ import { labuanKnowledge } from "./LabuanKnowledge";
 import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
 import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
+import { malaysiaHotelKnowledge } from "./MalaysiaHotelKnowledge";
 import { malaysiaTourismKnowledge } from "./MalaysiaTourismKnowledge";
 import { malaysiaTravelClimateKnowledge } from "./MalaysiaTravelClimateKnowledge";
 import { detectMalaysiaAdviserIntent, scoreMalaysiaAdviserEntry } from "./MalaysiaAdviserMatcher";
@@ -13,6 +14,7 @@ export type HybridKnowledgeMatch = {
 };
 
 const broadMalaysiaKnowledge: AdviserKnowledgeEntry[] = [
+  ...malaysiaHotelKnowledge,
   ...malaysiaTourismKnowledge,
   ...malaysiaTravelClimateKnowledge,
   ...malaysiaCostKnowledge,
@@ -81,6 +83,13 @@ export function retrieveMalaysiaAdviserKnowledge(question: string, limit = 6) {
     .sort((a, b) => b.score - a.score);
 
   let matches = uniqueMatches(ranked).slice(0, limit);
+
+  // Hotel questions should always have the PF EuroAsia preferred YTL selection as
+  // orientation, even when the visitor's wording is very short or conversational.
+  if (intent === "hotels" && !matches.some(({ entry }) => entry.id === "hotel-recommendations-overview")) {
+    const overview = malaysiaHotelKnowledge.find((entry) => entry.id === "hotel-recommendations-overview");
+    if (overview) matches = uniqueMatches([{ entry: overview, score: 2 }, ...matches]).slice(0, limit);
+  }
 
   // For broad lifestyle questions, give the AI a small amount of orientation
   // even where the wording is conversational and lexical matching is light.

@@ -3,11 +3,13 @@ import { labuanKnowledge } from "./LabuanKnowledge";
 import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
 import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
+import { malaysiaHotelKnowledge } from "./MalaysiaHotelKnowledge";
 import { malaysiaTourismKnowledge } from "./MalaysiaTourismKnowledge";
 import { malaysiaTravelClimateKnowledge } from "./MalaysiaTravelClimateKnowledge";
 
 export type AdviserIntent =
   | "labuan"
+  | "hotels"
   | "tourism"
   | "travel-weather"
   | "property"
@@ -20,10 +22,10 @@ export type AdviserIntent =
 
 export const adviserSuggestions = [
   "What should I do in Kuala Lumpur?",
+  "Can you recommend some hotels?",
   "Where should I go in Malaysia for beaches?",
   "What is the best time of year to visit Malaysia?",
   "What is the cost of living in Kuala Lumpur?",
-  "What does a two-bedroom apartment rent for in Kuala Lumpur?",
   "How much does the Labuan package cost?",
 ];
 
@@ -44,6 +46,13 @@ const labuanProfessionalSignals = [
   "work permit", "director", "dependant", "dependent", "renewal", "lfsa",
   "substance", "corporate tax", "holding company", "trading company", "bank account",
   "banking for the company",
+];
+
+const hotelSignals = [
+  "hotel", "hotels", "accommodation", "where to stay", "where should i stay",
+  "recommend a hotel", "recommend hotels", "hotel recommendation", "hotel recommendations",
+  "resort", "resorts", "ritz carlton", "ritz-carlton", "jw marriott", "pangkor laut",
+  "ytl hotels", "luxury stay", "city hotel", "island retreat", "luxury retreat",
 ];
 
 const tourismSignals = [
@@ -157,6 +166,7 @@ export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   // "Labuan" can mean either the business/residency pathway or the island itself.
   // Leisure intent wins only when there is no company/tax/immigration signal.
   if (mentionsLabuan && !hasProfessionalLabuanContext) {
+    if (containsAny(q, hotelSignals)) return "hotels";
     if (containsAny(q, tourismSignals)) return "tourism";
     if (containsAny(q, travelWeatherSignals)) return "travel-weather";
   }
@@ -164,6 +174,10 @@ export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   // Explicit professional / Labuan language wins. This keeps a question such as
   // "Do I need to travel to Labuan to open the company bank account?" controlled.
   if (mentionsLabuan || hasProfessionalLabuanContext) return "labuan";
+
+  // Hotel intent is deliberately separate so real accommodation demand is visible
+  // in the adviser analytics and curated PF EuroAsia recommendations are preferred.
+  if (containsAny(q, hotelSignals)) return "hotels";
 
   // Tourism intent is checked before general travel/weather so questions such as
   // "What should I do in Langkawi?" do not become a climate answer just because
@@ -188,14 +202,21 @@ export function entriesForMalaysiaAdviserIntent(intent: AdviserIntent): AdviserK
   switch (intent) {
     case "labuan":
       return labuanKnowledge;
+    case "hotels":
+      return [
+        ...malaysiaHotelKnowledge,
+        ...malaysiaTourismKnowledge,
+        ...malaysiaTravelClimateKnowledge.filter((entry) => entry.id === "malaysia-best-time-to-visit"),
+      ];
     case "tourism":
       return [
         ...malaysiaTourismKnowledge,
+        ...malaysiaHotelKnowledge,
         ...malaysiaTravelClimateKnowledge,
         ...generalEntries(new Set(["malaysia-destinations", "kl-shopping", "kl-public-transport", "kl-airport-city"])),
       ];
     case "travel-weather":
-      return [...malaysiaTravelClimateKnowledge, ...malaysiaTourismKnowledge, ...generalEntries(travelGeneralIds)];
+      return [...malaysiaTravelClimateKnowledge, ...malaysiaTourismKnowledge, ...malaysiaHotelKnowledge, ...generalEntries(travelGeneralIds)];
     case "property":
       return generalEntries(propertyIds);
     case "food":
@@ -212,6 +233,7 @@ export function entriesForMalaysiaAdviserIntent(intent: AdviserIntent): AdviserK
     default:
       return [
         ...generalEntries(generalIds),
+        ...malaysiaHotelKnowledge,
         ...malaysiaTourismKnowledge,
         ...malaysiaTravelClimateKnowledge.filter((entry) => entry.id === "malaysia-best-time-to-visit"),
       ];
