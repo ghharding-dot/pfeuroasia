@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { generateText } from "ai";
+import { gateway, generateText } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import { recordMalaysiaAdviserAnswer } from "../../lib/malaysiaAdviserLeadStore";
 import { findMalaysiaAdviserAnswer } from "../../services/labuan-company-residency/adviser/MalaysiaAdviserMatcher";
@@ -13,6 +13,7 @@ export const runtime = "nodejs";
 export const maxDuration = 30;
 
 const HYBRID_MODEL = "openai/gpt-5.6-luna";
+const HYBRID_FALLBACK_MODELS = ["google/gemini-3.5-flash-lite"];
 
 type HistoryMessage = {
   role: "assistant" | "user";
@@ -190,13 +191,14 @@ export async function POST(request: NextRequest) {
 
   try {
     const result = await generateText({
-      model: HYBRID_MODEL,
+      model: gateway(HYBRID_MODEL),
       maxOutputTokens: 700,
       temperature: 0.2,
       system: `You are Ask EuroAsia — Malaysia Adviser, a practical relocation, lifestyle and tourism adviser for PF EuroAsia.\n\nGROUNDING RULES:\n- The VERIFIED KNOWLEDGE supplied in the user prompt is your only factual source.\n- Never add facts, prices, statistics, opening hours, transport times, legal rules, medical claims, tax rules, immigration rules or travel requirements from memory.\n- Conversation history may help you understand what the visitor means, but it is not a factual source.\n- If the verified knowledge is not sufficient to answer the visitor's actual question, reply with exactly: INSUFFICIENT_CONTEXT\n- Never invent a source or imply that you checked a live website during this request.\n- Never disclose internal provider costs, commercial mark-ups or internal business notes.\n\nANSWER STYLE:\n- Be conversational, confident where the verified context is clear, and useful rather than terse.\n- For tourism and lifestyle questions, proactively connect relevant retrieved facts and give sensible options.\n- For itinerary questions, organize the retrieved ideas into a practical outline but do not invent precise schedules.\n- If a figure or condition in the verified material is described as approximate, dated or variable, preserve that qualification.\n- Use short paragraphs and bullets where they improve clarity. Avoid tables.\n- Do not append a fabricated bibliography; the application displays the verified sources separately.`,
       prompt: `VISITOR QUESTION:\n${question}\n\nRECENT CONVERSATION (for intent only; not a factual source):\n${conversationContext}\n\nVERIFIED KNOWLEDGE:\n${verifiedContext}\n\nAnswer the visitor using only the verified knowledge above.`,
       providerOptions: {
         gateway: {
+          models: HYBRID_FALLBACK_MODELS,
           user: createHash("sha256").update(email).digest("hex").slice(0, 32),
           tags: ["feature:malaysia-adviser", `topic:${retrieval.intent}`],
         },
@@ -213,6 +215,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    const resolvedModel = result.response.modelId || HYBRID_MODEL;
     const sources = uniqueSourceLinks(
       retrieval.matches.map(({ entry }) => adviserSourceLink(entry.id, entry.source)),
     );
@@ -221,6 +224,12 @@ export async function POST(request: NextRequest) {
       retrieval.matches.flatMap(({ entry }) => entry.followUps || []),
     ).slice(0, 4);
     const source = unique(sources.map(({ label }) => label)).join(" · ").slice(0, 1000);
+
+    console.info("malaysia-adviser-hybrid-generation-succeeded", {
+      requestedModel: HYBRID_MODEL,
+      resolvedModel,
+      topic: retrieval.intent,
+    });
 
     void persistAnswer({
       fullName,
@@ -231,7 +240,7 @@ export async function POST(request: NextRequest) {
       mode: "hybrid-ai",
       topic: retrieval.intent,
       knowledgeIds,
-      model: HYBRID_MODEL,
+      model: resolvedModel,
     });
 
     return NextResponse.json({
@@ -246,8 +255,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("malaysia-adviser-hybrid-generation-failed", error);
 
-    // Graceful degradation: use the existing verified deterministic answer if one
-    // is strong enough. The visitor never sees a raw provider or gateway error.
+    // Graceful degradation: Gateway first tries the secondary AI model. If the
+    // whole AI chain is unavailable, use the existing verified deterministic answer
+    // when one is strong enough. The visitor never sees a raw provider error.
     const fallback = controlledResponse({
       fullName,
       email,
