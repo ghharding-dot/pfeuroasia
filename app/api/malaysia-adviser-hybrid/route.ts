@@ -13,7 +13,7 @@ export const runtime = "nodejs";
 export const maxDuration = 30;
 
 const HYBRID_MODEL = "openai/gpt-5.6-luna";
-const HYBRID_FALLBACK_MODELS = ["google/gemini-3.5-flash-lite"];
+const HYBRID_FALLBACK_MODELS = ["google/gemini-3.6-flash"];
 
 type HistoryMessage = {
   role: "assistant" | "user";
