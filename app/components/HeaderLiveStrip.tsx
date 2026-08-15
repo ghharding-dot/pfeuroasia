@@ -59,10 +59,10 @@ export function HeaderLiveStrip() {
   }, [now]);
 
   return (
-    <div className={styles.strip} role="region" aria-label="Current time and temperature in Marbella and Kuala Lumpur">
+    <div className={styles.strip} role="region" aria-label="Current time and temperature in Marbella, Spain and Kuala Lumpur, Malaysia">
       <div className={`site-shell ${styles.inner}`}>
         <div className={styles.location}>
-          <strong>Marbella / Madrid</strong>
+          <strong>Marbella, Spain</strong>
           <span className={styles.time}>{times.marbella}</span>
           <span className={styles.temperature}>{weather.marbella === null ? "--°C" : `${weather.marbella}°C`}</span>
         </div>
@@ -70,7 +70,7 @@ export function HeaderLiveStrip() {
         <span className={styles.divider} aria-hidden="true" />
 
         <div className={styles.location}>
-          <strong>Kuala Lumpur</strong>
+          <strong>Kuala Lumpur, Malaysia</strong>
           <span className={styles.time}>{times.kualaLumpur}</span>
           <span className={styles.temperature}>{weather.kualaLumpur === null ? "--°C" : `${weather.kualaLumpur}°C`}</span>
         </div>
