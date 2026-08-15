@@ -74,6 +74,18 @@ export const malaysiaTourismKnowledge: AdviserKnowledgeEntry[] = [
     followUps: ["How many days should I spend in Sarawak?", "Should I choose Sabah or Sarawak?", "What should I do in Kuching?"],
   },
   {
+    id: "tourism-labuan",
+    title: "What is there to do in Labuan as a visitor?",
+    keywords: [
+      "what to do in labuan", "things to do in labuan", "visit labuan", "labuan tourism",
+      "labuan attractions", "labuan holiday", "labuan beaches", "labuan marine park",
+      "labuan war cemetery", "layang layangan", "pantai layang layangan", "labuan island hopping",
+    ],
+    answer: "Labuan is not only a business and financial centre; it also has visitor attractions of its own. Tourism Malaysia highlights the Labuan War Cemetery, coastal and beach areas including Pantai Layang-Layangan, and marine/island experiences around Labuan Marine Park. It can be useful for someone considering the Labuan business pathway to understand the island as a real place to visit as well as a corporate jurisdiction. For current activity availability, operators and schedules should be checked close to the travel date.",
+    source: "Tourism Malaysia — official Labuan Explore listings, checked August 2026",
+    followUps: ["What is Labuan like to live in?", "How do I get to Labuan?", "How does the Labuan company and residency pathway work?"],
+  },
+  {
     id: "tourism-beaches-islands",
     title: "Where should I go for beaches and islands in Malaysia?",
     keywords: [
