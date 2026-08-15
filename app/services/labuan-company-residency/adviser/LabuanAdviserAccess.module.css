@@ -1,0 +1,198 @@
+.gate {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 54px;
+  padding: 42px;
+  background: #fff;
+  border: 1px solid #d6d0c4;
+  box-shadow: 0 18px 48px rgba(25, 29, 25, .06);
+}
+
+.gateCopy {
+  padding: 18px 8px 18px 6px;
+}
+
+.kicker {
+  margin: 0 0 12px;
+  color: #99794d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.gateCopy h2 {
+  margin: 0 0 22px;
+  font-family: var(--serif);
+  font-size: clamp(42px, 4.8vw, 68px);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.gateCopy > p:not(.kicker) {
+  max-width: 620px;
+  margin: 0 0 24px;
+  color: #666960;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.gateCopy ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gateCopy li {
+  position: relative;
+  padding-left: 22px;
+  color: #474b44;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.gateCopy li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #a98758;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px;
+  background: #f2eee5;
+}
+
+.form label {
+  display: grid;
+  gap: 8px;
+}
+
+.form label > span {
+  color: #343730;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.form input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 1px solid #cfc8bb;
+  border-radius: 0;
+  background: #fff;
+  color: #171916;
+  font: inherit;
+}
+
+.form input:focus {
+  outline: 2px solid rgba(153, 121, 77, .22);
+  outline-offset: 1px;
+  border-color: #99794d;
+}
+
+.form button {
+  justify-content: center;
+  width: 100%;
+  margin-top: 2px;
+  border: 0;
+  cursor: pointer;
+}
+
+.form button:disabled {
+  cursor: progress;
+  opacity: .68;
+}
+
+.privacy,
+.error {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.privacy {
+  color: #74776f;
+}
+
+.privacy a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.error {
+  color: #8d3329;
+}
+
+.honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.unlocked {
+  display: grid;
+  gap: 14px;
+}
+
+.accessBar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 11px 15px;
+  background: #e8e2d6;
+  color: #5c6057;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.accessBar strong {
+  color: #232620;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .gate {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 28px;
+  }
+
+  .gateCopy {
+    padding: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .gate {
+    padding: 20px;
+  }
+
+  .gateCopy h2 {
+    font-size: 42px;
+  }
+
+  .form {
+    padding: 22px;
+  }
+
+  .accessBar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
