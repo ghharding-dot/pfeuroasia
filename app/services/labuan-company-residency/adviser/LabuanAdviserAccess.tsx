@@ -48,7 +48,7 @@ export function LabuanAdviserAccess() {
         body: JSON.stringify({
           full_name: fullName,
           email,
-          source: "Malaysia & Labuan Q&A adviser",
+          source: "Malaysia living & Labuan Q&A adviser",
           company_website: "",
         }),
       });
@@ -94,12 +94,12 @@ export function LabuanAdviserAccess() {
         <p className={styles.kicker}>Complimentary adviser access</p>
         <h2 id="adviser-access-title">Enter your details to continue.</h2>
         <p>
-          Access the PF EuroAsia Malaysia & Labuan knowledge adviser for practical questions about company formation, residency, tax framework, costs and process.
+          Access the PF EuroAsia Malaysia & Labuan knowledge adviser for practical questions about living in Malaysia, Kuala Lumpur property and costs, healthcare, travel connections, destinations, company formation, residency and the Labuan tax framework.
         </p>
         <ul>
-          <li>Controlled Malaysia & Labuan information</li>
-          <li>Current PF EuroAsia package and process guidance</li>
-          <li>Unverified figures are clearly flagged for confirmation</li>
+          <li>Malaysia living, travel, property and lifestyle guidance</li>
+          <li>PF EuroAsia Labuan company and residency information</li>
+          <li>Market-sensitive answers are dated and unverified figures are flagged</li>
         </ul>
       </div>
 
