@@ -38,8 +38,8 @@ const genericCommercialWords = new Set([
   "much", "pay", "paying", "annual", "yearly", "monthly", "expense", "expenses",
 ]);
 
-const labuanSignals = [
-  "labuan", "company formation", "company setup", "company set up", "set up a company",
+const labuanProfessionalSignals = [
+  "company formation", "company setup", "company set up", "set up a company",
   "incorporation", "visa", "residency", "residence permit", "employment pass",
   "work permit", "director", "dependant", "dependent", "renewal", "lfsa",
   "substance", "corporate tax", "holding company", "trading company", "bank account",
@@ -51,7 +51,9 @@ const tourismSignals = [
   "places to visit", "tourist", "tourism", "attractions", "sightseeing", "itinerary",
   "trip ideas", "holiday ideas", "romantic weekend", "family holiday", "wildlife",
   "diving", "snorkelling", "snorkeling", "heritage", "george town", "petronas",
-  "mount kinabalu", "sipadan", "mangrove", "national park",
+  "mount kinabalu", "sipadan", "mangrove", "national park", "visit labuan",
+  "labuan holiday", "labuan attractions", "labuan beaches", "labuan tourism",
+  "what is labuan like",
 ];
 
 const travelWeatherSignals = [
@@ -149,11 +151,19 @@ function contentTokens(value: string) {
 
 export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   const q = normalise(question);
+  const mentionsLabuan = q.includes("labuan");
+  const hasProfessionalLabuanContext = containsAny(q, labuanProfessionalSignals);
 
-  // Explicit professional / Labuan language wins. This stops a question such as
-  // "Do I need to travel to Labuan to open the company bank account?" being treated
-  // as a leisure-travel question simply because it contains the word "travel".
-  if (containsAny(q, labuanSignals)) return "labuan";
+  // "Labuan" can mean either the business/residency pathway or the island itself.
+  // Leisure intent wins only when there is no company/tax/immigration signal.
+  if (mentionsLabuan && !hasProfessionalLabuanContext) {
+    if (containsAny(q, tourismSignals)) return "tourism";
+    if (containsAny(q, travelWeatherSignals)) return "travel-weather";
+  }
+
+  // Explicit professional / Labuan language wins. This keeps a question such as
+  // "Do I need to travel to Labuan to open the company bank account?" controlled.
+  if (mentionsLabuan || hasProfessionalLabuanContext) return "labuan";
 
   // Tourism intent is checked before general travel/weather so questions such as
   // "What should I do in Langkawi?" do not become a climate answer just because
