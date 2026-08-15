@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useMemo, useRef, useState } from "react";
 import styles from "./LabuanAdviser.module.css";
 import { AdviserKnowledgeEntry, labuanKnowledge } from "./LabuanKnowledge";
+import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
 import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
 
 type Visitor = {
@@ -23,6 +24,7 @@ type ChatMessage = {
 const knowledge: AdviserKnowledgeEntry[] = [
   ...labuanKnowledge,
   ...malaysiaGeneralKnowledge,
+  ...malaysiaFoodKnowledge,
 ];
 
 const suggestions = [
