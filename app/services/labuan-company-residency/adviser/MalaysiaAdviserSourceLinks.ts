@@ -24,6 +24,10 @@ const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
     label: "Tourism Malaysia — Explore Malaysia",
     url: "https://www.malaysia.travel/explore",
   },
+  "tourism-malaysia-first-visit-top-ten": {
+    label: "Tourism Malaysia — Explore Malaysia",
+    url: "https://www.malaysia.travel/explore",
+  },
   "tourism-kuala-lumpur": {
     label: "Tourism Malaysia — Kuala Lumpur",
     url: "https://www.malaysia.travel/explore?state=14",
