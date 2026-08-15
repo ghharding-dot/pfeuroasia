@@ -1,0 +1,13 @@
+.page { background: #f4f1e9; color: #171916; }
+.section { padding: 150px 0 72px; }
+.shell { max-width: 1120px; }
+.introGrid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: end; margin-bottom: 48px; }
+.introGrid h1 { margin: 8px 0 0; font-family: var(--serif); font-size: clamp(54px, 7vw, 94px); font-weight: 400; letter-spacing: -.05em; line-height: .94; }
+.introCopy p { margin: 0; color: #65685f; font-size: 15px; line-height: 1.8; }
+.introCopy a { display: inline-flex; margin-top: 18px; }
+
+@media (max-width: 800px) {
+  .section { padding: 118px 0 56px; }
+  .introGrid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 34px; }
+  .introGrid h1 { font-size: clamp(50px, 15vw, 72px); }
+}
