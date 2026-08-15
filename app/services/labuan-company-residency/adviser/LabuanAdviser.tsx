@@ -3,16 +3,8 @@
 import Link from "next/link";
 import { FormEvent, useMemo, useRef, useState } from "react";
 import styles from "./LabuanAdviser.module.css";
-
-type KnowledgeEntry = {
-  id: string;
-  title: string;
-  keywords: string[];
-  answer: string;
-  source: string;
-  followUps?: string[];
-  needsConfirmation?: boolean;
-};
+import { AdviserKnowledgeEntry, labuanKnowledge } from "./LabuanKnowledge";
+import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
 
 type ChatMessage = {
   id: number;
@@ -23,188 +15,18 @@ type ChatMessage = {
   followUps?: string[];
 };
 
-const knowledge: KnowledgeEntry[] = [
-  {
-    id: "overview",
-    title: "What is the Labuan pathway?",
-    keywords: ["what is labuan", "labuan company", "how does labuan work", "overview", "pathway", "malaysia company"],
-    answer:
-      "Labuan is Malaysia's international business and financial centre. For a suitable international entrepreneur or family, a Labuan company can provide a Malaysian corporate structure together with a route to apply for a Malaysian work permit and qualifying dependant residency. The company, activity, applicant role and immigration application must all be genuine and remain subject to regulatory and immigration approval.",
-    source: "PF EuroAsia Labuan company & residency guide — August 2026",
-    followUps: ["How much does the full package cost?", "How many directors can apply?", "What tax can a Labuan company pay?"],
-  },
-  {
-    id: "trading-tax",
-    title: "Labuan trading company tax",
-    keywords: ["3%", "trading tax", "operating company tax", "corporate tax", "tax rate", "trading company", "active business"],
-    answer:
-      "Qualifying Labuan trading activity may be taxed at 3% of audited net profits where the applicable substance, activity and regulatory requirements are satisfied. The rate is not automatic: the company's real activity and compliance position determine the treatment.",
-    source: "PF EuroAsia Labuan tax framework — August 2026",
-    followUps: ["What are the substance requirements?", "What happens if the requirements are not met?", "What about a holding company?"],
-  },
-  {
-    id: "holding-tax",
-    title: "Labuan holding company tax",
-    keywords: ["0%", "holding company", "investment holding", "non trading", "non-trading", "passive", "holding tax"],
-    answer:
-      "Qualifying Labuan non-trading investment-holding activity may not be subject to Labuan business activity tax when the relevant conditions are satisfied. Classification depends on what the company actually does and earns, so the structure should be reviewed before relying on a 0% treatment.",
-    source: "PF EuroAsia Labuan tax framework — August 2026",
-    followUps: ["What is the difference between trading and holding?", "What are the substance requirements?", "Can I get residency through a holding company?"],
-  },
-  {
-    id: "tax-failure",
-    title: "If substance requirements are not met",
-    keywords: ["24%", "fail", "failure", "not meet", "requirements not met", "substance fail", "penalty", "malaysian tax"],
-    answer:
-      "The current PF EuroAsia guidance warns that failure to satisfy the applicable Labuan requirements can result in Malaysian tax at 24%. Because this is highly fact-specific, independent tax advice should be taken before the company begins trading or changes activity.",
-    source: "PF EuroAsia Labuan tax framework — August 2026",
-    followUps: ["What are the substance requirements?", "What tax can a trading company pay?"],
-  },
-  {
-    id: "directors",
-    title: "Directors and work permits",
-    keywords: ["director", "directors", "four directors", "4 directors", "how many", "work permit per director", "employment pass director"],
-    answer:
-      "The current structure is presented as supporting up to four directors. Eligible directors or senior professional roles may apply for work permits where the positions reflect the company's genuine operating needs. Each application remains subject to LFSA and Malaysian Immigration approval; it is not an automatic visa allocation simply because a person is named as a director.",
-    source: "PF EuroAsia Labuan residency pathway — August 2026",
-    followUps: ["Can family members get residency?", "What income is required?", "How long is the permit valid?"],
-  },
-  {
-    id: "family",
-    title: "Family and dependant residency",
-    keywords: ["wife", "husband", "spouse", "children", "child", "family", "dependant", "dependent", "immediate family"],
-    answer:
-      "Qualifying immediate family members can be included through dependant applications alongside the principal work-permit applicant. Eligibility and documentation depend on the relationship and the immigration rules in force at the time of application.",
-    source: "PF EuroAsia Labuan residency pathway — August 2026",
-    followUps: ["What does a dependant application cost?", "What paperwork is required?", "How long does the process take?"],
-  },
-  {
-    id: "permit-term",
-    title: "Work permit term",
-    keywords: ["two year", "2 year", "two-year", "2-year", "visa length", "permit length", "how long is the visa", "how long is the permit", "valid for"],
-    answer:
-      "The Labuan pathway we are currently presenting is based on a renewable work-permit/residency term, commonly structured around two years. Final duration is determined by the approval issued in the individual case and remains subject to the current LFSA and Immigration rules.",
-    source: "PF EuroAsia Labuan residency pathway — August 2026",
-    followUps: ["What does renewal cost?", "What is needed for renewal?", "Can family permits be renewed too?"],
-  },
-  {
-    id: "renewal-cost",
-    title: "Renewal fees",
-    keywords: ["renewal fee", "renewal fees", "renew cost", "renewal cost", "visa renewal", "permit renewal cost", "two yearly fee", "2 yearly fee"],
-    answer:
-      "We have not yet published a confirmed two-year renewal fee. Renewal involves continuing company, employment and immigration compliance, but the exact professional and government charges are being confirmed with the Labuan provider. Rather than quote an unverified figure, PF EuroAsia will confirm the current renewal cost in writing for an applicant before commitment.",
-    source: "PF EuroAsia controlled knowledge base — renewal pricing pending provider confirmation",
-    followUps: ["What is needed for renewal?", "What are the annual company costs?", "Request the current renewal quotation"],
-    needsConfirmation: true,
-  },
-  {
-    id: "renewal-requirements",
-    title: "Renewal requirements",
-    keywords: ["renewal requirement", "renew requirements", "renewal documents", "salary slips", "bank statements", "annual employment", "renew visa"],
-    answer:
-      "Renewal requires continuing compliance and evidence that the approved employment and company activity remain genuine. Current guidance refers to supporting evidence such as recent salary slips, bank statements and annual employment-income documentation, with further documents requested where necessary.",
-    source: "PF EuroAsia Labuan core requirements — August 2026",
-    followUps: ["What does renewal cost?", "What are the annual company costs?"],
-  },
-  {
-    id: "income",
-    title: "Minimum income for work permit applicant",
-    keywords: ["rm10,000", "rm 10,000", "10000", "minimum income", "monthly income", "salary", "income requirement", "minimum salary"],
-    answer:
-      "Current LFSA guidance used for the PF EuroAsia pathway sets a minimum monthly income of RM10,000, or the foreign-currency equivalent, for a work-permit applicant. The role, experience and remuneration still need to make sense for the proposed business.",
-    source: "PF EuroAsia Labuan core requirements — August 2026",
-    followUps: ["What documents are required?", "How many directors can apply?"],
-  },
-  {
-    id: "full-package",
-    title: "Full package cost",
-    keywords: ["13500", "$13,500", "13,500", "full package", "total cost", "setup cost", "set up cost", "how much does it cost", "overall cost", "price"],
-    answer:
-      "The current PF EuroAsia indicative package is US$13,500 for the stated scope. It is shown as US$6,075 for company formation and US$7,425 for visa/residency work. The published scope is based on one principal and one dependant/associate as described; extra applicants, banking requirements, tax advice and out-of-scope government or professional fees are quoted separately.",
-    source: "PF EuroAsia indicative professional package — August 2026",
-    followUps: ["What is included in company formation?", "What is included in the residency cost?", "What are the annual running costs?"],
-  },
-  {
-    id: "formation-cost",
-    title: "Company formation cost",
-    keywords: ["6075", "$6,075", "6,075", "formation cost", "company formation", "incorporation cost", "incorporation fee", "registered office", "secretary"],
-    answer:
-      "The published company-formation portion is US$6,075. It includes the stated name search and reservation, incorporation and LFSA registration, statutory documents/company kit, registered office and resident secretary for year one, and regulatory filing/compliance setup.",
-    source: "PF EuroAsia indicative professional package — August 2026",
-    followUps: ["What does the full package cost?", "What are the annual running costs?"],
-  },
-  {
-    id: "residency-cost",
-    title: "Visa and residency cost",
-    keywords: ["7425", "$7,425", "7,425", "visa cost", "residency cost", "employment pass cost", "immigration fees", "dependent cost", "dependant cost", "1822.50", "3577.50", "2025"],
-    answer:
-      "The published visa/residency portion is US$7,425 for the stated scope. It is currently itemised as US$3,577.50 for principal Employment Pass processing, US$2,025 for immigration filing and approval fees, and US$1,822.50 for dependant/associate residency processing.",
-    source: "PF EuroAsia indicative professional package — August 2026",
-    followUps: ["What does the full package cost?", "What does renewal cost?", "Can family members get residency?"],
-  },
-  {
-    id: "annual-cost",
-    title: "Annual company running costs",
-    keywords: ["annual cost", "annual costs", "yearly cost", "running cost", "running costs", "ongoing cost", "ongoing administration", "$4,050", "4050", "4000", "3000"],
-    answer:
-      "The current PF EuroAsia page advises budgeting from approximately US$4,050 per year for ongoing administration. The actual amount depends on the company's activity and requirements for compliance, accounting, audit, licence and substance. This is an indicative budget rather than a fixed all-inclusive annual charge.",
-    source: "PF EuroAsia indicative professional package — August 2026",
-    followUps: ["What are the substance requirements?", "What does renewal cost?", "What is included in the initial company formation?"],
-  },
-  {
-    id: "timeline",
-    title: "Expected timing",
-    keywords: ["how long", "timeline", "timing", "weeks", "3-4 weeks", "3 weeks", "4 weeks", "processing time", "how fast"],
-    answer:
-      "The current guide gives an indicative 3-4 week period from receipt of complete documentation through company formation and LFSA approval. Immigration timing can vary. The process is presented in four stages: suitability/KYC and name approval, incorporation documents, LFSA review, then approval and immigration filing.",
-    source: "PF EuroAsia Labuan process guide — August 2026",
-    followUps: ["What paperwork is required?", "Can the setup start remotely?"],
-  },
-  {
-    id: "remote",
-    title: "Remote setup and banking",
-    keywords: ["remote", "from abroad", "do i need to travel", "travel to labuan", "travel to malaysia", "bank account", "banking", "in person", "signature"],
-    answer:
-      "Company formation and initial banking introductions can begin remotely. Some banks may later require an in-person signature, identification or verification step, so a completely remote banking outcome should not be promised in advance.",
-    source: "PF EuroAsia Labuan residency pathway — August 2026",
-    followUps: ["How long does the process take?", "What paperwork is required?"],
-  },
-  {
-    id: "documents",
-    title: "KYC and documents",
-    keywords: ["documents", "paperwork", "what do i need", "passport", "cv", "reference", "kyc", "fit and proper", "documentation"],
-    answer:
-      "Applicants should expect KYC and fit-and-proper checks. The current guide refers to passport, CV, professional/reference information, proposed role and experience, plus financial or supporting documents requested for the company and immigration applications. The precise checklist is confirmed after the applicant's business activity, role and family requirements are reviewed.",
-    source: "PF EuroAsia Labuan core requirements — August 2026",
-    followUps: ["How long does the process take?", "What income is required?", "Can family members apply?"],
-  },
-  {
-    id: "substance",
-    title: "Substance and compliance",
-    keywords: ["substance", "office", "employees", "employee requirement", "operating expenditure", "expenditure", "compliance", "record keeping", "management"],
-    answer:
-      "Labuan substance requirements vary according to the company's actual business activity. The current PF EuroAsia guidance flags employee levels, annual operating expenditure, office/management arrangements and record-keeping as areas that may apply. The exact substance test must be matched to the proposed activity before the tax position is confirmed.",
-    source: "PF EuroAsia Labuan core requirements — August 2026",
-    followUps: ["What tax can a trading company pay?", "What happens if requirements are not met?"],
-  },
-  {
-    id: "suitability",
-    title: "Is Labuan suitable for me?",
-    keywords: ["is labuan right", "is it right for me", "suitable", "suitability", "should i use labuan", "good for me", "can i use labuan"],
-    answer:
-      "Suitability depends on your proposed business activity, current tax residence, expected income, role in the company, family requirements and where the business is genuinely managed and operated. PF EuroAsia's first step is therefore a private suitability review rather than recommending Labuan solely on the headline tax rate.",
-    source: "PF EuroAsia Labuan private-assessment framework — August 2026",
-    followUps: ["What information do you need for an assessment?", "What tax can a Labuan company pay?", "How much does the full package cost?"],
-  },
+const knowledge: AdviserKnowledgeEntry[] = [
+  ...labuanKnowledge,
+  ...malaysiaGeneralKnowledge,
 ];
 
 const suggestions = [
-  "How much does the full package cost?",
-  "What tax can a Labuan company pay?",
-  "Can my wife and children get residency?",
-  "How many directors can apply?",
-  "What are the annual running costs?",
-  "What does the two-year renewal cost?",
+  "What is Malaysia like to live in?",
+  "How good is healthcare in Malaysia?",
+  "What does a two-bedroom apartment rent for in Kuala Lumpur?",
+  "How long is London to Kuala Lumpur?",
+  "What parts of Malaysia should I visit?",
+  "How much does the Labuan package cost?",
 ];
 
 const stopWords = new Set([
@@ -240,9 +62,11 @@ function normalise(value: string) {
     .trim();
 }
 
-function scoreEntry(question: string, entry: KnowledgeEntry) {
+function scoreEntry(question: string, entry: AdviserKnowledgeEntry) {
   const q = normalise(question);
-  const qTokens = q.split(" ").filter((token) => token.length > 2 && !stopWords.has(token));
+  const qTokens = q
+    .split(" ")
+    .filter((token) => token.length > 2 && !stopWords.has(token));
   let score = 0;
 
   for (const keyword of entry.keywords) {
@@ -261,7 +85,7 @@ function scoreEntry(question: string, entry: KnowledgeEntry) {
   return score;
 }
 
-function findAnswer(question: string): KnowledgeEntry | null {
+function findAnswer(question: string): AdviserKnowledgeEntry | null {
   const ranked = knowledge
     .map((entry) => ({ entry, score: scoreEntry(question, entry) }))
     .sort((a, b) => b.score - a.score);
@@ -275,8 +99,8 @@ export function LabuanAdviser() {
       id: 1,
       role: "assistant",
       text:
-        "Welcome to Ask EuroAsia. I currently answer questions only about Malaysia and the PF EuroAsia Labuan company/residency pathway. My answers are limited to information in our controlled knowledge base; if a figure or rule has not been verified, I will say so.",
-      source: "PF EuroAsia controlled knowledge base — updated August 2026",
+        "Welcome to Ask EuroAsia. You can ask about living in Malaysia, Kuala Lumpur property and lifestyle, travel connections, healthcare, transport, culture, destinations, or the PF EuroAsia Labuan company and residency pathway. Answers come from our controlled knowledge base and current market snapshots; where a figure or rule is not sufficiently verified, I will say so.",
+      source: "PF EuroAsia Malaysia & Labuan controlled knowledge base — updated August 2026",
       followUps: suggestions.slice(0, 3),
     },
   ]);
@@ -291,7 +115,10 @@ export function LabuanAdviser() {
     if (!clean || isThinking) return;
 
     const userId = nextId.current++;
-    setMessages((current) => [...current, { id: userId, role: "user", text: clean }]);
+    setMessages((current) => [
+      ...current,
+      { id: userId, role: "user", text: clean },
+    ]);
     setInput("");
     setIsThinking(true);
 
@@ -318,10 +145,14 @@ export function LabuanAdviser() {
             id: assistantId,
             role: "assistant",
             text:
-              "I do not have a sufficiently verified answer to that question in the Malaysia/Labuan knowledge base yet. I would rather flag it for confirmation than invent an answer. You can send the question to the EuroAsia Asia desk and we can obtain the current position from the appropriate Labuan adviser.",
+              "I do not have a sufficiently verified answer to that question in the Malaysia knowledge base yet. I would rather flag it for confirmation than invent an answer. You can send the question to the EuroAsia Asia desk and we can add the verified answer to the adviser once confirmed.",
             source: "No verified knowledge-base match",
             needsConfirmation: true,
-            followUps: ["How much does the full package cost?", "What are the annual running costs?", "What paperwork is required?"],
+            followUps: [
+              "What is Malaysia like to live in?",
+              "How good is healthcare in Malaysia?",
+              "What does a two-bedroom apartment rent for in Kuala Lumpur?",
+            ],
           },
         ]);
       }
@@ -340,7 +171,7 @@ export function LabuanAdviser() {
       <div className={styles.topBar}>
         <div>
           <span className={styles.statusDot} />
-          <span>Malaysia & Labuan knowledge base</span>
+          <span>Malaysia living & Labuan knowledge base</span>
         </div>
         <span>Updated August 2026</span>
       </div>
@@ -349,9 +180,15 @@ export function LabuanAdviser() {
         {messages.map((message) => (
           <article
             key={message.id}
-            className={`${styles.message} ${message.role === "user" ? styles.userMessage : styles.assistantMessage}`}
+            className={`${styles.message} ${
+              message.role === "user"
+                ? styles.userMessage
+                : styles.assistantMessage
+            }`}
           >
-            <div className={styles.messageLabel}>{message.role === "user" ? "You" : "Ask EuroAsia"}</div>
+            <div className={styles.messageLabel}>
+              {message.role === "user" ? "You" : "Ask EuroAsia"}
+            </div>
             <p>{message.text}</p>
             {message.source ? <small>Source: {message.source}</small> : null}
             {message.needsConfirmation ? (
@@ -362,7 +199,12 @@ export function LabuanAdviser() {
             {message.role === "assistant" && message.followUps?.length ? (
               <div className={styles.followUps}>
                 {message.followUps.map((followUp) => (
-                  <button key={followUp} type="button" onClick={() => ask(followUp)} disabled={isThinking}>
+                  <button
+                    key={followUp}
+                    type="button"
+                    onClick={() => ask(followUp)}
+                    disabled={isThinking}
+                  >
                     {followUp}
                   </button>
                 ))}
@@ -373,7 +215,10 @@ export function LabuanAdviser() {
         {isThinking ? (
           <article className={`${styles.message} ${styles.assistantMessage}`}>
             <div className={styles.messageLabel}>Ask EuroAsia</div>
-            <div className={styles.thinking} aria-label="Checking the knowledge base">
+            <div
+              className={styles.thinking}
+              aria-label="Checking the knowledge base"
+            >
               <span />
               <span />
               <span />
@@ -385,7 +230,11 @@ export function LabuanAdviser() {
       {!hasConversation ? (
         <div className={styles.quickQuestions}>
           {suggestions.map((suggestion) => (
-            <button key={suggestion} type="button" onClick={() => ask(suggestion)}>
+            <button
+              key={suggestion}
+              type="button"
+              onClick={() => ask(suggestion)}
+            >
               {suggestion}
             </button>
           ))}
@@ -399,10 +248,14 @@ export function LabuanAdviser() {
             id="labuan-question"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="e.g. Can my family obtain residency through the company?"
+            placeholder="e.g. What would a two-bedroom apartment cost in Kuala Lumpur?"
             autoComplete="off"
           />
-          <button type="submit" disabled={!input.trim() || isThinking} aria-label="Send question">
+          <button
+            type="submit"
+            disabled={!input.trim() || isThinking}
+            aria-label="Send question"
+          >
             Ask <span>→</span>
           </button>
         </div>
@@ -410,9 +263,15 @@ export function LabuanAdviser() {
 
       <div className={styles.footerNote}>
         <p>
-          General information only. This adviser does not provide personal legal, tax or immigration advice and does not guarantee approval. Individual cases should be reviewed by the appropriate qualified adviser.
+          General information only. Property prices, rents, travel schedules and
+          costs are market snapshots and can change. This adviser does not provide
+          personal legal, tax, medical or immigration advice and does not guarantee
+          approval. Individual cases should be reviewed by the appropriate qualified
+          adviser.
         </p>
-        <Link href="/asia-gateway/enquire">Request a private assessment →</Link>
+        <Link href="/asia-gateway/enquire">
+          Request a private assessment →
+        </Link>
       </div>
     </div>
   );
