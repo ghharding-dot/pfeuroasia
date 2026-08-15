@@ -1,0 +1,43 @@
+export type AdviserSourceLink = {
+  label: string;
+  url?: string;
+};
+
+const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
+  "tourism-overview": {
+    label: "Tourism Malaysia — Explore Malaysia",
+    url: "https://www.malaysia.travel/explore",
+  },
+  "tourism-kuala-lumpur": {
+    label: "Tourism Malaysia — Kuala Lumpur",
+    url: "https://www.malaysia.travel/explore?state=14",
+  },
+  "tourism-langkawi": {
+    label: "Tourism Malaysia — Langkawi",
+    url: "https://www.malaysia.travel/explore/langkawi",
+  },
+  "tourism-penang": {
+    label: "Tourism Malaysia — Penang",
+    url: "https://www.malaysia.travel/explore?state=7",
+  },
+  "tourism-sabah": {
+    label: "Tourism Malaysia — Sabah",
+    url: "https://www.malaysia.travel/explore?state=10",
+  },
+  "tourism-sarawak": {
+    label: "Tourism Malaysia — Sarawak",
+    url: "https://www.malaysia.travel/explore?state=11",
+  },
+  "tourism-labuan": {
+    label: "Tourism Malaysia — Labuan",
+    url: "https://www.malaysia.travel/explore?state=15",
+  },
+  "tourism-beaches-islands": {
+    label: "Tourism Malaysia — Islands & Beaches",
+    url: "https://www.malaysia.travel/explore?category%5B%5D=1",
+  },
+};
+
+export function adviserSourceLink(knowledgeId: string, fallbackLabel: string): AdviserSourceLink {
+  return sourceLinksByKnowledgeId[knowledgeId] || { label: fallbackLabel };
+}

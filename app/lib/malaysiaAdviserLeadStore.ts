@@ -15,6 +15,10 @@ export type MalaysiaAdviserQuestion = {
   answer?: string;
   source?: string;
   answeredAt?: string;
+  answerMode?: "controlled" | "hybrid-ai";
+  topic?: string;
+  knowledgeIds?: string[];
+  model?: string;
 };
 
 export type MalaysiaAdviserLead = {
@@ -217,6 +221,10 @@ export async function recordMalaysiaAdviserAnswer(args: {
   question: string;
   answer: string;
   answerSource?: string;
+  answerMode?: "controlled" | "hybrid-ai";
+  topic?: string;
+  knowledgeIds?: string[];
+  model?: string;
 }) {
   const leads = await readMalaysiaAdviserLeads();
   const { index, email, now } = ensureLead(leads, {
@@ -233,6 +241,10 @@ export async function recordMalaysiaAdviserAnswer(args: {
     answer: args.answer.trim().slice(0, 8000),
     source: args.answerSource?.trim().slice(0, 1000),
     answeredAt: now,
+    answerMode: args.answerMode,
+    topic: args.topic?.trim().slice(0, 80),
+    knowledgeIds: args.knowledgeIds?.slice(0, 12).map((item) => item.slice(0, 120)),
+    model: args.model?.trim().slice(0, 120),
   };
 
   const current = leads[index];

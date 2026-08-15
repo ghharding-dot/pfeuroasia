@@ -1,3 +1,5 @@
+@source "../../../../node_modules/streamdown/dist/*.js";
+
 .adviser {
   overflow: hidden;
   border: 1px solid #d2c9b8;
@@ -52,6 +54,10 @@
 }
 
 .messageLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 9px;
   color: #9a794c;
   font-size: 9px;
@@ -60,10 +66,75 @@
   text-transform: uppercase;
 }
 
+.answerMode {
+  padding: 4px 7px;
+  border: 1px solid #ded4c3;
+  border-radius: 999px;
+  background: #f7f3eb;
+  color: #6e695f;
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
 .userMessage .messageLabel { color: #d5ba8d; }
 .message p { margin: 0; font-size: 14px; line-height: 1.75; }
 .message small { display: block; margin-top: 12px; color: #87877f; font-size: 9px; line-height: 1.5; }
 .userMessage small { color: rgba(255,255,255,.55); }
+
+.aiMarkdown {
+  color: #272a26;
+  font-size: 14px;
+  line-height: 1.72;
+}
+.aiMarkdown :where(p) { margin: 0 0 10px; }
+.aiMarkdown :where(p:last-child) { margin-bottom: 0; }
+.aiMarkdown :where(ul, ol) { margin: 9px 0 11px; padding-left: 21px; }
+.aiMarkdown :where(li) { margin: 4px 0; }
+.aiMarkdown :where(strong) { color: #171916; }
+.aiMarkdown :where(h1, h2, h3, h4) {
+  margin: 14px 0 7px;
+  color: #171916;
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.aiMarkdown :where(h1, h2) { font-size: 18px; }
+.aiMarkdown :where(h3, h4) { font-size: 16px; }
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #ece5d9;
+}
+.sources > span {
+  width: 100%;
+  color: #858076;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.sources a,
+.sources small {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 6px 8px;
+  border: 1px solid #ddd3c2;
+  border-radius: 8px;
+  background: #faf7f1;
+  color: #725937;
+  font-size: 9px;
+  line-height: 1.35;
+  text-decoration: none;
+}
+.sources a:hover { border-color: #a4855a; background: #f4ecdf; }
+.sources b { font-size: 9px; }
 
 .confirmLink {
   display: inline-flex;
