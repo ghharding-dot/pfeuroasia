@@ -23,6 +23,16 @@ export function Header({
 
   return (
     <header className={`site-header ${transparent ? "is-transparent" : ""}`}>
+      <div className="news-ticker" role="region" aria-label="Latest news">
+        <span className="news-ticker-label">Latest</span>
+        <div className="news-ticker-window">
+          <Link className="news-ticker-track" href="/markets/malaysia">
+            <span>{tickerText}</span>
+            <span aria-hidden="true">{tickerText}</span>
+          </Link>
+        </div>
+      </div>
+
       <div className="site-shell header-inner">
         <Link className="brand" href="/" aria-label="Property Facilitators EuroAsia home">
           <span className="brand-lockup" aria-hidden="true">
@@ -63,16 +73,6 @@ export function Header({
       </div>
 
       <HeaderLiveStrip />
-
-      <div className="news-ticker" role="region" aria-label="Latest news">
-        <span className="news-ticker-label">Latest</span>
-        <div className="news-ticker-window">
-          <Link className="news-ticker-track" href="/markets/malaysia">
-            <span>{tickerText}</span>
-            <span aria-hidden="true">{tickerText}</span>
-          </Link>
-        </div>
-      </div>
     </header>
   );
 }
