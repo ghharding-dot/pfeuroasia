@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useMemo, useRef, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { MessageResponse } from "@/components/ai-elements/message";
 import styles from "./LabuanAdviser.module.css";
 import { adviserSuggestions } from "./MalaysiaAdviserMatcher";
@@ -56,8 +56,43 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const nextId = useRef(2);
+  const messagesPanelRef = useRef<HTMLDivElement | null>(null);
+  const latestAssistantRef = useRef<HTMLElement | null>(null);
 
   const hasConversation = useMemo(() => messages.length > 1, [messages.length]);
+
+  useEffect(() => {
+    if (messages.length <= 1) return;
+
+    const latestMessage = messages[messages.length - 1];
+    const frame = window.requestAnimationFrame(() => {
+      const panel = messagesPanelRef.current;
+      if (!panel) return;
+
+      if (latestMessage.role === "assistant" && !isThinking && latestAssistantRef.current) {
+        const panelRect = panel.getBoundingClientRect();
+        const answerRect = latestAssistantRef.current.getBoundingClientRect();
+        const answerTop = panel.scrollTop + answerRect.top - panelRect.top - 12;
+
+        panel.scrollTo({
+          top: Math.max(0, answerTop),
+          behavior: "smooth",
+        });
+
+        panel.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      } else {
+        panel.scrollTo({
+          top: panel.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [messages, isThinking]);
 
   async function registerFollowUp(question: string) {
     try {
@@ -172,6 +207,8 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
     void ask(input);
   }
 
+  const latestMessageId = messages[messages.length - 1]?.id;
+
   return (
     <div className={styles.adviser}>
       <div className={styles.topBar}>
@@ -182,10 +219,11 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
         <span>Updated August 2026</span>
       </div>
 
-      <div className={styles.messages} aria-live="polite">
+      <div ref={messagesPanelRef} className={styles.messages} aria-live="polite">
         {messages.map((message) => (
           <article
             key={message.id}
+            ref={message.role === "assistant" && message.id === latestMessageId ? latestAssistantRef : undefined}
             className={`${styles.message} ${message.role === "user" ? styles.userMessage : styles.assistantMessage}`}
           >
             <div className={styles.messageLabel}>
