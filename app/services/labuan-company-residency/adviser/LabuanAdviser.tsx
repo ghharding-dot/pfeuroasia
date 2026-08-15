@@ -133,11 +133,14 @@ function scoreEntry(question: string, entry: AdviserKnowledgeEntry) {
   // artificially multiplying the score of an unrelated answer.
   score += matchedContentTokens.size * 2;
 
-  // A useful title-word match helps natural paraphrases without relying on generic cost words.
+  // Meaningful title words are strong context. This preserves natural questions
+  // such as "How much does the Labuan package cost?" without giving any weight
+  // to the generic word "cost" itself.
+  const matchedTitleTokens = new Set<string>();
   for (const token of contentTokens(entry.title)) {
-    if (qTokens.has(token)) matchedContentTokens.add(token);
+    if (qTokens.has(token)) matchedTitleTokens.add(token);
   }
-  score += matchedContentTokens.size;
+  score += matchedTitleTokens.size * 4;
 
   return score;
 }
