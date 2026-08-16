@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
-export const SITE_URL = "https://pfeuroasia.com";
+export const SITE_URL = "https://www.pfeuroasia.com";
 export const SEO_LAST_UPDATED = new Date("2026-08-16T00:00:00.000Z");
 
 type SeoLocale = "en-GB" | "da-DK" | "zh-CN" | "ar-SA";

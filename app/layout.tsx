@@ -22,7 +22,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://pfeuroasia.com";
+const siteUrl = "https://www.pfeuroasia.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

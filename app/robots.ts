@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://pfeuroasia.com/sitemap.xml",
-    host: "https://pfeuroasia.com",
+    sitemap: "https://www.pfeuroasia.com/sitemap.xml",
+    host: "https://www.pfeuroasia.com",
   };
 }
