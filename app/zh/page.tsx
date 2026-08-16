@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { createMetadata } from "../lib/seo";
 import { ZhEnquiry } from "../components/ZhEnquiry";
 import { PartnerStrip } from "../components/PartnerStrip";
 
@@ -94,3 +95,4 @@ export default function ChineseHome() {
     <footer className="zh-footer"><div className="site-shell"><Link className="brand" href="/zh"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link><p>连接西班牙与亚洲的独立私人豪宅顾问。</p><Link className="language-link" href="/">English version →</Link></div></footer>
   </main>;
 }
+export const metadata = createMetadata("homeZh");

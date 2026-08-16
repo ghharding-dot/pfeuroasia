@@ -1,15 +1,8 @@
-import type { Metadata } from "next";
 import { EnquiryFlow } from "../../components/EnquiryFlow";
 import { Header } from "../../components/Header";
+import { createMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "Private Investment Opportunities | Property Facilitators EuroAsia" },
-  description:
-    "Register interest in selected hotels, commercial property, development sites, land, refurbishment projects and income-producing assets.",
-  alternates: {
-    canonical: "https://pfeuroasia.com/opportunities/investment-opportunities",
-  },
-};
+export const metadata = createMetadata("investmentEn");
 
 export default function InvestmentOpportunitiesPage() {
   return (

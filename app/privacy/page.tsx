@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { createMetadata } from "../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Privacy Notice",
-  description: "How Property Facilitators EuroAsia handles website and enquiry information.",
-};
+export const metadata = createMetadata("privacyEn");
 
 export default function PrivacyPage() {
   return (

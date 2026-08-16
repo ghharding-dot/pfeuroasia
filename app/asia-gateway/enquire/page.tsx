@@ -1,12 +1,8 @@
-import type { Metadata } from "next";
 import { EnquiryFlow } from "../../components/EnquiryFlow";
 import { Header } from "../../components/Header";
+import { createMetadata } from "../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Asia Enquiry | Property Facilitators EuroAsia",
-  description:
-    "Discuss Asia property acquisition, residency, company setup or a professional partnership with Property Facilitators EuroAsia.",
-};
+export const metadata = createMetadata("asiaEnquireEn");
 
 type AsiaEnquirePageProps = {
   searchParams: Promise<{ partner?: string | string[] }>;

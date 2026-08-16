@@ -1,7 +1,10 @@
 import Link from "next/link";
 import styles from "../HomeRegions.module.css";
+import { createMetadata } from "../lib/seo";
 import { DanishHeader } from "./DanishHeader";
 import { DanishHomePhase2 } from "./DanishHomePhase2";
+
+export const metadata = createMetadata("homeDa");
 
 const services = [
   ["01", "Købsrådgivning", "Strategisk ejendomskøb for private kunder, family offices og investorer – både offentligt markedsførte og diskrete off-market muligheder.", "/da/services/acquisition"],

@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "../../../components/Footer";
 import { Header } from "../../../components/Header";
+import { createMetadata } from "../../../lib/seo";
 import { LabuanAdviserAccess } from "./LabuanAdviserAccess";
 import pageStyles from "./AdviserPage.module.css";
 
-export const metadata: Metadata = {
-  title: "Ask EuroAsia | Malaysia Living & Labuan Adviser",
-  description:
-    "Ask practical questions about living in Malaysia, Kuala Lumpur, travel, property, healthcare and the PF EuroAsia Labuan company and residency pathway.",
-};
+export const metadata = createMetadata("labuanAdviserEn");
 
 export default function LabuanAdviserPage() {
   return (

@@ -11,8 +11,10 @@ import {
   imageObjectPosition,
   readProperties,
 } from "./lib/propertyStore";
+import { createMetadata } from "./lib/seo";
 import styles from "./HomeRegions.module.css";
 
+export const metadata = createMetadata("homeEn");
 export const dynamic = "force-dynamic";
 
 const services = [

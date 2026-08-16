@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { createMetadata } from "../../lib/seo";
 import styles from "./Labuan.module.css";
 
-export const metadata: Metadata = {
-  title: "Labuan Company & Malaysia Residency | PF EuroAsia",
-  description:
-    "A coordinated route to Labuan company formation, Malaysian work permits and dependent residency, delivered with regulated local specialists.",
-};
+export const metadata = createMetadata("labuanEn");
 
 const formationItems = [
   ["Name search & reservation", "US$202.50"],

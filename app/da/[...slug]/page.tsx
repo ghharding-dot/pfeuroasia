@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DanishHeader } from "../DanishHeader";
+import { createMetadata, RouteSeo, type SeoPageKey } from "../../lib/seo";
 import styles from "../DanishPage.module.css";
 
 type Card = { label: string; title: string; text: string };
@@ -26,12 +27,39 @@ const pages: Record<string, PageData> = {
   "enquire": { eyebrow:"Fortrolig forespørgsel", title:"Fortæl os, hvad du ønsker at opnå.", lead:"Køb, salg, relocation, ophold, virksomhed eller strategisk samarbejde – vi svarer personligt.", heading:"Start med en kort introduktion.", intro:"Send dit navn, dine kontaktoplysninger, det relevante marked og en kort beskrivelse af dit behov til enquiry@pfeuroasia.com. Vi vender tilbage fortroligt og aftaler det passende næste skridt.", cards:[{label:"Ejendom",title:"Køb eller salg",text:"Angiv område, ejendomstype, budget og ønsket tidshorisont."},{label:"Malaysia",title:"Ophold og virksomhed",text:"Fortæl om familie, aktivitet og den løsning, du undersøger."},{label:"Relocation",title:"Flytning og livsstil",text:"Angiv destination, tidspunkt og praktiske prioriteter."},{label:"Kontakt",title:"enquiry@pfeuroasia.com",text:"Du er også velkommen til at skrive direkte på engelsk eller dansk."}]},
 };
 
+const seoKeys: Record<string, SeoPageKey> = {
+  about: "aboutDa",
+  "services/acquisition": "acquisitionDa",
+  "services/international-sales": "salesDa",
+  "services/relocation-concierge": "relocationDa",
+  "services/labuan-company-residency": "labuanDa",
+  "markets/marbella": "marbellaDa",
+  "markets/malaysia": "malaysiaDa",
+  "markets/middle-east": "middleEastDa",
+  "areas/la-zagaleta": "zagaletaDa",
+  "areas/el-madronal": "madronalDa",
+  "luxury-villa-rentals": "rentalsDa",
+  commercial: "commercialDa",
+  "property-owners": "ownersDa",
+  "private-portfolio": "portfolioDa",
+  "asia-gateway": "asiaDa",
+  privacy: "privacyDa",
+  enquire: "enquireDa",
+};
+
 export function generateStaticParams() { return Object.keys(pages).map((key) => ({ slug: key.split("/") })); }
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
+  const pageKey = seoKeys[slug.join("/")];
+  return pageKey ? createMetadata(pageKey) : {};
+}
 
 export default async function DanishContentPage({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
   const key = slug.join("/");
   const page = pages[key];
-  if (!page) notFound();
-  return <main><DanishHeader/><section className={styles.hero}><div className={`site-shell ${styles.heroInner}`}><p className="eyebrow light">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.lead}</p></div></section><section className={styles.body}><div className="site-shell"><div className={styles.intro}><h2>{page.heading}</h2><p>{page.intro}</p></div><div className={styles.grid}>{page.cards.map((card)=><article className={styles.card} key={card.title}><span>{card.label}</span><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section><section className={styles.cta}><div className="site-shell"><p className="eyebrow light">En fortrolig samtale</p><h2>Fortæl os, hvad du ønsker at opnå.</h2><Link className="button button-gold" href="/da/enquire">Kontakt os <span>→</span></Link></div></section><footer className={styles.footer}><div className={`site-shell ${styles.footerInner}`}><p>Property Facilitators EuroAsia · International ejendomsrådgivning</p><div><Link href="/da">Dansk forside</Link> · <Link href="/">English</Link> · <Link href="/da/privacy">Privatliv</Link></div></div></footer></main>;
+  const pageKey = seoKeys[key];
+  if (!page || !pageKey) notFound();
+  return <RouteSeo pageKey={pageKey}><main><DanishHeader/><section className={styles.hero}><div className={`site-shell ${styles.heroInner}`}><p className="eyebrow light">{page.eyebrow}</p><h1>{page.title}</h1><p>{page.lead}</p></div></section><section className={styles.body}><div className="site-shell"><div className={styles.intro}><h2>{page.heading}</h2><p>{page.intro}</p></div><div className={styles.grid}>{page.cards.map((card)=><article className={styles.card} key={card.title}><span>{card.label}</span><h3>{card.title}</h3><p>{card.text}</p></article>)}</div></div></section><section className={styles.cta}><div className="site-shell"><p className="eyebrow light">En fortrolig samtale</p><h2>Fortæl os, hvad du ønsker at opnå.</h2><Link className="button button-gold" href="/da/enquire">Kontakt os <span>→</span></Link></div></section><footer className={styles.footer}><div className={`site-shell ${styles.footerInner}`}><p>Property Facilitators EuroAsia · International ejendomsrådgivning</p><div><Link href="/da">Dansk forside</Link> · <Link href="/">English</Link> · <Link href="/da/privacy">Privatliv</Link></div></div></footer></main></RouteSeo>;
 }

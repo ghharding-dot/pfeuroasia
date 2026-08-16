@@ -1,16 +1,12 @@
-import type { Metadata } from "next";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PrivatePortfolioRegistration } from "../components/PrivatePortfolioRegistration";
+import { createMetadata } from "../lib/seo";
 import "./private-portfolio.css";
 import "./private-portfolio-mobile-fix.css";
 import "./client-access.css";
 
-export const metadata: Metadata = {
-  title: "Private Property Portfolio | Property Facilitators EuroAsia",
-  description: "Register for confidential access to selected off-market and discreetly marketed luxury property opportunities in Southern Spain.",
-  robots: { index: true, follow: true },
-};
+export const metadata = createMetadata("portfolioEn");
 
 export default function PrivatePortfolioPage() {
   return (

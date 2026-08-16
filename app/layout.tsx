@@ -32,15 +32,6 @@ export const metadata: Metadata = {
   },
   description:
     "Independent luxury property advisers connecting qualified buyers and property owners across Marbella, La Zagaleta, El Madroñal, Malaysia and Asia.",
-  alternates: {
-    canonical: "/",
-    languages: {
-      "en-GB": "/",
-      "zh-CN": "/zh",
-      "ar-SA": "/ar",
-      "da-DK": "/da",
-    },
-  },
   applicationName: "Property Facilitators EuroAsia",
   authors: [{ name: "Property Facilitators EuroAsia", url: siteUrl }],
   creator: "Property Facilitators EuroAsia",
@@ -125,6 +116,20 @@ const organizationSchema = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Property Facilitators EuroAsia",
+  alternateName: "PF EuroAsia",
+  url: siteUrl,
+  inLanguage: ["en-GB", "da-DK", "zh-CN", "ar-SA"],
+  publisher: {
+    "@type": "Organization",
+    name: "Property Facilitators EuroAsia",
+    url: siteUrl,
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -136,6 +141,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         {children}
         <Analytics />
