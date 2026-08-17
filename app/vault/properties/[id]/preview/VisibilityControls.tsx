@@ -27,6 +27,11 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
           publicLocation: String(form.get("publicLocation") || ""),
           imagePosition: String(form.get("imagePosition") || "center"),
           publicImageApproved: form.get("publicImageApproved") === "true",
+          approximateLocation: String(form.get("approximateLocation") || ""),
+          annualCosts: String(form.get("annualCosts") || ""),
+          adviserName: String(form.get("adviserName") || ""),
+          adviserWhatsApp: String(form.get("adviserWhatsApp") || ""),
+          verifyListingDetails: true,
         }),
       });
       const result = await response.json();
@@ -50,15 +55,27 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
         defaultPublicImageApproved={property.publicImageApproved || false}
         defaultImagePosition={property.imagePosition || "center"}
       />
+      <section className="vault-panel vault-form-section">
+        <div className="vault-section-heading">
+          <div><p className="vault-kicker">Property page upgrade</p><h2>Viewing and verification details</h2></div>
+          <p>These details appear on the individual property page. Use an approximate area only, never the private street address.</p>
+        </div>
+        <div className="vault-form-grid">
+          <label><span>Approximate location</span><input name="approximateLocation" defaultValue={property.approximateLocation || property.location} /></label>
+          <label><span>Annual running costs</span><input name="annualCosts" defaultValue={property.annualCosts || ""} placeholder="Approx. €42,000 per year" /></label>
+          <label><span>Direct adviser name</span><input name="adviserName" defaultValue={property.adviserName || "PF EuroAsia Property Adviser"} /></label>
+          <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" defaultValue={property.adviserWhatsApp || ""} placeholder="+34 600 000 000" /></label>
+        </div>
+      </section>
       <section className="vault-publish-bar">
         <div>
-          <strong>Approve the client access route</strong>
+          <strong>Approve access and verify listing details</strong>
           <p>
-            Registered listings open automatically after contact verification. Private off-market properties require a detailed application and your approval.
+            Saving records today as the latest verification date for location, costs, adviser and access settings.
           </p>
         </div>
         <button className="vault-primary-button" type="submit" disabled={working}>
-          {working ? "Saving..." : "Save Access Settings"}
+          {working ? "Saving..." : "Save & Verify Details"}
         </button>
       </section>
       {message && <p className="vault-form-message" role="status">{message}</p>}
