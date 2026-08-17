@@ -28,11 +28,11 @@ async function uploadFile(
   file: File,
   partnerCode: string,
   uploadKey: string,
-  kind: "main" | "secondary" | "brochure",
+  kind: "main" | "secondary" | "brochure" | "partnerBrochure",
   onProgress: (message: string) => void,
 ) {
   const pathname = `collaborator-submissions/${partnerCode.toLowerCase()}/${uploadKey}/${kind}-${safeFilename(file.name)}`;
-  const label = kind === "brochure" ? "brochure PDF" : "photograph";
+  const label = kind === "brochure" || kind === "partnerBrochure" ? "brochure PDF" : "photograph";
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), UPLOAD_TIMEOUT_MS);
   let highestPercentage = 0;
@@ -42,7 +42,7 @@ async function uploadFile(
       access: "public",
       handleUploadUrl: "/api/vault/upload",
       clientPayload: JSON.stringify({ reference: uploadKey, kind }),
-      contentType: file.type || (kind === "brochure" ? "application/pdf" : undefined),
+      contentType: file.type || (kind === "brochure" || kind === "partnerBrochure" ? "application/pdf" : undefined),
       multipart: file.size > 10 * 1024 * 1024,
       abortSignal: controller.signal,
       onUploadProgress: ({ percentage }) => {
@@ -174,15 +174,23 @@ export function CollaboratorEditPropertyForm({
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
       const pdf = form.get("brochure") as File | null;
+      const partnerPdf = form.get("unbrandedBrochure") as File | null;
 
       validateImage(main);
       validateImage(second);
       validatePdf(pdf);
+      validatePdf(partnerPdf);
 
       let brochure = "";
       if (pdf?.size) {
         const temporaryBrochure = await uploadFile(pdf, partnerCode, uploadKey, "brochure", setMessage);
         brochure = await secureBrochure(temporaryBrochure, partnerCode, pdf, setMessage);
+      }
+
+      let unbrandedBrochure = "";
+      if (partnerPdf?.size) {
+        const temporaryPartnerBrochure = await uploadFile(partnerPdf, partnerCode, uploadKey, "partnerBrochure", setMessage);
+        unbrandedBrochure = await secureBrochure(temporaryPartnerBrochure, partnerCode, partnerPdf, setMessage);
       }
 
       const image = main?.size
@@ -196,6 +204,7 @@ export function CollaboratorEditPropertyForm({
       delete payload.mainImage;
       delete payload.secondaryImage;
       delete payload.brochure;
+      delete payload.unbrandedBrochure;
 
       setMessage("Sending the updated property for PF EuroAsia review...");
       const response = await fetch(`/api/collaborators/properties/${property.id}`, {
@@ -206,6 +215,7 @@ export function CollaboratorEditPropertyForm({
           image,
           secondaryImage,
           brochure,
+          unbrandedBrochure,
           publicImageApproved: form.get("publicImageApproved") === "true",
           removeSecondaryImage: form.get("removeSecondaryImage") === "on",
           authorityConfirmed: true,
@@ -232,6 +242,7 @@ export function CollaboratorEditPropertyForm({
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" defaultValue={property.title} required /></label>
           <label><span>Location</span><input name="location" defaultValue={property.location} required /></label>
+          <label><span>Approximate public location</span><input name="approximateLocation" defaultValue={property.approximateLocation || property.location} /></label>
           <label>
             <span>Listing price</span>
             <input
@@ -260,6 +271,9 @@ export function CollaboratorEditPropertyForm({
           <label><span>Built size</span><input name="builtSize" defaultValue={property.builtSize} /></label>
           <label><span>Plot size</span><input name="plotSize" defaultValue={property.plotSize} /></label>
           <label><span>Terraces</span><input name="terraces" defaultValue={property.terraces || ""} /></label>
+          <label><span>Annual running costs</span><input name="annualCosts" defaultValue={property.annualCosts || ""} placeholder="Approx. €42,000 per year" /></label>
+          <label><span>Direct adviser name</span><input name="adviserName" defaultValue={property.adviserName || "PF EuroAsia Property Adviser"} /></label>
+          <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" defaultValue={property.adviserWhatsApp || ""} placeholder="+34 600 000 000" /></label>
         </div>
         <label className="vault-full-field">
           <span>Brief website description</span>
@@ -291,6 +305,14 @@ export function CollaboratorEditPropertyForm({
             <em>Protected brochure currently attached</em>
             <span className="vault-file-action">Choose replacement PDF</span>
             <input name="brochure" type="file" accept="application/pdf,.pdf" />
+          </label>
+          <label className={`vault-upload-box vault-upload-pdf ${property.unbrandedBrochure ? "has-file" : ""}`}>
+            <span className="vault-upload-icon">PDF</span>
+            <strong>Unbranded partner brochure</strong>
+            <small>{property.unbrandedBrochure ? "Current partner edition retained unless replaced" : "Optional partner-ready edition"} · maximum 60 MB</small>
+            <em>{property.unbrandedBrochure ? "Unbranded brochure currently attached" : "No unbranded brochure attached"}</em>
+            <span className="vault-file-action">Choose replacement PDF</span>
+            <input name="unbrandedBrochure" type="file" accept="application/pdf,.pdf" />
           </label>
         </div>
         {property.secondaryImage && (
