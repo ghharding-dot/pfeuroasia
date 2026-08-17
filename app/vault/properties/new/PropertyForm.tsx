@@ -29,11 +29,11 @@ function safeFilename(name: string) {
 async function uploadFile(
   file: File,
   reference: string,
-  kind: "main" | "secondary" | "brochure",
+  kind: "main" | "secondary" | "brochure" | "partnerBrochure",
   onProgress: (message: string) => void,
 ) {
   const pathname = `private-portfolio/${reference}/${kind}-${safeFilename(file.name)}`;
-  const label = kind === "brochure" ? "brochure PDF" : "photograph";
+  const label = kind === "brochure" || kind === "partnerBrochure" ? "brochure PDF" : "photograph";
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), UPLOAD_TIMEOUT_MS);
   let highestPercentage = 0;
@@ -45,7 +45,7 @@ async function uploadFile(
       access: "public",
       handleUploadUrl: "/api/vault/upload",
       clientPayload: JSON.stringify({ reference, kind }),
-      contentType: file.type || (kind === "brochure" ? "application/pdf" : undefined),
+      contentType: file.type || (kind === "brochure" || kind === "partnerBrochure" ? "application/pdf" : undefined),
       multipart: file.size > 10 * 1024 * 1024,
       abortSignal: controller.signal,
       onUploadProgress: ({ percentage }) => {
@@ -155,18 +155,18 @@ function ImageUpload({
   );
 }
 
-function PdfUpload() {
+function PdfUpload({ name, title, required = false }: { name: string; title: string; required?: boolean }) {
   const [file, setFile] = useState<File | null>(null);
 
   return (
     <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
       <span className="vault-upload-icon">PDF</span>
-      <strong>One protected sales brochure PDF</strong>
-      <small>Encrypted immediately after upload · maximum 60 MB</small>
+      <strong>{title}</strong>
+      <small>{required ? "Required" : "Optional"} · encrypted immediately after upload · maximum 60 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the property brochure"}</em>
       <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
       <input
-        name="brochure"
+        name={name}
         type="file"
         accept="application/pdf,.pdf"
         onChange={(event) => setFile(event.target.files?.[0] || null)}
@@ -222,11 +222,13 @@ export function PropertyForm() {
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
       const pdf = form.get("brochure") as File | null;
+      const partnerPdf = form.get("unbrandedBrochure") as File | null;
       const ownerCode = String(form.get("listingPartnerCode") || "DIRECT");
 
       validateImage(main, true);
       validateImage(second, false);
       validatePdf(pdf, status === "published");
+      validatePdf(partnerPdf, false);
 
       let brochure = "";
       if (pdf?.size) {
@@ -240,6 +242,22 @@ export function PropertyForm() {
           temporaryBrochure,
           ownerCode,
           pdf,
+          setMessage,
+        );
+      }
+
+      let unbrandedBrochure = "";
+      if (partnerPdf?.size) {
+        const temporaryPartnerBrochure = await uploadFile(
+          partnerPdf,
+          uploadKey,
+          "partnerBrochure",
+          setMessage,
+        );
+        unbrandedBrochure = await secureBrochure(
+          temporaryPartnerBrochure,
+          ownerCode,
+          partnerPdf,
           setMessage,
         );
       }
@@ -259,6 +277,7 @@ export function PropertyForm() {
       delete payload.mainImage;
       delete payload.secondaryImage;
       delete payload.brochure;
+      delete payload.unbrandedBrochure;
 
       const response = await fetch("/api/vault/properties", {
         method: "POST",
@@ -269,6 +288,7 @@ export function PropertyForm() {
           image,
           secondaryImage,
           brochure,
+          unbrandedBrochure,
           publicImageApproved: form.get("publicImageApproved") === "true",
         }),
       });
@@ -296,6 +316,7 @@ export function PropertyForm() {
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
+          <label><span>Approximate public location</span><input name="approximateLocation" placeholder="La Zagaleta, Benahavís" /></label>
           <label><span>Price</span><input name="price" placeholder="€11,600,000" /></label>
           <label>
             <span>Listing collaborator</span>
@@ -319,6 +340,9 @@ export function PropertyForm() {
           <label><span>Built size</span><input name="builtSize" placeholder="958 m²" /></label>
           <label><span>Plot size</span><input name="plotSize" placeholder="5,394 m²" /></label>
           <label><span>Terraces</span><input name="terraces" placeholder="490 m²" /></label>
+          <label><span>Annual running costs</span><input name="annualCosts" placeholder="Approx. €42,000 per year" /></label>
+          <label><span>Direct adviser name</span><input name="adviserName" placeholder="PF EuroAsia Property Adviser" /></label>
+          <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" placeholder="+34 600 000 000" /></label>
         </div>
         <label className="vault-full-field">
           <span>Description</span>
@@ -334,13 +358,14 @@ export function PropertyForm() {
 
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
-          <div><p className="vault-kicker">Step 2</p><h2>Website images and protected brochure</h2></div>
-          <p>Use one main image, one optional secondary image, and one protected sales brochure PDF per property.</p>
+          <div><p className="vault-kicker">Step 2</p><h2>Website images and brochure editions</h2></div>
+          <p>Add the client-facing branded brochure and, where available, an unbranded edition for professional partners.</p>
         </div>
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
           <ImageUpload name="secondaryImage" title="Second website image" />
-          <PdfUpload />
+          <PdfUpload name="brochure" title="Branded property brochure PDF" />
+          <PdfUpload name="unbrandedBrochure" title="Unbranded partner brochure PDF" />
         </div>
       </section>
 
