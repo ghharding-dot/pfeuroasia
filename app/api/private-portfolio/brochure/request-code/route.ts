@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
   }
 
   const propertyReference = clean(body.propertyReference, 80).toUpperCase();
+  const edition = body.edition === "partner" ? "partner" : "branded";
   const fullName = clean(body.fullName, 160);
   const email = clean(body.email, 320).toLowerCase();
   const telephone = clean(body.telephone, 120);
@@ -48,7 +49,12 @@ export async function POST(request: NextRequest) {
   }
 
   const property = await findPublishedPrivateProperty(propertyReference);
-  if (!property?.brochure) {
+  if (!property) {
+    console.warn("brochure-verification-rejected", { reason: "property-unavailable", propertyReference });
+    return NextResponse.json({ error: "This property is not currently available." }, { status: 404 });
+  }
+  const selectedBrochure = edition === "partner" ? property.unbrandedBrochure : property.brochure;
+  if (!selectedBrochure) {
     console.warn("brochure-verification-rejected", { reason: "brochure-unavailable", propertyReference });
     return NextResponse.json({ error: "This brochure is not currently available." }, { status: 404 });
   }
@@ -61,7 +67,7 @@ export async function POST(request: NextRequest) {
 
   const code = String(randomInt(100000, 1000000));
   const challenge = createBrochureChallenge(
-    { propertyReference, fullName, email, telephone, consent },
+    { propertyReference, edition, fullName, email, telephone, consent },
     code,
   );
 
