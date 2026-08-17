@@ -6,6 +6,7 @@ export type PrivatePropertyDisplay = Readonly<
     VaultProperty,
     | "reference"
     | "location"
+    | "approximateLocation"
     | "price"
     | "title"
     | "bedrooms"
@@ -13,14 +14,19 @@ export type PrivatePropertyDisplay = Readonly<
     | "plotSize"
     | "builtSize"
     | "terraces"
+    | "annualCosts"
     | "description"
     | "image"
     | "secondaryImage"
     | "brochure"
+    | "unbrandedBrochure"
+    | "adviserName"
+    | "adviserWhatsApp"
+    | "lastVerifiedAt"
     | "imagePosition"
     | "listingPartnerCode"
     | "listingPartnerName"
-  >
+  > & { updatedAt?: string }
 >;
 
 function countLabel(value: number, singular: string, plural: string) {
@@ -28,14 +34,36 @@ function countLabel(value: number, singular: string, plural: string) {
   return `${value} ${value === 1 ? singular : plural}`;
 }
 
+function displayDate(value?: string) {
+  if (!value) return "Awaiting verification";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Awaiting verification";
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(date);
+}
+
+function whatsappHref(number: string, reference: string) {
+  const digits = number.replace(/\D/g, "");
+  if (!digits) return "";
+  const message = encodeURIComponent(
+    `Hello, I would like to speak with an adviser about ${reference} and arrange a private viewing.`,
+  );
+  return `https://wa.me/${digits}?text=${message}`;
+}
+
 export function PrivatePropertyCard({
   property,
   showEnquiry = true,
   brochureMode = "verified",
+  detailMode = false,
 }: {
   property: PrivatePropertyDisplay;
   showEnquiry?: boolean;
   brochureMode?: "verified" | "preview" | "direct" | "enquiry";
+  detailMode?: boolean;
 }) {
   const facts = [
     countLabel(property.bedrooms, "bedroom", "bedrooms"),
@@ -47,6 +75,13 @@ export function PrivatePropertyCard({
   const partnerName = property.listingPartnerName || "Property Facilitators EuroAsia";
   const enquirySubject = encodeURIComponent(`Enquiry regarding ${property.reference}`);
   const brochureSubject = encodeURIComponent(`Sales brochure request regarding ${property.reference}`);
+  const partnerBrochureSubject = encodeURIComponent(`Unbranded partner brochure request regarding ${property.reference}`);
+  const viewingSubject = encodeURIComponent(`Private viewing request regarding ${property.reference}`);
+  const adviserName = property.adviserName || "PF EuroAsia Property Adviser";
+  const whatsapp = whatsappHref(
+    property.adviserWhatsApp || process.env.NEXT_PUBLIC_PROPERTY_ADVISER_WHATSAPP || "",
+    property.reference,
+  );
 
   return (
     <article className="private-property-card">
@@ -86,6 +121,31 @@ export function PrivatePropertyCard({
 
         <p className="private-property-partner">Listed in collaboration with {partnerName}</p>
 
+        {detailMode && (
+          <div className="private-property-detail-grid">
+            <div>
+              <span>Approximate location</span>
+              <strong>{property.approximateLocation || property.location}</strong>
+              <small>Exact address and access details are released privately.</small>
+            </div>
+            <div>
+              <span>Annual running costs</span>
+              <strong>{property.annualCosts || "Available on request"}</strong>
+              <small>Indicative figures, subject to the latest owner documentation.</small>
+            </div>
+            <div>
+              <span>Last verified</span>
+              <strong>{displayDate(property.lastVerifiedAt || property.updatedAt)}</strong>
+              <small>Price, availability and particulars reconfirmed by our team.</small>
+            </div>
+            <div>
+              <span>Your adviser</span>
+              <strong>{adviserName}</strong>
+              <small>One direct contact from enquiry through to private viewing.</small>
+            </div>
+          </div>
+        )}
+
         {property.secondaryImage && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -102,6 +162,7 @@ export function PrivatePropertyCard({
                 propertyReference={property.reference}
                 propertyTitle={property.title}
                 partnerName={partnerName}
+                edition="branded"
               />
             ) : brochureMode === "direct" ? (
               <a
@@ -117,13 +178,38 @@ export function PrivatePropertyCard({
                 className="text-link"
                 href={`mailto:enquiry@pfeuroasia.com?subject=${brochureSubject}`}
               >
-                Request sales brochure <span>→</span>
+                Request branded property brochure <span>→</span>
               </a>
             ) : (
               <span className="brochure-pending brochure-attached">Protected sales brochure attached</span>
             )
           ) : (
             <span className="brochure-pending">Sales brochure PDF not attached</span>
+          )}
+
+          {property.unbrandedBrochure && brochureMode === "verified" && (
+            <BrochureAccessButton
+              propertyReference={property.reference}
+              propertyTitle={property.title}
+              partnerName={partnerName}
+              edition="partner"
+            />
+          )}
+
+          {property.unbrandedBrochure && brochureMode === "direct" && (
+            <a className="text-link" href={property.unbrandedBrochure} target="_blank" rel="noopener noreferrer">
+              View unbranded partner brochure <span>→</span>
+            </a>
+          )}
+
+          {property.unbrandedBrochure && brochureMode === "enquiry" && (
+            <a className="text-link" href={`mailto:enquiry@pfeuroasia.com?subject=${partnerBrochureSubject}`}>
+              Request unbranded partner brochure <span>→</span>
+            </a>
+          )}
+
+          {property.unbrandedBrochure && brochureMode === "preview" && (
+            <span className="brochure-pending brochure-attached">Unbranded partner brochure attached</span>
           )}
 
           {showEnquiry && (
@@ -135,6 +221,19 @@ export function PrivatePropertyCard({
             </a>
           )}
         </div>
+
+        {detailMode && showEnquiry && (
+          <div className="private-property-primary-actions">
+            <a className="button button-gold private-viewing-button" href={`mailto:enquiry@pfeuroasia.com?subject=${viewingSubject}`}>
+              Request a private viewing <span>→</span>
+            </a>
+            {whatsapp && (
+              <a className="private-whatsapp-button" href={whatsapp} target="_blank" rel="noopener noreferrer">
+                WhatsApp {adviserName} <span>↗</span>
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );
