@@ -55,7 +55,7 @@ async function uploadFile(
   } catch (error) {
     if (controller.signal.aborted) {
       throw new Error(
-        `${kind === "brochure" ? "The brochure PDF" : "A photograph"} upload timed out after ten minutes. Please check the connection and try again.`,
+        `${kind === "brochure" || kind === "partnerBrochure" ? "The brochure PDF" : "A photograph"} upload timed out after ten minutes. Please check the connection and try again.`,
       );
     }
     throw error;
