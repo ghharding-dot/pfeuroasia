@@ -61,7 +61,7 @@ export async function POST(request: Request) {
           throw new Error("Invalid upload information.");
         }
 
-        const isBrochure = kind === "brochure";
+        const isBrochure = kind === "brochure" || kind === "partnerBrochure";
         const isImage = kind === "main" || kind === "secondary";
 
         if (isBrochure && !hasAllowedExtension(pathname, [".pdf"])) {
