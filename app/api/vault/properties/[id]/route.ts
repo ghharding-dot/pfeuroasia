@@ -51,6 +51,7 @@ export async function PATCH(
 
   const hasAccessUpdate =
     typeof body.visibility === "string" || typeof body.accessLevel === "string";
+  const hasDetailUpdate = body.verifyListingDetails === true;
   const requestedVisibility = hasAccessUpdate
     ? normalizePropertyVisibility(body.visibility)
     : existing.visibility || "confidential";
@@ -83,7 +84,21 @@ export async function PATCH(
     imagePosition: hasAccessUpdate
       ? normalizeImagePosition(body.imagePosition)
       : existing.imagePosition || "center",
+    approximateLocation: hasDetailUpdate
+      ? clean(body.approximateLocation, 180) || existing.location
+      : existing.approximateLocation,
+    annualCosts: hasDetailUpdate ? clean(body.annualCosts, 1000) : existing.annualCosts,
+    adviserName: hasDetailUpdate
+      ? clean(body.adviserName, 120) || "PF EuroAsia Property Adviser"
+      : existing.adviserName,
+    adviserWhatsApp: hasDetailUpdate
+      ? clean(body.adviserWhatsApp, 40)
+      : existing.adviserWhatsApp,
     approvalStatus: status === "published" ? "approved" : existing.approvalStatus,
+    lastVerifiedAt:
+      hasDetailUpdate || (status === "published" && existing.status !== "published")
+        ? new Date().toISOString()
+        : existing.lastVerifiedAt,
     updatedAt: new Date().toISOString(),
   };
 
