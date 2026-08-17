@@ -1,6 +1,7 @@
 .site-header,
 .site-header.is-transparent {
   height: 160px;
+  padding-top: 34px;
 }
 
 .site-header > .header-inner {
@@ -8,8 +9,10 @@
 }
 
 .news-ticker {
-  position: relative;
-  z-index: 30;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
   display: flex !important;
   visibility: visible !important;
   width: 100%;
@@ -91,6 +94,7 @@
   .site-header,
   .site-header.is-transparent {
     height: 146px;
+    padding-top: 30px;
   }
 
   .site-header > .header-inner {
