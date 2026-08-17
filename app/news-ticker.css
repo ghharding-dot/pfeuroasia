@@ -118,7 +118,7 @@
   }
 
   .news-ticker-track {
-    animation-duration: 28s !important;
+    animation-duration: 56s !important;
     animation-iteration-count: infinite !important;
     animation-play-state: running !important;
   }
