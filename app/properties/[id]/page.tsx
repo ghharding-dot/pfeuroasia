@@ -6,6 +6,7 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { PrivatePropertyCard } from "../../components/PrivatePropertyCard";
 import {
+  imageObjectPosition,
   normalizePropertyAccessLevel,
   readProperties,
 } from "../../lib/propertyStore";
@@ -46,6 +47,24 @@ export default async function RegisteredPropertyPage({
 
   if (!session) redirect(`/properties/${property.id}/access`);
 
+  const locationKey = (property.approximateLocation || property.location)
+    .split(",")[0]
+    .trim()
+    .toLowerCase();
+  const similarProperties = properties
+    .filter(
+      (item) =>
+        item.id !== property.id &&
+        item.status === "published" &&
+        normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
+    )
+    .sort((left, right) => {
+      const leftMatches = (left.approximateLocation || left.location).toLowerCase().includes(locationKey);
+      const rightMatches = (right.approximateLocation || right.location).toLowerCase().includes(locationKey);
+      return Number(rightMatches) - Number(leftMatches);
+    })
+    .slice(0, 3);
+
   return (
     <main className="registered-property-page">
       <Header />
@@ -65,8 +84,37 @@ export default async function RegisteredPropertyPage({
       </section>
 
       <section className="private-collection-grid registered-property-grid site-shell">
-        <PrivatePropertyCard property={property} brochureMode="enquiry" />
+        <PrivatePropertyCard property={property} brochureMode="enquiry" detailMode />
       </section>
+
+      {similarProperties.length > 0 && (
+        <section className="registered-similar site-shell">
+          <div className="registered-similar-heading">
+            <div>
+              <p className="eyebrow">Curated alternatives</p>
+              <h2>Similar properties</h2>
+            </div>
+            <p>Comparable homes selected by area, access level and current availability.</p>
+          </div>
+          <div className="registered-similar-grid">
+            {similarProperties.map((item) => (
+              <Link className="registered-similar-card" href={`/properties/${item.id}`} key={item.id}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.image}
+                  alt={`${item.title} in ${item.approximateLocation || item.location}`}
+                  style={{ objectPosition: imageObjectPosition(item.imagePosition) }}
+                />
+                <div>
+                  <span>{item.approximateLocation || item.location}</span>
+                  <h3>{item.title}</h3>
+                  <strong>{item.price || "Price on application"}</strong>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <Footer />
     </main>

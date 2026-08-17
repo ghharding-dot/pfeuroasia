@@ -8,10 +8,12 @@ export function BrochureAccessButton({
   propertyReference,
   propertyTitle,
   partnerName,
+  edition = "branded",
 }: {
   propertyReference: string;
   propertyTitle: string;
   partnerName: string;
+  edition?: "branded" | "partner";
 }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>("details");
@@ -35,6 +37,7 @@ export function BrochureAccessButton({
     const form = new FormData(event.currentTarget);
     const payload = {
       propertyReference,
+      edition,
       fullName: String(form.get("fullName") || ""),
       email: String(form.get("email") || ""),
       telephone: String(form.get("telephone") || ""),
@@ -93,7 +96,7 @@ export function BrochureAccessButton({
   return (
     <>
       <button className="text-link brochure-access-trigger" type="button" onClick={() => setOpen(true)}>
-        Access protected sales brochure <span>→</span>
+        {edition === "partner" ? "Access unbranded partner brochure" : "Access branded property brochure"} <span>→</span>
       </button>
 
       {open && (
@@ -102,18 +105,20 @@ export function BrochureAccessButton({
             className="brochure-modal"
             role="dialog"
             aria-modal="true"
-            aria-labelledby={`brochure-title-${propertyReference}`}
+            aria-labelledby={`brochure-title-${propertyReference}-${edition}`}
             onMouseDown={(event) => event.stopPropagation()}
           >
             <button className="brochure-modal-close" type="button" onClick={close} aria-label="Close">×</button>
             <p className="eyebrow">Verified document access</p>
-            <h2 id={`brochure-title-${propertyReference}`}>{propertyTitle}</h2>
+            <h2 id={`brochure-title-${propertyReference}-${edition}`}>{propertyTitle}</h2>
             <p className="brochure-modal-reference">{propertyReference} · Listed with {partnerName}</p>
 
             {step === "details" && (
               <form className="brochure-verification-form" onSubmit={requestCode}>
                 <p>
-                  The brochure may contain the listing collaborator&apos;s direct details. Confirm your identity before receiving a personalised, watermarked copy.
+                  {edition === "partner"
+                    ? "This unbranded copy is prepared for professional partner presentation. Confirm your identity before receiving a personalised, watermarked copy."
+                    : "The branded brochure may contain the listing collaborator&apos;s direct details. Confirm your identity before receiving a personalised, watermarked copy."}
                 </p>
                 <label>
                   <span>Full name</span>
