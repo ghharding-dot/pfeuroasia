@@ -109,7 +109,7 @@ export default async function PropertyPreviewPage({
         <VisibilityControls property={property} />
 
         <section className="private-collection-grid vault-preview-grid">
-          <PrivatePropertyCard property={property} showEnquiry={false} brochureMode="preview" />
+          <PrivatePropertyCard property={property} showEnquiry={false} brochureMode="preview" detailMode />
         </section>
       </div>
     </main>
