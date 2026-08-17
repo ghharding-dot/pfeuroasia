@@ -40,13 +40,14 @@ async function getTemperature(latitude: number, longitude: number) {
 
 export async function GET() {
   try {
-    const [marbella, kualaLumpur] = await Promise.all([
+    const [stockholm, marbella, kualaLumpur] = await Promise.all([
+      getTemperature(59.3293, 18.0686),
       getTemperature(36.5101, -4.8824),
       getTemperature(3.139, 101.6869),
     ]);
 
     return NextResponse.json(
-      { marbella, kualaLumpur },
+      { stockholm, marbella, kualaLumpur },
       {
         headers: {
           "Cache-Control": "public, s-maxage=600, stale-while-revalidate=1800",
@@ -56,7 +57,7 @@ export async function GET() {
   } catch (error) {
     console.error("Header weather lookup failed", error);
     return NextResponse.json(
-      { marbella: null, kualaLumpur: null },
+      { stockholm: null, marbella: null, kualaLumpur: null },
       {
         status: 200,
         headers: {
