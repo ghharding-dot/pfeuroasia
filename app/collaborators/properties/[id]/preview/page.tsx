@@ -86,7 +86,7 @@ export default async function CollaboratorPropertyPreviewPage({
         </section>
 
         <section className="private-collection-grid vault-preview-grid">
-          <PrivatePropertyCard property={property} showEnquiry={false} brochureMode="preview" />
+          <PrivatePropertyCard property={property} showEnquiry={false} brochureMode="preview" detailMode />
         </section>
       </div>
     </main>
