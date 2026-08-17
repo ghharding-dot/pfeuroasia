@@ -67,7 +67,10 @@ export async function POST(request: Request) {
     ? path.startsWith("private-portfolio/")
     : path.startsWith(collaboratorPrefix);
 
-  if (!permittedPath || !/\/brochure-/i.test(`/${path}`)) {
+  const permittedBrochureType =
+    /(?:^|\/)(?:brochure|partnerBrochure)-/i.test(path);
+
+  if (!permittedPath || !permittedBrochureType) {
     return NextResponse.json(
       { error: "This brochure upload does not belong to the current account." },
       { status: 403 },
