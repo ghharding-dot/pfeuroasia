@@ -243,7 +243,14 @@ export async function GET(request: NextRequest) {
   const property = await findPublishedPrivateProperty(
     client.propertyReference,
   );
-  if (!property?.brochure) {
+  if (!property) {
+    return NextResponse.json(
+      { error: "This property is not currently available." },
+      { status: 404 },
+    );
+  }
+  const brochureSource = client.edition === "partner" ? property.unbrandedBrochure : property.brochure;
+  if (!brochureSource) {
     return NextResponse.json(
       { error: "This brochure is not currently available." },
       { status: 404 },
@@ -252,7 +259,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const downloadedAt = new Date().toISOString();
-    const source = await readBrochureBytes(property.brochure, request);
+    const source = await readBrochureBytes(brochureSource, request);
     const watermarked = await createWatermarkedPdf(source, {
       fullName: client.fullName,
       email: client.email,
@@ -264,6 +271,7 @@ export async function GET(request: NextRequest) {
       event: "verified-brochure-download",
       propertyReference: property.reference,
       propertyTitle: property.title,
+      brochureEdition: client.edition,
       listingPartnerCode: property.listingPartnerCode || "DIRECT",
       listingPartnerName:
         property.listingPartnerName || "Property Facilitators EuroAsia",
@@ -301,7 +309,7 @@ export async function GET(request: NextRequest) {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="${safeFilename(
           property.title,
-        )}-${property.reference}-verified.pdf"`,
+        )}-${property.reference}-${client.edition === "partner" ? "partner" : "branded"}-verified.pdf"`,
         "Cache-Control": "private, no-store, max-age=0",
         "X-Content-Type-Options": "nosniff",
       },
