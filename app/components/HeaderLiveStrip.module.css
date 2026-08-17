@@ -65,14 +65,14 @@
 @media (max-width: 760px) {
   .inner {
     justify-content: space-between;
-    gap: 10px;
+    gap: 6px;
     min-height: 38px;
     overflow: hidden;
     padding-block: 7px;
   }
 
   .location {
-    gap: 6px;
+    gap: 4px;
   }
 
   .location strong {
@@ -92,11 +92,15 @@
   .attribution {
     display: none;
   }
+
+  .country {
+    display: none;
+  }
 }
 
 @media (max-width: 430px) {
   .location strong {
-    max-width: 82px;
+    max-width: 76px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
