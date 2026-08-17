@@ -64,11 +64,15 @@
   will-change: transform;
 }
 
-.news-ticker-track span {
+.news-ticker-copy {
   display: block;
   flex: 0 0 auto;
   padding-right: 90px;
   white-space: nowrap;
+}
+
+.news-ticker-affiliation {
+  color: #e5484d;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -115,7 +119,7 @@
     animation-play-state: running !important;
   }
 
-  .news-ticker-track span {
+  .news-ticker-copy {
     padding-right: 60px;
   }
 
