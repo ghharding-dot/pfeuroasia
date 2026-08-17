@@ -16,6 +16,7 @@ export type PrivatePropertyRecord = Pick<
   | "image"
   | "secondaryImage"
   | "brochure"
+  | "unbrandedBrochure"
   | "listingPartnerCode"
   | "listingPartnerName"
 >;
