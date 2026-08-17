@@ -19,7 +19,17 @@ const tickerItems = [
   "DOMESTIC TOURISM STRONG — 74.7 million domestic visitors in Q1 2026, up 7.2%, with expenditure reaching RM34.0 billion",
 ];
 
-const tickerText = tickerItems.join("   ◆   ");
+const tickerText = tickerItems.slice(1).join("   ◆   ");
+
+function TickerCopy({ duplicate = false }: { duplicate?: boolean }) {
+  return (
+    <span className="news-ticker-copy" aria-hidden={duplicate || undefined}>
+      <span className="news-ticker-affiliation">{tickerItems[0]}</span>
+      {"   ◆   "}
+      {tickerText}
+    </span>
+  );
+}
 
 export function Header({
   transparent = false,
@@ -34,8 +44,8 @@ export function Header({
         <span className="news-ticker-label">Latest</span>
         <div className="news-ticker-window">
           <Link className="news-ticker-track" href="/markets/malaysia">
-            <span>{tickerText}</span>
-            <span aria-hidden="true">{tickerText}</span>
+            <TickerCopy />
+            <TickerCopy duplicate />
           </Link>
         </div>
       </div>
