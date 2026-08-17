@@ -123,6 +123,7 @@ export async function PATCH(
     ...existing,
     title: clean(body.title, 180) || existing.title,
     location: clean(body.location, 180) || existing.location,
+    approximateLocation: clean(body.approximateLocation, 180) || existing.approximateLocation || existing.location,
     priceAmount,
     priceCurrency: normalizePropertyCurrency(body.priceCurrency),
     price: undefined,
@@ -131,6 +132,7 @@ export async function PATCH(
     plotSize: clean(body.plotSize, 120),
     builtSize: clean(body.builtSize, 120),
     terraces: clean(body.terraces, 120),
+    annualCosts: clean(body.annualCosts, 1000),
     description: clean(body.description),
     image: clean(body.image, 1200) || existing.image,
     secondaryImage:
@@ -138,6 +140,10 @@ export async function PATCH(
         ? ""
         : clean(body.secondaryImage, 1200) || existing.secondaryImage || "",
     brochure: clean(body.brochure, 2000) || existing.brochure || "",
+    unbrandedBrochure:
+      clean(body.unbrandedBrochure, 2000) || existing.unbrandedBrochure || "",
+    adviserName: clean(body.adviserName, 120) || existing.adviserName || "PF EuroAsia Property Adviser",
+    adviserWhatsApp: clean(body.adviserWhatsApp, 40) || existing.adviserWhatsApp || "",
     accessLevel,
     visibility,
     publicTitle: clean(body.publicTitle, 120),
@@ -145,6 +151,7 @@ export async function PATCH(
     publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
     imagePosition: normalizeImagePosition(body.imagePosition),
     status: "draft",
+    lastVerifiedAt: existing.lastVerifiedAt,
     approvalStatus: "pending-review",
     updatedAt: new Date().toISOString(),
   };
