@@ -120,7 +120,10 @@ export function HomePhase2() {
               <div className={phase2Styles.cardOverlay} />
               <div className={phase2Styles.gatewayCardCopy}>
                 <span className={phase2Styles.pathLabel}>Asia Gateway</span>
-                <h2>Thinking of Dubai for residency or tax planning? Have you considered Malaysia and Asia?</h2>
+                <h2>
+                  Thinking of Dubai for tax residency? Have you considered
+                  Malaysia and Asia? The opportunities might surprise you.
+                </h2>
                 <p>
                   Before making the conventional move to Dubai, compare the
                   alternatives available across Malaysia and selected Asian
