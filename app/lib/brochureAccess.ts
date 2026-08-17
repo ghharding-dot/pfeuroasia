@@ -2,6 +2,7 @@ import { createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 
 export type BrochureClient = {
   propertyReference: string;
+  edition: "branded" | "partner";
   fullName: string;
   email: string;
   telephone: string;
@@ -85,6 +86,7 @@ export function verifyBrochureChallenge(token: string, code: string) {
 
   const client: BrochureClient = {
     propertyReference: payload.propertyReference,
+    edition: payload.edition === "partner" ? "partner" : "branded",
     fullName: payload.fullName,
     email: payload.email,
     telephone: payload.telephone,
