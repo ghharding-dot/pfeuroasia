@@ -16,6 +16,7 @@ export type VaultProperty = {
   reference: string;
   title: string;
   location: string;
+  approximateLocation?: string;
   /** Formatted compatibility value generated from the canonical numeric fields. */
   price?: string;
   /** Canonical numeric listing price used for all new and migrated records. */
@@ -27,10 +28,15 @@ export type VaultProperty = {
   plotSize: string;
   builtSize: string;
   terraces?: string;
+  annualCosts?: string;
   description: string;
   image: string;
   secondaryImage?: string;
   brochure?: string;
+  unbrandedBrochure?: string;
+  adviserName?: string;
+  adviserWhatsApp?: string;
+  lastVerifiedAt?: string;
   visibility?: PropertyVisibility;
   accessLevel?: PropertyAccessLevel;
   publicTitle?: string;
