@@ -27,11 +27,11 @@ async function uploadFile(
   file: File,
   partnerCode: string,
   uploadKey: string,
-  kind: "main" | "secondary" | "brochure",
+  kind: "main" | "secondary" | "brochure" | "partnerBrochure",
   onProgress: (message: string) => void,
 ) {
   const pathname = `collaborator-submissions/${partnerCode.toLowerCase()}/${uploadKey}/${kind}-${safeFilename(file.name)}`;
-  const label = kind === "brochure" ? "brochure PDF" : "photograph";
+  const label = kind === "brochure" || kind === "partnerBrochure" ? "brochure PDF" : "photograph";
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), UPLOAD_TIMEOUT_MS);
   let highestPercentage = 0;
@@ -43,7 +43,7 @@ async function uploadFile(
       access: "public",
       handleUploadUrl: "/api/vault/upload",
       clientPayload: JSON.stringify({ reference: uploadKey, kind }),
-      contentType: file.type || (kind === "brochure" ? "application/pdf" : undefined),
+      contentType: file.type || (kind === "brochure" || kind === "partnerBrochure" ? "application/pdf" : undefined),
       multipart: file.size > 10 * 1024 * 1024,
       abortSignal: controller.signal,
       onUploadProgress: ({ percentage }) => {
@@ -147,21 +147,21 @@ function ImageUpload({
   );
 }
 
-function PdfUpload() {
+function PdfUpload({ name, title, required = false }: { name: string; title: string; required?: boolean }) {
   const [file, setFile] = useState<File | null>(null);
 
   return (
     <label className={`vault-upload-box vault-upload-pdf ${file ? "has-file" : ""}`}>
       <span className="vault-upload-icon">PDF</span>
-      <strong>One protected sales brochure PDF</strong>
-      <small>Required · encrypted immediately after upload · maximum 60 MB</small>
+      <strong>{title}</strong>
+      <small>{required ? "Required" : "Optional"} · encrypted immediately after upload · maximum 60 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select the sales brochure"}</em>
       <span className="vault-file-action">{file ? "Replace PDF" : "Choose PDF"}</span>
       <input
-        name="brochure"
+        name={name}
         type="file"
         accept="application/pdf,.pdf"
-        required
+        required={required}
         onChange={(event) => setFile(event.target.files?.[0] || null)}
       />
     </label>
@@ -181,8 +181,11 @@ function validateImage(file: File | null, required: boolean) {
   }
 }
 
-function validatePdf(file: File | null) {
-  if (!file?.size) throw new Error("Please attach one sales brochure PDF.");
+function validatePdf(file: File | null, required = false) {
+  if (!file?.size) {
+    if (required) throw new Error("Please attach one branded sales brochure PDF.");
+    return;
+  }
   const isPdf =
     file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
   if (!isPdf) throw new Error("The property brochure must be a PDF.");
@@ -220,10 +223,12 @@ export function CollaboratorPropertyForm({
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
       const pdf = form.get("brochure") as File | null;
+      const partnerPdf = form.get("unbrandedBrochure") as File | null;
 
       validateImage(main, true);
       validateImage(second, false);
-      validatePdf(pdf);
+      validatePdf(pdf, true);
+      validatePdf(partnerPdf);
 
       const temporaryBrochure = await uploadFile(
         pdf as File,
@@ -238,6 +243,23 @@ export function CollaboratorPropertyForm({
         pdf as File,
         setMessage,
       );
+
+      let unbrandedBrochure = "";
+      if (partnerPdf?.size) {
+        const temporaryPartnerBrochure = await uploadFile(
+          partnerPdf,
+          partnerCode,
+          uploadKey,
+          "partnerBrochure",
+          setMessage,
+        );
+        unbrandedBrochure = await secureBrochure(
+          temporaryPartnerBrochure,
+          partnerCode,
+          partnerPdf,
+          setMessage,
+        );
+      }
 
       const image = await uploadFile(
         main as File,
@@ -261,6 +283,7 @@ export function CollaboratorPropertyForm({
       delete payload.mainImage;
       delete payload.secondaryImage;
       delete payload.brochure;
+      delete payload.unbrandedBrochure;
 
       const response = await fetch("/api/collaborators/properties", {
         method: "POST",
@@ -270,6 +293,7 @@ export function CollaboratorPropertyForm({
           image,
           secondaryImage,
           brochure,
+          unbrandedBrochure,
           publicImageApproved: form.get("publicImageApproved") === "true",
           authorityConfirmed: true,
         }),
@@ -298,6 +322,7 @@ export function CollaboratorPropertyForm({
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
+          <label><span>Approximate public location</span><input name="approximateLocation" placeholder="La Zagaleta, Benahavís" /></label>
           <label>
             <span>Listing price</span>
             <input name="priceAmount" type="number" min="0" step="1" inputMode="numeric" placeholder="8900000" />
@@ -318,6 +343,9 @@ export function CollaboratorPropertyForm({
           <label><span>Built size</span><input name="builtSize" placeholder="958 m²" /></label>
           <label><span>Plot size</span><input name="plotSize" placeholder="5,394 m²" /></label>
           <label><span>Terraces</span><input name="terraces" placeholder="490 m²" /></label>
+          <label><span>Annual running costs</span><input name="annualCosts" placeholder="Approx. €42,000 per year" /></label>
+          <label><span>Direct adviser name</span><input name="adviserName" placeholder="PF EuroAsia Property Adviser" /></label>
+          <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" placeholder="+34 600 000 000" /></label>
         </div>
         <label className="vault-full-field">
           <span>Brief website description</span>
@@ -333,13 +361,14 @@ export function CollaboratorPropertyForm({
 
       <section className="vault-panel vault-form-section vault-upload-section">
         <div className="vault-section-heading">
-          <div><p className="vault-kicker">Step 2</p><h2>Photography and protected brochure</h2></div>
-          <p>Upload one main image, one optional second image, and exactly one current sales brochure PDF.</p>
+          <div><p className="vault-kicker">Step 2</p><h2>Photography and brochure editions</h2></div>
+          <p>Upload the branded client brochure and, where available, an unbranded edition for professional partners.</p>
         </div>
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
           <ImageUpload name="secondaryImage" title="Second website image" />
-          <PdfUpload />
+          <PdfUpload name="brochure" title="Branded property brochure PDF" required />
+          <PdfUpload name="unbrandedBrochure" title="Unbranded partner brochure PDF" />
         </div>
       </section>
 
