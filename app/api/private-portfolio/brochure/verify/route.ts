@@ -28,7 +28,11 @@ export async function POST(request: NextRequest) {
   }
 
   const property = await findPublishedPrivateProperty(client.propertyReference);
-  if (!property?.brochure) {
+  if (!property) {
+    return NextResponse.json({ error: "This property is not currently available." }, { status: 404 });
+  }
+  const selectedBrochure = client.edition === "partner" ? property.unbrandedBrochure : property.brochure;
+  if (!selectedBrochure) {
     return NextResponse.json({ error: "This brochure is not currently available." }, { status: 404 });
   }
 
