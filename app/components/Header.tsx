@@ -12,20 +12,17 @@ type HeaderProps = {
 };
 
 const tickerItems = [
-  "PF EUROASIA ASIA AFFILIATION — Property Facilitators EuroAsia is now affiliating with IQI Global and Juwai IQI, giving Spanish developers direct exposure across Asian markets",
   "FORMULA 1 RETURNS TO SEPANG — Malaysia will host the Formula 1 Gulf Air Bahrain Grand Prix at Sepang International Circuit, 2–4 October 2026",
   "MALAYSIA TOURISM GROWTH — 10.6 million international visitor arrivals in Q1 2026, up 5.4% year-on-year",
   "CHINA VISITOR MOMENTUM — 1.4 million visitor arrivals from China in Q1 2026, up 25.2% year-on-year",
   "DOMESTIC TOURISM STRONG — 74.7 million domestic visitors in Q1 2026, up 7.2%, with expenditure reaching RM34.0 billion",
 ];
 
-const tickerText = tickerItems.slice(1).join("   ◆   ");
+const tickerText = tickerItems.join("   ◆   ");
 
 function TickerCopy({ duplicate = false }: { duplicate?: boolean }) {
   return (
     <span className="news-ticker-copy" aria-hidden={duplicate || undefined}>
-      <span className="news-ticker-affiliation">{tickerItems[0]}</span>
-      {"   ◆   "}
       {tickerText}
     </span>
   );
