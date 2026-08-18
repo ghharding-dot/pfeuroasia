@@ -67,8 +67,14 @@ export function RentalEnquiryForm() {
         <input name="name" required autoComplete="name" placeholder="Full Name" />
         <input name="email" required type="email" autoComplete="email" placeholder="Email Address" />
         <input className="wide" name="phone" required type="tel" autoComplete="tel" placeholder="Telephone / WhatsApp" />
-        <input name="arrival" required type="date" aria-label="Arrival date" />
-        <input name="departure" required type="date" aria-label="Departure date" />
+        <label className="rental-date-field">
+          <span>Arrival date</span>
+          <input name="arrival" required type="date" aria-label="Arrival date" />
+        </label>
+        <label className="rental-date-field">
+          <span>Departure date</span>
+          <input name="departure" required type="date" aria-label="Departure date" />
+        </label>
         <input name="guests" required min="1" type="number" placeholder="Number of Guests" />
         <input name="bedrooms" required min="1" type="number" placeholder="Bedrooms Required" />
         <select className="wide" name="location" required defaultValue="">
