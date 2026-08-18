@@ -74,10 +74,6 @@
   white-space: nowrap;
 }
 
-.news-ticker-affiliation {
-  color: #e5484d;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .news-ticker-track:hover {
     color: var(--gold-light);
