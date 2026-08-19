@@ -10,8 +10,8 @@ export default function MalaysiaPage() {
 
     <section className="malaysia-split-hero">
       <div className="malaysia-split-images" aria-hidden="true">
-        <div className="malaysia-city-panel"><img src="/images/kl%20BACK%20GORUND.avif" alt="" /></div>
-        <div className="malaysia-island-panel"><img src="/images/Emerald%20bay%20pkl.jpg" alt="" /></div>
+        <div className="malaysia-city-panel"><Image src="/images/kl%20BACK%20GORUND.avif" alt="" width={2016} height={3000} priority sizes="(max-width: 760px) 100vw, 50vw" /></div>
+        <div className="malaysia-island-panel"><Image src="/images/Emerald%20bay%20pkl.jpg" alt="" width={2048} height={1365} priority sizes="(max-width: 760px) 100vw, 50vw" /></div>
       </div>
       <div className="malaysia-split-shade" />
       <div className="site-shell malaysia-split-copy">
