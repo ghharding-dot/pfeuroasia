@@ -89,9 +89,9 @@ export function PrivatePortfolioRegistration() {
     <section className="portfolio-registration site-shell">
       <aside className="portfolio-registration-intro">
         <p className="eyebrow light">Private Collection</p>
-        <h1>Confidential property opportunities in Southern Spain.</h1>
+        <h1>Confidential off-market property in Marbella &amp; Benahavís.</h1>
         <p>
-          Our private portfolio is prepared for qualified purchasers, family offices and trusted professional advisers across Asia. It includes selected off-market and discreetly marketed villas, residences and investment opportunities that are not published on conventional property portals.
+          Our private portfolio is prepared for qualified international purchasers, family offices and trusted professional advisers. It includes selected off-market and discreetly marketed villas, residences and investment opportunities that are not published on conventional property portals.
         </p>
 
         <div className="approved-access-panel">
