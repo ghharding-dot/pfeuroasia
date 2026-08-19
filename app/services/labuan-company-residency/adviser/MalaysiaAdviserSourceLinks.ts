@@ -36,6 +36,14 @@ const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
     label: "PF EuroAsia — Malaysia vs Dubai comparison",
     url: "/guides/malaysia-vs-dubai-tax-residency",
   },
+  "labuan-vs-dubai-overview": {
+    label: "PF EuroAsia — Malaysia vs Dubai comparison",
+    url: "/guides/malaysia-vs-dubai-tax-residency",
+  },
+  "kl-neighbourhoods": {
+    label: "Current Kuala Lumpur neighbourhood guide",
+    url: "https://newprojek.com/guides/best-areas-to-live-kuala-lumpur",
+  },
   "hotel-recommendations-overview": {
     label: "YTL Hotels — Malaysia",
     url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/",
