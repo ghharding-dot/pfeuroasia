@@ -63,6 +63,11 @@ const taxResidencySignals = [
   "malaysia vs dubai", "malaysia or dubai", "dubai or malaysia",
 ];
 
+const countryComparisonSignals = [
+  "compare", "comparison", "compared", "versus", "vs", "better",
+  "difference", "differences", "alternative", "choose", "move",
+];
+
 const hotelSignals = [
   "hotel", "hotels", "accommodation", "where to stay", "where should i stay",
   "recommend a hotel", "recommend hotels", "hotel recommendation", "hotel recommendations",
@@ -179,7 +184,12 @@ export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   const q = normalise(question);
   const mentionsLabuan = q.includes("labuan");
   const hasProfessionalLabuanContext = containsAny(q, labuanProfessionalSignals);
-  const hasTaxResidencyContext = containsAny(q, taxResidencySignals);
+  const hasMalaysiaDubaiComparison =
+    q.includes("malaysia") &&
+    q.includes("dubai") &&
+    containsAny(q, countryComparisonSignals);
+  const hasTaxResidencyContext =
+    containsAny(q, taxResidencySignals) || hasMalaysiaDubaiComparison;
 
   // Personal tax-residence questions are controlled separately from corporate
   // Labuan taxation so a visa or company is never presented as automatic proof.
