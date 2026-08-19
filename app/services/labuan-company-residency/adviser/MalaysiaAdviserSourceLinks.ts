@@ -32,6 +32,10 @@ const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
     label: "PF EuroAsia — Malaysia tax residency guide",
     url: "/guides/malaysia-tax-residency-for-foreigners",
   },
+  "malaysia-vs-dubai-overview": {
+    label: "PF EuroAsia — Malaysia vs Dubai comparison",
+    url: "/guides/malaysia-vs-dubai-tax-residency",
+  },
   "hotel-recommendations-overview": {
     label: "YTL Hotels — Malaysia",
     url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/",
