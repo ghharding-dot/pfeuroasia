@@ -69,8 +69,8 @@ export default function AsiaGatewayPage() {
             <Link className={styles.heroAction} href="/markets/malaysia">
               View Malaysia property <span>→</span>
             </Link>
-            <Link className={styles.heroAction} href="/services/labuan-company-residency">
-              Labuan company setup &amp; tax residency <span>→</span>
+            <Link className={styles.heroAction} href="/guides/malaysia-tax-residency-for-foreigners">
+              Malaysia tax residency guide <span>→</span>
             </Link>
           </div>
         </div>
