@@ -162,4 +162,12 @@ export const labuanKnowledge: AdviserKnowledgeEntry[] = [
     source: "PF EuroAsia Labuan private-assessment framework — August 2026",
     followUps: ["What information do you need for an assessment?", "What tax can a Labuan company pay?", "How much does the full package cost?"],
   },
+  {
+    id: "labuan-vs-dubai-overview",
+    title: "Labuan compared with Dubai",
+    keywords: ["how does labuan compare to dubai", "how does labuan compare with dubai", "labuan vs dubai", "labuan versus dubai", "labuan or dubai", "dubai or labuan", "compare labuan dubai", "alternative to dubai"],
+    answer: "Labuan and Dubai are not direct substitutes. Dubai is a major city and business centre within the UAE, while Labuan is a Malaysian federal territory with a specialist international business framework. The UAE does not levy personal income tax on individuals; Labuan's headline 3% trading and 0% qualifying non-trading rates concern eligible company activity and do not automatically determine a director's personal tax residence. Labuan may deserve closer review for a genuine Asia-focused business able to meet its activity, substance, compliance and work-permit requirements. Dubai may remain the stronger fit for the UAE personal-tax environment, Gulf business and more convenient Europe connections. The decision must also consider where the owner genuinely lives, where the business is managed, banking, customers, family needs and the departure rules of the country being left.",
+    source: "PF EuroAsia Malaysia vs Dubai comparison and Labuan pathway — August 2026",
+    followUps: ["Is Labuan suitable for me?", "What tax can a Labuan trading company pay?", "How does Malaysia tax residency work?"],
+  },
 ];
