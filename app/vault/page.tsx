@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function VaultPage() {
+export default async function VaultPage({ searchParams }: { searchParams: Promise<{ next?: string | string[] }> }) {
   const configuredPassword = getVaultPassword();
   const cookieStore = await cookies();
   const token = cookieStore.get(VAULT_COOKIE_NAME)?.value;
@@ -19,13 +19,17 @@ export default async function VaultPage() {
     redirect("/vault/dashboard");
   }
 
+  const params = await searchParams;
+  const requestedNext = Array.isArray(params.next) ? params.next[0] : params.next;
+  const nextPath = requestedNext?.startsWith("/vault/") ? requestedNext : "/vault/dashboard";
+
   return (
     <main className="vault-page">
       <section className="vault-login-card">
         <p className="vault-kicker">Property Facilitators EuroAsia</p>
         <h1>The Vault</h1>
         <p className="vault-subtitle">Private Collection Management</p>
-        <VaultLogin />
+        <VaultLogin nextPath={nextPath} />
       </section>
     </main>
   );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCollaboratorSession } from "../../lib/collaboratorSession";
+import { readCollaboratorDocuments } from "../../lib/collaboratorDocumentStore";
 import { LogoutButton } from "../dashboard/LogoutButton";
 import { collaboratorDocumentMarkets, documentCategories } from "./documents";
 import "../../vault/vault.css";
@@ -20,7 +21,9 @@ export default async function CollaboratorDocumentsPage() {
   const collaborator = await getCollaboratorSession();
   if (!collaborator) redirect("/collaborators");
 
-  const totalDocuments = collaboratorDocumentMarkets.reduce(
+  const documentRecords = await readCollaboratorDocuments();
+  const markets = collaboratorDocumentMarkets(documentRecords);
+  const totalDocuments = markets.reduce(
     (total, market) => total + market.documents.length,
     0,
   );
@@ -56,7 +59,7 @@ export default async function CollaboratorDocumentsPage() {
         </section>
 
         <nav className="collaborator-document-jump" aria-label="Document locations">
-          {collaboratorDocumentMarkets.map((market) => (
+          {markets.map((market) => (
             <a key={market.id} href={`#${market.id}`}>
               {market.name}
             </a>
@@ -64,7 +67,7 @@ export default async function CollaboratorDocumentsPage() {
         </nav>
 
         <div className="collaborator-market-list">
-          {collaboratorDocumentMarkets.map((market) => (
+          {markets.map((market) => (
             <section className="vault-panel collaborator-market-panel" id={market.id} key={market.id}>
               <div className="collaborator-market-heading">
                 <div>
@@ -91,13 +94,13 @@ export default async function CollaboratorDocumentsPage() {
                       ) : (
                         <ul>
                           {documents.map((document) => (
-                            <li key={document.href}>
+                            <li key={document.id}>
                               <div>
                                 <strong>{document.title}</strong>
                                 <p>{document.description}</p>
-                                <small>{document.fileType} · Updated {document.updated}</small>
+                                <small>PDF · Updated {new Date(document.updatedAt).toLocaleDateString("en-GB")}</small>
                               </div>
-                              <a href={document.href} download>
+                              <a href={document.url} target="_blank" rel="noreferrer">
                                 Download
                               </a>
                             </li>

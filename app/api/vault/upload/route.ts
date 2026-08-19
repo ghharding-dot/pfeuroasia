@@ -36,7 +36,10 @@ export async function POST(request: Request) {
           throw new Error("Your secure upload session has expired. Sign in again and retry without closing this page.");
         }
 
-        const validAdminPath = vaultAccess && pathname.startsWith("private-portfolio/");
+        const validAdminPath = vaultAccess && (
+          pathname.startsWith("private-portfolio/") ||
+          pathname.startsWith("collaborator-documents/")
+        );
         const collaboratorPrefix = collaborator
           ? `collaborator-submissions/${collaborator.partnerCode.toLowerCase()}/`
           : "";
@@ -62,20 +65,21 @@ export async function POST(request: Request) {
         }
 
         const isBrochure = kind === "brochure" || kind === "partnerBrochure";
+        const isCollaboratorDocument = kind === "collaboratorDocument";
         const isImage = kind === "main" || kind === "secondary";
 
-        if (isBrochure && !hasAllowedExtension(pathname, [".pdf"])) {
-          throw new Error("The brochure must be a PDF file.");
+        if ((isBrochure || isCollaboratorDocument) && !hasAllowedExtension(pathname, [".pdf"])) {
+          throw new Error("The document must be a PDF file.");
         }
         if (isImage && !hasAllowedExtension(pathname, IMAGE_EXTENSIONS)) {
           throw new Error("The property photograph must be JPG, PNG or WebP.");
         }
-        if (!isBrochure && !isImage) {
+        if (!isBrochure && !isCollaboratorDocument && !isImage) {
           throw new Error("Unsupported upload type.");
         }
 
         return {
-          allowedContentTypes: isBrochure
+          allowedContentTypes: isBrochure || isCollaboratorDocument
             ? ["application/pdf", "application/x-pdf", "application/octet-stream"]
             : [
                 "image/jpeg",

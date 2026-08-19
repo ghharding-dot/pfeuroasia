@@ -21,6 +21,10 @@
 .vault-secondary-button { border:1px solid rgba(201,168,97,.58); background:transparent; color:var(--vault-cream); }
 .vault-login-form button:disabled,.vault-primary-button:disabled,.vault-secondary-button:disabled { opacity:.55; cursor:wait; }
 .vault-error { margin:0; color:#ffb0a8; }
+.vault-login-options { display:grid; gap:20px; }
+.vault-login-divider { display:flex; align-items:center; gap:12px; color:var(--vault-muted); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; }
+.vault-login-divider::before,.vault-login-divider::after { height:1px; flex:1; background:rgba(255,255,255,.12); content:""; }
+.vault-email-login { padding-bottom:4px; }
 .vault-dashboard-shell { width:min(1220px,100%); margin:0 auto; }
 .vault-dashboard-header { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:34px; }
 .vault-dashboard-header h1 { font-size:clamp(2.6rem,6vw,4.8rem); }

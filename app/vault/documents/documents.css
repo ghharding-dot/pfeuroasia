@@ -1,0 +1,19 @@
+.document-manager-grid { display: grid; gap: 26px; }
+.document-upload-form { display: grid; gap: 24px; }
+.document-pdf-picker { position: relative; display: grid; grid-template-columns: 52px minmax(0,1fr) auto; gap: 16px; align-items: center; min-height: 92px; padding: 18px 20px; border: 2px dashed rgba(201,168,97,.65); background: rgba(201,168,97,.06); cursor: pointer; }
+.document-pdf-picker input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.document-pdf-picker > span { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid var(--vault-gold); color: var(--vault-gold); font-size: .7rem; font-weight: 900; }
+.document-pdf-picker strong { overflow-wrap: anywhere; }
+.document-pdf-picker small { color: var(--vault-muted); }
+.document-pdf-picker.has-file { border-style: solid; }
+.document-current-panel { overflow: hidden; }
+.document-admin-list { display: grid; }
+.document-admin-list article { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 20px 22px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.document-admin-list article:last-child { border-bottom: 0; }
+.document-admin-list span { color: var(--vault-gold); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.document-admin-list h3 { margin: 5px 0; font-family: Georgia,serif; font-size: 1.3rem; font-weight: 400; }
+.document-admin-list p { margin: 0; color: var(--vault-muted); font-size: .8rem; }
+.document-admin-actions { display: flex; gap: 14px; }
+.document-admin-actions a,.document-admin-actions button { border: 0; border-bottom: 1px solid var(--vault-gold); background: transparent; color: var(--vault-cream); cursor: pointer; font: inherit; font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.document-admin-actions button { color: #ffb0a8; }
+@media (max-width:720px){.document-pdf-picker{grid-template-columns:48px minmax(0,1fr)}.document-pdf-picker small{grid-column:2}.document-admin-list article{align-items:flex-start;flex-direction:column}.document-admin-actions{width:100%;justify-content:flex-start}}
