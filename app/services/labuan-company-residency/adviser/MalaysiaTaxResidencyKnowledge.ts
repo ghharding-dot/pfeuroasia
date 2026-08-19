@@ -7,7 +7,7 @@ export const malaysiaTaxResidencyKnowledge: AdviserKnowledgeEntry[] = [
     keywords: ["malaysia tax residency", "malaysia tax residence", "tax resident in malaysia", "become tax resident", "foreign tax resident", "tax residency for foreigners"],
     answer: "Malaysia personal tax residence is a statutory question based on the individual's facts and travel history. It should be kept separate from immigration permission and from the tax position of any Malaysian or Labuan company. A complete review should also check whether the person remains resident or has continuing obligations in their current country.",
     source: "PF EuroAsia Malaysia tax residency guide — August 2026; HASiL Section 7 residence guidance",
-    followUps: ["How does the 182-day rule work?", "Does a Malaysian visa make me tax resident?", "Does a Labuan company create personal tax residency?"],
+    followUps: ["How does the 182-day rule work?", "Does a Malaysian visa make me tax resident?", "How does Malaysia compare with Dubai?"],
   },
   {
     id: "tax-residency-182-days",
@@ -56,5 +56,13 @@ export const malaysiaTaxResidencyKnowledge: AdviserKnowledgeEntry[] = [
     answer: "Potential pathways include a suitable Labuan business and work-permit route, Malaysia My Second Home, the DE Rantau Nomad Pass and employer-sponsored or specialist passes. They serve different applicants and none should be selected solely for a presumed tax result. Eligibility, immigration permission and personal tax consequences must each be checked under the current rules.",
     source: "PF EuroAsia Malaysia tax residency guide — August 2026; Malaysian official programme sources",
     followUps: ["Does a Malaysian visa make me tax resident?", "Is Labuan suitable for me?", "How does the 182-day rule work?"],
+  },
+  {
+    id: "malaysia-vs-dubai-overview",
+    title: "Malaysia compared with Dubai for relocation",
+    keywords: ["malaysia vs dubai", "malaysia or dubai", "dubai or malaysia", "compare malaysia dubai", "alternative to dubai", "dubai alternative", "which is better malaysia dubai"],
+    answer: "Malaysia and Dubai offer different propositions. The UAE does not levy personal income tax on individuals, while Malaysia has an individual income-tax system. Malaysia may appeal for Southeast Asian access, a tropical lifestyle, Kuala Lumpur property and suitable MM2H, DE Rantau, employment or Labuan pathways. Dubai may suit people prioritising the UAE tax environment, Gulf business and easier Europe connections. The correct choice depends on genuine living plans, income, family, business activity and the country being left.",
+    source: "PF EuroAsia Malaysia vs Dubai comparison — August 2026; HASiL, UAE Government and UAE Federal Tax Authority sources",
+    followUps: ["Is Malaysia tax-free for foreigners?", "Does a Malaysian visa make me tax resident?", "What should I check before leaving my current country?"],
   },
 ];
