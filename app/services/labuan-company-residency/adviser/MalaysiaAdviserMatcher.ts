@@ -25,6 +25,7 @@ export type AdviserIntent =
 export const adviserSuggestions = [
   "How does Malaysia tax residency work?",
   "Does a Malaysian visa make me tax resident?",
+  "How does Malaysia compare with Dubai?",
   "What should I do in Kuala Lumpur?",
   "Can you recommend some hotels?",
   "Where should I go in Malaysia for beaches?",
@@ -59,6 +60,7 @@ const taxResidencySignals = [
   "tax free malaysia", "leaving spain", "leaving uk", "leaving denmark",
   "leaving sweden", "exit tax", "double tax", "tax treaty", "mm2h tax",
   "de rantau tax", "alternative to dubai", "dubai alternative",
+  "malaysia vs dubai", "malaysia or dubai", "dubai or malaysia",
 ];
 
 const hotelSignals = [
