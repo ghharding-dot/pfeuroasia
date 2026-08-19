@@ -165,6 +165,8 @@ export default async function Home() {
                   <p>Luxury residential property, private estates and relocation across Marbella, Benahavís and the Costa del Sol.</p>
                   <nav className={styles.subLinks} aria-label="Explore Spain">
                     <Link href="/markets/marbella">Marbella</Link>
+                    <Link href="/areas/marbella-golden-mile">Golden Mile</Link>
+                    <Link href="/areas/benahavis">Benahavís</Link>
                     <Link href="/areas/la-zagaleta">La Zagaleta</Link>
                     <Link href="/areas/el-madronal">El Madroñal</Link>
                     <Link href="/guides/marbella-property-international-buyers">International buyer guide</Link>
