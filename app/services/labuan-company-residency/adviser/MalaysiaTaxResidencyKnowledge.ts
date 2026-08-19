@@ -60,7 +60,7 @@ export const malaysiaTaxResidencyKnowledge: AdviserKnowledgeEntry[] = [
   {
     id: "malaysia-vs-dubai-overview",
     title: "Malaysia compared with Dubai for relocation",
-    keywords: ["malaysia vs dubai", "malaysia or dubai", "dubai or malaysia", "compare malaysia dubai", "alternative to dubai", "dubai alternative", "which is better malaysia dubai"],
+    keywords: ["how does malaysia compare with dubai", "malaysia compared with dubai", "differences between malaysia and dubai", "malaysia vs dubai", "malaysia or dubai", "dubai or malaysia", "compare malaysia dubai", "alternative to dubai", "dubai alternative", "which is better malaysia dubai"],
     answer: "Malaysia and Dubai offer different propositions. The UAE does not levy personal income tax on individuals, while Malaysia has an individual income-tax system. Malaysia may appeal for Southeast Asian access, a tropical lifestyle, Kuala Lumpur property and suitable MM2H, DE Rantau, employment or Labuan pathways. Dubai may suit people prioritising the UAE tax environment, Gulf business and easier Europe connections. The correct choice depends on genuine living plans, income, family, business activity and the country being left.",
     source: "PF EuroAsia Malaysia vs Dubai comparison — August 2026; HASiL, UAE Government and UAE Federal Tax Authority sources",
     followUps: ["Is Malaysia tax-free for foreigners?", "Does a Malaysian visa make me tax resident?", "What should I check before leaving my current country?"],
