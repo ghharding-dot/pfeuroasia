@@ -4,6 +4,34 @@ export type AdviserSourceLink = {
 };
 
 const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
+  "tax-residency-overview": {
+    label: "PF EuroAsia — Malaysia tax residency guide",
+    url: "/guides/malaysia-tax-residency-for-foreigners",
+  },
+  "tax-residency-182-days": {
+    label: "HASiL — Residence Status under Section 7",
+    url: "https://www.hasil.gov.my/individu/taraf-mastautin/",
+  },
+  "visa-vs-tax-residence": {
+    label: "PF EuroAsia — Malaysia tax residency guide",
+    url: "/guides/malaysia-tax-residency-for-foreigners",
+  },
+  "labuan-company-personal-tax-residence": {
+    label: "PF EuroAsia — Malaysia tax residency guide",
+    url: "/guides/malaysia-tax-residency-for-foreigners",
+  },
+  "malaysia-not-generally-tax-free": {
+    label: "PF EuroAsia — Malaysia tax residency guide",
+    url: "/guides/malaysia-tax-residency-for-foreigners",
+  },
+  "leaving-current-tax-residence": {
+    label: "PF EuroAsia — Malaysia tax residency guide",
+    url: "/guides/malaysia-tax-residency-for-foreigners",
+  },
+  "malaysia-residency-pathways-overview": {
+    label: "PF EuroAsia — Malaysia tax residency guide",
+    url: "/guides/malaysia-tax-residency-for-foreigners",
+  },
   "hotel-recommendations-overview": {
     label: "YTL Hotels — Malaysia",
     url: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/",
