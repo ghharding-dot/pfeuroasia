@@ -186,9 +186,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
   min-height: 900px;
   height: 100svh;
   overflow: hidden;
-  background: #11161a url("/images/hero-villa.webp") center/cover no-repeat;
+  background: #11161a;
   color: white;
   isolation: isolate;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-shade {
