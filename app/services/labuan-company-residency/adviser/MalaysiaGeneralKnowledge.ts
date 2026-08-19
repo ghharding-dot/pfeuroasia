@@ -64,6 +64,15 @@ export const malaysiaGeneralKnowledge: MalaysiaGeneralKnowledgeEntry[] = [
     followUps: ["Where are good areas to live in Kuala Lumpur?", "What does a two-bedroom apartment rent for?", "What are the shopping malls like?"],
   },
   {
+    id: "kl-neighbourhoods",
+    title: "Good areas to live in Kuala Lumpur",
+    keywords: ["where are good areas to live in kuala lumpur", "good areas to live in kuala lumpur", "best areas to live in kuala lumpur", "where to live in kuala lumpur", "where to live in kl", "best area in kl", "best neighbourhood in kl", "best neighborhood in kl", "best neighbourhood in kuala lumpur", "best neighborhood in kuala lumpur", "kl neighbourhoods", "kl neighborhoods", "mont kiara", "bangsar", "desa parkcity", "ttdi", "damansara heights"],
+    answer:
+      "The best Kuala Lumpur area depends mainly on commute, schools, budget and whether you want city-centre convenience or a quieter residential setting. KLCC, Bukit Bintang and TRX suit people wanting high-rise central living close to offices, shopping, dining and rail, usually at a premium. Mont Kiara and Sri Hartamas are established international residential areas with extensive condominium choice and schools or family amenities nearby, although road traffic matters. Bangsar combines an established neighbourhood feel with dining and professional life; access varies by exact address. Desa ParkCity and TTDI are strong family-oriented choices for parks, community and a more residential atmosphere, but are less central. Damansara Heights is lower-density and premium, with larger-home options and greater car dependence. For better value with rail access in selected locations, compare Bukit Jalil, Wangsa Maju, Cheras and Kepong. Shortlist only after mapping the daily journey to work or school and checking the exact building, station access and current rent.",
+    source: "PF EuroAsia review of current Kuala Lumpur neighbourhood, NAPIC-linked market and MRT guidance — August 2026",
+    followUps: ["What does a two-bedroom apartment rent for?", "What is public transport like in Kuala Lumpur?", "What are serviced apartments like?"],
+  },
+  {
     id: "kl-shopping",
     title: "Shopping and malls in Kuala Lumpur",
     keywords: ["shopping", "shopping malls", "malls", "pavilion", "suria klcc", "trx mall", "exchange trx", "mid valley", "gardens mall"],
