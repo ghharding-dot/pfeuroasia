@@ -4,11 +4,13 @@ import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
 import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
 import { malaysiaHotelKnowledge } from "./MalaysiaHotelKnowledge";
+import { malaysiaTaxResidencyKnowledge } from "./MalaysiaTaxResidencyKnowledge";
 import { malaysiaTourismKnowledge } from "./MalaysiaTourismKnowledge";
 import { malaysiaTravelClimateKnowledge } from "./MalaysiaTravelClimateKnowledge";
 
 export type AdviserIntent =
   | "labuan"
+  | "tax-residency"
   | "hotels"
   | "tourism"
   | "travel-weather"
@@ -21,6 +23,8 @@ export type AdviserIntent =
   | "general";
 
 export const adviserSuggestions = [
+  "How does Malaysia tax residency work?",
+  "Does a Malaysian visa make me tax resident?",
   "What should I do in Kuala Lumpur?",
   "Can you recommend some hotels?",
   "Where should I go in Malaysia for beaches?",
@@ -47,6 +51,14 @@ const labuanProfessionalSignals = [
   "work permit", "director", "dependant", "dependent", "renewal", "lfsa",
   "substance", "corporate tax", "holding company", "trading company", "bank account",
   "banking for the company",
+];
+
+const taxResidencySignals = [
+  "tax residency", "tax residence", "tax resident", "182 day", "182 days",
+  "personal tax", "tax for foreigners", "visa make me tax", "tax-free malaysia",
+  "tax free malaysia", "leaving spain", "leaving uk", "leaving denmark",
+  "leaving sweden", "exit tax", "double tax", "tax treaty", "mm2h tax",
+  "de rantau tax", "alternative to dubai", "dubai alternative",
 ];
 
 const hotelSignals = [
@@ -165,6 +177,11 @@ export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   const q = normalise(question);
   const mentionsLabuan = q.includes("labuan");
   const hasProfessionalLabuanContext = containsAny(q, labuanProfessionalSignals);
+  const hasTaxResidencyContext = containsAny(q, taxResidencySignals);
+
+  // Personal tax-residence questions are controlled separately from corporate
+  // Labuan taxation so a visa or company is never presented as automatic proof.
+  if (hasTaxResidencyContext) return "tax-residency";
 
   // "Labuan" can mean either the business/residency pathway or the island itself.
   // Leisure intent wins only when there is no company/tax/immigration signal.
@@ -205,6 +222,8 @@ export function entriesForMalaysiaAdviserIntent(intent: AdviserIntent): AdviserK
   switch (intent) {
     case "labuan":
       return labuanKnowledge;
+    case "tax-residency":
+      return malaysiaTaxResidencyKnowledge;
     case "hotels":
       return [
         ...malaysiaHotelKnowledge,
