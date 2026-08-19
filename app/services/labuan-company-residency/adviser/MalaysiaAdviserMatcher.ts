@@ -100,7 +100,9 @@ const propertySignals = [
   "apartment", "condo", "condominium", "property price", "property prices", "buy property",
   "buy apartment", "buy condo", "rent", "rental", "two bedroom", "2 bedroom",
   "serviced apartment", "serviced residence", "new development", "new condo", "off plan",
-  "klcc property", "mont kiara",
+  "klcc property", "mont kiara", "areas to live", "area to live", "where to live",
+  "best area", "good area", "neighbourhood", "neighborhood", "bangsar",
+  "desa parkcity", "ttdi", "damansara heights",
 ];
 
 const foodSignals = [
@@ -145,6 +147,7 @@ const travelGeneralIds = new Set([
 ]);
 
 const propertyIds = new Set([
+  "kl-neighbourhoods",
   "kl-two-bed-rent",
   "kl-two-bed-buy",
   "kl-new-condos",
@@ -159,6 +162,7 @@ const generalIds = new Set(["malaysia-overview", "kl-shopping", "malaysia-destin
 function normalise(value: string) {
   return value
     .toLowerCase()
+    .replace(/\b(?:lebuan|lebaun|labourn)\b/g, "labuan")
     .replace(/[’']/g, "")
     .replace(/[^a-z0-9%$,. -]/g, " ")
     .replace(/\s+/g, " ")
