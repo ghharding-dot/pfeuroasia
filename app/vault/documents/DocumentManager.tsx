@@ -21,11 +21,12 @@ export function DocumentManager({ initialDocuments }: { initialDocuments: Collab
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     if (!file) return setMessage("Choose a PDF first.");
     if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) return setMessage("Only PDF files are accepted.");
     if (file.size > MAX_PDF_SIZE) return setMessage("The PDF must be 60 MB or smaller.");
 
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const market = String(form.get("market") || "spain");
     const category = String(form.get("category") || "Guidance");
     const title = String(form.get("title") || "").trim();
@@ -55,7 +56,7 @@ export function DocumentManager({ initialDocuments }: { initialDocuments: Collab
 
       setDocuments((current) => [result, ...current]);
       setFile(null);
-      event.currentTarget.reset();
+      formElement.reset();
       setMessage("Published. The PDF is now available to every collaborator.");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Upload failed.");
