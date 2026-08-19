@@ -67,6 +67,29 @@ const reasons = [
   "Coordination with independent legal, tax and technical specialists",
 ];
 
+const ownerLocations = [
+  {
+    name: "Marbella Golden Mile",
+    href: "/areas/marbella-golden-mile",
+    text: "Beachside apartments, penthouses and established villas across Marbella's most recognised residential corridor.",
+  },
+  {
+    name: "Benahavís",
+    href: "/areas/benahavis",
+    text: "Private hillside estates, golf communities and substantial family homes above Marbella.",
+  },
+  {
+    name: "La Zagaleta",
+    href: "/areas/la-zagaleta",
+    text: "Highly private villas and estates requiring controlled information and carefully qualified introductions.",
+  },
+  {
+    name: "El Madroñal",
+    href: "/areas/el-madronal",
+    text: "Individual villas and country-style estates where setting, views and presentation materially influence positioning.",
+  },
+];
+
 const questions = [
   {
     question: "Can the conversation begin confidentially and without obligation?",
@@ -87,6 +110,16 @@ const questions = [
     question: "Can you assist owners who live outside Spain?",
     answer:
       "Yes. We can coordinate communication, viewings and the wider sales process for internationally based owners, working alongside their chosen advisers in Spain.",
+  },
+  {
+    question: "How do you establish an appropriate asking price?",
+    answer:
+      "We review the property's location, condition, presentation, recent market evidence and competing supply before discussing a positioning range with the owner. The final asking price and sales strategy are agreed together; a formal valuation can be arranged through an independent qualified valuer when required.",
+  },
+  {
+    question: "Which Marbella and Benahavís areas do you represent?",
+    answer:
+      "Our core focus includes Marbella Golden Mile, Sierra Blanca, La Zagaleta, El Madroñal and other established Marbella and Benahavís communities. We consider each property individually before accepting a representation mandate.",
   },
 ];
 
@@ -111,10 +144,11 @@ export function OwnerListingSection() {
       <section className={`site-shell ${styles.representationHero}`}>
         <div className={styles.heroCopy}>
           <p className="eyebrow">For property owners</p>
-          <h1>Confidential property representation.</h1>
+          <h1>Sell your Marbella property—confidentially.</h1>
           <p className={styles.heroLead}>
-            A considered strategy for distinctive homes and owners who expect
-            privacy, judgement and personal attention at every stage.
+            A considered sales strategy for distinctive homes in Marbella and
+            Benahavís, connecting owners with qualified international buyers
+            through public or discreet off-market representation.
           </p>
           <div className={styles.heroActions}>
             <Link className="button button-dark" href="/enquire">
@@ -129,7 +163,7 @@ export function OwnerListingSection() {
         <div className={styles.heroVisual}>
           <Image
             src="/images/hero-villa.webp"
-            alt="Private luxury villa in Southern Spain"
+            alt="Private luxury villa in Marbella, Southern Spain"
             fill
             priority
             sizes="(max-width: 980px) 100vw, 48vw"
@@ -145,7 +179,7 @@ export function OwnerListingSection() {
         <div className={`site-shell ${styles.positioningGrid}`}>
           <p className="eyebrow light">A representation mandate</p>
           <div>
-            <h2>Selling a significant property requires more than a listing.</h2>
+            <h2>Selling a significant Marbella property requires more than a listing.</h2>
             <p>
               It begins with understanding the home, the owner’s objectives and
               the level of confidentiality required. Our role is to shape the
@@ -236,11 +270,41 @@ export function OwnerListingSection() {
         </div>
       </section>
 
-      <section className={styles.faqSection}>
+      <section className={styles.coverageSection} aria-labelledby="owner-locations-heading">
+        <div className="site-shell">
+          <div className={styles.coverageHeading}>
+            <div>
+              <p className="eyebrow">Marbella &amp; Benahavís expertise</p>
+              <h2 id="owner-locations-heading">Property positioning begins with local context.</h2>
+            </div>
+            <p>
+              Buyer expectations, comparable supply and presentation strategy vary
+              by location. Explore our area guidance or begin with a confidential
+              discussion about your property.
+            </p>
+          </div>
+          <div className={styles.coverageGrid}>
+            {ownerLocations.map((location, index) => (
+              <Link href={location.href} key={location.name}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{location.name}</h3>
+                <p>{location.text}</p>
+                <small>Explore the area <b aria-hidden="true">→</b></small>
+              </Link>
+            ))}
+          </div>
+          <div className={styles.coverageFooter}>
+            <Link href="/private-portfolio">See how qualified purchasers access private opportunities <span aria-hidden="true">→</span></Link>
+            <Link href="/enquire">Discuss selling your property <span aria-hidden="true">→</span></Link>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.faqSection} aria-labelledby="owner-faq-heading">
         <div className={`site-shell ${styles.faqGrid}`}>
           <div>
             <p className="eyebrow light">Before we begin</p>
-            <h2>A private first conversation.</h2>
+            <h2 id="owner-faq-heading">A private first conversation.</h2>
             <p>
               Share only what you are comfortable sharing initially. We can
               discuss location, value, timing and confidentiality before documents
