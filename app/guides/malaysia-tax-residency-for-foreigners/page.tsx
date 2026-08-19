@@ -210,7 +210,7 @@ export default function MalaysiaTaxResidencyGuidePage() {
       <section className={styles.comparison} aria-labelledby="comparison-heading">
         <div className={`site-shell ${styles.comparisonGrid}`}>
           <div><p className="eyebrow">Comparing international options</p><h2 id="comparison-heading">Malaysia may be an alternative to Dubai—not a copy of it.</h2></div>
-          <div><p>Tax is only one part of the decision. Families and entrepreneurs should also compare residency security, genuine business activity, living costs, healthcare, education, climate, travel connections and the amount of time they actually want to spend in the country.</p><p>Our next guide will compare Malaysia and Dubai across these practical questions without presenting either destination as universally better.</p></div>
+          <div><p>Tax is only one part of the decision. Families and entrepreneurs should also compare residency security, genuine business activity, living costs, healthcare, education, climate, travel connections and the amount of time they actually want to spend in the country.</p><p>Our Malaysia and Dubai guide compares these practical questions without presenting either destination as universally better.</p><Link className="text-link" href="/guides/malaysia-vs-dubai-tax-residency">Compare Malaysia with Dubai <span>→</span></Link></div>
         </div>
       </section>
 
