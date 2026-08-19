@@ -10,9 +10,15 @@
   min-height: 820px;
   height: 92svh;
   overflow: hidden;
-  background: #11161a url("/images/hero-villa.webp") center/cover no-repeat;
+  background: #11161a;
   color: white;
   isolation: isolate;
+}
+
+.villa-rentals-hero-image {
+  z-index: -2;
+  object-fit: cover;
+  object-position: center;
 }
 
 .villa-rentals-overlay {
@@ -254,6 +260,18 @@
   line-height: 1.55;
 }
 
+.villa-rentals-location-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+.villa-rentals-location-links span { color: rgba(255,255,255,.46); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+.villa-rentals-location-links a { padding-bottom: 5px; border-bottom: 1px solid rgba(197,162,104,.65); color: white; font-family: var(--serif); font-size: 18px; }
+
 .villa-rentals-concierge { background: var(--stone); }
 .villa-rentals-service-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); }
 .villa-rentals-service-list div { display: flex; align-items: center; gap: 14px; min-height: 68px; border-bottom: 1px solid var(--line); font-size: 13px; letter-spacing: 0.04em; }
@@ -271,6 +289,17 @@
 .villa-rentals-cross { color: var(--gold); font-family: var(--serif); font-size: 28px; }
 .villa-rentals-lvc-placeholder span { display: block; margin-bottom: 3px; color: var(--gold); font-family: var(--serif); font-size: 13px; font-style: italic; }
 .villa-rentals-partnership-inner > p { margin: 0; color: #5d5e58; font-family: var(--serif); font-size: 20px; line-height: 1.65; }
+
+.villa-rentals-faq { padding-block: 125px; background: var(--stone); }
+.villa-rentals-faq-layout { display: grid; grid-template-columns: .75fr 1.25fr; gap: 100px; align-items: start; }
+.villa-rentals-faq h2 { margin: 0; font-family: var(--serif); font-size: clamp(42px,5vw,70px); font-weight: 400; letter-spacing: -.04em; line-height: 1; }
+.villa-rentals-faq-list { border-top: 1px solid var(--line); }
+.villa-rentals-faq-list details { border-bottom: 1px solid var(--line); }
+.villa-rentals-faq-list summary { position: relative; padding: 25px 48px 25px 0; cursor: pointer; font-family: var(--serif); font-size: 23px; list-style: none; }
+.villa-rentals-faq-list summary::-webkit-details-marker { display: none; }
+.villa-rentals-faq-list summary::after { content: "+"; position: absolute; right: 8px; color: var(--gold); }
+.villa-rentals-faq-list details[open] summary::after { content: "−"; }
+.villa-rentals-faq-list details p { margin: -5px 48px 25px 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
 
 .villa-rentals-enquiry { background: #0c1115; color: white; }
 .villa-rentals-enquiry-layout { display: grid; grid-template-columns: minmax(0,.82fr) minmax(420px,1.18fr); gap: 90px; align-items: start; }
@@ -347,13 +376,15 @@
   .villa-rentals-intro-grid,
   .villa-rentals-concierge-grid,
   .villa-rentals-partnership-inner,
-  .villa-rentals-enquiry-layout { grid-template-columns: 1fr; gap: 54px; }
+  .villa-rentals-enquiry-layout,
+  .villa-rentals-faq-layout { grid-template-columns: 1fr; gap: 54px; }
   .villa-rentals-area-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .villa-rentals-enquiry-copy { position: static; }
 }
 
 @media (max-width: 680px) {
-  .villa-rentals-hero { min-height: 700px; height: 92svh; background-position: 62% center; }
+  .villa-rentals-hero { min-height: 700px; height: 92svh; }
+  .villa-rentals-hero-image { object-position: 62% center; }
   .villa-rentals-hero-inner { padding-block: 160px 70px; }
   .villa-rentals-hero h1 { font-size: clamp(48px,15vw,70px); }
   .villa-rentals-collaboration { max-width: 310px; line-height: 1.8; }
@@ -363,6 +394,7 @@
   .villa-rentals-concierge,
   .villa-rentals-partnership,
   .villa-rentals-enquiry,
+  .villa-rentals-faq,
   .villa-rentals-areas { padding-block: 88px; }
   .villa-rentals-area-grid,
   .villa-rentals-service-list,
