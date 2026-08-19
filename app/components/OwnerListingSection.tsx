@@ -91,8 +91,23 @@ const questions = [
 ];
 
 export function OwnerListingSection() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
-    <div className={styles.representationPage}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <div className={styles.representationPage}>
       <section className={`site-shell ${styles.representationHero}`}>
         <div className={styles.heroCopy}>
           <p className="eyebrow">For property owners</p>
@@ -215,6 +230,9 @@ export function OwnerListingSection() {
               <li key={reason}>{reason}</li>
             ))}
           </ul>
+          <Link className="text-link" href="/guides/marbella-property-international-buyers">
+            See how international buyers approach Marbella <span>→</span>
+          </Link>
         </div>
       </section>
 
@@ -260,6 +278,7 @@ export function OwnerListingSection() {
           </small>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
