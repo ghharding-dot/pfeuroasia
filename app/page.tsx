@@ -167,6 +167,7 @@ export default async function Home() {
                     <Link href="/markets/marbella">Marbella</Link>
                     <Link href="/areas/la-zagaleta">La Zagaleta</Link>
                     <Link href="/areas/el-madronal">El Madroñal</Link>
+                    <Link href="/guides/marbella-property-international-buyers">International buyer guide</Link>
                     <Link href="/private-portfolio">Private estates</Link>
                   </nav>
                 </div>
