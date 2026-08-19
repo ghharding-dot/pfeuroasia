@@ -4,6 +4,7 @@ import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
 import { malaysiaGeneralKnowledge } from "./MalaysiaGeneralKnowledge";
 import { malaysiaHotelKnowledge } from "./MalaysiaHotelKnowledge";
+import { malaysiaTaxResidencyKnowledge } from "./MalaysiaTaxResidencyKnowledge";
 import { malaysiaTourismKnowledge } from "./MalaysiaTourismKnowledge";
 import { malaysiaTravelClimateKnowledge } from "./MalaysiaTravelClimateKnowledge";
 import { detectMalaysiaAdviserIntent, scoreMalaysiaAdviserEntry } from "./MalaysiaAdviserMatcher";
@@ -71,8 +72,12 @@ function uniqueMatches(matches: HybridKnowledgeMatch[]) {
 
 export function retrieveMalaysiaAdviserKnowledge(question: string, limit = 6) {
   const intent = detectMalaysiaAdviserIntent(question);
-  const sensitive = intent === "labuan";
-  const pool = sensitive ? labuanKnowledge : broadMalaysiaKnowledge;
+  const sensitive = intent === "labuan" || intent === "tax-residency";
+  const pool = intent === "tax-residency"
+    ? [...malaysiaTaxResidencyKnowledge, ...labuanKnowledge]
+    : sensitive
+      ? labuanKnowledge
+      : broadMalaysiaKnowledge;
 
   const ranked = pool
     .map((entry) => ({
