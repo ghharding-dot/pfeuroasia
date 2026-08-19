@@ -113,9 +113,9 @@ export default function InternationalBuyerGuidePage() {
             <p>No single location is automatically best. The correct choice depends on how the property will actually be used.</p>
           </div>
           <div className={styles.locationList}>
-            <article><span>Marbella</span><h3>Golden Mile & Sierra Blanca</h3><p>Established prestige, convenient access and a wide range of apartments, villas and gated communities.</p></article>
+            <article><span>Marbella</span><h3>Golden Mile & Sierra Blanca</h3><p>Established prestige, convenient access and a wide range of apartments, villas and gated communities.</p><div><Link href="/areas/marbella-golden-mile">Golden Mile guide →</Link></div></article>
             <article><span>Golf valley</span><h3>Nueva Andalucía</h3><p>Golf, restaurants, international schools and practical proximity to Puerto Banús.</p></article>
-            <article><span>Benahavís</span><h3>La Zagaleta & El Madroñal</h3><p>Private hillside living, significant plots, nature and individual homes.</p><div><Link href="/areas/la-zagaleta">La Zagaleta guide →</Link><Link href="/areas/el-madronal">El Madroñal guide →</Link></div></article>
+            <article><span>Benahavís</span><h3>La Zagaleta & El Madroñal</h3><p>Private hillside living, significant plots, nature and individual homes.</p><div><Link href="/areas/benahavis">Benahavís guide →</Link><Link href="/areas/la-zagaleta">La Zagaleta →</Link><Link href="/areas/el-madronal">El Madroñal →</Link></div></article>
             <article><span>Western Costa del Sol</span><h3>Estepona & selected areas</h3><p>Modern developments, coastal living and alternatives beyond central Marbella.</p></article>
           </div>
         </div>
