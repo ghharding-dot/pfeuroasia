@@ -4,6 +4,32 @@
   font-size: .82rem;
 }
 
+.collaborator-resource-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 34px;
+  margin-bottom: 26px;
+  padding: 28px 30px;
+  border-color: rgba(201, 168, 97, .38);
+}
+
+.collaborator-resource-copy h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.collaborator-resource-copy > p:not(.vault-kicker) {
+  max-width: 800px;
+  margin: 10px 0 0;
+  color: var(--vault-muted);
+  line-height: 1.6;
+}
+
+.collaborator-resource-panel > a { flex: 0 0 auto; }
+
 .collaborator-authority-panel {
   border-color: rgba(201, 168, 97, .38);
 }
@@ -38,4 +64,6 @@
 
 @media (max-width: 720px) {
   .collaborator-authority-check { font-size: .86rem; }
+  .collaborator-resource-panel { align-items: flex-start; flex-direction: column; padding: 22px; }
+  .collaborator-resource-panel > a { width: 100%; }
 }

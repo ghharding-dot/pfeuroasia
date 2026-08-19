@@ -23,12 +23,13 @@ export default async function CollaboratorLoginPage() {
           <p className="eyebrow">Approved collaboration partners</p>
           <h1>Collaborator Portal</h1>
           <p>
-            Securely submit properties, website photography and one private sales brochure PDF for PF EuroAsia review.
+            Securely submit properties and access shared residency, company-formation and application documents.
           </p>
           <ul>
             <li>Your company is automatically attached to each submission.</li>
             <li>Properties remain pending until PF EuroAsia approves them.</li>
             <li>Client brochure access is verified, recorded and individually watermarked.</li>
+            <li>Spain and Malaysia information PDFs are available to every approved collaborator.</li>
           </ul>
         </div>
         <div className="collaborator-access-card">

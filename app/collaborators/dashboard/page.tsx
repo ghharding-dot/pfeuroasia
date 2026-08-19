@@ -44,6 +44,9 @@ export default async function CollaboratorDashboardPage() {
             <p>Submit and monitor your properties. PF EuroAsia controls final publication.</p>
           </div>
           <div className="vault-header-actions">
+            <Link className="vault-secondary-button" href="/collaborators/documents">
+              Document Centre
+            </Link>
             <Link className="vault-primary-button" href="/collaborators/properties/new">
               Add New Property
             </Link>
@@ -55,6 +58,21 @@ export default async function CollaboratorDashboardPage() {
           <article className="vault-stat"><strong>{properties.length}</strong><span>Your properties</span></article>
           <article className="vault-stat"><strong>{pending}</strong><span>Pending review</span></article>
           <article className="vault-stat"><strong>{published}</strong><span>Published</span></article>
+        </section>
+
+        <section className="vault-panel collaborator-resource-panel">
+          <div className="collaborator-resource-copy">
+            <p className="vault-kicker">Shared collaborator resources</p>
+            <h2>Residency, company formation and application documents</h2>
+            <p>
+              Access the same current Spain and Malaysia guidance, information packs and
+              application forms available to every approved PF EuroAsia collaborator.
+              Property brochures are managed separately and are not included here.
+            </p>
+          </div>
+          <Link className="vault-primary-button" href="/collaborators/documents">
+            Open Document Centre
+          </Link>
         </section>
 
         <section className="vault-panel">
