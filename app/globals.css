@@ -510,6 +510,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .area-hero, .market-landing-hero { position: relative; display: flex; min-height: 780px; align-items: end; overflow: hidden; background-position: center; background-size: cover; color: white; isolation: isolate; }
 .zagaleta-hero { background-image: url("/images/hero-villa.webp"); }
 .madronal-hero { background-image: url("/images/el-madronal-essence.webp"); background-position: center; }
+.golden-mile-hero { background-image: url("/images/hero-villa.webp"); background-position: center; }
+.benahavis-hero { background-image: url("/images/zagaleta-view.webp"); background-position: center; }
 .area-overlay { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(6,9,11,.8), rgba(6,9,11,.16) 70%), linear-gradient(0deg, rgba(6,9,11,.58), transparent 52%); }
 .area-hero-copy { padding-bottom: 100px; }
 .area-hero h1, .market-landing-hero h1 { margin: 0; font-family: var(--serif); font-size: clamp(78px, 9vw, 136px); font-weight: 400; letter-spacing: -.05em; line-height: .9; }
