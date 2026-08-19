@@ -93,7 +93,8 @@ export const metadata: Metadata = {
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
+  "@type": ["RealEstateAgent", "Organization"],
+  "@id": `${siteUrl}/#organization`,
   name: "Property Facilitators EuroAsia",
   url: siteUrl,
   logo: `${siteUrl}/images/pf-gold-symbol.png`,
@@ -101,6 +102,19 @@ const organizationSchema = {
   email: "enquiry@pfeuroasia.com",
   description:
     "Independent luxury property advisers connecting Southern Spain, the Middle East and Asia.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "enquiry@pfeuroasia.com",
+    availableLanguage: ["English", "Danish", "Chinese", "Arabic", "Spanish"],
+  },
+  knowsAbout: [
+    "Luxury property in Marbella and Benahavís",
+    "International property acquisition",
+    "Private and off-market property representation",
+    "Malaysia property and relocation",
+    "Labuan company formation and residency coordination",
+  ],
   areaServed: [
     { "@type": "Place", name: "Marbella" },
     { "@type": "Place", name: "La Zagaleta" },
@@ -120,14 +134,13 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
   name: "Property Facilitators EuroAsia",
   alternateName: "PF EuroAsia",
   url: siteUrl,
   inLanguage: ["en-GB", "da-DK", "zh-CN", "ar-SA"],
   publisher: {
-    "@type": "Organization",
-    name: "Property Facilitators EuroAsia",
-    url: siteUrl,
+    "@id": `${siteUrl}/#organization`,
   },
 };
 
