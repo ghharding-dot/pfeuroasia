@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -88,6 +89,14 @@ export default async function Home() {
       <Header transparent />
 
       <section className="hero">
+        <Image
+          className="hero-image"
+          src="/images/hero-villa.webp"
+          alt="Luxury villa in Marbella represented by Property Facilitators EuroAsia"
+          fill
+          priority
+          sizes="100vw"
+        />
         <div className="hero-shade" />
         <div className="hero-grid site-shell">
           <div className="hero-copy reveal-up">
