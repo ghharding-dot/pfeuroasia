@@ -99,6 +99,9 @@ export default function AsiaGatewayPage() {
               useful introductions and coordinate the journey from initial
               enquiry to an informed decision.
             </p>
+            <Link className="text-link" href="/guides/malaysia-vs-dubai-tax-residency">
+              Compare Malaysia with Dubai <span>→</span>
+            </Link>
           </div>
         </div>
       </section>
