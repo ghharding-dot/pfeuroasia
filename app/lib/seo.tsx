@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const SITE_URL = "https://www.pfeuroasia.com";
-export const SEO_LAST_UPDATED = new Date("2026-08-16T00:00:00.000Z");
+export const SEO_LAST_UPDATED = new Date("2026-08-19T00:00:00.000Z");
 
 type SeoLocale = "en-GB" | "da-DK" | "zh-CN" | "ar-SA";
 
@@ -118,6 +118,7 @@ export function languageAlternates(key: SeoPageKey): Record<string, string> {
 export function createMetadata(key: SeoPageKey): Metadata {
   const page: SeoEntry = seoPages[key];
   const image = page.image ?? "/images/hero-villa.webp";
+  const shouldIndex = page.index !== false;
   const alternateLocales = Object.keys(languageAlternates(key))
     .filter((locale): locale is SeoLocale => locale !== "x-default" && locale !== page.locale)
     .map((locale) => ogLocale[locale]);
@@ -129,7 +130,17 @@ export function createMetadata(key: SeoPageKey): Metadata {
       canonical: page.path,
       languages: languageAlternates(key),
     },
-    robots: page.index === false ? { index: false, follow: true } : { index: true, follow: true },
+    robots: {
+      index: shouldIndex,
+      follow: true,
+      googleBot: {
+        index: shouldIndex,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
       type: "website",
       locale: ogLocale[page.locale],
@@ -151,9 +162,47 @@ export function createMetadata(key: SeoPageKey): Metadata {
 
 export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children: ReactNode }) {
   const page: SeoEntry = seoPages[pageKey];
-  const schema = page.breadcrumbs.length > 1 ? {
+  const pageUrl = `${SITE_URL}${page.path === "/" ? "" : page.path}`;
+  const image = page.image ?? "/images/hero-villa.webp";
+  const serviceGroups = new Set([
+    "acquisition",
+    "sales",
+    "relocation",
+    "labuan",
+    "rentals",
+    "commercial",
+    "owners",
+    "portfolio",
+    "asia",
+  ]);
+  const serviceSchema = serviceGroups.has(page.group) ? {
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name: page.title,
+    description: page.description,
+    url: pageUrl,
+    provider: { "@id": `${SITE_URL}/#organization` },
+  } : null;
+  const pageSchema = {
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: page.title,
+    description: page.description,
+    inLanguage: page.locale,
+    dateModified: SEO_LAST_UPDATED.toISOString(),
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}${image}`,
+    },
+    ...(serviceSchema ? { mainEntity: { "@id": serviceSchema["@id"] } } : {}),
+  };
+  const breadcrumbSchema = page.breadcrumbs.length > 1 ? {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${pageUrl}#breadcrumb`,
     itemListElement: page.breadcrumbs.map(([name, path], index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -161,15 +210,17 @@ export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children:
       item: `${SITE_URL}${path}`,
     })),
   } : null;
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [pageSchema, breadcrumbSchema, serviceSchema].filter(Boolean),
+  };
 
   return (
     <>
-      {schema ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ) : null}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       {children}
     </>
   );
