@@ -1,0 +1,60 @@
+import type { AdviserKnowledgeEntry } from "./LabuanKnowledge";
+
+export const malaysiaTaxResidencyKnowledge: AdviserKnowledgeEntry[] = [
+  {
+    id: "tax-residency-overview",
+    title: "Malaysia personal tax residency overview",
+    keywords: ["malaysia tax residency", "malaysia tax residence", "tax resident in malaysia", "become tax resident", "foreign tax resident", "tax residency for foreigners"],
+    answer: "Malaysia personal tax residence is a statutory question based on the individual's facts and travel history. It should be kept separate from immigration permission and from the tax position of any Malaysian or Labuan company. A complete review should also check whether the person remains resident or has continuing obligations in their current country.",
+    source: "PF EuroAsia Malaysia tax residency guide — August 2026; HASiL Section 7 residence guidance",
+    followUps: ["How does the 182-day rule work?", "Does a Malaysian visa make me tax resident?", "Does a Labuan company create personal tax residency?"],
+  },
+  {
+    id: "tax-residency-182-days",
+    title: "Malaysia 182-day residence rule",
+    keywords: ["182 days", "182 day", "day rule", "how many days", "days in malaysia", "section 7", "residence test"],
+    answer: "Presence in Malaysia for 182 days or more is one route to residence under Section 7 of the Malaysian Income Tax Act. The official rules also contain connected-period provisions, a 90-day test linked to earlier years and a consecutive-year residence test. Temporary absences may be treated differently in specified circumstances, so prior-year travel and the complete calendar should be reviewed rather than relying on one headline number.",
+    source: "Inland Revenue Board of Malaysia (HASiL) — Residence Status, Section 7; updated 10 August 2026",
+    followUps: ["Does a Malaysian visa make me tax resident?", "What should I check before leaving my current country?"],
+  },
+  {
+    id: "visa-vs-tax-residence",
+    title: "Malaysian visa versus personal tax residence",
+    keywords: ["visa tax resident", "visa make me tax resident", "residency visa", "residence permit tax", "employment pass tax resident", "mm2h tax resident", "de rantau tax"],
+    answer: "A Malaysian visa, long-stay programme or employment pass does not automatically establish personal tax residence. Immigration status determines the basis on which someone may stay; tax residence is assessed under separate statutory tests and must also be considered alongside any continuing residence in another jurisdiction.",
+    source: "PF EuroAsia Malaysia tax residency guide — August 2026; HASiL Section 7 residence guidance",
+    followUps: ["How does the 182-day rule work?", "What Malaysia residency pathways are available?"],
+  },
+  {
+    id: "labuan-company-personal-tax-residence",
+    title: "Labuan company and personal tax residence",
+    keywords: ["labuan tax residency", "labuan company tax resident", "labuan company personal tax", "company gives tax residency", "director tax residency", "labuan visa tax"],
+    answer: "Owning or directing a Labuan company does not automatically create Malaysian personal tax residence. The company's corporate taxation, its substance and regulatory compliance, the person's work-permit position and the individual's tax residence are separate questions that must be assessed together without treating one as proof of another.",
+    source: "PF EuroAsia Malaysia tax residency guide and Labuan company framework — August 2026",
+    followUps: ["What tax can a Labuan trading company pay?", "How does the 182-day rule work?", "Is Labuan suitable for me?"],
+  },
+  {
+    id: "malaysia-not-generally-tax-free",
+    title: "Is Malaysia tax-free for foreigners?",
+    keywords: ["malaysia tax free", "tax-free malaysia", "no tax malaysia", "low tax country", "malaysia tax for foreigners", "foreign income tax", "zero tax"],
+    answer: "Malaysia should not be described as generally tax-free for foreigners. Treatment depends on personal residence status, the nature and source of income, current Malaysian rules, any company structure and obligations in other countries. Headline company rates should never be presented as a personal tax result, and individual professional advice is essential.",
+    source: "PF EuroAsia Malaysia tax residency guide — August 2026",
+    followUps: ["How does the 182-day rule work?", "Does a Labuan company create personal tax residency?"],
+  },
+  {
+    id: "leaving-current-tax-residence",
+    title: "Leaving a current country of tax residence",
+    keywords: ["leaving spain", "leaving uk", "leaving denmark", "leaving sweden", "exit tax", "stop being tax resident", "current tax residence", "double tax", "tax treaty", "centre of interests", "center of interests"],
+    answer: "Becoming resident in Malaysia does not automatically end residence, filing or departure obligations in another country. The current jurisdiction may apply its own day-count, home, family, economic-interest, departure or treaty rules. Advice should be coordinated between a Malaysian adviser and a qualified adviser in the country being left before travel and structures are changed.",
+    source: "PF EuroAsia cross-border planning framework — August 2026",
+    followUps: ["What information is needed for an assessment?", "How does the 182-day rule work?"],
+  },
+  {
+    id: "malaysia-residency-pathways-overview",
+    title: "Malaysia residency pathways overview",
+    keywords: ["malaysia residency options", "malaysia residency pathways", "move to malaysia", "mm2h", "de rantau", "digital nomad pass", "employment pass", "residency programme", "residency program", "dubai alternative"],
+    answer: "Potential pathways include a suitable Labuan business and work-permit route, Malaysia My Second Home, the DE Rantau Nomad Pass and employer-sponsored or specialist passes. They serve different applicants and none should be selected solely for a presumed tax result. Eligibility, immigration permission and personal tax consequences must each be checked under the current rules.",
+    source: "PF EuroAsia Malaysia tax residency guide — August 2026; Malaysian official programme sources",
+    followUps: ["Does a Malaysian visa make me tax resident?", "Is Labuan suitable for me?", "How does the 182-day rule work?"],
+  },
+];
