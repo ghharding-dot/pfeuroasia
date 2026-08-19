@@ -1,0 +1,174 @@
+.marbella-market-page {
+  overflow: hidden;
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.marbella-market-hero {
+  position: relative;
+  display: flex;
+  min-height: 790px;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #11161a;
+  color: white;
+  isolation: isolate;
+}
+
+.marbella-market-hero-image {
+  z-index: -2;
+  object-fit: cover;
+  object-position: center;
+}
+
+.marbella-market-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(5,9,12,.86), rgba(5,9,12,.44) 55%, rgba(5,9,12,.08) 82%),
+    linear-gradient(0deg, rgba(4,7,9,.58), transparent 55%);
+}
+
+.marbella-market-hero-copy { padding-block: 170px 105px; }
+
+.marbella-market-hero h1 {
+  max-width: 1050px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(66px, 8.3vw, 126px);
+  font-weight: 400;
+  letter-spacing: -.052em;
+  line-height: .92;
+}
+
+.marbella-market-hero-copy > p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 30px 0 36px;
+  color: rgba(255,255,255,.72);
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.marbella-market-hero-actions { display: flex; flex-wrap: wrap; gap: 22px 34px; align-items: center; }
+.marbella-market-hero-actions > a:not(.button) { padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.6); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.marbella-market-hero-actions > a:not(.button) span { margin-left: 9px; color: var(--gold-light); }
+
+.marbella-market-intro,
+.marbella-property-routes,
+.marbella-private-market,
+.marbella-market-cta { padding-block: clamp(100px, 10vw, 150px); }
+
+.marbella-market-intro { background: var(--stone); }
+.marbella-market-intro-grid { display: grid; grid-template-columns: 240px 1fr; gap: clamp(55px, 8vw, 120px); }
+.marbella-market-intro h2,
+.marbella-market-heading h2,
+.marbella-routes-heading h2,
+.marbella-process-intro h2,
+.marbella-private-market h2,
+.marbella-market-faq h2,
+.marbella-market-cta h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(44px, 5vw, 74px);
+  font-weight: 400;
+  letter-spacing: -.042em;
+  line-height: 1.02;
+}
+
+.marbella-market-intro-copy { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px; max-width: 950px; margin-top: 38px; }
+.marbella-market-intro-copy p { margin: 0; color: #5d5f58; font-size: 15px; line-height: 1.85; }
+
+.marbella-market-areas { padding-block: clamp(100px, 10vw, 150px); background: #111713; color: white; }
+.marbella-market-heading { display: grid; grid-template-columns: minmax(0,1fr) minmax(280px,.6fr); gap: 22px 90px; align-items: end; }
+.marbella-market-heading .eyebrow { grid-column: 1 / -1; }
+.marbella-market-heading > p:not(.eyebrow) { margin: 0 0 7px; color: rgba(255,255,255,.58); font-size: 14px; line-height: 1.8; }
+.marbella-market-area-grid { display: grid; grid-template-columns: repeat(2,1fr); margin-top: 70px; border-top: 1px solid rgba(255,255,255,.16); border-left: 1px solid rgba(255,255,255,.16); }
+.marbella-market-area-grid > a { min-height: 390px; padding: clamp(34px,4vw,52px); border-right: 1px solid rgba(255,255,255,.16); border-bottom: 1px solid rgba(255,255,255,.16); color: white; transition: background 200ms ease, transform 200ms ease; }
+.marbella-market-area-grid > a:hover { background: rgba(255,255,255,.035); transform: translateY(-3px); }
+.marbella-market-area-grid > a > span { color: var(--gold-light); font-size: 9px; letter-spacing: .16em; }
+.marbella-market-area-grid h3 { margin: 78px 0 18px; font-family: var(--serif); font-size: clamp(34px,3.4vw,50px); font-weight: 400; line-height: 1.05; }
+.marbella-market-area-grid p { max-width: 530px; margin: 0; color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.75; }
+.marbella-market-area-grid small,
+.marbella-routes-grid small { display: inline-block; margin-top: 30px; padding-bottom: 6px; border-bottom: 1px solid var(--gold); font-size: 9px; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+.marbella-market-area-grid small b,
+.marbella-routes-grid small b { margin-left: 9px; color: var(--gold-light); font-size: 13px; font-weight: 400; }
+
+.marbella-property-routes { background: var(--ivory); }
+.marbella-routes-heading { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(50px,8vw,130px); align-items: end; }
+.marbella-routes-heading > p { margin: 0 0 6px; color: #5e6059; font-size: 14px; line-height: 1.85; }
+.marbella-routes-grid { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 70px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.marbella-routes-grid > a { min-height: 390px; padding: 34px 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--ink); transition: background 200ms ease, transform 200ms ease; }
+.marbella-routes-grid > a:hover { background: var(--paper); transform: translateY(-3px); }
+.marbella-routes-grid > a > span { color: var(--gold); font-size: 9px; letter-spacing: .15em; }
+.marbella-routes-grid h3 { margin: 62px 0 17px; font-family: var(--serif); font-size: 30px; font-weight: 400; line-height: 1.08; }
+.marbella-routes-grid p { margin: 0; color: #62645d; font-size: 12px; line-height: 1.75; }
+.marbella-routes-grid small b { color: var(--gold); }
+
+.marbella-buying-process { padding-block: clamp(100px, 10vw, 150px); background: #10161c; color: white; }
+.marbella-buying-process-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(60px,9vw,145px); align-items: start; }
+.marbella-process-intro { position: sticky; top: 120px; }
+.marbella-process-intro > p:not(.eyebrow) { max-width: 560px; margin: 28px 0; color: rgba(255,255,255,.6); font-size: 14px; line-height: 1.85; }
+.marbella-process-intro > a { display: inline-block; padding-bottom: 7px; border-bottom: 1px solid var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.marbella-process-intro > a span { margin-left: 9px; color: var(--gold-light); }
+.marbella-process-list { border-top: 1px solid rgba(255,255,255,.16); }
+.marbella-process-list article { display: grid; grid-template-columns: 48px 1fr; gap: 25px; padding-block: 30px; border-bottom: 1px solid rgba(255,255,255,.16); }
+.marbella-process-list article > span { padding-top: 6px; color: var(--gold-light); font-size: 9px; letter-spacing: .15em; }
+.marbella-process-list h3 { margin: 0 0 9px; font-family: var(--serif); font-size: 28px; font-weight: 400; }
+.marbella-process-list p { margin: 0; color: rgba(255,255,255,.57); font-size: 13px; line-height: 1.75; }
+
+.marbella-private-market { background: #dcd3c4; }
+.marbella-private-market-grid,
+.marbella-market-cta-grid { display: grid; grid-template-columns: 1fr .85fr; gap: clamp(60px,9vw,145px); align-items: start; }
+.marbella-private-market-grid > div:last-child > p,
+.marbella-market-cta-grid > div:last-child > p { margin: 8px 0 30px; color: #555750; font-size: 15px; line-height: 1.85; }
+.marbella-private-actions { display: flex; flex-wrap: wrap; gap: 22px 30px; align-items: center; }
+.marbella-private-actions > a:not(.button) { padding-bottom: 7px; border-bottom: 1px solid rgba(17,18,16,.32); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.marbella-private-actions > a:not(.button) span { margin-left: 9px; color: var(--gold); }
+
+.marbella-market-faq { padding-block: clamp(100px,10vw,150px); background: #171815; color: white; }
+.marbella-market-faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(60px,9vw,145px); }
+.marbella-market-faq-list { border-top: 1px solid rgba(255,255,255,.18); }
+.marbella-market-faq-list details { border-bottom: 1px solid rgba(255,255,255,.18); }
+.marbella-market-faq-list summary { position: relative; padding: 26px 48px 26px 0; cursor: pointer; font-family: var(--serif); font-size: clamp(21px,2vw,27px); line-height: 1.3; list-style: none; }
+.marbella-market-faq-list summary::-webkit-details-marker { display: none; }
+.marbella-market-faq-list summary::after { content: "+"; position: absolute; top: 26px; right: 5px; color: var(--gold-light); font-size: 25px; line-height: 1; }
+.marbella-market-faq-list details[open] summary::after { content: "−"; }
+.marbella-market-faq-list details p { margin: -3px 48px 27px 0; color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.8; }
+
+.marbella-market-cta { background: var(--paper); }
+
+@media (max-width: 1050px) {
+  .marbella-routes-grid { grid-template-columns: repeat(2,1fr); }
+  .marbella-buying-process-grid,
+  .marbella-market-faq-grid { grid-template-columns: 1fr; gap: 55px; }
+  .marbella-process-intro { position: static; }
+}
+
+@media (max-width: 760px) {
+  .marbella-market-hero { min-height: 720px; }
+  .marbella-market-hero-image { object-position: 62% center; }
+  .marbella-market-hero-copy { padding-block: 145px 75px; }
+  .marbella-market-hero h1 { font-size: clamp(52px,14.5vw,70px); }
+  .marbella-market-hero-copy > p:not(.eyebrow) { font-size: 18px; }
+  .marbella-market-hero-actions { align-items: flex-start; flex-direction: column; }
+  .marbella-market-intro-grid,
+  .marbella-market-heading,
+  .marbella-routes-heading,
+  .marbella-private-market-grid,
+  .marbella-market-cta-grid { grid-template-columns: 1fr; gap: 36px; }
+  .marbella-market-intro-copy,
+  .marbella-market-area-grid,
+  .marbella-routes-grid { grid-template-columns: 1fr; }
+  .marbella-market-intro-copy { gap: 24px; }
+  .marbella-market-heading .eyebrow { grid-column: auto; }
+  .marbella-market-area-grid,
+  .marbella-routes-grid { margin-top: 48px; }
+  .marbella-market-area-grid > a,
+  .marbella-routes-grid > a { min-height: auto; padding: 36px 28px; }
+  .marbella-market-area-grid h3,
+  .marbella-routes-grid h3 { margin-top: 46px; }
+  .marbella-process-list article { grid-template-columns: 38px 1fr; gap: 14px; }
+  .marbella-market-faq-list details p { margin-right: 0; }
+}
