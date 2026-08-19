@@ -47,7 +47,7 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
       id: 1,
       role: "assistant",
       text:
-        `Welcome ${visitor.fullName.split(" ")[0] || ""}. Ask me naturally about Malaysia — where to go, what to do, travel seasons, Kuala Lumpur, food, living costs, property, healthcare, transport and lifestyle — or about the PF EuroAsia Labuan company and residency pathway. For general Malaysia questions I can combine relevant facts from our verified knowledge into a more useful answer. Company, tax, residency and immigration questions remain tightly controlled. If I do not have enough verified information, I will register the question for our team rather than guess.`,
+        `Welcome ${visitor.fullName.split(" ")[0] || ""}. Ask me naturally about Malaysia — where to go, what to do, travel seasons, Kuala Lumpur, food, living costs, property, healthcare, transport and lifestyle — or about Malaysia tax residency and the PF EuroAsia Labuan company and residency pathway. For general Malaysia questions I can combine relevant facts from our verified knowledge into a more useful answer. Company, personal tax, residency and immigration questions use controlled answers from our verified knowledge. If I do not have enough information, I will register the question for our team rather than guess.`,
       source: "PF EuroAsia verified Malaysia & Labuan knowledge base — updated August 2026",
       mode: "controlled",
       followUps: adviserSuggestions.slice(0, 3),
