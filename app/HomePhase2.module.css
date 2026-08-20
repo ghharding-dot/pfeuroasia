@@ -258,38 +258,6 @@
   margin-top: 14px;
 }
 
-.missionCta {
-  grid-column: 2;
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 22px;
-  margin-top: 26px;
-  padding: 13px 17px;
-  border: 1px solid #9b7d4e;
-  color: #282b27;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.missionCta span {
-  color: #9b7d4e;
-  font-size: 14px;
-}
-
-.missionCta:hover {
-  background: #9b7d4e;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.missionCta:hover span {
-  color: #fff;
-}
-
 .expertiseSection {
   background: var(--stone);
   padding: 104px 0 92px;
@@ -492,17 +460,12 @@
     gap: 26px;
   }
 
-  .missionInner > :global(.eyebrow),
-  .missionCta {
+  .missionInner > :global(.eyebrow) {
     grid-column: 1;
   }
 
   .missionCopy {
     max-width: 680px;
-  }
-
-  .missionCta {
-    margin-top: 0;
   }
 
   .expertiseSection,
@@ -596,12 +559,6 @@
 
   .missionCopy p {
     font-size: 13px;
-  }
-
-  .missionCta {
-    width: 100%;
-    min-height: 46px;
-    justify-content: space-between;
   }
 
   .expertiseSection,
