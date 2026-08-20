@@ -12,9 +12,13 @@ export function Footer() {
             <strong>Collaborators & professional partners</strong>
             <span>Access the private collaborator area, shared resources and partner information.</span>
           </div>
-          <Link className={`button button-gold ${styles.collaboratorButton}`} href="/collaborators">
+          <a
+            className={`button button-gold ${styles.collaboratorButton}`}
+            href="/collaborators"
+            aria-label="Open the collaborator portal"
+          >
             Collaborator access <span>→</span>
-          </Link>
+          </a>
         </div>
       </div>
       <div className="site-shell footer-top">
