@@ -28,11 +28,7 @@ export function Footer() {
           </Link>
           <div className="footer-contact">
             <p><strong>Property Facilitators EuroAsia</strong></p>
-            <p><strong>Malaysia Office</strong><br />
-              Level 11(A), Main Office Tower<br />
-              Financial Park Labuan<br />
-              Malaysia
-            </p>
+            <p><strong>Labuan, Malaysia</strong></p>
             <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
           </div>
         </div>
