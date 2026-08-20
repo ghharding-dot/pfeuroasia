@@ -1,33 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import styles from "./PartnerNetworkDialog.module.css";
-
-const partnerGroups = [
-  {
-    title: "Property representation",
-    partners: [
-      ["Property Facilitators Iberia", "/go/pfiberia"],
-      ["Aylesford Spain", "/go/aylesford"],
-      ["House & Country Real Estate", "/go/house-country"],
-      ["The Fixer · Robert Bazo", "/go/the-fixer"],
-      ["LuxoEstates", "/go/luxoestates"],
-    ],
-  },
-  {
-    title: "Legal representation",
-    partners: [
-      ["Lawbird Legal Services", "/go/lawbird"],
-      ["Legal 10 Abogados Marbella", "/go/legal10"],
-      ["Martínez-Echevarría Lawyers", "/go/martinezechevarria"],
-    ],
-  },
-  {
-    title: "Luxury villa rentals",
-    partners: [["The Luxury Villa Collection", "/luxury-villa-rentals#villa-enquiry"]],
-  },
-] as const;
 
 export function PartnerNetworkDialog() {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -43,14 +17,12 @@ export function PartnerNetworkDialog() {
     }
 
     if (!dialog.open) dialog.showModal();
-    const closeTimer = window.setTimeout(() => setOpen(false), 8000);
-    return () => window.clearTimeout(closeTimer);
   }, [open]);
 
   return (
     <>
       <button className={styles.trigger} type="button" onClick={() => setOpen(true)}>
-        Discover our partners <span aria-hidden="true">＋</span>
+        Read our full mission <span aria-hidden="true">＋</span>
       </button>
 
       <dialog
@@ -67,27 +39,34 @@ export function PartnerNetworkDialog() {
           <button className={styles.close} type="button" onClick={() => setOpen(false)} aria-label="Close partner panel">
             ×
           </button>
-          <p className={styles.eyebrow}>Our collaboration network</p>
-          <h3 id="partner-dialog-title">Trusted specialists, connected across borders.</h3>
-          <p className={styles.intro}>
-            Select a partner to discover the established professionals working with PF EuroAsia.
-          </p>
-
-          <div className={styles.groups}>
-            {partnerGroups.map((group) => (
-              <section className={styles.group} key={group.title}>
-                <h4>{group.title}</h4>
-                <div className={styles.partnerList}>
-                  {group.partners.map(([name, href]) => (
-                    <Link href={href} key={name}>
-                      <span>{name}</span><b aria-hidden="true">→</b>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            ))}
+          <p className={styles.eyebrow}>PF EuroAsia</p>
+          <h3 id="partner-dialog-title">Our Mission</h3>
+          <div className={styles.missionText}>
+            <p>
+              PF EuroAsia was created to bring trusted professionals together across borders,
+              combining established relationships, specialist knowledge and local expertise
+              within one coordinated international network.
+            </p>
+            <p>
+              We collaborate with real estate professionals, lawyers, tax and corporate
+              advisers, residency specialists and relocation experts. This allows each
+              professional to retain the trust of their existing clients while giving those
+              clients access to verified opportunities, services and expertise in markets they
+              may not previously have considered.
+            </p>
+            <p>
+              Our objective is to help clients explore international property, investment,
+              relocation, tax-residency and company-formation options with greater confidence.
+              Whether considering Spain, Gibraltar, Scandinavia, Malaysia or the wider Asian
+              market, clients are introduced to experienced professionals with the appropriate
+              local knowledge.
+            </p>
+            <p>
+              PF EuroAsia is not simply another property agency. It is a collaborative gateway
+              connecting trusted advisers, their clients and carefully selected international
+              opportunities.
+            </p>
           </div>
-          <p className={styles.timerNote}>This panel closes automatically after a few seconds.</p>
         </div>
       </dialog>
     </>

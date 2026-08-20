@@ -95,61 +95,22 @@
   line-height: 1.02;
 }
 
-.intro {
-  max-width: 570px;
-  margin: 16px 0 28px;
-  color: #62655e;
-  font-size: 13px;
-  line-height: 1.65;
+.missionText {
+  max-width: 650px;
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(155, 125, 78, 0.3);
 }
 
-.groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+.missionText p {
+  margin: 0;
+  color: #565a53;
+  font-size: 14px;
+  line-height: 1.75;
 }
 
-.group:last-child {
-  grid-column: 1 / -1;
-}
-
-.group h4 {
-  margin: 0 0 9px;
-  color: #8d744d;
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.partnerList {
-  border-top: 1px solid rgba(155, 125, 78, 0.28);
-}
-
-.partnerList a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 11px 2px;
-  border-bottom: 1px solid rgba(155, 125, 78, 0.22);
-  color: #292c27;
-  font-family: var(--serif);
-  font-size: 16px;
-  line-height: 1.2;
-}
-
-.partnerList a b {
-  color: #9b7d4e;
-  font-family: sans-serif;
-  font-size: 13px;
-}
-
-.timerNote {
-  margin: 22px 0 0;
-  color: #77776f;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.missionText p + p {
+  margin-top: 16px;
 }
 
 @media (max-width: 900px) {
@@ -176,17 +137,13 @@
     padding: 36px 22px 28px;
   }
 
-  .groups {
-    grid-template-columns: 1fr;
-    gap: 21px;
-  }
-
-  .group:last-child {
-    grid-column: 1;
-  }
-
   .panel h3 {
     padding-right: 24px;
     font-size: 36px;
+  }
+
+  .missionText p {
+    font-size: 13px;
+    line-height: 1.68;
   }
 }
