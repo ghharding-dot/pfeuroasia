@@ -22,7 +22,7 @@ function LuxuryVillaCollectionLogo() {
 
 export function PartnerStrip() {
   return (
-    <section className="partner-strip" aria-labelledby="partner-strip-title">
+    <section className="partner-strip" id="collaboration-network" aria-labelledby="partner-strip-title">
       <div className="site-shell">
         <p className="partner-strip-title" id="partner-strip-title">Our collaboration network</p>
 

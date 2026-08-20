@@ -162,7 +162,7 @@ export function HomePhase2() {
               and the responsibilities involved.
             </p>
           </div>
-          <Link className={phase2Styles.missionCta} href="/collaborators">
+          <Link className={phase2Styles.missionCta} href="#collaboration-network">
             Discover our network <span aria-hidden="true">→</span>
           </Link>
         </div>
