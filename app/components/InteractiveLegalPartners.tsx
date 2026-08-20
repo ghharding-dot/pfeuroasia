@@ -12,6 +12,7 @@ type Partner = {
   kicker: string;
   description: string;
   mark: string;
+  instagram?: string;
 };
 
 const partners: Partner[] = [
@@ -23,6 +24,7 @@ const partners: Partner[] = [
     description:
       "Marbella-based legal support for international clients, including property, corporate, litigation and immigration matters in Spain.",
     mark: "LB",
+    instagram: "lawbird_lawyers",
   },
   {
     key: "legal10",
@@ -63,10 +65,15 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
 export function InteractiveLegalPartners() {
   const [active, setActive] = useState<PartnerKey | null>(null);
+  const [instagramFeed, setInstagramFeed] = useState<PartnerKey | null>(null);
+  const selectedInstagramPartner = partners.find(
+    (partner) => partner.key === instagramFeed && partner.instagram,
+  );
 
   return (
-    <div className={styles.grid}>
-      {partners.map((partner) => {
+    <>
+      <div className={styles.grid}>
+        {partners.map((partner) => {
         const revealed = active === partner.key;
 
         return (
@@ -99,13 +106,70 @@ export function InteractiveLegalPartners() {
               <p className={styles.kicker}>{partner.kicker}</p>
               <h3>{partner.name}</h3>
               <p className={styles.description}>{partner.description}</p>
-              <a className={styles.visitLink} href={partner.href}>
-                Visit partner <span>→</span>
-              </a>
+              <div className={styles.partnerActions}>
+                <a className={styles.visitLink} href={partner.href}>
+                  Visit partner <span>→</span>
+                </a>
+                {partner.instagram ? (
+                  <button
+                    className={styles.instagramButton}
+                    type="button"
+                    aria-expanded={instagramFeed === partner.key}
+                    aria-controls="legal-partner-instagram-feed"
+                    onClick={() =>
+                      setInstagramFeed(
+                        instagramFeed === partner.key ? null : partner.key,
+                      )
+                    }
+                  >
+                    Instagram @{partner.instagram} <span>↘</span>
+                  </button>
+                ) : null}
+              </div>
             </div>
           </article>
         );
-      })}
-    </div>
+        })}
+      </div>
+
+      {selectedInstagramPartner ? (
+        <section
+          className={styles.instagramPanel}
+          id="legal-partner-instagram-feed"
+          aria-label={`${selectedInstagramPartner.name} Instagram feed`}
+        >
+          <div className={styles.instagramHeading}>
+            <div>
+              <p>Instagram</p>
+              <h3>{selectedInstagramPartner.name}</h3>
+              <span>@{selectedInstagramPartner.instagram}</span>
+            </div>
+            <div className={styles.instagramHeadingActions}>
+              <a
+                href={`https://www.instagram.com/${selectedInstagramPartner.instagram}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open Instagram <span>↗</span>
+              </a>
+              <button type="button" onClick={() => setInstagramFeed(null)}>
+                Close
+              </button>
+            </div>
+          </div>
+          <iframe
+            className={styles.instagramEmbed}
+            src={`https://www.instagram.com/${selectedInstagramPartner.instagram}/embed/`}
+            title={`${selectedInstagramPartner.name} on Instagram`}
+            loading="lazy"
+            allow="encrypted-media"
+          />
+          <p className={styles.instagramFallback}>
+            Instagram content may be hidden by browser privacy settings. If so,
+            use “Open Instagram” above.
+          </p>
+        </section>
+      ) : null}
+    </>
   );
 }

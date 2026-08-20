@@ -39,6 +39,9 @@ export function Footer() {
           <Link href="/services/relocation-concierge">Relocation & concierge</Link>
           <Link href="/about">Our approach</Link>
           <Link href="/privacy">Privacy notice</Link>
+          <a href="https://www.instagram.com/pfiberia/" target="_blank" rel="noopener noreferrer">
+            Instagram · @pfiberia
+          </a>
         </div>
         <div className="footer-links footer-markets">
           <Link href="/markets/marbella">Marbella property</Link>

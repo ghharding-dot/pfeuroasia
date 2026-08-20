@@ -17,6 +17,137 @@
   padding: 22px 22px 20px;
 }
 
+.partnerActions {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: stretch;
+  gap: 7px;
+  margin-top: auto;
+}
+
+.partnerActions :global(.visitLink) {
+  margin-top: 0;
+}
+
+.instagramButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 10px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: transparent;
+  color: rgba(255,255,255,.78);
+  font-family: inherit;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+
+.instagramButton:hover,
+.instagramButton[aria-expanded="true"] {
+  border-color: var(--gold-light);
+  background: rgba(197,162,104,.13);
+  color: var(--gold-light);
+}
+
+.instagramPanel {
+  width: min(100%, 920px);
+  margin: 28px auto 4px;
+  overflow: hidden;
+  border: 1px solid rgba(167, 133, 80, .58);
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 20px 45px rgba(34, 29, 20, .12);
+}
+
+.instagramHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  padding: 22px 24px;
+  border-bottom: 1px solid rgba(23,25,22,.1);
+  background: linear-gradient(145deg, #fffdf8, #f6f1e7);
+}
+
+.instagramHeading p,
+.instagramHeading h3,
+.instagramHeading div > span {
+  margin: 0;
+}
+
+.instagramHeading p {
+  color: #9a7b4e;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.instagramHeading h3 {
+  margin-top: 5px;
+  color: #171916;
+  font-family: var(--serif);
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.instagramHeading div > span {
+  display: block;
+  margin-top: 3px;
+  color: #777970;
+  font-size: 11px;
+}
+
+.instagramHeadingActions {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.instagramHeadingActions a,
+.instagramHeadingActions button {
+  padding: 10px 12px;
+  border: 1px solid #a78550;
+  background: #171916;
+  color: #fff;
+  font-family: inherit;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.instagramHeadingActions button {
+  border-color: rgba(23,25,22,.22);
+  background: transparent;
+  color: #5f615b;
+}
+
+.instagramEmbed {
+  display: block;
+  width: 100%;
+  height: 570px;
+  border: 0;
+  background: #fff;
+}
+
+.instagramFallback {
+  margin: 0;
+  padding: 13px 20px 15px;
+  border-top: 1px solid rgba(23,25,22,.08);
+  color: #777970;
+  font-size: 9px;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .luxoCard {
   display: flex;
   align-items: center;
@@ -90,6 +221,34 @@
 
   .propertyReveal {
     padding: 18px 18px 16px;
+  }
+
+  .partnerActions {
+    flex-wrap: wrap;
+  }
+
+  .instagramPanel {
+    margin-top: 18px;
+  }
+
+  .instagramHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+    padding: 19px;
+  }
+
+  .instagramHeadingActions {
+    width: 100%;
+  }
+
+  .instagramHeadingActions a {
+    flex: 1;
+    text-align: center;
+  }
+
+  .instagramEmbed {
+    height: 500px;
   }
 
   .grid > :last-child {
