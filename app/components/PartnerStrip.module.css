@@ -252,6 +252,27 @@
   transform: translateY(-2px);
 }
 
+.rentalInstagramLink {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 14px;
+  margin-top: 13px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(167,133,80,.55);
+  color: #876b43;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color .18s ease, border-color .18s ease;
+}
+
+.rentalInstagramLink:hover {
+  border-color: #a78550;
+  color: #5e4728;
+}
+
 .collaboratorButton {
   display: inline-flex;
   min-height: 52px;

@@ -56,6 +56,15 @@ export function PartnerStrip() {
               <a className={styles.rentalFeatureLink} href="/luxury-villa-rentals#villa-enquiry">
                 Explore luxury villa rentals <span>→</span>
               </a>
+              <a
+                className={styles.rentalInstagramLink}
+                href="https://www.instagram.com/theluxuryvillaco/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open The Luxury Villa Collection on Instagram"
+              >
+                Instagram @theluxuryvillaco <span>↗</span>
+              </a>
             </div>
             <a
               className={`partner-logo ${styles.rentalPartnerLogo} ${styles.rentalPartnerLogoLarge}`}
