@@ -209,6 +209,87 @@
   transform: translateY(0) scale(0.985);
 }
 
+.missionSection {
+  position: relative;
+  padding: 82px 0 86px;
+  border-top: 1px solid rgba(155, 125, 78, 0.2);
+  border-bottom: 1px solid var(--line);
+  background: var(--ivory);
+}
+
+.missionInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  column-gap: 86px;
+  align-items: end;
+}
+
+.missionInner > :global(.eyebrow) {
+  grid-column: 1 / -1;
+}
+
+.missionInner h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(42px, 4.2vw, 66px);
+  font-weight: 400;
+  letter-spacing: -0.038em;
+  line-height: 1.02;
+}
+
+.missionInner h2 em {
+  display: block;
+  color: #8e7754;
+  font-weight: 400;
+}
+
+.missionCopy {
+  padding-bottom: 4px;
+}
+
+.missionCopy p {
+  margin: 0;
+  color: #5f625c;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.missionCopy p + p {
+  margin-top: 14px;
+}
+
+.missionCta {
+  grid-column: 2;
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 22px;
+  margin-top: 26px;
+  padding: 13px 17px;
+  border: 1px solid #9b7d4e;
+  color: #282b27;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.missionCta span {
+  color: #9b7d4e;
+  font-size: 14px;
+}
+
+.missionCta:hover {
+  background: #9b7d4e;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.missionCta:hover span {
+  color: #fff;
+}
+
 .expertiseSection {
   background: var(--stone);
   padding: 104px 0 92px;
@@ -402,6 +483,28 @@
     min-height: 390px;
   }
 
+  .missionSection {
+    padding-block: 70px;
+  }
+
+  .missionInner {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .missionInner > :global(.eyebrow),
+  .missionCta {
+    grid-column: 1;
+  }
+
+  .missionCopy {
+    max-width: 680px;
+  }
+
+  .missionCta {
+    margin-top: 0;
+  }
+
   .expertiseSection,
   .trustSection {
     padding-block: 72px;
@@ -477,6 +580,28 @@
   .gatewayCardCopy strong {
     width: 100%;
     min-height: 46px;
+  }
+
+  .missionSection {
+    padding-block: 54px 58px;
+  }
+
+  .missionInner {
+    gap: 22px;
+  }
+
+  .missionInner h2 {
+    font-size: clamp(38px, 11vw, 50px);
+  }
+
+  .missionCopy p {
+    font-size: 13px;
+  }
+
+  .missionCta {
+    width: 100%;
+    min-height: 46px;
+    justify-content: space-between;
   }
 
   .expertiseSection,

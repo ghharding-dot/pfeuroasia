@@ -143,6 +143,31 @@ export function HomePhase2() {
         </div>
       </section>
 
+      <section className={phase2Styles.missionSection} aria-labelledby="mission-heading">
+        <div className={`site-shell ${phase2Styles.missionInner}`}>
+          <p className="eyebrow">Our mission</p>
+          <h2 id="mission-heading">
+            Trusted professionals. Verified opportunities.
+            <em>New markets.</em>
+          </h2>
+          <div className={phase2Styles.missionCopy}>
+            <p>
+              PF EuroAsia brings together trusted professionals across property,
+              law, taxation, residency, company formation and relocation.
+            </p>
+            <p>
+              Through collaboration, we help existing clients explore carefully
+              selected opportunities in new international markets—supported by
+              experienced professionals who understand both the opportunities
+              and the responsibilities involved.
+            </p>
+          </div>
+          <Link className={phase2Styles.missionCta} href="/collaborators">
+            Discover our network <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </section>
+
       <section className={phase2Styles.expertiseSection} id="expertise">
         <div className="site-shell">
           <div className={phase2Styles.expertiseIntro}>
