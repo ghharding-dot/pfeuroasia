@@ -65,15 +65,10 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
 export function InteractiveLegalPartners() {
   const [active, setActive] = useState<PartnerKey | null>(null);
-  const [instagramFeed, setInstagramFeed] = useState<PartnerKey | null>(null);
-  const selectedInstagramPartner = partners.find(
-    (partner) => partner.key === instagramFeed && partner.instagram,
-  );
 
   return (
-    <>
-      <div className={styles.grid}>
-        {partners.map((partner) => {
+    <div className={styles.grid}>
+      {partners.map((partner) => {
         const revealed = active === partner.key;
 
         return (
@@ -111,65 +106,21 @@ export function InteractiveLegalPartners() {
                   Visit partner <span>→</span>
                 </a>
                 {partner.instagram ? (
-                  <button
+                  <a
                     className={styles.instagramButton}
-                    type="button"
-                    aria-expanded={instagramFeed === partner.key}
-                    aria-controls="legal-partner-instagram-feed"
-                    onClick={() =>
-                      setInstagramFeed(
-                        instagramFeed === partner.key ? null : partner.key,
-                      )
-                    }
+                    href={`https://www.instagram.com/${partner.instagram}/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${partner.name} on Instagram`}
                   >
-                    Instagram @{partner.instagram} <span>↘</span>
-                  </button>
+                    Instagram @{partner.instagram} <span>↗</span>
+                  </a>
                 ) : null}
               </div>
             </div>
           </article>
         );
-        })}
-      </div>
-
-      {selectedInstagramPartner ? (
-        <section
-          className={styles.instagramPanel}
-          id="legal-partner-instagram-feed"
-          aria-label={`${selectedInstagramPartner.name} Instagram feed`}
-        >
-          <div className={styles.instagramHeading}>
-            <div>
-              <p>Instagram</p>
-              <h3>{selectedInstagramPartner.name}</h3>
-              <span>@{selectedInstagramPartner.instagram}</span>
-            </div>
-            <div className={styles.instagramHeadingActions}>
-              <a
-                href={`https://www.instagram.com/${selectedInstagramPartner.instagram}/`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Open Instagram <span>↗</span>
-              </a>
-              <button type="button" onClick={() => setInstagramFeed(null)}>
-                Close
-              </button>
-            </div>
-          </div>
-          <iframe
-            className={styles.instagramEmbed}
-            src={`https://www.instagram.com/${selectedInstagramPartner.instagram}/embed/`}
-            title={`${selectedInstagramPartner.name} on Instagram`}
-            loading="lazy"
-            allow="encrypted-media"
-          />
-          <p className={styles.instagramFallback}>
-            Instagram content may be hidden by browser privacy settings. If so,
-            use “Open Instagram” above.
-          </p>
-        </section>
-      ) : null}
-    </>
+      })}
+    </div>
   );
 }
