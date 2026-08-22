@@ -48,6 +48,13 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
       "bazo.estate@gmail.com",
     ],
   },
+  R2H: {
+    code: "R2H",
+    name: "Rent2Holiday",
+    loginEmails: [
+      "jorge@rent2holiday.es",
+    ],
+  },
   LEG: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",
@@ -77,6 +84,7 @@ export const PROPERTY_LISTING_PARTNERS = [
   PARTNER_CONTACTS.HOU,
   PARTNER_CONTACTS.LUX,
   PARTNER_CONTACTS.FIX,
+  PARTNER_CONTACTS.R2H,
 ] as const;
 
 export const COLLABORATOR_LOGIN_PARTNERS = PROPERTY_LISTING_PARTNERS.filter(
