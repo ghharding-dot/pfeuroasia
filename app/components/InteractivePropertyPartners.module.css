@@ -203,17 +203,31 @@
 
 .rent2Logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 3px;
+  align-items: center;
+  gap: 11px;
   color: #171916;
+}
+
+.rent2Logo img {
+  width: 48px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.rent2Wordmark {
+  display: inline-flex;
+  align-items: baseline;
   font-family: var(--serif);
-  font-size: 27px;
+  font-size: 25px;
+  font-weight: 600;
   letter-spacing: -.04em;
 }
 
-.rent2Logo b {
-  color: #a78550;
-  font-weight: 400;
+.rent2Wordmark b {
+  color: #e8830a;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 @media (max-width: 1180px) {
