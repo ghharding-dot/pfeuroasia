@@ -5,7 +5,7 @@ import cardStyles from "./InteractiveLegalPartners.module.css";
 import partnerStyles from "./PartnerStrip.module.css";
 import styles from "./InteractivePropertyPartners.module.css";
 
-type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer";
+type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer" | "rent2holiday";
 
 type Partner = {
   key: PartnerKey;
@@ -61,6 +61,16 @@ const partners: Partner[] = [
     mark: "FX",
     instagram: "robertbazo",
   },
+  {
+    key: "rent2holiday",
+    name: "Rent2Holiday",
+    representative: "Jorge Gonzalez",
+    href: "https://rent2holiday.es",
+    kicker: "Holiday rentals & property management",
+    description:
+      "Costa del Sol specialists in holiday rentals, property sales and comprehensive property management across Marbella, Mijas, Estepona and surrounding areas.",
+    mark: "R2",
+  },
 ];
 
 function FrontLogo({ partner }: { partner: Partner }) {
@@ -80,6 +90,14 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
   if (partner.key === "housecountry") {
     return <img src="/images/partner-house-country.png" alt="House and Country Real Estate" />;
+  }
+
+  if (partner.key === "rent2holiday") {
+    return (
+      <div className={styles.rent2Logo} aria-label="Rent2Holiday">
+        <span>Rent2</span><b>Holiday</b>
+      </div>
+    );
   }
 
   return <img className={styles.fixerImage} src="/images/partner-the-fixer.svg" alt="The Fixer property advisory" />;
