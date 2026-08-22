@@ -16,6 +16,7 @@ type Partner = {
   description: string;
   mark: string;
   instagram?: string;
+  email?: string;
 };
 
 const partners: Partner[] = [
@@ -70,6 +71,7 @@ const partners: Partner[] = [
     description:
       "Costa del Sol specialists in holiday rentals, property sales and comprehensive property management across Marbella, Mijas, Estepona and surrounding areas.",
     mark: "R2",
+    email: "jorge@rent2holiday.es",
   },
 ];
 
@@ -155,6 +157,15 @@ export function InteractivePropertyPartners() {
                     aria-label={`Open ${partner.name} on Instagram`}
                   >
                     Instagram @{partner.instagram} <span>↗</span>
+                  </a>
+                ) : null}
+                {partner.email ? (
+                  <a
+                    className={styles.instagramButton}
+                    href={`mailto:${partner.email}`}
+                    aria-label={`Email ${partner.representative} at ${partner.name}`}
+                  >
+                    Email {partner.representative.split(" ")[0]} <span>→</span>
                   </a>
                 ) : null}
               </div>
