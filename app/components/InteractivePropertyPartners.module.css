@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
   gap: 14px;
   margin-top: 18px;
@@ -199,6 +199,21 @@
   object-fit: contain;
   transform: scale(1.55);
   transform-origin: center;
+}
+
+.rent2Logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  color: #171916;
+  font-family: var(--serif);
+  font-size: 27px;
+  letter-spacing: -.04em;
+}
+
+.rent2Logo b {
+  color: #a78550;
+  font-weight: 400;
 }
 
 @media (max-width: 1180px) {
