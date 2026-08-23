@@ -27,7 +27,7 @@ async function uploadFile(
   file: File,
   partnerCode: string,
   uploadKey: string,
-  kind: "main" | "secondary" | "brochure" | "partnerBrochure",
+  kind: "main" | "secondary" | "tertiary" | "quaternary" | "brochure" | "partnerBrochure",
   onProgress: (message: string) => void,
 ) {
   const pathname = `collaborator-submissions/${partnerCode.toLowerCase()}/${uploadKey}/${kind}-${safeFilename(file.name)}`;
@@ -205,6 +205,7 @@ export function CollaboratorPropertyForm({
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [authorityConfirmed, setAuthorityConfirmed] = useState(false);
+  const [listingType, setListingType] = useState<"resale" | "new-development">("resale");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -222,11 +223,15 @@ export function CollaboratorPropertyForm({
       const uploadKey = `property-${Date.now()}`;
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
+      const third = form.get("thirdImage") as File | null;
+      const fourth = form.get("fourthImage") as File | null;
       const pdf = form.get("brochure") as File | null;
       const partnerPdf = form.get("unbrandedBrochure") as File | null;
 
       validateImage(main, true);
-      validateImage(second, false);
+      validateImage(second, listingType === "new-development");
+      validateImage(third, listingType === "new-development");
+      validateImage(fourth, listingType === "new-development");
       validatePdf(pdf, true);
       validatePdf(partnerPdf);
 
@@ -277,11 +282,19 @@ export function CollaboratorPropertyForm({
             setMessage,
           )
         : "";
+      const thirdImage = third?.size
+        ? await uploadFile(third, partnerCode, uploadKey, "tertiary", setMessage)
+        : "";
+      const fourthImage = fourth?.size
+        ? await uploadFile(fourth, partnerCode, uploadKey, "quaternary", setMessage)
+        : "";
 
       setMessage("Submitting property for PF EuroAsia review...");
       const payload = Object.fromEntries(form.entries());
       delete payload.mainImage;
       delete payload.secondaryImage;
+      delete payload.thirdImage;
+      delete payload.fourthImage;
       delete payload.brochure;
       delete payload.unbrandedBrochure;
 
@@ -292,6 +305,8 @@ export function CollaboratorPropertyForm({
           ...payload,
           image,
           secondaryImage,
+          thirdImage,
+          fourthImage,
           brochure,
           unbrandedBrochure,
           publicImageApproved: form.get("publicImageApproved") === "true",
@@ -319,6 +334,29 @@ export function CollaboratorPropertyForm({
           <div><p className="vault-kicker">Step 1</p><h2>Property details</h2></div>
           <p>This submission will be assigned automatically to {partnerName} and held for PF EuroAsia approval.</p>
         </div>
+        <fieldset className="collaborator-listing-type">
+          <legend>Choose the homepage property section</legend>
+          <label>
+            <input
+              type="radio"
+              name="listingType"
+              value="resale"
+              checked={listingType === "resale"}
+              onChange={() => setListingType("resale")}
+            />
+            <span><strong>Villa and current property showcase</strong><small>Use for existing villas, completed homes and conventional resale listings.</small></span>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="listingType"
+              value="new-development"
+              checked={listingType === "new-development"}
+              onChange={() => setListingType("new-development")}
+            />
+            <span><strong>New developments and under construction</strong><small>Use for investment projects, off-plan releases and multi-unit developments.</small></span>
+          </label>
+        </fieldset>
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
@@ -352,7 +390,7 @@ export function CollaboratorPropertyForm({
           <textarea
             name="description"
             rows={8}
-            placeholder="Enter the concise description that PF EuroAsia should show with the two website photographs."
+            placeholder="Enter the concise description that PF EuroAsia should show with the property photographs."
           />
         </label>
       </section>
@@ -366,7 +404,13 @@ export function CollaboratorPropertyForm({
         </div>
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
-          <ImageUpload name="secondaryImage" title="Second website image" />
+          <ImageUpload name="secondaryImage" title="Second website image" required={listingType === "new-development"} />
+          {listingType === "new-development" && (
+            <>
+              <ImageUpload name="thirdImage" title="Third development image" required />
+              <ImageUpload name="fourthImage" title="Fourth development image" required />
+            </>
+          )}
           <PdfUpload name="brochure" title="Branded property brochure PDF" required />
           <PdfUpload name="unbrandedBrochure" title="Unbranded partner brochure PDF" />
         </div>

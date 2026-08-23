@@ -66,7 +66,11 @@ export async function POST(request: Request) {
 
         const isBrochure = kind === "brochure" || kind === "partnerBrochure";
         const isCollaboratorDocument = kind === "collaboratorDocument";
-        const isImage = kind === "main" || kind === "secondary";
+        const isImage =
+          kind === "main" ||
+          kind === "secondary" ||
+          kind === "tertiary" ||
+          kind === "quaternary";
 
         if ((isBrochure || isCollaboratorDocument) && !hasAllowedExtension(pathname, [".pdf"])) {
           throw new Error("The document must be a PDF file.");

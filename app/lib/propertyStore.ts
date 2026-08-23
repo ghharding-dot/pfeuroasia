@@ -10,6 +10,7 @@ import {
 export type PropertyVisibility = "confidential" | "teaser" | "public";
 export type PropertyAccessLevel = "registered" | "private";
 export type PropertyImagePosition = "center" | "top" | "bottom" | "left" | "right";
+export type PropertyListingType = "resale" | "new-development";
 
 export type VaultProperty = {
   id: string;
@@ -32,6 +33,8 @@ export type VaultProperty = {
   description: string;
   image: string;
   secondaryImage?: string;
+  thirdImage?: string;
+  fourthImage?: string;
   brochure?: string;
   unbrandedBrochure?: string;
   adviserName?: string;
@@ -43,6 +46,7 @@ export type VaultProperty = {
   publicLocation?: string;
   publicImageApproved?: boolean;
   imagePosition?: PropertyImagePosition;
+  listingType?: PropertyListingType;
   listingPartnerCode?: string;
   listingPartnerName?: string;
   submittedBy?: "admin" | "collaborator";
@@ -57,6 +61,10 @@ const CATALOGUE_PATH = "private-portfolio/catalogue.json";
 
 export function normalizePropertyVisibility(value: unknown): PropertyVisibility {
   return value === "teaser" || value === "public" ? value : "confidential";
+}
+
+export function normalizePropertyListingType(value: unknown): PropertyListingType {
+  return value === "new-development" ? "new-development" : "resale";
 }
 
 export function normalizePropertyAccessLevel(
@@ -118,6 +126,7 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
     price,
     priceAmount,
     priceCurrency,
+    listingType: property.listingType === "new-development" ? "new-development" : "resale",
   };
 }
 

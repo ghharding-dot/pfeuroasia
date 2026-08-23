@@ -32,7 +32,13 @@ function formatUsd(amount: number) {
   }).format(amount);
 }
 
-export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide[] }) {
+export function PublicPropertyCarousel({
+  slides,
+  variant = "property",
+}: {
+  slides: PublicPropertySlide[];
+  variant?: "property" | "development";
+}) {
   const [index, setIndex] = useState(0);
   const [eurUsdRate, setEurUsdRate] = useState(FALLBACK_EUR_USD_RATE);
 
@@ -73,25 +79,38 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
 
   if (slides.length === 0) return null;
 
+  const isDevelopment = variant === "development";
+  const headingId = isDevelopment
+    ? "new-developments-heading"
+    : "selected-opportunities-heading";
+
   function move(direction: number) {
     setIndex((current) => (current + direction + slides.length) % slides.length);
   }
 
   return (
-    <section className={styles.section} aria-labelledby="selected-opportunities-heading">
+    <section className={styles.section} aria-labelledby={headingId}>
       <div className="site-shell">
         <div className={styles.heading}>
           <div>
-            <p className="eyebrow">Selected property opportunities</p>
-            <h2 id="selected-opportunities-heading">
-              A glimpse of what is available.
-              <em>General listings and private introductions.</em>
+            <p className="eyebrow">
+              {isDevelopment ? "New developments in Spain" : "Selected property opportunities"}
+            </p>
+            <h2 id={headingId}>
+              {isDevelopment ? "Property taking shape." : "A glimpse of what is available."}
+              <em>
+                {isDevelopment
+                  ? "Under construction, off-plan and investment opportunities."
+                  : "General listings and private introductions."}
+              </em>
             </h2>
           </div>
           <div className={styles.headingCopy}>
             <strong>{slides.length} approved {slides.length === 1 ? "opportunity" : "opportunities"}</strong>
             <p>
-              Registered listings open after simple contact verification. Genuine private and off-market opportunities remain subject to a fuller application and approval.
+              {isDevelopment
+                ? "Explore selected new-build projects, phased releases and under-construction opportunities with direct access to current availability and developer information."
+                : "Registered listings open after simple contact verification. Genuine private and off-market opportunities remain subject to a fuller application and approval."}
             </p>
           </div>
         </div>
@@ -116,7 +135,11 @@ export function PublicPropertyCarousel({ slides }: { slides: PublicPropertySlide
                       style={{ objectPosition: slide.imagePosition }}
                     />
                     <span className={styles.imageLabel}>
-                      {registered ? "Registered listing" : "Private opportunity"}
+                      {isDevelopment
+                        ? "New development"
+                        : registered
+                          ? "Registered listing"
+                          : "Private opportunity"}
                     </span>
                   </div>
 

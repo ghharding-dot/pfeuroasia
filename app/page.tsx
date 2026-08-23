@@ -45,10 +45,13 @@ const services = [
   },
 ];
 
-async function getPublicPropertySlides(): Promise<PublicPropertySlide[]> {
+async function getPublicPropertySlides(): Promise<{
+  properties: PublicPropertySlide[];
+  developments: PublicPropertySlide[];
+}> {
   try {
     const properties = await readProperties();
-    return properties
+    const approved = properties
       .filter(
         (property) =>
           property.status === "published" &&
@@ -59,25 +62,32 @@ async function getPublicPropertySlides(): Promise<PublicPropertySlide[]> {
       .map((property) => {
         const isTeaser = property.visibility === "teaser";
         return {
-          id: property.id,
-          image: property.image,
-          imagePosition: imageObjectPosition(property.imagePosition),
-          title:
-            property.publicTitle ||
-            (isTeaser ? "Private property opportunity" : property.title),
-          location:
-            property.publicLocation ||
-            (isTeaser ? "Southern Spain" : property.location),
-          visibility: property.visibility as "teaser" | "public",
-          price:
-            property.visibility === "public"
-              ? property.price || "Price on application"
-              : undefined,
+          listingType: property.listingType === "new-development" ? "new-development" : "resale",
+          slide: {
+            id: property.id,
+            image: property.image,
+            imagePosition: imageObjectPosition(property.imagePosition),
+            title:
+              property.publicTitle ||
+              (isTeaser ? "Private property opportunity" : property.title),
+            location:
+              property.publicLocation ||
+              (isTeaser ? "Southern Spain" : property.location),
+            visibility: property.visibility as "teaser" | "public",
+            price:
+              property.visibility === "public"
+                ? property.price || "Price on application"
+                : undefined,
+          },
         };
       });
+    return {
+      properties: approved.filter((item) => item.listingType === "resale").map((item) => item.slide),
+      developments: approved.filter((item) => item.listingType === "new-development").map((item) => item.slide),
+    };
   } catch (error) {
     console.error("homepage-property-carousel-unavailable", error);
-    return [];
+    return { properties: [], developments: [] };
   }
 }
 
@@ -193,7 +203,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <PublicPropertyCarousel slides={publicPropertySlides} />
+      <PublicPropertyCarousel slides={publicPropertySlides.properties} />
+      <PublicPropertyCarousel slides={publicPropertySlides.developments} variant="development" />
 
       <section className="services-section section-pad" id="services">
         <div className="site-shell">

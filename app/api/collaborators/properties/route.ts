@@ -4,6 +4,7 @@ import { formatPropertyCurrency, normalizePriceAmount, normalizePropertyCurrency
 import {
   generatePropertyReference,
   normalizeImagePosition,
+  normalizePropertyListingType,
   normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
@@ -152,6 +153,8 @@ export async function POST(request: Request) {
     description: clean(body.description),
     image: clean(body.image, 1000),
     secondaryImage: clean(body.secondaryImage, 1000),
+    thirdImage: clean(body.thirdImage, 1000),
+    fourthImage: clean(body.fourthImage, 1000),
     brochure: clean(body.brochure, 2000),
     unbrandedBrochure: clean(body.unbrandedBrochure, 2000),
     adviserName: clean(body.adviserName, 120) || "PF EuroAsia Property Adviser",
@@ -162,6 +165,7 @@ export async function POST(request: Request) {
     publicLocation: clean(body.publicLocation, 120),
     publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
     imagePosition: normalizeImagePosition(body.imagePosition),
+    listingType: normalizePropertyListingType(body.listingType),
     listingPartnerCode: collaborator.partnerCode,
     listingPartnerName: collaborator.partnerName,
     submittedBy: "collaborator",
@@ -176,6 +180,16 @@ export async function POST(request: Request) {
   if (!property.title || !property.location || !property.image || !property.brochure) {
     return NextResponse.json(
       { error: "Property title, location, main image and one brochure PDF are required." },
+      { status: 400 },
+    );
+  }
+
+  if (
+    property.listingType === "new-development" &&
+    (!property.secondaryImage || !property.thirdImage || !property.fourthImage)
+  ) {
+    return NextResponse.json(
+      { error: "New-development listings require four property photographs." },
       { status: 400 },
     );
   }

@@ -7,6 +7,7 @@ import {
 } from "../../../../lib/propertyPrice";
 import {
   normalizeImagePosition,
+  normalizePropertyListingType,
   normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
@@ -139,6 +140,14 @@ export async function PATCH(
       body.removeSecondaryImage === true
         ? ""
         : clean(body.secondaryImage, 1200) || existing.secondaryImage || "",
+    thirdImage:
+      body.removeThirdImage === true
+        ? ""
+        : clean(body.thirdImage, 1200) || existing.thirdImage || "",
+    fourthImage:
+      body.removeFourthImage === true
+        ? ""
+        : clean(body.fourthImage, 1200) || existing.fourthImage || "",
     brochure: clean(body.brochure, 2000) || existing.brochure || "",
     unbrandedBrochure:
       clean(body.unbrandedBrochure, 2000) || existing.unbrandedBrochure || "",
@@ -150,6 +159,7 @@ export async function PATCH(
     publicLocation: clean(body.publicLocation, 120),
     publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
     imagePosition: normalizeImagePosition(body.imagePosition),
+    listingType: normalizePropertyListingType(body.listingType),
     status: "draft",
     lastVerifiedAt: existing.lastVerifiedAt,
     approvalStatus: "pending-review",
@@ -159,6 +169,16 @@ export async function PATCH(
   if (!updated.title || !updated.location || !updated.image || !updated.brochure) {
     return NextResponse.json(
       { error: "Property title, location, main image and one brochure PDF are required." },
+      { status: 400 },
+    );
+  }
+
+  if (
+    updated.listingType === "new-development" &&
+    (!updated.secondaryImage || !updated.thirdImage || !updated.fourthImage)
+  ) {
+    return NextResponse.json(
+      { error: "New-development listings require four property photographs." },
       { status: 400 },
     );
   }

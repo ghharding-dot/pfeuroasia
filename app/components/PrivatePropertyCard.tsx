@@ -18,6 +18,8 @@ export type PrivatePropertyDisplay = Readonly<
     | "description"
     | "image"
     | "secondaryImage"
+    | "thirdImage"
+    | "fourthImage"
     | "brochure"
     | "unbrandedBrochure"
     | "adviserName"
@@ -82,6 +84,11 @@ export function PrivatePropertyCard({
     property.adviserWhatsApp || process.env.NEXT_PUBLIC_PROPERTY_ADVISER_WHATSAPP || "",
     property.reference,
   );
+  const additionalImages = [
+    property.secondaryImage,
+    property.thirdImage,
+    property.fourthImage,
+  ].filter((image): image is string => Boolean(image));
 
   return (
     <article className="private-property-card">
@@ -146,13 +153,18 @@ export function PrivatePropertyCard({
           </div>
         )}
 
-        {property.secondaryImage && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            className="private-property-secondary-image"
-            src={property.secondaryImage}
-            alt={`Additional view of ${property.title}`}
-          />
+        {additionalImages.length > 0 && (
+          <div className="private-property-image-gallery">
+            {additionalImages.map((image, index) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                className="private-property-secondary-image"
+                src={image}
+                alt={`Additional view ${index + 2} of ${property.title}`}
+                key={image}
+              />
+            ))}
+          </div>
         )}
 
         <div className="private-property-actions">

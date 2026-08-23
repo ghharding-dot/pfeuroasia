@@ -28,7 +28,7 @@ async function uploadFile(
   file: File,
   partnerCode: string,
   uploadKey: string,
-  kind: "main" | "secondary" | "brochure" | "partnerBrochure",
+  kind: "main" | "secondary" | "tertiary" | "quaternary" | "brochure" | "partnerBrochure",
   onProgress: (message: string) => void,
 ) {
   const pathname = `collaborator-submissions/${partnerCode.toLowerCase()}/${uploadKey}/${kind}-${safeFilename(file.name)}`;
@@ -105,10 +105,12 @@ function ReplacementImage({
   name,
   title,
   currentUrl,
+  required = false,
 }: {
   name: string;
   title: string;
   currentUrl?: string;
+  required?: boolean;
 }) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState(currentUrl || "");
@@ -139,6 +141,7 @@ function ReplacementImage({
         name={name}
         type="file"
         accept="image/jpeg,image/png,image/webp"
+        required={required && !currentUrl}
         onChange={(event) => setFile(event.target.files?.[0] || null)}
       />
     </label>
@@ -158,6 +161,9 @@ export function CollaboratorEditPropertyForm({
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [authorityConfirmed, setAuthorityConfirmed] = useState(false);
+  const [listingType, setListingType] = useState<"resale" | "new-development">(
+    property.listingType === "new-development" ? "new-development" : "resale",
+  );
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -173,11 +179,15 @@ export function CollaboratorEditPropertyForm({
       const uploadKey = `property-edit-${property.id}-${Date.now()}`;
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
+      const third = form.get("thirdImage") as File | null;
+      const fourth = form.get("fourthImage") as File | null;
       const pdf = form.get("brochure") as File | null;
       const partnerPdf = form.get("unbrandedBrochure") as File | null;
 
       validateImage(main);
       validateImage(second);
+      validateImage(third);
+      validateImage(fourth);
       validatePdf(pdf);
       validatePdf(partnerPdf);
 
@@ -199,10 +209,18 @@ export function CollaboratorEditPropertyForm({
       const secondaryImage = second?.size
         ? await uploadFile(second, partnerCode, uploadKey, "secondary", setMessage)
         : "";
+      const thirdImage = third?.size
+        ? await uploadFile(third, partnerCode, uploadKey, "tertiary", setMessage)
+        : "";
+      const fourthImage = fourth?.size
+        ? await uploadFile(fourth, partnerCode, uploadKey, "quaternary", setMessage)
+        : "";
 
       const payload = Object.fromEntries(form.entries());
       delete payload.mainImage;
       delete payload.secondaryImage;
+      delete payload.thirdImage;
+      delete payload.fourthImage;
       delete payload.brochure;
       delete payload.unbrandedBrochure;
 
@@ -214,10 +232,14 @@ export function CollaboratorEditPropertyForm({
           ...payload,
           image,
           secondaryImage,
+          thirdImage,
+          fourthImage,
           brochure,
           unbrandedBrochure,
           publicImageApproved: form.get("publicImageApproved") === "true",
           removeSecondaryImage: form.get("removeSecondaryImage") === "on",
+          removeThirdImage: form.get("removeThirdImage") === "on",
+          removeFourthImage: form.get("removeFourthImage") === "on",
           authorityConfirmed: true,
         }),
       });
@@ -239,6 +261,17 @@ export function CollaboratorEditPropertyForm({
           <div><p className="vault-kicker">Edit listing</p><h2>Property details</h2></div>
           <p>Any change returns the listing to PF EuroAsia for approval before it is published again.</p>
         </div>
+        <fieldset className="collaborator-listing-type">
+          <legend>Choose the homepage property section</legend>
+          <label>
+            <input type="radio" name="listingType" value="resale" checked={listingType === "resale"} onChange={() => setListingType("resale")} />
+            <span><strong>Villa and current property showcase</strong><small>Existing villas, completed homes and conventional resale listings.</small></span>
+          </label>
+          <label>
+            <input type="radio" name="listingType" value="new-development" checked={listingType === "new-development"} onChange={() => setListingType("new-development")} />
+            <span><strong>New developments and under construction</strong><small>Investment projects, off-plan releases and multi-unit developments.</small></span>
+          </label>
+        </fieldset>
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" defaultValue={property.title} required /></label>
           <label><span>Location</span><input name="location" defaultValue={property.location} required /></label>
@@ -297,7 +330,13 @@ export function CollaboratorEditPropertyForm({
         </div>
         <div className="vault-upload-grid">
           <ReplacementImage name="mainImage" title="Main website image" currentUrl={property.image} />
-          <ReplacementImage name="secondaryImage" title="Second website image" currentUrl={property.secondaryImage} />
+          <ReplacementImage name="secondaryImage" title="Second website image" currentUrl={property.secondaryImage} required={listingType === "new-development"} />
+          {listingType === "new-development" && (
+            <>
+              <ReplacementImage name="thirdImage" title="Third development image" currentUrl={property.thirdImage} required />
+              <ReplacementImage name="fourthImage" title="Fourth development image" currentUrl={property.fourthImage} required />
+            </>
+          )}
           <label className="vault-upload-box vault-upload-pdf has-file">
             <span className="vault-upload-icon">PDF</span>
             <strong>Protected sales brochure</strong>
@@ -319,6 +358,18 @@ export function CollaboratorEditPropertyForm({
           <label className="collaborator-authority-check collaborator-remove-check">
             <input name="removeSecondaryImage" type="checkbox" />
             <span>Remove the current second photograph instead of retaining it.</span>
+          </label>
+        )}
+        {listingType === "new-development" && property.thirdImage && (
+          <label className="collaborator-authority-check collaborator-remove-check">
+            <input name="removeThirdImage" type="checkbox" />
+            <span>Remove the current third photograph instead of retaining it.</span>
+          </label>
+        )}
+        {listingType === "new-development" && property.fourthImage && (
+          <label className="collaborator-authority-check collaborator-remove-check">
+            <input name="removeFourthImage" type="checkbox" />
+            <span>Remove the current fourth photograph instead of retaining it.</span>
           </label>
         )}
       </section>
