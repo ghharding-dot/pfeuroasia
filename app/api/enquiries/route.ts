@@ -137,6 +137,7 @@ function partnerEmail(code?: string) {
     HOU: process.env.PARTNER_EMAIL_HOU || "jaime@houseandcountry.com",
     LUX: process.env.PARTNER_EMAIL_LUX,
     FIX: process.env.PARTNER_EMAIL_FIXER || "robert@bazothefixer.com",
+    R2H: process.env.PARTNER_EMAIL_R2H || "jorge@rent2holiday.es",
     LEG:
       process.env.PARTNER_EMAIL_LEG ||
       "juanlopez@legal10abogadosmarbella.com",
