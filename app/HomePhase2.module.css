@@ -209,80 +209,64 @@
   transform: translateY(0) scale(0.985);
 }
 
-.malaysiaSpotlight {
-  display: grid;
-  grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
-  gap: 18px;
-  margin-top: 18px;
-}
-
-.malaysiaStatement,
-.nomadYouTubeCard {
-  min-height: 150px;
-  border: 1px solid rgba(222, 194, 141, 0.28);
-  background: rgba(8, 12, 15, 0.82);
-  backdrop-filter: blur(12px);
-}
-
-.malaysiaStatement {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 28px 34px;
-}
-
-.malaysiaStatement > span,
-.youTubeCopy small {
-  color: var(--gold-light);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.malaysiaStatement p {
-  margin: 12px 0 0;
-  color: #fff;
+.gatewayPromise {
+  display: block;
+  max-width: 720px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.82);
   font-family: var(--serif);
-  font-size: clamp(29px, 2.8vw, 43px);
+  font-size: clamp(19px, 1.65vw, 25px);
   font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
 }
 
-.nomadYouTubeCard {
+.missionActions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: stretch;
+  justify-content: flex-end;
+  margin-top: 26px;
+}
+
+.missionActions :global(button) {
+  margin-top: 0;
+}
+
+.nomadYouTubeLink {
   display: grid;
+  min-height: 48px;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 20px;
+  gap: 14px;
   align-items: center;
-  padding: 24px 28px;
-  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+  padding: 8px 14px 8px 10px;
+  border: 1px solid #9b7d4e;
+  background: rgba(255, 255, 255, 0.34);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.nomadYouTubeCard:hover {
-  border-color: rgba(255, 255, 255, 0.48);
-  background: rgba(14, 19, 23, 0.94);
-  transform: translateY(-3px);
-}
-
-.nomadYouTubeCard:focus-visible {
-  outline: 2px solid var(--gold-light);
-  outline-offset: 3px;
+.nomadYouTubeLink:hover,
+.nomadYouTubeLink:focus-visible {
+  background: #262923;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
 .youTubePlay {
   display: grid;
-  width: 58px;
-  height: 42px;
+  width: 46px;
+  height: 32px;
   place-items: center;
-  border-radius: 11px;
+  border-radius: 8px;
   background: #ff0033;
-  box-shadow: 0 10px 24px rgba(255, 0, 51, 0.2);
+  box-shadow: 0 7px 16px rgba(255, 0, 51, 0.16);
 }
 
 .youTubePlay svg {
-  width: 26px;
-  height: 26px;
+  width: 21px;
+  height: 21px;
   fill: #fff;
 }
 
@@ -290,31 +274,46 @@
   display: flex;
   min-width: 0;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
+}
+
+.youTubeCopy small {
+  color: #8e7754;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .youTubeCopy strong {
-  color: #fff;
-  font-family: var(--serif);
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.08;
+  color: #282b27;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
-.youTubeCopy > span {
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 11px;
-  line-height: 1.45;
+.nomadYouTubeLink:hover .youTubeCopy small,
+.nomadYouTubeLink:focus-visible .youTubeCopy small {
+  color: var(--gold-light);
+}
+
+.nomadYouTubeLink:hover .youTubeCopy strong,
+.nomadYouTubeLink:focus-visible .youTubeCopy strong {
+  color: #fff;
 }
 
 .externalArrow {
-  color: var(--gold-light);
-  font-size: 24px;
+  color: #9b7d4e;
+  font-size: 18px;
   transition: transform 180ms ease;
 }
 
-.nomadYouTubeCard:hover .externalArrow {
-  transform: translate(3px, -3px);
+.nomadYouTubeLink:hover .externalArrow,
+.nomadYouTubeLink:focus-visible .externalArrow {
+  color: var(--gold-light);
+  transform: translate(2px, -2px);
 }
 
 .missionSection {
@@ -559,13 +558,9 @@
     min-height: 390px;
   }
 
-  .malaysiaSpotlight {
-    grid-template-columns: 1fr;
-  }
-
-  .malaysiaStatement,
-  .nomadYouTubeCard {
-    min-height: 132px;
+  .missionActions {
+    justify-content: flex-start;
+    margin-top: 0;
   }
 
   .missionSection {
@@ -662,39 +657,18 @@
     min-height: 46px;
   }
 
-  .malaysiaSpotlight {
-    gap: 12px;
-    margin-top: 12px;
+  .gatewayPromise {
+    margin-top: 16px;
+    font-size: 18px;
   }
 
-  .malaysiaStatement {
-    min-height: 122px;
-    padding: 24px;
+  .missionActions,
+  .nomadYouTubeLink {
+    width: 100%;
   }
 
-  .nomadYouTubeCard {
-    min-height: 0;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 15px;
-    padding: 22px 20px;
-  }
-
-  .youTubePlay {
-    width: 50px;
-    height: 36px;
-    border-radius: 9px;
-  }
-
-  .youTubeCopy strong {
-    font-size: 21px;
-  }
-
-  .youTubeCopy > span {
-    font-size: 10px;
-  }
-
-  .externalArrow {
-    display: none;
+  .nomadYouTubeLink {
+    min-height: 50px;
   }
 
   .missionSection {

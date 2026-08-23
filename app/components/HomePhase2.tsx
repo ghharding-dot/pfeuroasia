@@ -80,6 +80,9 @@ export function HomePhase2() {
               <h1 id="gateway-heading">
                 Choose your direction.
                 <em>We will guide the journey.</em>
+                <span className={phase2Styles.gatewayPromise}>
+                  But ultimately, go where you’re treated best.
+                </span>
               </h1>
             </div>
             <p>
@@ -142,32 +145,6 @@ export function HomePhase2() {
             </Link>
           </div>
 
-          <div className={phase2Styles.malaysiaSpotlight}>
-            <div className={phase2Styles.malaysiaStatement}>
-              <span>Malaysia perspective</span>
-              <p>Go where you’re treated best.</p>
-            </div>
-
-            <a
-              className={phase2Styles.nomadYouTubeCard}
-              href="https://www.youtube.com/@nomadcapitalist"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit the official Nomad Capitalist YouTube channel"
-            >
-              <span className={phase2Styles.youTubePlay} aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M9 7.5v9l7-4.5-7-4.5Z" />
-                </svg>
-              </span>
-              <span className={phase2Styles.youTubeCopy}>
-                <small>Nomad Capitalist on YouTube</small>
-                <strong>Visit the official channel</strong>
-                <span>International mobility, residency and global citizenship perspectives.</span>
-              </span>
-              <span className={phase2Styles.externalArrow} aria-hidden="true">↗</span>
-            </a>
-          </div>
         </div>
       </section>
 
@@ -190,7 +167,27 @@ export function HomePhase2() {
               and the responsibilities involved.
             </p>
           </div>
-          <PartnerNetworkDialog />
+          <div className={phase2Styles.missionActions}>
+            <PartnerNetworkDialog />
+            <a
+              className={phase2Styles.nomadYouTubeLink}
+              href="https://www.youtube.com/@nomadcapitalist"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit the official Nomad Capitalist YouTube channel"
+            >
+              <span className={phase2Styles.youTubePlay} aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M9 7.5v9l7-4.5-7-4.5Z" />
+                </svg>
+              </span>
+              <span className={phase2Styles.youTubeCopy}>
+                <small>Nomad Capitalist · YouTube</small>
+                <strong>Visit the official channel</strong>
+              </span>
+              <span className={phase2Styles.externalArrow} aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </section>
 
