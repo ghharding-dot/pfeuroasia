@@ -1,5 +1,5 @@
 import { BrochureAccessButton } from "./BrochureAccessButton";
-import { imageObjectPosition, type VaultProperty } from "../lib/propertyStore";
+import { imageObjectPosition, propertyTypeLabel, type VaultProperty } from "../lib/propertyStore";
 
 export type PrivatePropertyDisplay = Readonly<
   Pick<
@@ -29,6 +29,7 @@ export type PrivatePropertyDisplay = Readonly<
     | "imagePosition"
     | "listingPartnerCode"
     | "listingPartnerName"
+    | "propertyType"
   > & { updatedAt?: string }
 >;
 
@@ -69,6 +70,7 @@ export function PrivatePropertyCard({
   detailMode?: boolean;
 }) {
   const facts = [
+    propertyTypeLabel(property.propertyType),
     countLabel(property.bedrooms, "bedroom", "bedrooms"),
     countLabel(property.bathrooms, "bathroom", "bathrooms"),
     property.builtSize ? `${property.builtSize} built` : "",
