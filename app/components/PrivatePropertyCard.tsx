@@ -63,11 +63,15 @@ export function PrivatePropertyCard({
   showEnquiry = true,
   brochureMode = "verified",
   detailMode = false,
+  enquiryHref,
+  enquiryLabel = "Enquire about this property",
 }: {
   property: PrivatePropertyDisplay;
   showEnquiry?: boolean;
   brochureMode?: "verified" | "preview" | "direct" | "enquiry";
   detailMode?: boolean;
+  enquiryHref?: string;
+  enquiryLabel?: string;
 }) {
   const facts = [
     propertyTypeLabel(property.propertyType),
@@ -234,17 +238,17 @@ export function PrivatePropertyCard({
           {showEnquiry && (
             <a
               className="text-link"
-              href={`mailto:enquiry@pfeuroasia.com?subject=${enquirySubject}`}
+              href={enquiryHref || `mailto:enquiry@pfeuroasia.com?subject=${enquirySubject}`}
             >
-              Enquire about this property <span>→</span>
+              {enquiryLabel} <span>→</span>
             </a>
           )}
         </div>
 
         {detailMode && showEnquiry && (
           <div className="private-property-primary-actions">
-            <a className="button button-gold private-viewing-button" href={`mailto:enquiry@pfeuroasia.com?subject=${viewingSubject}`}>
-              Request a private viewing <span>→</span>
+            <a className="button button-gold private-viewing-button" href={enquiryHref || `mailto:enquiry@pfeuroasia.com?subject=${viewingSubject}`}>
+              {enquiryHref ? enquiryLabel : "Request a private viewing"} <span>→</span>
             </a>
             {whatsapp && (
               <a className="private-whatsapp-button" href={whatsapp} target="_blank" rel="noopener noreferrer">
