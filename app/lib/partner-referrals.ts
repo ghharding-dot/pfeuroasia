@@ -24,6 +24,11 @@ export const PARTNER_REFERRALS = {
     name: "The Fixer",
     category: "Property representation partner",
   },
+  rent2holiday: {
+    code: "R2H",
+    name: "Rent2Holiday",
+    category: "Holiday rental and property management partner",
+  },
   legal10: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",
