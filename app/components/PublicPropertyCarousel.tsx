@@ -197,15 +197,27 @@ export function PublicPropertyCarousel({
                       </div>
                     )}
                     <p className={styles.description}>
-                      {registered
+                      {isDevelopment
+                        ? "View the photographs, price range and full development details without registering. Enquire only when you would like current availability or further information."
+                        : registered
                         ? "Register your name, email and telephone number, then verify your email to view the full property particulars. No manual approval is required."
                         : "This is a private or off-market introduction. Full particulars are disclosed only after a detailed client application and PF EuroAsia approval."}
                     </p>
                     <Link
                       className="button button-gold"
-                      href={registered ? `/properties/${slide.id}/access` : "/private-portfolio"}
+                      href={
+                        isDevelopment
+                          ? `/properties/${slide.id}`
+                          : registered
+                            ? `/properties/${slide.id}/access`
+                            : "/private-portfolio"
+                      }
                     >
-                      {registered ? "View full details" : "Request private access"} <span>→</span>
+                      {isDevelopment
+                        ? "View full development"
+                        : registered
+                          ? "View full details"
+                          : "Request private access"} <span>→</span>
                     </Link>
                   </div>
                 </article>
