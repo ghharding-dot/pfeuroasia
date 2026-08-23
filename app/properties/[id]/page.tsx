@@ -17,12 +17,28 @@ import {
 import "../registered-property.css";
 import "../../private-portfolio/portfolio-collection.css";
 
-export const metadata: Metadata = {
-  title: "Registered Property Details | Property Facilitators EuroAsia",
-  robots: { index: false, follow: false },
-};
-
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const properties = await readProperties();
+  const property = properties.find((item) => item.id === id && item.status === "published");
+  const isDevelopment = property?.listingType === "new-development";
+
+  return {
+    title: property
+      ? `${property.title} | Property Facilitators EuroAsia`
+      : "Property Details | Property Facilitators EuroAsia",
+    description: property?.description || "View current property details and availability through Property Facilitators EuroAsia.",
+    robots: isDevelopment
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
+  };
+}
 
 export default async function RegisteredPropertyPage({
   params,
@@ -35,17 +51,24 @@ export default async function RegisteredPropertyPage({
     (item) =>
       item.id === id &&
       item.status === "published" &&
-      normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
+      (item.listingType === "new-development"
+        ? (item.visibility === "public" || item.visibility === "teaser") &&
+          item.publicImageApproved === true
+        : normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered"),
   );
 
   if (!property) notFound();
 
-  const cookieStore = await cookies();
-  const session = verifyRegisteredPropertySession(
-    cookieStore.get(REGISTERED_PROPERTY_COOKIE_NAME)?.value,
-  );
+  const isDevelopment = property.listingType === "new-development";
 
-  if (!session) redirect(`/properties/${property.id}/access`);
+  const cookieStore = isDevelopment ? null : await cookies();
+  const session = isDevelopment
+    ? null
+    : verifyRegisteredPropertySession(
+        cookieStore?.get(REGISTERED_PROPERTY_COOKIE_NAME)?.value,
+      );
+
+  if (!isDevelopment && !session) redirect(`/properties/${property.id}/access`);
 
   const locationKey = (property.approximateLocation || property.location)
     .split(",")[0]
@@ -56,7 +79,11 @@ export default async function RegisteredPropertyPage({
       (item) =>
         item.id !== property.id &&
         item.status === "published" &&
-        normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
+        (isDevelopment
+          ? item.listingType === "new-development" &&
+            (item.visibility === "public" || item.visibility === "teaser") &&
+            item.publicImageApproved === true
+          : normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered"),
     )
     .sort((left, right) => {
       const leftMatches = (left.approximateLocation || left.location).toLowerCase().includes(locationKey);
@@ -72,19 +99,27 @@ export default async function RegisteredPropertyPage({
       <section className="registered-property-hero site-shell">
         <div className="registered-property-notice">
           <div>
-            <strong>Verified registered-listing access</strong>
+            <strong>{isDevelopment ? "New development · Open listing" : "Verified registered-listing access"}</strong>
             <p>
-              Signed in as {session.fullName}. This access covers general registered listings for 30 days. Private off-market opportunities require a separate application and approval.
+              {isDevelopment
+                ? "View the complete development presentation without registering. Enquire when you would like current availability, floor plans or further information."
+                : `Signed in as ${session?.fullName}. This access covers general registered listings for 30 days. Private off-market opportunities require a separate application and approval.`}
             </p>
           </div>
-          <Link className="button button-gold" href="/private-portfolio">
-            Explore Private Collection <span>→</span>
+          <Link className="button button-gold" href={isDevelopment ? "/#new-developments-heading" : "/private-portfolio"}>
+            {isDevelopment ? "Back to developments" : "Explore Private Collection"} <span>→</span>
           </Link>
         </div>
       </section>
 
       <section className="private-collection-grid registered-property-grid site-shell">
-        <PrivatePropertyCard property={property} brochureMode="enquiry" detailMode />
+        <PrivatePropertyCard
+          property={property}
+          brochureMode="enquiry"
+          detailMode
+          enquiryHref={isDevelopment ? `/enquire?property=${encodeURIComponent(property.id)}` : undefined}
+          enquiryLabel={isDevelopment ? "Enquire about this development" : undefined}
+        />
       </section>
 
       {similarProperties.length > 0 && (
