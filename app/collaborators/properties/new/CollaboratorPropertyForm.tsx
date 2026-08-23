@@ -362,10 +362,17 @@ export function CollaboratorPropertyForm({
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
           <label><span>Approximate public location</span><input name="approximateLocation" placeholder="La Zagaleta, Benahavís" /></label>
           <label>
-            <span>Listing price</span>
-            <input name="priceAmount" type="number" min="0" step="1" inputMode="numeric" placeholder="8900000" />
+            <span>{listingType === "new-development" ? "Price from" : "Listing price"}</span>
+            <input name="priceAmount" type="number" min="0" step="1" inputMode="numeric" placeholder="400000" required={listingType === "new-development"} />
             <small>Numbers only. Currency formatting is added automatically.</small>
           </label>
+          {listingType === "new-development" && (
+            <label>
+              <span>Price to</span>
+              <input name="priceToAmount" type="number" min="0" step="1" inputMode="numeric" placeholder="1200000" required />
+              <small>Enter the highest current price in the development.</small>
+            </label>
+          )}
           <label>
             <span>Currency</span>
             <select name="priceCurrency" defaultValue="EUR">

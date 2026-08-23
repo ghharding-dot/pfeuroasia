@@ -36,7 +36,9 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
       ? "Registered listing — automatic access after contact verification"
       : "Private off-market — detailed application and PF EuroAsia approval";
   const priceLabel = property.priceAmount
-    ? formatPropertyCurrency(property.priceAmount, property.priceCurrency || "EUR")
+    ? property.priceToAmount
+      ? `${formatPropertyCurrency(property.priceAmount, property.priceCurrency || "EUR")} – ${formatPropertyCurrency(property.priceToAmount, property.priceCurrency || "EUR")}`
+      : formatPropertyCurrency(property.priceAmount, property.priceCurrency || "EUR")
     : "Price on application";
   const text = [
     "A collaborator has updated a property and returned it for PF EuroAsia review.",
@@ -92,10 +94,27 @@ export async function PATCH(
     );
   }
 
+  const listingType = normalizePropertyListingType(body.listingType);
   const priceAmount = normalizePriceAmount(body.priceAmount);
+  const priceToAmount = normalizePriceAmount(body.priceToAmount);
   if (body.priceAmount && !priceAmount) {
     return NextResponse.json(
       { error: "Enter the listing price as numbers only, for example 8900000." },
+      { status: 400 },
+    );
+  }
+  if (body.priceToAmount && !priceToAmount) {
+    return NextResponse.json(
+      { error: "Enter the maximum development price as numbers only." },
+      { status: 400 },
+    );
+  }
+  if (
+    listingType === "new-development" &&
+    (!priceAmount || !priceToAmount || priceToAmount < priceAmount)
+  ) {
+    return NextResponse.json(
+      { error: "New developments require a valid price from and price to, with the maximum price higher than the starting price." },
       { status: 400 },
     );
   }
@@ -126,8 +145,10 @@ export async function PATCH(
     location: clean(body.location, 180) || existing.location,
     approximateLocation: clean(body.approximateLocation, 180) || existing.approximateLocation || existing.location,
     priceAmount,
+    priceToAmount: listingType === "new-development" ? priceToAmount : undefined,
     priceCurrency: normalizePropertyCurrency(body.priceCurrency),
     price: undefined,
+    priceTo: undefined,
     bedrooms: Number(body.bedrooms || 0),
     bathrooms: Number(body.bathrooms || 0),
     plotSize: clean(body.plotSize, 120),
@@ -159,7 +180,7 @@ export async function PATCH(
     publicLocation: clean(body.publicLocation, 120),
     publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
     imagePosition: normalizeImagePosition(body.imagePosition),
-    listingType: normalizePropertyListingType(body.listingType),
+    listingType,
     status: "draft",
     lastVerifiedAt: existing.lastVerifiedAt,
     approvalStatus: "pending-review",

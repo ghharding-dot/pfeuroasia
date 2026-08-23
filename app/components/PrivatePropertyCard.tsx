@@ -8,6 +8,7 @@ export type PrivatePropertyDisplay = Readonly<
     | "location"
     | "approximateLocation"
     | "price"
+    | "priceTo"
     | "title"
     | "bedrooms"
     | "bathrooms"
@@ -113,7 +114,11 @@ export function PrivatePropertyCard({
             <p>{property.reference} · {property.location}</p>
             <h2>{property.title}</h2>
           </div>
-          <strong>{property.price || "Price on application"}</strong>
+          <strong>
+            {property.priceTo
+              ? `${property.price || "Price on application"} – ${property.priceTo}`
+              : property.price || "Price on application"}
+          </strong>
         </div>
 
         {facts.length > 0 && (

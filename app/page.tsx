@@ -78,6 +78,10 @@ async function getPublicPropertySlides(): Promise<{
               property.visibility === "public"
                 ? property.price || "Price on application"
                 : undefined,
+            priceTo:
+              property.visibility === "public" && property.listingType === "new-development"
+                ? property.priceTo
+                : undefined,
           },
         };
       });

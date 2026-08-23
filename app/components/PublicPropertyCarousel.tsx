@@ -13,6 +13,7 @@ export type PublicPropertySlide = {
   visibility: "teaser" | "public";
   accessLevel?: "registered" | "private";
   price?: string;
+  priceTo?: string;
 };
 
 const FALLBACK_EUR_USD_RATE = 1.16;
@@ -72,7 +73,12 @@ export function PublicPropertyCarousel({
     () =>
       slides.map((slide) => {
         const euroAmount = extractEuroAmount(slide.price);
-        return euroAmount ? `Approx. US${formatUsd(euroAmount * eurUsdRate)} USD` : "";
+        const euroAmountTo = extractEuroAmount(slide.priceTo);
+        if (!euroAmount) return "";
+        if (euroAmountTo) {
+          return `Approx. US${formatUsd(euroAmount * eurUsdRate)} – US${formatUsd(euroAmountTo * eurUsdRate)} USD`;
+        }
+        return `Approx. US${formatUsd(euroAmount * eurUsdRate)} USD`;
       }),
     [slides, eurUsdRate],
   );
@@ -180,7 +186,9 @@ export function PublicPropertyCarousel({
                     <h3>{slide.title}</h3>
                     {slide.visibility === "public" && slide.price && (
                       <div className={styles.priceBlock}>
-                        <strong className={styles.price}>{slide.price}</strong>
+                        <strong className={styles.price}>
+                          {slide.priceTo ? `${slide.price} – ${slide.priceTo}` : slide.price}
+                        </strong>
                         {approximateUsdPrices[slideIndex] && (
                           <span className={styles.convertedPrice}>
                             {approximateUsdPrices[slideIndex]}

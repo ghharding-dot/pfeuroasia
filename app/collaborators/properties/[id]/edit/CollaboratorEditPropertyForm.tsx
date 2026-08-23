@@ -277,7 +277,7 @@ export function CollaboratorEditPropertyForm({
           <label><span>Location</span><input name="location" defaultValue={property.location} required /></label>
           <label><span>Approximate public location</span><input name="approximateLocation" defaultValue={property.approximateLocation || property.location} /></label>
           <label>
-            <span>Listing price</span>
+            <span>{listingType === "new-development" ? "Price from" : "Listing price"}</span>
             <input
               name="priceAmount"
               type="number"
@@ -285,10 +285,27 @@ export function CollaboratorEditPropertyForm({
               step="1"
               inputMode="numeric"
               defaultValue={property.priceAmount || ""}
-              placeholder="8900000"
+              placeholder="400000"
+              required={listingType === "new-development"}
             />
             <small>Numbers only. Currency formatting is added automatically.</small>
           </label>
+          {listingType === "new-development" && (
+            <label>
+              <span>Price to</span>
+              <input
+                name="priceToAmount"
+                type="number"
+                min="0"
+                step="1"
+                inputMode="numeric"
+                defaultValue={property.priceToAmount || ""}
+                placeholder="1200000"
+                required
+              />
+              <small>Enter the highest current price in the development.</small>
+            </label>
+          )}
           <label>
             <span>Currency</span>
             <select name="priceCurrency" defaultValue={property.priceCurrency || "EUR"}>

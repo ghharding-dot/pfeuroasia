@@ -22,6 +22,10 @@ export type VaultProperty = {
   price?: string;
   /** Canonical numeric listing price used for all new and migrated records. */
   priceAmount?: number;
+  /** Optional upper price for new-development ranges. */
+  priceTo?: string;
+  /** Canonical numeric upper price for new-development ranges. */
+  priceToAmount?: number;
   /** ISO-style base currency code for the canonical listing price. */
   priceCurrency?: PropertyCurrency;
   bedrooms: number;
@@ -120,12 +124,18 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
   const price = priceAmount
     ? formatPropertyCurrency(priceAmount, priceCurrency)
     : property.price || undefined;
+  const priceToAmount = normalizePriceAmount(property.priceToAmount ?? property.priceTo);
+  const priceTo = priceToAmount
+    ? formatPropertyCurrency(priceToAmount, priceCurrency)
+    : property.priceTo || undefined;
 
   return {
     ...property,
     price,
     priceAmount,
     priceCurrency,
+    priceTo,
+    priceToAmount,
     listingType: property.listingType === "new-development" ? "new-development" : "resale",
   };
 }
