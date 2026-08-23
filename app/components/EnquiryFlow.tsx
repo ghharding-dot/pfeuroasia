@@ -215,6 +215,10 @@ async function deliverFromBrowser(
     recipients.push("robert@bazothefixer.com");
   }
 
+  if (partner?.code === "R2H") {
+    recipients.push("jorge@rent2holiday.es");
+  }
+
   const subjectType = payload.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
   const record = {
     reference,
