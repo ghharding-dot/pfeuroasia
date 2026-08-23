@@ -11,6 +11,13 @@ export type PropertyVisibility = "confidential" | "teaser" | "public";
 export type PropertyAccessLevel = "registered" | "private";
 export type PropertyImagePosition = "center" | "top" | "bottom" | "left" | "right";
 export type PropertyListingType = "resale" | "new-development";
+export type PropertyType =
+  | "villa"
+  | "plot"
+  | "new-construction"
+  | "apartment"
+  | "townhouse"
+  | "new-build";
 
 export type VaultProperty = {
   id: string;
@@ -51,6 +58,7 @@ export type VaultProperty = {
   publicImageApproved?: boolean;
   imagePosition?: PropertyImagePosition;
   listingType?: PropertyListingType;
+  propertyType?: PropertyType;
   listingPartnerCode?: string;
   listingPartnerName?: string;
   submittedBy?: "admin" | "collaborator";
@@ -69,6 +77,30 @@ export function normalizePropertyVisibility(value: unknown): PropertyVisibility 
 
 export function normalizePropertyListingType(value: unknown): PropertyListingType {
   return value === "new-development" ? "new-development" : "resale";
+}
+
+export function normalizePropertyType(
+  value: unknown,
+  listingType: PropertyListingType,
+): PropertyType {
+  if (listingType === "new-development") {
+    return value === "apartment" || value === "townhouse" || value === "villa"
+      ? value
+      : "new-build";
+  }
+
+  return value === "plot" || value === "new-construction" ? value : "villa";
+}
+
+export function propertyTypeLabel(value?: PropertyType) {
+  switch (value) {
+    case "plot": return "Plot";
+    case "new-construction": return "New construction";
+    case "apartment": return "Apartment";
+    case "townhouse": return "Townhouse";
+    case "new-build": return "New build";
+    default: return "Villa";
+  }
 }
 
 export function normalizePropertyAccessLevel(
@@ -129,6 +161,8 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
     ? formatPropertyCurrency(priceToAmount, priceCurrency)
     : property.priceTo || undefined;
 
+  const listingType = normalizePropertyListingType(property.listingType);
+
   return {
     ...property,
     price,
@@ -136,7 +170,8 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
     priceCurrency,
     priceTo,
     priceToAmount,
-    listingType: property.listingType === "new-development" ? "new-development" : "resale",
+    listingType,
+    propertyType: normalizePropertyType(property.propertyType, listingType),
   };
 }
 
