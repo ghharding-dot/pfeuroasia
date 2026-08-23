@@ -77,12 +77,41 @@ export function PublicPropertyCarousel({
     [slides, eurUsdRate],
   );
 
-  if (slides.length === 0) return null;
-
   const isDevelopment = variant === "development";
   const headingId = isDevelopment
     ? "new-developments-heading"
     : "selected-opportunities-heading";
+
+  if (slides.length === 0 && !isDevelopment) return null;
+
+  if (slides.length === 0) {
+    return (
+      <section className={styles.section} aria-labelledby={headingId}>
+        <div className="site-shell">
+          <div className={styles.heading}>
+            <div>
+              <p className="eyebrow">New developments in Spain</p>
+              <h2 id={headingId}>
+                Property taking shape.
+                <em>Under construction, off-plan and investment opportunities.</em>
+              </h2>
+            </div>
+            <div className={styles.headingCopy}>
+              <strong>New portfolio section</strong>
+              <p>
+                Selected new-build projects, phased releases and under-construction opportunities will be presented here.
+              </p>
+            </div>
+          </div>
+          <div className={styles.emptyState}>
+            <span>New developments</span>
+            <h3>Our first selected projects are being prepared.</h3>
+            <p>Current availability, investment details and developer information will appear here shortly.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   function move(direction: number) {
     setIndex((current) => (current + direction + slides.length) % slides.length);
