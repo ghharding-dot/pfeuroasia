@@ -32,10 +32,16 @@ export default async function RegisteredPropertyAccessPage({
     (item) =>
       item.id === id &&
       item.status === "published" &&
-      normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered",
+      (item.listingType === "new-development"
+        ? (item.visibility === "public" || item.visibility === "teaser") &&
+          item.publicImageApproved === true
+        : normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered"),
   );
 
   if (!property) notFound();
+  if (property.listingType === "new-development") {
+    redirect(`/properties/${property.id}`);
+  }
 
   const cookieStore = await cookies();
   const session = verifyRegisteredPropertySession(
