@@ -206,6 +206,12 @@ export function CollaboratorPropertyForm({
   const [message, setMessage] = useState("");
   const [authorityConfirmed, setAuthorityConfirmed] = useState(false);
   const [listingType, setListingType] = useState<"resale" | "new-development">("resale");
+  const [propertyType, setPropertyType] = useState("villa");
+
+  function changeListingType(next: "resale" | "new-development") {
+    setListingType(next);
+    setPropertyType(next === "new-development" ? "apartment" : "villa");
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -342,7 +348,7 @@ export function CollaboratorPropertyForm({
               name="listingType"
               value="resale"
               checked={listingType === "resale"}
-              onChange={() => setListingType("resale")}
+              onChange={() => changeListingType("resale")}
             />
             <span><strong>Villa and current property showcase</strong><small>Use for existing villas, completed homes and conventional resale listings.</small></span>
           </label>
@@ -352,12 +358,31 @@ export function CollaboratorPropertyForm({
               name="listingType"
               value="new-development"
               checked={listingType === "new-development"}
-              onChange={() => setListingType("new-development")}
+              onChange={() => changeListingType("new-development")}
             />
             <span><strong>New developments and under construction</strong><small>Use for investment projects, off-plan releases and multi-unit developments.</small></span>
           </label>
         </fieldset>
         <div className="vault-form-grid">
+          <label>
+            <span>Property type</span>
+            <select name="propertyType" value={propertyType} onChange={(event) => setPropertyType(event.target.value)} required>
+              {listingType === "resale" ? (
+                <>
+                  <option value="villa">Villa</option>
+                  <option value="plot">Plot</option>
+                  <option value="new-construction">New construction</option>
+                </>
+              ) : (
+                <>
+                  <option value="apartment">Apartment</option>
+                  <option value="townhouse">Townhouse</option>
+                  <option value="villa">Villa</option>
+                  <option value="new-build">New build</option>
+                </>
+              )}
+            </select>
+          </label>
           <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
           <label><span>Approximate public location</span><input name="approximateLocation" placeholder="La Zagaleta, Benahavís" /></label>
