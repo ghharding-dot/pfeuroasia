@@ -14,6 +14,7 @@ import {
 } from "./lib/propertyStore";
 import { createMetadata } from "./lib/seo";
 import styles from "./HomeRegions.module.css";
+import vaultButtonStyles from "./HomeVaultButton.module.css";
 
 export const metadata = createMetadata("homeEn");
 export const dynamic = "force-dynamic";
@@ -101,6 +102,13 @@ export default async function Home() {
   return (
     <main>
       <Header transparent />
+      <Link
+        className={vaultButtonStyles.button}
+        href="/vault"
+        aria-label="Open The Vault administration"
+      >
+        The Vault
+      </Link>
 
       <section className="hero">
         <Image
