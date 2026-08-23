@@ -66,7 +66,7 @@ const partners: Partner[] = [
     key: "rent2holiday",
     name: "Rent2Holiday",
     representative: "Jorge Gonzalez",
-    href: "https://rent2holiday.es",
+    href: "/go/rent2holiday",
     kicker: "Holiday rentals & property management",
     description:
       "Costa del Sol specialists in holiday rentals, property sales and comprehensive property management across Marbella, Mijas, Estepona and surrounding areas.",
