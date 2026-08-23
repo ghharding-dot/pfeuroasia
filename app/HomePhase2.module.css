@@ -221,115 +221,6 @@
   line-height: 1.2;
 }
 
-.missionActions {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: stretch;
-  justify-content: flex-end;
-  margin-top: 26px;
-}
-
-.missionActions :global(button) {
-  margin-top: 0;
-}
-
-.nomadResource {
-  display: flex;
-  width: min(100%, 430px);
-  flex-direction: column;
-  gap: 9px;
-}
-
-.nomadIntro {
-  margin: 0;
-  color: #5f625c;
-  font-size: 12px;
-  line-height: 1.55;
-}
-
-.nomadYouTubeLink {
-  display: grid;
-  min-height: 48px;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 14px;
-  align-items: center;
-  padding: 8px 14px 8px 10px;
-  border: 1px solid #9b7d4e;
-  background: rgba(255, 255, 255, 0.34);
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.nomadYouTubeLink:hover,
-.nomadYouTubeLink:focus-visible {
-  background: #262923;
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.youTubePlay {
-  display: grid;
-  width: 46px;
-  height: 32px;
-  place-items: center;
-  border-radius: 8px;
-  background: #ff0033;
-  box-shadow: 0 7px 16px rgba(255, 0, 51, 0.16);
-}
-
-.youTubePlay svg {
-  width: 21px;
-  height: 21px;
-  fill: #fff;
-}
-
-.youTubeCopy {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.youTubeCopy small {
-  color: #8e7754;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.youTubeCopy strong {
-  color: #282b27;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.nomadYouTubeLink:hover .youTubeCopy small,
-.nomadYouTubeLink:focus-visible .youTubeCopy small {
-  color: var(--gold-light);
-}
-
-.nomadYouTubeLink:hover .youTubeCopy strong,
-.nomadYouTubeLink:focus-visible .youTubeCopy strong {
-  color: #fff;
-}
-
-.externalArrow {
-  color: #9b7d4e;
-  font-size: 18px;
-  transition: transform 180ms ease;
-}
-
-.nomadYouTubeLink:hover .externalArrow,
-.nomadYouTubeLink:focus-visible .externalArrow {
-  color: var(--gold-light);
-  transform: translate(2px, -2px);
-}
-
 .missionSection {
   position: relative;
   padding: 82px 0 86px;
@@ -572,11 +463,6 @@
     min-height: 390px;
   }
 
-  .missionActions {
-    justify-content: flex-start;
-    margin-top: 0;
-  }
-
   .missionSection {
     padding-block: 70px;
   }
@@ -676,15 +562,6 @@
     font-size: 18px;
   }
 
-  .missionActions,
-  .nomadResource,
-  .nomadYouTubeLink {
-    width: 100%;
-  }
-
-  .nomadYouTubeLink {
-    min-height: 50px;
-  }
 
   .missionSection {
     padding-block: 54px 58px;

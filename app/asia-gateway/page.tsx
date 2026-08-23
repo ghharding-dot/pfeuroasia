@@ -211,6 +211,38 @@ export default function AsiaGatewayPage() {
         </div>
       </section>
 
+      <section className={styles.nomadSection} aria-labelledby="nomad-video-heading">
+        <div className={`site-shell ${styles.nomadInner}`}>
+          <div className={styles.nomadCopy}>
+            <p className="eyebrow">A wider international perspective</p>
+            <h2 id="nomad-video-heading">Explore the options around the globe.</h2>
+            <p>
+              Take a look at Nomad Capitalist and the various options available
+              around the globe. There is a lot of interesting information.
+            </p>
+          </div>
+          <a
+            className={styles.nomadVideo}
+            href="https://www.youtube.com/watch?v=hGvgJ1FYUlY"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch Live Like a King in Kuala Lumpur by Nomad Capitalist on YouTube"
+          >
+            <span className={styles.youTubePlay} aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M9 7.5v9l7-4.5-7-4.5Z" />
+              </svg>
+            </span>
+            <span className={styles.nomadVideoCopy}>
+              <small>Nomad Capitalist · Malaysia</small>
+              <strong>Live Like a King in Kuala Lumpur</strong>
+              <span>Luxury Living in Malaysia</span>
+            </span>
+            <span className={styles.nomadArrow} aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
       <section className={styles.comingSoon}>
         <div className={`site-shell ${styles.comingSoonInner}`}>
           <div>
