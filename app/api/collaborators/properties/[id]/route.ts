@@ -8,6 +8,7 @@ import {
 import {
   normalizeImagePosition,
   normalizePropertyListingType,
+  normalizePropertyType,
   normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
@@ -181,6 +182,7 @@ export async function PATCH(
     publicImageApproved: visibility === "confidential" ? false : body.publicImageApproved === true,
     imagePosition: normalizeImagePosition(body.imagePosition),
     listingType,
+    propertyType: normalizePropertyType(body.propertyType, listingType),
     status: "draft",
     lastVerifiedAt: existing.lastVerifiedAt,
     approvalStatus: "pending-review",
