@@ -141,6 +141,33 @@ export function HomePhase2() {
               </div>
             </Link>
           </div>
+
+          <div className={phase2Styles.malaysiaSpotlight}>
+            <div className={phase2Styles.malaysiaStatement}>
+              <span>Malaysia perspective</span>
+              <p>Go where you’re treated best.</p>
+            </div>
+
+            <a
+              className={phase2Styles.nomadYouTubeCard}
+              href="https://www.youtube.com/@nomadcapitalist"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit the official Nomad Capitalist YouTube channel"
+            >
+              <span className={phase2Styles.youTubePlay} aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M9 7.5v9l7-4.5-7-4.5Z" />
+                </svg>
+              </span>
+              <span className={phase2Styles.youTubeCopy}>
+                <small>Nomad Capitalist on YouTube</small>
+                <strong>Visit the official channel</strong>
+                <span>International mobility, residency and global citizenship perspectives.</span>
+              </span>
+              <span className={phase2Styles.externalArrow} aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </section>
 
