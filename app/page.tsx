@@ -10,6 +10,7 @@ import {
 import { SpecialistOpportunities } from "./components/SpecialistOpportunities";
 import {
   imageObjectPosition,
+  normalizePropertyMarket,
   readProperties,
 } from "./lib/propertyStore";
 import { createMetadata } from "./lib/seo";
@@ -56,6 +57,7 @@ async function getPublicPropertySlides(): Promise<{
       .filter(
         (property) =>
           property.status === "published" &&
+          normalizePropertyMarket(property.market) === "spain" &&
           (property.visibility === "teaser" || property.visibility === "public") &&
           property.publicImageApproved === true &&
           Boolean(property.image),

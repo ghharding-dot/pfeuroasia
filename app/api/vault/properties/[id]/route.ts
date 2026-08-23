@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
 import {
   normalizeImagePosition,
+  normalizePropertyMarket,
   normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
@@ -87,6 +88,9 @@ export async function PATCH(
     approximateLocation: hasDetailUpdate
       ? clean(body.approximateLocation, 180) || existing.location
       : existing.approximateLocation,
+    market: hasDetailUpdate
+      ? normalizePropertyMarket(body.market || existing.market)
+      : existing.market,
     annualCosts: hasDetailUpdate ? clean(body.annualCosts, 1000) : existing.annualCosts,
     adviserName: hasDetailUpdate
       ? clean(body.adviserName, 120) || "PF EuroAsia Property Adviser"

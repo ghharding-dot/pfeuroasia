@@ -123,14 +123,15 @@ function ImageUpload({
   const [preview, setPreview] = useState("");
 
   useEffect(() => {
-    if (!file) {
-      setPreview("");
-      return;
-    }
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    return () => URL.revokeObjectURL(url);
-  }, [file]);
+    return () => {
+      if (preview.startsWith("blob:")) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
+  function selectFile(nextFile: File | null) {
+    setFile(nextFile);
+    setPreview(nextFile ? URL.createObjectURL(nextFile) : "");
+  }
 
   return (
     <label className={`vault-upload-box ${preview ? "has-file" : ""}`}>
@@ -149,7 +150,7 @@ function ImageUpload({
         type="file"
         accept="image/jpeg,image/png,image/webp"
         required={required}
-        onChange={(event) => setFile(event.target.files?.[0] || null)}
+        onChange={(event) => selectFile(event.target.files?.[0] || null)}
       />
     </label>
   );
@@ -315,6 +316,14 @@ export function PropertyForm() {
         </div>
         <div className="vault-form-grid">
           <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
+          <label>
+            <span>Market / country</span>
+            <select name="market" defaultValue="spain" required>
+              <option value="spain">Spain</option>
+              <option value="malaysia">Malaysia</option>
+              <option value="international">Other international market</option>
+            </select>
+          </label>
           <label><span>Location</span><input name="location" placeholder="La Zagaleta, Benahavís" required /></label>
           <label><span>Approximate public location</span><input name="approximateLocation" placeholder="La Zagaleta, Benahavís" /></label>
           <label><span>Price</span><input name="price" placeholder="€11,600,000" /></label>

@@ -2,9 +2,60 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import {
+  PublicPropertyCarousel,
+  type PublicPropertySlide,
+} from "../../components/PublicPropertyCarousel";
+import {
+  imageObjectPosition,
+  normalizePropertyMarket,
+  readProperties,
+} from "../../lib/propertyStore";
 import { MalaysiaCostAndVisit } from "./MalaysiaCostAndVisit";
 
-export default function MalaysiaPage() {
+export const dynamic = "force-dynamic";
+
+async function getMalaysiaPropertySlides(): Promise<PublicPropertySlide[]> {
+  try {
+    const properties = await readProperties();
+    return properties
+      .filter(
+        (property) =>
+          property.status === "published" &&
+          normalizePropertyMarket(property.market) === "malaysia" &&
+          (property.visibility === "teaser" || property.visibility === "public") &&
+          property.publicImageApproved === true &&
+          Boolean(property.image),
+      )
+      .map((property) => {
+        const isTeaser = property.visibility === "teaser";
+        return {
+          id: property.id,
+          image: property.image,
+          imagePosition: imageObjectPosition(property.imagePosition),
+          title:
+            property.publicTitle ||
+            (isTeaser ? "Private Malaysia property opportunity" : property.title),
+          location:
+            property.publicLocation ||
+            (isTeaser ? "Malaysia" : property.location),
+          visibility: property.visibility as "teaser" | "public",
+          accessLevel: property.accessLevel,
+          price:
+            property.visibility === "public"
+              ? property.price || "Price on application"
+              : undefined,
+        };
+      });
+  } catch (error) {
+    console.error("malaysia-property-carousel-unavailable", error);
+    return [];
+  }
+}
+
+export default async function MalaysiaPage() {
+  const malaysiaPropertySlides = await getMalaysiaPropertySlides();
+
   return <main>
     <Header enquireHref="/asia-gateway/enquire" enquireLabel="Asia enquiry" />
 
@@ -114,6 +165,17 @@ export default function MalaysiaPage() {
         <p className="kl-image-note">All development imagery shown is an artist&apos;s impression supplied for marketing purposes.</p>
       </div>
     </section>
+
+    <PublicPropertyCarousel
+      slides={malaysiaPropertySlides}
+      eyebrow="Malaysia property collection"
+      heading="Explore current opportunities."
+      emphasis="Kuala Lumpur and selected Malaysian locations."
+      summary="Approved Malaysia listings submitted through the PF EuroAsia collaboration network. Open public developments directly or request private access where discretion is required."
+      emptyMessage="Our Malaysia collaborators will be able to upload and submit developments and individual properties through the same secure approval system used by the wider PF EuroAsia network."
+      headingId="malaysia-property-carousel-heading"
+      directPublicListings
+    />
 
     <section className="china-contact section-pad"><div className="site-shell china-contact-grid"><div><p className="eyebrow">Serving wider Asia</p><h2>Malaysia first.<br />China ready.</h2></div><div><p>Malaysia provides the operational bridge, while mainland China requires a different communication approach. China enquiries should use email, WeChat or the secure enquiry form rather than relying on WhatsApp.</p><div className="channel-tags"><span>Email</span><span>WeChat</span><span>Secure form</span></div><Link className="button button-dark" href="/asia-gateway/enquire">Contact the Asia desk <span>→</span></Link></div></div></section>
 

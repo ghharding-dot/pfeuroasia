@@ -41,7 +41,13 @@ function carouselStatus(property: VaultProperty) {
   if (!property.image) {
     return { label: "Not on carousel", reason: "Main photograph missing", state: "warning" };
   }
-  return { label: "Carousel live", reason: "Visible on the homepage carousel", state: "live" };
+  return {
+    label: "Carousel live",
+    reason: property.market === "malaysia"
+      ? "Visible on the Malaysia property carousel"
+      : "Visible on the homepage carousel",
+    state: "live",
+  };
 }
 
 function formatDate(value?: string) {
@@ -265,6 +271,7 @@ export default async function VaultDashboardPage() {
                     <div className="vault-property-copy">
                       <span>
                         {property.reference} · {property.location}
+                        {property.market === "malaysia" ? " · Malaysia" : property.market === "international" ? " · International" : " · Spain"}
                         {property.brochure ? " · Protected PDF attached" : " · PDF pending"}
                       </span>
                       <h3>{property.title}</h3>

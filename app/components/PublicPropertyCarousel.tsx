@@ -36,9 +36,23 @@ function formatUsd(amount: number) {
 export function PublicPropertyCarousel({
   slides,
   variant = "property",
+  eyebrow,
+  heading,
+  emphasis,
+  summary,
+  emptyMessage,
+  headingId: customHeadingId,
+  directPublicListings = false,
 }: {
   slides: PublicPropertySlide[];
   variant?: "property" | "development";
+  eyebrow?: string;
+  heading?: string;
+  emphasis?: string;
+  summary?: string;
+  emptyMessage?: string;
+  headingId?: string;
+  directPublicListings?: boolean;
 }) {
   const [index, setIndex] = useState(0);
   const [eurUsdRate, setEurUsdRate] = useState(FALLBACK_EUR_USD_RATE);
@@ -84,11 +98,19 @@ export function PublicPropertyCarousel({
   );
 
   const isDevelopment = variant === "development";
-  const headingId = isDevelopment
+  const headingId = customHeadingId || (isDevelopment
     ? "new-developments-heading"
-    : "selected-opportunities-heading";
+    : "selected-opportunities-heading");
+  const displayEyebrow = eyebrow || (isDevelopment ? "New developments in Spain" : "Selected property opportunities");
+  const displayHeading = heading || (isDevelopment ? "Property taking shape." : "A glimpse of what is available.");
+  const displayEmphasis = emphasis || (isDevelopment
+    ? "Under construction, off-plan and investment opportunities."
+    : "General listings and private introductions.");
+  const displaySummary = summary || (isDevelopment
+    ? "Explore selected new-build projects, phased releases and under-construction opportunities with direct access to current availability and developer information."
+    : "Registered listings open after simple contact verification. Genuine private and off-market opportunities remain subject to a fuller application and approval.");
 
-  if (slides.length === 0 && !isDevelopment) return null;
+  if (slides.length === 0 && !isDevelopment && !emptyMessage) return null;
 
   if (slides.length === 0) {
     return (
@@ -96,23 +118,21 @@ export function PublicPropertyCarousel({
         <div className="site-shell">
           <div className={styles.heading}>
             <div>
-              <p className="eyebrow">New developments in Spain</p>
+              <p className="eyebrow">{displayEyebrow}</p>
               <h2 id={headingId}>
-                Property taking shape.
-                <em>Under construction, off-plan and investment opportunities.</em>
+                {displayHeading}
+                <em>{displayEmphasis}</em>
               </h2>
             </div>
             <div className={styles.headingCopy}>
               <strong>New portfolio section</strong>
-              <p>
-                Selected new-build projects, phased releases and under-construction opportunities will be presented here.
-              </p>
+              <p>{displaySummary}</p>
             </div>
           </div>
           <div className={styles.emptyState}>
-            <span>New developments</span>
-            <h3>Our first selected projects are being prepared.</h3>
-            <p>Current availability, investment details and developer information will appear here shortly.</p>
+            <span>{isDevelopment ? "New developments" : "Malaysia property network"}</span>
+            <h3>{isDevelopment ? "Our first selected projects are being prepared." : "New opportunities will appear here."}</h3>
+            <p>{emptyMessage || "Current availability, investment details and developer information will appear here shortly."}</p>
           </div>
         </div>
       </section>
@@ -128,25 +148,15 @@ export function PublicPropertyCarousel({
       <div className="site-shell">
         <div className={styles.heading}>
           <div>
-            <p className="eyebrow">
-              {isDevelopment ? "New developments in Spain" : "Selected property opportunities"}
-            </p>
+            <p className="eyebrow">{displayEyebrow}</p>
             <h2 id={headingId}>
-              {isDevelopment ? "Property taking shape." : "A glimpse of what is available."}
-              <em>
-                {isDevelopment
-                  ? "Under construction, off-plan and investment opportunities."
-                  : "General listings and private introductions."}
-              </em>
+              {displayHeading}
+              <em>{displayEmphasis}</em>
             </h2>
           </div>
           <div className={styles.headingCopy}>
             <strong>{slides.length} approved {slides.length === 1 ? "opportunity" : "opportunities"}</strong>
-            <p>
-              {isDevelopment
-                ? "Explore selected new-build projects, phased releases and under-construction opportunities with direct access to current availability and developer information."
-                : "Registered listings open after simple contact verification. Genuine private and off-market opportunities remain subject to a fuller application and approval."}
-            </p>
+            <p>{displaySummary}</p>
           </div>
         </div>
 
@@ -197,7 +207,9 @@ export function PublicPropertyCarousel({
                       </div>
                     )}
                     <p className={styles.description}>
-                      {isDevelopment
+                      {registered && directPublicListings
+                        ? "View the complete development presentation, then contact the PF EuroAsia Asia desk for current availability, pricing and further information."
+                        : isDevelopment
                         ? "View the photographs, price range and full development details without registering. Enquire only when you would like current availability or further information."
                         : registered
                         ? "Register your name, email and telephone number, then verify your email to view the full property particulars. No manual approval is required."
@@ -205,15 +217,16 @@ export function PublicPropertyCarousel({
                     </p>
                     <Link
                       className="button button-gold"
+                      tabIndex={slideIndex === index ? undefined : -1}
                       href={
-                        isDevelopment
+                        isDevelopment || (registered && directPublicListings)
                           ? `/properties/${slide.id}`
                           : registered
                             ? `/properties/${slide.id}/access`
                             : "/private-portfolio"
                       }
                     >
-                      {isDevelopment
+                      {isDevelopment || (registered && directPublicListings)
                         ? "View full development"
                         : registered
                           ? "View full details"

@@ -116,14 +116,15 @@ function ReplacementImage({
   const [preview, setPreview] = useState(currentUrl || "");
 
   useEffect(() => {
-    if (!file) {
-      setPreview(currentUrl || "");
-      return;
-    }
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    return () => URL.revokeObjectURL(url);
-  }, [file, currentUrl]);
+    return () => {
+      if (preview.startsWith("blob:")) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
+
+  function selectFile(nextFile: File | null) {
+    setFile(nextFile);
+    setPreview(nextFile ? URL.createObjectURL(nextFile) : currentUrl || "");
+  }
 
   return (
     <label className={`vault-upload-box ${preview ? "has-file" : ""}`}>
@@ -142,7 +143,7 @@ function ReplacementImage({
         type="file"
         accept="image/jpeg,image/png,image/webp"
         required={required && !currentUrl}
-        onChange={(event) => setFile(event.target.files?.[0] || null)}
+        onChange={(event) => selectFile(event.target.files?.[0] || null)}
       />
     </label>
   );
@@ -301,6 +302,14 @@ export function CollaboratorEditPropertyForm({
             </select>
           </label>
           <label><span>Property title</span><input name="title" defaultValue={property.title} required /></label>
+          <label>
+            <span>Market / country</span>
+            <select name="market" defaultValue={property.market || "spain"} required>
+              <option value="spain">Spain</option>
+              <option value="malaysia">Malaysia</option>
+              <option value="international">Other international market</option>
+            </select>
+          </label>
           <label><span>Location</span><input name="location" defaultValue={property.location} required /></label>
           <label><span>Approximate public location</span><input name="approximateLocation" defaultValue={property.approximateLocation || property.location} /></label>
           <label>

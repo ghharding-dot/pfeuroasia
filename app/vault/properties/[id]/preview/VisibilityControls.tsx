@@ -27,6 +27,7 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
           publicLocation: String(form.get("publicLocation") || ""),
           imagePosition: String(form.get("imagePosition") || "center"),
           publicImageApproved: form.get("publicImageApproved") === "true",
+          market: String(form.get("market") || property.market || "spain"),
           approximateLocation: String(form.get("approximateLocation") || ""),
           annualCosts: String(form.get("annualCosts") || ""),
           adviserName: String(form.get("adviserName") || ""),
@@ -61,6 +62,14 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
           <p>These details appear on the individual property page. Use an approximate area only, never the private street address.</p>
         </div>
         <div className="vault-form-grid">
+          <label>
+            <span>Market / country</span>
+            <select name="market" defaultValue={property.market || "spain"}>
+              <option value="spain">Spain</option>
+              <option value="malaysia">Malaysia</option>
+              <option value="international">Other international market</option>
+            </select>
+          </label>
           <label><span>Approximate location</span><input name="approximateLocation" defaultValue={property.approximateLocation || property.location} /></label>
           <label><span>Annual running costs</span><input name="annualCosts" defaultValue={property.annualCosts || ""} placeholder="Approx. €42,000 per year" /></label>
           <label><span>Direct adviser name</span><input name="adviserName" defaultValue={property.adviserName || "PF EuroAsia Property Adviser"} /></label>

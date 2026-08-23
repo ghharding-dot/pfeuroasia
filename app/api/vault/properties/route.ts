@@ -4,6 +4,7 @@ import { hasVaultAccess } from "../../../lib/vaultSession";
 import {
   generatePropertyReference,
   normalizeImagePosition,
+  normalizePropertyMarket,
   normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
     reference: generatePropertyReference(properties),
     title: String(body.title || "").trim(),
     location: String(body.location || "").trim(),
+    market: normalizePropertyMarket(body.market),
     approximateLocation: String(body.approximateLocation || body.location || "").trim().slice(0, 180),
     price: String(body.price || "").trim(),
     bedrooms: Number(body.bedrooms || 0),

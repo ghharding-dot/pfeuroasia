@@ -97,10 +97,13 @@ export default async function PropertyPreviewPage({
             </p>
             <p>
               Client access: <strong>{accessLevel === "registered" ? "Registered listing" : "Private off-market"}</strong>
+              {" · "}Market: <strong>{property.market === "malaysia" ? "Malaysia" : property.market === "international" ? "Other international" : "Spain"}</strong>
               {" · "}Public presentation: <strong>{visibilityLabel(property.visibility)}</strong>
               {carouselEligible
-                ? " · Approved for the homepage carousel."
-                : " · Not currently visible in the homepage carousel."}
+                ? property.market === "malaysia"
+                  ? " · Approved for the Malaysia property carousel."
+                  : " · Approved for the homepage carousel."
+                : " · Not currently visible in a public carousel."}
             </p>
           </div>
           <span className={`vault-status vault-status-${property.status}`}>{property.status}</span>

@@ -18,12 +18,14 @@ export type PropertyType =
   | "apartment"
   | "townhouse"
   | "new-build";
+export type PropertyMarket = "spain" | "malaysia" | "international";
 
 export type VaultProperty = {
   id: string;
   reference: string;
   title: string;
   location: string;
+  market?: PropertyMarket;
   approximateLocation?: string;
   /** Formatted compatibility value generated from the canonical numeric fields. */
   price?: string;
@@ -103,6 +105,11 @@ export function propertyTypeLabel(value?: PropertyType) {
   }
 }
 
+export function normalizePropertyMarket(value: unknown): PropertyMarket {
+  if (value === "malaysia" || value === "international") return value;
+  return "spain";
+}
+
 export function normalizePropertyAccessLevel(
   value: unknown,
   visibility?: PropertyVisibility,
@@ -165,6 +172,7 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
 
   return {
     ...property,
+    market: property.market ? normalizePropertyMarket(property.market) : undefined,
     price,
     priceAmount,
     priceCurrency,
