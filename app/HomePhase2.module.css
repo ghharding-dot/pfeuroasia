@@ -235,6 +235,20 @@
   margin-top: 0;
 }
 
+.nomadResource {
+  display: flex;
+  width: min(100%, 430px);
+  flex-direction: column;
+  gap: 9px;
+}
+
+.nomadIntro {
+  margin: 0;
+  color: #5f625c;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
 .nomadYouTubeLink {
   display: grid;
   min-height: 48px;
@@ -663,6 +677,7 @@
   }
 
   .missionActions,
+  .nomadResource,
   .nomadYouTubeLink {
     width: 100%;
   }
