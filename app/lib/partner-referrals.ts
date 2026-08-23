@@ -54,3 +54,11 @@ export function getPartnerReferral(slug?: string | null) {
   const normalized = slug.toLowerCase() as PartnerSlug;
   return PARTNER_REFERRALS[normalized] ?? null;
 }
+
+export function getPartnerReferralSlugByCode(code?: string | null): PartnerSlug | null {
+  if (!code) return null;
+  const match = Object.entries(PARTNER_REFERRALS).find(
+    ([, partner]) => partner.code === code.toUpperCase(),
+  );
+  return match ? (match[0] as PartnerSlug) : null;
+}
