@@ -172,6 +172,12 @@ type EnquiryFlowProps = {
   partnerSlug?: string;
   interest?: EnquiryInterest;
   journey?: EnquiryJourney;
+  propertyContext?: {
+    id: string;
+    reference: string;
+    title: string;
+    location: string;
+  };
 };
 
 type SubmissionResponse = {
@@ -272,6 +278,7 @@ export function EnquiryFlow({
   partnerSlug,
   interest,
   journey = "spain",
+  propertyContext,
 }: EnquiryFlowProps) {
   const partner = getPartnerReferral(partnerSlug);
   const preset = interest ? interestConfig[interest] : undefined;
@@ -279,12 +286,18 @@ export function EnquiryFlow({
   const goals = isAsia ? asiaGoals : spainGoals;
   const [step, setStep] = useState(preset ? 2 : 1);
   const [goal, setGoal] = useState(
-    preset?.enquiryType || (partner ? (isAsia ? "asia-property" : "buy") : ""),
+    preset?.enquiryType || ((partner || propertyContext) ? (isAsia ? "asia-property" : "buy") : ""),
   );
   const [details, setDetails] = useState(() =>
     preset
       ? { ...initialDetails, location: preset.defaultLocation }
-      : initialDetails,
+      : propertyContext
+        ? {
+            location: `${propertyContext.title} · ${propertyContext.location} · ${propertyContext.reference}`,
+            budget: "",
+            message: `I would like further information and current availability for ${propertyContext.title} (${propertyContext.reference}).`,
+          }
+        : initialDetails,
   );
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");
@@ -390,6 +403,12 @@ export function EnquiryFlow({
           <p>
             <strong>Collaboration source:</strong><br />
             {partner.name} · {partner.code}
+          </p>
+        )}
+        {propertyContext && (
+          <p>
+            <strong>Development enquiry:</strong><br />
+            {propertyContext.title} · {propertyContext.reference}
           </p>
         )}
         <div className="enquiry-progress" aria-label={`Step ${progressStep} of ${totalSteps}`}>
