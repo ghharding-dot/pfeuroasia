@@ -18,7 +18,7 @@ const services = [
   {
     number: "03",
     title: "Company formation",
-    text: "Professional introductions for establishing and operating businesses in Malaysia, Labuan and selected Asian jurisdictions.",
+    text: "Malaysia and Labuan remain our primary focus, with Singapore and Hong Kong company formation coordinated through experienced local advisers.",
   },
   {
     number: "04",
@@ -56,8 +56,8 @@ export default function AsiaGatewayPage() {
           </h1>
           <p>
             Property investment, residency and relocation in Malaysia — including
-            Labuan company setup, residency and tax-residency guidance — introduced
-            through a growing network of experienced local professionals.
+            Labuan company setup and tax-residency guidance — together with company
+            formation in Singapore and Hong Kong through experienced local advisers.
           </p>
           <div className={styles.heroActions}>
             <Link className={`${styles.heroAction} ${styles.heroActionPrimary}`} href="/asia-gateway/enquire">
@@ -65,6 +65,9 @@ export default function AsiaGatewayPage() {
             </Link>
             <Link className={styles.heroAction} href="/services/labuan-company-residency/adviser">
               Ask the Malaysia &amp; Labuan Adviser <span>→</span>
+            </Link>
+            <Link className={styles.heroAction} href="/asia-gateway/company-residency">
+              Compare company &amp; residency options <span>→</span>
             </Link>
             <Link className={styles.heroAction} href="/markets/malaysia">
               View Malaysia property <span>→</span>
@@ -94,10 +97,10 @@ export default function AsiaGatewayPage() {
             </p>
             <p>
               Malaysia is our first focus, with Kuala Lumpur and Labuan offering
-              distinct property, lifestyle and commercial possibilities. Our
-              role is to help clients identify the right specialists, arrange
-              useful introductions and coordinate the journey from initial
-              enquiry to an informed decision.
+              distinct property, lifestyle, residency and commercial possibilities.
+              Where a client requires a different regional base, we can also
+              coordinate company formation in Singapore and Hong Kong through
+              experienced local advisers.
             </p>
             <Link className="text-link" href="/guides/malaysia-vs-dubai-tax-residency">
               Compare Malaysia with Dubai <span>→</span>

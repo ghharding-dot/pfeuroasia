@@ -48,6 +48,7 @@ export function Footer() {
           <Link href="/areas/la-zagaleta">La Zagaleta</Link>
           <Link href="/areas/el-madronal">El Madroñal</Link>
           <Link href="/markets/malaysia">Malaysia & Asia</Link>
+          <Link href="/asia-gateway/company-residency">Asian company formation</Link>
           <Link href="/zh">简体中文</Link>
           <Link href="/da">Dansk</Link>
           <Link href="/enquire">Contact our desks</Link>

@@ -12,7 +12,7 @@ function absoluteUrl(path: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return Object.entries(seoPages)
+  const routes: MetadataRoute.Sitemap = Object.entries(seoPages)
     .filter(([, page]) => !("index" in page) || page.index !== false)
     .map(([key, page]) => ({
       url: absoluteUrl(page.path),
@@ -28,4 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ),
       },
     }));
+
+  routes.push({
+    url: absoluteUrl("/asia-gateway/company-residency"),
+    lastModified: SEO_LAST_UPDATED,
+    changeFrequency: "monthly",
+    priority: 0.85,
+  });
+
+  return routes;
 }
