@@ -344,6 +344,24 @@
   .imageWrap {
     height: 410px;
   }
+
+  .developmentSection .slides {
+    height: auto;
+  }
+
+  .developmentSection .slide {
+    height: auto;
+    min-height: 790px;
+    grid-template-rows: 410px auto;
+  }
+
+  .developmentSection .slide.active {
+    position: relative;
+  }
+
+  .developmentSection .copy {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 720px) {
@@ -374,6 +392,19 @@
 
   .copy {
     padding: 34px 24px 40px;
+  }
+
+  .developmentSection .slide {
+    min-height: 0;
+    grid-template-rows: 330px auto;
+  }
+
+  .developmentSection .copy {
+    padding-bottom: 52px;
+  }
+
+  .developmentSection .copy :global(.button) {
+    width: 100%;
   }
 
   .count {

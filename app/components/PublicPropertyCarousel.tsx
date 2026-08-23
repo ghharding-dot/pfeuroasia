@@ -92,7 +92,7 @@ export function PublicPropertyCarousel({
 
   if (slides.length === 0) {
     return (
-      <section className={styles.section} aria-labelledby={headingId}>
+      <section className={`${styles.section} ${isDevelopment ? styles.developmentSection : ""}`} aria-labelledby={headingId}>
         <div className="site-shell">
           <div className={styles.heading}>
             <div>
@@ -124,7 +124,7 @@ export function PublicPropertyCarousel({
   }
 
   return (
-    <section className={styles.section} aria-labelledby={headingId}>
+    <section className={`${styles.section} ${isDevelopment ? styles.developmentSection : ""}`} aria-labelledby={headingId}>
       <div className="site-shell">
         <div className={styles.heading}>
           <div>
