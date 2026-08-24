@@ -82,6 +82,8 @@ async function getPublicPropertySlides(): Promise<{
             id: property.id,
             image: property.image,
             secondaryImage: property.secondaryImage,
+            thirdImage: property.thirdImage,
+            fourthImage: property.fourthImage,
             imagePosition: imageObjectPosition(property.imagePosition),
             title:
               property.publicTitle ||

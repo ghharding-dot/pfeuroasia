@@ -8,6 +8,8 @@ export type PublicPropertySlide = {
   id: string;
   image: string;
   secondaryImage?: string;
+  thirdImage?: string;
+  fourthImage?: string;
   imagePosition: string;
   title: string;
   location: string;
@@ -171,38 +173,54 @@ export function PublicPropertyCarousel({
                 : slide.visibility === "public";
               return (
                 <article
-                  className={`${styles.slide} ${slideIndex === index ? styles.active : ""}`}
+                  className={`${styles.slide} ${isDevelopment ? styles.developmentSlide : ""} ${slideIndex === index ? styles.active : ""}`}
                   aria-hidden={slideIndex !== index}
                   key={slide.id}
                 >
-                  <div
-                    className={`${styles.imageGallery} ${slide.secondaryImage ? styles.twoImages : styles.singleImage}`}
-                  >
-                    <div className={styles.imageWrap}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={slide.image}
-                        alt={slide.title}
-                        style={{ objectPosition: slide.imagePosition }}
-                      />
-                      <span className={styles.imageLabel}>
-                        {isDevelopment
-                          ? "New development"
-                          : registered
-                            ? "Registered listing"
-                            : "Private opportunity"}
-                      </span>
-                    </div>
-                    {slide.secondaryImage ? (
+                  {isDevelopment ? (
+                    <div className={`${styles.developmentPhotos} ${styles.developmentPhotosLeft}`}>
                       <div className={styles.imageWrap}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={slide.secondaryImage}
-                          alt={`${slide.title} — additional view`}
+                          src={slide.image}
+                          alt={slide.title}
+                          style={{ objectPosition: slide.imagePosition }}
                         />
+                        <span className={styles.imageLabel}>New development</span>
                       </div>
-                    ) : null}
-                  </div>
+                      {slide.secondaryImage ? (
+                        <div className={styles.imageWrap}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={slide.secondaryImage} alt={`${slide.title} — second view`} />
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <div
+                      className={`${styles.imageGallery} ${slide.secondaryImage ? styles.twoImages : styles.singleImage}`}
+                    >
+                      <div className={styles.imageWrap}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={slide.image}
+                          alt={slide.title}
+                          style={{ objectPosition: slide.imagePosition }}
+                        />
+                        <span className={styles.imageLabel}>
+                          {registered ? "Registered listing" : "Private opportunity"}
+                        </span>
+                      </div>
+                      {slide.secondaryImage ? (
+                        <div className={styles.imageWrap}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={slide.secondaryImage}
+                            alt={`${slide.title} — additional view`}
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  )}
 
                   <div className={styles.copy}>
                     <p className={styles.count}>
@@ -249,6 +267,23 @@ export function PublicPropertyCarousel({
                           : "Request private access"} <span>→</span>
                     </Link>
                   </div>
+
+                  {isDevelopment ? (
+                    <div className={`${styles.developmentPhotos} ${styles.developmentPhotosRight}`}>
+                      {slide.thirdImage ? (
+                        <div className={styles.imageWrap}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={slide.thirdImage} alt={`${slide.title} — third view`} />
+                        </div>
+                      ) : null}
+                      {slide.fourthImage ? (
+                        <div className={styles.imageWrap}>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={slide.fourthImage} alt={`${slide.title} — fourth view`} />
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </article>
               );
             })}
