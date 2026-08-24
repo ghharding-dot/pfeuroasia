@@ -30,7 +30,10 @@ export async function POST(request: Request) {
       request,
       onBeforeGenerateToken: async (pathname, clientPayload) => {
         const vaultAccess = await hasVaultAccess();
-        const collaborator = vaultAccess ? null : await getCollaboratorSession();
+        // A user can legitimately be signed into both the Vault and the
+        // collaborator portal. Keep both permissions so a Vault session does
+        // not mask the collaborator session and reject collaborator uploads.
+        const collaborator = await getCollaboratorSession();
 
         if (!vaultAccess && !collaborator) {
           throw new Error("Your secure upload session has expired. Sign in again and retry without closing this page.");
