@@ -98,10 +98,13 @@
 }
 
 .aboutPath {
+  background-color: #090c0a;
   background-image:
-    linear-gradient(rgba(26, 22, 15, 0.28), rgba(26, 22, 15, 0.28)),
+    linear-gradient(rgba(26, 22, 15, 0.18), rgba(26, 22, 15, 0.18)),
     url('/images/from-europe-to-asia.png');
-  background-position: center;
+  background-position: center 8%;
+  background-repeat: no-repeat;
+  background-size: 94% auto;
 }
 
 .asiaPath {
