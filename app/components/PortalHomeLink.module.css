@@ -1,0 +1,52 @@
+.homeLink {
+  position: fixed;
+  left: max(18px, env(safe-area-inset-left));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 1000;
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border: 1px solid #b9965b;
+  border-radius: 999px;
+  background: #171916;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  color: #f4e5c8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.homeLink span {
+  color: #d9ba83;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.homeLink:hover,
+.homeLink:focus-visible {
+  background: #b9965b;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+  color: #141511;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.homeLink:hover span,
+.homeLink:focus-visible span {
+  color: #141511;
+}
+
+@media (max-width: 620px) {
+  .homeLink {
+    left: max(12px, env(safe-area-inset-left));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    min-height: 44px;
+    padding: 10px 14px;
+  }
+}
