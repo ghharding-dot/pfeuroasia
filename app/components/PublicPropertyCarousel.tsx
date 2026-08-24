@@ -43,6 +43,7 @@ export function PublicPropertyCarousel({
   emptyMessage,
   headingId: customHeadingId,
   directPublicListings = false,
+  portfolioValueMillions,
 }: {
   slides: PublicPropertySlide[];
   variant?: "property" | "development";
@@ -53,6 +54,7 @@ export function PublicPropertyCarousel({
   emptyMessage?: string;
   headingId?: string;
   directPublicListings?: boolean;
+  portfolioValueMillions?: number;
 }) {
   const [index, setIndex] = useState(0);
   const [eurUsdRate, setEurUsdRate] = useState(FALLBACK_EUR_USD_RATE);
@@ -263,6 +265,12 @@ export function PublicPropertyCarousel({
               </div>
             </div>
           )}
+
+          {!isDevelopment && portfolioValueMillions && portfolioValueMillions > 0 ? (
+            <p className={styles.portfolioValue}>
+              Currently representing more than <strong>€{portfolioValueMillions} million</strong> in privately listed villas.
+            </p>
+          ) : null}
         </div>
       </div>
     </section>

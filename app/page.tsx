@@ -50,18 +50,30 @@ const services = [
 async function getPublicPropertySlides(): Promise<{
   properties: PublicPropertySlide[];
   developments: PublicPropertySlide[];
+  privateVillaValueMillions: number;
 }> {
   try {
     const properties = await readProperties();
-    const approved = properties
-      .filter(
-        (property) =>
-          property.status === "published" &&
-          normalizePropertyMarket(property.market) === "spain" &&
-          (property.visibility === "teaser" || property.visibility === "public") &&
-          property.publicImageApproved === true &&
-          Boolean(property.image),
-      )
+    const approvedProperties = properties.filter(
+      (property) =>
+        property.status === "published" &&
+        normalizePropertyMarket(property.market) === "spain" &&
+        (property.visibility === "teaser" || property.visibility === "public") &&
+        property.publicImageApproved === true &&
+        Boolean(property.image),
+    );
+    const uniqueVillaTitles = new Set<string>();
+    const privateVillaValue = approvedProperties.reduce((total, property) => {
+      if (property.listingType === "new-development" || property.priceCurrency !== "EUR") {
+        return total;
+      }
+
+      const titleKey = property.title.trim().toLowerCase().replace(/\s+/g, " ");
+      if (!titleKey || uniqueVillaTitles.has(titleKey)) return total;
+      uniqueVillaTitles.add(titleKey);
+      return total + (property.priceAmount || 0);
+    }, 0);
+    const approved = approvedProperties
       .map((property) => {
         const isTeaser = property.visibility === "teaser";
         return {
@@ -91,10 +103,11 @@ async function getPublicPropertySlides(): Promise<{
     return {
       properties: approved.filter((item) => item.listingType === "resale").map((item) => item.slide),
       developments: approved.filter((item) => item.listingType === "new-development").map((item) => item.slide),
+      privateVillaValueMillions: Math.floor(privateVillaValue / 1_000_000),
     };
   } catch (error) {
     console.error("homepage-property-carousel-unavailable", error);
-    return { properties: [], developments: [] };
+    return { properties: [], developments: [], privateVillaValueMillions: 0 };
   }
 }
 
@@ -217,7 +230,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <PublicPropertyCarousel slides={publicPropertySlides.properties} />
+      <PublicPropertyCarousel
+        slides={publicPropertySlides.properties}
+        portfolioValueMillions={publicPropertySlides.privateVillaValueMillions}
+      />
       <PublicPropertyCarousel slides={publicPropertySlides.developments} variant="development" />
 
       <section className="services-section section-pad" id="services">
