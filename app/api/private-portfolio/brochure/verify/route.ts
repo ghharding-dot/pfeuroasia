@@ -4,13 +4,8 @@ import {
   verifyBrochureChallenge,
 } from "../../../../lib/brochureAccess";
 import { findPublishedPrivateProperty } from "../../../../lib/privatePropertyLookup";
-import { hasPrivatePortfolioRequestAccess } from "../../../../lib/privatePortfolioRequest";
 
 export async function POST(request: NextRequest) {
-  if (!(await hasPrivatePortfolioRequestAccess(request))) {
-    return NextResponse.json({ error: "Private Collection access has expired." }, { status: 401 });
-  }
-
   const body = await request.json().catch(() => null);
   const challenge = typeof body?.challenge === "string" ? body.challenge : "";
   const code = typeof body?.code === "string" ? body.code.trim() : "";

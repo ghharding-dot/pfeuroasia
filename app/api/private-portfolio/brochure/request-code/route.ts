@@ -2,7 +2,6 @@ import { randomInt } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createBrochureChallenge } from "../../../../lib/brochureAccess";
 import { findPublishedPrivateProperty } from "../../../../lib/privatePropertyLookup";
-import { hasPrivatePortfolioRequestAccess } from "../../../../lib/privatePortfolioRequest";
 
 function clean(value: unknown, maxLength = 320) {
   return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
@@ -13,11 +12,6 @@ function maskedEmail(email: string) {
 }
 
 export async function POST(request: NextRequest) {
-  if (!(await hasPrivatePortfolioRequestAccess(request))) {
-    console.warn("brochure-verification-rejected", { reason: "portfolio-access-expired" });
-    return NextResponse.json({ error: "Private Collection access has expired. Please sign in again." }, { status: 401 });
-  }
-
   const body = await request.json().catch(() => null);
   if (!body) {
     console.warn("brochure-verification-rejected", { reason: "invalid-json" });

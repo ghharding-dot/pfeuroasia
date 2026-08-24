@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { PrivatePropertyCard } from "../../components/PrivatePropertyCard";
@@ -10,10 +9,6 @@ import {
   normalizePropertyAccessLevel,
   readProperties,
 } from "../../lib/propertyStore";
-import {
-  REGISTERED_PROPERTY_COOKIE_NAME,
-  verifyRegisteredPropertySession,
-} from "../../lib/registeredPropertyAuth";
 import "../registered-property.css";
 import "../../private-portfolio/portfolio-collection.css";
 
@@ -61,15 +56,6 @@ export default async function RegisteredPropertyPage({
 
   const isDevelopment = property.listingType === "new-development";
 
-  const cookieStore = isDevelopment ? null : await cookies();
-  const session = isDevelopment
-    ? null
-    : verifyRegisteredPropertySession(
-        cookieStore?.get(REGISTERED_PROPERTY_COOKIE_NAME)?.value,
-      );
-
-  if (!isDevelopment && !session) redirect(`/properties/${property.id}/access`);
-
   const locationKey = (property.approximateLocation || property.location)
     .split(",")[0]
     .trim()
@@ -99,15 +85,15 @@ export default async function RegisteredPropertyPage({
       <section className="registered-property-hero site-shell">
         <div className="registered-property-notice">
           <div>
-            <strong>{isDevelopment ? "New development · Open listing" : "Verified registered-listing access"}</strong>
+            <strong>{isDevelopment ? "New development · Open listing" : "Selected property · Open details"}</strong>
             <p>
               {isDevelopment
                 ? "View the complete development presentation without registering. Enquire when you would like current availability, floor plans or further information."
-                : `Signed in as ${session?.fullName}. This access covers general registered listings for 30 days. Private off-market opportunities require a separate application and approval.`}
+                : "View the larger photographs and full property information without registering. Registration is only required when you choose to download a brochure PDF."}
             </p>
           </div>
-          <Link className="button button-gold" href={isDevelopment ? "/#new-developments-heading" : "/private-portfolio"}>
-            {isDevelopment ? "Back to developments" : "Explore Private Collection"} <span>→</span>
+          <Link className="button button-gold" href={isDevelopment ? "/#new-developments-heading" : "/#selected-opportunities-heading"}>
+            {isDevelopment ? "Back to developments" : "Back to selected properties"} <span>→</span>
           </Link>
         </div>
       </section>
@@ -115,7 +101,7 @@ export default async function RegisteredPropertyPage({
       <section className="private-collection-grid registered-property-grid site-shell">
         <PrivatePropertyCard
           property={property}
-          brochureMode="enquiry"
+          brochureMode={isDevelopment ? "enquiry" : "verified"}
           detailMode
           enquiryHref={isDevelopment ? `/enquire?property=${encodeURIComponent(property.id)}` : undefined}
           enquiryLabel={isDevelopment ? "Enquire about this development" : undefined}
