@@ -11,8 +11,7 @@
 .news-ticker {
   position: fixed;
   z-index: 100;
-  top: 0;
-  left: 0;
+  inset: 0 0 auto;
   display: flex !important;
   visibility: visible !important;
   width: 100%;
@@ -29,6 +28,9 @@
   letter-spacing: .1em;
   line-height: 1;
   text-transform: uppercase;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: layout paint;
 }
 
 .news-ticker-label {
