@@ -3,7 +3,7 @@ import { PartnerStrip } from "./PartnerStrip";
 import styles from "./FooterCollaborators.module.css";
 
 export function Footer() {
-  const whatsappDigits = (process.env.NEXT_PUBLIC_PROPERTY_ADVISER_WHATSAPP || "").replace(/\D/g, "");
+  const whatsappDigits = "34647026881";
   const whatsappHref = whatsappDigits
     ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent("Hello Geoff, I am contacting you through the PF EuroAsia website.")}`
     : "";
@@ -38,7 +38,7 @@ export function Footer() {
             {whatsappHref && (
               <p>
                 <a className="footer-whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">
-                  WhatsApp PF EuroAsia <span>↗</span>
+                  WhatsApp PF EuroAsia · +34 647 026 881 <span>↗</span>
                 </a>
               </p>
             )}

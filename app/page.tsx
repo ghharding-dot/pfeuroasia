@@ -267,28 +267,6 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="gateway-section">
-        <div className="gateway-image" role="img" aria-label="Luxury Asian city residence at blue hour" />
-        <div className="gateway-copy">
-          <p className="eyebrow light">Europe meets Asia</p>
-          <h2>One relationship.<br />Two worlds.</h2>
-          <p>
-            For clients in Asia, we make Spain feel closer: qualifying the
-            market, opening the right doors and coordinating every detail on
-            the ground. For Spanish owners, we create considered exposure to a
-            genuinely international audience.
-          </p>
-          <div className="gateway-points">
-            <span>Spain-side presence</span>
-            <span>Cross-border coordination</span>
-            <span>Confidential private network</span>
-          </div>
-          <Link className="text-link light-link" href="/about">
-            Discover our approach <span>→</span>
-          </Link>
-        </div>
-      </section>
-
       <section className="market-section section-pad" id="markets">
         <div className="site-shell market-grid">
           <div className="market-card image-card">
