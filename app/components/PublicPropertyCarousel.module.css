@@ -119,6 +119,19 @@
   transform: translateX(0);
 }
 
+.developmentSection .slides {
+  height: auto;
+}
+
+.developmentSection .slide {
+  height: auto;
+  min-height: 455px;
+}
+
+.developmentSection .slide.active {
+  position: relative;
+}
+
 .imageWrap {
   position: relative;
   height: 100%;
