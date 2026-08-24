@@ -125,13 +125,13 @@
 
 .pathLabel {
   display: block;
-  margin-bottom: 13px;
+  margin-bottom: 17px;
   color: var(--gold-light);
   font-family: var(--serif);
-  font-size: clamp(17px, 1.55vw, 23px);
+  font-size: clamp(30px, 3vw, 48px);
   font-weight: 400;
-  letter-spacing: 0.035em;
-  line-height: 1.05;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
   text-transform: none;
 }
 
@@ -541,7 +541,7 @@
   }
 
   .pathLabel {
-    font-size: 20px;
+    font-size: 34px;
   }
 
   .gatewayCardCopy h2 {

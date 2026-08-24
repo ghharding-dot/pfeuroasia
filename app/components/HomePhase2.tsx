@@ -100,7 +100,7 @@ export function HomePhase2() {
             >
               <div className={phase2Styles.cardOverlay} />
               <div className={phase2Styles.gatewayCardCopy}>
-                <span className={phase2Styles.pathLabel}>Spanish property</span>
+                <span className={phase2Styles.pathLabel}>Spain Gateway</span>
                 <h2>Looking to buy property in Spain?</h2>
                 <p>
                   Explore luxury homes, private opportunities, buyer
