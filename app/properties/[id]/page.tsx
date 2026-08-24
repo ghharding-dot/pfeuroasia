@@ -103,6 +103,8 @@ export default async function RegisteredPropertyPage({
           property={property}
           brochureMode={isDevelopment ? "enquiry" : "verified"}
           detailMode
+          showEnquiry={isDevelopment}
+          singleBrochureAction={!isDevelopment}
           enquiryHref={isDevelopment ? `/enquire?property=${encodeURIComponent(property.id)}` : undefined}
           enquiryLabel={isDevelopment ? "Enquire about this development" : undefined}
         />

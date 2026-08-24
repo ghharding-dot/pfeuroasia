@@ -3,6 +3,11 @@ import { PartnerStrip } from "./PartnerStrip";
 import styles from "./FooterCollaborators.module.css";
 
 export function Footer() {
+  const whatsappDigits = (process.env.NEXT_PUBLIC_PROPERTY_ADVISER_WHATSAPP || "").replace(/\D/g, "");
+  const whatsappHref = whatsappDigits
+    ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent("Hello Geoff, I am contacting you through the PF EuroAsia website.")}`
+    : "";
+
   return (
     <footer className="site-footer">
       <PartnerStrip />
@@ -30,6 +35,13 @@ export function Footer() {
             <p><strong>Property Facilitators EuroAsia</strong></p>
             <p><strong>Labuan, Malaysia</strong></p>
             <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
+            {whatsappHref && (
+              <p>
+                <a className="footer-whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                  WhatsApp PF EuroAsia <span>↗</span>
+                </a>
+              </p>
+            )}
           </div>
         </div>
         <p>Independent luxury property representation between Spain and Asia.</p>

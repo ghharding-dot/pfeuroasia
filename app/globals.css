@@ -397,6 +397,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .footer-contact p { margin: 0 0 13px; color: rgba(255,255,255,.52); font-size: 11px; line-height: 1.75; }
 .footer-contact strong { color: rgba(255,255,255,.82); font-weight: 600; letter-spacing: .04em; }
 .footer-contact a { color: var(--gold-light); border-bottom: 1px solid rgba(222,194,141,.35); }
+.footer-contact .footer-whatsapp-link { display: inline-flex; min-height: 42px; align-items: center; justify-content: space-between; gap: 22px; margin-top: 7px; padding: 0 15px; border: 1px solid rgba(222,194,141,.72); color: var(--gold-light); font-size: 9px; font-weight: 700; letter-spacing: .1em; line-height: 1.2; text-decoration: none; text-transform: uppercase; transition: background .2s ease, color .2s ease; }
+.footer-contact .footer-whatsapp-link:hover { background: var(--gold); color: #11130f; }
 .footer-top > p { max-width: 330px; margin: 5px 0 0; color: rgba(255,255,255,.48); font-family: var(--serif); font-size: 18px; line-height: 1.6; }
 .footer-links { display: flex; flex-direction: column; gap: 13px; font-size: 11px; letter-spacing: .06em; }
 .footer-links a:hover { color: var(--gold); }

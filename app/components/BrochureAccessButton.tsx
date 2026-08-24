@@ -9,11 +9,13 @@ export function BrochureAccessButton({
   propertyTitle,
   partnerName,
   edition = "branded",
+  label,
 }: {
   propertyReference: string;
   propertyTitle: string;
   partnerName: string;
   edition?: "branded" | "partner";
+  label?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>("details");
@@ -96,7 +98,7 @@ export function BrochureAccessButton({
   return (
     <>
       <button className="text-link brochure-access-trigger" type="button" onClick={() => setOpen(true)}>
-        {edition === "partner" ? "Access unbranded partner brochure" : "Access branded property brochure"} <span>→</span>
+        {label || (edition === "partner" ? "Access unbranded partner brochure" : "Access branded property brochure")} <span>→</span>
       </button>
 
       {open && (
@@ -130,7 +132,7 @@ export function BrochureAccessButton({
                 </label>
                 <label>
                   <span>Telephone / WhatsApp</span>
-                  <input name="telephone" type="tel" autoComplete="tel" />
+                  <input name="telephone" type="tel" autoComplete="tel" required />
                 </label>
                 <label className="brochure-honeypot" aria-hidden="true">
                   <span>Company website</span>

@@ -65,6 +65,7 @@ export function PrivatePropertyCard({
   detailMode = false,
   enquiryHref,
   enquiryLabel = "Enquire about this property",
+  singleBrochureAction = false,
 }: {
   property: PrivatePropertyDisplay;
   showEnquiry?: boolean;
@@ -72,6 +73,7 @@ export function PrivatePropertyCard({
   detailMode?: boolean;
   enquiryHref?: string;
   enquiryLabel?: string;
+  singleBrochureAction?: boolean;
 }) {
   const facts = [
     propertyTypeLabel(property.propertyType),
@@ -186,6 +188,7 @@ export function PrivatePropertyCard({
                 propertyTitle={property.title}
                 partnerName={partnerName}
                 edition="branded"
+                label={singleBrochureAction ? "Request PDF brochure" : undefined}
               />
             ) : brochureMode === "direct" ? (
               <a
@@ -210,7 +213,7 @@ export function PrivatePropertyCard({
             <span className="brochure-pending">Sales brochure PDF not attached</span>
           )}
 
-          {property.unbrandedBrochure && brochureMode === "verified" && (
+          {!singleBrochureAction && property.unbrandedBrochure && brochureMode === "verified" && (
             <BrochureAccessButton
               propertyReference={property.reference}
               propertyTitle={property.title}
@@ -219,19 +222,19 @@ export function PrivatePropertyCard({
             />
           )}
 
-          {property.unbrandedBrochure && brochureMode === "direct" && (
+          {!singleBrochureAction && property.unbrandedBrochure && brochureMode === "direct" && (
             <a className="text-link" href={property.unbrandedBrochure} target="_blank" rel="noopener noreferrer">
               View unbranded partner brochure <span>→</span>
             </a>
           )}
 
-          {property.unbrandedBrochure && brochureMode === "enquiry" && (
+          {!singleBrochureAction && property.unbrandedBrochure && brochureMode === "enquiry" && (
             <a className="text-link" href={`mailto:enquiry@pfeuroasia.com?subject=${partnerBrochureSubject}`}>
               Request unbranded partner brochure <span>→</span>
             </a>
           )}
 
-          {property.unbrandedBrochure && brochureMode === "preview" && (
+          {!singleBrochureAction && property.unbrandedBrochure && brochureMode === "preview" && (
             <span className="brochure-pending brochure-attached">Unbranded partner brochure attached</span>
           )}
 

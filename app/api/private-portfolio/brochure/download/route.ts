@@ -9,7 +9,6 @@ import {
 } from "../../../../lib/brochureStorage";
 import { getPartnerContact } from "../../../../lib/partnerContacts";
 import { findPublishedPrivateProperty } from "../../../../lib/privatePropertyLookup";
-import { hasPrivatePortfolioRequestAccess } from "../../../../lib/privatePortfolioRequest";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -224,13 +223,6 @@ function maskedIp(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  if (!(await hasPrivatePortfolioRequestAccess(request))) {
-    return NextResponse.json(
-      { error: "Private Collection access has expired." },
-      { status: 401 },
-    );
-  }
-
   const token = request.nextUrl.searchParams.get("token") || "";
   const client = verifyBrochureDownloadToken(token);
   if (!client || !client.consent) {
