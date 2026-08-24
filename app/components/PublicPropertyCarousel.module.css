@@ -51,7 +51,7 @@
 
 .carousel {
   position: relative;
-  width: min(100%, 980px);
+  width: min(100%, 1180px);
   margin-inline: auto;
 }
 
