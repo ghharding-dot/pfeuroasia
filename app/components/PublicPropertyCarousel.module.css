@@ -93,12 +93,13 @@
 
 .slides {
   position: relative;
+  display: grid;
   height: auto;
 }
 
 .slide {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  grid-area: 1 / 1;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(285px, .65fr);
   height: auto;
@@ -111,7 +112,8 @@
   opacity: 0;
   pointer-events: none;
   transform: translateX(28px);
-  transition: opacity 500ms ease, transform 600ms ease;
+  visibility: hidden;
+  transition: opacity 500ms ease, transform 600ms ease, visibility 0s linear 600ms;
 }
 
 .active {
@@ -119,6 +121,8 @@
   opacity: 1;
   pointer-events: auto;
   transform: translateX(0);
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 .developmentSection .carousel {
