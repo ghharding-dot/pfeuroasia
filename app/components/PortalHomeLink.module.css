@@ -1,25 +1,30 @@
+.homeNav {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  padding: 12px max(18px, env(safe-area-inset-left));
+  border-bottom: 1px solid rgba(185, 150, 91, 0.32);
+  background: #0f110f;
+}
+
 .homeLink {
-  position: fixed;
-  left: max(18px, env(safe-area-inset-left));
-  bottom: max(18px, env(safe-area-inset-bottom));
-  z-index: 1000;
   display: inline-flex;
-  min-height: 46px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  padding: 11px 16px;
+  padding: 10px 15px;
   border: 1px solid #b9965b;
   border-radius: 999px;
   background: #171916;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
   color: #f4e5c8;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1;
   text-transform: uppercase;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .homeLink span {
@@ -31,10 +36,9 @@
 .homeLink:hover,
 .homeLink:focus-visible {
   background: #b9965b;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
   color: #141511;
   outline: none;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .homeLink:hover span,
@@ -43,10 +47,12 @@
 }
 
 @media (max-width: 620px) {
+  .homeNav {
+    padding: 10px max(12px, env(safe-area-inset-left));
+  }
+
   .homeLink {
-    left: max(12px, env(safe-area-inset-left));
-    bottom: max(12px, env(safe-area-inset-bottom));
-    min-height: 44px;
-    padding: 10px 14px;
+    min-height: 42px;
+    padding: 9px 13px;
   }
 }

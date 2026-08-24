@@ -4,8 +4,8 @@ import { PortalHomeLink } from "../components/PortalHomeLink";
 export default function VaultLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <>
-      {children}
       <PortalHomeLink />
+      {children}
     </>
   );
 }

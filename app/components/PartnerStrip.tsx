@@ -75,17 +75,6 @@ export function PartnerStrip() {
             </a>
           </div>
         </div>
-
-        <div className={styles.rentalPartnerSection}>
-          <div className={styles.rentalDivider} aria-hidden="true" />
-          <p className={styles.rentalEyebrow}>Approved PF EuroAsia collaborators</p>
-          <p className={styles.rentalStatement}>
-            Securely submit your direct property listings, photography and private brochure for PF EuroAsia review.
-          </p>
-          <a className={styles.collaboratorButton} href="/collaborators">
-            Collaborator Login <span>→</span>
-          </a>
-        </div>
       </div>
     </section>
   );
