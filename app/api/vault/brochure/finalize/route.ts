@@ -45,7 +45,7 @@ function pathnameFor(url: URL) {
 
 export async function POST(request: Request) {
   const vaultAccess = await hasVaultAccess();
-  const collaborator = vaultAccess ? null : await getCollaboratorSession();
+  const collaborator = await getCollaboratorSession();
   if (!vaultAccess && !collaborator) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -63,9 +63,11 @@ export async function POST(request: Request) {
   const collaboratorPrefix = collaborator
     ? `collaborator-submissions/${collaborator.partnerCode.toLowerCase()}/`
     : "";
-  const permittedPath = vaultAccess
-    ? path.startsWith("private-portfolio/")
-    : path.startsWith(collaboratorPrefix);
+  const isAdminUpload = vaultAccess && path.startsWith("private-portfolio/");
+  const isCollaboratorUpload = Boolean(
+    collaborator && path.startsWith(collaboratorPrefix),
+  );
+  const permittedPath = isAdminUpload || isCollaboratorUpload;
 
   const permittedBrochureType =
     /(?:^|\/)(?:brochure|partnerBrochure)-/i.test(path);
@@ -80,11 +82,11 @@ export async function POST(request: Request) {
   const requestedOwnerCode = String(body?.ownerCode || "DIRECT")
     .trim()
     .toUpperCase();
-  const owner = collaborator
+  const owner = isCollaboratorUpload && collaborator
     ? getPartnerContact(collaborator.partnerCode)
     : getPartnerContact(requestedOwnerCode);
 
-  if (!collaborator && owner.code !== requestedOwnerCode) {
+  if (!isCollaboratorUpload && owner.code !== requestedOwnerCode) {
     return NextResponse.json(
       { error: "The listing collaborator could not be identified." },
       { status: 400 },
