@@ -36,7 +36,7 @@ export function Header({
   const [open, setOpen] = useState(false);
 
   return (
-    <header className={`site-header ${transparent ? "is-transparent" : ""}`}>
+    <>
       <div className="news-ticker" role="region" aria-label="Latest Malaysia news and market updates">
         <span className="news-ticker-label">Latest</span>
         <div className="news-ticker-window">
@@ -47,6 +47,7 @@ export function Header({
         </div>
       </div>
 
+      <header className={`site-header ${transparent ? "is-transparent" : ""}`}>
       <div className="site-shell header-inner">
         <Link className="brand" href="/" aria-label="Property Facilitators EuroAsia home">
           <span className="brand-lockup" aria-hidden="true">
@@ -87,6 +88,7 @@ export function Header({
       </div>
 
       <HeaderLiveStrip />
-    </header>
+      </header>
+    </>
   );
 }
