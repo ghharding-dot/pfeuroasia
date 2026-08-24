@@ -93,7 +93,7 @@
 
 .slides {
   position: relative;
-  height: 455px;
+  height: auto;
 }
 
 .slide {
@@ -101,7 +101,8 @@
   inset: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(285px, .65fr);
-  height: 455px;
+  height: auto;
+  min-height: 455px;
   overflow: hidden;
   border: 1px solid rgba(197, 162, 104, .92);
   background: #121714;
@@ -114,6 +115,7 @@
 }
 
 .active {
+  position: relative;
   opacity: 1;
   pointer-events: auto;
   transform: translateX(0);
@@ -130,6 +132,20 @@
 
 .developmentSection .slide.active {
   position: relative;
+}
+
+.imageGallery {
+  display: grid;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: #1a211c;
+}
+
+.singleImage {
+  grid-template-rows: 1fr;
 }
 
 .imageWrap {
@@ -368,9 +384,13 @@
     width: min(100%, 760px);
   }
 
-  .slides,
+  .slides {
+    height: auto;
+  }
+
   .slide {
-    height: 790px;
+    height: auto;
+    min-height: 790px;
   }
 
   .slide {
@@ -378,7 +398,7 @@
     grid-template-rows: 410px 1fr;
   }
 
-  .imageWrap {
+  .imageGallery {
     height: 410px;
   }
 
@@ -414,16 +434,20 @@
     font-size: 42px;
   }
 
-  .slides,
+  .slides {
+    height: auto;
+  }
+
   .slide {
-    height: 715px;
+    height: auto;
+    min-height: 0;
   }
 
   .slide {
     grid-template-rows: 330px 1fr;
   }
 
-  .imageWrap {
+  .imageGallery {
     height: 330px;
   }
 

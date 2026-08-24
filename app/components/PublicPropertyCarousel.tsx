@@ -7,6 +7,7 @@ import styles from "./PublicPropertyCarousel.module.css";
 export type PublicPropertySlide = {
   id: string;
   image: string;
+  secondaryImage?: string;
   imagePosition: string;
   title: string;
   location: string;
@@ -174,20 +175,33 @@ export function PublicPropertyCarousel({
                   aria-hidden={slideIndex !== index}
                   key={slide.id}
                 >
-                  <div className={styles.imageWrap}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={slide.image}
-                      alt={slide.title}
-                      style={{ objectPosition: slide.imagePosition }}
-                    />
-                    <span className={styles.imageLabel}>
-                      {isDevelopment
-                        ? "New development"
-                        : registered
-                          ? "Registered listing"
-                          : "Private opportunity"}
-                    </span>
+                  <div
+                    className={`${styles.imageGallery} ${slide.secondaryImage ? styles.twoImages : styles.singleImage}`}
+                  >
+                    <div className={styles.imageWrap}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={slide.image}
+                        alt={slide.title}
+                        style={{ objectPosition: slide.imagePosition }}
+                      />
+                      <span className={styles.imageLabel}>
+                        {isDevelopment
+                          ? "New development"
+                          : registered
+                            ? "Registered listing"
+                            : "Private opportunity"}
+                      </span>
+                    </div>
+                    {slide.secondaryImage ? (
+                      <div className={styles.imageWrap}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={slide.secondaryImage}
+                          alt={`${slide.title} — additional view`}
+                        />
+                      </div>
+                    ) : null}
                   </div>
 
                   <div className={styles.copy}>
