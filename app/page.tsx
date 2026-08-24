@@ -182,6 +182,12 @@ export default async function Home() {
 
       <HomePhase2 />
 
+      <PublicPropertyCarousel
+        slides={publicPropertySlides.properties}
+        portfolioValueMillions={publicPropertySlides.privateVillaValueMillions}
+      />
+      <PublicPropertyCarousel slides={publicPropertySlides.developments} variant="development" />
+
       <section className={styles.regionsSection} id="regions">
         <div className="site-shell">
           <div className={styles.heading}>
@@ -203,6 +209,7 @@ export default async function Home() {
                 <div className={styles.regionCopy}>
                   <h3>Spain</h3>
                   <p>Luxury residential property, private estates and relocation across Marbella, Benahavís and the Costa del Sol.</p>
+                  <p className={styles.linkPrompt}>Click any of the area buttons below for local information and property opportunities.</p>
                   <nav className={styles.subLinks} aria-label="Explore Spain">
                     <Link href="/markets/marbella">Marbella</Link>
                     <Link href="/areas/marbella-golden-mile">Golden Mile</Link>
@@ -221,9 +228,9 @@ export default async function Home() {
           <article className={`${styles.rentalCard} ${styles.rentals}`}>
             <div className={styles.rentalInner}>
               <div className={styles.rentalCopy}>
-                <span className={styles.regionLabel}>Private stays · Concierge</span>
+                <span className={styles.regionLabel}>Stay first · Explore Marbella</span>
                 <h3>Luxury Villa Rentals</h3>
-                <p>Exceptional villas, discreet service and fully coordinated stays in Marbella and selected destinations.</p>
+                <p>Come to Spain first and stay in one of our luxury villas before deciding where you would like to buy in Marbella.</p>
               </div>
               <Link className={styles.rentalCta} href="/luxury-villa-rentals">
                 View luxury villas <span>→</span>
@@ -232,12 +239,6 @@ export default async function Home() {
           </article>
         </div>
       </section>
-
-      <PublicPropertyCarousel
-        slides={publicPropertySlides.properties}
-        portfolioValueMillions={publicPropertySlides.privateVillaValueMillions}
-      />
-      <PublicPropertyCarousel slides={publicPropertySlides.developments} variant="development" />
 
       <section className="services-section section-pad" id="services">
         <div className="site-shell">

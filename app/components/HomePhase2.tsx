@@ -28,7 +28,7 @@ export function HomePhase2() {
         <div className={phase2Styles.gatewayCards}>
           <Link
             className={`${phase2Styles.gatewayCard} ${phase2Styles.spainPath}`}
-            href="#regions"
+            href="#selected-opportunities-heading"
           >
             <div className={phase2Styles.cardOverlay} />
             <div className={phase2Styles.gatewayCardCopy}>

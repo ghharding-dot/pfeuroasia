@@ -132,6 +132,16 @@
   line-height: 1.75;
 }
 
+.linkPrompt {
+  margin-top: 18px !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 10px !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.55 !important;
+  text-transform: uppercase;
+}
+
 .subLinks {
   display: flex;
   flex-wrap: wrap;
