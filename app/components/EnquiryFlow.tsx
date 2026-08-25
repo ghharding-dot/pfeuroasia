@@ -50,6 +50,11 @@ const asiaGoals = [
     title: "Acquire a property in Asia",
     text: "Selected residential and investment opportunities, beginning with Malaysia.",
   },
+  {
+    value: "malaysia-trip",
+    title: "Planning a trip to Malaysia?",
+    text: "We can help coordinate it—from hotels and transfers to property visits and trusted local introductions.",
+  },
 ];
 
 const standardBudgetOptions = [
@@ -65,6 +70,14 @@ const asiaBudgetOptions = [
   "US$250,000 – US$500,000",
   "US$500,000 – US$1m",
   "US$1m+",
+  "Prefer to discuss",
+];
+
+const malaysiaTripBudgetOptions = [
+  "Under €5,000",
+  "€5,000 – €10,000",
+  "€10,000 – €25,000",
+  "€25,000+",
   "Prefer to discuss",
 ];
 
@@ -108,6 +121,16 @@ const asiaGoalDetails: Record<
     budgetLabel: "Indicative property budget",
     messagePlaceholder:
       "Preferred location, property type, intended use, timing, yield expectations or lifestyle priorities…",
+  },
+  "malaysia-trip": {
+    legend: "Tell us about your planned trip to Malaysia.",
+    hint:
+      "Share your dates, interests and priorities. We can coordinate the right accommodation, transfers, visits and local introductions around your plans.",
+    locationLabel: "Destinations or purpose of your visit",
+    locationPlaceholder: "e.g. Kuala Lumpur, Langkawi, property visits or a discovery trip",
+    budgetLabel: "Indicative trip budget",
+    messagePlaceholder:
+      "Preferred dates, number of travellers, hotel style, destinations, transfers, property visits and any special requirements…",
   },
 };
 
@@ -320,7 +343,13 @@ export function EnquiryFlow({
   const totalSteps = preset ? 2 : 3;
   const progressStep = preset ? step - 1 : step;
   const asiaDetail = isAsia ? asiaGoalDetails[goal] : undefined;
-  const budgetOptions = preset?.budgetOptions || (isAsia ? asiaBudgetOptions : standardBudgetOptions);
+  const budgetOptions =
+    preset?.budgetOptions ||
+    (goal === "malaysia-trip"
+      ? malaysiaTripBudgetOptions
+      : isAsia
+        ? asiaBudgetOptions
+        : standardBudgetOptions);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -408,7 +437,7 @@ export function EnquiryFlow({
         <p>
           {preset?.intro ||
             (isAsia
-              ? "Tell us whether you are considering residency, company setup, a professional partnership or property acquisition in Asia. Your enquiry will be handled personally and in confidence."
+              ? "Tell us whether you are considering residency, company setup, a professional partnership, property acquisition or planning a trip to Malaysia. Your enquiry will be handled personally and in confidence."
               : "Share a little about your objectives. Your enquiry will be handled personally and in confidence.")}
         </p>
         {preset && (
