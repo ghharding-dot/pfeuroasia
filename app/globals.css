@@ -525,13 +525,21 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .area-feature-grid article > span { color: var(--gold); font-size: 10px; letter-spacing: .14em; }
 .area-feature-grid h2 { margin: 86px 0 20px; font-family: var(--serif); font-size: 32px; font-weight: 400; }
 .area-feature-grid p { margin: 0; color: rgba(255,255,255,.5); font-size: 13px; line-height: 1.75; }
-.hotel-recommendation-card { min-height: 0 !important; padding: 0 !important; overflow: hidden; }
-.hotel-recommendation-image { position: relative; height: 250px; overflow: hidden; background: #20231f; }
-.hotel-recommendation-image img { object-fit: cover; transition: transform 600ms cubic-bezier(.2,.7,.2,1); }
-.hotel-recommendation-card:hover .hotel-recommendation-image img { transform: scale(1.035); }
-.hotel-recommendation-copy { padding: 32px 34px 36px; }
-.hotel-recommendation-copy > span { color: var(--gold); font-size: 10px; letter-spacing: .14em; }
-.hotel-recommendation-copy h2 { margin: 30px 0 20px; }
+.hotel-recommendation-grid { gap: 14px; border: 0; }
+.hotel-recommendation-card { min-height: 0 !important; padding: 0 !important; overflow: hidden; border: 1px solid rgba(255,255,255,.14) !important; background: #151916; box-shadow: 0 18px 44px rgba(0,0,0,.12); transition: opacity 350ms ease, transform 450ms cubic-bezier(.2,.7,.2,1), box-shadow 450ms ease; }
+.hotel-recommendation-image { position: relative; height: clamp(340px, 31vw, 440px); overflow: hidden; background: #20231f; isolation: isolate; }
+.hotel-recommendation-image img { z-index: -2; object-fit: cover; transition: transform 800ms cubic-bezier(.2,.7,.2,1), filter 500ms ease; }
+.hotel-recommendation-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,10,8,.06) 25%, rgba(8,10,8,.28) 58%, rgba(8,10,8,.9) 100%); transition: background 450ms ease; }
+.hotel-recommendation-number { position: absolute; top: 24px; left: 25px; padding-bottom: 8px; border-bottom: 1px solid rgba(222,194,141,.78); color: var(--gold-light); font-family: var(--serif); font-size: 14px; letter-spacing: .04em; }
+.hotel-recommendation-title { position: absolute; right: 28px; bottom: 27px; left: 28px; }
+.hotel-recommendation-title > span { display: block; margin-bottom: 12px; color: var(--gold-light); font-size: 9px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; }
+.hotel-recommendation-title h2 { margin: 0; color: #fff; font-family: var(--serif); font-size: clamp(34px, 3vw, 47px); font-weight: 400; letter-spacing: -.035em; line-height: .98; text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+.hotel-recommendation-card:hover { z-index: 1; box-shadow: 0 28px 60px rgba(0,0,0,.32); transform: translateY(-9px); }
+.hotel-recommendation-card:hover .hotel-recommendation-image img { filter: saturate(1.06) contrast(1.03); transform: scale(1.045); }
+.hotel-recommendation-card:hover .hotel-recommendation-shade { background: linear-gradient(180deg, rgba(8,10,8,0) 22%, rgba(8,10,8,.18) 58%, rgba(8,10,8,.82) 100%); }
+.hotel-recommendation-grid:has(.hotel-recommendation-card:hover) .hotel-recommendation-card:not(:hover) { opacity: .72; transform: scale(.985); }
+.hotel-recommendation-copy { display: flex; min-height: 230px; flex-direction: column; align-items: flex-start; padding: 30px 32px 34px; }
+.hotel-recommendation-copy p { flex: 1; }
 .hotel-recommendation-copy .text-link { margin-top: 26px; }
 .area-advice { background: var(--ivory); }
 .area-advice-grid { display: grid; grid-template-columns: 1fr .85fr; gap: 120px; align-items: start; }
@@ -868,6 +876,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .area-feature-grid, .market-area-grid { grid-template-columns: 1fr; }
   .area-feature-grid article { min-height: 245px; }
   .area-feature-grid h2 { margin-top: 48px; }
+  .hotel-recommendation-grid { gap: 18px; border-left: 0; }
+  .hotel-recommendation-image { height: min(116vw, 460px); }
+  .hotel-recommendation-title { right: 24px; bottom: 24px; left: 24px; }
+  .hotel-recommendation-title h2 { margin: 0; font-size: clamp(37px, 11vw, 48px); }
+  .hotel-recommendation-copy { min-height: 0; padding: 27px 25px 30px; }
   .market-area-grid > a { min-height: 310px; padding: 30px; }
   .market-area-grid h2 { margin-top: 58px; }
   .china-contact h2 { font-size: 50px; }
