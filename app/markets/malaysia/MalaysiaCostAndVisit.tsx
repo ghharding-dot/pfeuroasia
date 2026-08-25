@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./MalaysiaCostAndVisit.module.css";
 import cardStyles from "./MalaysiaDiscoveryCards.module.css";
-import { SkyscannerFlightSearch } from "./SkyscannerFlightSearch";
+import { SkyscannerFlightSearch } from "../../components/SkyscannerFlightSearch";
 
 const comparisonRows = [
   { icon: "⛽", label: "Petrol / gasoline", unit: "per litre", europe: "€1.80", malaysia: "RM3.82 (€0.80)" },
