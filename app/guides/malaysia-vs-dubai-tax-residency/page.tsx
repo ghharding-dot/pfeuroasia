@@ -116,7 +116,7 @@ export default function MalaysiaVsDubaiPage() {
           <div className={`${styles.heroPanel} ${styles.malaysiaPanel}`}>
             <Image
               className={styles.heroImage}
-              src="/images/kl%20BACK%20GORUND.avif"
+              src="/images/malaysia-travel-pool-skyline.webp"
               alt=""
               fill
               priority
