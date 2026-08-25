@@ -329,6 +329,238 @@
   line-height: 1.72;
 }
 
+.rentalSection,
+.conciergeSection {
+  padding: 116px 0;
+}
+
+.rentalSection {
+  background: var(--stone);
+}
+
+.rentalGrid,
+.conciergeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rentalCard,
+.conciergeCard {
+  position: relative;
+  display: flex;
+  min-height: 440px;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 26px;
+  color: #fff;
+  isolation: isolate;
+  transition: transform 350ms ease, box-shadow 350ms ease;
+}
+
+.rentalCard > img,
+.conciergeCard > img {
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 800ms cubic-bezier(.2, .7, .2, 1), filter 450ms ease;
+}
+
+.rentalCard:hover,
+.rentalCard:focus-visible,
+.conciergeCard:hover,
+.conciergeCard:focus-visible {
+  box-shadow: 0 26px 58px rgba(0, 0, 0, .28);
+  outline: none;
+  transform: translateY(-7px);
+}
+
+.rentalCard:hover > img,
+.rentalCard:focus-visible > img,
+.conciergeCard:hover > img,
+.conciergeCard:focus-visible > img {
+  filter: saturate(1.06);
+  transform: scale(1.045);
+}
+
+.cardShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(6, 9, 8, .12), rgba(6, 9, 8, .2) 42%, rgba(6, 9, 8, .94) 100%);
+}
+
+.cardNumber {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 13px;
+}
+
+.cardCopy small {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--gold-light);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.cardCopy h3 {
+  margin: 0 0 13px;
+  font-family: var(--serif);
+  font-size: clamp(31px, 3vw, 43px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: .98;
+}
+
+.cardCopy p {
+  max-width: 460px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, .68);
+  font-size: 11px;
+  line-height: 1.68;
+}
+
+.cardCopy b {
+  display: inline-flex;
+  gap: 12px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--gold);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.cardCopy b span { color: var(--gold-light); font-size: 12px; }
+
+.collectionNote {
+  margin: 22px 0 0;
+  color: #777970;
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.partnershipBand {
+  display: grid;
+  grid-template-columns: auto 30px auto minmax(280px, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 55px;
+  padding: 32px 36px;
+  border: 1px solid #cbbd9f;
+  background: rgba(255, 255, 255, .45);
+}
+
+.partnershipBand > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.partnershipBand strong {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.partnershipBand > span {
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 25px;
+  text-align: center;
+}
+
+.partnershipBand small {
+  display: block;
+  color: #8e7047;
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.partnershipBand > p {
+  margin: 0;
+  padding-left: 30px;
+  border-left: 1px solid #cbbd9f;
+  color: #5f625c;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.conciergeSection {
+  background: #131815;
+  color: #fff;
+}
+
+.conciergeSection .sectionHeading > p {
+  color: rgba(255, 255, 255, .56);
+}
+
+.conciergeCard {
+  min-height: 390px;
+}
+
+.rentalEnquiry {
+  padding: 120px 0;
+  background: #0c1115;
+  color: #fff;
+}
+
+.enquiryGrid {
+  display: grid;
+  grid-template-columns: minmax(0, .82fr) minmax(420px, 1.18fr);
+  gap: 90px;
+  align-items: start;
+}
+
+.enquiryCopy {
+  position: sticky;
+  top: 120px;
+}
+
+.enquiryCopy h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(49px, 5vw, 72px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.enquiryCopy > p:not(:global(.eyebrow)) {
+  margin: 27px 0 30px;
+  color: rgba(255, 255, 255, .67);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+.enquiryCopy ul {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  list-style: none;
+}
+
+.enquiryCopy li {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  color: rgba(255, 255, 255, .67);
+  font-size: 12px;
+}
+
+.enquiryCopy li::before {
+  margin-right: 12px;
+  color: var(--gold-light);
+  content: '◆';
+  font-size: 7px;
+}
+
 .stepsSection {
   padding: 110px 0;
   background: #171b18;
@@ -374,6 +606,12 @@
   .featureCopy { padding: 54px; }
   .hotelGrid { grid-template-columns: 1fr; }
   .hotelImage { height: 470px; }
+  .rentalGrid,
+  .conciergeGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .partnershipBand { grid-template-columns: auto 26px auto; }
+  .partnershipBand > p { grid-column: 1 / -1; padding: 24px 0 0; border-top: 1px solid #cbbd9f; border-left: 0; }
+  .enquiryGrid { grid-template-columns: 1fr; gap: 55px; }
+  .enquiryCopy { position: static; }
 }
 
 @media (max-width: 620px) {
@@ -388,14 +626,26 @@
   .flightSection,
   .featureSection,
   .hotelSection,
+  .rentalSection,
+  .conciergeSection,
   .stepsSection,
-  .cta { padding-block: 78px; }
+  .cta,
+  .rentalEnquiry { padding-block: 78px; }
   .introGrid { grid-template-columns: 1fr; }
   .flightWidget { padding: 23px 16px; }
   .featureGrid { display: block; }
   .featureImage { min-height: 420px; }
   .featureCopy { padding: 38px 26px 44px; }
   .hotelImage { height: 390px; }
+  .rentalGrid,
+  .conciergeGrid { grid-template-columns: 1fr; }
+  .rentalCard,
+  .conciergeCard { min-height: 420px; padding: 23px; }
+  .partnershipBand { grid-template-columns: 1fr; gap: 20px; padding: 27px 24px; }
+  .partnershipBand > span { text-align: left; }
+  .partnershipBand > p { grid-column: auto; }
+  .enquiryGrid { display: block; }
+  .enquiryCopy { margin-bottom: 48px; }
   .stepsGrid { grid-template-columns: 1fr; }
   .stepsGrid article { min-height: 230px; padding: 27px; }
   .stepsGrid h3 { margin-top: 45px; }
