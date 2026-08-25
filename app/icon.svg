@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PF EuroAsia">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5c066"/>
+      <stop offset="0.24" stop-color="#b56a22"/>
+      <stop offset="0.5" stop-color="#ffe59a"/>
+      <stop offset="0.72" stop-color="#d78a31"/>
+      <stop offset="1" stop-color="#8c4315"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffe08a"/>
+      <stop offset="1" stop-color="#b96d21"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="92" fill="#101512"/>
+  <g transform="translate(81 18) scale(.78)" fill-rule="evenodd">
+    <path d="M143 9h208l72 82v97l-68 69H228v326H10l29-70h104v-41H59l24-54h60V9Zm84 74v93h101V83H227Z" fill="url(#gold)"/>
+    <path d="M143 9h208l72 82v97l-68 69H228v326H10l29-70h104v-41H59l24-54h60V9Zm84 74v93h101V83H227Z" fill="none" stroke="url(#edge)" stroke-width="5"/>
+  </g>
+</svg>
