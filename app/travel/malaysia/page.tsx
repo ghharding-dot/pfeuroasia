@@ -42,7 +42,7 @@ export default function MalaysiaTravelPage() {
         <p>Search the journey, choose the right stay and coordinate a focused visit around lifestyle, property, residency or business objectives.</p>
       </div>
       <nav className={styles.routeSwitch} aria-label="Choose a travel destination">
-        <Link href="/travel/spain"><span>Travelling to Spain</span><b aria-hidden="true">←</b></Link>
+        <Link href="/luxury-villa-rentals"><span>Travelling to Spain</span><b aria-hidden="true">←</b></Link>
         <Link className={styles.active} href="/travel/malaysia"><span>Travelling to Malaysia</span><small>You are here</small></Link>
       </nav>
     </section>
