@@ -97,7 +97,7 @@ export function HomePhase2() {
         </div>
 
         <div className={phase2Styles.travelRoutes} aria-label="PF EuroAsia travel planning">
-          <Link href="/travel/spain" className={phase2Styles.travelRoute}>
+          <Link href="/luxury-villa-rentals" className={phase2Styles.travelRoute}>
             <span><small>Europe-bound travel</small>Travelling to Spain?</span>
             <strong>Flights · Luxury villas · Local support <b aria-hidden="true">→</b></strong>
           </Link>
