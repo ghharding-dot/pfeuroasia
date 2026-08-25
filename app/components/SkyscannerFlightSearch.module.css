@@ -1,0 +1,121 @@
+.search {
+  display: grid;
+  gap: 22px;
+  color: #182019;
+}
+
+.brandLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(24, 32, 25, .18);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.brandLine span { color: #6c7069; }
+.brandLine strong { color: #2c4a82; font-size: 11px; }
+
+.route,
+.dates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.search label,
+.destination {
+  display: grid;
+  align-content: center;
+  min-height: 82px;
+  padding: 13px 15px;
+  border: 1px solid rgba(24, 32, 25, .22);
+  background: rgba(255, 255, 255, .54);
+}
+
+.search label > span,
+.destination > span {
+  margin-bottom: 8px;
+  color: #77786f;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #182019;
+  font: inherit;
+  font-size: 15px;
+}
+
+.search input:focus { box-shadow: 0 2px 0 #b59059; }
+.search input::placeholder { color: #8b8b82; }
+
+.destination {
+  position: relative;
+  padding-right: 64px;
+}
+
+.destination strong {
+  overflow: hidden;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.destination small {
+  position: absolute;
+  right: 15px;
+  bottom: 17px;
+  color: #b59059;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .13em;
+}
+
+.search button {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 18px;
+  border: 1px solid #b59059;
+  background: #b59059;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.search button:hover,
+.search button:focus-visible {
+  background: transparent;
+  color: #182019;
+  outline: none;
+}
+
+.search button span { font-family: var(--serif); font-size: 18px; font-weight: 400; }
+.error { margin: -8px 0 0; color: #9d2f25; font-size: 11px; line-height: 1.5; }
+.note { color: #77786f; font-size: 9px; line-height: 1.55; }
+
+@media (max-width: 620px) {
+  .route,
+  .dates { grid-template-columns: 1fr; }
+  .brandLine { align-items: flex-start; flex-direction: column; gap: 6px; }
+}
