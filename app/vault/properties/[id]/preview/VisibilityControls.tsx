@@ -27,6 +27,8 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
           publicLocation: String(form.get("publicLocation") || ""),
           imagePosition: String(form.get("imagePosition") || "center"),
           publicImageApproved: form.get("publicImageApproved") === "true",
+          featuredOnHomepage: form.get("featuredOnHomepage") === "true",
+          homepagePriority: Number(form.get("homepagePriority") || 100),
           market: String(form.get("market") || property.market || "spain"),
           approximateLocation: String(form.get("approximateLocation") || ""),
           annualCosts: String(form.get("annualCosts") || ""),
@@ -62,6 +64,27 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
           <p>These details appear on the individual property page. Use an approximate area only, never the private street address.</p>
         </div>
         <div className="vault-form-grid">
+          <label>
+            <span>Homepage showcase</span>
+            <select
+              name="featuredOnHomepage"
+              defaultValue={property.featuredOnHomepage ? "true" : "false"}
+            >
+              <option value="false">Full property page only</option>
+              <option value="true">Feature on homepage</option>
+            </select>
+          </label>
+          <label>
+            <span>Homepage position</span>
+            <input
+              name="homepagePriority"
+              type="number"
+              min="1"
+              max="100"
+              defaultValue={property.homepagePriority || 100}
+            />
+            <small>1 appears first. The homepage displays a maximum of ten villas.</small>
+          </label>
           <label>
             <span>Market / country</span>
             <select name="market" defaultValue={property.market || "spain"}>

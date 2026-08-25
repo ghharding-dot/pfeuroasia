@@ -85,6 +85,12 @@ export async function PATCH(
     imagePosition: hasAccessUpdate
       ? normalizeImagePosition(body.imagePosition)
       : existing.imagePosition || "center",
+    featuredOnHomepage: hasDetailUpdate
+      ? body.featuredOnHomepage === true
+      : existing.featuredOnHomepage || false,
+    homepagePriority: hasDetailUpdate
+      ? Math.min(100, Math.max(1, Number(body.homepagePriority) || 100))
+      : existing.homepagePriority,
     approximateLocation: hasDetailUpdate
       ? clean(body.approximateLocation, 180) || existing.location
       : existing.approximateLocation,

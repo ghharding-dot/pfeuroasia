@@ -47,6 +47,7 @@ export function PublicPropertyCarousel({
   headingId: customHeadingId,
   directPublicListings = false,
   portfolioValueMillions,
+  catalogueHref,
 }: {
   slides: PublicPropertySlide[];
   variant?: "property" | "development";
@@ -58,6 +59,7 @@ export function PublicPropertyCarousel({
   headingId?: string;
   directPublicListings?: boolean;
   portfolioValueMillions?: number;
+  catalogueHref?: string;
 }) {
   const [index, setIndex] = useState(0);
   const [eurUsdRate, setEurUsdRate] = useState(FALLBACK_EUR_USD_RATE);
@@ -162,22 +164,28 @@ export function PublicPropertyCarousel({
           <div className={styles.headingCopy}>
             <strong>{slides.length} approved {slides.length === 1 ? "opportunity" : "opportunities"}</strong>
             <p>{displaySummary}</p>
+            {catalogueHref ? (
+              <Link className={styles.catalogueLink} href={catalogueHref}>
+                View the complete property collection <span>→</span>
+              </Link>
+            ) : null}
           </div>
         </div>
 
         <div className={styles.carousel}>
           <div className={styles.slides} aria-live="polite">
             {slides.map((slide, slideIndex) => {
+              if (slideIndex !== index) return null;
               const registered = slide.accessLevel
                 ? slide.accessLevel === "registered"
                 : slide.visibility === "public";
+              const fourPhotoProperty = !isDevelopment && Boolean(slide.thirdImage || slide.fourthImage);
               return (
                 <article
-                  className={`${styles.slide} ${isDevelopment ? styles.developmentSlide : ""} ${slideIndex === index ? styles.active : ""}`}
-                  aria-hidden={slideIndex !== index}
+                  className={`${styles.slide} ${isDevelopment ? styles.developmentSlide : ""} ${fourPhotoProperty ? styles.fourPhotoSlide : ""} ${styles.active}`}
                   key={slide.id}
                 >
-                  {isDevelopment ? (
+                  {isDevelopment || fourPhotoProperty ? (
                     <div className={`${styles.developmentPhotos} ${styles.developmentPhotosLeft}`}>
                       <div className={styles.imageWrap}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -186,7 +194,9 @@ export function PublicPropertyCarousel({
                           alt={slide.title}
                           style={{ objectPosition: slide.imagePosition }}
                         />
-                        <span className={styles.imageLabel}>New development</span>
+                        <span className={styles.imageLabel}>
+                          {isDevelopment ? "New development" : registered ? "Registered listing" : "Private opportunity"}
+                        </span>
                       </div>
                       {slide.secondaryImage ? (
                         <div className={styles.imageWrap}>
@@ -266,7 +276,7 @@ export function PublicPropertyCarousel({
                     </Link>
                   </div>
 
-                  {isDevelopment ? (
+                  {isDevelopment || fourPhotoProperty ? (
                     <div className={`${styles.developmentPhotos} ${styles.developmentPhotosRight}`}>
                       {slide.thirdImage ? (
                         <div className={styles.imageWrap}>
@@ -305,7 +315,12 @@ export function PublicPropertyCarousel({
                     key={slide.id}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={slide.image} alt="" style={{ objectPosition: slide.imagePosition }} />
+                    <img
+                      src={slide.image}
+                      alt=""
+                      loading="lazy"
+                      style={{ objectPosition: slide.imagePosition }}
+                    />
                     <span>{String(thumbnailIndex + 1).padStart(2, "0")}</span>
                   </button>
                 ))}

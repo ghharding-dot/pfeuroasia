@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PartnerStrip } from "./PartnerStrip";
 import styles from "./FooterCollaborators.module.css";
+import { TrackedAnchor } from "./TrackedAnchor";
 
 export function Footer() {
   const whatsappDigits = "34647026881";
@@ -37,9 +38,16 @@ export function Footer() {
             <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
             {whatsappHref && (
               <p>
-                <a className="footer-whatsapp-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">
+                <TrackedAnchor
+                  className="footer-whatsapp-link"
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  eventName="whatsapp_click"
+                  eventParameters={{ location: "footer", desk: "PF EuroAsia" }}
+                >
                   WhatsApp PF EuroAsia · +34 647 026 881 <span>↗</span>
-                </a>
+                </TrackedAnchor>
               </p>
             )}
           </div>

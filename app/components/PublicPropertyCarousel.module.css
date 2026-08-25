@@ -49,6 +49,21 @@
   line-height: 1.7;
 }
 
+.catalogueLink {
+  width: fit-content;
+  margin-top: 4px;
+  color: #7b6441;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.catalogueLink:hover {
+  color: #121714;
+}
+
 .carousel {
   position: relative;
   width: min(100%, 1180px);
@@ -129,7 +144,8 @@
   width: min(100%, 1180px);
 }
 
-.developmentSection .slide {
+.developmentSection .slide,
+.fourPhotoSlide {
   grid-template-columns: minmax(0, 1fr) minmax(290px, .78fr) minmax(0, 1fr);
   height: auto;
   min-height: 560px;
@@ -149,20 +165,24 @@
   background: #1a211c;
 }
 
-.developmentSection .copy {
+.developmentSection .copy,
+.fourPhotoSlide .copy {
   justify-content: center;
   padding: 36px 26px;
 }
 
-.developmentSection .copy h3 {
+.developmentSection .copy h3,
+.fourPhotoSlide .copy h3 {
   font-size: clamp(31px, 2.6vw, 42px);
 }
 
-.developmentSection .count {
+.developmentSection .count,
+.fourPhotoSlide .count {
   margin-bottom: 20px;
 }
 
-.developmentSection .description {
+.developmentSection .description,
+.fourPhotoSlide .description {
   margin: 16px 0 22px;
 }
 
@@ -438,7 +458,8 @@
     width: min(100%, 760px);
   }
 
-  .developmentSection .slide {
+  .developmentSection .slide,
+  .fourPhotoSlide {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     min-height: 0;
@@ -450,7 +471,8 @@
     height: 230px;
   }
 
-  .developmentSection .copy {
+  .developmentSection .copy,
+  .fourPhotoSlide .copy {
     justify-content: flex-start;
     padding: 40px 34px 44px;
   }
@@ -490,7 +512,8 @@
     padding: 34px 24px 40px;
   }
 
-  .developmentSection .slide {
+  .developmentSection .slide,
+  .fourPhotoSlide {
     grid-template-rows: auto auto auto;
     min-height: 0;
   }
@@ -499,11 +522,13 @@
     height: 190px;
   }
 
-  .developmentSection .copy {
+  .developmentSection .copy,
+  .fourPhotoSlide .copy {
     padding: 34px 24px 42px;
   }
 
-  .developmentSection .copy :global(.button) {
+  .developmentSection .copy :global(.button),
+  .fourPhotoSlide .copy :global(.button) {
     width: 100%;
   }
 

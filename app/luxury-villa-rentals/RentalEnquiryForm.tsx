@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackEvent } from "../lib/analytics";
 
 export function RentalEnquiryForm() {
   const [sending, setSending] = useState(false);
@@ -13,31 +14,42 @@ export function RentalEnquiryForm() {
     setError("");
 
     const form = new FormData(event.currentTarget);
+    const stay = [
+      `Arrival: ${form.get("arrival")}`,
+      `Departure: ${form.get("departure")}`,
+      `Guests: ${form.get("guests")}`,
+      `Bedrooms: ${form.get("bedrooms")}`,
+      `Additional requirements: ${form.get("requirements") || "Not provided"}`,
+    ].join(" · ");
     const payload = {
-      _subject: "New luxury villa availability request",
-      _cc: "villas@theluxuryvillacollection.com",
-      _template: "table",
-      enquiry_type: "Luxury villa rental",
+      enquiry_type: "luxury-rental",
+      preferred_area_or_property: form.get("location"),
+      indicative_budget_or_value: form.get("budget"),
+      requirements: stay,
       full_name: form.get("name"),
       email: form.get("email"),
+      contact_desk: "Spain rental desk",
+      preferred_channel: "telephone_or_whatsapp",
       telephone_or_whatsapp: form.get("phone"),
-      arrival_date: form.get("arrival"),
-      departure_date: form.get("departure"),
-      number_of_guests: form.get("guests"),
-      bedrooms_required: form.get("bedrooms"),
-      preferred_location: form.get("location"),
-      budget_range: form.get("budget"),
-      additional_requirements: form.get("requirements"),
+      wechat_id: "",
+      current_location: "",
+      partner_slug: "",
+      language: "en",
+      website_region: "Luxury villa rentals",
+      website_journey: "spain",
+      company_website: "",
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
+      const response = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (!response.ok) throw new Error("Unable to send enquiry");
+      const result = await response.json();
+      if (!response.ok || !result.reference) throw new Error("Unable to send enquiry");
+      trackEvent("rental_enquiry_submitted", { source: "luxury_villa_rentals" });
       setSent(true);
       event.currentTarget.reset();
     } catch {

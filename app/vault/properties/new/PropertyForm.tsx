@@ -29,7 +29,7 @@ function safeFilename(name: string) {
 async function uploadFile(
   file: File,
   reference: string,
-  kind: "main" | "secondary" | "brochure" | "partnerBrochure",
+  kind: "main" | "secondary" | "tertiary" | "quaternary" | "brochure" | "partnerBrochure",
   onProgress: (message: string) => void,
 ) {
   const pathname = `private-portfolio/${reference}/${kind}-${safeFilename(file.name)}`;
@@ -222,12 +222,16 @@ export function PropertyForm() {
       const uploadKey = `property-${Date.now()}`;
       const main = form.get("mainImage") as File | null;
       const second = form.get("secondaryImage") as File | null;
+      const third = form.get("thirdImage") as File | null;
+      const fourth = form.get("fourthImage") as File | null;
       const pdf = form.get("brochure") as File | null;
       const partnerPdf = form.get("unbrandedBrochure") as File | null;
       const ownerCode = String(form.get("listingPartnerCode") || "DIRECT");
 
       validateImage(main, true);
       validateImage(second, false);
+      validateImage(third, false);
+      validateImage(fourth, false);
       validatePdf(pdf, status === "published");
       validatePdf(partnerPdf, false);
 
@@ -272,11 +276,19 @@ export function PropertyForm() {
       const secondaryImage = second?.size
         ? await uploadFile(second, uploadKey, "secondary", setMessage)
         : "";
+      const thirdImage = third?.size
+        ? await uploadFile(third, uploadKey, "tertiary", setMessage)
+        : "";
+      const fourthImage = fourth?.size
+        ? await uploadFile(fourth, uploadKey, "quaternary", setMessage)
+        : "";
 
       setMessage("Saving property details...");
       const payload = Object.fromEntries(form.entries());
       delete payload.mainImage;
       delete payload.secondaryImage;
+      delete payload.thirdImage;
+      delete payload.fourthImage;
       delete payload.brochure;
       delete payload.unbrandedBrochure;
 
@@ -288,6 +300,8 @@ export function PropertyForm() {
           status,
           image,
           secondaryImage,
+          thirdImage,
+          fourthImage,
           brochure,
           unbrandedBrochure,
           publicImageApproved: form.get("publicImageApproved") === "true",
@@ -373,6 +387,8 @@ export function PropertyForm() {
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
           <ImageUpload name="secondaryImage" title="Second website image" />
+          <ImageUpload name="thirdImage" title="Third website image" />
+          <ImageUpload name="fourthImage" title="Fourth website image" />
           <PdfUpload name="brochure" title="Branded property brochure PDF" />
           <PdfUpload name="unbrandedBrochure" title="Unbranded partner brochure PDF" />
         </div>

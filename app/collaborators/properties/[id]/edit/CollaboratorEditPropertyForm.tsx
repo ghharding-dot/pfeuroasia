@@ -384,12 +384,8 @@ export function CollaboratorEditPropertyForm({
         <div className="vault-upload-grid">
           <ReplacementImage name="mainImage" title="Main website image" currentUrl={property.image} />
           <ReplacementImage name="secondaryImage" title="Second website image" currentUrl={property.secondaryImage} required={listingType === "new-development"} />
-          {listingType === "new-development" && (
-            <>
-              <ReplacementImage name="thirdImage" title="Third development image" currentUrl={property.thirdImage} required />
-              <ReplacementImage name="fourthImage" title="Fourth development image" currentUrl={property.fourthImage} required />
-            </>
-          )}
+          <ReplacementImage name="thirdImage" title={listingType === "new-development" ? "Third development image" : "Third website image"} currentUrl={property.thirdImage} required={listingType === "new-development"} />
+          <ReplacementImage name="fourthImage" title={listingType === "new-development" ? "Fourth development image" : "Fourth website image"} currentUrl={property.fourthImage} required={listingType === "new-development"} />
           <label className="vault-upload-box vault-upload-pdf has-file">
             <span className="vault-upload-icon">PDF</span>
             <strong>Protected sales brochure</strong>
@@ -413,13 +409,13 @@ export function CollaboratorEditPropertyForm({
             <span>Remove the current second photograph instead of retaining it.</span>
           </label>
         )}
-        {listingType === "new-development" && property.thirdImage && (
+        {property.thirdImage && (
           <label className="collaborator-authority-check collaborator-remove-check">
             <input name="removeThirdImage" type="checkbox" />
             <span>Remove the current third photograph instead of retaining it.</span>
           </label>
         )}
-        {listingType === "new-development" && property.fourthImage && (
+        {property.fourthImage && (
           <label className="collaborator-authority-check collaborator-remove-check">
             <input name="removeFourthImage" type="checkbox" />
             <span>Remove the current fourth photograph instead of retaining it.</span>

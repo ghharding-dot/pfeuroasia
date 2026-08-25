@@ -58,6 +58,10 @@ export type VaultProperty = {
   publicTitle?: string;
   publicLocation?: string;
   publicImageApproved?: boolean;
+  /** Vault-controlled selection for the ten-property homepage showcase. */
+  featuredOnHomepage?: boolean;
+  /** Lower numbers appear first in the homepage showcase. */
+  homepagePriority?: number;
   imagePosition?: PropertyImagePosition;
   listingType?: PropertyListingType;
   propertyType?: PropertyType;

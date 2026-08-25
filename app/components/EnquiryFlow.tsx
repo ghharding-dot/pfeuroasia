@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { getPartnerReferral } from "../lib/partner-referrals";
+import { trackEvent } from "../lib/analytics";
 
 const spainGoals = [
   {
@@ -14,6 +16,16 @@ const spainGoals = [
     value: "sell",
     title: "Sell a property",
     text: "International positioning for an exceptional Spanish home.",
+  },
+  {
+    value: "luxury-rental",
+    title: "Rent a luxury villa",
+    text: "A bespoke villa selection and concierge support in Southern Spain.",
+  },
+  {
+    value: "asia-residency-company",
+    title: "Residency & company setup",
+    text: "Malaysia, Labuan and selected Asian jurisdictions.",
   },
   {
     value: "partner",
@@ -280,6 +292,7 @@ export function EnquiryFlow({
   journey = "spain",
   propertyContext,
 }: EnquiryFlowProps) {
+  const router = useRouter();
   const partner = getPartnerReferral(partnerSlug);
   const preset = interest ? interestConfig[interest] : undefined;
   const isAsia = journey === "asia";
@@ -350,6 +363,11 @@ export function EnquiryFlow({
       }
 
       setReference(result.reference);
+      trackEvent("enquiry_submitted", {
+        enquiry_type: goal,
+        journey,
+        partner: partner?.code || "DIRECT",
+      });
       setSubmitted(true);
     } catch {
       setError("Your enquiry could not be delivered. Please try again or email enquiry@pfeuroasia.com.");
@@ -448,7 +466,22 @@ export function EnquiryFlow({
                 </label>
               ))}
             </div>
-            <button className="button button-dark form-next" type="button" disabled={!goal} onClick={() => setStep(2)}>
+            <button
+              className="button button-dark form-next"
+              type="button"
+              disabled={!goal}
+              onClick={() => {
+                if (goal === "luxury-rental") {
+                  router.push("/luxury-villa-rentals/enquire");
+                  return;
+                }
+                if (goal === "asia-residency-company") {
+                  router.push("/asia-gateway/enquire");
+                  return;
+                }
+                setStep(2);
+              }}
+            >
               Continue <span>→</span>
             </button>
           </fieldset>

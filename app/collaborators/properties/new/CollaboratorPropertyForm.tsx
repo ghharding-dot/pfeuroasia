@@ -446,12 +446,8 @@ export function CollaboratorPropertyForm({
         <div className="vault-upload-grid">
           <ImageUpload name="mainImage" title="Main website image" required />
           <ImageUpload name="secondaryImage" title="Second website image" required={listingType === "new-development"} />
-          {listingType === "new-development" && (
-            <>
-              <ImageUpload name="thirdImage" title="Third development image" required />
-              <ImageUpload name="fourthImage" title="Fourth development image" required />
-            </>
-          )}
+          <ImageUpload name="thirdImage" title={listingType === "new-development" ? "Third development image" : "Third website image"} required={listingType === "new-development"} />
+          <ImageUpload name="fourthImage" title={listingType === "new-development" ? "Fourth development image" : "Fourth website image"} required={listingType === "new-development"} />
           <PdfUpload name="brochure" title="Branded property brochure PDF" required />
           <PdfUpload name="unbrandedBrochure" title="Unbranded partner brochure PDF" />
         </div>

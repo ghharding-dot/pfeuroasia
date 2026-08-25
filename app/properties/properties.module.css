@@ -1,0 +1,292 @@
+.page {
+  background: #ece8df;
+}
+
+.hero {
+  padding: 190px 0 92px;
+  background: #101512;
+  color: white;
+}
+
+.hero h1 {
+  max-width: 880px;
+  margin: 15px 0 22px;
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.hero > div > p:last-child {
+  max-width: 720px;
+  margin: 0;
+  color: rgba(255, 255, 255, .68);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.registrationSection {
+  padding: 58px 0;
+  border-bottom: 1px solid rgba(126, 102, 65, .2);
+  background: #f5f1e8;
+}
+
+.registrationInner {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(520px, 1.1fr);
+  align-items: end;
+  gap: 64px;
+}
+
+.registrationInner h2 {
+  margin: 8px 0 10px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+}
+
+.registrationInner p {
+  max-width: 580px;
+  margin-bottom: 0;
+  color: #62645d;
+  line-height: 1.65;
+}
+
+.registrationForm {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.registrationForm label {
+  display: grid;
+  gap: 7px;
+}
+
+.registrationForm label span {
+  color: #6f5a3a;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.registrationForm input {
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid rgba(126, 102, 65, .36);
+  background: white;
+  font: inherit;
+}
+
+.registrationForm button {
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid #b38d50;
+  background: #b38d50;
+  color: #111512;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.registrationForm button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formError {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #8f2929;
+  font-size: 12px;
+}
+
+.registrationSuccess {
+  display: grid;
+  gap: 6px;
+  padding: 22px 26px;
+  border: 1px solid rgba(179, 141, 80, .65);
+  background: white;
+}
+
+.registrationSuccess strong {
+  color: #7b6441;
+  font-family: var(--serif);
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.registrationSuccess span {
+  color: #62645d;
+  font-size: 13px;
+}
+
+.collectionSection {
+  padding: 92px 0 110px;
+}
+
+.collectionHeading {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 420px);
+  align-items: end;
+  gap: 48px;
+  margin-bottom: 44px;
+}
+
+.collectionHeading h2 {
+  margin: 8px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.8vw, 60px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+}
+
+.collectionHeading > p {
+  margin: 0;
+  color: #62645d;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid rgba(126, 102, 65, .24);
+  background: #f7f4ed;
+}
+
+.imageLink {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #182019;
+}
+
+.imageLink img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms ease;
+}
+
+.imageLink:hover img {
+  transform: scale(1.025);
+}
+
+.imageLink > span {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 7px 9px;
+  border: 1px solid rgba(224, 193, 137, .72);
+  background: rgba(10, 14, 11, .66);
+  color: #ead5aa;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.cardCopy {
+  display: grid;
+  min-height: 220px;
+  padding: 25px 24px 27px;
+}
+
+.cardCopy > p {
+  margin: 0 0 9px;
+  color: #80735e;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.cardCopy h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 29px;
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1.05;
+}
+
+.cardCopy strong {
+  margin-top: 13px;
+  color: #8e7042;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.cardCopy > a {
+  align-self: end;
+  width: fit-content;
+  margin-top: 22px;
+  color: #6f5938;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .registrationInner,
+  .collectionHeading {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .registrationForm {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .registrationForm button {
+    grid-column: 1 / -1;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .hero {
+    padding: 158px 0 70px;
+  }
+
+  .registrationForm,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .registrationForm button {
+    grid-column: auto;
+  }
+
+  .collectionSection {
+    padding: 70px 0 82px;
+  }
+}

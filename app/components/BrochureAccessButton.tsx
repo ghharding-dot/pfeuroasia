@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { trackEvent } from "../lib/analytics";
 
 type Step = "details" | "code" | "ready";
 
@@ -81,6 +82,10 @@ export function BrochureAccessButton({
 
       setDownloadUrl(result.downloadUrl);
       setStep("ready");
+      trackEvent("brochure_download", {
+        property_reference: propertyReference,
+        edition,
+      });
 
       const link = document.createElement("a");
       link.href = result.downloadUrl;

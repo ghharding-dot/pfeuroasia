@@ -100,11 +100,29 @@ async function getPublicPropertySlides(): Promise<{
               property.visibility === "public" && property.listingType === "new-development"
                 ? property.priceTo
                 : undefined,
+            featuredOnHomepage: property.featuredOnHomepage === true,
+            homepagePriority: property.homepagePriority || 100,
           },
         };
       });
+    const resaleSlides = approved
+      .filter((item) => item.listingType === "resale")
+      .map((item) => item.slide);
+    const uniqueResaleSlides = resaleSlides.filter((slide, index, items) => {
+      const titleKey = slide.title.trim().toLowerCase().replace(/\s+/g, " ");
+      return items.findIndex(
+        (candidate) => candidate.title.trim().toLowerCase().replace(/\s+/g, " ") === titleKey,
+      ) === index;
+    });
+    const featured = uniqueResaleSlides
+      .filter((slide) => slide.featuredOnHomepage)
+      .sort((a, b) => a.homepagePriority - b.homepagePriority);
+    const homepageProperties = [
+      ...featured,
+      ...uniqueResaleSlides.filter((slide) => !slide.featuredOnHomepage),
+    ].slice(0, 10);
     return {
-      properties: approved.filter((item) => item.listingType === "resale").map((item) => item.slide),
+      properties: homepageProperties,
       developments: approved.filter((item) => item.listingType === "new-development").map((item) => item.slide),
       privateVillaValueMillions: Math.floor(privateVillaValue / 1_000_000),
     };
@@ -185,6 +203,7 @@ export default async function Home() {
       <PublicPropertyCarousel
         slides={publicPropertySlides.properties}
         portfolioValueMillions={publicPropertySlides.privateVillaValueMillions}
+        catalogueHref="/properties"
       />
       <PublicPropertyCarousel slides={publicPropertySlides.developments} variant="development" />
 

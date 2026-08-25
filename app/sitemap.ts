@@ -36,5 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   });
 
+  routes.push({
+    url: absoluteUrl("/properties"),
+    lastModified: SEO_LAST_UPDATED,
+    changeFrequency: "weekly",
+    priority: 0.95,
+  });
+
   return routes;
 }

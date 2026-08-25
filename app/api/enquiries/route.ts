@@ -310,7 +310,13 @@ export async function POST(request: NextRequest) {
   const mainRecipient = process.env.ENQUIRY_EMAIL || "enquiry@pfeuroasia.com";
   const routedPartnerEmail = partnerEmail(partner?.code);
   const recipients = Array.from(
-    new Set([mainRecipient, routedPartnerEmail].filter(Boolean) as string[]),
+    new Set([
+      mainRecipient,
+      routedPartnerEmail,
+      enquiryType === "luxury-rental"
+        ? process.env.PARTNER_EMAIL_LVC || "villas@theluxuryvillacollection.com"
+        : undefined,
+    ].filter(Boolean) as string[]),
   );
 
   const internalText = [
