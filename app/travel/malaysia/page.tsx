@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: "Travel to Malaysia with PF EuroAsia",
     description: "Flights, selected hotels, transfers and coordinated Malaysia discovery visits.",
     url: "/travel/malaysia",
-    images: ["/images/kl BACK GORUND.avif"],
+    images: ["/images/malaysia-travel-pool-skyline.webp"],
   },
 };
 
@@ -25,16 +25,16 @@ const services = [
 ];
 
 const hotels = [
-  { title: "The Ritz-Carlton, Kuala Lumpur", image: "/images/Ritz%20CARLTON.webp", text: "A refined central Kuala Lumpur stay with a quieter luxury atmosphere, dining and spa facilities.", href: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/" },
-  { title: "JW Marriott Kuala Lumpur", image: "/images/JW%20Marriott%20STREET.jpg", text: "A city-centre base close to Kuala Lumpur's business, shopping, dining and social districts.", href: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/" },
-  { title: "Pangkor Laut Resort", image: "/images/Emerald%20bay%20pkl.jpg", text: "A private-island retreat for clients who want nature, privacy and time away from the city.", href: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/" },
+  { title: "The Ritz-Carlton, Kuala Lumpur", price: "From approx. RM650 (€135) per night", image: "/images/Ritz%20CARLTON.webp", text: "A refined central Kuala Lumpur stay with a quieter luxury atmosphere, dining and spa facilities.", href: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/" },
+  { title: "JW Marriott Kuala Lumpur", price: "From approx. RM500 (€104) per night", image: "/images/JW%20Marriott%20STREET.jpg", text: "A city-centre base close to Kuala Lumpur's business, shopping, dining and social districts.", href: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/" },
+  { title: "Pangkor Laut Resort", price: "From approx. RM900 per night", image: "/images/Emerald%20bay%20pkl.jpg", text: "A private-island retreat for clients who want nature, privacy and time away from the city.", href: "https://www.ytlhotels.com/hotels-and-resorts/malaysia/" },
 ];
 
 export default function MalaysiaTravelPage() {
   return <main className={styles.travelPage}>
     <Header transparent enquireHref="/asia-gateway/enquire" enquireLabel="Plan a Malaysia trip" />
     <section className={styles.hero}>
-      <Image className={`${styles.heroImage} ${styles.malaysiaImage}`} src="/images/kl%20BACK%20GORUND.avif" alt="Kuala Lumpur skyline at night" fill priority sizes="100vw" />
+      <Image className={`${styles.heroImage} ${styles.malaysiaImage}`} src="/images/malaysia-travel-pool-skyline.webp" alt="Infinity pool overlooking the Petronas Twin Towers and Kuala Lumpur skyline at dusk" fill priority sizes="100vw" />
       <div className={styles.heroShade} />
       <div className={`site-shell ${styles.heroCopy}`}>
         <p className="eyebrow light">PF EuroAsia Travel · Malaysia</p>
@@ -51,7 +51,7 @@ export default function MalaysiaTravelPage() {
 
     <section className={styles.flightSection}><div className={`site-shell ${styles.flightGrid}`}><div className={styles.flightCopy}><p className="eyebrow light">Search live flights</p><h2>Fly to Kuala Lumpur.</h2><p>Compare current flight options with Skyscanner. Kuala Lumpur International Airport (KUL) is preselected and your departure point can be suggested from your location.</p><small>Schedules, availability and fares are supplied by Skyscanner and can change. Results open on Skyscanner. Affiliate tracking will be added when PF EuroAsia&apos;s approved partner details are available.</small></div><div className={styles.flightWidget}><SkyscannerFlightSearch destinationName="Kuala Lumpur" destinationIata="KUL" buttonLabel="Search flights to Kuala Lumpur" /></div></div></section>
 
-    <section className={styles.hotelSection}><div className="site-shell"><div className={styles.sectionHeading}><div><p className="eyebrow">Selected stays</p><h2>Kuala Lumpur and beyond.</h2></div><p>Hotels and resorts currently presented through our YTL Hotels recommendations. Rates, room types and availability should be confirmed for the actual dates.</p></div><div className={styles.hotelGrid}>{hotels.map(hotel=><article className={styles.hotelCard} key={hotel.title}><div className={styles.hotelImage}><Image src={hotel.image} alt={hotel.title} fill sizes="(max-width: 900px) 100vw, 33vw" /><h3>{hotel.title}</h3></div><div className={styles.hotelCopy}><p>{hotel.text}</p><a className="text-link" href={hotel.href} target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a></div></article>)}</div></div></section>
+    <section className={styles.hotelSection}><div className="site-shell"><div className={styles.sectionHeading}><div><p className="eyebrow">Selected stays</p><h2>Kuala Lumpur and beyond.</h2></div><p>Hotels and resorts currently presented through our YTL Hotels recommendations. Rates, room types and availability should be confirmed for the actual dates.</p></div><div className={styles.hotelGrid}>{hotels.map(hotel=><article className={styles.hotelCard} key={hotel.title}><div className={styles.hotelImage}><Image src={hotel.image} alt={hotel.title} fill sizes="(max-width: 900px) 100vw, 33vw" /><div className={styles.hotelImageCopy}><h3>{hotel.title}</h3><p>{hotel.price}</p></div></div><div className={styles.hotelCopy}><p>{hotel.text}</p><a className="text-link" href={hotel.href} target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a></div></article>)}</div></div></section>
 
     <section className={styles.stepsSection}><div className="site-shell"><p className="eyebrow light">Your Malaysia visit</p><div className={styles.stepsGrid}>{services.map(([number,title,text])=><article key={number}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
 
