@@ -283,6 +283,80 @@
   line-height: 1.2;
 }
 
+.travelRoutes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3px;
+  margin-top: 8px;
+  padding: 3px;
+  border: 1px solid rgba(222, 194, 141, 0.28);
+  background: rgba(5, 8, 11, 0.78);
+  box-shadow: 0 20px 46px rgba(0, 0, 0, 0.24);
+}
+
+.travelRoute {
+  display: flex;
+  min-height: 88px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 20px 25px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: linear-gradient(110deg, rgba(17, 23, 25, 0.96), rgba(28, 29, 23, 0.88));
+  color: #fff;
+  transition: border-color 260ms ease, background 260ms ease, transform 260ms ease;
+}
+
+.travelRoute > span {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2vw, 30px);
+  letter-spacing: -0.025em;
+}
+
+.travelRoute small {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gold-light);
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.travelRoute strong {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.travelRoute b {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  transition: transform 220ms ease;
+}
+
+.travelRoute:hover,
+.travelRoute:focus-visible {
+  border-color: rgba(222, 194, 141, 0.75);
+  background: linear-gradient(110deg, rgba(25, 31, 30, 0.98), rgba(73, 58, 35, 0.9));
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.travelRoute:hover b,
+.travelRoute:focus-visible b {
+  transform: translateX(5px);
+}
+
 .whyPage {
   background: var(--ivory);
 }
@@ -548,6 +622,10 @@
     filter: none;
   }
 
+  .travelRoutes {
+    grid-template-columns: 1fr;
+  }
+
   .missionSection {
     padding-block: 70px;
   }
@@ -612,6 +690,11 @@
     transition: none;
   }
 
+  .travelRoute,
+  .travelRoute b {
+    transition: none;
+  }
+
   .gatewayCard:hover::before,
   .gatewayCard:focus-visible::before {
     transform: scale(1.015);
@@ -659,6 +742,24 @@
   .gatewayPromise {
     margin-top: 16px;
     font-size: 18px;
+  }
+
+  .travelRoute {
+    min-height: 104px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 11px;
+    padding: 20px;
+  }
+
+  .travelRoute > span {
+    font-size: 25px;
+  }
+
+  .travelRoute strong {
+    width: 100%;
+    justify-content: space-between;
+    text-align: left;
   }
 
 
