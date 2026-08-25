@@ -112,14 +112,30 @@ export default function MalaysiaVsDubaiPage() {
       />
 
       <section className={styles.hero}>
-        <Image
-          className={styles.heroImage}
-          src="/images/kl%20BACK%20GORUND.avif"
-          alt="Kuala Lumpur skyline for a Malaysia and Dubai relocation comparison"
-          fill
-          priority
-          sizes="100vw"
-        />
+        <div className={styles.heroImages} aria-hidden="true">
+          <div className={`${styles.heroPanel} ${styles.malaysiaPanel}`}>
+            <Image
+              className={styles.heroImage}
+              src="/images/kl%20BACK%20GORUND.avif"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 760px) 100vw, 50vw"
+            />
+            <span className={styles.cityLabel}>Kuala Lumpur · Malaysia</span>
+          </div>
+          <div className={`${styles.heroPanel} ${styles.dubaiPanel}`}>
+            <Image
+              className={styles.heroImage}
+              src="/images/burj-khalifa-dubai.webp"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 760px) 100vw, 50vw"
+            />
+            <span className={styles.cityLabel}>Dubai · UAE</span>
+          </div>
+        </div>
         <div className={styles.heroShade} />
         <div className={`site-shell ${styles.heroInner}`}>
           <p className="eyebrow light">International relocation comparison · 2026</p>
@@ -231,7 +247,7 @@ export default function MalaysiaVsDubaiPage() {
         </div>
       </section>
 
-      <section className={styles.disclaimer}><div className="site-shell"><p>Last reviewed: August 2026. This comparison provides general information only and is not legal, tax, immigration, accounting, financial or investment advice. Immigration permission, domestic tax residence, treaty residence and company taxation are separate questions. Obtain written advice from appropriately qualified professionals in every relevant jurisdiction before acting.</p></div></section>
+      <section className={styles.disclaimer}><div className="site-shell"><p>Last reviewed: August 2026. This comparison provides general information only and is not legal, tax, immigration, accounting, financial or investment advice. Immigration permission, domestic tax residence, treaty residence and company taxation are separate questions. Obtain written advice from appropriately qualified professionals in every relevant jurisdiction before acting.</p><p className={styles.photoCredit}>Dubai skyline: Vamos John / Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>. Image cropped and optimised for display.</p></div></section>
       <Footer />
     </main>
   );
