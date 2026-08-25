@@ -295,6 +295,43 @@
   letter-spacing: .03em;
 }
 
+.propertyFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 17px 0 0;
+  padding: 12px 0;
+  border-top: 1px solid rgba(224, 193, 137, .2);
+  border-bottom: 1px solid rgba(224, 193, 137, .2);
+}
+
+.propertyFacts > div {
+  min-width: 78px;
+  padding: 0 13px;
+  border-left: 1px solid rgba(224, 193, 137, .2);
+}
+
+.propertyFacts > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.propertyFacts dt {
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, .48);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.propertyFacts dd {
+  margin: 0;
+  color: #ead5aa;
+  font-size: 12px;
+  font-weight: 650;
+}
+
 .description {
   max-width: 360px;
   margin: 20px 0 26px;

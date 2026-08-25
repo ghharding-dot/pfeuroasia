@@ -100,6 +100,9 @@ async function getPublicPropertySlides(): Promise<{
               property.visibility === "public" && property.listingType === "new-development"
                 ? property.priceTo
                 : undefined,
+            plotSize: property.plotSize || undefined,
+            builtSize: property.builtSize || undefined,
+            bedrooms: property.bedrooms || undefined,
             featuredOnHomepage: property.featuredOnHomepage === true,
             homepagePriority: property.homepagePriority || 100,
           },

@@ -240,6 +240,43 @@
   font-weight: 500;
 }
 
+.propertyFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 18px 0 0;
+  padding: 13px 0;
+  border-top: 1px solid rgba(126, 102, 65, .2);
+  border-bottom: 1px solid rgba(126, 102, 65, .2);
+}
+
+.propertyFacts > div {
+  min-width: 0;
+  padding: 0 10px;
+  border-left: 1px solid rgba(126, 102, 65, .2);
+}
+
+.propertyFacts > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.propertyFacts dt {
+  margin-bottom: 4px;
+  color: #80735e;
+  font-size: 7px;
+  font-weight: 750;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.propertyFacts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #403c34;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .cardCopy > a {
   align-self: end;
   width: fit-content;

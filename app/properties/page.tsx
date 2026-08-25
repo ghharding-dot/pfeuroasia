@@ -87,6 +87,19 @@ export default async function PropertiesPage() {
                     <p>{location}</p>
                     <h3>{title}</h3>
                     {registered && property.price ? <strong>{property.price}</strong> : null}
+                    {(property.plotSize || property.builtSize || Boolean(property.bedrooms)) ? (
+                      <dl className={styles.propertyFacts}>
+                        {property.plotSize ? (
+                          <div><dt>Plot</dt><dd>{property.plotSize}</dd></div>
+                        ) : null}
+                        {property.builtSize ? (
+                          <div><dt>Built</dt><dd>{property.builtSize}</dd></div>
+                        ) : null}
+                        {property.bedrooms ? (
+                          <div><dt>Bedrooms</dt><dd>{property.bedrooms}</dd></div>
+                        ) : null}
+                      </dl>
+                    ) : null}
                     <Link href={registered ? `/properties/${property.id}` : "/private-portfolio"}>
                       {registered ? "View full details" : "Request private access"} <span>→</span>
                     </Link>

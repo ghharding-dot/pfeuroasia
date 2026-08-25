@@ -17,6 +17,9 @@ export type PublicPropertySlide = {
   accessLevel?: "registered" | "private";
   price?: string;
   priceTo?: string;
+  plotSize?: string;
+  builtSize?: string;
+  bedrooms?: number;
 };
 
 const FALLBACK_EUR_USD_RATE = 1.16;
@@ -249,6 +252,28 @@ export function PublicPropertyCarousel({
                           </span>
                         )}
                       </div>
+                    )}
+                    {(slide.plotSize || slide.builtSize || Boolean(slide.bedrooms)) && (
+                      <dl className={styles.propertyFacts}>
+                        {slide.plotSize ? (
+                          <div>
+                            <dt>Plot</dt>
+                            <dd>{slide.plotSize}</dd>
+                          </div>
+                        ) : null}
+                        {slide.builtSize ? (
+                          <div>
+                            <dt>Built</dt>
+                            <dd>{slide.builtSize}</dd>
+                          </div>
+                        ) : null}
+                        {slide.bedrooms ? (
+                          <div>
+                            <dt>Bedrooms</dt>
+                            <dd>{slide.bedrooms}</dd>
+                          </div>
+                        ) : null}
+                      </dl>
                     )}
                     <p className={styles.description}>
                       {registered && directPublicListings
