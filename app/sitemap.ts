@@ -45,12 +45,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   routes.push(
     {
-      url: absoluteUrl("/travel/spain"),
-      lastModified: SEO_LAST_UPDATED,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
       url: absoluteUrl("/travel/malaysia"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "monthly",
