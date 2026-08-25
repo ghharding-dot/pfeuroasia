@@ -82,14 +82,18 @@ export default async function MalaysiaPage() {
     <section className="malaysia-services section-pad">
       <div className="site-shell">
         <p className="eyebrow light">PF EuroAsia recommends · YTL Hotels</p>
-        <div className="area-feature-grid">
+        <div className="area-feature-grid hotel-recommendation-grid">
           <article className="hotel-recommendation-card">
             <div className="hotel-recommendation-image">
               <Image src="/images/Ritz%20CARLTON.webp" alt="The Ritz-Carlton, Kuala Lumpur" fill sizes="(max-width: 620px) 100vw, 33vw" />
+              <div className="hotel-recommendation-shade" />
+              <div className="hotel-recommendation-number">01</div>
+              <div className="hotel-recommendation-title">
+                <span>Refined city stay</span>
+                <h2>The Ritz-Carlton,<br />Kuala Lumpur</h2>
+              </div>
             </div>
             <div className="hotel-recommendation-copy">
-              <span>01</span>
-              <h2>The Ritz-Carlton, Kuala Lumpur</h2>
               <p>Our preferred Kuala Lumpur choice for a refined five-star stay, with a quieter luxury atmosphere, award-winning dining and spa facilities.</p>
               <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/the-ritz-carlton/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
             </div>
@@ -97,10 +101,14 @@ export default async function MalaysiaPage() {
           <article className="hotel-recommendation-card">
             <div className="hotel-recommendation-image">
               <Image src="/images/JW%20Marriott%20STREET.jpg" alt="JW Marriott Kuala Lumpur" fill sizes="(max-width: 620px) 100vw, 33vw" />
+              <div className="hotel-recommendation-shade" />
+              <div className="hotel-recommendation-number">02</div>
+              <div className="hotel-recommendation-title">
+                <span>Central Kuala Lumpur</span>
+                <h2>JW Marriott<br />Kuala Lumpur</h2>
+              </div>
             </div>
             <div className="hotel-recommendation-copy">
-              <span>02</span>
-              <h2>JW Marriott Kuala Lumpur</h2>
               <p>Our city-centre recommendation for visitors who want to be close to Kuala Lumpur&apos;s business, shopping, dining and social districts.</p>
               <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/jw-marriott/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
             </div>
@@ -108,10 +116,14 @@ export default async function MalaysiaPage() {
           <article className="hotel-recommendation-card">
             <div className="hotel-recommendation-image">
               <Image src="/images/Emerald%20bay%20pkl.jpg" alt="Pangkor Laut Resort and Emerald Bay" fill sizes="(max-width: 620px) 100vw, 33vw" />
+              <div className="hotel-recommendation-shade" />
+              <div className="hotel-recommendation-number">03</div>
+              <div className="hotel-recommendation-title">
+                <span>Private island retreat</span>
+                <h2>Pangkor Laut<br />Resort</h2>
+              </div>
             </div>
             <div className="hotel-recommendation-copy">
-              <span>03</span>
-              <h2>Pangkor Laut Resort</h2>
               <p>Our recommended retreat: an island setting in Perak for privacy, nature and relaxation when the trip is about switching off rather than staying in the city.</p>
               <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/" target="_blank" rel="noreferrer">Explore Pangkor Laut at YTL Hotels <span>→</span></a>
             </div>
