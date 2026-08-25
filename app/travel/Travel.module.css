@@ -1,0 +1,409 @@
+.travelPage {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 820px;
+  align-items: flex-end;
+  overflow: hidden;
+  color: #fff;
+  isolation: isolate;
+}
+
+.heroImage {
+  z-index: -3;
+  object-fit: cover;
+}
+
+.spainImage { object-position: center 54%; }
+.malaysiaImage { object-position: center 38%; }
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(5, 9, 11, .86), rgba(5, 9, 11, .28) 68%),
+    linear-gradient(0deg, rgba(5, 9, 11, .82), transparent 62%);
+}
+
+.heroCopy {
+  padding-bottom: 154px;
+}
+
+.heroCopy h1 {
+  max-width: 920px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(72px, 8vw, 124px);
+  font-weight: 400;
+  letter-spacing: -.052em;
+  line-height: .88;
+}
+
+.heroCopy h1 em {
+  display: block;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.heroCopy > p:not(:global(.eyebrow)) {
+  max-width: 650px;
+  margin: 30px 0 0;
+  color: rgba(255, 255, 255, .76);
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.55;
+}
+
+.routeSwitch {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 4px;
+  border-top: 1px solid rgba(222, 194, 141, .36);
+  background: rgba(6, 9, 10, .82);
+  backdrop-filter: blur(14px);
+}
+
+.routeSwitch a {
+  display: flex;
+  min-height: 86px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 31px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: #fff;
+  transition: background 220ms ease, border-color 220ms ease;
+}
+
+.routeSwitch a:hover,
+.routeSwitch a:focus-visible,
+.routeSwitch .active {
+  border-color: rgba(222, 194, 141, .7);
+  background: rgba(132, 99, 50, .22);
+  outline: none;
+}
+
+.routeSwitch span {
+  font-family: var(--serif);
+  font-size: 25px;
+}
+
+.routeSwitch small {
+  color: rgba(255, 255, 255, .56);
+  font-size: 9px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.routeSwitch b {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.intro {
+  padding: 118px 0 108px;
+  background: var(--stone);
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(420px, 1.2fr);
+  gap: 100px;
+  align-items: start;
+}
+
+.intro h2,
+.sectionHeading h2,
+.featureCopy h2,
+.cta h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(49px, 5vw, 74px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1.02;
+}
+
+.introGrid > div:last-child > p {
+  margin: 5px 0 30px;
+  color: #5f625c;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.serviceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.serviceTags span {
+  padding: 10px 14px;
+  border: 1px solid #c9b995;
+  color: #6e5a3a;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.flightSection {
+  padding: 112px 0;
+  background: #141916;
+  color: #fff;
+}
+
+.flightGrid {
+  display: grid;
+  grid-template-columns: minmax(300px, .8fr) minmax(0, 1.2fr);
+  gap: 76px;
+  align-items: center;
+}
+
+.flightCopy h2 {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: clamp(49px, 5vw, 72px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.flightCopy > p:not(:global(.eyebrow)) {
+  max-width: 540px;
+  margin: 0 0 19px;
+  color: rgba(255, 255, 255, .62);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.flightCopy small {
+  display: block;
+  max-width: 560px;
+  color: rgba(255, 255, 255, .38);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.flightWidget {
+  min-width: 0;
+  padding: 34px;
+  border: 1px solid #cab98f;
+  background: #f1eee6;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .28);
+  color: var(--ink);
+}
+
+.featureSection {
+  padding: 118px 0;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(380px, .88fr);
+  background: #171b18;
+  color: #fff;
+}
+
+.featureImage {
+  position: relative;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.featureImage img {
+  object-fit: cover;
+  transition: transform 900ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.featureGrid:hover .featureImage img { transform: scale(1.035); }
+
+.featureCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 68px;
+}
+
+.featureCopy h2 { margin-bottom: 26px; }
+
+.featureCopy > p:not(:global(.eyebrow)) {
+  margin: 0 0 30px;
+  color: rgba(255, 255, 255, .6);
+  font-size: 14px;
+  line-height: 1.82;
+}
+
+.hotelSection {
+  padding: 116px 0;
+  background: var(--stone);
+}
+
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 52px;
+}
+
+.sectionHeading > p {
+  margin: 0 0 6px;
+  color: #62645e;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.hotelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.hotelCard {
+  overflow: hidden;
+  border: 1px solid #d1c5ad;
+  background: var(--ivory);
+  transition: transform 350ms ease, box-shadow 350ms ease;
+}
+
+.hotelCard:hover {
+  box-shadow: 0 24px 54px rgba(35, 29, 20, .16);
+  transform: translateY(-7px);
+}
+
+.hotelImage {
+  position: relative;
+  height: 360px;
+  overflow: hidden;
+}
+
+.hotelImage img {
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.hotelCard:hover .hotelImage img { transform: scale(1.04); }
+
+.hotelImage::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(7, 10, 8, .8), transparent 58%);
+  content: '';
+}
+
+.hotelImage h3 {
+  position: absolute;
+  right: 25px;
+  bottom: 24px;
+  left: 25px;
+  z-index: 1;
+  margin: 0;
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: -.03em;
+  line-height: 1;
+}
+
+.hotelCopy {
+  padding: 27px 27px 31px;
+}
+
+.hotelCopy p {
+  margin: 0 0 22px;
+  color: #64665f;
+  font-size: 12px;
+  line-height: 1.72;
+}
+
+.stepsSection {
+  padding: 110px 0;
+  background: #171b18;
+  color: #fff;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 46px;
+  border-top: 1px solid rgba(255, 255, 255, .15);
+  border-left: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stepsGrid article {
+  min-height: 280px;
+  padding: 35px;
+  border-right: 1px solid rgba(255, 255, 255, .15);
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.stepsGrid span { color: var(--gold-light); font-size: 10px; }
+.stepsGrid h3 { margin: 70px 0 18px; font-family: var(--serif); font-size: 31px; font-weight: 400; }
+.stepsGrid p { margin: 0; color: rgba(255, 255, 255, .5); font-size: 12px; line-height: 1.72; }
+
+.cta {
+  padding: 110px 0;
+  background: var(--ivory);
+  text-align: center;
+}
+
+.cta h2 { max-width: 860px; margin-inline: auto; }
+.cta p { max-width: 650px; margin: 26px auto 34px; color: #62645e; line-height: 1.8; }
+
+@media (max-width: 900px) {
+  .hero { min-height: 760px; }
+  .heroCopy { padding-bottom: 176px; }
+  .introGrid,
+  .flightGrid,
+  .featureGrid,
+  .sectionHeading { grid-template-columns: 1fr; gap: 38px; }
+  .featureImage { min-height: 520px; }
+  .featureCopy { padding: 54px; }
+  .hotelGrid { grid-template-columns: 1fr; }
+  .hotelImage { height: 470px; }
+}
+
+@media (max-width: 620px) {
+  .hero { min-height: 790px; }
+  .heroCopy { padding-bottom: 208px; }
+  .heroCopy h1 { font-size: clamp(61px, 18vw, 82px); }
+  .heroCopy > p:not(:global(.eyebrow)) { font-size: 17px; }
+  .routeSwitch { grid-template-columns: 1fr; }
+  .routeSwitch a { min-height: 70px; padding: 15px 20px; }
+  .routeSwitch span { font-size: 20px; }
+  .intro,
+  .flightSection,
+  .featureSection,
+  .hotelSection,
+  .stepsSection,
+  .cta { padding-block: 78px; }
+  .introGrid { grid-template-columns: 1fr; }
+  .flightWidget { padding: 23px 16px; }
+  .featureGrid { display: block; }
+  .featureImage { min-height: 420px; }
+  .featureCopy { padding: 38px 26px 44px; }
+  .hotelImage { height: 390px; }
+  .stepsGrid { grid-template-columns: 1fr; }
+  .stepsGrid article { min-height: 230px; padding: 27px; }
+  .stepsGrid h3 { margin-top: 45px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeSwitch a,
+  .featureImage img,
+  .hotelCard,
+  .hotelImage img { transition: none; }
+}
