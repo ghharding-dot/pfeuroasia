@@ -140,6 +140,53 @@
 .villa-rentals-body-copy p,
 .villa-rentals-concierge-grid > div:first-child > p:last-child { margin: 0 0 24px; }
 
+.villa-rentals-flights {
+  padding-block: 116px;
+  background: #141916;
+  color: white;
+}
+
+.villa-rentals-flight-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, .8fr) minmax(0, 1.2fr);
+  gap: 76px;
+  align-items: center;
+}
+
+.villa-rentals-flight-copy h2 {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: clamp(49px, 5vw, 72px);
+  font-weight: 400;
+  letter-spacing: -.04em;
+  line-height: 1;
+}
+
+.villa-rentals-flight-copy > p:not(.villa-rentals-eyebrow) {
+  max-width: 540px;
+  margin: 0 0 19px;
+  color: rgba(255, 255, 255, .62);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.villa-rentals-flight-copy small {
+  display: block;
+  max-width: 560px;
+  color: rgba(255, 255, 255, .38);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.villa-rentals-flight-widget {
+  min-width: 0;
+  padding: 34px;
+  border: 1px solid #cab98f;
+  background: #f1eee6;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .28);
+  color: var(--ink);
+}
+
 .villa-rentals-areas {
   padding-block: 130px;
   background: #10161c;
@@ -377,7 +424,8 @@
   .villa-rentals-concierge-grid,
   .villa-rentals-partnership-inner,
   .villa-rentals-enquiry-layout,
-  .villa-rentals-faq-layout { grid-template-columns: 1fr; gap: 54px; }
+  .villa-rentals-faq-layout,
+  .villa-rentals-flight-grid { grid-template-columns: 1fr; gap: 54px; }
   .villa-rentals-area-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .villa-rentals-enquiry-copy { position: static; }
 }
@@ -395,7 +443,9 @@
   .villa-rentals-partnership,
   .villa-rentals-enquiry,
   .villa-rentals-faq,
-  .villa-rentals-areas { padding-block: 88px; }
+  .villa-rentals-areas,
+  .villa-rentals-flights { padding-block: 88px; }
+  .villa-rentals-flight-widget { padding: 22px 16px; }
   .villa-rentals-area-grid,
   .villa-rentals-service-list,
   .rental-form-grid { grid-template-columns: 1fr; }
