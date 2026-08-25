@@ -254,15 +254,15 @@ export function PublicPropertyCarousel({
                         )}
                       </div>
                     )}
-                    {(slide.plotSize || slide.builtSize || Boolean(slide.bedrooms)) && (
+                    {(formatPropertyArea(slide.plotSize) || formatPropertyArea(slide.builtSize) || Boolean(slide.bedrooms)) && (
                       <dl className={styles.propertyFacts}>
-                        {slide.plotSize ? (
+                        {formatPropertyArea(slide.plotSize) ? (
                           <div>
                             <dt>Plot</dt>
                             <dd>{formatPropertyArea(slide.plotSize)}</dd>
                           </div>
                         ) : null}
-                        {slide.builtSize ? (
+                        {formatPropertyArea(slide.builtSize) ? (
                           <div>
                             <dt>Built</dt>
                             <dd>{formatPropertyArea(slide.builtSize)}</dd>

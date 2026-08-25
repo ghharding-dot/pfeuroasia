@@ -88,12 +88,12 @@ export default async function PropertiesPage() {
                     <p>{location}</p>
                     <h3>{title}</h3>
                     {registered && property.price ? <strong>{property.price}</strong> : null}
-                    {(property.plotSize || property.builtSize || Boolean(property.bedrooms)) ? (
+                    {(formatPropertyArea(property.plotSize) || formatPropertyArea(property.builtSize) || Boolean(property.bedrooms)) ? (
                       <dl className={styles.propertyFacts}>
-                        {property.plotSize ? (
+                        {formatPropertyArea(property.plotSize) ? (
                           <div><dt>Plot</dt><dd>{formatPropertyArea(property.plotSize)}</dd></div>
                         ) : null}
-                        {property.builtSize ? (
+                        {formatPropertyArea(property.builtSize) ? (
                           <div><dt>Built</dt><dd>{formatPropertyArea(property.builtSize)}</dd></div>
                         ) : null}
                         {property.bedrooms ? (

@@ -5,6 +5,8 @@ export function formatPropertyArea(value?: string) {
   const area = trimmed
     .replace(/\s*(?:m(?:²|2)|sqm|sq\.?\s*m(?:etres?)?|square\s+met(?:er|re)s?)\.?\s*$/i, "")
     .trim();
+  if (!/\d/.test(area)) return "";
+
   const compactNumber = area.replace(/[\s,]/g, "");
   const formatted = /^\d+$/.test(compactNumber)
     ? new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(Number(compactNumber))
