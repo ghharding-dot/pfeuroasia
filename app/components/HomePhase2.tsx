@@ -8,7 +8,7 @@ export function HomePhase2() {
       <div className={`site-shell ${phase2Styles.gatewayInner}`}>
         <div className={phase2Styles.gatewayIntro}>
           <div>
-            <p className="eyebrow light">Europe & Asia connected</p>
+            <p className="eyebrow light">Three gateways · One trusted network</p>
             <h1 id="gateway-heading">
               Choose your direction.
               <em>We will guide the journey.</em>
@@ -18,10 +18,9 @@ export function HomePhase2() {
             </h1>
           </div>
           <p>
-            Three clear routes within one trusted international network.
-            Explore Spanish property, discover who we are and what we do, or
-            enter our growing Asia Gateway for investment, relocation,
-            residency and business opportunities.
+            Spain, our international network and Asia each offer a distinct
+            route forward. Select the direction that reflects what you want to
+            achieve.
           </p>
         </div>
 
@@ -31,21 +30,22 @@ export function HomePhase2() {
             href="#selected-opportunities-heading"
           >
             <div className={phase2Styles.cardOverlay} />
+            <div className={phase2Styles.cardTopline}>
+              <span>01</span>
+              <span>Spain · Costa del Sol</span>
+            </div>
             <div className={phase2Styles.gatewayCardCopy}>
               <span className={phase2Styles.pathLabel}>Spain Gateway</span>
-              <h2>Looking to buy property in Spain?</h2>
-              <p>
-                Explore luxury homes, private opportunities, buyer
-                representation, villa rentals and concierge services across
-                Marbella and the Costa del Sol.
+              <h2>Spain</h2>
+              <p className={phase2Styles.cardLead}>
+                Luxury property and trusted local expertise.
               </p>
-              <div className={phase2Styles.pathTags}>
-                <span>Buy</span>
-                <span>Sell</span>
-                <span>Rent</span>
-                <span>Concierge</span>
-              </div>
-              <strong>Continue to Spain <span aria-hidden="true">↓</span></strong>
+              <p>
+                Selected villas, discreet opportunities and personal
+                representation across Marbella, Benahavís and the Costa del
+                Sol.
+              </p>
+              <strong>Explore Spain <span aria-hidden="true">↓</span></strong>
             </div>
           </Link>
 
@@ -54,21 +54,21 @@ export function HomePhase2() {
             href="/why-euroasia"
           >
             <div className={phase2Styles.cardOverlay} />
+            <div className={phase2Styles.cardTopline}>
+              <span>02</span>
+              <span>Europe · Asia · Trusted partners</span>
+            </div>
             <div className={phase2Styles.gatewayCardCopy}>
-              <span className={phase2Styles.pathLabel}>Why PF EuroAsia</span>
-              <h2>Our mission, what we do and our expertise.</h2>
-              <p>
-                Discover the principles, experience and trusted international
-                network behind our property, relocation and cross-border
-                advisory service.
+              <span className={phase2Styles.pathLabel}>Our Network</span>
+              <h2>PF EuroAsia</h2>
+              <p className={phase2Styles.cardLead}>
+                Trusted professionals across borders.
               </p>
-              <div className={phase2Styles.pathTags}>
-                <span>Mission</span>
-                <span>Expertise</span>
-                <span>Experience</span>
-                <span>Network</span>
-              </div>
-              <strong>Discover PF EuroAsia <span aria-hidden="true">→</span></strong>
+              <p>
+                A coordinated network connecting property, legal, residency
+                and business expertise across Europe and Asia.
+              </p>
+              <strong>Discover our network <span aria-hidden="true">→</span></strong>
             </div>
           </Link>
 
@@ -77,24 +77,21 @@ export function HomePhase2() {
             href="/asia-gateway"
           >
             <div className={phase2Styles.cardOverlay} />
+            <div className={phase2Styles.cardTopline}>
+              <span>03</span>
+              <span>Malaysia · Wider Asia</span>
+            </div>
             <div className={phase2Styles.gatewayCardCopy}>
               <span className={phase2Styles.pathLabel}>Asia Gateway</span>
-              <h2>
-                Thinking of Dubai for tax residency? Have you considered
-                Malaysia and Asia?
-              </h2>
-              <p>
-                Compare opportunities across Malaysia and selected Asian
-                markets—from residency and relocation to property investment,
-                company formation and business expansion.
+              <h2>Asia</h2>
+              <p className={phase2Styles.cardLead}>
+                Property, residency and business opportunities.
               </p>
-              <div className={phase2Styles.pathTags}>
-                <span>Invest</span>
-                <span>Relocate</span>
-                <span>Residency</span>
-                <span>Business</span>
-              </div>
-              <strong>Compare Malaysia & Asia <span aria-hidden="true">→</span></strong>
+              <p>
+                Explore property, relocation, residency and company formation
+                across Malaysia and carefully selected Asian markets.
+              </p>
+              <strong>Enter Asia Gateway <span aria-hidden="true">→</span></strong>
             </div>
           </Link>
         </div>

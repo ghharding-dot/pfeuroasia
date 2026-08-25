@@ -70,45 +70,74 @@
 }
 
 .gatewayCards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
+  display: flex;
+  height: clamp(560px, 54vw, 670px);
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid rgba(222, 194, 141, 0.28);
+  background: rgba(5, 8, 11, 0.78);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
 }
 
 .gatewayCard {
+  --gateway-image: none;
   position: relative;
-  min-height: 500px;
+  min-width: 0;
+  flex: 1 1 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-position: center;
-  background-size: cover;
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
-  transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: white;
+  isolation: isolate;
+  transition: flex 700ms cubic-bezier(.2, .72, .2, 1), border-color 260ms ease, filter 500ms ease;
 }
 
-.gatewayCard:hover {
+.gatewayCard::before {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-color: #0d1214;
+  background-image: var(--gateway-image);
+  background-position: var(--gateway-position, center);
+  background-repeat: no-repeat;
+  background-size: var(--gateway-size, cover);
+  content: '';
+  transform: scale(1.015);
+  transition: transform 1100ms cubic-bezier(.2, .72, .2, 1);
+}
+
+.gatewayCard:hover,
+.gatewayCard:focus-visible {
+  flex: 1.32 1 0;
   border-color: rgba(222, 194, 141, 0.72);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
-  transform: translateY(-5px);
+  outline: none;
+}
+
+.gatewayCard:hover::before,
+.gatewayCard:focus-visible::before {
+  transform: scale(1.055);
+}
+
+.gatewayCards:has(.gatewayCard:hover) .gatewayCard:not(:hover),
+.gatewayCards:has(.gatewayCard:focus-visible) .gatewayCard:not(:focus-visible) {
+  filter: brightness(0.7) saturate(0.72);
 }
 
 .spainPath {
-  background-image: url('/images/el-madronal-essence.webp');
-  background-position: center 48%;
+  --gateway-image: url('/images/el-madronal-essence.webp');
+  --gateway-position: center 48%;
 }
 
 .aboutPath {
-  background-color: #090c0a;
-  background-image:
+  --gateway-image:
     linear-gradient(rgba(26, 22, 15, 0.18), rgba(26, 22, 15, 0.18)),
     url('/images/from-europe-to-asia.png');
-  background-position: center 8%;
-  background-repeat: no-repeat;
-  background-size: 94% auto;
+  --gateway-position: center 14%;
+  --gateway-size: 94% auto;
 }
 
 .asiaPath {
-  background-image: url('/images/asia-network.webp');
+  --gateway-image: url('/images/asia-network.webp');
+  --gateway-position: center;
 }
 
 .cardOverlay {
@@ -117,66 +146,87 @@
   background:
     linear-gradient(0deg, rgba(5, 8, 11, 0.95), rgba(5, 8, 11, 0.22) 76%),
     linear-gradient(90deg, rgba(5, 8, 11, 0.46), transparent 70%);
-  transition: background 220ms ease;
+  z-index: -1;
+  transition: background 500ms ease;
 }
 
-.gatewayCard:hover .cardOverlay {
+.gatewayCard:hover .cardOverlay,
+.gatewayCard:focus-visible .cardOverlay {
   background:
     linear-gradient(0deg, rgba(5, 8, 11, 0.91), rgba(5, 8, 11, 0.14) 80%),
     linear-gradient(90deg, rgba(5, 8, 11, 0.35), transparent 70%);
+}
+
+.cardTopline {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 24px 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cardTopline span:first-child {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.04em;
 }
 
 .gatewayCardCopy {
   position: absolute;
   inset: auto 0 0;
   z-index: 1;
-  padding: 32px 28px 30px;
+  padding: 40px 30px 34px;
 }
 
 .pathLabel {
   display: block;
-  margin-bottom: 17px;
+  margin-bottom: 13px;
   color: var(--gold-light);
-  font-family: var(--serif);
-  font-size: clamp(29px, 2.4vw, 42px);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 0.98;
-  text-transform: none;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .gatewayCardCopy h2 {
   max-width: 520px;
-  margin: 0 0 14px;
+  margin: 0 0 15px;
   font-family: var(--serif);
-  font-size: clamp(25px, 2vw, 34px);
+  font-size: clamp(52px, 5vw, 76px);
   font-weight: 400;
-  letter-spacing: -0.032em;
-  line-height: 1.03;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
 }
 
 .gatewayCardCopy p {
   max-width: 570px;
-  margin: 0 0 18px;
+  margin: 0 0 22px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 11px;
-  line-height: 1.62;
+  font-size: 11.5px;
+  line-height: 1.68;
 }
 
-.pathTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 20px;
-}
-
-.pathTags span {
-  padding: 6px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 8px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+.gatewayCardCopy .cardLead {
+  max-width: 420px;
+  margin-bottom: 11px;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.55vw, 23px);
+  letter-spacing: -0.012em;
+  line-height: 1.2;
 }
 
 .gatewayCardCopy strong {
@@ -203,23 +253,16 @@
   transition: transform 180ms ease;
 }
 
-.aboutPath .gatewayCardCopy strong {
-  background: var(--gold);
-  color: #141511;
-}
-
-.aboutPath .gatewayCardCopy strong span {
-  color: #141511;
-}
-
-.gatewayCard:hover .gatewayCardCopy strong {
+.gatewayCard:hover .gatewayCardCopy strong,
+.gatewayCard:focus-visible .gatewayCardCopy strong {
   background: var(--gold);
   box-shadow: 0 13px 28px rgba(0, 0, 0, 0.36);
   color: #141511;
   transform: translateY(-3px);
 }
 
-.gatewayCard:hover .gatewayCardCopy strong span {
+.gatewayCard:hover .gatewayCardCopy strong span,
+.gatewayCard:focus-visible .gatewayCardCopy strong span {
   color: #141511;
   transform: translateX(5px);
 }
@@ -485,11 +528,24 @@
   }
 
   .gatewayCards {
-    grid-template-columns: 1fr;
+    height: auto;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .gatewayCard {
     min-height: 390px;
+    flex: none;
+  }
+
+  .gatewayCard:hover,
+  .gatewayCard:focus-visible {
+    flex: none;
+  }
+
+  .gatewayCards:has(.gatewayCard:hover) .gatewayCard:not(:hover),
+  .gatewayCards:has(.gatewayCard:focus-visible) .gatewayCard:not(:focus-visible) {
+    filter: none;
   }
 
   .missionSection {
@@ -548,6 +604,20 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .gatewayCard,
+  .gatewayCard::before,
+  .gatewayCardCopy strong,
+  .gatewayCardCopy strong span {
+    transition: none;
+  }
+
+  .gatewayCard:hover::before,
+  .gatewayCard:focus-visible::before {
+    transform: scale(1.015);
+  }
+}
+
 @media (max-width: 620px) {
   .gatewayHero {
     padding: 124px 0 48px;
@@ -570,11 +640,11 @@
   }
 
   .pathLabel {
-    font-size: 34px;
+    font-size: 9px;
   }
 
   .gatewayCardCopy h2 {
-    font-size: 30px;
+    font-size: 58px;
   }
 
   .gatewayCardCopy p {
