@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { formatPropertyArea } from "../lib/propertyDisplay";
 import styles from "./PublicPropertyCarousel.module.css";
 
 export type PublicPropertySlide = {
@@ -258,13 +259,13 @@ export function PublicPropertyCarousel({
                         {slide.plotSize ? (
                           <div>
                             <dt>Plot</dt>
-                            <dd>{slide.plotSize}</dd>
+                            <dd>{formatPropertyArea(slide.plotSize)}</dd>
                           </div>
                         ) : null}
                         {slide.builtSize ? (
                           <div>
                             <dt>Built</dt>
-                            <dd>{slide.builtSize}</dd>
+                            <dd>{formatPropertyArea(slide.builtSize)}</dd>
                           </div>
                         ) : null}
                         {slide.bedrooms ? (

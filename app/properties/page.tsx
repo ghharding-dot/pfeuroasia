@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { formatPropertyArea } from "../lib/propertyDisplay";
 import { normalizePropertyMarket, readProperties } from "../lib/propertyStore";
 import { PropertyUpdatesForm } from "./PropertyUpdatesForm";
 import styles from "./properties.module.css";
@@ -90,10 +91,10 @@ export default async function PropertiesPage() {
                     {(property.plotSize || property.builtSize || Boolean(property.bedrooms)) ? (
                       <dl className={styles.propertyFacts}>
                         {property.plotSize ? (
-                          <div><dt>Plot</dt><dd>{property.plotSize}</dd></div>
+                          <div><dt>Plot</dt><dd>{formatPropertyArea(property.plotSize)}</dd></div>
                         ) : null}
                         {property.builtSize ? (
-                          <div><dt>Built</dt><dd>{property.builtSize}</dd></div>
+                          <div><dt>Built</dt><dd>{formatPropertyArea(property.builtSize)}</dd></div>
                         ) : null}
                         {property.bedrooms ? (
                           <div><dt>Bedrooms</dt><dd>{property.bedrooms}</dd></div>
