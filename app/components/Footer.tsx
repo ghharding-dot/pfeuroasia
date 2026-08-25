@@ -3,7 +3,7 @@ import { PartnerStrip } from "./PartnerStrip";
 import styles from "./FooterCollaborators.module.css";
 import { TrackedAnchor } from "./TrackedAnchor";
 
-export function Footer() {
+export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolean } = {}) {
   const whatsappDigits = "34647026881";
   const whatsappHref = whatsappDigits
     ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent("Hello Geoff, I am contacting you through the PF EuroAsia website.")}`
@@ -11,7 +11,7 @@ export function Footer() {
 
   return (
     <footer className="site-footer">
-      <PartnerStrip />
+      {!hidePartnerStrip && <PartnerStrip />}
       <div className="site-shell">
         <div className={styles.collaboratorBar}>
           <div className={styles.collaboratorCopy}>
