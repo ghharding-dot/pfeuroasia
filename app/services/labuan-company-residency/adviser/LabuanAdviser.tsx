@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { MessageResponse } from "@/components/ai-elements/message";
 import styles from "./LabuanAdviser.module.css";
-import { adviserSuggestions } from "./MalaysiaAdviserMatcher";
+import { adviserSuggestions, adviserSuggestionsEs } from "./MalaysiaAdviserMatcher";
 
 type Visitor = {
   fullName: string;
@@ -41,16 +41,19 @@ type HybridResponse = {
   error?: string;
 };
 
-export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
+export function LabuanAdviser({ visitor, locale = "en" }: { visitor: Visitor; locale?: "en" | "es" }) {
+  const isSpanish = locale === "es";
+  const suggestions = isSpanish ? adviserSuggestionsEs : adviserSuggestions;
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 1,
       role: "assistant",
-      text:
-        `Welcome ${visitor.fullName.split(" ")[0] || ""}. Ask me naturally about Malaysia — where to go, what to do, travel seasons, Kuala Lumpur, food, living costs, property, healthcare, transport and lifestyle — or about Malaysia tax residency and the PF EuroAsia Labuan company and residency pathway. For general Malaysia questions I can combine relevant facts from our verified knowledge into a more useful answer. Company, personal tax, residency and immigration questions use controlled answers from our verified knowledge. If I do not have enough information, I will register the question for our team rather than guess.`,
-      source: "PF EuroAsia verified Malaysia & Labuan knowledge base — updated August 2026",
+      text: isSpanish
+        ? `Bienvenido/a ${visitor.fullName.split(" ")[0] || ""}. Pregúnteme con naturalidad sobre Malasia: destinos, actividades, épocas para viajar, Kuala Lumpur, comida, coste de vida, propiedad, sanidad, transporte y estilo de vida; o sobre residencia fiscal en Malasia y la vía de sociedad y residencia de PF EuroAsia en Labuan. Las preguntas sobre empresa, fiscalidad personal, residencia e inmigración utilizan respuestas controladas basadas en información verificada. Si no dispongo de información suficiente, registraré la pregunta para que nuestro equipo la revise en lugar de adivinar.`
+        : `Welcome ${visitor.fullName.split(" ")[0] || ""}. Ask me naturally about Malaysia — where to go, what to do, travel seasons, Kuala Lumpur, food, living costs, property, healthcare, transport and lifestyle — or about Malaysia tax residency and the PF EuroAsia Labuan company and residency pathway. For general Malaysia questions I can combine relevant facts from our verified knowledge into a more useful answer. Company, personal tax, residency and immigration questions use controlled answers from our verified knowledge. If I do not have enough information, I will register the question for our team rather than guess.`,
+      source: isSpanish ? "Base verificada de PF EuroAsia sobre Malasia y Labuan — actualizada en agosto de 2026" : "PF EuroAsia verified Malaysia & Labuan knowledge base — updated August 2026",
       mode: "controlled",
-      followUps: adviserSuggestions.slice(0, 3),
+      followUps: suggestions.slice(0, 3),
     },
   ]);
   const [input, setInput] = useState("");
@@ -137,6 +140,7 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
           email: visitor.email,
           question: clean,
           history: conversationHistory,
+          language: locale,
           company_website: "",
         }),
       });
@@ -154,7 +158,7 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
             sources: result.sources,
             mode: result.mode,
             topic: result.topic,
-            followUps: result.followUps,
+            followUps: isSpanish ? suggestions.slice(0, 4) : result.followUps,
           },
         ]);
         return;
@@ -166,19 +170,19 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
         {
           id: assistantId,
           role: "assistant",
-          text: saved
-            ? `I do not yet have enough verified information to answer that confidently. I have registered your exact question for the PF EuroAsia team to review, and the confirmed answer can be sent to ${visitor.email}.`
-            : "I do not yet have enough verified information to answer that confidently, and I could not register the email follow-up automatically. Please use the enquiry link below and our Malaysia desk will confirm it for you.",
+          text: isSpanish
+            ? saved
+              ? `Todavía no dispongo de suficiente información verificada para responder con seguridad. He registrado su pregunta exacta para que el equipo de PF EuroAsia la revise y pueda enviar la respuesta confirmada a ${visitor.email}.`
+              : "Todavía no dispongo de suficiente información verificada y no he podido registrar automáticamente el seguimiento. Utilice el enlace de consulta y nuestro equipo de Malasia lo confirmará."
+            : saved
+              ? `I do not yet have enough verified information to answer that confidently. I have registered your exact question for the PF EuroAsia team to review, and the confirmed answer can be sent to ${visitor.email}.`
+              : "I do not yet have enough verified information to answer that confidently, and I could not register the email follow-up automatically. Please use the enquiry link below and our Malaysia desk will confirm it for you.",
           source: saved
             ? "Question registered in the PF EuroAsia Malaysia Adviser follow-up queue"
             : "No sufficiently verified answer available",
           topic: result.topic,
           needsConfirmation: !saved,
-          followUps: [
-            "What should I do in Kuala Lumpur?",
-            "Where should I go in Malaysia for beaches?",
-            "What is the cost of living in Kuala Lumpur?",
-          ],
+          followUps: suggestions.slice(3, 6),
         },
       ]);
     } catch {
@@ -188,9 +192,13 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
         {
           id: assistantId,
           role: "assistant",
-          text: saved
-            ? `The adviser could not complete that answer safely, so I have registered your exact question for our team to check. The confirmed answer can be sent to ${visitor.email}.`
-            : "The adviser is temporarily unable to complete that answer. Please use the enquiry link below so our Malaysia desk can help directly.",
+          text: isSpanish
+            ? saved
+              ? `El asesor no ha podido completar la respuesta con seguridad, por lo que he registrado su pregunta para que nuestro equipo la revise. La respuesta confirmada podrá enviarse a ${visitor.email}.`
+              : "El asesor no puede completar la respuesta temporalmente. Utilice el enlace de consulta para que nuestro equipo de Malasia le ayude directamente."
+            : saved
+              ? `The adviser could not complete that answer safely, so I have registered your exact question for our team to check. The confirmed answer can be sent to ${visitor.email}.`
+              : "The adviser is temporarily unable to complete that answer. Please use the enquiry link below so our Malaysia desk can help directly.",
           source: saved
             ? "Question registered in the PF EuroAsia Malaysia Adviser follow-up queue"
             : "Hybrid adviser unavailable",
@@ -214,9 +222,9 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
       <div className={styles.topBar}>
         <div>
           <span className={styles.statusDot} />
-          <span>Hybrid Malaysia adviser · verified knowledge + AI synthesis</span>
+          <span>{isSpanish ? "Asesor híbrido de Malasia · información verificada + síntesis con IA" : "Hybrid Malaysia adviser · verified knowledge + AI synthesis"}</span>
         </div>
-        <span>Updated August 2026</span>
+        <span>{isSpanish ? "Actualizado en agosto de 2026" : "Updated August 2026"}</span>
       </div>
 
       <div ref={messagesPanelRef} className={styles.messages} aria-live="polite">
@@ -227,10 +235,10 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
             className={`${styles.message} ${message.role === "user" ? styles.userMessage : styles.assistantMessage}`}
           >
             <div className={styles.messageLabel}>
-              {message.role === "user" ? "You" : "Ask EuroAsia"}
+              {message.role === "user" ? (isSpanish ? "Usted" : "You") : "Ask EuroAsia"}
               {message.role === "assistant" && message.mode ? (
                 <span className={styles.answerMode}>
-                  {message.mode === "hybrid-ai" ? "AI · verified sources" : "Controlled answer"}
+                  {message.mode === "hybrid-ai" ? (isSpanish ? "IA · fuentes verificadas" : "AI · verified sources") : (isSpanish ? "Respuesta controlada" : "Controlled answer")}
                 </span>
               ) : null}
             </div>
@@ -242,8 +250,8 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
             )}
 
             {message.sources?.length ? (
-              <div className={styles.sources} aria-label="Verified answer sources">
-                <span>Verified sources</span>
+              <div className={styles.sources} aria-label={isSpanish ? "Fuentes verificadas" : "Verified answer sources"}>
+                <span>{isSpanish ? "Fuentes verificadas" : "Verified sources"}</span>
                 {message.sources.map((source) =>
                   source.url ? (
                     <a key={`${source.label}-${source.url}`} href={source.url} target="_blank" rel="noreferrer">
@@ -255,12 +263,12 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
                 )}
               </div>
             ) : message.source ? (
-              <small>Source: {message.source}</small>
+              <small>{isSpanish ? "Fuente" : "Source"}: {message.source}</small>
             ) : null}
 
             {message.needsConfirmation ? (
-              <Link className={styles.confirmLink} href="/asia-gateway/enquire">
-                Ask us to confirm this <span>→</span>
+              <Link className={styles.confirmLink} href={isSpanish ? "/es/enquire" : "/asia-gateway/enquire"}>
+                {isSpanish ? "Solicitar confirmación" : "Ask us to confirm this"} <span>→</span>
               </Link>
             ) : null}
             {message.role === "assistant" && message.followUps?.length ? (
@@ -277,7 +285,7 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
         {isThinking ? (
           <article className={`${styles.message} ${styles.assistantMessage}`}>
             <div className={styles.messageLabel}>Ask EuroAsia</div>
-            <div className={styles.thinking} aria-label="Retrieving verified knowledge and preparing the answer">
+            <div className={styles.thinking} aria-label={isSpanish ? "Consultando información verificada y preparando la respuesta" : "Retrieving verified knowledge and preparing the answer"}>
               <span /><span /><span />
             </div>
           </article>
@@ -286,7 +294,7 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
 
       {!hasConversation ? (
         <div className={styles.quickQuestions}>
-          {adviserSuggestions.map((suggestion) => (
+          {suggestions.map((suggestion) => (
             <button key={suggestion} type="button" onClick={() => void ask(suggestion)}>
               {suggestion}
             </button>
@@ -295,26 +303,26 @@ export function LabuanAdviser({ visitor }: { visitor: Visitor }) {
       ) : null}
 
       <form className={styles.inputBar} onSubmit={submit}>
-        <label htmlFor="labuan-question">Ask a Malaysia or Labuan question</label>
+        <label htmlFor="labuan-question">{isSpanish ? "Haga una pregunta sobre Malasia o Labuan" : "Ask a Malaysia or Labuan question"}</label>
         <div>
           <input
             id="labuan-question"
             value={input}
             onChange={(event) => setInput(event.target.value)}
-            placeholder="e.g. We have 10 days in Malaysia — KL, good food and beaches. What would you suggest?"
+            placeholder={isSpanish ? "Ej.: Tenemos 10 días en Malasia: Kuala Lumpur, buena comida y playas. ¿Qué recomienda?" : "e.g. We have 10 days in Malaysia — KL, good food and beaches. What would you suggest?"}
             autoComplete="off"
           />
-          <button type="submit" disabled={!input.trim() || isThinking} aria-label="Send question">
-            Ask <span>→</span>
+          <button type="submit" disabled={!input.trim() || isThinking} aria-label={isSpanish ? "Enviar pregunta" : "Send question"}>
+            {isSpanish ? "Preguntar" : "Ask"} <span>→</span>
           </button>
         </div>
       </form>
 
       <div className={styles.footerNote}>
         <p>
-          General information only. Hybrid answers are composed from PF EuroAsia&apos;s verified knowledge sources. Company, tax, residency and immigration answers remain controlled and questions without sufficient verified support are sent for human follow-up. Weather, property, travel and cost information can change.
+          {isSpanish ? "Información general únicamente. Las respuestas se elaboran a partir de fuentes verificadas de PF EuroAsia. Las cuestiones sobre sociedades, fiscalidad, residencia e inmigración permanecen controladas; las preguntas sin respaldo suficiente se envían para revisión humana. La información sobre clima, propiedad, viajes y costes puede cambiar." : "General information only. Hybrid answers are composed from PF EuroAsia's verified knowledge sources. Company, tax, residency and immigration answers remain controlled and questions without sufficient verified support are sent for human follow-up. Weather, property, travel and cost information can change."}
         </p>
-        <Link href="/asia-gateway/enquire">Request a private assessment →</Link>
+        <Link href={isSpanish ? "/es/enquire" : "/asia-gateway/enquire"}>{isSpanish ? "Solicitar una valoración privada →" : "Request a private assessment →"}</Link>
       </div>
     </div>
   );

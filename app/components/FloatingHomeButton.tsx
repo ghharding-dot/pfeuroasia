@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import styles from "./FloatingHomeButton.module.css";
 
 const localeHomes = {
+  es: { href: "/es", label: "Inicio" },
   da: { href: "/da", label: "Hjem" },
   zh: { href: "/zh", label: "首页" },
   ar: { href: "/ar", label: "الرئيسية" },

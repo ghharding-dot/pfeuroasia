@@ -41,6 +41,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: SEO_LAST_UPDATED,
     changeFrequency: "weekly",
     priority: 0.95,
+    alternates: {
+      languages: {
+        "en-GB": absoluteUrl("/properties"),
+        "es-ES": absoluteUrl("/es/properties"),
+        "x-default": absoluteUrl("/properties"),
+      },
+    },
+  });
+
+  routes.push({
+    url: absoluteUrl("/es/properties"),
+    lastModified: SEO_LAST_UPDATED,
+    changeFrequency: "weekly",
+    priority: 0.95,
+    alternates: {
+      languages: {
+        "en-GB": absoluteUrl("/properties"),
+        "es-ES": absoluteUrl("/es/properties"),
+        "x-default": absoluteUrl("/properties"),
+      },
+    },
   });
 
   routes.push(

@@ -65,6 +65,7 @@ export function Header({
           <Link className={styles.navButton} href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
           <Link className={styles.navButton} href="/property-owners" onClick={() => setOpen(false)}>Property owners</Link>
           <Link className={styles.navButton} href="/about" onClick={() => setOpen(false)}>Our approach</Link>
+          <Link className="language-link" href="/es" onClick={() => setOpen(false)}>Español</Link>
           <Link className="language-link" href="/zh" onClick={() => setOpen(false)}>中文</Link>
           <Link className="language-link" href="/ar" onClick={() => setOpen(false)}>العربية</Link>
           <Link className="language-link" href="/da" onClick={() => setOpen(false)}>Dansk</Link>

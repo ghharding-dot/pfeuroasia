@@ -12,7 +12,8 @@ type AccessDetails = {
   email: string;
 };
 
-export function LabuanAdviserAccess() {
+export function LabuanAdviserAccess({ locale = "en" }: { locale?: "en" | "es" } = {}) {
+  const isSpanish = locale === "es";
   const [details, setDetails] = useState<AccessDetails>({ fullName: "", email: "" });
   const [unlocked, setUnlocked] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -24,8 +25,11 @@ export function LabuanAdviserAccess() {
       if (!stored) return;
       const parsed = JSON.parse(stored) as Partial<AccessDetails>;
       if (parsed.fullName && parsed.email) {
-        setDetails({ fullName: parsed.fullName, email: parsed.email });
-        setUnlocked(true);
+        const timer = window.setTimeout(() => {
+          setDetails({ fullName: parsed.fullName!, email: parsed.email! });
+          setUnlocked(true);
+        }, 0);
+        return () => window.clearTimeout(timer);
       }
     } catch {
       // Session storage is optional; the gate still works without it.
@@ -40,7 +44,7 @@ export function LabuanAdviserAccess() {
     const email = details.email.trim().toLowerCase();
 
     if (!fullName || !email || !email.includes("@")) {
-      setError("Please enter your full name and a valid email address.");
+      setError(isSpanish ? "Introduzca su nombre completo y un correo electrónico válido." : "Please enter your full name and a valid email address.");
       return;
     }
 
@@ -53,14 +57,14 @@ export function LabuanAdviserAccess() {
         body: JSON.stringify({
           full_name: fullName,
           email,
-          source: "Ask EuroAsia — Malaysia Adviser",
+          source: isSpanish ? "Ask EuroAsia — Asesor de Malasia en español" : "Ask EuroAsia — Malaysia Adviser",
           company_website: "",
         }),
       });
 
       if (!response.ok) {
         const result = (await response.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(result?.error || "We could not register your access details.");
+        throw new Error(result?.error || (isSpanish ? "No hemos podido registrar sus datos de acceso." : "We could not register your access details."));
       }
 
       const registered = { fullName, email };
@@ -76,7 +80,7 @@ export function LabuanAdviserAccess() {
       setError(
         submitError instanceof Error
           ? submitError.message
-          : "We could not register your access details. Please try again.",
+          : isSpanish ? "No hemos podido registrar sus datos. Inténtelo de nuevo." : "We could not register your access details. Please try again.",
       );
     } finally {
       setSubmitting(false);
@@ -87,10 +91,10 @@ export function LabuanAdviserAccess() {
     return (
       <div className={styles.unlocked}>
         <div className={styles.accessBar}>
-          <span>Malaysia Adviser access</span>
-          <strong>{details.fullName || "Access granted"}</strong>
+          <span>{isSpanish ? "Acceso al Asesor de Malasia" : "Malaysia Adviser access"}</span>
+          <strong>{details.fullName || (isSpanish ? "Acceso concedido" : "Access granted")}</strong>
         </div>
-        <LabuanAdviser visitor={details} />
+        <LabuanAdviser visitor={details} locale={locale} />
       </div>
     );
   }
@@ -98,21 +102,21 @@ export function LabuanAdviserAccess() {
   return (
     <section className={styles.gate} aria-labelledby="adviser-access-title">
       <div className={styles.gateCopy}>
-        <p className={styles.kicker}>Complimentary adviser access</p>
-        <h2 id="adviser-access-title">Enter your details to continue.</h2>
+        <p className={styles.kicker}>{isSpanish ? "Acceso gratuito al asesor" : "Complimentary adviser access"}</p>
+        <h2 id="adviser-access-title">{isSpanish ? "Introduzca sus datos para continuar." : "Enter your details to continue."}</h2>
         <p>
-          Access the PF EuroAsia Malaysia Adviser for practical questions about living in Malaysia, Kuala Lumpur, travel, property, healthcare, food, lifestyle, company formation, residency and Labuan.
+          {isSpanish ? "Acceda al Asesor de Malasia de PF EuroAsia para consultar en español sobre vida en Malasia, Kuala Lumpur, viajes, propiedad, sanidad, gastronomía, constitución de sociedades, residencia y Labuan." : "Access the PF EuroAsia Malaysia Adviser for practical questions about living in Malaysia, Kuala Lumpur, travel, property, healthcare, food, lifestyle, company formation, residency and Labuan."}
         </p>
         <ul>
-          <li>Malaysia living, property, food, travel and lifestyle information</li>
-          <li>Controlled Labuan company, tax and residency guidance</li>
-          <li>If we cannot verify an answer, your question can be sent to our team for email follow-up</li>
+          <li>{isSpanish ? "Información sobre vida, propiedad, gastronomía, viajes y estilo de vida" : "Malaysia living, property, food, travel and lifestyle information"}</li>
+          <li>{isSpanish ? "Orientación controlada sobre sociedad, fiscalidad y residencia en Labuan" : "Controlled Labuan company, tax and residency guidance"}</li>
+          <li>{isSpanish ? "Si no podemos verificar una respuesta, la pregunta se envía al equipo para seguimiento" : "If we cannot verify an answer, your question can be sent to our team for email follow-up"}</li>
         </ul>
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>
-          <span>Full name</span>
+          <span>{isSpanish ? "Nombre completo" : "Full name"}</span>
           <input
             type="text"
             name="full_name"
@@ -120,12 +124,12 @@ export function LabuanAdviserAccess() {
             required
             value={details.fullName}
             onChange={(event) => setDetails((current) => ({ ...current, fullName: event.target.value }))}
-            placeholder="Your full name"
+            placeholder={isSpanish ? "Su nombre completo" : "Your full name"}
           />
         </label>
 
         <label>
-          <span>Email address</span>
+          <span>{isSpanish ? "Correo electrónico" : "Email address"}</span>
           <input
             type="email"
             name="email"
@@ -142,11 +146,11 @@ export function LabuanAdviserAccess() {
         {error ? <p className={styles.error} role="alert">{error}</p> : null}
 
         <button className="button button-dark" type="submit" disabled={submitting}>
-          {submitting ? "Opening adviser…" : "Access Malaysia Adviser"} <span>→</span>
+          {submitting ? (isSpanish ? "Abriendo asesor…" : "Opening adviser…") : (isSpanish ? "Acceder al Asesor de Malasia" : "Access Malaysia Adviser")} <span>→</span>
         </button>
 
         <p className={styles.privacy}>
-          By continuing, you agree that PF EuroAsia may store these details to provide the adviser service and follow up by email when a question needs human or specialist confirmation. See our <Link href="/privacy">privacy notice</Link>.
+          {isSpanish ? <>Al continuar, acepta que PF EuroAsia guarde estos datos para prestar el servicio y realizar seguimiento cuando una pregunta necesite confirmación humana o especializada. Consulte nuestro <Link href="/es/privacy">aviso de privacidad</Link>.</> : <>By continuing, you agree that PF EuroAsia may store these details to provide the adviser service and follow up by email when a question needs human or specialist confirmation. See our <Link href="/privacy">privacy notice</Link>.</>}
         </p>
       </form>
     </section>

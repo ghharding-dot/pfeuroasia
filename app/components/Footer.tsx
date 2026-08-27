@@ -69,6 +69,7 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
           <Link href="/areas/el-madronal">El Madroñal</Link>
           <Link href="/markets/malaysia">Malaysia & Asia</Link>
           <Link href="/asia-gateway/company-residency">Asian company formation</Link>
+          <Link href="/es">Español</Link>
           <Link href="/zh">简体中文</Link>
           <Link href="/da">Dansk</Link>
           <Link href="/enquire">Contact our desks</Link>

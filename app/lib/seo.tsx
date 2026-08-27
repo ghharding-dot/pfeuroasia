@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 export const SITE_URL = "https://www.pfeuroasia.com";
 export const SEO_LAST_UPDATED = new Date("2026-08-19T00:00:00.000Z");
 
-type SeoLocale = "en-GB" | "da-DK" | "zh-CN" | "ar-SA";
+type SeoLocale = "en-GB" | "es-ES" | "da-DK" | "zh-CN" | "ar-SA";
 
 type SeoEntry = {
   path: string;
@@ -19,29 +19,30 @@ type SeoEntry = {
 };
 
 const groups: Record<string, Partial<Record<SeoLocale, string>>> = {
-  home: { "en-GB": "/", "da-DK": "/da", "zh-CN": "/zh", "ar-SA": "/ar" },
-  about: { "en-GB": "/about", "da-DK": "/da/about" },
-  acquisition: { "en-GB": "/services/acquisition", "da-DK": "/da/services/acquisition" },
-  sales: { "en-GB": "/services/international-sales", "da-DK": "/da/services/international-sales" },
-  relocation: { "en-GB": "/services/relocation-concierge", "da-DK": "/da/services/relocation-concierge" },
-  labuan: { "en-GB": "/services/labuan-company-residency", "da-DK": "/da/services/labuan-company-residency" },
-  marbella: { "en-GB": "/markets/marbella", "da-DK": "/da/markets/marbella" },
+  home: { "en-GB": "/", "es-ES": "/es", "da-DK": "/da", "zh-CN": "/zh", "ar-SA": "/ar" },
+  about: { "en-GB": "/about", "es-ES": "/es/about", "da-DK": "/da/about" },
+  acquisition: { "en-GB": "/services/acquisition", "es-ES": "/es/services/acquisition", "da-DK": "/da/services/acquisition" },
+  sales: { "en-GB": "/services/international-sales", "es-ES": "/es/services/international-sales", "da-DK": "/da/services/international-sales" },
+  relocation: { "en-GB": "/services/relocation-concierge", "es-ES": "/es/services/relocation-concierge", "da-DK": "/da/services/relocation-concierge" },
+  labuan: { "en-GB": "/services/labuan-company-residency", "es-ES": "/es/services/labuan-company-residency", "da-DK": "/da/services/labuan-company-residency" },
+  marbella: { "en-GB": "/markets/marbella", "es-ES": "/es/markets/marbella", "da-DK": "/da/markets/marbella" },
   internationalBuyers: { "en-GB": "/guides/marbella-property-international-buyers" },
   malaysiaTaxResidency: { "en-GB": "/guides/malaysia-tax-residency-for-foreigners" },
   malaysiaVsDubai: { "en-GB": "/guides/malaysia-vs-dubai-tax-residency" },
   goldenMile: { "en-GB": "/areas/marbella-golden-mile" },
   benahavis: { "en-GB": "/areas/benahavis" },
-  malaysia: { "en-GB": "/markets/malaysia", "da-DK": "/da/markets/malaysia" },
-  middleEast: { "en-GB": "/markets/middle-east", "da-DK": "/da/markets/middle-east" },
-  zagaleta: { "en-GB": "/areas/la-zagaleta", "da-DK": "/da/areas/la-zagaleta", "zh-CN": "/zh/la-zagaleta" },
-  madronal: { "en-GB": "/areas/el-madronal", "da-DK": "/da/areas/el-madronal", "zh-CN": "/zh/el-madronal" },
-  rentals: { "en-GB": "/luxury-villa-rentals", "da-DK": "/da/luxury-villa-rentals", "zh-CN": "/zh/luxury-villa-rentals" },
-  commercial: { "en-GB": "/commercial", "da-DK": "/da/commercial" },
-  owners: { "en-GB": "/property-owners", "da-DK": "/da/property-owners" },
-  portfolio: { "en-GB": "/private-portfolio", "da-DK": "/da/private-portfolio" },
-  asia: { "en-GB": "/asia-gateway", "da-DK": "/da/asia-gateway" },
-  privacy: { "en-GB": "/privacy", "da-DK": "/da/privacy" },
-  enquire: { "en-GB": "/enquire", "da-DK": "/da/enquire" },
+  malaysia: { "en-GB": "/markets/malaysia", "es-ES": "/es/markets/malaysia", "da-DK": "/da/markets/malaysia" },
+  middleEast: { "en-GB": "/markets/middle-east", "es-ES": "/es/markets/middle-east", "da-DK": "/da/markets/middle-east" },
+  zagaleta: { "en-GB": "/areas/la-zagaleta", "es-ES": "/es/areas/la-zagaleta", "da-DK": "/da/areas/la-zagaleta", "zh-CN": "/zh/la-zagaleta" },
+  madronal: { "en-GB": "/areas/el-madronal", "es-ES": "/es/areas/el-madronal", "da-DK": "/da/areas/el-madronal", "zh-CN": "/zh/el-madronal" },
+  rentals: { "en-GB": "/luxury-villa-rentals", "es-ES": "/es/luxury-villa-rentals", "da-DK": "/da/luxury-villa-rentals", "zh-CN": "/zh/luxury-villa-rentals" },
+  commercial: { "en-GB": "/commercial", "es-ES": "/es/commercial", "da-DK": "/da/commercial" },
+  owners: { "en-GB": "/property-owners", "es-ES": "/es/property-owners", "da-DK": "/da/property-owners" },
+  portfolio: { "en-GB": "/private-portfolio", "es-ES": "/es/private-portfolio", "da-DK": "/da/private-portfolio" },
+  asia: { "en-GB": "/asia-gateway", "es-ES": "/es/asia-gateway", "da-DK": "/da/asia-gateway" },
+  privacy: { "en-GB": "/privacy", "es-ES": "/es/privacy", "da-DK": "/da/privacy" },
+  enquire: { "en-GB": "/enquire", "es-ES": "/es/enquire", "da-DK": "/da/enquire" },
+  labuanAdviser: { "en-GB": "/services/labuan-company-residency/adviser", "es-ES": "/es/services/labuan-company-residency/adviser" },
 };
 
 export const seoPages = {
@@ -98,6 +99,26 @@ export const seoPages = {
   enquireEn: { path: "/enquire", title: "Confidential Property & Relocation Enquiry", description: "Contact Property Facilitators EuroAsia privately about property, relocation, residency, company setup or international collaboration.", locale: "en-GB", group: "enquire", breadcrumbs: [["Home", "/"], ["Enquire", "/enquire"]], priority: 0.6 },
   enquireDa: { path: "/da/enquire", title: "Fortrolig forespørgsel om ejendom og relocation", description: "Kontakt Property Facilitators EuroAsia fortroligt om ejendom, relocation, ophold, selskabsstiftelse eller internationalt samarbejde.", locale: "da-DK", group: "enquire", breadcrumbs: [["Forside", "/da"], ["Kontakt", "/da/enquire"]], priority: 0.6 },
 
+  homeEs: { path: "/es", title: "Propiedades, residencia y oportunidades entre España y Asia", description: "Asesoramiento independiente sobre propiedades en Marbella, relocation, residencia y constitución de sociedades en Malasia y Asia.", locale: "es-ES", group: "home", breadcrumbs: [], priority: 1 },
+  aboutEs: { path: "/es/about", title: "Asesores inmobiliarios internacionales independientes", description: "Conozca el enfoque personal, independiente y confidencial de Property Facilitators EuroAsia.", locale: "es-ES", group: "about", breadcrumbs: [["Inicio", "/es"], ["Nuestro enfoque", "/es/about"]] },
+  acquisitionEs: { path: "/es/services/acquisition", title: "Asesoramiento para comprar propiedades de lujo", description: "Representación independiente del comprador y búsqueda privada de propiedades en Marbella y Benahavís.", locale: "es-ES", group: "acquisition", breadcrumbs: [["Inicio", "/es"], ["Servicios", "/es#servicios-es"], ["Adquisición", "/es/services/acquisition"]] },
+  salesEs: { path: "/es/services/international-sales", title: "Venta internacional de propiedades de lujo", description: "Posicionamiento discreto e introducciones a compradores cualificados para propiedades especiales.", locale: "es-ES", group: "sales", breadcrumbs: [["Inicio", "/es"], ["Servicios", "/es#servicios-es"], ["Venta internacional", "/es/services/international-sales"]] },
+  relocationEs: { path: "/es/services/relocation-concierge", title: "Relocation y concierge privado en España", description: "Coordinación personal de relocation, alquiler de villas y servicios privados en el sur de España.", locale: "es-ES", group: "relocation", breadcrumbs: [["Inicio", "/es"], ["Servicios", "/es#servicios-es"], ["Relocation y concierge", "/es/services/relocation-concierge"]] },
+  labuanEs: { path: "/es/services/labuan-company-residency", title: "Sociedad en Labuan y residencia en Malasia", description: "Vía coordinada para sociedad en Labuan, permiso de trabajo, residencia familiar y orientación fiscal.", locale: "es-ES", group: "labuan", breadcrumbs: [["Inicio", "/es"], ["Asia Gateway", "/es/asia-gateway"], ["Labuan", "/es/services/labuan-company-residency"]], image: "/images/kl BACK GORUND.avif", priority: 0.9 },
+  marbellaEs: { path: "/es/markets/marbella", title: "Propiedades de lujo en Marbella y Benahavís", description: "Villas y propiedades en Marbella, Golden Mile, La Zagaleta y El Madroñal con asesoramiento independiente.", locale: "es-ES", group: "marbella", breadcrumbs: [["Inicio", "/es"], ["Mercados", "/es#mercados-es"], ["Marbella", "/es/markets/marbella"]], image: "/images/hero-villa.webp", priority: 0.9 },
+  malaysiaEs: { path: "/es/markets/malaysia", title: "Propiedad, residencia e inversión en Malasia", description: "Explore Kuala Lumpur, relocation, sociedad en Labuan y oportunidades en Malasia con especialistas locales.", locale: "es-ES", group: "malaysia", breadcrumbs: [["Inicio", "/es"], ["Asia Gateway", "/es/asia-gateway"], ["Malasia", "/es/markets/malaysia"]], image: "/images/asia-network.webp", priority: 0.9 },
+  middleEastEs: { path: "/es/markets/middle-east", title: "Propiedad y oportunidades en Oriente Medio", description: "Oportunidades seleccionadas entre el Golfo, España, Malasia y Asia.", locale: "es-ES", group: "middleEast", breadcrumbs: [["Inicio", "/es"], ["Mercados", "/es#mercados-es"], ["Oriente Medio", "/es/markets/middle-east"]] },
+  zagaletaEs: { path: "/es/areas/la-zagaleta", title: "Villas de lujo y fincas privadas en La Zagaleta", description: "Guía independiente para comprar y poseer propiedades de lujo en La Zagaleta, Benahavís.", locale: "es-ES", group: "zagaleta", breadcrumbs: [["Inicio", "/es"], ["Marbella", "/es/markets/marbella"], ["La Zagaleta", "/es/areas/la-zagaleta"]], image: "/images/zagaleta-view.webp", priority: 0.9 },
+  madronalEs: { path: "/es/areas/el-madronal", title: "Villas y fincas privadas en El Madroñal", description: "Propiedades de lujo en El Madroñal, Benahavís, con asesoramiento local sobre ubicación, vistas y valor.", locale: "es-ES", group: "madronal", breadcrumbs: [["Inicio", "/es"], ["Marbella", "/es/markets/marbella"], ["El Madroñal", "/es/areas/el-madronal"]], image: "/images/el-madronal-essence.webp", priority: 0.9 },
+  rentalsEs: { path: "/es/luxury-villa-rentals", title: "Alquiler de villas de lujo en Marbella y Benahavís", description: "Villas privadas seleccionadas en La Zagaleta, El Madroñal, Golden Mile y Costa del Sol.", locale: "es-ES", group: "rentals", breadcrumbs: [["Inicio", "/es"], ["Alquiler de villas", "/es/luxury-villa-rentals"]], image: "/images/luxury-villa-rentals/la-zagaleta.jpg", priority: 0.9 },
+  commercialEs: { path: "/es/commercial", title: "Oportunidades comerciales y de inversión privadas", description: "Acceso cualificado a hoteles, desarrollos, terrenos y activos inmobiliarios seleccionados.", locale: "es-ES", group: "commercial", breadcrumbs: [["Inicio", "/es"], ["Inversión", "/es/commercial"]] },
+  ownersEs: { path: "/es/property-owners", title: "Venta internacional de propiedades en Marbella", description: "Representación confidencial para propietarios de villas y fincas en Marbella y Benahavís.", locale: "es-ES", group: "owners", breadcrumbs: [["Inicio", "/es"], ["Propietarios", "/es/property-owners"]] },
+  portfolioEs: { path: "/es/private-portfolio", title: "Propiedades off-market y villas privadas en Marbella", description: "Solicite acceso confidencial a propiedades seleccionadas en Marbella y Benahavís.", locale: "es-ES", group: "portfolio", breadcrumbs: [["Inicio", "/es"], ["Colección privada", "/es/private-portfolio"]] },
+  asiaEs: { path: "/es/asia-gateway", title: "Malasia y Asia: propiedad, residencia y sociedades", description: "Una puerta práctica a propiedad en Malasia, sociedad en Labuan, residencia y relocation.", locale: "es-ES", group: "asia", breadcrumbs: [["Inicio", "/es"], ["Asia Gateway", "/es/asia-gateway"]], image: "/images/asia-network.webp", priority: 0.9 },
+  privacyEs: { path: "/es/privacy", title: "Aviso de privacidad", description: "Cómo trata Property Facilitators EuroAsia las consultas y los datos personales.", locale: "es-ES", group: "privacy", breadcrumbs: [["Inicio", "/es"], ["Privacidad", "/es/privacy"]], priority: 0.4 },
+  enquireEs: { path: "/es/enquire", title: "Consulta confidencial sobre propiedad y relocation", description: "Contacte de forma confidencial sobre propiedad, residencia, sociedades o colaboración internacional.", locale: "es-ES", group: "enquire", breadcrumbs: [["Inicio", "/es"], ["Contactar", "/es/enquire"]], priority: 0.6 },
+  labuanAdviserEs: { path: "/es/services/labuan-company-residency/adviser", title: "Ask EuroAsia: Asesor de Malasia y Labuan", description: "Pregunte en español sobre vivir en Malasia, propiedad en Kuala Lumpur, viajes, residencia y sociedad en Labuan.", locale: "es-ES", group: "labuanAdviser", breadcrumbs: [["Inicio", "/es"], ["Labuan", "/es/services/labuan-company-residency"], ["Asesor de Malasia", "/es/services/labuan-company-residency/adviser"]], priority: 0.7 },
+
   countryEstatesEn: { path: "/opportunities/country-estates", title: "Country Estates & Fincas in Andalusia", description: "Register requirements for substantial country estates, fincas, cortijos, equestrian and lifestyle properties in Andalusia.", locale: "en-GB", group: "countryEstates", breadcrumbs: [["Home", "/"], ["Opportunities", "/#opportunities"], ["Country estates", "/opportunities/country-estates"]] },
   investmentEn: { path: "/opportunities/investment-opportunities", title: "Private Property Investment Opportunities", description: "Register interest in selected hotels, commercial property, development sites, land, refurbishment projects and income-producing assets.", locale: "en-GB", group: "investment", breadcrumbs: [["Home", "/"], ["Opportunities", "/#opportunities"], ["Investment opportunities", "/opportunities/investment-opportunities"]] },
   labuanAdviserEn: { path: "/services/labuan-company-residency/adviser", title: "Ask EuroAsia: Malaysia Living & Labuan Adviser", description: "Ask practical questions about living in Malaysia, Kuala Lumpur property, travel and the PF EuroAsia Labuan company and residency pathway.", locale: "en-GB", group: "labuanAdviser", breadcrumbs: [["Home", "/"], ["Labuan company and residency", "/services/labuan-company-residency"], ["Ask EuroAsia", "/services/labuan-company-residency/adviser"]], priority: 0.7 },
@@ -109,6 +130,7 @@ export type SeoPageKey = keyof typeof seoPages;
 
 const ogLocale: Record<SeoLocale, string> = {
   "en-GB": "en_GB",
+  "es-ES": "es_ES",
   "da-DK": "da_DK",
   "zh-CN": "zh_CN",
   "ar-SA": "ar_SA",

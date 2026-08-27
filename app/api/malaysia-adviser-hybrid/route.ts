@@ -25,6 +25,7 @@ type HybridPayload = {
   email?: unknown;
   question?: unknown;
   history?: unknown;
+  language?: unknown;
   company_website?: unknown;
 };
 
@@ -98,22 +99,52 @@ async function persistAnswer(args: {
   }
 }
 
-function controlledResponse(args: {
+async function translateControlledAnswerToSpanish(answer: string) {
+  try {
+    const result = await generateText({
+      model: gateway(HYBRID_MODEL),
+      maxOutputTokens: 900,
+      temperature: 0,
+      system: `Translate the supplied verified adviser answer from English into natural Spain Spanish.
+- Preserve every fact, figure, currency, date, condition, qualification and warning exactly.
+- Do not add, remove, reinterpret or update any information.
+- Preserve Markdown structure.
+- Return only the Spanish translation.`,
+      prompt: answer,
+      providerOptions: {
+        gateway: {
+          models: HYBRID_FALLBACK_MODELS,
+          tags: ["feature:malaysia-adviser", "task:controlled-spanish-translation"],
+        },
+      },
+    });
+    return result.text.trim() || answer;
+  } catch (error) {
+    console.error("malaysia-adviser-controlled-spanish-translation-failed", error);
+    return answer;
+  }
+}
+
+async function controlledResponse(args: {
   fullName: string;
   email: string;
   question: string;
   topic: string;
+  language: "en" | "es";
 }) {
   const match = findMalaysiaAdviserAnswer(args.question);
   if (!match || match.needsConfirmation) return null;
 
   const source = match.source;
   const sourceLink = adviserSourceLink(match.id, match.source);
+  const answer = args.language === "es"
+    ? await translateControlledAnswerToSpanish(match.answer)
+    : match.answer;
   void persistAnswer({
     fullName: args.fullName,
     email: args.email,
     question: args.question,
-    answer: match.answer,
+    answer,
     source,
     mode: "controlled",
     topic: args.topic,
@@ -124,7 +155,7 @@ function controlledResponse(args: {
     ok: true,
     mode: "controlled",
     topic: args.topic,
-    answer: match.answer,
+    answer,
     source,
     sources: [sourceLink],
     followUps: match.followUps || [],
@@ -149,6 +180,7 @@ export async function POST(request: NextRequest) {
   const email = clean(payload.email, 320).toLowerCase();
   const question = clean(payload.question, 3000);
   const history = cleanHistory(payload.history);
+  const language = clean(payload.language, 8).toLowerCase() === "es" ? "es" : "en";
 
   if (!fullName || !email || !email.includes("@") || !question) {
     return NextResponse.json({ error: "Incomplete adviser request." }, { status: 400 });
@@ -159,11 +191,12 @@ export async function POST(request: NextRequest) {
   // Company, tax, residency and immigration remain deliberately controlled. The AI
   // layer is not allowed to reinterpret or embellish these sensitive answers.
   if (retrieval.sensitive) {
-    const response = controlledResponse({
+    const response = await controlledResponse({
       fullName,
       email,
       question,
       topic: retrieval.intent,
+      language,
     });
     if (response) return response;
 
@@ -184,7 +217,9 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  const verifiedContext = formatHybridKnowledgeContext(retrieval.matches);
+  const verifiedContext = `${formatHybridKnowledgeContext(retrieval.matches)}\n\nOUTPUT LANGUAGE: ${
+    language === "es" ? "Answer entirely in natural Spain Spanish." : "Answer in English."
+  }`;
   const conversationContext = history.length
     ? history.map((item) => `${item.role.toUpperCase()}: ${item.text}`).join("\n")
     : "No earlier conversation context.";
@@ -258,11 +293,12 @@ export async function POST(request: NextRequest) {
     // Graceful degradation: Gateway first tries the secondary AI model. If the
     // whole AI chain is unavailable, use the existing verified deterministic answer
     // when one is strong enough. The visitor never sees a raw provider error.
-    const fallback = controlledResponse({
+    const fallback = await controlledResponse({
       fullName,
       email,
       question,
       topic: retrieval.intent,
+      language,
     });
     if (fallback) return fallback;
 

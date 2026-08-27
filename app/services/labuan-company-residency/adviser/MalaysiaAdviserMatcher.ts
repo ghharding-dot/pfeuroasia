@@ -35,6 +35,19 @@ export const adviserSuggestions = [
   "How much does the Labuan package cost?",
 ];
 
+export const adviserSuggestionsEs = [
+  "¿Cómo funciona la residencia fiscal en Malasia?",
+  "¿Un visado de Malasia me convierte en residente fiscal?",
+  "¿Cómo se compara Malasia con Dubái?",
+  "¿Qué debería hacer en Kuala Lumpur?",
+  "¿Puede recomendarme algunos hoteles?",
+  "¿Dónde debería ir en Malasia para disfrutar de playas?",
+  "¿Cuáles son los diez mejores lugares para visitar en Malasia?",
+  "¿Cuál es la mejor época para visitar Malasia?",
+  "¿Cuál es el coste de vida en Kuala Lumpur?",
+  "¿Cuánto cuesta el paquete de Labuan?",
+];
+
 const stopWords = new Set([
   "a", "an", "and", "are", "can", "do", "does", "for", "how", "i", "in",
   "is", "it", "me", "my", "of", "on", "the", "to", "what", "with", "whats",
@@ -160,11 +173,42 @@ const cultureIds = new Set(["malaysia-legal-system", "malaysia-language", "malay
 const generalIds = new Set(["malaysia-overview", "kl-shopping", "malaysia-destinations"]);
 
 function normalise(value: string) {
-  return value
+  const normalized = value
     .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/\b(?:lebuan|lebaun|labourn)\b/g, "labuan")
     .replace(/[’']/g, "")
     .replace(/[^a-z0-9%$,. -]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const spanishAliases: Array<[RegExp, string]> = [
+    [/residencia fiscal|residente fiscal|domicilio fiscal/g, " tax residency tax resident "],
+    [/impuesto personal|impuestos personales|fiscalidad personal/g, " personal tax "],
+    [/doble imposicion|convenio fiscal/g, " double tax tax treaty "],
+    [/salir de espana|dejar espana/g, " leaving spain "],
+    [/sociedad|empresa|constituir una empresa|constitucion de sociedades/g, " company formation company setup "],
+    [/permiso de trabajo|permiso laboral/g, " work permit employment pass "],
+    [/visado|visa/g, " visa residency "],
+    [/dependiente|dependientes|familiares/g, " dependent family residency "],
+    [/renovacion|renovar/g, " renewal "],
+    [/cuenta bancaria|banca/g, " bank account banking "],
+    [/comparar|comparacion|frente a|alternativa/g, " compare comparison alternative "],
+    [/hotel|hoteles|alojamiento|donde alojarse/g, " hotel hotels accommodation where to stay "],
+    [/que hacer|que ver|lugares para visitar|turismo|itinerario/g, " what to do what to see places to visit tourism itinerary "],
+    [/mejor epoca|cuando visitar|clima|tiempo|monzon|lluvia/g, " best time when to visit climate weather monsoon rain "],
+    [/playa|playas|isla|islas/g, " beach beaches island islands "],
+    [/propiedad|propiedades|apartamento|comprar|alquilar|alquiler/g, " property apartment buy rent rental "],
+    [/comida|comer|restaurante|restaurantes|gastronomia/g, " food eat restaurant restaurants cuisine "],
+    [/sanidad|salud|hospital|medico|seguro medico/g, " healthcare hospital doctor health insurance "],
+    [/transporte|metro|tren|trafico|moverse/g, " transport metro train traffic getting around "],
+    [/idioma|hablan ingles|religion|cultura/g, " language speak english religion culture "],
+    [/coste de vida|costo de vida|gastos mensuales|presupuesto mensual/g, " cost of living monthly expenses monthly budget "],
+    [/cuanto cuesta|precio|precios|coste|costo/g, " how much cost price prices "],
+  ];
+
+  return spanishAliases.reduce((result, [pattern, replacement]) => result.replace(pattern, replacement), normalized)
     .replace(/\s+/g, " ")
     .trim();
 }
