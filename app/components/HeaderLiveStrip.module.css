@@ -87,9 +87,16 @@
   border: 1px solid rgba(197, 162, 104, .34);
   border-radius: 2px;
   background: rgba(255, 255, 255, .035);
-  font-size: 20px;
   line-height: 1;
+  overflow: hidden;
   transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.flagImage {
+  display: block;
+  width: 30px;
+  height: 20px;
+  object-fit: cover;
 }
 
 .flagButton:hover,
@@ -161,7 +168,11 @@
   .flagButton {
     width: 39px;
     height: 26px;
-    font-size: 19px;
+  }
+
+  .flagImage {
+    width: 29px;
+    height: 19px;
   }
 }
 

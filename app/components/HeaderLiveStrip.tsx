@@ -12,11 +12,11 @@ type WeatherPayload = {
 };
 
 const languages = [
-  { href: "/", flag: "🇬🇧", label: "English", prefix: "/" },
-  { href: "/es", flag: "🇪🇸", label: "Español", prefix: "/es" },
-  { href: "/ar", flag: "🇸🇦", label: "العربية", prefix: "/ar" },
-  { href: "/zh", flag: "🇨🇳", label: "中文", prefix: "/zh" },
-  { href: "/da", flag: "🇩🇰", label: "Dansk", prefix: "/da" },
+  { href: "/", flagSrc: "/images/flags/gb.svg", label: "English", prefix: "/" },
+  { href: "/es", flagSrc: "/images/flags/es.svg", label: "Español", prefix: "/es" },
+  { href: "/ar", flagSrc: "/images/flags/sa.svg", label: "العربية", prefix: "/ar" },
+  { href: "/zh", flagSrc: "/images/flags/cn.svg", label: "中文", prefix: "/zh" },
+  { href: "/da", flagSrc: "/images/flags/dk.svg", label: "Dansk", prefix: "/da" },
 ] as const;
 
 function formatTime(date: Date, timeZone: string) {
@@ -123,7 +123,12 @@ export function LanguageFlagBar() {
               title={language.label}
               key={language.href}
             >
-              <span aria-hidden="true">{language.flag}</span>
+              <img
+                className={styles.flagImage}
+                src={language.flagSrc}
+                alt=""
+                aria-hidden="true"
+              />
               <span className={styles.visuallyHidden}>{language.label}</span>
             </Link>
           );
