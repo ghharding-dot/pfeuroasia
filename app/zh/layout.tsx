@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { HeaderLiveStrip, LanguageFlagBar } from "../components/HeaderLiveStrip";
 
 export const metadata: Metadata = {
   title: {
@@ -9,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function ChineseLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <div lang="zh-CN">{children}</div>;
+  return <div lang="zh-CN"><div className="language-layout-bars"><HeaderLiveStrip /><LanguageFlagBar /></div>{children}</div>;
 }

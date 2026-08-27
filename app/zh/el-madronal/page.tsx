@@ -3,7 +3,7 @@ import { PartnerStrip } from "../../components/PartnerStrip";
 
 export default function ChineseMadronalPage() {
   return <main className="zh-site zh-zagaleta-page" lang="zh-CN">
-    <header className="zh-area-header"><div className="site-shell zh-header-inner"><Link className="brand" href="/zh"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link><nav><Link href="/zh">中文首页</Link><a href="#life-cn">生活方式</a><a href="#homes-cn">住宅类型</a><Link className="language-link" href="/areas/el-madronal">EN</Link></nav></div></header>
+    <header className="zh-area-header"><div className="site-shell zh-header-inner"><Link className="brand" href="/zh"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link><nav><Link href="/zh">中文首页</Link><a href="#life-cn">生活方式</a><a href="#homes-cn">住宅类型</a></nav></div></header>
 
     <section className="zh-zag-hero zh-madronal-hero"><div className="area-overlay"/><div className="site-shell zh-zag-hero-copy"><p className="eyebrow light">Benahavís · Marbella Hills</p><h1>El Madroñal</h1><p>坐落于自然山林之间，兼顾私密、景观与日常便利的成熟高端住宅社区。</p><a className="button button-gold" href="#explore-cn">深入了解 <span>↓</span></a></div></section>
 

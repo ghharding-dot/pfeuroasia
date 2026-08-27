@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { HeaderLiveStrip, LanguageFlagBar } from "../components/HeaderLiveStrip";
 import styles from "../components/HeaderMobileDirectory.module.css";
 
 export function SpanishHeader({ transparent = true }: { transparent?: boolean }) {
@@ -9,7 +10,7 @@ export function SpanishHeader({ transparent = true }: { transparent?: boolean })
   const close = () => setOpen(false);
 
   return (
-    <header className={`site-header ${transparent ? "is-transparent" : ""}`}>
+    <header className={`site-header has-language-bars ${transparent ? "is-transparent" : ""}`}>
       <div className="site-shell header-inner">
         <Link className="brand" href="/es" aria-label="Inicio de Property Facilitators EuroAsia en español">
           <span className="brand-lockup" aria-hidden="true">
@@ -26,7 +27,6 @@ export function SpanishHeader({ transparent = true }: { transparent?: boolean })
           <Link className={styles.navButton} href="/es/properties" onClick={close}>Propiedades</Link>
           <Link className={styles.navButton} href="/es/property-owners" onClick={close}>Propietarios</Link>
           <Link className={styles.navButton} href="/es/about" onClick={close}>Nuestro enfoque</Link>
-          <Link className="language-link" href="/" onClick={close}>EN</Link>
           <Link className="nav-enquire" href="/es/enquire" onClick={close}>Contactar <span>→</span></Link>
         </nav>
         <span className={styles.mobileDirectory} aria-hidden="true">Menú</span>
@@ -40,6 +40,8 @@ export function SpanishHeader({ transparent = true }: { transparent?: boolean })
           <span /><span />
         </button>
       </div>
+      <HeaderLiveStrip />
+      <LanguageFlagBar />
     </header>
   );
 }

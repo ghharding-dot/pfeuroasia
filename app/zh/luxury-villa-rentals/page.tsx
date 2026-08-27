@@ -39,7 +39,6 @@ export default function ChineseLuxuryVillaRentalsPage() {
           <nav aria-label="中文导航">
             <Link href="/zh">中文首页</Link>
             <a href="#villa-enquiry">查询档期</a>
-            <Link className="language-link" href="/luxury-villa-rentals">EN</Link>
           </nav>
         </div>
       </header>

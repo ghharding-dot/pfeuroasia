@@ -10,7 +10,7 @@ const propertyBands = [
 
 export default function ChineseZagaletaPage() {
   return <main className="zh-site zh-zagaleta-page" lang="zh-CN">
-    <header className="zh-area-header"><div className="site-shell zh-header-inner"><Link className="brand" href="/zh"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link><nav><Link href="/zh">中文首页</Link><a href="#numbers-cn">社区数据</a><a href="#property-cn">物业价格</a><Link className="language-link" href="/areas/la-zagaleta">EN</Link></nav></div></header>
+    <header className="zh-area-header"><div className="site-shell zh-header-inner"><Link className="brand" href="/zh"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link><nav><Link href="/zh">中文首页</Link><a href="#numbers-cn">社区数据</a><a href="#property-cn">物业价格</a></nav></div></header>
 
     <section className="zh-zag-hero"><div className="area-overlay"/><div className="site-shell zh-zag-hero-copy"><p className="eyebrow light">Benahavís · Costa del Sol</p><h1>La Zagaleta</h1><p>在欧洲极具私密性的成熟庄园社区，真正体验与外界保持距离的生活。</p><a className="button button-gold" href="#explore-cn">深入了解 <span>↓</span></a></div></section>
 

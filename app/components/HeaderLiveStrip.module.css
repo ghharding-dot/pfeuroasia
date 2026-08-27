@@ -63,6 +63,7 @@
 }
 
 .languageBar {
+  direction: ltr;
   border-bottom: 1px solid rgba(197, 162, 104, .28);
   background: rgba(9, 10, 9, .97);
   color: white;
@@ -73,7 +74,7 @@
   min-height: 38px;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: clamp(46px, 7vw, 112px);
   padding-block: 5px;
 }
 
@@ -153,7 +154,7 @@
 
   .languageInner {
     min-height: 36px;
-    gap: 9px;
+    gap: clamp(18px, 6vw, 34px);
     padding-block: 4px;
   }
 

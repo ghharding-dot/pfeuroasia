@@ -14,7 +14,7 @@ export default function ChineseHome() {
     <header className="zh-header">
       <div className="site-shell zh-header-inner">
         <Link className="brand" href="/zh" aria-label="Property Facilitators EuroAsia 中文首页"><span className="brand-lockup" aria-hidden="true"><img className="brand-symbol" src="/images/pf-gold-symbol.png" alt=""/><span className="brand-words"><b>Property</b><b>Facilitators</b></span><span className="brand-region">EuroAsia</span></span></Link>
-        <nav aria-label="中文导航"><a href="#services-zh">服务</a><a href="#markets-zh">市场</a><Link href="/zh/luxury-villa-rentals">豪华别墅租赁</Link><a href="#private-zh">私人房源</a><a href="#contact-zh">联系我们</a><Link className="language-link" href="/">EN</Link></nav>
+        <nav aria-label="中文导航"><a href="#services-zh">服务</a><a href="#markets-zh">市场</a><Link href="/zh/luxury-villa-rentals">豪华别墅租赁</Link><a href="#private-zh">私人房源</a><a href="#contact-zh">联系我们</a></nav>
       </div>
     </header>
 

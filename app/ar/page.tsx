@@ -47,7 +47,7 @@ const marketCards = [
 export default function ArabicHome() {
   return (
     <main className={styles.site} lang="ar" dir="rtl">
-      <header className={styles.header}>
+      <header className={`${styles.header} language-overlay-header`}>
         <div className={`site-shell ${styles.headerInner}`}>
           <Link className="brand" href="/ar" aria-label="الصفحة العربية لبروبرتي فاسيليتيترز يورو آسيا">
             <span className="brand-lockup" aria-hidden="true">
@@ -62,7 +62,6 @@ export default function ArabicHome() {
             <a href="#markets-ar">إسبانيا</a>
             <a href="#private-ar">العقارات الخاصة</a>
             <a href="#contact-ar">تواصل معنا</a>
-            <Link className={styles.languageLink} href="/">EN</Link>
           </nav>
         </div>
       </header>
