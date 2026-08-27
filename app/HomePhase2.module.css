@@ -703,7 +703,8 @@
 
 @media (max-width: 620px) {
   .gatewayHero {
-    padding: 124px 0 48px;
+    /* Clear the complete stacked mobile header: ticker, navigation, weather and flags. */
+    padding: 194px 0 48px;
   }
 
   .gatewayIntro h1 {
