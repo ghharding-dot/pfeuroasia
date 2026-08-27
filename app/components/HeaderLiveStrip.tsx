@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./HeaderLiveStrip.module.css";
 
@@ -8,6 +10,14 @@ type WeatherPayload = {
   marbella: number | null;
   kualaLumpur: number | null;
 };
+
+const languages = [
+  { href: "/", flag: "🇬🇧", label: "English", prefix: "/" },
+  { href: "/es", flag: "🇪🇸", label: "Español", prefix: "/es" },
+  { href: "/ar", flag: "🇸🇦", label: "العربية", prefix: "/ar" },
+  { href: "/zh", flag: "🇨🇳", label: "中文", prefix: "/zh" },
+  { href: "/da", flag: "🇩🇰", label: "Dansk", prefix: "/da" },
+] as const;
 
 function formatTime(date: Date, timeZone: string) {
   return new Intl.DateTimeFormat("en-GB", {
@@ -27,7 +37,7 @@ export function HeaderLiveStrip() {
   });
 
   useEffect(() => {
-    setNow(new Date());
+    const initialClock = window.setTimeout(() => setNow(new Date()), 0);
 
     const clockTimer = window.setInterval(() => setNow(new Date()), 30_000);
 
@@ -46,6 +56,7 @@ export function HeaderLiveStrip() {
     const weatherTimer = window.setInterval(loadWeather, 10 * 60 * 1000);
 
     return () => {
+      window.clearTimeout(initialClock);
       window.clearInterval(clockTimer);
       window.clearInterval(weatherTimer);
     };
@@ -89,5 +100,35 @@ export function HeaderLiveStrip() {
         <span className={styles.attribution}>Weather data: MET Norway</span>
       </div>
     </div>
+  );
+}
+
+export function LanguageFlagBar() {
+  const pathname = usePathname();
+
+  return (
+    <nav className={styles.languageBar} aria-label="Choose website language">
+      <div className={`site-shell ${styles.languageInner}`}>
+        {languages.map((language) => {
+          const active = language.prefix === "/"
+            ? !languages.slice(1).some((item) => pathname.startsWith(item.prefix))
+            : pathname.startsWith(language.prefix);
+
+          return (
+            <Link
+              className={`${styles.flagButton} ${active ? styles.activeFlag : ""}`}
+              href={language.href}
+              aria-label={language.label}
+              aria-current={active ? "page" : undefined}
+              title={language.label}
+              key={language.href}
+            >
+              <span aria-hidden="true">{language.flag}</span>
+              <span className={styles.visuallyHidden}>{language.label}</span>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
