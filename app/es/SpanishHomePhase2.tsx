@@ -30,7 +30,7 @@ export function SpanishHomePhase2() {
             <p>Dos propuestas distintas dentro de una sola red internacional de confianza: España para propiedades y servicios personales, o Asia para inversión, residencia y empresa.</p>
           </div>
           <div className={styles.gatewayCards}>
-            <Link className={`${styles.gatewayCard} ${styles.spainPath}`} href="#mercados-es">
+            <Link className={`${styles.gatewayCard} ${styles.spainPath}`} href="#oportunidades-seleccionadas-es">
               <div className={styles.cardOverlay} />
               <div className={styles.gatewayCardCopy}><span className={styles.pathLabel}>Propiedades en España</span><h2>¿Desea comprar una propiedad en España?</h2><p>Villas de lujo, oportunidades privadas, asesoramiento al comprador, alquiler y concierge en Marbella y la Costa del Sol.</p><div className={styles.pathTags}><span>Compra</span><span>Venta</span><span>Alquiler</span><span>Concierge</span></div><strong>Continuar a España <span aria-hidden="true">↓</span></strong></div>
             </Link>

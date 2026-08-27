@@ -4,8 +4,18 @@ import styles from "../HomeRegions.module.css";
 import { createMetadata } from "../lib/seo";
 import { SpanishHeader } from "./SpanishHeader";
 import { SpanishHomePhase2 } from "./SpanishHomePhase2";
+import {
+  PublicPropertyCarousel,
+  type PublicPropertySlide,
+} from "../components/PublicPropertyCarousel";
+import {
+  imageObjectPosition,
+  normalizePropertyMarket,
+  readProperties,
+} from "../lib/propertyStore";
 
 export const metadata = createMetadata("homeEs");
+export const dynamic = "force-dynamic";
 
 const services = [
   ["01", "Asesoramiento en adquisiciones", "Búsqueda estratégica y representación del comprador, tanto en el mercado abierto como en oportunidades discretas.", "/es/services/acquisition"],
@@ -14,11 +24,102 @@ const services = [
   ["04", "Concierge y alquiler de villas", "Estancias exclusivas y servicios personales en Marbella y el sur de España.", "/es/luxury-villa-rentals"],
 ];
 
-export default function SpanishHome() {
+async function getSpanishPropertySlides(): Promise<{
+  properties: PublicPropertySlide[];
+  developments: PublicPropertySlide[];
+  privateVillaValueMillions: number;
+}> {
+  try {
+    const properties = await readProperties();
+    const approvedProperties = properties.filter(
+      (property) =>
+        property.status === "published" &&
+        normalizePropertyMarket(property.market) === "spain" &&
+        (property.visibility === "teaser" || property.visibility === "public") &&
+        property.publicImageApproved === true &&
+        Boolean(property.image),
+    );
+    const uniqueVillaTitles = new Set<string>();
+    const privateVillaValue = approvedProperties.reduce((total, property) => {
+      if (property.listingType === "new-development" || property.priceCurrency !== "EUR") return total;
+      const titleKey = property.title.trim().toLowerCase().replace(/\s+/g, " ");
+      if (!titleKey || uniqueVillaTitles.has(titleKey)) return total;
+      uniqueVillaTitles.add(titleKey);
+      return total + (property.priceAmount || 0);
+    }, 0);
+    const approved = approvedProperties.map((property) => {
+      const isTeaser = property.visibility === "teaser";
+      return {
+        listingType: property.listingType === "new-development" ? "new-development" : "resale",
+        featuredOnHomepage: property.featuredOnHomepage === true,
+        homepagePriority: property.homepagePriority || 100,
+        slide: {
+          id: property.id,
+          image: property.image,
+          secondaryImage: property.secondaryImage,
+          thirdImage: property.thirdImage,
+          fourthImage: property.fourthImage,
+          imagePosition: imageObjectPosition(property.imagePosition),
+          title: property.publicTitle || (isTeaser ? "Oportunidad inmobiliaria privada" : property.title),
+          location: property.publicLocation || (isTeaser ? "Sur de España" : property.location),
+          visibility: property.visibility as "teaser" | "public",
+          accessLevel: property.accessLevel,
+          price: property.visibility === "public" ? property.price || "Precio a consultar" : undefined,
+          priceTo: property.visibility === "public" && property.listingType === "new-development" ? property.priceTo : undefined,
+          plotSize: property.plotSize || undefined,
+          builtSize: property.builtSize || undefined,
+          bedrooms: property.bedrooms || undefined,
+        },
+      };
+    });
+    const resale = approved.filter((item) => item.listingType === "resale");
+    const uniqueResale = resale.filter((item, index, items) => {
+      const titleKey = item.slide.title.trim().toLowerCase().replace(/\s+/g, " ");
+      return items.findIndex((candidate) => candidate.slide.title.trim().toLowerCase().replace(/\s+/g, " ") === titleKey) === index;
+    });
+    const homepageProperties = [
+      ...uniqueResale.filter((item) => item.featuredOnHomepage).sort((a, b) => a.homepagePriority - b.homepagePriority),
+      ...uniqueResale.filter((item) => !item.featuredOnHomepage),
+    ].slice(0, 10).map((item) => item.slide);
+    return {
+      properties: homepageProperties,
+      developments: approved.filter((item) => item.listingType === "new-development").map((item) => item.slide),
+      privateVillaValueMillions: Math.floor(privateVillaValue / 1_000_000),
+    };
+  } catch (error) {
+    console.error("spanish-homepage-property-carousel-unavailable", error);
+    return { properties: [], developments: [], privateVillaValueMillions: 0 };
+  }
+}
+
+export default async function SpanishHome() {
+  const publicPropertySlides = await getSpanishPropertySlides();
   return (
     <main>
       <SpanishHeader />
       <SpanishHomePhase2 />
+      <PublicPropertyCarousel
+        slides={publicPropertySlides.properties}
+        portfolioValueMillions={publicPropertySlides.privateVillaValueMillions}
+        catalogueHref="/es/properties"
+        locale="es"
+        eyebrow="Oportunidades inmobiliarias seleccionadas"
+        heading="Una muestra de lo que está disponible."
+        emphasis="Propiedades publicadas y oportunidades privadas."
+        summary="Consulte propiedades seleccionadas en Marbella, Benahavís y la Costa del Sol. Las oportunidades privadas y off-market están sujetas a cualificación."
+        headingId="oportunidades-seleccionadas-es"
+      />
+      <PublicPropertyCarousel
+        slides={publicPropertySlides.developments}
+        variant="development"
+        locale="es"
+        eyebrow="Nuevas promociones en España"
+        heading="Proyectos en desarrollo."
+        emphasis="Obra nueva, sobre plano y oportunidades de inversión."
+        summary="Explore proyectos seleccionados de obra nueva y promociones en construcción con acceso directo a la disponibilidad y la información del promotor."
+        emptyMessage="Próximamente se publicarán aquí la disponibilidad actual, los detalles de inversión y la información de los promotores."
+        headingId="nuevas-promociones-es"
+      />
       <section className="hero">
         <Image className="hero-image" src="/images/hero-villa.webp" alt="Villa de lujo en Marbella representada por Property Facilitators EuroAsia" fill priority sizes="100vw" />
         <div className="hero-shade" />

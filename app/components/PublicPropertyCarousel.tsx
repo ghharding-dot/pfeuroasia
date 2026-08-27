@@ -52,6 +52,7 @@ export function PublicPropertyCarousel({
   directPublicListings = false,
   portfolioValueMillions,
   catalogueHref,
+  locale = "en",
 }: {
   slides: PublicPropertySlide[];
   variant?: "property" | "development";
@@ -64,6 +65,7 @@ export function PublicPropertyCarousel({
   directPublicListings?: boolean;
   portfolioValueMillions?: number;
   catalogueHref?: string;
+  locale?: "en" | "es";
 }) {
   const [index, setIndex] = useState(0);
   const [eurUsdRate, setEurUsdRate] = useState(FALLBACK_EUR_USD_RATE);
@@ -109,6 +111,7 @@ export function PublicPropertyCarousel({
   );
 
   const isDevelopment = variant === "development";
+  const isSpanish = locale === "es";
   const headingId = customHeadingId || (isDevelopment
     ? "new-developments-heading"
     : "selected-opportunities-heading");
@@ -136,13 +139,13 @@ export function PublicPropertyCarousel({
               </h2>
             </div>
             <div className={styles.headingCopy}>
-              <strong>New portfolio section</strong>
+            <strong>{isSpanish ? "Nueva sección de propiedades" : "New portfolio section"}</strong>
               <p>{displaySummary}</p>
             </div>
           </div>
           <div className={styles.emptyState}>
-            <span>{isDevelopment ? "New developments" : "Malaysia property network"}</span>
-            <h3>{isDevelopment ? "Our first selected projects are being prepared." : "New opportunities will appear here."}</h3>
+            <span>{isDevelopment ? (isSpanish ? "Nuevas promociones" : "New developments") : (isSpanish ? "Red inmobiliaria" : "Malaysia property network")}</span>
+            <h3>{isDevelopment ? (isSpanish ? "Estamos preparando nuestros primeros proyectos seleccionados." : "Our first selected projects are being prepared.") : (isSpanish ? "Las nuevas oportunidades aparecerán aquí." : "New opportunities will appear here.")}</h3>
             <p>{emptyMessage || "Current availability, investment details and developer information will appear here shortly."}</p>
           </div>
         </div>
@@ -166,11 +169,13 @@ export function PublicPropertyCarousel({
             </h2>
           </div>
           <div className={styles.headingCopy}>
-            <strong>{slides.length} approved {slides.length === 1 ? "opportunity" : "opportunities"}</strong>
+            <strong>{isSpanish
+              ? `${slides.length} ${slides.length === 1 ? "oportunidad aprobada" : "oportunidades aprobadas"}`
+              : `${slides.length} approved ${slides.length === 1 ? "opportunity" : "opportunities"}`}</strong>
             <p>{displaySummary}</p>
             {catalogueHref ? (
               <Link className={styles.catalogueLink} href={catalogueHref}>
-                View the complete property collection <span>→</span>
+                {isSpanish ? "Ver la colección completa" : "View the complete property collection"} <span>→</span>
               </Link>
             ) : null}
           </div>
@@ -199,7 +204,9 @@ export function PublicPropertyCarousel({
                           style={{ objectPosition: slide.imagePosition }}
                         />
                         <span className={styles.imageLabel}>
-                          {isDevelopment ? "New development" : registered ? "Registered listing" : "Private opportunity"}
+                          {isSpanish
+                            ? (isDevelopment ? "Nueva promoción" : registered ? "Propiedad publicada" : "Oportunidad privada")
+                            : (isDevelopment ? "New development" : registered ? "Registered listing" : "Private opportunity")}
                         </span>
                       </div>
                       {slide.secondaryImage ? (
@@ -221,7 +228,9 @@ export function PublicPropertyCarousel({
                           style={{ objectPosition: slide.imagePosition }}
                         />
                         <span className={styles.imageLabel}>
-                          {registered ? "Registered listing" : "Private opportunity"}
+                          {isSpanish
+                            ? (registered ? "Propiedad publicada" : "Oportunidad privada")
+                            : (registered ? "Registered listing" : "Private opportunity")}
                         </span>
                       </div>
                       {slide.secondaryImage ? (
@@ -258,26 +267,34 @@ export function PublicPropertyCarousel({
                       <dl className={styles.propertyFacts}>
                         {formatPropertyArea(slide.plotSize) ? (
                           <div>
-                            <dt>Plot</dt>
+                            <dt>{isSpanish ? "Parcela" : "Plot"}</dt>
                             <dd>{formatPropertyArea(slide.plotSize)}</dd>
                           </div>
                         ) : null}
                         {formatPropertyArea(slide.builtSize) ? (
                           <div>
-                            <dt>Built</dt>
+                            <dt>{isSpanish ? "Construido" : "Built"}</dt>
                             <dd>{formatPropertyArea(slide.builtSize)}</dd>
                           </div>
                         ) : null}
                         {slide.bedrooms ? (
                           <div>
-                            <dt>Bedrooms</dt>
+                            <dt>{isSpanish ? "Dormitorios" : "Bedrooms"}</dt>
                             <dd>{slide.bedrooms}</dd>
                           </div>
                         ) : null}
                       </dl>
                     )}
                     <p className={styles.description}>
-                      {registered && directPublicListings
+                      {isSpanish
+                        ? registered && directPublicListings
+                          ? "Consulte la presentación completa de la promoción y contacte con PF EuroAsia para conocer la disponibilidad, los precios y obtener más información."
+                          : isDevelopment
+                          ? "Consulte las fotografías, el rango de precios y todos los detalles de la promoción sin registrarse. Envíe una consulta cuando desee conocer la disponibilidad actual u obtener más información."
+                          : registered
+                          ? "Consulte las fotografías ampliadas y todos los detalles de la propiedad sin registrarse. Solo deberá registrarse si desea descargar el folleto en PDF."
+                          : "Esta es una oportunidad privada u off-market. Los detalles completos se facilitan tras una solicitud detallada y la aprobación de PF EuroAsia."
+                        : registered && directPublicListings
                         ? "View the complete development presentation, then contact the PF EuroAsia Asia desk for current availability, pricing and further information."
                         : isDevelopment
                         ? "View the photographs, price range and full development details without registering. Enquire only when you would like current availability or further information."
@@ -294,11 +311,17 @@ export function PublicPropertyCarousel({
                           : "/private-portfolio"
                       }
                     >
-                      {isDevelopment
-                        ? "View full development"
-                        : registered
-                          ? "View full details"
-                          : "Request private access"} <span>→</span>
+                      {isSpanish
+                        ? isDevelopment
+                          ? "Ver promoción completa"
+                          : registered
+                            ? "Ver todos los detalles"
+                            : "Solicitar acceso privado"
+                        : isDevelopment
+                          ? "View full development"
+                          : registered
+                            ? "View full details"
+                            : "Request private access"} <span>→</span>
                     </Link>
                   </div>
 
@@ -326,17 +349,17 @@ export function PublicPropertyCarousel({
           {slides.length > 1 && (
             <div className={styles.controls}>
               <div className={styles.arrows}>
-                <button type="button" onClick={() => move(-1)} aria-label="Previous property">←</button>
-                <button type="button" onClick={() => move(1)} aria-label="Next property">→</button>
+                <button type="button" onClick={() => move(-1)} aria-label={isSpanish ? "Propiedad anterior" : "Previous property"}>←</button>
+                <button type="button" onClick={() => move(1)} aria-label={isSpanish ? "Propiedad siguiente" : "Next property"}>→</button>
               </div>
 
-              <div className={styles.thumbnails} aria-label="Choose a property">
+              <div className={styles.thumbnails} aria-label={isSpanish ? "Elegir una propiedad" : "Choose a property"}>
                 {slides.map((slide, thumbnailIndex) => (
                   <button
                     type="button"
                     className={`${styles.thumbnail} ${thumbnailIndex === index ? styles.activeThumbnail : ""}`}
                     onClick={() => setIndex(thumbnailIndex)}
-                    aria-label={`Show property ${thumbnailIndex + 1}: ${slide.title}`}
+                    aria-label={`${isSpanish ? "Mostrar propiedad" : "Show property"} ${thumbnailIndex + 1}: ${slide.title}`}
                     aria-current={thumbnailIndex === index ? "true" : undefined}
                     key={slide.id}
                   >
@@ -356,7 +379,7 @@ export function PublicPropertyCarousel({
 
           {!isDevelopment && portfolioValueMillions && portfolioValueMillions > 0 ? (
             <p className={styles.portfolioValue}>
-              Currently representing more than <strong>€{portfolioValueMillions} million</strong> in privately listed villas.
+              {isSpanish ? "Actualmente representamos más de " : "Currently representing more than "}<strong>€{portfolioValueMillions} {isSpanish ? "millones" : "million"}</strong>{isSpanish ? " en villas de comercialización privada." : " in privately listed villas."}
             </p>
           ) : null}
         </div>
