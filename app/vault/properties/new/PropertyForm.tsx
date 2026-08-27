@@ -211,6 +211,7 @@ export function PropertyForm() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
+  const [market, setMarket] = useState<"spain" | "malaysia" | "asia" | "international">("spain");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -332,9 +333,10 @@ export function PropertyForm() {
           <label><span>Property title</span><input name="title" placeholder="The Retreat" required /></label>
           <label>
             <span>Market / country</span>
-            <select name="market" defaultValue="spain" required>
+            <select name="market" value={market} onChange={(event) => setMarket(event.target.value as typeof market)} required>
               <option value="spain">Spain</option>
               <option value="malaysia">Malaysia</option>
+              <option value="asia">Other Asia country</option>
               <option value="international">Other international market</option>
             </select>
           </label>
@@ -367,6 +369,25 @@ export function PropertyForm() {
           <label><span>Direct adviser name</span><input name="adviserName" placeholder="PF EuroAsia Property Adviser" /></label>
           <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" placeholder="+34 600 000 000" /></label>
         </div>
+        {(market === "malaysia" || market === "asia") && (
+          <fieldset className="vault-subsection-fieldset">
+            <legend>Asia carousel details</legend>
+            <p>These details appear publicly after the listing is approved for the Asia carousel.</p>
+            <div className="vault-form-grid">
+              <label><span>Country</span><input key={market} name="country" defaultValue={market === "malaysia" ? "Malaysia" : ""} required /></label>
+              <label>
+                <span>Setting</span>
+                <select name="setting" defaultValue="City" required>
+                  <option>City</option><option>Beach / coastal</option><option>Island</option><option>Marina / waterfront</option><option>Resort</option><option>Countryside</option><option>Mountain</option><option>Mixed-use</option>
+                </select>
+              </label>
+              <label><span>Views</span><input name="views" placeholder="Sea, city skyline, marina" /></label>
+              <label><span>Year of construction / completion</span><input name="yearOfConstruction" placeholder="2029" /></label>
+              <label><span>Developer / constructor</span><input name="developer" /></label>
+              <label><span>Local sales agent</span><input name="salesAgent" /></label>
+            </div>
+          </fieldset>
+        )}
         <label className="vault-full-field">
           <span>Description</span>
           <textarea

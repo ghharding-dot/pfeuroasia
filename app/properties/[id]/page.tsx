@@ -55,6 +55,7 @@ export default async function RegisteredPropertyPage({
   if (!property) notFound();
 
   const isDevelopment = property.listingType === "new-development";
+  const isAsiaProperty = property.market === "malaysia" || property.market === "asia";
 
   const locationKey = (property.approximateLocation || property.location)
     .split(",")[0]
@@ -67,6 +68,9 @@ export default async function RegisteredPropertyPage({
         item.status === "published" &&
         (isDevelopment
           ? item.listingType === "new-development" &&
+            (isAsiaProperty
+              ? item.market === "malaysia" || item.market === "asia"
+              : item.market === property.market) &&
             (item.visibility === "public" || item.visibility === "teaser") &&
             item.publicImageApproved === true
           : normalizePropertyAccessLevel(item.accessLevel, item.visibility) === "registered"),
@@ -92,8 +96,8 @@ export default async function RegisteredPropertyPage({
                 : "View the larger photographs and full property information without registering. Registration is only required when you choose to download a brochure PDF."}
             </p>
           </div>
-          <Link className="button button-gold" href={isDevelopment ? "/#new-developments-heading" : "/#selected-opportunities-heading"}>
-            {isDevelopment ? "Back to developments" : "Back to selected properties"} <span>→</span>
+          <Link className="button button-gold" href={isAsiaProperty ? "/markets/malaysia#malaysia-property-carousel-heading" : isDevelopment ? "/#new-developments-heading" : "/#selected-opportunities-heading"}>
+            {isAsiaProperty ? "Back to Asia properties" : isDevelopment ? "Back to developments" : "Back to selected properties"} <span>→</span>
           </Link>
         </div>
       </section>

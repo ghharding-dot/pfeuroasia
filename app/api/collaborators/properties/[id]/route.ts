@@ -50,7 +50,8 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
     `Property: ${property.title}`,
     `Reference: ${property.reference}`,
     `Location: ${property.location}`,
-    `Market: ${property.market === "malaysia" ? "Malaysia" : property.market === "international" ? "Other international" : "Spain"}`,
+    `Market: ${property.market === "malaysia" ? "Malaysia" : property.market === "asia" ? "Other Asia country" : property.market === "international" ? "Other international" : "Spain"}`,
+    `Country: ${property.country || "Not supplied"}`,
     `Price: ${priceLabel}`,
     `Requested access route: ${accessLabel}`,
     `Requested visibility: ${visibilityLabel}`,
@@ -147,6 +148,12 @@ export async function PATCH(
     title: clean(body.title, 180) || existing.title,
     location: clean(body.location, 180) || existing.location,
     market: normalizePropertyMarket(body.market || existing.market),
+    country: clean(body.country, 120),
+    setting: clean(body.setting, 120),
+    views: clean(body.views, 240),
+    yearOfConstruction: clean(body.yearOfConstruction, 80),
+    developer: clean(body.developer, 180),
+    salesAgent: clean(body.salesAgent, 180),
     approximateLocation: clean(body.approximateLocation, 180) || existing.approximateLocation || existing.location,
     priceAmount,
     priceToAmount: listingType === "new-development" ? priceToAmount : undefined,
@@ -195,6 +202,13 @@ export async function PATCH(
   if (!updated.title || !updated.location || !updated.image || !updated.brochure) {
     return NextResponse.json(
       { error: "Property title, location, main image and one brochure PDF are required." },
+      { status: 400 },
+    );
+  }
+
+  if ((updated.market === "malaysia" || updated.market === "asia") && !updated.country) {
+    return NextResponse.json(
+      { error: "Asia listings require the property country." },
       { status: 400 },
     );
   }

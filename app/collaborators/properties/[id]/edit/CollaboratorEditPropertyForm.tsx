@@ -168,6 +168,9 @@ export function CollaboratorEditPropertyForm({
   const [propertyType, setPropertyType] = useState(
     property.propertyType || (property.listingType === "new-development" ? "new-build" : "villa"),
   );
+  const [market, setMarket] = useState<"spain" | "malaysia" | "asia" | "international">(
+    property.market || "spain",
+  );
 
   function changeListingType(next: "resale" | "new-development") {
     setListingType(next);
@@ -304,9 +307,15 @@ export function CollaboratorEditPropertyForm({
           <label><span>Property title</span><input name="title" defaultValue={property.title} required /></label>
           <label>
             <span>Market / country</span>
-            <select name="market" defaultValue={property.market || "spain"} required>
+            <select
+              name="market"
+              value={market}
+              onChange={(event) => setMarket(event.target.value as typeof market)}
+              required
+            >
               <option value="spain">Spain</option>
               <option value="malaysia">Malaysia</option>
+              <option value="asia">Other Asia country</option>
               <option value="international">Other international market</option>
             </select>
           </label>
@@ -361,6 +370,32 @@ export function CollaboratorEditPropertyForm({
           <label><span>Direct adviser name</span><input name="adviserName" defaultValue={property.adviserName || "PF EuroAsia Property Adviser"} /></label>
           <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" defaultValue={property.adviserWhatsApp || ""} placeholder="+34 600 000 000" /></label>
         </div>
+        {(market === "malaysia" || market === "asia") && (
+          <fieldset className="vault-subsection-fieldset">
+            <legend>Asia carousel details</legend>
+            <p>Keep the public Asia property information accurate and current.</p>
+            <div className="vault-form-grid">
+              <label><span>Country</span><input name="country" defaultValue={property.country || (market === "malaysia" ? "Malaysia" : "")} required /></label>
+              <label>
+                <span>Setting</span>
+                <select name="setting" defaultValue={property.setting || "City"} required>
+                  <option value="City">City</option>
+                  <option value="Beach / coastal">Beach / coastal</option>
+                  <option value="Island">Island</option>
+                  <option value="Marina / waterfront">Marina / waterfront</option>
+                  <option value="Resort">Resort</option>
+                  <option value="Countryside">Countryside</option>
+                  <option value="Mountain">Mountain</option>
+                  <option value="Mixed-use">Mixed-use</option>
+                </select>
+              </label>
+              <label><span>Views</span><input name="views" defaultValue={property.views || ""} placeholder="Sea, city skyline, marina" /></label>
+              <label><span>Year of construction / completion</span><input name="yearOfConstruction" defaultValue={property.yearOfConstruction || ""} placeholder="2029" /></label>
+              <label><span>Developer / constructor</span><input name="developer" defaultValue={property.developer || ""} /></label>
+              <label><span>Local sales agent</span><input name="salesAgent" defaultValue={property.salesAgent || ""} /></label>
+            </div>
+          </fieldset>
+        )}
         <label className="vault-full-field">
           <span>Brief website description</span>
           <textarea name="description" rows={8} defaultValue={property.description} />

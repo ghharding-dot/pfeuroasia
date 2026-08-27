@@ -30,6 +30,12 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
           featuredOnHomepage: form.get("featuredOnHomepage") === "true",
           homepagePriority: Number(form.get("homepagePriority") || 100),
           market: String(form.get("market") || property.market || "spain"),
+          country: String(form.get("country") || ""),
+          setting: String(form.get("setting") || ""),
+          views: String(form.get("views") || ""),
+          yearOfConstruction: String(form.get("yearOfConstruction") || ""),
+          developer: String(form.get("developer") || ""),
+          salesAgent: String(form.get("salesAgent") || ""),
           approximateLocation: String(form.get("approximateLocation") || ""),
           annualCosts: String(form.get("annualCosts") || ""),
           adviserName: String(form.get("adviserName") || ""),
@@ -90,10 +96,17 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
             <select name="market" defaultValue={property.market || "spain"}>
               <option value="spain">Spain</option>
               <option value="malaysia">Malaysia</option>
+              <option value="asia">Other Asia country</option>
               <option value="international">Other international market</option>
             </select>
           </label>
           <label><span>Approximate location</span><input name="approximateLocation" defaultValue={property.approximateLocation || property.location} /></label>
+          <label><span>Country</span><input name="country" defaultValue={property.country || (property.market === "malaysia" ? "Malaysia" : "")} /></label>
+          <label><span>Setting</span><input name="setting" defaultValue={property.setting || ""} placeholder="City, beach, island or resort" /></label>
+          <label><span>Views</span><input name="views" defaultValue={property.views || ""} placeholder="Sea, city skyline, marina" /></label>
+          <label><span>Year of construction / completion</span><input name="yearOfConstruction" defaultValue={property.yearOfConstruction || ""} /></label>
+          <label><span>Developer / constructor</span><input name="developer" defaultValue={property.developer || ""} /></label>
+          <label><span>Local sales agent</span><input name="salesAgent" defaultValue={property.salesAgent || ""} /></label>
           <label><span>Annual running costs</span><input name="annualCosts" defaultValue={property.annualCosts || ""} placeholder="Approx. €42,000 per year" /></label>
           <label><span>Direct adviser name</span><input name="adviserName" defaultValue={property.adviserName || "PF EuroAsia Property Adviser"} /></label>
           <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" defaultValue={property.adviserWhatsApp || ""} placeholder="+34 600 000 000" /></label>

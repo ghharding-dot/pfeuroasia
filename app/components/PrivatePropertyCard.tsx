@@ -30,6 +30,12 @@ export type PrivatePropertyDisplay = Readonly<
     | "listingPartnerCode"
     | "listingPartnerName"
     | "propertyType"
+    | "country"
+    | "setting"
+    | "views"
+    | "yearOfConstruction"
+    | "developer"
+    | "salesAgent"
   > & { updatedAt?: string }
 >;
 
@@ -83,6 +89,14 @@ export function PrivatePropertyCard({
     property.plotSize ? `${property.plotSize} plot` : "",
     property.terraces ? `${property.terraces} terraces` : "",
   ].filter(Boolean);
+  const asiaDetails = [
+    property.country ? ["Country", property.country] : null,
+    property.setting ? ["Setting", property.setting] : null,
+    property.views ? ["Views", property.views] : null,
+    property.yearOfConstruction ? ["Construction / completion", property.yearOfConstruction] : null,
+    property.developer ? ["Developer / constructor", property.developer] : null,
+    property.salesAgent ? ["Local sales agent", property.salesAgent] : null,
+  ].filter((detail): detail is string[] => Boolean(detail));
   const partnerName = property.listingPartnerName || "Property Facilitators EuroAsia";
   const enquirySubject = encodeURIComponent(`Enquiry regarding ${property.reference}`);
   const brochureSubject = encodeURIComponent(`Sales brochure request regarding ${property.reference}`);
@@ -137,6 +151,14 @@ export function PrivatePropertyCard({
 
         {property.description && (
           <p className="private-property-description">{property.description}</p>
+        )}
+
+        {asiaDetails.length > 0 && (
+          <div className="private-property-asia-details">
+            {asiaDetails.map(([label, value]) => (
+              <div key={label}><span>{label}</span><strong>{value}</strong></div>
+            ))}
+          </div>
         )}
 
         <p className="private-property-partner">Listed in collaboration with {partnerName}</p>

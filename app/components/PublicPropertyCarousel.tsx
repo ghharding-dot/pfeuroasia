@@ -21,6 +21,15 @@ export type PublicPropertySlide = {
   plotSize?: string;
   builtSize?: string;
   bedrooms?: number;
+  bathrooms?: number;
+  terraces?: string;
+  country?: string;
+  setting?: string;
+  views?: string;
+  yearOfConstruction?: string;
+  developer?: string;
+  salesAgent?: string;
+  propertyType?: string;
 };
 
 const FALLBACK_EUR_USD_RATE = 1.16;
@@ -55,7 +64,7 @@ export function PublicPropertyCarousel({
   locale = "en",
 }: {
   slides: PublicPropertySlide[];
-  variant?: "property" | "development";
+  variant?: "property" | "development" | "asia";
   eyebrow?: string;
   heading?: string;
   emphasis?: string;
@@ -111,6 +120,7 @@ export function PublicPropertyCarousel({
   );
 
   const isDevelopment = variant === "development";
+  const isAsia = variant === "asia";
   const isSpanish = locale === "es";
   const headingId = customHeadingId || (isDevelopment
     ? "new-developments-heading"
@@ -128,7 +138,7 @@ export function PublicPropertyCarousel({
 
   if (slides.length === 0) {
     return (
-      <section className={`${styles.section} ${isDevelopment ? styles.developmentSection : ""}`} aria-labelledby={headingId}>
+      <section className={`${styles.section} ${isDevelopment ? styles.developmentSection : ""} ${isAsia ? styles.asiaSection : ""}`} aria-labelledby={headingId}>
         <div className="site-shell">
           <div className={styles.heading}>
             <div>
@@ -144,7 +154,7 @@ export function PublicPropertyCarousel({
             </div>
           </div>
           <div className={styles.emptyState}>
-            <span>{isDevelopment ? (isSpanish ? "Nuevas promociones" : "New developments") : (isSpanish ? "Red inmobiliaria" : "Malaysia property network")}</span>
+            <span>{isDevelopment ? (isSpanish ? "Nuevas promociones" : "New developments") : isAsia ? "Asia property network" : (isSpanish ? "Red inmobiliaria" : "Malaysia property network")}</span>
             <h3>{isDevelopment ? (isSpanish ? "Estamos preparando nuestros primeros proyectos seleccionados." : "Our first selected projects are being prepared.") : (isSpanish ? "Las nuevas oportunidades aparecerán aquí." : "New opportunities will appear here.")}</h3>
             <p>{emptyMessage || "Current availability, investment details and developer information will appear here shortly."}</p>
           </div>
@@ -158,7 +168,7 @@ export function PublicPropertyCarousel({
   }
 
   return (
-    <section className={`${styles.section} ${isDevelopment ? styles.developmentSection : ""}`} aria-labelledby={headingId}>
+    <section className={`${styles.section} ${isDevelopment ? styles.developmentSection : ""} ${isAsia ? styles.asiaSection : ""}`} aria-labelledby={headingId}>
       <div className="site-shell">
         <div className={styles.heading}>
           <div>
@@ -188,7 +198,7 @@ export function PublicPropertyCarousel({
               const registered = slide.accessLevel
                 ? slide.accessLevel === "registered"
                 : slide.visibility === "public";
-              const fourPhotoProperty = !isDevelopment && Boolean(slide.thirdImage || slide.fourthImage);
+              const fourPhotoProperty = !isDevelopment && !isAsia && Boolean(slide.thirdImage || slide.fourthImage);
               return (
                 <article
                   className={`${styles.slide} ${isDevelopment ? styles.developmentSlide : ""} ${fourPhotoProperty ? styles.fourPhotoSlide : ""} ${styles.active}`}
@@ -230,7 +240,9 @@ export function PublicPropertyCarousel({
                         <span className={styles.imageLabel}>
                           {isSpanish
                             ? (registered ? "Propiedad publicada" : "Oportunidad privada")
-                            : (registered ? "Registered listing" : "Private opportunity")}
+                            : isAsia
+                              ? (slide.country || "Asia property")
+                              : (registered ? "Registered listing" : "Private opportunity")}
                         </span>
                       </div>
                       {slide.secondaryImage ? (
@@ -253,6 +265,7 @@ export function PublicPropertyCarousel({
                     <h3>{slide.title}</h3>
                     {slide.visibility === "public" && slide.price && (
                       <div className={styles.priceBlock}>
+                        {isAsia ? <span className={styles.priceCaption}>{slide.priceTo ? "Price range" : "Prices from"}</span> : null}
                         <strong className={styles.price}>
                           {slide.priceTo ? `${slide.price} – ${slide.priceTo}` : slide.price}
                         </strong>
@@ -263,7 +276,7 @@ export function PublicPropertyCarousel({
                         )}
                       </div>
                     )}
-                    {(formatPropertyArea(slide.plotSize) || formatPropertyArea(slide.builtSize) || Boolean(slide.bedrooms)) && (
+                    {(formatPropertyArea(slide.plotSize) || formatPropertyArea(slide.builtSize) || formatPropertyArea(slide.terraces) || Boolean(slide.bedrooms) || Boolean(slide.bathrooms)) && (
                       <dl className={styles.propertyFacts}>
                         {formatPropertyArea(slide.plotSize) ? (
                           <div>
@@ -283,6 +296,29 @@ export function PublicPropertyCarousel({
                             <dd>{slide.bedrooms}</dd>
                           </div>
                         ) : null}
+                        {slide.bathrooms ? (
+                          <div>
+                            <dt>{isSpanish ? "Baños" : "Bathrooms"}</dt>
+                            <dd>{slide.bathrooms}</dd>
+                          </div>
+                        ) : null}
+                        {formatPropertyArea(slide.terraces) ? (
+                          <div>
+                            <dt>{isSpanish ? "Terraza" : "Terrace"}</dt>
+                            <dd>{formatPropertyArea(slide.terraces)}</dd>
+                          </div>
+                        ) : null}
+                      </dl>
+                    )}
+                    {isAsia && (
+                      <dl className={styles.asiaDetails}>
+                        {slide.country ? <div><dt>Country</dt><dd>{slide.country}</dd></div> : null}
+                        {slide.setting ? <div><dt>Setting</dt><dd>{slide.setting}</dd></div> : null}
+                        {slide.views ? <div><dt>Views</dt><dd>{slide.views}</dd></div> : null}
+                        <div><dt>Build status</dt><dd>{slide.propertyType || "New build"}</dd></div>
+                        {slide.yearOfConstruction ? <div><dt>Completion</dt><dd>{slide.yearOfConstruction}</dd></div> : null}
+                        {slide.developer ? <div><dt>Developer</dt><dd>{slide.developer}</dd></div> : null}
+                        {slide.salesAgent ? <div><dt>Sales agent</dt><dd>{slide.salesAgent}</dd></div> : null}
                       </dl>
                     )}
                     <p className={styles.description}>
@@ -294,6 +330,8 @@ export function PublicPropertyCarousel({
                           : registered
                           ? "Consulte las fotografías ampliadas y todos los detalles de la propiedad sin registrarse. Solo deberá registrarse si desea descargar el folleto en PDF."
                           : "Esta es una oportunidad privada u off-market. Los detalles completos se facilitan tras una solicitud detallada y la aprobación de PF EuroAsia."
+                        : isAsia
+                        ? "Open the full presentation for further photographs and project information, then enquire for current availability, floor plans and the latest prices."
                         : registered && directPublicListings
                         ? "View the complete development presentation, then contact the PF EuroAsia Asia desk for current availability, pricing and further information."
                         : isDevelopment
@@ -317,6 +355,8 @@ export function PublicPropertyCarousel({
                           : registered
                             ? "Ver todos los detalles"
                             : "Solicitar acceso privado"
+                        : isAsia && registered
+                          ? "View full Asia listing"
                         : isDevelopment
                           ? "View full development"
                           : registered

@@ -43,8 +43,8 @@ function carouselStatus(property: VaultProperty) {
   }
   return {
     label: "Carousel live",
-    reason: property.market === "malaysia"
-      ? "Visible on the Malaysia property carousel"
+    reason: property.market === "malaysia" || property.market === "asia"
+      ? "Visible on the Asia property carousel"
       : "Visible on the homepage carousel",
     state: "live",
   };
@@ -271,7 +271,7 @@ export default async function VaultDashboardPage() {
                     <div className="vault-property-copy">
                       <span>
                         {property.reference} · {property.location}
-                        {property.market === "malaysia" ? " · Malaysia" : property.market === "international" ? " · International" : " · Spain"}
+                        {property.market === "malaysia" ? " · Malaysia" : property.market === "asia" ? ` · ${property.country || "Asia"}` : property.market === "international" ? " · International" : " · Spain"}
                         {property.brochure ? " · Protected PDF attached" : " · PDF pending"}
                       </span>
                       <h3>{property.title}</h3>

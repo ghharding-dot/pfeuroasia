@@ -71,6 +71,9 @@
 .vault-form-grid input,.vault-form-grid select,.vault-full-field textarea { width:100%; min-width:0; border:1px solid rgba(255,255,255,.16); border-radius:0; background:#07111f; color:white; padding:15px 16px; font:inherit; font-size:.98rem; text-transform:none; letter-spacing:normal; outline:none; }
 .vault-form-grid input:focus,.vault-form-grid select:focus,.vault-full-field textarea:focus { border-color:var(--vault-gold); box-shadow:0 0 0 2px rgba(201,168,97,.12); }
 .vault-form-grid input::placeholder,.vault-full-field textarea::placeholder { color:#687789; }
+.vault-subsection-fieldset { margin:28px 0 0; padding:24px; border:1px solid rgba(201,168,97,.32); background:rgba(201,168,97,.035); }
+.vault-subsection-fieldset legend { padding:0 10px; color:var(--vault-gold); font-size:.74rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.vault-subsection-fieldset > p { margin:0 0 20px; color:var(--vault-muted); font-size:.84rem; line-height:1.6; }
 .vault-full-field { margin-top:22px; }
 .vault-full-field textarea { resize:vertical; min-height:170px; line-height:1.55; }
 .vault-upload-section { border-color:rgba(201,168,97,.38); }

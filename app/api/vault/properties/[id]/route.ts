@@ -97,6 +97,14 @@ export async function PATCH(
     market: hasDetailUpdate
       ? normalizePropertyMarket(body.market || existing.market)
       : existing.market,
+    country: hasDetailUpdate ? clean(body.country, 120) : existing.country,
+    setting: hasDetailUpdate ? clean(body.setting, 120) : existing.setting,
+    views: hasDetailUpdate ? clean(body.views, 240) : existing.views,
+    yearOfConstruction: hasDetailUpdate
+      ? clean(body.yearOfConstruction, 80)
+      : existing.yearOfConstruction,
+    developer: hasDetailUpdate ? clean(body.developer, 180) : existing.developer,
+    salesAgent: hasDetailUpdate ? clean(body.salesAgent, 180) : existing.salesAgent,
     annualCosts: hasDetailUpdate ? clean(body.annualCosts, 1000) : existing.annualCosts,
     adviserName: hasDetailUpdate
       ? clean(body.adviserName, 120) || "PF EuroAsia Property Adviser"

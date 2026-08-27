@@ -9,6 +9,7 @@ import {
 import {
   imageObjectPosition,
   normalizePropertyMarket,
+  propertyTypeLabel,
   readProperties,
 } from "../../lib/propertyStore";
 import { MalaysiaCostAndVisit } from "./MalaysiaCostAndVisit";
@@ -22,7 +23,8 @@ async function getMalaysiaPropertySlides(): Promise<PublicPropertySlide[]> {
       .filter(
         (property) =>
           property.status === "published" &&
-          normalizePropertyMarket(property.market) === "malaysia" &&
+          (normalizePropertyMarket(property.market) === "malaysia" ||
+            normalizePropertyMarket(property.market) === "asia") &&
           (property.visibility === "teaser" || property.visibility === "public") &&
           property.publicImageApproved === true &&
           Boolean(property.image),
@@ -32,6 +34,9 @@ async function getMalaysiaPropertySlides(): Promise<PublicPropertySlide[]> {
         return {
           id: property.id,
           image: property.image,
+          secondaryImage: property.secondaryImage,
+          thirdImage: property.thirdImage,
+          fourthImage: property.fourthImage,
           imagePosition: imageObjectPosition(property.imagePosition),
           title:
             property.publicTitle ||
@@ -45,6 +50,24 @@ async function getMalaysiaPropertySlides(): Promise<PublicPropertySlide[]> {
             property.visibility === "public"
               ? property.price || "Price on application"
               : undefined,
+          priceTo:
+            property.visibility === "public" && property.listingType === "new-development"
+              ? property.priceTo
+              : undefined,
+          builtSize: property.builtSize || undefined,
+          bedrooms: property.bedrooms || undefined,
+          bathrooms: property.bathrooms || undefined,
+          terraces: property.terraces || undefined,
+          country: property.country || (property.market === "malaysia" ? "Malaysia" : undefined),
+          setting: property.setting || undefined,
+          views: property.views || undefined,
+          yearOfConstruction: property.yearOfConstruction || undefined,
+          developer: property.developer || undefined,
+          salesAgent: property.salesAgent || property.listingPartnerName || undefined,
+          propertyType:
+            property.listingType === "new-development"
+              ? `New build · ${propertyTypeLabel(property.propertyType)}`
+              : propertyTypeLabel(property.propertyType),
         };
       });
   } catch (error) {
@@ -180,11 +203,12 @@ export default async function MalaysiaPage() {
 
     <PublicPropertyCarousel
       slides={malaysiaPropertySlides}
-      eyebrow="Malaysia property collection"
+      variant="asia"
+      eyebrow="Asia property collection"
       heading="Explore current opportunities."
-      emphasis="Kuala Lumpur and selected Malaysian locations."
-      summary="Approved Malaysia listings submitted through the PF EuroAsia collaboration network. Open public developments directly or request private access where discretion is required."
-      emptyMessage="Our Malaysia collaborators will be able to upload and submit developments and individual properties through the same secure approval system used by the wider PF EuroAsia network."
+      emphasis="Cities, beaches, islands and selected developments across Asia."
+      summary="Approved Asian listings submitted through the PF EuroAsia collaboration network, with location, size, views, build status, developer and local sales representation shown clearly."
+      emptyMessage="Our Asia collaborators can upload and submit developments and individual properties through the secure PF EuroAsia approval system. Approved opportunities will appear here."
       headingId="malaysia-property-carousel-heading"
       directPublicListings
     />
