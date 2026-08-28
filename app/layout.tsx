@@ -4,6 +4,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FloatingHomeButton } from "./components/FloatingHomeButton";
+import { ImageProtection } from "./components/ImageProtection";
 import "./globals.css";
 import "./premium-buttons.css";
 import "./news-ticker.css";
@@ -173,6 +174,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         {children}
+        <ImageProtection />
         <FloatingHomeButton />
         <Analytics />
         <SpeedInsights />
