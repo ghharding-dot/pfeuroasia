@@ -24,10 +24,10 @@ export default function AboutPage() {
         <div className="site-shell about-story-grid">
           <figure className="about-founder-portrait">
             <Image
-              src="/images/geoff-harding-founder.png"
+              src="/images/geoff-harding-founder.webp"
               alt="Geoff Harding, founder of Property Facilitators EuroAsia"
-              width={1024}
-              height={1536}
+              width={900}
+              height={1407}
               sizes="(max-width: 900px) 100vw, 50vw"
             />
           </figure>
