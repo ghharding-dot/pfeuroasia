@@ -13,6 +13,7 @@ export type PublicPropertySlide = {
   fourthImage?: string;
   imagePosition: string;
   title: string;
+  reference?: string;
   location: string;
   visibility: "teaser" | "public";
   accessLevel?: "registered" | "private";
@@ -20,9 +21,14 @@ export type PublicPropertySlide = {
   priceTo?: string;
   plotSize?: string;
   builtSize?: string;
+  builtSizeTo?: string;
   bedrooms?: number;
+  bedroomsTo?: number;
   bathrooms?: number;
+  bathroomsTo?: number;
   terraces?: string;
+  amenities?: string;
+  description?: string;
   country?: string;
   setting?: string;
   views?: string;
@@ -47,6 +53,26 @@ function formatUsd(amount: number) {
     currencyDisplay: "narrowSymbol",
     maximumFractionDigits: 0,
   }).format(amount);
+}
+
+function formatRange(from?: string, to?: string) {
+  const formattedFrom = formatPropertyArea(from);
+  const formattedTo = formatPropertyArea(to);
+  if (formattedFrom && formattedTo && formattedFrom !== formattedTo) {
+    return `${formattedFrom} – ${formattedTo}`;
+  }
+  return formattedFrom || formattedTo;
+}
+
+function formatNumberRange(from?: number, to?: number) {
+  if (from && to && from !== to) return `${from} – ${to}`;
+  return from || to || "";
+}
+
+function parseAmenities(value?: string) {
+  return value
+    ? value.split(/[,\n]/).map((item) => item.trim()).filter(Boolean).slice(0, 8)
+    : [];
 }
 
 export function PublicPropertyCarousel({
@@ -199,6 +225,10 @@ export function PublicPropertyCarousel({
                 ? slide.accessLevel === "registered"
                 : slide.visibility === "public";
               const fourPhotoProperty = !isDevelopment && !isAsia && Boolean(slide.thirdImage || slide.fourthImage);
+              const builtRange = formatRange(slide.builtSize, slide.builtSizeTo);
+              const bedroomRange = formatNumberRange(slide.bedrooms, slide.bedroomsTo);
+              const bathroomRange = formatNumberRange(slide.bathrooms, slide.bathroomsTo);
+              const amenities = parseAmenities(slide.amenities);
               return (
                 <article
                   className={`${styles.slide} ${isDevelopment ? styles.developmentSlide : ""} ${fourPhotoProperty ? styles.fourPhotoSlide : ""} ${styles.active}`}
@@ -261,6 +291,9 @@ export function PublicPropertyCarousel({
                     <p className={styles.count}>
                       {String(slideIndex + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
                     </p>
+                    {slide.reference ? (
+                      <p className={styles.reference}>{isSpanish ? "Referencia" : "Reference"} · {slide.reference}</p>
+                    ) : null}
                     <p className={styles.location}>{slide.location}</p>
                     <h3>{slide.title}</h3>
                     {slide.visibility === "public" && slide.price && (
@@ -276,7 +309,7 @@ export function PublicPropertyCarousel({
                         )}
                       </div>
                     )}
-                    {(formatPropertyArea(slide.plotSize) || formatPropertyArea(slide.builtSize) || formatPropertyArea(slide.terraces) || Boolean(slide.bedrooms) || Boolean(slide.bathrooms)) && (
+                    {(formatPropertyArea(slide.plotSize) || builtRange || formatPropertyArea(slide.terraces) || bedroomRange || bathroomRange) && (
                       <dl className={styles.propertyFacts}>
                         {formatPropertyArea(slide.plotSize) ? (
                           <div>
@@ -284,22 +317,22 @@ export function PublicPropertyCarousel({
                             <dd>{formatPropertyArea(slide.plotSize)}</dd>
                           </div>
                         ) : null}
-                        {formatPropertyArea(slide.builtSize) ? (
+                        {builtRange ? (
                           <div>
                             <dt>{isSpanish ? "Construido" : "Built"}</dt>
-                            <dd>{formatPropertyArea(slide.builtSize)}</dd>
+                            <dd>{builtRange}</dd>
                           </div>
                         ) : null}
-                        {slide.bedrooms ? (
+                        {bedroomRange ? (
                           <div>
                             <dt>{isSpanish ? "Dormitorios" : "Bedrooms"}</dt>
-                            <dd>{slide.bedrooms}</dd>
+                            <dd>{bedroomRange}</dd>
                           </div>
                         ) : null}
-                        {slide.bathrooms ? (
+                        {bathroomRange ? (
                           <div>
                             <dt>{isSpanish ? "Baños" : "Bathrooms"}</dt>
-                            <dd>{slide.bathrooms}</dd>
+                            <dd>{bathroomRange}</dd>
                           </div>
                         ) : null}
                         {formatPropertyArea(slide.terraces) ? (
@@ -310,6 +343,12 @@ export function PublicPropertyCarousel({
                         ) : null}
                       </dl>
                     )}
+                    {amenities.length > 0 ? (
+                      <div className={styles.amenities} aria-label={isSpanish ? "Servicios" : "Amenities"}>
+                        <span className={styles.amenitiesLabel}>{isSpanish ? "Servicios" : "Amenities"}</span>
+                        <div>{amenities.map((amenity) => <span key={amenity}>{amenity}</span>)}</div>
+                      </div>
+                    ) : null}
                     {isAsia && (
                       <dl className={styles.asiaDetails}>
                         {slide.country ? <div><dt>Country</dt><dd>{slide.country}</dd></div> : null}
@@ -322,7 +361,7 @@ export function PublicPropertyCarousel({
                       </dl>
                     )}
                     <p className={styles.description}>
-                      {isSpanish
+                      {slide.description || (isSpanish
                         ? registered && directPublicListings
                           ? "Consulte la presentación completa de la promoción y contacte con PF EuroAsia para conocer la disponibilidad, los precios y obtener más información."
                           : isDevelopment
@@ -338,7 +377,7 @@ export function PublicPropertyCarousel({
                         ? "View the photographs, price range and full development details without registering. Enquire only when you would like current availability or further information."
                         : registered
                         ? "View the larger photographs and full property details without registering. Registration is only required when you download a brochure PDF."
-                        : "This is a private or off-market introduction. Full particulars are disclosed only after a detailed client application and PF EuroAsia approval."}
+                        : "This is a private or off-market introduction. Full particulars are disclosed only after a detailed client application and PF EuroAsia approval.")}
                     </p>
                     <Link
                       className="button button-gold"

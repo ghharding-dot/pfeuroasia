@@ -284,6 +284,18 @@
   text-transform: uppercase;
 }
 
+.reference {
+  width: fit-content;
+  margin: 0 0 10px;
+  padding: 5px 8px;
+  border: 1px solid rgba(224, 193, 137, .38);
+  color: #ead5aa;
+  font-size: 8px;
+  font-weight: 750;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
 .copy h3 {
   margin: 0;
   font-family: var(--serif);
@@ -387,6 +399,34 @@
   color: #ead5aa;
   font-size: 10px;
   line-height: 1.35;
+}
+
+.amenities {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.amenitiesLabel {
+  color: rgba(255, 255, 255, .48);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.amenities > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.amenities > div > span {
+  padding: 5px 7px;
+  border: 1px solid rgba(224, 193, 137, .25);
+  color: rgba(255, 255, 255, .72);
+  font-size: 9px;
+  line-height: 1.2;
 }
 
 .description {

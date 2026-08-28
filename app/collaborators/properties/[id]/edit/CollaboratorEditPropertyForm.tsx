@@ -4,6 +4,7 @@ import { upload } from "@vercel/blob/client";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PropertyVisibilityFields } from "../../../../components/PropertyVisibilityFields";
+import { DevelopmentAmenitiesPicker } from "../../../../components/DevelopmentAmenitiesPicker";
 import type { VaultProperty } from "../../../../lib/propertyStore";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
@@ -361,15 +362,24 @@ export function CollaboratorEditPropertyForm({
               <option value="AED">AED — UAE Dirham</option>
             </select>
           </label>
-          <label><span>Bedrooms</span><input name="bedrooms" type="number" min="0" defaultValue={property.bedrooms} /></label>
-          <label><span>Bathrooms</span><input name="bathrooms" type="number" min="0" defaultValue={property.bathrooms} /></label>
-          <label><span>Built size</span><input name="builtSize" defaultValue={property.builtSize} /></label>
+          <label><span>{listingType === "new-development" ? "Bedrooms from" : "Bedrooms"}</span><input name="bedrooms" type="number" min="0" defaultValue={property.bedrooms} /></label>
+          {listingType === "new-development" && <label><span>Bedrooms to</span><input name="bedroomsTo" type="number" min="0" defaultValue={property.bedroomsTo || ""} /></label>}
+          <label><span>{listingType === "new-development" ? "Bathrooms from" : "Bathrooms"}</span><input name="bathrooms" type="number" min="0" defaultValue={property.bathrooms} /></label>
+          {listingType === "new-development" && <label><span>Bathrooms to</span><input name="bathroomsTo" type="number" min="0" defaultValue={property.bathroomsTo || ""} /></label>}
+          <label><span>{listingType === "new-development" ? "Built area from" : "Built size"}</span><input name="builtSize" defaultValue={property.builtSize} /></label>
+          {listingType === "new-development" && <label><span>Built area to</span><input name="builtSizeTo" defaultValue={property.builtSizeTo || ""} /></label>}
           <label><span>Plot size</span><input name="plotSize" defaultValue={property.plotSize} /></label>
           <label><span>Terraces</span><input name="terraces" defaultValue={property.terraces || ""} /></label>
           <label><span>Annual running costs</span><input name="annualCosts" defaultValue={property.annualCosts || ""} placeholder="Approx. €42,000 per year" /></label>
           <label><span>Direct adviser name</span><input name="adviserName" defaultValue={property.adviserName || "PF EuroAsia Property Adviser"} /></label>
           <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" defaultValue={property.adviserWhatsApp || ""} placeholder="+34 600 000 000" /></label>
         </div>
+        {listingType === "new-development" && (
+          <div className="vault-full-field">
+            <span>Development amenities</span>
+            <DevelopmentAmenitiesPicker defaultValue={property.amenities || ""} />
+          </div>
+        )}
         {(market === "malaysia" || market === "asia") && (
           <fieldset className="vault-subsection-fieldset">
             <legend>Asia carousel details</legend>

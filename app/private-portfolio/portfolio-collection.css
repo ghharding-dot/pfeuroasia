@@ -51,6 +51,10 @@
 .private-property-facts { display: flex; flex-wrap: wrap; gap: 0; margin: 42px 0 34px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .private-property-facts span { padding: 15px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #55574f; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .private-property-description { margin: 0; color: #5f615a; font-size: 15px; line-height: 1.9; white-space: pre-line; }
+.private-property-amenities { display: grid; gap: 10px; margin: 20px 0 0; }
+.private-property-amenities > strong { color: #8b7450; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.private-property-amenities > div { display: flex; flex-wrap: wrap; gap: 7px; }
+.private-property-amenities span { padding: 7px 10px; border: 1px solid #d9cfbc; color: #555b55; font-size: 11px; }
 .private-property-partner { margin: 25px 0 0; color: #8b7450; font-size: 9px; font-weight: 650; letter-spacing: .12em; text-transform: uppercase; }
 .private-property-asia-details { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin:30px 0 0; border-top:1px solid var(--line); border-left:1px solid var(--line); }
 .private-property-asia-details > div { display:grid; gap:7px; padding:16px 18px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }

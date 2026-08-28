@@ -55,6 +55,7 @@ async function getSpanishPropertySlides(): Promise<{
         homepagePriority: property.homepagePriority || 100,
         slide: {
           id: property.id,
+          reference: property.reference,
           image: property.image,
           secondaryImage: property.secondaryImage,
           thirdImage: property.thirdImage,
@@ -68,7 +69,14 @@ async function getSpanishPropertySlides(): Promise<{
           priceTo: property.visibility === "public" && property.listingType === "new-development" ? property.priceTo : undefined,
           plotSize: property.plotSize || undefined,
           builtSize: property.builtSize || undefined,
+          builtSizeTo: property.builtSizeTo || undefined,
           bedrooms: property.bedrooms || undefined,
+          bedroomsTo: property.bedroomsTo || undefined,
+          bathrooms: property.bathrooms || undefined,
+          bathroomsTo: property.bathroomsTo || undefined,
+          terraces: property.terraces || undefined,
+          amenities: property.amenities || undefined,
+          description: property.visibility === "public" ? property.description || undefined : undefined,
         },
       };
     });

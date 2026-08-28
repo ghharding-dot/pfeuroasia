@@ -44,10 +44,18 @@ export type VaultProperty = {
   /** ISO-style base currency code for the canonical listing price. */
   priceCurrency?: PropertyCurrency;
   bedrooms: number;
+  /** Optional upper bedroom count for multi-unit developments. */
+  bedroomsTo?: number;
   bathrooms: number;
+  /** Optional upper bathroom count for multi-unit developments. */
+  bathroomsTo?: number;
   plotSize: string;
   builtSize: string;
+  /** Optional upper built-area value for multi-unit developments. */
+  builtSizeTo?: string;
   terraces?: string;
+  /** Comma- or line-separated amenities displayed on public development cards. */
+  amenities?: string;
   annualCosts?: string;
   description: string;
   image: string;

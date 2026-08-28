@@ -11,10 +11,14 @@ export type PrivatePropertyDisplay = Readonly<
     | "priceTo"
     | "title"
     | "bedrooms"
+    | "bedroomsTo"
     | "bathrooms"
+    | "bathroomsTo"
     | "plotSize"
     | "builtSize"
+    | "builtSizeTo"
     | "terraces"
+    | "amenities"
     | "annualCosts"
     | "description"
     | "image"
@@ -39,9 +43,10 @@ export type PrivatePropertyDisplay = Readonly<
   > & { updatedAt?: string }
 >;
 
-function countLabel(value: number, singular: string, plural: string) {
-  if (!value) return "";
-  return `${value} ${value === 1 ? singular : plural}`;
+function countRangeLabel(from: number, to: number | undefined, singular: string, plural: string) {
+  if (!from && !to) return "";
+  const range = from && to && from !== to ? `${from}–${to}` : String(from || to);
+  return `${range} ${from === 1 && !to ? singular : plural}`;
 }
 
 function displayDate(value?: string) {
@@ -83,9 +88,11 @@ export function PrivatePropertyCard({
 }) {
   const facts = [
     propertyTypeLabel(property.propertyType),
-    countLabel(property.bedrooms, "bedroom", "bedrooms"),
-    countLabel(property.bathrooms, "bathroom", "bathrooms"),
-    property.builtSize ? `${property.builtSize} built` : "",
+    countRangeLabel(property.bedrooms, property.bedroomsTo, "bedroom", "bedrooms"),
+    countRangeLabel(property.bathrooms, property.bathroomsTo, "bathroom", "bathrooms"),
+    property.builtSizeTo
+      ? `${property.builtSize || property.builtSizeTo}–${property.builtSizeTo} built`
+      : property.builtSize ? `${property.builtSize} built` : "",
     property.plotSize ? `${property.plotSize} plot` : "",
     property.terraces ? `${property.terraces} terraces` : "",
   ].filter(Boolean);
@@ -151,6 +158,13 @@ export function PrivatePropertyCard({
 
         {property.description && (
           <p className="private-property-description">{property.description}</p>
+        )}
+
+        {property.amenities && (
+          <div className="private-property-amenities">
+            <strong>Amenities</strong>
+            <div>{property.amenities.split(/[,\n]/).map((item) => item.trim()).filter(Boolean).map((amenity) => <span key={amenity}>{amenity}</span>)}</div>
+          </div>
         )}
 
         {asiaDetails.length > 0 && (

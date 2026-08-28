@@ -33,6 +33,7 @@ async function getMalaysiaPropertySlides(): Promise<PublicPropertySlide[]> {
         const isTeaser = property.visibility === "teaser";
         return {
           id: property.id,
+          reference: property.reference,
           image: property.image,
           secondaryImage: property.secondaryImage,
           thirdImage: property.thirdImage,
@@ -55,9 +56,14 @@ async function getMalaysiaPropertySlides(): Promise<PublicPropertySlide[]> {
               ? property.priceTo
               : undefined,
           builtSize: property.builtSize || undefined,
+          builtSizeTo: property.builtSizeTo || undefined,
           bedrooms: property.bedrooms || undefined,
+          bedroomsTo: property.bedroomsTo || undefined,
           bathrooms: property.bathrooms || undefined,
+          bathroomsTo: property.bathroomsTo || undefined,
           terraces: property.terraces || undefined,
+          amenities: property.amenities || undefined,
+          description: property.visibility === "public" ? property.description || undefined : undefined,
           country: property.country || (property.market === "malaysia" ? "Malaysia" : undefined),
           setting: property.setting || undefined,
           views: property.views || undefined,

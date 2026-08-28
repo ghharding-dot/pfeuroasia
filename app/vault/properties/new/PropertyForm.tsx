@@ -4,6 +4,7 @@ import { upload } from "@vercel/blob/client";
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { PropertyVisibilityFields } from "../../../components/PropertyVisibilityFields";
+import { DevelopmentAmenitiesPicker } from "../../../components/DevelopmentAmenitiesPicker";
 
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024;
 const MAX_PDF_SIZE = 60 * 1024 * 1024;
@@ -361,13 +362,20 @@ export function PropertyForm() {
             </select>
           </label>
           <label><span>Bedrooms</span><input name="bedrooms" type="number" min="0" placeholder="6" /></label>
+          <label><span>Bedrooms to (development)</span><input name="bedroomsTo" type="number" min="0" placeholder="4" /></label>
           <label><span>Bathrooms</span><input name="bathrooms" type="number" min="0" placeholder="6" /></label>
+          <label><span>Bathrooms to (development)</span><input name="bathroomsTo" type="number" min="0" placeholder="4" /></label>
           <label><span>Built size</span><input name="builtSize" placeholder="958 m²" /></label>
+          <label><span>Built size to (development)</span><input name="builtSizeTo" placeholder="240 m²" /></label>
           <label><span>Plot size</span><input name="plotSize" placeholder="5,394 m²" /></label>
           <label><span>Terraces</span><input name="terraces" placeholder="490 m²" /></label>
           <label><span>Annual running costs</span><input name="annualCosts" placeholder="Approx. €42,000 per year" /></label>
           <label><span>Direct adviser name</span><input name="adviserName" placeholder="PF EuroAsia Property Adviser" /></label>
           <label><span>Adviser WhatsApp</span><input name="adviserWhatsApp" type="tel" placeholder="+34 600 000 000" /></label>
+        </div>
+        <div className="vault-full-field">
+          <span>Development amenities</span>
+          <DevelopmentAmenitiesPicker />
         </div>
         {(market === "malaysia" || market === "asia") && (
           <fieldset className="vault-subsection-fieldset">
