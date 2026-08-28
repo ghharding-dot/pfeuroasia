@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -21,22 +22,44 @@ export default function AboutPage() {
       </section>
       <section className="about-story section-pad">
         <div className="site-shell about-story-grid">
-          <div className="about-image" />
-          <div>
-            <p className="eyebrow">Experience on the ground</p>
-            <h2>Southern Spain, understood from the inside.</h2>
+          <figure className="about-founder-portrait">
+            <Image
+              src="/images/geoff-harding-founder.png"
+              alt="Geoff Harding, founder of Property Facilitators EuroAsia"
+              width={1024}
+              height={1536}
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
+          </figure>
+          <div className="about-founder-copy">
+            <p className="eyebrow">Founder &amp; international property facilitator</p>
+            <h2>Geoff Harding</h2>
             <p>
-              Our perspective has been shaped by more than 25 years working
-              with prime property and international owners in Marbella, La
-              Zagaleta and El Madroñal. That experience matters: it brings
-              context to value, realism to negotiation and trusted people to
-              the table when they are needed.
+              Geoff has lived and worked in Spain since 1984. His early career
+              was in the motor trade, followed by international vehicle trading
+              from 1994, connecting opportunities in South Korea and wider Asia
+              with clients and markets in Spain.
             </p>
             <p>
-              EuroAsia extends that experience eastward—serving clients and
-              professional partners who want a capable, accountable presence in
-              Spain.
+              In 2002 he began a long-standing professional relationship with
+              a prominent Malaysian family, later working with Madroñal 2004
+              S.L. and overseeing prime homes in El Madroñal. That experience
+              developed into more than two decades of trusted work with
+              international owners, luxury property and private estates.
             </p>
+            <p>
+              Geoff moved into property sales in 2020, established Property
+              Facilitators Iberia in 2024 and founded PF EuroAsia in 2026. Today
+              he connects clients and trusted professional partners across
+              Spain, Scandinavia, Malaysia and the wider Asian market—combining
+              personal relationships, local knowledge and straightforward
+              commercial advice.
+            </p>
+            <dl className="about-founder-details">
+              <div><dt>Spain</dt><dd>Based here since 1984</dd></div>
+              <div><dt>Europe &amp; Asia</dt><dd>International trading since 1994</dd></div>
+              <div><dt>Prime property</dt><dd>Trusted relationships since 2002</dd></div>
+            </dl>
           </div>
         </div>
       </section>
