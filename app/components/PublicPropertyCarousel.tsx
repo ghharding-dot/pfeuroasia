@@ -314,7 +314,7 @@ export function PublicPropertyCarousel({
                         )}
                       </div>
                     )}
-                    {(formatPropertyArea(slide.plotSize) || builtRange || formatPropertyArea(slide.terraces) || bedroomRange || bathroomRange) && (
+                    {(formatPropertyArea(slide.plotSize) || builtRange || formatPropertyArea(slide.terraces) || bedroomRange || bathroomRange || (isDevelopment && slide.yearOfConstruction)) && (
                       <dl className={styles.propertyFacts}>
                         {formatPropertyArea(slide.plotSize) ? (
                           <div>
@@ -344,6 +344,12 @@ export function PublicPropertyCarousel({
                           <div>
                             <dt>{isSpanish ? "Terraza" : "Terrace"}</dt>
                             <dd>{formatPropertyArea(slide.terraces)}</dd>
+                          </div>
+                        ) : null}
+                        {isDevelopment && slide.yearOfConstruction ? (
+                          <div>
+                            <dt>{isSpanish ? "Finalización" : "Completion"}</dt>
+                            <dd>{slide.yearOfConstruction}</dd>
                           </div>
                         ) : null}
                       </dl>

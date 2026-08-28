@@ -135,7 +135,7 @@ function ImageUpload({
         <span className="vault-upload-icon">＋</span>
       )}
       <strong>{title}</strong>
-      <small>{required ? "Required" : "Optional"} · JPG, PNG or WebP · maximum 20 MB</small>
+      <small>{required ? "Required" : "Optional"} · ideally 1650 × 1200 px landscape · JPG, PNG or WebP · maximum 20 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select an image"}</em>
       <span className="vault-file-action">{file ? "Replace image" : "Choose image"}</span>
       <input
@@ -431,6 +431,7 @@ export function CollaboratorPropertyForm({
           {listingType === "new-development" && <label><span>Bathrooms to</span><input name="bathroomsTo" type="number" min="0" placeholder="4" /></label>}
           <label><span>{listingType === "new-development" ? "Built area from" : "Built size"}</span><input name="builtSize" placeholder={listingType === "new-development" ? "65 m²" : "958 m²"} /></label>
           {listingType === "new-development" && <label><span>Built area to</span><input name="builtSizeTo" placeholder="240 m²" /></label>}
+          {listingType === "new-development" && <label><span>Estimated completion date</span><input name="yearOfConstruction" placeholder="Q4 2028" /></label>}
           <label><span>Plot size</span><input name="plotSize" placeholder="5,394 m²" /></label>
           <label><span>Terraces</span><input name="terraces" placeholder="490 m²" /></label>
           <label><span>Annual running costs</span><input name="annualCosts" placeholder="Approx. €42,000 per year" /></label>
@@ -466,7 +467,6 @@ export function CollaboratorPropertyForm({
                 </select>
               </label>
               <label><span>Views</span><input name="views" placeholder="Sea, city skyline, marina" /></label>
-              <label><span>Year of construction / completion</span><input name="yearOfConstruction" placeholder="2029" /></label>
               <label><span>Developer / constructor</span><input name="developer" placeholder="Developer or construction company" /></label>
               <label><span>Local sales agent</span><input name="salesAgent" placeholder="Appointed sales agency or contact" /></label>
             </div>

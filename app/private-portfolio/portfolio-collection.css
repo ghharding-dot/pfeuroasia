@@ -42,6 +42,8 @@
 .private-property-card { display: grid; grid-template-columns: minmax(360px, .86fr) minmax(0, 1.14fr); min-height: 620px; border: 1px solid var(--line); background: var(--paper); }
 .private-property-image { min-height: 100%; overflow: hidden; background: #20211e; }
 .private-property-image > img { display: block; width: 100%; height: 100%; min-height: 620px; object-fit: cover; object-position: center; }
+.private-property-card-detail .private-property-image { min-height: 0; height: clamp(540px, 58vw, 720px); align-self: start; }
+.private-property-card-detail .private-property-image > img { height: 100%; min-height: 0; max-height: 720px; }
 .placeholder-image { display: grid; place-items: center; min-height: 100%; padding: 35px; background: linear-gradient(135deg, #292b27, #111210); color: rgba(255,255,255,.46); text-align: center; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
 .private-property-content { display: flex; flex-direction: column; padding: 52px; }
 .private-property-heading { display: flex; justify-content: space-between; gap: 35px; align-items: start; }
@@ -136,6 +138,8 @@
   .private-property-card { grid-template-columns: 1fr; }
   .private-property-image { min-height: 430px; }
   .private-property-image > img { min-height: 430px; max-height: 560px; }
+  .private-property-card-detail .private-property-image { height: min(68vw, 560px); min-height: 430px; }
+  .private-property-card-detail .private-property-image > img { min-height: 430px; }
   .private-property-heading { flex-direction: column; }
   .private-property-primary-actions { grid-template-columns: 1fr; }
 }
@@ -149,6 +153,8 @@
   .private-property-card { min-height: 0; }
   .private-property-image { min-height: 300px; }
   .private-property-image > img { min-height: 300px; max-height: 420px; }
+  .private-property-card-detail .private-property-image { height: 72vw; min-height: 300px; max-height: 420px; }
+  .private-property-card-detail .private-property-image > img { min-height: 300px; }
   .private-property-content { padding: 30px 24px; }
   .private-property-image-gallery { grid-template-columns: 1fr; }
   .private-property-secondary-image { height: 190px; }

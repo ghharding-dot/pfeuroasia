@@ -75,6 +75,7 @@ async function getSpanishPropertySlides(): Promise<{
           bathrooms: property.bathrooms || undefined,
           bathroomsTo: property.bathroomsTo || undefined,
           terraces: property.terraces || undefined,
+          yearOfConstruction: property.yearOfConstruction || undefined,
           amenities: property.amenities || undefined,
           description: property.visibility === "public" ? property.description || undefined : undefined,
         },
