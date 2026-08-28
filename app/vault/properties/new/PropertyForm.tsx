@@ -143,7 +143,7 @@ function ImageUpload({
         <span className="vault-upload-icon">＋</span>
       )}
       <strong>{title}</strong>
-      <small>{required ? "Required" : "Optional"} · JPG, PNG or WebP · maximum 20 MB</small>
+      <small>{required ? "Required" : "Optional"} · ideally 1650 × 1200 px landscape · JPG, PNG or WebP · maximum 20 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : "Tap here to select an image"}</em>
       <span className="vault-file-action">{file ? "Replace image" : "Choose image"}</span>
       <input
@@ -367,6 +367,7 @@ export function PropertyForm() {
           <label><span>Bathrooms to (development)</span><input name="bathroomsTo" type="number" min="0" placeholder="4" /></label>
           <label><span>Built size</span><input name="builtSize" placeholder="958 m²" /></label>
           <label><span>Built size to (development)</span><input name="builtSizeTo" placeholder="240 m²" /></label>
+          <label><span>Estimated completion date (development)</span><input name="yearOfConstruction" placeholder="Q4 2028" /></label>
           <label><span>Plot size</span><input name="plotSize" placeholder="5,394 m²" /></label>
           <label><span>Terraces</span><input name="terraces" placeholder="490 m²" /></label>
           <label><span>Annual running costs</span><input name="annualCosts" placeholder="Approx. €42,000 per year" /></label>
@@ -390,7 +391,6 @@ export function PropertyForm() {
                 </select>
               </label>
               <label><span>Views</span><input name="views" placeholder="Sea, city skyline, marina" /></label>
-              <label><span>Year of construction / completion</span><input name="yearOfConstruction" placeholder="2029" /></label>
               <label><span>Developer / constructor</span><input name="developer" /></label>
               <label><span>Local sales agent</span><input name="salesAgent" /></label>
             </div>

@@ -123,7 +123,7 @@ export function PrivatePropertyCard({
   ].filter((image): image is string => Boolean(image));
 
   return (
-    <article className="private-property-card">
+    <article className={`private-property-card ${detailMode ? "private-property-card-detail" : ""}`}>
       <div className="private-property-image">
         {property.image ? (
           // eslint-disable-next-line @next/next/no-img-element

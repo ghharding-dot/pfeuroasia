@@ -136,7 +136,7 @@ function ReplacementImage({
         <span className="vault-upload-icon">＋</span>
       )}
       <strong>{title}</strong>
-      <small>Leave unchanged or select a replacement · JPG, PNG or WebP · maximum 20 MB</small>
+      <small>Leave unchanged or select a replacement · ideally 1650 × 1200 px landscape · JPG, PNG or WebP · maximum 20 MB</small>
       <em>{file ? `${file.name} · ${formatSize(file.size)}` : currentUrl ? "Current image retained" : "No image attached"}</em>
       <span className="vault-file-action">{file ? "Change replacement" : "Choose replacement"}</span>
       <input
@@ -368,6 +368,7 @@ export function CollaboratorEditPropertyForm({
           {listingType === "new-development" && <label><span>Bathrooms to</span><input name="bathroomsTo" type="number" min="0" defaultValue={property.bathroomsTo || ""} /></label>}
           <label><span>{listingType === "new-development" ? "Built area from" : "Built size"}</span><input name="builtSize" defaultValue={property.builtSize} /></label>
           {listingType === "new-development" && <label><span>Built area to</span><input name="builtSizeTo" defaultValue={property.builtSizeTo || ""} /></label>}
+          {listingType === "new-development" && <label><span>Estimated completion date</span><input name="yearOfConstruction" defaultValue={property.yearOfConstruction || ""} placeholder="Q4 2028" /></label>}
           <label><span>Plot size</span><input name="plotSize" defaultValue={property.plotSize} /></label>
           <label><span>Terraces</span><input name="terraces" defaultValue={property.terraces || ""} /></label>
           <label><span>Annual running costs</span><input name="annualCosts" defaultValue={property.annualCosts || ""} placeholder="Approx. €42,000 per year" /></label>
@@ -400,7 +401,6 @@ export function CollaboratorEditPropertyForm({
                 </select>
               </label>
               <label><span>Views</span><input name="views" defaultValue={property.views || ""} placeholder="Sea, city skyline, marina" /></label>
-              <label><span>Year of construction / completion</span><input name="yearOfConstruction" defaultValue={property.yearOfConstruction || ""} placeholder="2029" /></label>
               <label><span>Developer / constructor</span><input name="developer" defaultValue={property.developer || ""} /></label>
               <label><span>Local sales agent</span><input name="salesAgent" defaultValue={property.salesAgent || ""} /></label>
             </div>
