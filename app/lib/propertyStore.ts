@@ -1,4 +1,4 @@
-import { list, put } from "@vercel/blob";
+import { get, put } from "@vercel/blob";
 import {
   formatPropertyCurrency,
   inferLegacyCurrency,
@@ -209,13 +209,13 @@ function normalizeStoredProperty(value: unknown): VaultProperty | null {
 }
 
 export async function readProperties(): Promise<VaultProperty[]> {
-  const result = await list({ prefix: CATALOGUE_PATH, limit: 1 });
-  const blob = result.blobs.find((item) => item.pathname === CATALOGUE_PATH);
-  if (!blob) return [];
+  const result = await get(CATALOGUE_PATH, {
+    access: "public",
+    useCache: false,
+  });
+  if (!result || result.statusCode !== 200) return [];
 
-  const response = await fetch(blob.url, { cache: "no-store" });
-  if (!response.ok) return [];
-  const parsed = await response.json();
+  const parsed = await new Response(result.stream).json();
   if (!Array.isArray(parsed)) return [];
 
   return parsed
@@ -228,6 +228,7 @@ export async function writeProperties(properties: VaultProperty[]) {
     access: "public",
     addRandomSuffix: false,
     allowOverwrite: true,
+    cacheControlMaxAge: 60,
     contentType: "application/json",
   });
 }
