@@ -17,10 +17,12 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
 
     try {
       const form = new FormData(event.currentTarget);
+      const action = String(form.get("action") || "save");
       const response = await fetch(`/api/vault/properties/${property.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          ...(action === "publish" ? { status: "published" } : {}),
           accessLevel: String(form.get("accessLevel") || "private"),
           visibility: String(form.get("visibility") || "confidential"),
           publicTitle: String(form.get("publicTitle") || ""),
@@ -45,7 +47,11 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Access settings could not be updated.");
-      setMessage("Access and visibility settings saved.");
+      setMessage(
+        action === "publish"
+          ? "Property details saved and property published."
+          : "Access and visibility settings saved.",
+      );
       router.refresh();
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Access settings could not be updated.");
@@ -119,9 +125,28 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
             Saving records today as the latest verification date for location, costs, adviser and access settings.
           </p>
         </div>
-        <button className="vault-primary-button" type="submit" disabled={working}>
-          {working ? "Saving..." : "Save & Verify Details"}
-        </button>
+        <div className="vault-header-actions">
+          <button
+            className="vault-secondary-button"
+            type="submit"
+            name="action"
+            value="save"
+            disabled={working}
+          >
+            {working ? "Saving..." : "Save Details"}
+          </button>
+          {property.status === "draft" && (
+            <button
+              className="vault-primary-button"
+              type="submit"
+              name="action"
+              value="publish"
+              disabled={working}
+            >
+              {working ? "Saving..." : "Save & Publish Property"}
+            </button>
+          )}
+        </div>
       </section>
       {message && <p className="vault-form-message" role="status">{message}</p>}
     </form>
