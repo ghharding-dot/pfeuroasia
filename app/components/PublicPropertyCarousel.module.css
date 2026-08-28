@@ -147,8 +147,8 @@
 .developmentSection .slide,
 .fourPhotoSlide {
   grid-template-columns: minmax(0, 1fr) minmax(290px, .78fr) minmax(0, 1fr);
-  height: auto;
-  min-height: 620px;
+  height: 620px;
+  min-height: 0;
 }
 
 .developmentSection .slide.active {
@@ -184,23 +184,44 @@
 
 .developmentSection .copy,
 .fourPhotoSlide .copy {
-  justify-content: center;
-  padding: 36px 26px;
+  justify-content: flex-start;
+  padding: 26px 24px;
 }
 
 .developmentSection .copy h3,
 .fourPhotoSlide .copy h3 {
-  font-size: clamp(31px, 2.6vw, 42px);
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: clamp(29px, 2.25vw, 36px);
+  line-height: 1.01;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
 }
 
 .developmentSection .count,
 .fourPhotoSlide .count {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .developmentSection .description,
 .fourPhotoSlide .description {
-  margin: 16px 0 22px;
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 14px 0 16px;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.developmentSection .propertyFacts,
+.fourPhotoSlide .propertyFacts {
+  margin-top: 12px;
+  padding: 10px 0;
+}
+
+.developmentSection .copy :global(.button),
+.fourPhotoSlide .copy :global(.button) {
+  margin-top: auto;
 }
 
 .imageGallery {

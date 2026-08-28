@@ -75,6 +75,11 @@ function parseAmenities(value?: string) {
     : [];
 }
 
+function limitWords(value: string, maximum = 55) {
+  const words = value.trim().split(/\s+/).filter(Boolean);
+  return words.length > maximum ? `${words.slice(0, maximum).join(" ")}…` : value;
+}
+
 export function PublicPropertyCarousel({
   slides,
   variant = "property",
@@ -343,7 +348,7 @@ export function PublicPropertyCarousel({
                         ) : null}
                       </dl>
                     )}
-                    {amenities.length > 0 ? (
+                    {amenities.length > 0 && !isDevelopment ? (
                       <div className={styles.amenities} aria-label={isSpanish ? "Servicios" : "Amenities"}>
                         <span className={styles.amenitiesLabel}>{isSpanish ? "Servicios" : "Amenities"}</span>
                         <div>{amenities.map((amenity) => <span key={amenity}>{amenity}</span>)}</div>
@@ -361,7 +366,7 @@ export function PublicPropertyCarousel({
                       </dl>
                     )}
                     <p className={styles.description}>
-                      {slide.description || (isSpanish
+                      {limitWords(slide.description || (isSpanish
                         ? registered && directPublicListings
                           ? "Consulte la presentación completa de la promoción y contacte con PF EuroAsia para conocer la disponibilidad, los precios y obtener más información."
                           : isDevelopment
@@ -377,7 +382,7 @@ export function PublicPropertyCarousel({
                         ? "View the photographs, price range and full development details without registering. Enquire only when you would like current availability or further information."
                         : registered
                         ? "View the larger photographs and full property details without registering. Registration is only required when you download a brochure PDF."
-                        : "This is a private or off-market introduction. Full particulars are disclosed only after a detailed client application and PF EuroAsia approval.")}
+                        : "This is a private or off-market introduction. Full particulars are disclosed only after a detailed client application and PF EuroAsia approval."), isDevelopment ? 55 : 100)}
                     </p>
                     <Link
                       className="button button-gold"
