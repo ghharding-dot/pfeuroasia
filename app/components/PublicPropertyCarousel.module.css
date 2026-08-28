@@ -147,8 +147,8 @@
 .developmentSection .slide,
 .fourPhotoSlide {
   grid-template-columns: minmax(0, 1fr) minmax(290px, .78fr) minmax(0, 1fr);
-  height: 620px;
-  min-height: 0;
+  height: auto;
+  min-height: 620px;
 }
 
 .developmentSection .slide.active {
