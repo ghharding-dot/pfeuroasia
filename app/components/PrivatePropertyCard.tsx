@@ -77,6 +77,7 @@ export function PrivatePropertyCard({
   enquiryHref,
   enquiryLabel = "Enquire about this property",
   singleBrochureAction = false,
+  brochureLabel,
 }: {
   property: PrivatePropertyDisplay;
   showEnquiry?: boolean;
@@ -85,6 +86,7 @@ export function PrivatePropertyCard({
   enquiryHref?: string;
   enquiryLabel?: string;
   singleBrochureAction?: boolean;
+  brochureLabel?: string;
 }) {
   const facts = [
     propertyTypeLabel(property.propertyType),
@@ -224,7 +226,7 @@ export function PrivatePropertyCard({
                 propertyTitle={property.title}
                 partnerName={partnerName}
                 edition="branded"
-                label={singleBrochureAction ? "Request PDF brochure" : undefined}
+                label={brochureLabel || (singleBrochureAction ? "Request PDF brochure" : undefined)}
               />
             ) : brochureMode === "direct" ? (
               <a

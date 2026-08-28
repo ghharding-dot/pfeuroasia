@@ -92,7 +92,7 @@ export default async function RegisteredPropertyPage({
             <strong>{isDevelopment ? "New development · Open listing" : "Selected property · Open details"}</strong>
             <p>
               {isDevelopment
-                ? "View the complete development presentation without registering. Enquire when you would like current availability, floor plans or further information."
+                ? "View the complete development presentation without registering. PDF information is available after a short email verification; enquire for current availability, floor plans or further information."
                 : "View the larger photographs and full property information without registering. Registration is only required when you choose to download a brochure PDF."}
             </p>
           </div>
@@ -105,10 +105,11 @@ export default async function RegisteredPropertyPage({
       <section className="private-collection-grid registered-property-grid site-shell">
         <PrivatePropertyCard
           property={property}
-          brochureMode={isDevelopment ? "enquiry" : "verified"}
+          brochureMode="verified"
           detailMode
           showEnquiry={isDevelopment}
-          singleBrochureAction={!isDevelopment}
+          singleBrochureAction
+          brochureLabel={isDevelopment ? "Download PDF information" : undefined}
           enquiryHref={isDevelopment ? `/enquire?property=${encodeURIComponent(property.id)}` : undefined}
           enquiryLabel={isDevelopment ? "Enquire about this development" : undefined}
         />
