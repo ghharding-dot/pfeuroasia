@@ -14,6 +14,15 @@ import "../../private-portfolio/portfolio-collection.css";
 
 export const dynamic = "force-dynamic";
 
+function metadataDescription(value?: string) {
+  const normalized = (value || "View current property details and availability through Property Facilitators EuroAsia.")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (normalized.length <= 160) return normalized;
+  const shortened = normalized.slice(0, 157).replace(/\s+\S*$/, "");
+  return `${shortened}…`;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -22,14 +31,27 @@ export async function generateMetadata({
   const { id } = await params;
   const properties = await readProperties();
   const property = properties.find((item) => item.id === id && item.status === "published");
-  const isDevelopment = property?.listingType === "new-development";
+  const isIndexable = Boolean(
+    property &&
+      property.publicImageApproved === true &&
+      (property.listingType === "new-development"
+        ? property.visibility === "public" || property.visibility === "teaser"
+        : normalizePropertyAccessLevel(property.accessLevel, property.visibility) === "registered"),
+  );
+  const canonical = `https://www.pfeuroasia.com/properties/${id}`;
+  const title = property
+    ? `${property.title} | Property Facilitators EuroAsia`
+    : "Property Details | Property Facilitators EuroAsia";
+  const description = metadataDescription(property?.description);
 
   return {
-    title: property
-      ? `${property.title} | Property Facilitators EuroAsia`
-      : "Property Details | Property Facilitators EuroAsia",
-    description: property?.description || "View current property details and availability through Property Facilitators EuroAsia.",
-    robots: isDevelopment
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: property?.publicImageApproved && property.image
+      ? { title, description, url: canonical, images: [{ url: property.image }] }
+      : { title, description, url: canonical },
+    robots: isIndexable
       ? { index: true, follow: true }
       : { index: false, follow: false },
   };

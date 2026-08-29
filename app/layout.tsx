@@ -121,12 +121,6 @@ const organizationSchema = {
     { "@type": "Country", name: "Saudi Arabia" },
     { "@type": "Country", name: "Malaysia" },
   ],
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Level 11(A), Main Office Tower, Financial Park Labuan",
-    addressLocality: "Labuan",
-    addressCountry: "MY",
-  },
 };
 
 const websiteSchema = {

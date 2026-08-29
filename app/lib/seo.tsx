@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const SITE_URL = "https://www.pfeuroasia.com";
-export const SEO_LAST_UPDATED = new Date("2026-08-19T00:00:00.000Z");
+export const SEO_LAST_UPDATED = new Date("2026-08-29T00:00:00.000Z");
 
 type SeoLocale = "en-GB" | "es-ES" | "da-DK" | "zh-CN" | "ar-SA";
 
