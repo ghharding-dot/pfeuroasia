@@ -8,17 +8,17 @@ import styles from "./Labuan.module.css";
 export const metadata = createMetadata("labuanEn");
 
 const formationItems = [
-  ["Name search & reservation", "US$202.50"],
-  ["Incorporation & LFSA registration", "US$2,430"],
-  ["Statutory documents & company kit", "US$472.50"],
-  ["Registered office & resident secretary - year one", "US$2,025"],
-  ["Regulatory filing & compliance setup", "US$945"],
+  "Name search and incorporation",
+  "Registered office and resident secretary",
+  "Statutory documents and compliance setup",
+  "Banking and professional-service coordination",
 ];
 
 const residencyItems = [
-  ["Employment Pass processing - principal", "US$3,577.50"],
-  ["Immigration filing & approval fees", "US$2,025"],
-  ["Dependent / associate residency processing", "US$1,822.50"],
+  "Employment Pass assessment and processing",
+  "Immigration filing coordination",
+  "Dependent and family-residency options",
+  "Renewal and continuing-compliance overview",
 ];
 
 export default function LabuanCompanyResidencyPage() {
@@ -47,7 +47,7 @@ export default function LabuanCompanyResidencyPage() {
             <Link className="button button-gold" href="/services/labuan-company-residency/adviser">
               Ask the Malaysia & Labuan adviser <span>→</span>
             </Link>
-            <a className="text-link light-link" href="#package">View the package <span>↓</span></a>
+            <a className="text-link light-link" href="#package">See what the guide covers <span>↓</span></a>
           </div>
         </div>
       </section>
@@ -122,26 +122,23 @@ export default function LabuanCompanyResidencyPage() {
       <section className={styles.package} id="package">
         <div className="site-shell">
           <div className={styles.packageHeading}>
-            <div><p className="eyebrow light">Indicative professional package</p><h2>Formation through residency.</h2></div>
-            <div><strong>US$13,500</strong><span>Total for the stated scope</span></div>
+            <div><p className="eyebrow light">Registered-client information</p><h2>Formation through residency.</h2></div>
+            <div><strong>Full guide</strong><span>Available after registration</span></div>
           </div>
           <div className={styles.priceColumns}>
             <article>
               <header><div><span>Phase 1</span><h3>Company formation</h3></div><strong>US$6,075</strong></header>
-              <ul>{formationItems.map(([label, price]) => <li key={label}><span>{label}</span><b>{price}</b></li>)}</ul>
+              <ul>{formationItems.map((label) => <li key={label}><span>{label}</span></li>)}</ul>
             </article>
             <article>
               <header><div><span>Phase 2</span><h3>Visa & residency</h3></div><strong>US$7,425</strong></header>
-              <ul>{residencyItems.map(([label, price]) => <li key={label}><span>{label}</span><b>{price}</b></li>)}</ul>
+              <ul>{residencyItems.map((label) => <li key={label}><span>{label}</span></li>)}</ul>
             </article>
           </div>
           <div className={styles.packageNotes}>
-            <p><strong>Expected timing:</strong> approximately 3-4 weeks from receipt of complete documentation through company formation and LFSA approval; immigration timing can vary.</p>
-            <p><strong>Annual company renewal:</strong> approximately US$3,000 per year, including the underlying government fee and local corporate service provider fee, subject to the company remaining within the stated scope.</p>
-            <p><strong>Employment Pass renewal:</strong> after two years, the current underlying cost for the principal is approximately US$2,650, plus approximately US$850 for the associated office renewal - approximately US$3,500 in total.</p>
-            <p><strong>Dependent renewal:</strong> approximately US$800 per dependent after two years.</p>
-            <p><strong>PF EuroAsia renewal assistance:</strong> optional coordination and renewal assistance is available for a fixed professional service fee quoted in advance, rather than a percentage-based renewal markup.</p>
-            <p><strong>Scope:</strong> initial package pricing reflects one principal and one dependent / associate as described. Additional applicants, bank requirements, tax advice and out-of-scope government or professional fees are quoted separately.</p>
+            <p><strong>Register first:</strong> detailed procedures, current setup costs, renewal charges, document requirements and realistic timing are provided after PF EuroAsia has recorded and reviewed the enquiry.</p>
+            <p><strong>Local delivery:</strong> PF EuroAsia coordinates the process with the established Labuan corporate adviser that formed our own EuroAsia company.</p>
+            <p><Link className="button button-gold" href="/asia-gateway/enquire?jurisdiction=Malaysia%20%26%20Labuan&guide=company-residency">Register to receive the full guide <span>→</span></Link></p>
           </div>
         </div>
       </section>
