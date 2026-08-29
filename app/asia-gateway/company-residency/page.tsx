@@ -1,17 +1,7 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import styles from "./CompanyResidency.module.css";
-
-export const metadata: Metadata = {
-  title: "Asian Company Formation & Residency Options",
-  description:
-    "Compare Malaysia and Labuan with company-formation options in Singapore and Hong Kong, coordinated through trusted local advisers.",
-  alternates: {
-    canonical: "/asia-gateway/company-residency",
-  },
-};
 
 const routes = [
   {
@@ -97,10 +87,10 @@ export default function CompanyResidencyPage() {
       <section className={styles.hero}>
         <div className={styles.heroGlow} />
         <div className={["site-shell", styles.heroInner].join(" ")}>
-          <p className="eyebrow light">Asia Gateway · Company & residency</p>
+          <p className="eyebrow light">Company formation in Asia</p>
           <h1>
-            Begin with the right
-            <em>Asian structure.</em>
+            Malaysia, Singapore
+            <em>&amp; Hong Kong compared.</em>
           </h1>
           <p>
             Malaysia and Labuan remain our principal focus. Where Singapore or
@@ -140,6 +130,9 @@ export default function CompanyResidencyPage() {
               introduce the relevant local corporate, tax and immigration
               specialists.
             </p>
+            <Link className="text-link" href="/services/malaysia-company-formation">
+              Read the Malaysia company formation guide <span>→</span>
+            </Link>
           </div>
         </div>
       </section>

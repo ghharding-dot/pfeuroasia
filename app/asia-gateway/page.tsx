@@ -75,6 +75,12 @@ export default function AsiaGatewayPage() {
             <Link className={styles.heroAction} href="/guides/malaysia-tax-residency-for-foreigners">
               Malaysia tax residency guide <span>→</span>
             </Link>
+            <Link className={styles.heroAction} href="/guides/malaysia-residency-options">
+              Compare Malaysia residency options <span>→</span>
+            </Link>
+            <Link className={styles.heroAction} href="/services/malaysia-company-formation">
+              Malaysia company formation <span>→</span>
+            </Link>
           </div>
         </div>
       </section>

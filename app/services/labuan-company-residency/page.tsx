@@ -69,6 +69,8 @@ export default function LabuanCompanyResidencyPage() {
               corporate and advisory specialist, providing one clear point of contact from initial
               suitability review through documentation and filing.
             </p>
+            <p><Link className="text-link" href="/services/malaysia-company-formation">Compare mainland Malaysia and Labuan company formation <span>→</span></Link></p>
+            <p><Link className="text-link" href="/guides/malaysia-residency-options">Compare Malaysia residency pathways <span>→</span></Link></p>
           </div>
         </div>
       </section>

@@ -44,13 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
   routes.push({
-    url: absoluteUrl("/asia-gateway/company-residency"),
-    lastModified: SEO_LAST_UPDATED,
-    changeFrequency: "monthly",
-    priority: 0.85,
-  });
-
-  routes.push({
     url: absoluteUrl("/properties"),
     lastModified: SEO_LAST_UPDATED,
     changeFrequency: "weekly",

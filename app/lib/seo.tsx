@@ -29,6 +29,9 @@ const groups: Record<string, Partial<Record<SeoLocale, string>>> = {
   internationalBuyers: { "en-GB": "/guides/marbella-property-international-buyers" },
   malaysiaTaxResidency: { "en-GB": "/guides/malaysia-tax-residency-for-foreigners" },
   malaysiaVsDubai: { "en-GB": "/guides/malaysia-vs-dubai-tax-residency" },
+  malaysiaResidencyOptions: { "en-GB": "/guides/malaysia-residency-options" },
+  malaysiaCompanyFormation: { "en-GB": "/services/malaysia-company-formation" },
+  asiaCompanyFormation: { "en-GB": "/asia-gateway/company-residency" },
   goldenMile: { "en-GB": "/areas/marbella-golden-mile" },
   benahavis: { "en-GB": "/areas/benahavis" },
   malaysia: { "en-GB": "/markets/malaysia", "es-ES": "/es/markets/malaysia", "da-DK": "/da/markets/malaysia" },
@@ -68,6 +71,9 @@ export const seoPages = {
   internationalBuyersEn: { path: "/guides/marbella-property-international-buyers", title: "Marbella Property Advisor for International Buyers", description: "Independent Marbella property advice for international buyers from the UK, Scandinavia, the Middle East, Asia and the United States.", locale: "en-GB", group: "internationalBuyers", breadcrumbs: [["Home", "/"], ["Marbella and Benahavís", "/markets/marbella"], ["International buyer guide", "/guides/marbella-property-international-buyers"]], image: "/images/hero-villa.webp", priority: 0.9 },
   malaysiaTaxResidencyEn: { path: "/guides/malaysia-tax-residency-for-foreigners", title: "Malaysia Tax Residency for Foreigners", description: "Understand Malaysia tax residency, the 182-day rule, immigration pathways and Labuan company distinctions for international clients considering relocation.", locale: "en-GB", group: "malaysiaTaxResidency", breadcrumbs: [["Home", "/"], ["Asia Gateway", "/asia-gateway"], ["Malaysia tax residency", "/guides/malaysia-tax-residency-for-foreigners"]], image: "/images/kl BACK GORUND.avif", priority: 0.9 },
   malaysiaVsDubaiEn: { path: "/guides/malaysia-vs-dubai-tax-residency", title: "Malaysia vs Dubai: Tax Residency, Lifestyle & Business", description: "Compare Malaysia and Dubai for tax residency, visas, company setup, lifestyle, living costs and international relocation from Europe.", locale: "en-GB", group: "malaysiaVsDubai", breadcrumbs: [["Home", "/"], ["Asia Gateway", "/asia-gateway"], ["Malaysia vs Dubai", "/guides/malaysia-vs-dubai-tax-residency"]], image: "/images/kl BACK GORUND.avif", priority: 0.9 },
+  malaysiaResidencyOptionsEn: { path: "/guides/malaysia-residency-options", title: "Malaysia Residency Options for Foreigners", description: "Compare Malaysia residency pathways including MM2H, DE Rantau, employment passes and business-led routes with coordinated professional guidance.", locale: "en-GB", group: "malaysiaResidencyOptions", breadcrumbs: [["Home", "/"], ["Asia Gateway", "/asia-gateway"], ["Malaysia residency options", "/guides/malaysia-residency-options"]], image: "/images/kl BACK GORUND.avif", priority: 0.9 },
+  malaysiaCompanyFormationEn: { path: "/services/malaysia-company-formation", title: "Malaysia Company Formation for Foreigners", description: "Understand mainland Malaysian and Labuan company formation, foreign ownership, compliance, work-pass considerations and coordinated local support.", locale: "en-GB", group: "malaysiaCompanyFormation", breadcrumbs: [["Home", "/"], ["Asia Gateway", "/asia-gateway"], ["Malaysia company formation", "/services/malaysia-company-formation"]], image: "/images/asia-network.webp", priority: 0.9 },
+  asiaCompanyFormationEn: { path: "/asia-gateway/company-residency", title: "Company Formation in Asia: Malaysia, Singapore & Hong Kong", description: "Compare company formation and residency considerations across Malaysia, Labuan, Singapore and Hong Kong through trusted local advisers.", locale: "en-GB", group: "asiaCompanyFormation", breadcrumbs: [["Home", "/"], ["Asia Gateway", "/asia-gateway"], ["Asian company formation", "/asia-gateway/company-residency"]], image: "/images/asia-network.webp", priority: 0.9 },
   goldenMileEn: { path: "/areas/marbella-golden-mile", title: "Marbella Golden Mile Property & Luxury Villas", description: "Independent guidance to apartments, villas and private communities across Marbella Golden Mile, from beachfront living to elevated residential areas.", locale: "en-GB", group: "goldenMile", breadcrumbs: [["Home", "/"], ["Marbella and Benahavís", "/markets/marbella"], ["Marbella Golden Mile", "/areas/marbella-golden-mile"]], image: "/images/hero-villa.webp", priority: 0.9 },
   benahavisEn: { path: "/areas/benahavis", title: "Benahavís Property, Villas & Private Estates", description: "Explore property in Benahavís, including private hillside estates, golf communities, family villas and discreet luxury opportunities above Marbella.", locale: "en-GB", group: "benahavis", breadcrumbs: [["Home", "/"], ["Marbella and Benahavís", "/markets/marbella"], ["Benahavís", "/areas/benahavis"]], image: "/images/zagaleta-view.webp", priority: 0.9 },
   malaysiaEn: { path: "/markets/malaysia", title: "Malaysia Property, Living & Kuala Lumpur Investment", description: "Explore Kuala Lumpur property, Malaysia relocation, discovery visits and trusted local introductions for international investors and families.", locale: "en-GB", group: "malaysia", breadcrumbs: [["Home", "/"], ["Asia Gateway", "/asia-gateway"], ["Malaysia", "/markets/malaysia"]], image: "/images/asia-network.webp", priority: 0.9 },
@@ -206,6 +212,8 @@ export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children:
     "owners",
     "portfolio",
     "asia",
+    "malaysiaCompanyFormation",
+    "asiaCompanyFormation",
   ]);
   const serviceSchema = serviceGroups.has(page.group) ? {
     "@type": "Service",
