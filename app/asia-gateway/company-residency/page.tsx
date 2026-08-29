@@ -12,13 +12,12 @@ const routes = [
     summary:
       "Our principal Asian pathway for clients considering company formation, residency, relocation and selected property opportunities.",
     points: [
-      "Labuan company formation and operating structures",
-      "Employment-pass and residency coordination",
-      "Malaysia tax-residency guidance",
-      "Kuala Lumpur property and relocation support",
+      "Company and residency-led option",
+      "Local incorporation and compliance support",
+      "Relocation and property guidance available",
     ],
-    href: "/services/labuan-company-residency",
-    cta: "Explore Malaysia & Labuan",
+    href: "/asia-gateway/enquire?jurisdiction=Malaysia%20%26%20Labuan&guide=company-residency",
+    cta: "Register for the full guide",
   },
   {
     key: "singapore",
@@ -28,13 +27,12 @@ const routes = [
     summary:
       "A stable and internationally recognised base for genuine regional business, introduced and coordinated through local corporate advisers.",
     points: [
-      "Private limited company setup",
-      "Foreign shareholder structures",
-      "Local director, secretary and compliance support",
-      "Work-pass guidance assessed separately",
+      "Internationally recognised business base",
+      "Company setup through local advisers",
+      "Residence assessed separately",
     ],
-    href: "/asia-gateway/enquire",
-    cta: "Discuss a Singapore company",
+    href: "/asia-gateway/enquire?jurisdiction=Singapore&guide=company-residency",
+    cta: "Register for Singapore information",
   },
   {
     key: "hongkong",
@@ -44,13 +42,12 @@ const routes = [
     summary:
       "An established international business and trading centre, with company setup coordinated through experienced Hong Kong advisers.",
     points: [
-      "Private limited company setup",
-      "Foreign director and shareholder structures",
-      "Registered office, secretary and compliance support",
-      "Entrepreneur and residence routes assessed separately",
+      "Established international trading centre",
+      "Company setup through local advisers",
+      "Residence assessed separately",
     ],
-    href: "/asia-gateway/enquire",
-    cta: "Discuss a Hong Kong company",
+    href: "/asia-gateway/enquire?jurisdiction=Hong%20Kong&guide=company-residency",
+    cta: "Register for Hong Kong information",
   },
 ];
 
@@ -101,8 +98,8 @@ export default function CompanyResidencyPage() {
             <Link className="button button-gold" href="#options">
               Compare the options <span>→</span>
             </Link>
-            <Link className={styles.heroLink} href="/asia-gateway/enquire">
-              Arrange a confidential consultation <span>→</span>
+            <Link className={styles.heroLink} href="/asia-gateway/enquire?guide=company-residency">
+              Register for detailed information <span>→</span>
             </Link>
           </div>
         </div>
@@ -130,8 +127,8 @@ export default function CompanyResidencyPage() {
               introduce the relevant local corporate, tax and immigration
               specialists.
             </p>
-            <Link className="text-link" href="/services/malaysia-company-formation">
-              Read the Malaysia company formation guide <span>→</span>
+            <Link className="text-link" href="/asia-gateway/enquire?jurisdiction=Malaysia%20%26%20Labuan&guide=company-residency">
+              Register for the Malaysia &amp; Labuan guide <span>→</span>
             </Link>
           </div>
         </div>
@@ -147,6 +144,7 @@ export default function CompanyResidencyPage() {
             <p>
               Start with Malaysia and Labuan, or compare Singapore and Hong Kong
               where the commercial objective points to a different structure.
+              Full procedures, costs and adviser introductions are provided after registration.
             </p>
           </div>
 
@@ -235,22 +233,22 @@ export default function CompanyResidencyPage() {
             <li>
               <span>01</span>
               <div>
-                <strong>Understand the objective</strong>
-                <p>Business activity, preferred location, residence needs and timing.</p>
+                <strong>Register with PF EuroAsia</strong>
+                <p>Tell us the preferred jurisdiction, business objective, residence needs and timing.</p>
               </div>
             </li>
             <li>
               <span>02</span>
               <div>
-                <strong>Compare suitable routes</strong>
+                <strong>We review the suitable routes</strong>
                 <p>Malaysia and Labuan first, with Singapore or Hong Kong where appropriate.</p>
               </div>
             </li>
             <li>
               <span>03</span>
               <div>
-                <strong>Introduce the local specialist</strong>
-                <p>Company, tax, compliance and immigration advice from the relevant jurisdiction.</p>
+                <strong>Receive the guide and introduction</strong>
+                <p>Detailed information and the appropriate local adviser are shared with registered clients.</p>
               </div>
             </li>
           </ol>
@@ -266,8 +264,8 @@ export default function CompanyResidencyPage() {
             Labuan, then compare Singapore or Hong Kong where those jurisdictions
             better suit the business.
           </p>
-          <Link className="button button-gold" href="/asia-gateway/enquire">
-            Register your interest <span>→</span>
+          <Link className="button button-gold" href="/asia-gateway/enquire?guide=company-residency">
+            Register to receive detailed information <span>→</span>
           </Link>
           <small>
             General information only. Eligibility, taxation and regulatory
