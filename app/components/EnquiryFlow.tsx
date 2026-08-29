@@ -207,6 +207,8 @@ type EnquiryFlowProps = {
   partnerSlug?: string;
   interest?: EnquiryInterest;
   journey?: EnquiryJourney;
+  initialAsiaJurisdiction?: string;
+  requestingGuide?: boolean;
   propertyContext?: {
     id: string;
     reference: string;
@@ -313,6 +315,8 @@ export function EnquiryFlow({
   partnerSlug,
   interest,
   journey = "spain",
+  initialAsiaJurisdiction,
+  requestingGuide = false,
   propertyContext,
 }: EnquiryFlowProps) {
   const router = useRouter();
@@ -320,9 +324,9 @@ export function EnquiryFlow({
   const preset = interest ? interestConfig[interest] : undefined;
   const isAsia = journey === "asia";
   const goals = isAsia ? asiaGoals : spainGoals;
-  const [step, setStep] = useState(preset ? 2 : 1);
+  const [step, setStep] = useState(preset || (journey === "asia" && requestingGuide) ? 2 : 1);
   const [goal, setGoal] = useState(
-    preset?.enquiryType || ((partner || propertyContext) ? (isAsia ? "asia-property" : "buy") : ""),
+    preset?.enquiryType || (requestingGuide ? "asia-residency-company" : ((partner || propertyContext) ? (isAsia ? "asia-property" : "buy") : "")),
   );
   const [details, setDetails] = useState(() =>
     preset
@@ -333,7 +337,15 @@ export function EnquiryFlow({
             budget: "",
             message: `I would like further information and current availability for ${propertyContext.title} (${propertyContext.reference}).`,
           }
-        : initialDetails,
+        : requestingGuide
+          ? {
+              location: initialAsiaJurisdiction || "",
+              budget: "",
+              message: initialAsiaJurisdiction
+                ? `I would like to receive detailed company and residency information for ${initialAsiaJurisdiction}.`
+                : "I would like to receive the detailed Asian company and residency comparison guide.",
+            }
+          : initialDetails,
   );
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");
@@ -433,10 +445,12 @@ export function EnquiryFlow({
         <p className="eyebrow light">
           {preset?.kicker || (isAsia ? "Asia Gateway · Confidential enquiry" : "Confidential enquiry")}
         </p>
-        <h1>{preset?.heading || (isAsia ? "How may we help in Asia?" : "How may we help?")}</h1>
+        <h1>{preset?.heading || (requestingGuide ? "Register for detailed information." : isAsia ? "How may we help in Asia?" : "How may we help?")}</h1>
         <p>
           {preset?.intro ||
-            (isAsia
+            (requestingGuide
+              ? "Register your interest with PF EuroAsia to receive the appropriate company and residency information and, where suitable, an introduction to our local adviser."
+              : isAsia
               ? "Tell us whether you are considering residency, company setup, a professional partnership, property acquisition or planning a trip to Malaysia. Your enquiry will be handled personally and in confidence."
               : "Share a little about your objectives. Your enquiry will be handled personally and in confidence.")}
         </p>
