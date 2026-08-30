@@ -327,10 +327,12 @@ export function EnquiryFlow({
   const partner = getPartnerReferral(partnerSlug);
   const preset = interest ? interestConfig[interest] : undefined;
   const isAsia = journey === "asia";
+  const isAimsReferral = partner?.code === "AIMS";
+  const isGuidedFlow = Boolean(preset || (isAsia && requestingGuide) || isAimsReferral);
   const goals = isAsia ? asiaGoals : spainGoals;
-  const [step, setStep] = useState(preset || (journey === "asia" && requestingGuide) ? 2 : 1);
+  const [step, setStep] = useState(isGuidedFlow ? 2 : 1);
   const [goal, setGoal] = useState(
-    preset?.enquiryType || (requestingGuide ? "asia-residency-company" : ((partner || propertyContext) ? (isAsia ? "asia-property" : "buy") : "")),
+    preset?.enquiryType || ((requestingGuide || isAimsReferral) ? "asia-residency-company" : ((partner || propertyContext) ? (isAsia ? "asia-property" : "buy") : "")),
   );
   const [details, setDetails] = useState(() =>
     preset
@@ -341,11 +343,13 @@ export function EnquiryFlow({
             budget: "",
             message: `I would like further information and current availability for ${propertyContext.title} (${propertyContext.reference}).`,
           }
-        : requestingGuide
+        : (requestingGuide || isAimsReferral)
           ? {
-              location: initialAsiaJurisdiction || "",
+              location: initialAsiaJurisdiction || (isAimsReferral ? "Labuan, Malaysia" : ""),
               budget: "",
-              message: initialAsiaJurisdiction
+              message: isAimsReferral
+                ? "I would like to discuss forming a company in Labuan, Malaysia."
+                : initialAsiaJurisdiction
                 ? `I would like to receive detailed company and residency information for ${initialAsiaJurisdiction}.`
                 : "I would like to receive the detailed Asian company and residency comparison guide.",
             }
@@ -356,8 +360,8 @@ export function EnquiryFlow({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
 
-  const totalSteps = preset ? 2 : 3;
-  const progressStep = preset ? step - 1 : step;
+  const totalSteps = isGuidedFlow ? 2 : 3;
+  const progressStep = isGuidedFlow ? step - 1 : step;
   const asiaDetail = isAsia ? asiaGoalDetails[goal] : undefined;
   const budgetOptions =
     preset?.budgetOptions ||
@@ -522,7 +526,7 @@ export function EnquiryFlow({
                   router.push("/luxury-villa-rentals/enquire");
                   return;
                 }
-                if (goal === "asia-residency-company") {
+                if (goal === "asia-residency-company" && !isAsia) {
                   router.push("/asia-gateway/enquire");
                   return;
                 }
@@ -583,6 +587,8 @@ export function EnquiryFlow({
             <div className="form-actions">
               {preset ? (
                 <Link className="back-button" href="/#private-portfolio">← Back to opportunities</Link>
+              ) : isAimsReferral ? (
+                <Link className="back-button" href="/#collaboration-network">← Back to collaborations</Link>
               ) : (
                 <button className="back-button" type="button" onClick={() => setStep(1)}>← Back</button>
               )}
