@@ -24,6 +24,7 @@ export default async function EnquirePage({ searchParams }: EnquirePageProps) {
   const partnerSlug = property
     ? getPartnerReferralSlugByCode(property.listingPartnerCode) || undefined
     : requestedPartnerSlug;
+  const isAsiaPartner = partnerSlug?.toLowerCase() === "aims";
   const propertyContext = property
     ? {
         id: property.id,
@@ -36,7 +37,12 @@ export default async function EnquirePage({ searchParams }: EnquirePageProps) {
   return (
     <main className="enquiry-page">
       <Header />
-      <EnquiryFlow partnerSlug={partnerSlug} propertyContext={propertyContext} />
+      <EnquiryFlow
+        partnerSlug={partnerSlug}
+        propertyContext={propertyContext}
+        journey={isAsiaPartner ? "asia" : "spain"}
+        initialAsiaJurisdiction={isAsiaPartner ? "Labuan, Malaysia" : undefined}
+      />
     </main>
   );
 }

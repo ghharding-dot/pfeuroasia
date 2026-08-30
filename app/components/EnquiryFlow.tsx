@@ -262,6 +262,10 @@ async function deliverFromBrowser(
     recipients.push("jorge@rent2holiday.es");
   }
 
+  if (partner?.code === "AIMS") {
+    recipients.push("abid@aimsconsulting.my");
+  }
+
   const subjectType = payload.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
   const record = {
     reference,

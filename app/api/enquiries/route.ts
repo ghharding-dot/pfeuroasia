@@ -145,6 +145,7 @@ function partnerEmail(code?: string) {
     MEC:
       process.env.PARTNER_EMAIL_MEC ||
       "luis.recio@martinezechevarria.com",
+    AIMS: process.env.PARTNER_EMAIL_AIMS || "abid@aimsconsulting.my",
   };
   return code ? emails[code] : undefined;
 }

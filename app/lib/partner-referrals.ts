@@ -44,6 +44,11 @@ export const PARTNER_REFERRALS = {
     name: "Martinez-Echevarria Lawyers",
     category: "Legal representation partner",
   },
+  aims: {
+    code: "AIMS",
+    name: "AIMS Trust Group",
+    category: "Malaysia and Asia corporate services partner",
+  },
 } as const;
 
 export type PartnerSlug = keyof typeof PARTNER_REFERRALS;

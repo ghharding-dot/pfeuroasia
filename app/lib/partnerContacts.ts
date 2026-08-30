@@ -70,6 +70,11 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
     name: "Martinez-Echevarria Lawyers",
     email: "luis.recio@martinezechevarria.com",
   },
+  AIMS: {
+    code: "AIMS",
+    name: "AIMS Trust Group",
+    email: process.env.PARTNER_EMAIL_AIMS || "abid@aimsconsulting.my",
+  },
 };
 
 export function getPartnerContact(code?: string | null) {
