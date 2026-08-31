@@ -731,3 +731,98 @@
     height: 62px;
   }
 }
+
+
+/* Keep the main property carousel's complete frame stable between listings. */
+.propertySection .slide {
+  height: 620px;
+  min-height: 0;
+}
+
+.propertySection .copy {
+  overflow: hidden;
+}
+
+.propertySection .copy h3,
+.propertySection .description {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.propertySection .copy h3 {
+  -webkit-line-clamp: 3;
+}
+
+.propertySection .description {
+  -webkit-line-clamp: 4;
+}
+
+.propertySection .amenities > div {
+  max-height: 48px;
+  overflow: hidden;
+}
+
+.propertySection .copy :global(.button) {
+  margin-top: auto;
+}
+
+@media (max-width: 960px) {
+  .propertySection .slide {
+    grid-template-columns: 1fr;
+    grid-template-rows: 410px minmax(0, 1fr);
+    height: 880px;
+    min-height: 0;
+  }
+
+  .propertySection .imageGallery {
+    height: 410px;
+  }
+
+  .propertySection .fourPhotoSlide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 410px minmax(0, 1fr);
+    height: 880px;
+  }
+
+  .propertySection .fourPhotoSlide > .developmentPhotos {
+    height: 410px;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+
+  .propertySection .fourPhotoSlide > .developmentPhotos:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .propertySection .fourPhotoSlide > .copy {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .propertySection .fourPhotoSlide > .developmentPhotos:last-child {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .propertySection .slide {
+    grid-template-rows: 330px minmax(0, 1fr);
+    height: 800px;
+  }
+
+  .propertySection .imageGallery {
+    height: 330px;
+  }
+
+  .propertySection .fourPhotoSlide {
+    grid-template-rows: 330px minmax(0, 1fr);
+    height: 800px;
+  }
+
+  .propertySection .fourPhotoSlide > .developmentPhotos {
+    height: 330px;
+  }
+}
