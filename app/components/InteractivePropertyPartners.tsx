@@ -5,7 +5,7 @@ import cardStyles from "./InteractiveLegalPartners.module.css";
 import partnerStyles from "./PartnerStrip.module.css";
 import styles from "./InteractivePropertyPartners.module.css";
 
-type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer" | "rent2holiday";
+type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer" | "rent2holiday" | "madronalvillas";
 
 type Partner = {
   key: PartnerKey;
@@ -73,6 +73,16 @@ const partners: Partner[] = [
     mark: "R2",
     email: "jorge@rent2holiday.es",
   },
+  {
+    key: "madronalvillas",
+    name: "Madroñal Villas",
+    representative: "Geoff Harding",
+    href: "https://madronalvillas.com/",
+    kicker: "Private villa management & hospitality",
+    description:
+      "Private villa management and luxury hospitality in El Madroñal, Marbella, with experience caring for exceptional homes and international owners since 2010.",
+    mark: "MV",
+  },
 ];
 
 function FrontLogo({ partner }: { partner: Partner }) {
@@ -101,6 +111,10 @@ function FrontLogo({ partner }: { partner: Partner }) {
         <span className={styles.rent2Wordmark}><span>Rent</span><b>2</b><span>Holiday</span></span>
       </div>
     );
+  }
+
+  if (partner.key === "madronalvillas") {
+    return <img className={styles.madronalLogoImage} src="/images/partner-madronal-villas.webp" alt="Madroñal Villas" />;
   }
 
   return <img className={styles.fixerImage} src="/images/partner-the-fixer.svg" alt="The Fixer property advisory" />;
@@ -146,7 +160,11 @@ export function InteractivePropertyPartners() {
               <p className={cardStyles.representative}><span>Representative</span>{partner.representative}</p>
               <p className={cardStyles.description}>{partner.description}</p>
               <div className={styles.partnerActions}>
-                <a className={cardStyles.visitLink} href={partner.href}>
+                <a
+                  className={cardStyles.visitLink}
+                  href={partner.href}
+                  {...(partner.key === "madronalvillas" ? { target: "_blank", rel: "noopener" } : {})}
+                >
                   Visit partner <span>→</span>
                 </a>
                 {partner.instagram ? (

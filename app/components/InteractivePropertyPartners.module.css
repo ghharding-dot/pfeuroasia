@@ -1,9 +1,17 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: stretch;
   gap: 14px;
   margin-top: 18px;
+}
+
+.madronalLogoImage {
+  display: block;
+  width: min(94%, 255px);
+  height: auto;
+  max-height: 104px !important;
+  object-fit: contain;
 }
 
 .grid > article,
