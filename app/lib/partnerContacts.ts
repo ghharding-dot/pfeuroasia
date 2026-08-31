@@ -1,8 +1,11 @@
+import { createHash } from "node:crypto";
+
 export type PartnerContact = {
   code: string;
   name: string;
   email?: string;
   loginEmails?: readonly string[];
+  loginEmailHashes?: readonly string[];
 };
 
 export type CollaboratorLogin = PartnerContact & {
@@ -55,6 +58,13 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
       "jorge@rent2holiday.es",
     ],
   },
+  DEV: {
+    code: "DEV",
+    name: "Developments.es",
+    loginEmailHashes: [
+      "00dd2f50ef2de4601f30c5a022bd85b300556c0bfaaf17c51026724c9c7cff43",
+    ],
+  },
   LEG: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",
@@ -90,13 +100,22 @@ export const PROPERTY_LISTING_PARTNERS = [
   PARTNER_CONTACTS.LUX,
   PARTNER_CONTACTS.FIX,
   PARTNER_CONTACTS.R2H,
+  PARTNER_CONTACTS.DEV,
 ] as const;
 
 export const COLLABORATOR_LOGIN_PARTNERS = PROPERTY_LISTING_PARTNERS.filter(
   (partner) =>
     partner.code !== "DIRECT" &&
-    (Boolean(partner.email) || Boolean(partner.loginEmails?.length)),
+    (Boolean(partner.email) ||
+      Boolean(partner.loginEmails?.length) ||
+      Boolean(partner.loginEmailHashes?.length)),
 );
+
+function collaboratorEmailHash(email: string) {
+  return createHash("sha256")
+    .update(`pfea-dev-access-2026:${email}`)
+    .digest("hex");
+}
 
 export function getCollaboratorByEmail(email?: string | null): CollaboratorLogin | null {
   const normalized = String(email || "").trim().toLowerCase();
@@ -108,8 +127,9 @@ export function getCollaboratorByEmail(email?: string | null): CollaboratorLogin
         .filter(Boolean)
         .map((value) => String(value).trim().toLowerCase()),
     );
+    const approvedEmailHashes = new Set(partner.loginEmailHashes || []);
 
-    if (approvedEmails.has(normalized)) {
+    if (approvedEmails.has(normalized) || approvedEmailHashes.has(collaboratorEmailHash(normalized))) {
       return { ...partner, loginEmail: normalized };
     }
   }
