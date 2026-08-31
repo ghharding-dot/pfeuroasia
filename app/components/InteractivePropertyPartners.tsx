@@ -82,6 +82,7 @@ const partners: Partner[] = [
     description:
       "Private villa management and luxury hospitality in El Madroñal, Marbella, with experience caring for exceptional homes and international owners since 2010.",
     mark: "MV",
+    instagram: "madronalvillaspain",
   },
 ];
 
