@@ -100,6 +100,9 @@ const organizationSchema = {
   email: "enquiry@pfeuroasia.com",
   description:
     "Independent luxury property advisers connecting Southern Spain, the Middle East and Asia.",
+  founder: {
+    "@id": `${siteUrl}/about#geoff-harding`,
+  },
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
@@ -120,6 +123,25 @@ const organizationSchema = {
     { "@type": "Country", name: "Spain" },
     { "@type": "Country", name: "Saudi Arabia" },
     { "@type": "Country", name: "Malaysia" },
+  ],
+};
+
+const founderSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${siteUrl}/about#geoff-harding`,
+  name: "Geoff Harding",
+  jobTitle: "Founder and International Property Facilitator",
+  url: `${siteUrl}/about`,
+  image: `${siteUrl}/images/geoff-harding-founder.webp`,
+  worksFor: {
+    "@id": `${siteUrl}/#organization`,
+  },
+  knowsAbout: [
+    "Luxury property in Marbella and Benahavís",
+    "International property acquisition",
+    "Cross-border property introductions",
+    "Malaysia property and relocation coordination",
   ],
 };
 
@@ -166,6 +188,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
         />
         {children}
         <ImageProtection />

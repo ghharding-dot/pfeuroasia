@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { AuthorityReview } from "../../components/AuthorityReview";
 import styles from "./page.module.css";
 
 const comparisonRows = [
@@ -148,6 +149,8 @@ export default function MalaysiaVsDubaiPage() {
         </div>
       </section>
 
+      <AuthorityReview focus="malaysia" />
+
       <section className={styles.intro} aria-labelledby="comparison-intro">
         <div className={`site-shell ${styles.introGrid}`}>
           <p className="eyebrow">Not the same proposition</p>
@@ -247,7 +250,7 @@ export default function MalaysiaVsDubaiPage() {
         </div>
       </section>
 
-      <section className={styles.disclaimer}><div className="site-shell"><p>Last reviewed: August 2026. This comparison provides general information only and is not legal, tax, immigration, accounting, financial or investment advice. Immigration permission, domestic tax residence, treaty residence and company taxation are separate questions. Obtain written advice from appropriately qualified professionals in every relevant jurisdiction before acting.</p><p className={styles.photoCredit}>Dubai skyline: Vamos John / Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>. Image cropped and optimised for display.</p></div></section>
+      <section className={styles.disclaimer}><div className="site-shell"><p>Last reviewed: September 2026. This comparison provides general information only and is not legal, tax, immigration, accounting, financial or investment advice. Immigration permission, domestic tax residence, treaty residence and company taxation are separate questions. Obtain written advice from appropriately qualified professionals in every relevant jurisdiction before acting.</p><p className={styles.photoCredit}>Dubai skyline: Vamos John / Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a>. Image cropped and optimised for display.</p></div></section>
       <Footer />
     </main>
   );

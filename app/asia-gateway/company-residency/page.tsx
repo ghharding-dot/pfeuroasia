@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { AuthorityReview } from "../../components/AuthorityReview";
 import styles from "./CompanyResidency.module.css";
 
 const routes = [
@@ -104,6 +105,8 @@ export default function CompanyResidencyPage() {
           </div>
         </div>
       </section>
+
+      <AuthorityReview focus="malaysia" />
 
       <section className={styles.intro}>
         <div className={["site-shell", styles.introGrid].join(" ")}>

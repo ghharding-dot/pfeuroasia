@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { AuthorityReview } from "../../components/AuthorityReview";
 import { createMetadata } from "../../lib/seo";
 import styles from "./Labuan.module.css";
 
@@ -51,6 +52,8 @@ export default function LabuanCompanyResidencyPage() {
           </div>
         </div>
       </section>
+
+      <AuthorityReview focus="malaysia" />
 
       <section className={styles.intro}>
         <div className={`site-shell ${styles.introGrid}`}>

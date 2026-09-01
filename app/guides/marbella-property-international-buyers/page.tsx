@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { AuthorityReview } from "../../components/AuthorityReview";
 import styles from "./page.module.css";
 
 const buyerPerspectives = [
@@ -58,6 +59,8 @@ export default function InternationalBuyerGuidePage() {
           </div>
         </div>
       </section>
+
+      <AuthorityReview focus="spain" />
 
       <section className={styles.intro}>
         <div className={`site-shell ${styles.introGrid}`}>

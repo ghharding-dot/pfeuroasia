@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { AuthorityReview } from "../../components/AuthorityReview";
 import styles from "../../guides/MalaysiaSeoGuide.module.css";
 
 const structures = [
@@ -38,6 +39,8 @@ export default function MalaysiaCompanyFormationPage() {
         <div className={styles.heroShade} />
         <div className={`site-shell ${styles.heroInner}`}><p className="eyebrow light">Malaysia · Business setup</p><h1>Malaysia company formation<em>for international entrepreneurs.</em></h1><p className={styles.heroCopy}>Compare mainland Malaysian, registered foreign-company and Labuan structures before appointing the local professionals to form and maintain the business.</p><div className={styles.heroActions}><Link className="button button-gold" href="/asia-gateway/enquire">Discuss your proposed business <span>→</span></Link><Link className="text-link light-link" href="/services/labuan-company-residency">Explore the Labuan package <span>→</span></Link></div></div>
       </section>
+
+      <AuthorityReview focus="malaysia" />
 
       <section className={styles.intro}><div className={`site-shell ${styles.introGrid}`}><div><p className="eyebrow">Structure follows activity</p><h2>Start with what the company will actually do.</h2></div><div className={styles.lead}><p>The best jurisdiction is not simply the one with the fastest registration or lowest headline tax. It should fit the customers, contracts, management, banking, employees and owners.</p><p>PF EuroAsia coordinates the initial review and introduces established Malaysian corporate, accounting, immigration and tax specialists for formal advice and implementation.</p></div></div></section>
 

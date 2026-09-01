@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const SITE_URL = "https://www.pfeuroasia.com";
-export const SEO_LAST_UPDATED = new Date("2026-08-29T00:00:00.000Z");
+export const SEO_LAST_UPDATED = new Date("2026-09-01T00:00:00.000Z");
+const SEO_FIRST_PUBLISHED = new Date("2026-09-01T00:00:00.000Z");
 
 type SeoLocale = "en-GB" | "es-ES" | "da-DK" | "zh-CN" | "ar-SA";
 
@@ -204,6 +205,7 @@ export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children:
   const page: SeoEntry = seoPages[pageKey];
   const pageUrl = `${SITE_URL}${page.path === "/" ? "" : page.path}`;
   const image = page.image ?? "/images/hero-villa.webp";
+  const imageUrl = new URL(image, SITE_URL).href;
   const serviceGroups = new Set([
     "acquisition",
     "sales",
@@ -225,6 +227,30 @@ export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children:
     url: pageUrl,
     provider: { "@id": `${SITE_URL}/#organization` },
   } : null;
+  const articleGroups = new Set([
+    "internationalBuyers",
+    "malaysiaTaxResidency",
+    "malaysiaVsDubai",
+    "malaysiaResidencyOptions",
+    "malaysiaCompanyFormation",
+    "asiaCompanyFormation",
+    "labuan",
+  ]);
+  const articleSchema = articleGroups.has(page.group) ? {
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: page.title,
+    description: page.description,
+    url: pageUrl,
+    mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+    image: imageUrl,
+    inLanguage: page.locale,
+    datePublished: SEO_FIRST_PUBLISHED.toISOString(),
+    dateModified: SEO_LAST_UPDATED.toISOString(),
+    author: { "@id": `${SITE_URL}/#organization` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    reviewedBy: { "@id": `${SITE_URL}/about#geoff-harding` },
+  } : null;
   const pageSchema = {
     "@type": "WebPage",
     "@id": `${pageUrl}#webpage`,
@@ -237,9 +263,13 @@ export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children:
     about: { "@id": `${SITE_URL}/#organization` },
     primaryImageOfPage: {
       "@type": "ImageObject",
-      url: `${SITE_URL}${image}`,
+      url: imageUrl,
     },
-    ...(serviceSchema ? { mainEntity: { "@id": serviceSchema["@id"] } } : {}),
+    ...((articleSchema || serviceSchema) ? {
+      mainEntity: [articleSchema, serviceSchema]
+        .filter(Boolean)
+        .map((item) => ({ "@id": item!["@id"] })),
+    } : {}),
   };
   const breadcrumbSchema = page.breadcrumbs.length > 1 ? {
     "@context": "https://schema.org",
@@ -254,7 +284,7 @@ export function RouteSeo({ pageKey, children }: { pageKey: SeoPageKey; children:
   } : null;
   const schema = {
     "@context": "https://schema.org",
-    "@graph": [pageSchema, breadcrumbSchema, serviceSchema].filter(Boolean),
+    "@graph": [pageSchema, breadcrumbSchema, articleSchema, serviceSchema].filter(Boolean),
   };
 
   return (

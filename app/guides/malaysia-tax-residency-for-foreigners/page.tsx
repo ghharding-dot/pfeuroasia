@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { AuthorityReview } from "../../components/AuthorityReview";
 import styles from "./page.module.css";
 
 const distinctions = [
@@ -125,6 +126,8 @@ export default function MalaysiaTaxResidencyGuidePage() {
           </div>
         </div>
       </section>
+
+      <AuthorityReview focus="malaysia" />
 
       <section className={styles.intro} aria-labelledby="tax-residency-intro">
         <div className={`site-shell ${styles.introGrid}`}>
