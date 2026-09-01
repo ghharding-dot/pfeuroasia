@@ -64,6 +64,7 @@ export function Header({
           <Link className={styles.navButton} href="/commercial" onClick={() => setOpen(false)}>Commercial</Link>
           <Link className={styles.navButton} href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
           <Link className={styles.navButton} href="/property-owners" onClick={() => setOpen(false)}>Property owners</Link>
+          <Link className={styles.navButton} href="/knowledge-centre" onClick={() => setOpen(false)}>Knowledge</Link>
           <Link className={styles.navButton} href="/about" onClick={() => setOpen(false)}>Our approach</Link>
           <Link className="nav-enquire" href={enquireHref} onClick={() => setOpen(false)}>
             {enquireLabel} <span>→</span>

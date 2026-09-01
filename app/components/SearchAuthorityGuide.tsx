@@ -117,7 +117,7 @@ export function SearchAuthorityGuide({ guide }: { guide: SearchGuideData }) {
           <div className={styles.sourceGrid}>{guide.sources.map((source) => <a href={source.href} target="_blank" rel="noreferrer" key={source.label}>{source.label}<span>↗</span></a>)}</div>
           <div className={styles.related}>
             <p className="eyebrow">Continue your research</p>
-            <div>{guide.related.map((item) => <Link href={item.href} key={item.href}>{item.label}<span>→</span></Link>)}</div>
+            <div><Link href="/knowledge-centre">Browse the Knowledge Centre<span>→</span></Link>{guide.related.map((item) => <Link href={item.href} key={item.href}>{item.label}<span>→</span></Link>)}</div>
           </div>
         </div>
       </section>
