@@ -73,6 +73,8 @@ export default function LabuanCompanyResidencyPage() {
               suitability review through documentation and filing.
             </p>
             <p><Link className="text-link" href="/services/malaysia-company-formation">Compare mainland Malaysia and Labuan company formation <span>→</span></Link></p>
+            <p><Link className="text-link" href="/guides/malaysia-company-vs-labuan-company">See the Malaysia-versus-Labuan decision guide <span>→</span></Link></p>
+            <p><Link className="text-link" href="/guides/labuan-company-setup-costs">Review official fees and wider setup costs <span>→</span></Link></p>
             <p><Link className="text-link" href="/guides/malaysia-residency-options">Compare Malaysia residency pathways <span>→</span></Link></p>
           </div>
         </div>

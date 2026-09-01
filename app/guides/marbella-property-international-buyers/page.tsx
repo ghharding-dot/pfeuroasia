@@ -77,6 +77,7 @@ export default function InternationalBuyerGuidePage() {
               Property Facilitators EuroAsia provides an accountable point of contact in Southern
               Spain, combining local market experience with carefully coordinated professional advice.
             </p>
+            <p><Link className="text-link" href="/guides/spain-golden-visa-alternatives">Review Spain&apos;s current residency alternatives <span>→</span></Link></p>
           </div>
         </div>
       </section>

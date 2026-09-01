@@ -111,6 +111,10 @@ export default function AsiaGatewayPage() {
             <Link className="text-link" href="/guides/malaysia-vs-dubai-tax-residency">
               Compare Malaysia with Dubai <span>→</span>
             </Link>
+            <br /><br />
+            <Link className="text-link" href="/guides/moving-from-spain-to-malaysia">
+              Read the Spain-to-Malaysia moving guide <span>→</span>
+            </Link>
           </div>
         </div>
       </section>
