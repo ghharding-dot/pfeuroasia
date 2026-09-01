@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { TopicPathway } from "../../components/TopicPathway";
 import styles from "./CompanyResidency.module.css";
 
 const routes = [
@@ -257,6 +258,17 @@ export default function CompanyResidencyPage() {
           </ol>
         </div>
       </section>
+
+      <TopicPathway
+        title="Move from jurisdiction to structure."
+        intro="Compare the wider Asian options first, then test the Malaysian or Labuan structure against the actual customers, management, substance and residence objective."
+        links={[
+          { label: "Malaysia", title: "Malaysia company formation", description: "Understand mainland, foreign-company and Labuan starting structures.", href: "/services/malaysia-company-formation" },
+          { label: "Comparison", title: "Malaysia company vs Labuan", description: "Choose by operating reality rather than the headline tax rate.", href: "/guides/malaysia-company-vs-labuan-company" },
+          { label: "Budget", title: "Labuan company setup costs", description: "Separate official fees from professional, substance and immigration costs.", href: "/guides/labuan-company-setup-costs" },
+          { label: "Research hub", title: "Browse the Knowledge Centre", description: "See the complete company, residence and relocation research path.", href: "/knowledge-centre" },
+        ]}
+      />
 
       <section className={styles.cta}>
         <div className={["site-shell", styles.ctaInner].join(" ")}>

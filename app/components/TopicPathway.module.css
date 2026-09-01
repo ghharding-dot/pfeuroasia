@@ -1,0 +1,14 @@
+.section { background: var(--stone); border-block: 1px solid var(--line); padding: 88px 0; }
+.heading { align-items: end; display: grid; gap: 70px; grid-template-columns: minmax(0,1fr) minmax(320px,500px); margin-bottom: 40px; }
+.heading h2 { font-family: var(--serif); font-size: clamp(38px,4vw,58px); font-weight: 400; letter-spacing: -.04em; line-height: 1; margin: 0; }
+.heading>p { color: #62665f; font-size: 1rem; line-height: 1.75; margin: 0; }
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(4,minmax(0,1fr)); }
+.card { background: rgba(255,255,255,.74); border: 1px solid var(--line); display: flex; flex-direction: column; min-height: 310px; padding: 25px; transition: background .18s ease,border-color .18s ease,transform .18s ease; }
+.card:hover { background: #fff; border-color: rgba(151,116,57,.65); transform: translateY(-2px); }
+.card>div { display: flex; gap: 20px; justify-content: space-between; }
+.card>div span { color: #8b6b35; font-size: .75rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+.card h3 { font-family: var(--serif); font-size: 1.65rem; font-weight: 400; letter-spacing: -.025em; line-height: 1.08; margin: 48px 0 14px; }
+.card p { color: #686c65; font-size: 1rem; line-height: 1.65; margin: 0; }
+.card strong { color: #7e602e; font-size: .78rem; letter-spacing: .06em; margin-top: auto; padding-top: 24px; }
+@media (max-width:1050px) { .grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width:760px) { .section { padding-block:68px; } .heading { gap:28px; grid-template-columns:1fr; } .grid { grid-template-columns:1fr; } .card { min-height:280px; } }

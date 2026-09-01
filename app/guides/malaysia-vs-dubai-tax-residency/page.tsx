@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { TopicPathway } from "../../components/TopicPathway";
 import styles from "./page.module.css";
 
 const comparisonRows = [
@@ -235,6 +236,17 @@ export default function MalaysiaVsDubaiPage() {
           <div>{sourceLinks.map((source) => <a href={source.href} key={source.href} target="_blank" rel="noreferrer">{source.label}<span>↗</span></a>)}</div>
         </div>
       </section>
+
+      <TopicPathway
+        title="Test the Malaysia option in more detail."
+        intro="Once Malaysia is on the shortlist, separate the immigration, personal-tax, company and household-cost questions before comparing final outcomes."
+        links={[
+          { label: "Tax residence", title: "Malaysia tax residency", description: "Understand the statutory residence tests and the evidence behind them.", href: "/guides/malaysia-tax-residency-for-foreigners" },
+          { label: "Immigration", title: "Malaysia residency options", description: "Compare lifestyle, remote-work, employment and business-led pathways.", href: "/guides/malaysia-residency-options" },
+          { label: "Lifestyle", title: "Malaysia vs Spain living costs", description: "Build a realistic household budget instead of relying on a headline index.", href: "/guides/cost-of-living-malaysia-vs-spain" },
+          { label: "Research hub", title: "Browse the Knowledge Centre", description: "Continue through all Malaysia, Labuan, property and relocation guidance.", href: "/knowledge-centre" },
+        ]}
+      />
 
       <section className={styles.faq} aria-labelledby="comparison-faq-heading">
         <div className={`site-shell ${styles.faqGrid}`}>

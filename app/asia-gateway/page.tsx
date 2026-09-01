@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { TopicPathway } from "../components/TopicPathway";
 import regionStyles from "../HomeRegions.module.css";
 import styles from "./AsiaGateway.module.css";
 
@@ -252,6 +253,17 @@ export default function AsiaGatewayPage() {
           </a>
         </div>
       </section>
+
+      <TopicPathway
+        title="Choose a question and follow the evidence."
+        intro="The Asia Gateway now connects into focused guidance for residency, tax residence, company structure and the practical move to Malaysia."
+        links={[
+          { label: "Residency", title: "Malaysia residency options", description: "Compare MM2H, DE Rantau, employment and business-led pathways.", href: "/guides/malaysia-residency-options" },
+          { label: "Tax", title: "Malaysia tax residency", description: "Understand day counts, connected periods and cross-border evidence.", href: "/guides/malaysia-tax-residency-for-foreigners" },
+          { label: "Company", title: "Malaysia or Labuan company", description: "Compare the structures by where and how the business will operate.", href: "/guides/malaysia-company-vs-labuan-company" },
+          { label: "All guidance", title: "EuroAsia Knowledge Centre", description: "Search every authority guide from one organised research index.", href: "/knowledge-centre" },
+        ]}
+      />
 
       <section className={styles.comingSoon}>
         <div className={`site-shell ${styles.comingSoonInner}`}>

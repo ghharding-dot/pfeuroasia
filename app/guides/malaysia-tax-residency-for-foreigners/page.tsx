@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { TopicPathway } from "../../components/TopicPathway";
 import styles from "./page.module.css";
 
 const distinctions = [
@@ -216,6 +217,17 @@ export default function MalaysiaTaxResidencyGuidePage() {
           <div><p>Tax is only one part of the decision. Families and entrepreneurs should also compare residency security, genuine business activity, living costs, healthcare, education, climate, travel connections and the amount of time they actually want to spend in the country.</p><p>Our Malaysia and Dubai guide compares these practical questions without presenting either destination as universally better.</p><Link className="text-link" href="/guides/malaysia-vs-dubai-tax-residency">Compare Malaysia with Dubai <span>→</span></Link></div>
         </div>
       </section>
+
+      <TopicPathway
+        title="Build the complete Malaysia plan."
+        intro="Tax residence is one part of a wider decision involving immigration permission, departure from the present country, company activity and the practical base in Malaysia."
+        links={[
+          { label: "Residency", title: "Compare Malaysia residency options", description: "Review MM2H, DE Rantau, employment and business-led starting points.", href: "/guides/malaysia-residency-options" },
+          { label: "Relocation", title: "Moving from Spain to Malaysia", description: "Coordinate the departure year, immigration route and day-to-day relocation.", href: "/guides/moving-from-spain-to-malaysia" },
+          { label: "Company", title: "Malaysia company vs Labuan", description: "Choose the structure by genuine activity, substance and operating location.", href: "/guides/malaysia-company-vs-labuan-company" },
+          { label: "Research hub", title: "Browse the Knowledge Centre", description: "See every PF EuroAsia guide organised by topic and jurisdiction.", href: "/knowledge-centre" },
+        ]}
+      />
 
       <section className={styles.faq} aria-labelledby="tax-residency-faq-heading">
         <div className={`site-shell ${styles.faqGrid}`}>

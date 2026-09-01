@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { TopicPathway } from "../../components/TopicPathway";
 import styles from "../MalaysiaSeoGuide.module.css";
 
 const pathways = [
@@ -97,6 +98,17 @@ export default function MalaysiaResidencyOptionsPage() {
       <section className={styles.sources}>
         <div className="site-shell"><p className="eyebrow">Official starting points</p><h2>Verify the current rules.</h2><div className={styles.sourceGrid}><a href="https://www.mm2h.gov.my/" target="_blank" rel="noreferrer">Malaysia My Second Home — Ministry of Tourism <span>↗</span></a><a href="https://www.mdec.my/md-programmes/digital-nomad-pass" target="_blank" rel="noreferrer">DE Rantau — Malaysia Digital <span>↗</span></a><a href="https://esd.imi.gov.my/portal/" target="_blank" rel="noreferrer">Employment Pass — Immigration Department <span>↗</span></a><Link href="/services/labuan-company-residency">Labuan company and residency pathway <span>→</span></Link></div></div>
       </section>
+
+      <TopicPathway
+        title="Connect residence with the rest of the move."
+        intro="The correct visa or pass still needs to align with tax residence, housing, property eligibility and any company or employment activity."
+        links={[
+          { label: "Tax residence", title: "Malaysia tax residency", description: "Separate immigration permission from the statutory tax-residence tests.", href: "/guides/malaysia-tax-residency-for-foreigners" },
+          { label: "Relocation", title: "Moving from Spain to Malaysia", description: "Plan departure and arrival across one calendar and evidence trail.", href: "/guides/moving-from-spain-to-malaysia" },
+          { label: "Property", title: "Buying in Malaysia as a foreigner", description: "Check state rules, title, thresholds and due diligence before committing.", href: "/guides/buying-property-in-malaysia-as-a-foreigner" },
+          { label: "Business route", title: "Labuan company and residency", description: "Explore the coordinated company and work-permit pathway for suitable clients.", href: "/services/labuan-company-residency" },
+        ]}
+      />
 
       <section className={styles.faq}><div className={`site-shell ${styles.faqGrid}`}><div><p className="eyebrow light">Malaysia residency FAQ</p><h2>Questions clients ask first.</h2></div><div>{faqs.map((item) => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div></div></section>
 

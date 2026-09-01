@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { TopicPathway } from "../../components/TopicPathway";
 import "./marbella-market.css";
 
 const marketAreas = [
@@ -262,6 +263,17 @@ export default function MarbellaPage() {
           </div>
         </div>
       </section>
+
+      <TopicPathway
+        title="Continue from market to decision."
+        intro="Move from the broad Marbella market into the buyer process, current residence options and the distinct locations that shape value and lifestyle."
+        links={[
+          { label: "Buyer guide", title: "Marbella for international buyers", description: "Understand representation, due diligence and the acquisition sequence.", href: "/guides/marbella-property-international-buyers" },
+          { label: "Residency", title: "Spain Golden Visa alternatives", description: "Review current routes after the investor pathway closed to new applicants.", href: "/guides/spain-golden-visa-alternatives" },
+          { label: "Location", title: "Marbella Golden Mile", description: "Explore the beachfront, central and elevated residential submarkets.", href: "/areas/marbella-golden-mile" },
+          { label: "Location", title: "Benahavís and private estates", description: "Compare hillside communities, golf areas and substantial private homes.", href: "/areas/benahavis" },
+        ]}
+      />
 
       <section className="marbella-market-faq" aria-labelledby="marbella-faq-heading">
         <div className="site-shell marbella-market-faq-grid">

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { TopicPathway } from "../../components/TopicPathway";
 import styles from "./page.module.css";
 
 const buyerPerspectives = [
@@ -134,6 +135,17 @@ export default function InternationalBuyerGuidePage() {
           <p className={styles.disclaimer}>This guide is general information, not legal, tax, financial or technical advice. Buyers should obtain independent professional advice appropriate to their circumstances before proceeding.</p>
         </div>
       </section>
+
+      <TopicPathway
+        title="Refine the Spain-side plan."
+        intro="A good acquisition brief connects the legal route, preferred location, representation and level of market access before viewings begin."
+        links={[
+          { label: "Residency", title: "Spain Golden Visa alternatives", description: "Compare the current residence routes separately from property ownership.", href: "/guides/spain-golden-visa-alternatives" },
+          { label: "Area guide", title: "Marbella Golden Mile", description: "Understand the established beachfront, central and elevated addresses.", href: "/areas/marbella-golden-mile" },
+          { label: "Private estates", title: "La Zagaleta and El Madroñal", description: "Begin with the Benahavís guide, then compare its principal private enclaves.", href: "/areas/benahavis" },
+          { label: "Research hub", title: "Browse the Knowledge Centre", description: "See all Spain, Malaysia, property and relocation guides in one place.", href: "/knowledge-centre" },
+        ]}
+      />
 
       <section className="mini-cta">
         <div className="site-shell">
