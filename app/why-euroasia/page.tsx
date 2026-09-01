@@ -1,15 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { PartnerNetworkDialog } from "../components/PartnerNetworkDialog";
+import { createMetadata } from "../lib/seo";
 import styles from "../HomePhase2.module.css";
 
-export const metadata: Metadata = {
-  title: "Why PF EuroAsia | Our Mission and Expertise",
-  description:
-    "Discover PF EuroAsia's mission, international property expertise and trusted professional network across Spain and Asia.",
-};
+export const metadata = createMetadata("whyEn");
 
 const expertise = [
   {

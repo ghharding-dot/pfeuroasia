@@ -20,6 +20,7 @@ type SeoEntry = {
 
 const groups: Record<string, Partial<Record<SeoLocale, string>>> = {
   home: { "en-GB": "/", "es-ES": "/es", "da-DK": "/da", "zh-CN": "/zh", "ar-SA": "/ar" },
+  why: { "en-GB": "/why-euroasia" },
   about: { "en-GB": "/about", "es-ES": "/es/about", "da-DK": "/da/about" },
   acquisition: { "en-GB": "/services/acquisition", "es-ES": "/es/services/acquisition", "da-DK": "/da/services/acquisition" },
   sales: { "en-GB": "/services/international-sales", "es-ES": "/es/services/international-sales", "da-DK": "/da/services/international-sales" },
@@ -54,6 +55,7 @@ export const seoPages = {
   homeZh: { path: "/zh", title: "马贝拉豪宅与欧洲亚洲国际置业服务", description: "为中文客户提供马贝拉、La Zagaleta、El Madroñal及南西班牙豪宅的独立置业、销售和私人咨询服务。", locale: "zh-CN", group: "home", breadcrumbs: [], priority: 0.9 },
   homeAr: { path: "/ar", title: "عقارات ماربيا الفاخرة للعملاء السعوديين والخليجيين", description: "استشارات عقارية مستقلة وسرية تربط العملاء السعوديين والخليجيين بعقارات ماربيا ولا زاغاليتا وإل مادرونيال.", locale: "ar-SA", group: "home", breadcrumbs: [], priority: 0.9 },
 
+  whyEn: { path: "/why-euroasia", title: "Why PF EuroAsia | Our Mission and Expertise", description: "Discover PF EuroAsia's mission, international property expertise and trusted professional network across Spain and Asia.", locale: "en-GB", group: "why", breadcrumbs: [["Home", "/"], ["Why PF EuroAsia", "/why-euroasia"]], priority: 0.8 },
   aboutEn: { path: "/about", title: "Independent International Property Advisers", description: "Meet Property Facilitators EuroAsia and discover our private, independent approach to property, relocation and cross-border introductions.", locale: "en-GB", group: "about", breadcrumbs: [["Home", "/"], ["Our approach", "/about"]] },
   aboutDa: { path: "/da/about", title: "Uafhængig international ejendomsrådgivning", description: "Læs om Property Facilitators EuroAsias personlige og uafhængige tilgang til ejendom, relocation og internationale introduktioner.", locale: "da-DK", group: "about", breadcrumbs: [["Forside", "/da"], ["Vores tilgang", "/da/about"]] },
 
