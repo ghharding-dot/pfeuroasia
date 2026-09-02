@@ -11,7 +11,17 @@
 .intro h2, .package h2, .process h2, .cta h2 { margin: 8px 0 0; font-family: var(--serif); font-size: clamp(50px, 5.4vw, 78px); font-weight: 400; letter-spacing: -.045em; line-height: 1.02; }
 .leadCopy { padding-top: 38px; }
 .leadCopy p { margin: 0 0 22px; color: #5f625b; font-size: 16px; line-height: 1.9; }
-.highlights { padding: 0 0 120px; }
+.locationSection { padding: 110px 0 118px; background: #171916; color: #fff; }
+.locationHeading { display: grid; grid-template-columns: 1fr .9fr; gap: 110px; align-items: end; margin-bottom: 58px; }
+.locationHeading h2 { max-width: 720px; margin: 8px 0 0; font-family: var(--serif); font-size: clamp(50px, 5.2vw, 76px); font-weight: 400; letter-spacing: -.045em; line-height: 1.02; }
+.locationHeading > div:last-child p { margin: 0 0 18px; color: rgba(255,255,255,.58); font-size: 14px; line-height: 1.82; }
+.locationGrid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.14); border-left: 1px solid rgba(255,255,255,.14); }
+.locationGrid article { min-height: 310px; padding: 30px 28px; border-right: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14); }
+.locationGrid article > span { color: var(--gold-light); font-size: 10px; letter-spacing: .14em; }
+.locationGrid strong { display: block; margin: 74px 0 16px; font-family: var(--serif); font-size: 29px; font-weight: 400; line-height: 1.08; }
+.locationGrid p { margin: 0; color: rgba(255,255,255,.52); font-size: 12px; line-height: 1.75; }
+.locationSource { max-width: 900px; margin: 26px 0 0; color: rgba(255,255,255,.34); font-size: 9px; line-height: 1.7; }
+.highlights { padding: 120px 0; }
 .highlightGrid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #cfc9bc; border-left: 1px solid #cfc9bc; }
 .highlightGrid article { min-height: 310px; padding: 30px 26px; border-right: 1px solid #cfc9bc; border-bottom: 1px solid #cfc9bc; }
 .highlightGrid article > span { color: #99794d; font-size: 10px; letter-spacing: .14em; }
@@ -73,10 +83,10 @@
   .heroCopy { padding-bottom: 64px; }
   .heroCopy h1 { font-size: 62px; }
   .heroActions { align-items: flex-start; flex-direction: column; gap: 20px; }
-  .intro, .requirements, .package, .process { padding: 82px 0; }
-  .introGrid, .taxGrid, .requirementGrid, .ctaGrid { grid-template-columns: 1fr; gap: 44px; }
+  .intro, .locationSection, .requirements, .package, .process { padding: 82px 0; }
+  .introGrid, .locationHeading, .taxGrid, .requirementGrid, .ctaGrid { grid-template-columns: 1fr; gap: 44px; }
   .leadCopy { padding-top: 0; }
-  .highlightGrid { grid-template-columns: 1fr 1fr; }
+  .locationGrid, .highlightGrid { grid-template-columns: 1fr 1fr; }
   .taxImageWrap { min-height: 420px; margin: 0 -20px; }
   .taxCopy { padding: 68px 0; }
   .priceColumns, .packageNotes { grid-template-columns: 1fr; }
@@ -84,11 +94,11 @@
 
 @media (max-width: 600px) {
   .heroCopy h1 { font-size: 49px; }
-  .highlightGrid { grid-template-columns: 1fr; }
-  .highlightGrid article { min-height: 250px; }
-  .highlightGrid strong { margin-top: 48px; }
+  .locationGrid, .highlightGrid { grid-template-columns: 1fr; }
+  .locationGrid article, .highlightGrid article { min-height: 250px; }
+  .locationGrid strong, .highlightGrid strong { margin-top: 48px; }
   .taxCards { grid-template-columns: 1fr; }
-  .taxCopy h2, .intro h2, .requirements h2, .package h2, .process h2, .cta h2 { font-size: 45px; }
+  .taxCopy h2, .intro h2, .locationHeading h2, .requirements h2, .package h2, .process h2, .cta h2 { font-size: 45px; }
   .requirementList article { grid-template-columns: 1fr; gap: 10px; }
   .packageHeading { align-items: flex-start; flex-direction: column; }
   .packageHeading > div:last-child { text-align: left; }
