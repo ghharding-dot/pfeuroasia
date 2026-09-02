@@ -80,6 +80,56 @@ export default function LabuanCompanyResidencyPage() {
         </div>
       </section>
 
+      <section className={styles.locationSection}>
+        <div className="site-shell">
+          <div className={styles.locationHeading}>
+            <div>
+              <p className="eyebrow light">Where is Labuan?</p>
+              <h2>A Malaysian base in the heart of Asia.</h2>
+            </div>
+            <div>
+              <p>
+                Labuan is a Federal Territory of Malaysia situated off the coast of Borneo. Labuan FSA positions the
+                jurisdiction as a gateway for international business in Asia, with the practical advantage of operating
+                in the same time zone as many of the region&apos;s major commercial centres.
+              </p>
+              <p>
+                For internationally mobile entrepreneurs, the attraction is not simply tax. It is the combination of
+                Malaysian jurisdiction, an established international business framework, regional access and a regulated
+                corporate ecosystem designed for genuine cross-border activity.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.locationGrid}>
+            <article>
+              <span>01</span>
+              <strong>Malaysia, off Borneo</strong>
+              <p>Labuan is part of Malaysia and operates as a Federal Territory, giving international businesses a Malaysian legal and regulatory base within Southeast Asia.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <strong>Regional business time zone</strong>
+              <p>Labuan FSA highlights its strategic location in Asia and the convenience of sharing a time zone with major cities across the region.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Established international centre</strong>
+              <p>Labuan FSA reports more than 5,300 operating companies, over 800 licensed entities and participants from more than 120 countries.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <strong>Regulated, not unregulated</strong>
+              <p>Labuan FSA is the statutory authority responsible for regulating and developing Labuan IBFC, with compliance requirements aligned to international standards.</p>
+            </article>
+          </div>
+
+          <p className={styles.locationSource}>
+            Sources: Labuan Financial Services Authority — current Labuan company, regulator and market information. Figures and requirements are reviewed before publication and remain subject to change.
+          </p>
+        </div>
+      </section>
+
       <section className={styles.highlights}>
         <div className="site-shell">
           <div className={styles.highlightGrid}>
