@@ -270,40 +270,27 @@
 }
 
 .nomadVideo {
-  display: grid;
-  min-height: 126px;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 20px;
-  align-items: center;
-  padding: 24px 26px;
+  margin: 0;
   border: 1px solid #9b7d4e;
   background: #20241f;
   color: #fff;
   box-shadow: 0 18px 38px rgba(24, 27, 23, 0.12);
-  transition: background 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+  overflow: hidden;
 }
 
-.nomadVideo:hover,
-.nomadVideo:focus-visible {
-  background: #151814;
-  box-shadow: 0 24px 48px rgba(24, 27, 23, 0.2);
-  transform: translateY(-3px);
+.nomadVideoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0d0f0c;
 }
 
-.youTubePlay {
-  display: grid;
-  width: 64px;
-  height: 46px;
-  place-items: center;
-  border-radius: 11px;
-  background: #ff0033;
-  box-shadow: 0 10px 24px rgba(255, 0, 51, 0.2);
-}
-
-.youTubePlay svg {
-  width: 28px;
-  height: 28px;
-  fill: #fff;
+.nomadVideoFrame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .nomadVideoCopy {
@@ -311,6 +298,7 @@
   min-width: 0;
   flex-direction: column;
   gap: 5px;
+  padding: 18px 22px 20px;
 }
 
 .nomadVideoCopy small {
@@ -331,17 +319,6 @@
 .nomadVideoCopy > span {
   color: rgba(255, 255, 255, 0.58);
   font-size: 11px;
-}
-
-.nomadArrow {
-  color: var(--gold-light);
-  font-size: 24px;
-  transition: transform 180ms ease;
-}
-
-.nomadVideo:hover .nomadArrow,
-.nomadVideo:focus-visible .nomadArrow {
-  transform: translate(3px, -3px);
 }
 
 .comingSoon {
@@ -446,19 +423,10 @@
   }
 
   .nomadVideo {
-    min-height: 0;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 15px;
-    padding: 21px 18px;
+    width: 100%;
   }
 
-  .youTubePlay {
-    width: 50px;
-    height: 36px;
-    border-radius: 9px;
-  }
-
-  .nomadArrow {
-    display: none;
+  .nomadVideoCopy {
+    padding: 16px 18px 18px;
   }
 }

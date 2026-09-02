@@ -232,25 +232,23 @@ export default function AsiaGatewayPage() {
               around the globe. There is a lot of interesting information.
             </p>
           </div>
-          <a
-            className={styles.nomadVideo}
-            href="https://www.youtube.com/watch?v=hGvgJ1FYUlY"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Watch Live Like a King in Kuala Lumpur by Nomad Capitalist on YouTube"
-          >
-            <span className={styles.youTubePlay} aria-hidden="true">
-              <svg viewBox="0 0 24 24" focusable="false">
-                <path d="M9 7.5v9l7-4.5-7-4.5Z" />
-              </svg>
-            </span>
-            <span className={styles.nomadVideoCopy}>
+          <figure className={styles.nomadVideo}>
+            <div className={styles.nomadVideoFrame}>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/hGvgJ1FYUlY?rel=0"
+                title="Live Like a King in Kuala Lumpur by Nomad Capitalist"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <figcaption className={styles.nomadVideoCopy}>
               <small>Nomad Capitalist · Malaysia</small>
               <strong>Live Like a King in Kuala Lumpur</strong>
-              <span>Luxury Living in Malaysia</span>
-            </span>
-            <span className={styles.nomadArrow} aria-hidden="true">↗</span>
-          </a>
+              <span>Watch here without leaving PF EuroAsia</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
