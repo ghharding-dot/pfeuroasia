@@ -11,7 +11,7 @@ import "./documents.css";
 
 export const metadata: Metadata = {
   title: "Collaborator Document Centre | Property Facilitators EuroAsia",
-  description: "Shared information and application documents for approved PF EuroAsia collaborators.",
+  description: "Shared information, application documents and approved collaboration templates for PF EuroAsia collaborators.",
   robots: { index: false, follow: false },
 };
 
@@ -36,7 +36,7 @@ export default async function CollaboratorDocumentsPage() {
             <p className="vault-kicker">Shared collaborator resources</p>
             <h1>Document Centre</h1>
             <p>
-              Current information packs and forms available to every approved collaborator.
+              Current information packs, forms and approved templates available to every approved collaborator.
             </p>
           </div>
           <div className="vault-header-actions">
@@ -51,7 +51,7 @@ export default async function CollaboratorDocumentsPage() {
           <div>
             <strong>One shared source for non-property documents</strong>
             <p>
-              Residency, company-formation and related application PDFs will be kept here.
+              Residency, company-formation, application and approved collaboration PDFs are kept here.
               Property-specific brochures remain within the property system and are excluded.
             </p>
           </div>

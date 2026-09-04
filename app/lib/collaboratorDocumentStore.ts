@@ -6,6 +6,7 @@ export const COLLABORATOR_DOCUMENT_CATEGORIES = [
   "Company formation",
   "Guidance",
   "Application forms",
+  "Collaboration agreements",
 ] as const;
 
 export type CollaboratorDocumentMarket = (typeof COLLABORATOR_DOCUMENT_MARKETS)[number];
