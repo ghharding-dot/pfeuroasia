@@ -14,7 +14,7 @@ const coreCollaborationDocuments: CollaboratorDocumentRecord[] = [
     category: "Collaboration agreements",
     title: "International Developer Collaboration Agreement",
     description:
-      "Malaysia-base commercial template for approved Asian property-developer collaborations. Complete all schedules and obtain project-country legal review before signature.",
+      "Malaysia-based commercial template for approved Asian property-developer collaborations. Complete all schedules and obtain project-country legal review before signature.",
     url: "/collaborator-documents/asia/PF_EuroAsia_International_Developer_Collaboration_Agreement.pdf",
     fileName: "PF_EuroAsia_International_Developer_Collaboration_Agreement.pdf",
     createdAt: "2026-09-04T00:00:00.000Z",
