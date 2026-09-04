@@ -168,6 +168,16 @@
   margin-top: 42px;
 }
 
+.financialPartnerSection { margin-top: 42px; text-align: center; }
+.financialFeature { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(280px,.75fr); gap: 34px; width: min(100%,1040px); margin: 22px auto 0; padding: 38px; border: 1px solid rgba(167,133,80,.48); border-radius: 14px; background: linear-gradient(145deg,#fffdf8,#eef4f5); box-shadow: 0 18px 42px rgba(44,36,24,.09); text-align: left; }
+.financialCopy { display:flex;justify-content:center;flex-direction:column; }
+.financialCopy h3 { margin:0 0 16px;color:#171916;font-family:var(--serif);font-size:clamp(34px,3.2vw,48px);font-weight:400; }
+.financialCopy>p:not(.rentalFeatureLead) { max-width:640px;margin:0 0 14px;color:rgba(23,25,22,.72);font-size:14px;line-height:1.72; }
+.estuaryLogo { display:flex;min-height:250px;align-items:center;justify-content:center;flex-direction:column;gap:24px;padding:32px;border-radius:10px;background:linear-gradient(145deg,#071b25,#145c73); }
+.estuaryLogo img { width:100%;height:auto; }
+.estuaryLogo small { color:rgba(255,255,255,.62);font-size:8px;letter-spacing:.12em;line-height:1.6;text-align:center;text-transform:uppercase; }
+@media(max-width:760px){.financialFeature{grid-template-columns:1fr;padding:24px}.estuaryLogo{min-height:190px}}
+
 .rentalFeature {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);

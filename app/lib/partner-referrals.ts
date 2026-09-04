@@ -49,6 +49,11 @@ export const PARTNER_REFERRALS = {
     name: "AIMS Trust Group",
     category: "Malaysia and Asia corporate services partner",
   },
+  "estuary-fx": {
+    code: "EST",
+    name: "Estuary FX",
+    category: "Currency and international payments partner",
+  },
 } as const;
 
 export type PartnerSlug = keyof typeof PARTNER_REFERRALS;

@@ -57,6 +57,7 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
           <Link href="/services/acquisition">Acquisition</Link>
           <Link href="/services/international-sales">International sales</Link>
           <Link href="/services/relocation-concierge">Relocation & concierge</Link>
+          <Link href="/international-payments">International payments</Link>
           <Link href="/knowledge-centre">Knowledge Centre</Link>
           <Link href="/about">Our approach</Link>
           <Link href="/privacy">Privacy notice</Link>

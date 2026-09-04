@@ -32,6 +32,11 @@ const spainGoals = [
     title: "Discuss a partnership",
     text: "Cross-border brokerage and professional collaboration.",
   },
+  {
+    value: "international-payments",
+    title: "International FX transfers & payments",
+    text: "Property, personal and business currency transfers through our Estuary FX collaboration.",
+  },
 ];
 
 const asiaGoals = [
@@ -134,7 +139,7 @@ const asiaGoalDetails: Record<
   },
 };
 
-export type EnquiryInterest = "country-estates" | "investment-opportunities";
+export type EnquiryInterest = "country-estates" | "investment-opportunities" | "international-payments";
 export type EnquiryJourney = "spain" | "asia";
 
 const interestConfig: Record<
@@ -198,6 +203,21 @@ const interestConfig: Record<
     ],
     successText:
       "Your investment criteria have been registered. We will contact you personally regarding appropriate public and privately introduced opportunities.",
+  },
+  "international-payments": {
+    enquiryType: "international-payments",
+    kicker: "Estuary FX · International payments",
+    heading: "Tell us about your transfer.",
+    intro: "For international property payments, personal transfers and business FX between Spain, Europe, the UAE and Asia.",
+    scope: "Property purchase or sale · AED to EUR · Personal transfers · Business payments · FX risk management",
+    formLegend: "Tell us about your international payment.",
+    formHint: "An outline is enough. Estuary FX and Property Facilitators EuroAsia will receive your enquiry and coordinate the next step.",
+    locationLabel: "Funds held in / destination country",
+    locationPlaceholder: "e.g. Dubai, UAE to Spain",
+    defaultLocation: "",
+    messagePlaceholder: "Currency held, currency required, approximate amount, expected timing and whether the transfer relates to property or business…",
+    budgetOptions: ["Under €100,000", "€100,000 – €500,000", "€500,000 – €1m", "€1m+", "Prefer to discuss"],
+    successText: "Your international-payments enquiry has been registered and shared with Estuary FX. A specialist will contact you directly, with Property Facilitators retaining the referral record.",
   },
 };
 
@@ -265,6 +285,7 @@ async function deliverFromBrowser(
   if (partner?.code === "AIMS") {
     recipients.push("abid@aimsconsulting.my");
   }
+  if (partner?.code === "EST") recipients.push("info@estuaryfx.co.uk");
 
   const subjectType = payload.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
   const record = {

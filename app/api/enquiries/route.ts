@@ -146,6 +146,7 @@ function partnerEmail(code?: string) {
       process.env.PARTNER_EMAIL_MEC ||
       "luis.recio@martinezechevarria.com",
     AIMS: process.env.PARTNER_EMAIL_AIMS || "abid@aimsconsulting.my",
+    EST: process.env.PARTNER_EMAIL_ESTUARY_FX || "info@estuaryfx.co.uk",
   };
   return code ? emails[code] : undefined;
 }
@@ -192,6 +193,7 @@ async function sendWithResend(args: {
 }
 
 function enquirySubjectType(record: Record<string, string>) {
+  if (record.enquiry_type === "international-payments") return "international payments enquiry";
   return record.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
 }
 

@@ -47,6 +47,24 @@ export function PartnerStrip() {
           <InteractiveAsiaPartners />
         </div>
 
+        <div className={styles.financialPartnerSection}>
+          <div className={styles.rentalDivider} aria-hidden="true" />
+          <p className={styles.rentalEyebrow}>Currency &amp; international payments partner</p>
+          <div className={styles.financialFeature}>
+            <div className={styles.financialCopy}>
+              <p className={styles.rentalFeatureLead}>Europe · UAE · Spain · Asia</p>
+              <h3>Estuary FX</h3>
+              <p>Specialist support for international property payments, personal transfers and business foreign exchange, with a dedicated account manager throughout.</p>
+              <p>Particularly relevant for clients moving funds from Dubai and the UAE to purchase property in Spain.</p>
+              <a className={styles.rentalFeatureLink} href="/international-payments">Explore international payments <span>→</span></a>
+            </div>
+            <a className={styles.estuaryLogo} href="/international-payments" aria-label="Estuary FX international payments">
+              <img src="/images/estuary-fx-logo.png" alt="Estuary FX" />
+              <small>Currency exchange · International payments · Risk management</small>
+            </a>
+          </div>
+        </div>
+
         <div className={`${styles.rentalPartnerSection} ${styles.featuredRentalSection}`}>
           <div className={styles.rentalDivider} aria-hidden="true" />
           <p className={styles.rentalEyebrow}>Luxury villa rental partner</p>
