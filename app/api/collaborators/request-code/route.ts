@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     "",
     "The code expires in 10 minutes.",
     "",
-    "This portal allows you to submit and update Aylesford Spain properties for PF EuroAsia review. Submitted or edited properties cannot be published without PF EuroAsia approval.",
+    "This portal allows you to submit and update property and villa rental listings for PF EuroAsia review. Submissions cannot be published without PF EuroAsia approval.",
     "",
     "Property Facilitators EuroAsia",
   ].join("\n");

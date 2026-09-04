@@ -41,15 +41,21 @@ export default async function CollaboratorDashboardPage() {
           <div>
             <p className="vault-kicker">PF EuroAsia approved collaborator</p>
             <h1>{collaborator.partnerName}</h1>
-            <p>Submit and monitor your properties. PF EuroAsia controls final publication.</p>
+            <p>Submit and monitor your listings. PF EuroAsia controls final publication.</p>
           </div>
           <div className="vault-header-actions">
             <Link className="vault-secondary-button" href="/collaborators/documents">
               Document Centre
             </Link>
-            <Link className="vault-primary-button" href="/collaborators/properties/new">
-              Add New Property
-            </Link>
+            {collaborator.partnerCode === "LVC" ? (
+              <Link className="vault-primary-button" href="/collaborators/rentals/new">
+                Add Rental Villa
+              </Link>
+            ) : (
+              <Link className="vault-primary-button" href="/collaborators/properties/new">
+                Add New Property
+              </Link>
+            )}
             <LogoutButton />
           </div>
         </header>

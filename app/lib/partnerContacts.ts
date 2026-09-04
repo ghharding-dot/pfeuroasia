@@ -42,6 +42,12 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
     name: "LuxoEstates",
     email: process.env.PARTNER_EMAIL_LUX,
   },
+  LVC: {
+    code: "LVC",
+    name: "The Luxury Villa Collection",
+    email: "villas@theluxuryvillacollection.com",
+    loginEmails: ["villas@theluxuryvillacollection.com"],
+  },
   FIX: {
     code: "FIX",
     name: "The Fixer",
@@ -98,6 +104,7 @@ export const PROPERTY_LISTING_PARTNERS = [
   PARTNER_CONTACTS.AYL,
   PARTNER_CONTACTS.HOU,
   PARTNER_CONTACTS.LUX,
+  PARTNER_CONTACTS.LVC,
   PARTNER_CONTACTS.FIX,
   PARTNER_CONTACTS.R2H,
   PARTNER_CONTACTS.DEV,
