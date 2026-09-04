@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { trackEvent } from "../lib/analytics";
 
-export function RentalEnquiryForm() {
+export function RentalEnquiryForm({ selectedVilla = "" }: { selectedVilla?: string }) {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -83,8 +83,9 @@ export function RentalEnquiryForm() {
         <input name="departure" required type="date" aria-label="Departure date" />
         <input name="guests" required min="1" type="number" placeholder="Number of Guests" />
         <input name="bedrooms" required min="1" type="number" placeholder="Bedrooms Required" />
-        <select className="wide" name="location" required defaultValue="">
-          <option value="" disabled>Preferred Location</option>
+        <select className="wide" name="location" required defaultValue={selectedVilla}>
+          <option value="" disabled>Preferred Location or Villa</option>
+          {selectedVilla && <option value={selectedVilla}>{selectedVilla}</option>}
           <option>La Zagaleta</option>
           <option>El Madroñal</option>
           <option>Marbella Golden Mile</option>
