@@ -150,7 +150,7 @@ export function RentalVillaUploadForm({
           </div>
           <p>
             {partnerName}. Each submission receives its own visible LVC reference.
-            Public descriptions are limited to the first 100 words.
+            Public descriptions are limited to the first 150 words.
           </p>
         </div>
 
@@ -203,11 +203,11 @@ export function RentalVillaUploadForm({
         </div>
 
         <label className="vault-full-field">
-          <span>Brief description * — maximum 100 words</span>
+          <span>Brief description * — maximum 150 words</span>
           <textarea
             name="description"
             required
-            maxLength={900}
+            maxLength={1600}
             rows={6}
             placeholder="A concise description for the centre of the carousel."
           />
