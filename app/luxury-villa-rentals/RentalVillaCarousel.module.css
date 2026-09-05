@@ -38,7 +38,7 @@
 .carousel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(380px, 0.86fr) minmax(0, 1fr);
-  height: 680px;
+  height: 700px;
   overflow: hidden;
   background: #141c24;
   box-shadow: 0 28px 70px rgba(13, 20, 26, 0.2);
@@ -141,11 +141,32 @@
   line-height: 0.94;
 }
 
+.priceBlock {
+  margin: 0 0 18px;
+}
+
 .price {
-  margin: 0 0 22px;
+  margin: 0;
   color: #e0c27d;
   font-size: 0.82rem;
   font-weight: 700;
+}
+
+.priceConversions {
+  display: flex;
+  margin: 7px 0 0;
+  flex-wrap: wrap;
+  gap: 3px 12px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.priceConversions small {
+  display: block;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.6rem;
 }
 
 .facts {
@@ -293,7 +314,7 @@
 @media (max-width: 1050px) {
   .carousel {
     grid-template-columns: 1fr 380px 1fr;
-    height: 660px;
+    height: 700px;
   }
 
   .details {
@@ -328,7 +349,7 @@
   }
 
   .details {
-    min-height: 650px;
+    min-height: 700px;
     order: 2;
   }
 
@@ -351,7 +372,7 @@
   }
 
   .details {
-    min-height: 670px;
+    min-height: 720px;
     padding: 26px 21px 22px;
   }
 }

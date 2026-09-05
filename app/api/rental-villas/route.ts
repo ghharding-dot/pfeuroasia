@@ -59,8 +59,11 @@ export async function POST(request: Request) {
     guests: Math.max(0, Number(body.guests) || 0),
     priceFrom: clean(body.priceFrom, 80),
     priceTo: clean(body.priceTo, 80),
-    currency:
-      body.currency === "GBP" || body.currency === "USD" ? body.currency : "EUR",
+    currency: listingPartner.code === "LVC"
+      ? "GBP"
+      : body.currency === "EUR" || body.currency === "USD"
+        ? body.currency
+        : "GBP",
     description: conciseDescription(body.description),
     amenities: clean(body.amenities, 1200),
     image: clean(body.image, 1000),

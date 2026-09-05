@@ -224,11 +224,12 @@ export function RentalVillaUploadForm({
           </label>
           <label>
             <span>Currency</span>
-            <select name="currency" defaultValue={villa?.currency || "EUR"}>
-              <option value="EUR">EUR €</option>
+            <select name="currency" defaultValue={villa?.currency || "GBP"} disabled={partnerCode === "LVC"}>
               <option value="GBP">GBP £</option>
+              <option value="EUR">EUR €</option>
               <option value="USD">USD $</option>
             </select>
+            {partnerCode === "LVC" && <small>LVC rental prices are quoted in pounds sterling.</small>}
           </label>
           <label>
             <span>Weekly price from</span>

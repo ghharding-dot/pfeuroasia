@@ -69,6 +69,12 @@ function normalizeRentalVilla(value: unknown): RentalVilla | null {
     guests: Math.max(0, Number(villa.guests) || 0),
     priceFrom: clean(villa.priceFrom, 80),
     priceTo: clean(villa.priceTo, 80),
+    currency:
+      villa.listingPartnerCode === "LVC"
+        ? "GBP"
+        : villa.currency === "EUR" || villa.currency === "USD"
+          ? villa.currency
+          : "GBP",
     description: clean(villa.description, 1800),
     amenities: clean(villa.amenities, 1200),
     galleryImages,
