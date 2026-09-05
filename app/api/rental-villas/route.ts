@@ -16,7 +16,7 @@ function clean(value: unknown, maxLength = 5000) {
 }
 
 function conciseDescription(value: unknown) {
-  return clean(value, 1200).split(/\s+/).filter(Boolean).slice(0, 100).join(" ");
+  return clean(value, 1800).split(/\s+/).filter(Boolean).slice(0, 150).join(" ");
 }
 
 export async function POST(request: Request) {
