@@ -45,6 +45,9 @@ export async function POST(request: Request) {
     : getPartnerContact(clean(body.listingPartnerCode, 30) || "LVC");
   const status: RentalVilla["status"] =
     vaultAccess && body.status === "published" ? "published" : "draft";
+  const galleryImages = Array.isArray(body.galleryImages)
+    ? body.galleryImages.map((image: unknown) => clean(image, 1000)).filter(Boolean).slice(0, 8)
+    : [];
 
   const villa: RentalVilla = {
     id: crypto.randomUUID(),
@@ -64,6 +67,7 @@ export async function POST(request: Request) {
     secondaryImage: clean(body.secondaryImage, 1000),
     thirdImage: clean(body.thirdImage, 1000),
     fourthImage: clean(body.fourthImage, 1000),
+    galleryImages,
     listingPartnerCode: listingPartner.code,
     listingPartnerName: listingPartner.name,
     submittedBy: collaborator && !vaultAccess ? "collaborator" : "admin",

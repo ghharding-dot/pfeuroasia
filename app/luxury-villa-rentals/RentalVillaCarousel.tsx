@@ -26,8 +26,34 @@ function amenities(value?: string) {
 
 export function RentalVillaCarousel({ villas }: Props) {
   const [active, setActive] = useState(0);
+  const [photoSet, setPhotoSet] = useState(0);
   const current = villas[active];
   const currentAmenities = useMemo(() => amenities(current?.amenities), [current]);
+  const currentImages = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          [
+            ...(current?.galleryImages || []),
+            current?.image,
+            current?.secondaryImage,
+            current?.thirdImage,
+            current?.fourthImage,
+          ].filter((image): image is string => Boolean(image)),
+        ),
+      ).slice(0, 8),
+    [current],
+  );
+  const photoSetCount = Math.max(1, Math.ceil(currentImages.length / 4));
+  const visibleImages = Array.from(
+    { length: 4 },
+    (_, index) => {
+      const imageIndex = currentImages.length
+        ? (photoSet * 4 + index) % currentImages.length
+        : 0;
+      return { src: currentImages[imageIndex] || "", number: imageIndex + 1 };
+    },
+  );
 
   useEffect(() => {
     if (villas.length < 2) return;
@@ -38,6 +64,10 @@ export function RentalVillaCarousel({ villas }: Props) {
     return () => window.clearInterval(timer);
   }, [villas.length]);
 
+  useEffect(() => {
+    setPhotoSet(0);
+  }, [active]);
+
   if (!current) return null;
 
   const bookingHref =
@@ -47,6 +77,10 @@ export function RentalVillaCarousel({ villas }: Props) {
 
   function move(direction: number) {
     setActive((index) => (index + direction + villas.length) % villas.length);
+  }
+
+  function movePhotos(direction: number) {
+    setPhotoSet((index) => (index + direction + photoSetCount) % photoSetCount);
   }
 
   return (
@@ -61,11 +95,11 @@ export function RentalVillaCarousel({ villas }: Props) {
           <div className={styles.imageColumn}>
             <a href={bookingHref} aria-label={"Enquire about " + current.title}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={current.image} alt={current.title + " exterior"} />
+              <img src={visibleImages[0].src} alt={current.title + " photograph " + visibleImages[0].number} />
             </a>
             <a href={bookingHref} aria-label={"Enquire about " + current.title}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={current.secondaryImage} alt={current.title + " living area"} />
+              <img src={visibleImages[1].src} alt={current.title + " photograph " + visibleImages[1].number} />
             </a>
           </div>
 
@@ -75,6 +109,13 @@ export function RentalVillaCarousel({ villas }: Props) {
                 <span>{String(active + 1).padStart(2, "0")} / {String(villas.length).padStart(2, "0")}</span>
                 <strong>{current.reference}</strong>
               </div>
+              {photoSetCount > 1 && (
+                <div className={styles.photoNavigation} aria-label="Villa photographs">
+                  <button type="button" onClick={() => movePhotos(-1)} aria-label="Previous four photographs">←</button>
+                  <span>Photos {photoSet * 4 + 1}–{Math.min(photoSet * 4 + 4, currentImages.length)} of {currentImages.length}</span>
+                  <button type="button" onClick={() => movePhotos(1)} aria-label="Next four photographs">→</button>
+                </div>
+              )}
               <p className={styles.location}>{current.location}</p>
               <h3>{current.title}</h3>
               <p className={styles.price}>{priceLabel(current)}</p>
@@ -99,11 +140,11 @@ export function RentalVillaCarousel({ villas }: Props) {
           <div className={styles.imageColumn}>
             <a href={bookingHref} aria-label={"Enquire about " + current.title}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={current.thirdImage} alt={current.title + " terrace"} />
+              <img src={visibleImages[2].src} alt={current.title + " photograph " + visibleImages[2].number} />
             </a>
             <a href={bookingHref} aria-label={"Enquire about " + current.title}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={current.fourthImage} alt={current.title + " pool and grounds"} />
+              <img src={visibleImages[3].src} alt={current.title + " photograph " + visibleImages[3].number} />
             </a>
           </div>
         </article>

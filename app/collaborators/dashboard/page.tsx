@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCollaboratorSession } from "../../lib/collaboratorSession";
 import { readProperties } from "../../lib/propertyStore";
+import { readRentalVillas } from "../../lib/rentalVillaStore";
 import { LogoutButton } from "./LogoutButton";
 import "../../vault/vault.css";
 import "../portal.css";
@@ -27,12 +28,19 @@ export default async function CollaboratorDashboardPage() {
   const collaborator = await getCollaboratorSession();
   if (!collaborator) redirect("/collaborators");
 
-  const allProperties = await readProperties();
+  const [allProperties, allRentalVillas] = await Promise.all([
+    readProperties(),
+    readRentalVillas(),
+  ]);
   const properties = allProperties.filter(
     (property) => property.listingPartnerCode === collaborator.partnerCode,
   );
-  const published = properties.filter((property) => property.status === "published").length;
-  const pending = properties.length - published;
+  const rentalVillas = allRentalVillas.filter(
+    (villa) => villa.listingPartnerCode === collaborator.partnerCode,
+  );
+  const submissions = collaborator.partnerCode === "LVC" ? rentalVillas : properties;
+  const published = submissions.filter((item) => item.status === "published").length;
+  const pending = submissions.length - published;
 
   return (
     <main className="vault-dashboard-page">
@@ -61,7 +69,7 @@ export default async function CollaboratorDashboardPage() {
         </header>
 
         <section className="vault-stats" aria-label="Collaborator property summary">
-          <article className="vault-stat"><strong>{properties.length}</strong><span>Your properties</span></article>
+          <article className="vault-stat"><strong>{submissions.length}</strong><span>Your listings</span></article>
           <article className="vault-stat"><strong>{pending}</strong><span>Pending review</span></article>
           <article className="vault-stat"><strong>{published}</strong><span>Published</span></article>
         </section>
@@ -81,6 +89,47 @@ export default async function CollaboratorDashboardPage() {
           </Link>
         </section>
 
+        {collaborator.partnerCode === "LVC" ? (
+          <section className="vault-panel">
+            <div className="vault-panel-header">
+              <div>
+                <h2>Your rental villa submissions</h2>
+                <p className="vault-panel-note">Edit any villa here. Updated published villas return to PF EuroAsia for approval.</p>
+              </div>
+            </div>
+            {rentalVillas.length === 0 ? (
+              <div className="vault-empty">
+                No rental villas have been submitted yet. Use Add Rental Villa to send the first villa for review.
+              </div>
+            ) : (
+              <div className="vault-property-list">
+                {rentalVillas.map((villa) => {
+                  const label = statusLabel(villa);
+                  const statusClass = villa.status === "published" ? "published" : "draft";
+                  return (
+                    <article className="vault-property-row" key={villa.id}>
+                      <div className="vault-property-thumb">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={villa.image} alt="" />
+                      </div>
+                      <div className="vault-property-copy">
+                        <span>{villa.reference} · {villa.location}</span>
+                        <h3>{villa.title}</h3>
+                        <p>{villa.bedrooms || "—"} bedrooms · sleeps {villa.guests || "—"}</p>
+                      </div>
+                      <span className={`vault-status vault-status-${statusClass}`}>{label}</span>
+                      <div className="vault-row-actions">
+                        <Link className="vault-row-action" href={`/collaborators/rentals/${villa.id}/edit`}>
+                          Edit
+                        </Link>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+        ) : (
         <section className="vault-panel">
           <div className="vault-panel-header">
             <div>
@@ -126,6 +175,7 @@ export default async function CollaboratorDashboardPage() {
             </div>
           )}
         </section>
+        )}
       </div>
     </main>
   );

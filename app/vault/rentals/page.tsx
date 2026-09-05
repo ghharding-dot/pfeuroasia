@@ -60,7 +60,12 @@ export default async function VaultRentalsPage() {
                   <span className={"vault-status vault-status-" + villa.status}>
                     {villa.status === "published" ? "Published" : "Pending review"}
                   </span>
-                  <RentalStatusButton id={villa.id} status={villa.status} />
+                  <div className="vault-row-actions">
+                    <Link className="vault-row-action" href={`/vault/rentals/${villa.id}/edit`}>
+                      Edit
+                    </Link>
+                    <RentalStatusButton id={villa.id} status={villa.status} />
+                  </div>
                 </article>
               ))}
             </div>

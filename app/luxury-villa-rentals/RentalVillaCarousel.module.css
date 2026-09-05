@@ -37,8 +37,8 @@
 
 .carousel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(330px, 0.76fr) minmax(0, 1fr);
-  height: 620px;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.86fr) minmax(0, 1fr);
+  height: 680px;
   overflow: hidden;
   background: #141c24;
   box-shadow: 0 28px 70px rgba(13, 20, 26, 0.2);
@@ -98,6 +98,36 @@
   font-weight: 700;
 }
 
+.photoNavigation {
+  display: flex;
+  min-height: 32px;
+  margin: -19px 0 18px;
+  align-items: center;
+  justify-content: space-between;
+  border-block: 1px solid rgba(213, 182, 111, 0.22);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.photoNavigation button {
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #d5b66f;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.photoNavigation button:hover,
+.photoNavigation button:focus-visible {
+  background: rgba(213, 182, 111, 0.1);
+}
+
 .location {
   color: rgba(255, 255, 255, 0.64);
 }
@@ -148,14 +178,15 @@
 }
 
 .description {
-  display: -webkit-box;
   margin: 0;
-  overflow: hidden;
+  max-height: 235px;
+  padding-right: 8px;
+  overflow-y: auto;
+  scrollbar-color: rgba(213, 182, 111, 0.55) transparent;
+  scrollbar-width: thin;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.82rem;
   line-height: 1.65;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
 }
 
 .amenities {
@@ -261,8 +292,8 @@
 
 @media (max-width: 1050px) {
   .carousel {
-    grid-template-columns: 1fr 360px 1fr;
-    height: 580px;
+    grid-template-columns: 1fr 380px 1fr;
+    height: 660px;
   }
 
   .details {
@@ -297,7 +328,7 @@
   }
 
   .details {
-    min-height: 535px;
+    min-height: 650px;
     order: 2;
   }
 
@@ -320,7 +351,7 @@
   }
 
   .details {
-    min-height: 555px;
+    min-height: 670px;
     padding: 26px 21px 22px;
   }
 }
