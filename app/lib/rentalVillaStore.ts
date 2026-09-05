@@ -53,7 +53,7 @@ function normalizeRentalVilla(value: unknown): RentalVilla | null {
     guests: Math.max(0, Number(villa.guests) || 0),
     priceFrom: clean(villa.priceFrom, 80),
     priceTo: clean(villa.priceTo, 80),
-    description: clean(villa.description, 900),
+    description: clean(villa.description, 1800),
     amenities: clean(villa.amenities, 1200),
     status: villa.status === "published" ? "published" : "draft",
     approvalStatus:
