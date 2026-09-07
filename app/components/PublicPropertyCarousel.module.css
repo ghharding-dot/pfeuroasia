@@ -810,7 +810,7 @@
 @media (max-width: 720px) {
   .propertySection .slide {
     grid-template-rows: 330px minmax(0, 1fr);
-    height: 800px;
+    height: 860px;
   }
 
   .propertySection .imageGallery {
@@ -819,10 +819,60 @@
 
   .propertySection .fourPhotoSlide {
     grid-template-rows: 330px minmax(0, 1fr);
-    height: 800px;
+    height: 860px;
   }
 
   .propertySection .fourPhotoSlide > .developmentPhotos {
     height: 330px;
+  }
+
+  .propertySection .copy,
+  .propertySection .fourPhotoSlide > .copy {
+    padding: 26px 22px 28px;
+  }
+
+  /* Flex shrinking was collapsing longer property titles into clipped glyphs. */
+  .propertySection .copy h3 {
+    flex: 0 0 auto;
+    font-size: 31px;
+    line-height: 1.06;
+    -webkit-line-clamp: 2;
+  }
+
+  .propertySection .count {
+    margin-bottom: 14px;
+  }
+
+  .propertySection .reference {
+    margin-bottom: 8px;
+  }
+
+  .propertySection .location {
+    margin-bottom: 8px;
+  }
+
+  .propertySection .priceBlock,
+  .propertySection .propertyFacts,
+  .propertySection .description,
+  .propertySection .copy :global(.button) {
+    flex: 0 0 auto;
+  }
+
+  .propertySection .priceBlock {
+    margin-top: 10px;
+  }
+
+  .propertySection .propertyFacts {
+    margin-top: 12px;
+    padding-block: 10px;
+  }
+
+  .propertySection .description {
+    margin: 14px 0 18px;
+    -webkit-line-clamp: 2;
+  }
+
+  .propertySection .amenities {
+    display: none;
   }
 }
