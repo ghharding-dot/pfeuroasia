@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import styles from "./InteractiveLegalPartners.module.css";
 
@@ -12,6 +13,8 @@ type Partner = {
   kicker: string;
   description: string;
   mark: string;
+  backgroundImage?: string;
+  backgroundPosition?: string;
   instagram?: string;
 };
 
@@ -24,6 +27,8 @@ const partners: Partner[] = [
     description:
       "Marbella-based legal support for international clients, including property, corporate, litigation and immigration matters in Spain.",
     mark: "LB",
+    backgroundImage: "/images/partner-lawbird-antonio.webp",
+    backgroundPosition: "center 26%",
     instagram: "lawbird_lawyers",
   },
   {
@@ -43,6 +48,7 @@ const partners: Partner[] = [
     description:
       "International legal support with offices across Portugal, Madrid, Marbella, Málaga, Turkey and Dubai, covering real estate, tax and wider commercial matters.",
     mark: "ME",
+    backgroundImage: "/images/partner-martinez-marbella-office.webp",
   },
 ];
 
@@ -97,6 +103,16 @@ export function InteractiveLegalPartners() {
             </button>
 
             <div className={styles.reveal} aria-hidden={!revealed}>
+              {partner.backgroundImage ? (
+                <Image
+                  className={styles.backgroundImage}
+                  src={partner.backgroundImage}
+                  alt=""
+                  fill
+                  sizes="(max-width: 760px) 100vw, 33vw"
+                  style={{ objectPosition: partner.backgroundPosition || "center" }}
+                />
+              ) : null}
               <span className={styles.watermark} aria-hidden="true">{partner.mark}</span>
               <p className={styles.kicker}>{partner.kicker}</p>
               <h3>{partner.name}</h3>

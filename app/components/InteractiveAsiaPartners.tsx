@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import styles from "./InteractiveLegalPartners.module.css";
 import layoutStyles from "./InteractiveAsiaPartners.module.css";
 
@@ -39,6 +40,13 @@ export function InteractiveAsiaPartners() {
         </button>
 
         <div className={styles.reveal} aria-hidden={!active}>
+          <Image
+            className={styles.backgroundImage}
+            src="/images/partner-aims-team.webp"
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, 320px"
+          />
           <span className={styles.watermark} aria-hidden="true">A</span>
           <p className={styles.kicker}>Labuan corporate & trust services</p>
           <h3>AIMS Trust Group</h3>

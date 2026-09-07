@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import cardStyles from "./InteractiveLegalPartners.module.css";
 import partnerStyles from "./PartnerStrip.module.css";
@@ -23,7 +24,7 @@ const partners: Partner[] = [
   {
     key: "pfiberia",
     name: "Property Facilitators Iberia",
-    representative: "Geoff Harding",
+    representative: "Geoff Harding · Myriam Harding",
     href: "/go/pfiberia",
     kicker: "Marbella property representation",
     description:
@@ -34,7 +35,7 @@ const partners: Partner[] = [
   {
     key: "aylesford",
     name: "Aylesford Spain",
-    representative: "Michael Cory-Reed",
+    representative: "Michael Corry-Reid · David Neeson",
     href: "/go/aylesford",
     kicker: "Prime residential property",
     description:
@@ -194,10 +195,10 @@ export function InteractivePropertyPartners() {
         );
       })}
 
-      <a className={styles.luxoCard} href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
+      <Link className={styles.luxoCard} href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
         <span className={styles.luxoName}><span>Luxo</span><b>Estates</b></span>
         <small className={styles.luxoRepresentative}>Representative · Diogo Meira</small>
-      </a>
+      </Link>
     </div>
   );
 }

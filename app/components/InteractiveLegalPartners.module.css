@@ -99,6 +99,14 @@
   transition: opacity .3s ease, transform .32s ease;
 }
 
+.backgroundImage {
+  z-index: 0;
+  object-fit: cover;
+  opacity: .2;
+  filter: grayscale(.2) contrast(1.05);
+  pointer-events: none;
+}
+
 .watermark {
   position: absolute;
   right: 14px;

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./PartnerStrip.module.css";
 import { InteractiveAsiaPartners } from "./InteractiveAsiaPartners";
 import { InteractiveLegalPartners } from "./InteractiveLegalPartners";
@@ -51,6 +52,13 @@ export function PartnerStrip() {
           <div className={styles.rentalDivider} aria-hidden="true" />
           <p className={styles.rentalEyebrow}>Currency &amp; international payments partner</p>
           <div className={styles.financialFeature}>
+            <Image
+              className={styles.financialBackdrop}
+              src="/images/partner-estuary-global-payments.webp"
+              alt=""
+              fill
+              sizes="(max-width: 760px) 100vw, 1040px"
+            />
             <div className={styles.financialCopy}>
               <p className={styles.rentalFeatureLead}>Europe · UAE · Spain · Asia</p>
               <h3>Estuary FX</h3>
