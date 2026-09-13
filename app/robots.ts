@@ -6,6 +6,7 @@ const privatePaths = [
   "/collaborators/",
   "/private-portfolio/access",
   "/private-portfolio/collection",
+  "/private-collection-preview/",
 ];
 
 const searchCrawlers = [
