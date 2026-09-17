@@ -18,6 +18,7 @@ const listingPartners = [
   ["HOU", "House and Country Real Estate"],
   ["LUX", "LuxoEstates"],
   ["FIX", "The Fixer"],
+  ["BRE", "Bremberg International Estate"],
 ] as const;
 
 function safeFilename(name: string) {
@@ -212,7 +213,7 @@ export function PropertyForm() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"draft" | "published">("draft");
-  const [market, setMarket] = useState<"spain" | "malaysia" | "asia" | "international">("spain");
+  const [market, setMarket] = useState<"spain" | "sweden" | "italy" | "united-kingdom" | "malaysia" | "asia" | "international">("spain");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -336,6 +337,9 @@ export function PropertyForm() {
             <span>Market / country</span>
             <select name="market" value={market} onChange={(event) => setMarket(event.target.value as typeof market)} required>
               <option value="spain">Spain</option>
+              <option value="sweden">Sweden</option>
+              <option value="italy">Italy</option>
+              <option value="united-kingdom">United Kingdom</option>
               <option value="malaysia">Malaysia</option>
               <option value="asia">Other Asia country</option>
               <option value="international">Other international market</option>
