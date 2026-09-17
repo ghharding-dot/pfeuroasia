@@ -6,7 +6,7 @@ import cardStyles from "./InteractiveLegalPartners.module.css";
 import partnerStyles from "./PartnerStrip.module.css";
 import styles from "./InteractivePropertyPartners.module.css";
 
-type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "fixer" | "rent2holiday" | "madronalvillas";
+type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "bremberg" | "fixer" | "rent2holiday" | "madronalvillas";
 
 type Partner = {
   key: PartnerKey;
@@ -51,6 +51,16 @@ const partners: Partner[] = [
     description:
       "A trusted local property relationship providing access to selected homes, estates and opportunities across Marbella and the wider Andalusian market.",
     mark: "HC",
+  },
+  {
+    key: "bremberg",
+    name: "Bremberg International Estate",
+    representative: "Eric Bremberg",
+    href: "/go/bremberg",
+    kicker: "Stockholm & international property",
+    description:
+      "Specialists in exclusive property and discreet off-market sales, connecting private clients across Stockholm, Marbella and selected international markets.",
+    mark: "BE",
   },
   {
     key: "fixer",
@@ -111,6 +121,15 @@ function FrontLogo({ partner }: { partner: Partner }) {
       <div className={styles.rent2Logo} aria-label="Rent2Holiday">
         <img src="/images/partner-rent2holiday.svg" alt="" />
         <span className={styles.rent2Wordmark}><span>Rent</span><b>2</b><span>Holiday</span></span>
+      </div>
+    );
+  }
+
+  if (partner.key === "bremberg") {
+    return (
+      <div className={styles.brembergLogo} aria-label="Bremberg International Estate">
+        <strong>Bremberg</strong>
+        <span>International Estate</span>
       </div>
     );
   }
