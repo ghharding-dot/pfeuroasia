@@ -692,10 +692,10 @@
   }
 }
 
-/* iPad Safari can discard the percentage-width gutter on this homepage panel. */
+/* Keep the portrait iPad heading below the complete fixed header and flag row. */
 @media (min-width: 621px) and (max-width: 900px) and (orientation: portrait) {
-  .gatewayIntro {
-    padding-inline: 28px;
+  .gatewayHero {
+    padding-top: 230px;
   }
 }
 
