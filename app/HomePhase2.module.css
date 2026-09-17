@@ -692,6 +692,13 @@
   }
 }
 
+/* iPad Safari can discard the percentage-width gutter on this homepage panel. */
+@media (min-width: 621px) and (max-width: 900px) and (orientation: portrait) {
+  .gatewayIntro {
+    padding-inline: 28px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .gatewayCard,
   .gatewayCard::before,
