@@ -125,9 +125,12 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
   if (partner.key === "bremberg") {
     return (
-      <div className={styles.brembergLogo} aria-label="Bremberg International Estate">
-        <strong>Bremberg</strong>
-        <span>International Estate</span>
+      <div className={styles.brembergLogoPanel}>
+        <img
+          className={styles.brembergLogoImage}
+          src="https://brembergestate.com/wp-content/uploads/2024/05/bremberglogo-1.svg"
+          alt="Bremberg International Estate"
+        />
       </div>
     );
   }
