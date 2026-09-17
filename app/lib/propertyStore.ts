@@ -18,7 +18,14 @@ export type PropertyType =
   | "apartment"
   | "townhouse"
   | "new-build";
-export type PropertyMarket = "spain" | "malaysia" | "asia" | "international";
+export type PropertyMarket =
+  | "spain"
+  | "sweden"
+  | "italy"
+  | "united-kingdom"
+  | "malaysia"
+  | "asia"
+  | "international";
 
 export type VaultProperty = {
   id: string;
@@ -124,15 +131,34 @@ export function propertyTypeLabel(value?: PropertyType) {
 }
 
 export function normalizePropertyMarket(value: unknown): PropertyMarket {
-  if (value === "malaysia" || value === "asia" || value === "international") return value;
+  if (
+    value === "sweden" ||
+    value === "italy" ||
+    value === "united-kingdom" ||
+    value === "malaysia" ||
+    value === "asia" ||
+    value === "international"
+  ) return value;
   return "spain";
 }
 
 export function propertyMarketLabel(value?: PropertyMarket) {
+  if (value === "sweden") return "Sweden";
+  if (value === "italy") return "Italy";
+  if (value === "united-kingdom") return "United Kingdom";
   if (value === "malaysia") return "Malaysia";
   if (value === "asia") return "Other Asia country";
   if (value === "international") return "Other international market";
   return "Spain";
+}
+
+export function propertyMarketCountry(value?: PropertyMarket) {
+  if (value === "sweden") return "Sweden";
+  if (value === "italy") return "Italy";
+  if (value === "united-kingdom") return "United Kingdom";
+  if (value === "malaysia") return "Malaysia";
+  if (value === "spain") return "Spain";
+  return "";
 }
 
 export function normalizePropertyAccessLevel(
