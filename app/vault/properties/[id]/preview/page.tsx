@@ -5,6 +5,7 @@ import { PrivatePropertyCard } from "../../../../components/PrivatePropertyCard"
 import {
   normalizePropertyAccessLevel,
   readProperties,
+  propertyMarketLabel,
   type VaultProperty,
 } from "../../../../lib/propertyStore";
 import { hasVaultAccess } from "../../../../lib/vaultSession";
@@ -97,7 +98,7 @@ export default async function PropertyPreviewPage({
             </p>
             <p>
               Client access: <strong>{accessLevel === "registered" ? "Registered listing" : "Private off-market"}</strong>
-              {" · "}Market: <strong>{property.market === "malaysia" ? "Malaysia" : property.market === "asia" ? property.country || "Asia" : property.market === "international" ? "Other international" : "Spain"}</strong>
+              {" · "}Market: <strong>{property.market === "asia" || property.market === "international" ? property.country || propertyMarketLabel(property.market) : propertyMarketLabel(property.market)}</strong>
               {" · "}Public presentation: <strong>{visibilityLabel(property.visibility)}</strong>
               {carouselEligible
                 ? property.market === "malaysia" || property.market === "asia"
