@@ -27,13 +27,23 @@ export default function BrembergProfilePage() {
         <div className={`site-shell ${styles.heroInner}`}>
           <div className={styles.identity}>
             <p className="eyebrow light">Sweden property collaboration</p>
-            <div className={styles.wordmark} aria-label="Bremberg International Estate">
-              <span>Bremberg</span>
-              <small>International Estate</small>
+            <div className={styles.logoPanel}>
+              <img
+                className={styles.logo}
+                src="https://brembergestate.com/wp-content/uploads/2024/05/bremberglogo-1.svg"
+                alt="Bremberg International Estate"
+              />
             </div>
             <h1>Eric Bremberg</h1>
             <p className={styles.role}>CEO · Founder · Registered Real Estate Agent</p>
           </div>
+          <figure className={styles.portraitWrap}>
+            <img
+              className={styles.portrait}
+              src="https://brembergestate.com/wp-content/uploads/2024/05/eric3-1-1.jpg"
+              alt="Eric Bremberg, founder and registered real estate agent at Bremberg International Estate"
+            />
+          </figure>
           <div className={styles.heroCopy}>
             <p>
               PF EuroAsia works with Eric Bremberg and Bremberg International Estate for clients buying,
