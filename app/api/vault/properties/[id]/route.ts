@@ -3,6 +3,7 @@ import { hasVaultAccess } from "../../../../lib/vaultSession";
 import {
   normalizeImagePosition,
   normalizePropertyMarket,
+  propertyMarketCountry,
   normalizePropertyAccessLevel,
   normalizePropertyVisibility,
   readProperties,
@@ -97,7 +98,9 @@ export async function PATCH(
     market: hasDetailUpdate
       ? normalizePropertyMarket(body.market || existing.market)
       : existing.market,
-    country: hasDetailUpdate ? clean(body.country, 120) : existing.country,
+    country: hasDetailUpdate
+      ? clean(body.country, 120) || propertyMarketCountry(normalizePropertyMarket(body.market || existing.market))
+      : existing.country,
     setting: hasDetailUpdate ? clean(body.setting, 120) : existing.setting,
     views: hasDetailUpdate ? clean(body.views, 240) : existing.views,
     yearOfConstruction: hasDetailUpdate
