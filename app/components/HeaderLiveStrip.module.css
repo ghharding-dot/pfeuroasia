@@ -124,6 +124,32 @@
   backdrop-filter: blur(8px);
 }
 
+@media (max-width: 1100px) {
+  .inner {
+    justify-content: space-between;
+    gap: clamp(12px, 2vw, 24px);
+  }
+
+  .location {
+    gap: 6px;
+  }
+
+  .country,
+  .attribution {
+    display: none;
+  }
+
+  .location strong {
+    font-size: 8px;
+    letter-spacing: .12em;
+  }
+
+  .time,
+  .temperature {
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 760px) {
   .inner {
     justify-content: space-between;
