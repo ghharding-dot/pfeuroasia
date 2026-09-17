@@ -52,6 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       languages: {
         "en-GB": absoluteUrl("/properties"),
         "es-ES": absoluteUrl("/es/properties"),
+        "sv-SE": absoluteUrl("/sv/properties"),
         "x-default": absoluteUrl("/properties"),
       },
     },
@@ -66,12 +67,39 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       languages: {
         "en-GB": absoluteUrl("/properties"),
         "es-ES": absoluteUrl("/es/properties"),
+        "sv-SE": absoluteUrl("/sv/properties"),
         "x-default": absoluteUrl("/properties"),
       },
     },
   });
 
   routes.push(
+    {
+      url: absoluteUrl("/sv"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/sv/properties"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "weekly",
+      priority: 0.95,
+      alternates: {
+        languages: {
+          "en-GB": absoluteUrl("/properties"),
+          "es-ES": absoluteUrl("/es/properties"),
+          "sv-SE": absoluteUrl("/sv/properties"),
+          "x-default": absoluteUrl("/properties"),
+        },
+      },
+    },
+    {
+      url: absoluteUrl("/sv/markets/malaysia"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.85,
+    },
     {
       url: absoluteUrl("/travel/malaysia"),
       lastModified: SEO_LAST_UPDATED,
