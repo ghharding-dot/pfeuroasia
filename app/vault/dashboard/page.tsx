@@ -13,6 +13,7 @@ import {
 } from "../../lib/registeredLeadStore";
 import {
   normalizePropertyAccessLevel,
+  propertyMarketLabel,
   readProperties,
   type VaultProperty,
 } from "../../lib/propertyStore";
@@ -272,7 +273,7 @@ export default async function VaultDashboardPage() {
                     <div className="vault-property-copy">
                       <span>
                         {property.reference} · {property.location}
-                        {property.market === "malaysia" ? " · Malaysia" : property.market === "asia" ? ` · ${property.country || "Asia"}` : property.market === "international" ? " · International" : " · Spain"}
+                        {` · ${property.market === "asia" || property.market === "international" ? property.country || propertyMarketLabel(property.market) : propertyMarketLabel(property.market)}`}
                         {property.brochure ? " · Protected PDF attached" : " · PDF pending"}
                       </span>
                       <h3>{property.title}</h3>
