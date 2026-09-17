@@ -209,7 +209,7 @@ export function CollaboratorPropertyForm({
   const [authorityConfirmed, setAuthorityConfirmed] = useState(false);
   const [listingType, setListingType] = useState<"resale" | "new-development">("resale");
   const [propertyType, setPropertyType] = useState("villa");
-  const [market, setMarket] = useState<"spain" | "malaysia" | "asia" | "international">("spain");
+  const [market, setMarket] = useState<"spain" | "sweden" | "italy" | "united-kingdom" | "malaysia" | "asia" | "international">("spain");
 
   function changeListingType(next: "resale" | "new-development") {
     setListingType(next);
@@ -396,6 +396,9 @@ export function CollaboratorPropertyForm({
               required
             >
               <option value="spain">Spain</option>
+              <option value="sweden">Sweden</option>
+              <option value="italy">Italy</option>
+              <option value="united-kingdom">United Kingdom</option>
               <option value="malaysia">Malaysia</option>
               <option value="asia">Other Asia country</option>
               <option value="international">Other international market</option>
@@ -421,6 +424,7 @@ export function CollaboratorPropertyForm({
               <option value="EUR">EUR — Euro</option>
               <option value="USD">USD — US Dollar</option>
               <option value="GBP">GBP — British Pound</option>
+              <option value="SEK">SEK — Swedish Krona</option>
               <option value="MYR">MYR — Malaysian Ringgit</option>
               <option value="AED">AED — UAE Dirham</option>
             </select>
