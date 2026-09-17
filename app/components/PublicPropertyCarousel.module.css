@@ -770,9 +770,9 @@
 @media (max-width: 960px) {
   .propertySection .slide {
     grid-template-columns: 1fr;
-    grid-template-rows: 410px minmax(0, 1fr);
-    height: 880px;
-    min-height: 0;
+    grid-template-rows: 410px auto;
+    height: auto;
+    min-height: 880px;
   }
 
   .propertySection .imageGallery {
@@ -781,8 +781,9 @@
 
   .propertySection .fourPhotoSlide {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: 410px minmax(0, 1fr);
-    height: 880px;
+    grid-template-rows: 410px auto;
+    height: auto;
+    min-height: 880px;
   }
 
   .propertySection .fourPhotoSlide > .developmentPhotos {
@@ -805,12 +806,29 @@
     grid-column: 2;
     grid-row: 1;
   }
+
+  .propertySection .copy {
+    overflow: visible;
+  }
+
+  .propertySection .copy h3,
+  .propertySection .priceBlock,
+  .propertySection .propertyFacts,
+  .propertySection .description,
+  .propertySection .copy :global(.button) {
+    flex: 0 0 auto;
+  }
+
+  .propertySection .copy h3 {
+    line-height: 1.06;
+  }
 }
 
 @media (max-width: 720px) {
   .propertySection .slide {
-    grid-template-rows: 330px minmax(0, 1fr);
-    height: 860px;
+    grid-template-rows: 330px auto;
+    height: auto;
+    min-height: 860px;
   }
 
   .propertySection .imageGallery {
@@ -818,8 +836,9 @@
   }
 
   .propertySection .fourPhotoSlide {
-    grid-template-rows: 330px minmax(0, 1fr);
-    height: 860px;
+    grid-template-rows: 330px auto;
+    height: auto;
+    min-height: 860px;
   }
 
   .propertySection .fourPhotoSlide > .developmentPhotos {
