@@ -1,4 +1,4 @@
-export type PropertyCurrency = "EUR" | "USD" | "GBP" | "MYR" | "AED";
+export type PropertyCurrency = "EUR" | "USD" | "GBP" | "SEK" | "MYR" | "AED";
 
 const FALLBACK_EUR_USD_RATE = 1.16;
 
@@ -33,7 +33,7 @@ export function normalizePriceAmount(value: unknown): number | undefined {
 }
 
 export function normalizePropertyCurrency(value: unknown): PropertyCurrency {
-  return value === "USD" || value === "GBP" || value === "MYR" || value === "AED"
+  return value === "USD" || value === "GBP" || value === "SEK" || value === "MYR" || value === "AED"
     ? value
     : "EUR";
 }
@@ -43,6 +43,7 @@ export function inferLegacyCurrency(value: unknown): PropertyCurrency {
   const upper = value.toUpperCase();
   if (upper.includes("USD") || upper.includes("US$") || upper.includes("$")) return "USD";
   if (upper.includes("GBP") || upper.includes("£")) return "GBP";
+  if (upper.includes("SEK") || upper.includes("KR")) return "SEK";
   if (upper.includes("MYR") || upper.includes("RM")) return "MYR";
   if (upper.includes("AED")) return "AED";
   return "EUR";
