@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPartnerReferral } from "../../lib/partner-referrals";
+import { getPartnerContact } from "../../lib/partnerContacts";
 
 export const runtime = "nodejs";
 
@@ -131,24 +132,25 @@ async function createReference() {
 }
 
 function partnerEmail(code?: string) {
-  const emails: Record<string, string | undefined> = {
-    PFI: process.env.PARTNER_EMAIL_PFI || "ghh@pfiberia.com",
-    AYL: process.env.PARTNER_EMAIL_AYL || "michael@aylesfordspain.com",
-    HOU: process.env.PARTNER_EMAIL_HOU || "jaime@houseandcountry.com",
+  const configuredEmails: Record<string, string | undefined> = {
+    PFI: process.env.PARTNER_EMAIL_PFI,
+    AYL: process.env.PARTNER_EMAIL_AYL,
+    HOU: process.env.PARTNER_EMAIL_HOU,
     LUX: process.env.PARTNER_EMAIL_LUX,
-    FIX: process.env.PARTNER_EMAIL_FIXER || "robert@bazothefixer.com",
-    R2H: process.env.PARTNER_EMAIL_R2H || "jorge@rent2holiday.es",
-    LEG:
-      process.env.PARTNER_EMAIL_LEG ||
-      "juanlopez@legal10abogadosmarbella.com",
-    LAW: process.env.PARTNER_EMAIL_LAW || "aflores@lawbird.com",
-    MEC:
-      process.env.PARTNER_EMAIL_MEC ||
-      "luis.recio@martinezechevarria.com",
-    AIMS: process.env.PARTNER_EMAIL_AIMS || "abid@aimsconsulting.my",
-    EST: process.env.PARTNER_EMAIL_ESTUARY_FX || "info@estuaryfx.co.uk",
+    FIX: process.env.PARTNER_EMAIL_FIXER,
+    R2H: process.env.PARTNER_EMAIL_R2H,
+    LEG: process.env.PARTNER_EMAIL_LEG,
+    LAW: process.env.PARTNER_EMAIL_LAW,
+    MEC: process.env.PARTNER_EMAIL_MEC,
+    AIMS: process.env.PARTNER_EMAIL_AIMS,
+    EST: process.env.PARTNER_EMAIL_ESTUARY_FX,
+    BRE: process.env.PARTNER_EMAIL_BREMBERG,
   };
-  return code ? emails[code] : undefined;
+  if (!code) return undefined;
+  if (code === "BRE") return configuredEmails.BRE || "eric@brembergestate.com";
+
+  const partner = getPartnerContact(code);
+  return configuredEmails[code] || partner.email || partner.loginEmails?.[0];
 }
 
 function notificationAddress() {
