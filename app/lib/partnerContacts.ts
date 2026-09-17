@@ -71,6 +71,13 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
       "00dd2f50ef2de4601f30c5a022bd85b300556c0bfaaf17c51026724c9c7cff43",
     ],
   },
+  BRE: {
+    code: "BRE",
+    name: "Bremberg International Estate",
+    loginEmailHashes: [
+      "08c41323153fb4ace658ece3408a9e6b350a087e42297a3a000a2b9883fd0fb4",
+    ],
+  },
   LEG: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",
@@ -108,6 +115,7 @@ export const PROPERTY_LISTING_PARTNERS = [
   PARTNER_CONTACTS.FIX,
   PARTNER_CONTACTS.R2H,
   PARTNER_CONTACTS.DEV,
+  PARTNER_CONTACTS.BRE,
 ] as const;
 
 export const COLLABORATOR_LOGIN_PARTNERS = PROPERTY_LISTING_PARTNERS.filter(
