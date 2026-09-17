@@ -29,7 +29,7 @@ export function PartnerStrip() {
         <p className="partner-strip-title" id="partner-strip-title">Our collaboration network</p>
 
         <div className={styles.partnerGroup}>
-          <p className={styles.groupEyebrow}>Spain collaborations</p>
+          <p className={styles.groupEyebrow}>European property collaborations</p>
           <p className={styles.rentalStatement}>Hover on desktop or tap once on mobile to discover each partner.</p>
           <InteractivePropertyPartners />
         </div>
