@@ -67,8 +67,14 @@ export function ZhRentalEnquiryForm() {
         <input name="name" required autoComplete="name" placeholder="姓名" />
         <input name="email" required type="email" autoComplete="email" placeholder="电子邮箱" />
         <input className="wide" name="phone" required type="text" placeholder="电话 / 微信 / WhatsApp" />
-        <input name="arrival" required type="date" aria-label="入住日期" />
-        <input name="departure" required type="date" aria-label="退房日期" />
+        <label className="rental-date-field">
+          <span>入住日期</span>
+          <input name="arrival" required type="date" aria-label="入住日期" />
+        </label>
+        <label className="rental-date-field">
+          <span>退房日期</span>
+          <input name="departure" required type="date" aria-label="退房日期" />
+        </label>
         <input name="guests" required min="1" type="number" placeholder="入住人数" />
         <input name="bedrooms" required min="1" type="number" placeholder="所需卧室数量" />
         <select className="wide" name="location" required defaultValue="">
