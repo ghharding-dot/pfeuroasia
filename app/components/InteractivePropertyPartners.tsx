@@ -17,7 +17,6 @@ type Partner = {
   description: string;
   mark: string;
   instagram?: string;
-  email?: string;
 };
 
 const partners: Partner[] = [
@@ -56,7 +55,7 @@ const partners: Partner[] = [
     key: "bremberg",
     name: "Bremberg International Estate",
     representative: "Eric Bremberg",
-    href: "/go/bremberg",
+    href: "/partners/bremberg",
     kicker: "Stockholm & international property",
     description:
       "Specialists in exclusive property and discreet off-market sales, connecting private clients across Stockholm, Marbella and selected international markets.",
@@ -82,7 +81,6 @@ const partners: Partner[] = [
     description:
       "Costa del Sol specialists in holiday rentals, property sales and comprehensive property management across Marbella, Mijas, Estepona and surrounding areas.",
     mark: "R2",
-    email: "jorge@rent2holiday.es",
   },
   {
     key: "madronalvillas",
@@ -197,15 +195,6 @@ export function InteractivePropertyPartners() {
                     aria-label={`Open ${partner.name} on Instagram`}
                   >
                     Instagram @{partner.instagram} <span>↗</span>
-                  </a>
-                ) : null}
-                {partner.email ? (
-                  <a
-                    className={styles.instagramButton}
-                    href={`mailto:${partner.email}`}
-                    aria-label={`Email ${partner.representative} at ${partner.name}`}
-                  >
-                    Email {partner.representative.split(" ")[0]} <span>→</span>
                   </a>
                 ) : null}
               </div>
