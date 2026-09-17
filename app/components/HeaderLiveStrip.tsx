@@ -17,6 +17,7 @@ const languages = [
   { href: "/ar", flagSrc: "/images/flags/sa.svg", label: "العربية", prefix: "/ar" },
   { href: "/zh", flagSrc: "/images/flags/cn.svg", label: "中文", prefix: "/zh" },
   { href: "/da", flagSrc: "/images/flags/dk.svg", label: "Dansk", prefix: "/da" },
+  { href: "/sv", flagSrc: "/images/flags/se.svg", label: "Svenska", prefix: "/sv" },
 ] as const;
 
 function formatTime(date: Date, timeZone: string) {
