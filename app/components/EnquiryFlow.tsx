@@ -18,6 +18,11 @@ const spainGoals = [
     text: "International positioning for an exceptional Spanish home.",
   },
   {
+    value: "sweden-property",
+    title: "Property in Sweden",
+    text: "Buying, selling and discreet property introductions through Eric Bremberg in Sweden.",
+  },
+  {
     value: "luxury-rental",
     title: "Rent a luxury villa",
     text: "A bespoke villa selection and concierge support in Southern Spain.",
@@ -67,6 +72,14 @@ const standardBudgetOptions = [
   "€5m – €10m",
   "€10m – €20m",
   "€20m+",
+  "Prefer to discuss",
+];
+
+const swedenBudgetOptions = [
+  "Under SEK 10m",
+  "SEK 10m – SEK 20m",
+  "SEK 20m – SEK 40m",
+  "SEK 40m+",
   "Prefer to discuss",
 ];
 
@@ -274,19 +287,6 @@ async function deliverFromBrowser(
 ) {
   const recipients = ["enquiry@pfeuroasia.com"];
 
-  if (partner?.code === "FIX") {
-    recipients.push("robert@bazothefixer.com");
-  }
-
-  if (partner?.code === "R2H") {
-    recipients.push("jorge@rent2holiday.es");
-  }
-
-  if (partner?.code === "AIMS") {
-    recipients.push("abid@aimsconsulting.my");
-  }
-  if (partner?.code === "EST") recipients.push("info@estuaryfx.co.uk");
-
   const subjectType = payload.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
   const record = {
     reference,
@@ -345,16 +345,24 @@ export function EnquiryFlow({
   propertyContext,
 }: EnquiryFlowProps) {
   const router = useRouter();
-  const partner = getPartnerReferral(partnerSlug);
+  const referralPartner = getPartnerReferral(partnerSlug);
   const preset = interest ? interestConfig[interest] : undefined;
   const isAsia = journey === "asia";
-  const isAimsReferral = partner?.code === "AIMS";
-  const isGuidedFlow = Boolean(preset || (isAsia && requestingGuide) || isAimsReferral);
+  const isAimsReferral = referralPartner?.code === "AIMS";
+  const isBrembergReferral = referralPartner?.code === "BRE";
+  const isGuidedFlow = Boolean(preset || (isAsia && requestingGuide) || isAimsReferral || isBrembergReferral);
   const goals = isAsia ? asiaGoals : spainGoals;
   const [step, setStep] = useState(isGuidedFlow ? 2 : 1);
-  const [goal, setGoal] = useState(
-    preset?.enquiryType || ((requestingGuide || isAimsReferral) ? "asia-residency-company" : ((partner || propertyContext) ? (isAsia ? "asia-property" : "buy") : "")),
+  const initialGoal = preset?.enquiryType || (
+    isBrembergReferral
+      ? "sweden-property"
+      : (requestingGuide || isAimsReferral)
+        ? "asia-residency-company"
+        : (referralPartner || propertyContext)
+          ? (isAsia ? "asia-property" : "buy")
+          : ""
   );
+  const [goal, setGoal] = useState(initialGoal);
   const [details, setDetails] = useState(() =>
     preset
       ? { ...initialDetails, location: preset.defaultLocation }
@@ -364,6 +372,12 @@ export function EnquiryFlow({
             budget: "",
             message: `I would like further information and current availability for ${propertyContext.title} (${propertyContext.reference}).`,
           }
+        : isBrembergReferral
+          ? {
+              location: "Sweden",
+              budget: "",
+              message: "I would like to discuss buying or selling property in Sweden.",
+            }
         : (requestingGuide || isAimsReferral)
           ? {
               location: initialAsiaJurisdiction || (isAimsReferral ? "Labuan, Malaysia" : ""),
@@ -376,6 +390,7 @@ export function EnquiryFlow({
             }
           : initialDetails,
   );
+  const partner = goal === "sweden-property" ? getPartnerReferral("bremberg") : referralPartner;
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");
   const [sending, setSending] = useState(false);
@@ -386,7 +401,9 @@ export function EnquiryFlow({
   const asiaDetail = isAsia ? asiaGoalDetails[goal] : undefined;
   const budgetOptions =
     preset?.budgetOptions ||
-    (goal === "malaysia-trip"
+    (goal === "sweden-property"
+      ? swedenBudgetOptions
+      : goal === "malaysia-trip"
       ? malaysiaTripBudgetOptions
       : isAsia
         ? asiaBudgetOptions
@@ -410,7 +427,7 @@ export function EnquiryFlow({
       telephone_or_whatsapp: form.get("phone"),
       wechat_id: form.get("wechat"),
       current_location: form.get("country"),
-      partner_slug: partnerSlug || "",
+      partner_slug: goal === "sweden-property" ? "bremberg" : partnerSlug || "",
       language: document.documentElement.lang || "en",
       website_region: form.get("desk") || (isAsia ? "Asia & Malaysia desk" : "International"),
       website_journey: journey,
@@ -561,13 +578,13 @@ export function EnquiryFlow({
 
         {step === 2 && (
           <fieldset>
-            <legend>{preset?.formLegend || asiaDetail?.legend || "Tell us about your requirements."}</legend>
+            <legend>{preset?.formLegend || asiaDetail?.legend || (goal === "sweden-property" ? "Tell us about your property requirements in Sweden." : "Tell us about your requirements.")}</legend>
             <p className="form-hint">
-              {preset?.formHint || asiaDetail?.hint || "An outline is enough—we will explore the details together."}
+              {preset?.formHint || asiaDetail?.hint || (goal === "sweden-property" ? "Your enquiry will be shared directly with Eric Bremberg and Property Facilitators EuroAsia." : "An outline is enough—we will explore the details together.")}
             </p>
             <div className="form-grid">
               <label>
-                <span>{preset?.locationLabel || asiaDetail?.locationLabel || "Preferred area or property"}</span>
+                <span>{preset?.locationLabel || asiaDetail?.locationLabel || (goal === "sweden-property" ? "Swedish area or property" : "Preferred area or property")}</span>
                 <input
                   name="location"
                   value={details.location}
@@ -575,7 +592,7 @@ export function EnquiryFlow({
                   placeholder={
                     preset?.locationPlaceholder ||
                     asiaDetail?.locationPlaceholder ||
-                    "e.g. La Zagaleta, Marbella"
+                    (goal === "sweden-property" ? "e.g. Stockholm, Djursholm, Danderyd or another area" : "e.g. La Zagaleta, Marbella")
                   }
                 />
               </label>
@@ -637,8 +654,9 @@ export function EnquiryFlow({
                     <option>Other Asia market</option>
                   </select>
                 ) : (
-                  <select name="desk" defaultValue={preset ? "Spain desk" : ""}>
+                  <select name="desk" defaultValue={goal === "sweden-property" ? "Sweden property desk" : preset ? "Spain desk" : ""}>
                     <option value="" disabled>Select a desk</option>
+                    <option>Sweden property desk</option>
                     <option>Spain desk</option>
                     <option>Asia & Malaysia desk</option>
                     <option>China enquiry</option>
