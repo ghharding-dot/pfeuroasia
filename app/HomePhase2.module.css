@@ -597,8 +597,18 @@
   }
 
   .gatewayIntro {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     grid-template-columns: 1fr;
     gap: 22px;
+  }
+
+  .gatewayIntro h1 {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(46px, 6vw, 58px);
+    letter-spacing: -0.035em;
   }
 
   .gatewayCards {
