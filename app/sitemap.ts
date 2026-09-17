@@ -84,6 +84,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.85,
     },
+    {
+      url: absoluteUrl("/partners/bremberg"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   );
 
   const properties = await readProperties();
