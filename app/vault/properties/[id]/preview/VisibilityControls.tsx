@@ -101,6 +101,9 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
             <span>Market / country</span>
             <select name="market" defaultValue={property.market || "spain"}>
               <option value="spain">Spain</option>
+              <option value="sweden">Sweden</option>
+              <option value="italy">Italy</option>
+              <option value="united-kingdom">United Kingdom</option>
               <option value="malaysia">Malaysia</option>
               <option value="asia">Other Asia country</option>
               <option value="international">Other international market</option>
