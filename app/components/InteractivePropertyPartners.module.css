@@ -223,9 +223,10 @@
   width: min(100%, 250px);
   min-height: 112px;
   padding: 24px 20px;
+  border: 2px solid #9a7026;
   border-radius: 5px;
-  background: #050505;
-  box-shadow: 0 12px 30px rgba(16, 15, 12, .15);
+  background: transparent;
+  box-shadow: 0 10px 24px rgba(125, 91, 31, .1);
 }
 
 .brembergLogoImage {
@@ -234,6 +235,7 @@
   height: auto;
   max-height: 68px !important;
   object-fit: contain;
+  filter: brightness(.72) saturate(1.4) contrast(1.08);
 }
 
 .rent2Logo img {
