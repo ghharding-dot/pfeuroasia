@@ -29,6 +29,11 @@ export const PARTNER_REFERRALS = {
     name: "Rent2Holiday",
     category: "Holiday rental and property management partner",
   },
+  bremberg: {
+    code: "BRE",
+    name: "Bremberg International Estate",
+    category: "Sweden and international property partner",
+  },
   legal10: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",
