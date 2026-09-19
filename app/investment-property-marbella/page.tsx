@@ -42,12 +42,12 @@ const featuredInvestments = [
   },
   {
     number: "02",
-    name: "Nueva La Quinta",
-    location: "Benahavís · La Quinta",
+    name: "Real de La Quinta",
+    location: "Benahavís · Marbella",
     description:
-      "A selected development opportunity in the hills above Marbella for international purchasers.",
-    href: "/enquire",
-    action: "Request current details",
+      "A 200-hectare residential country club resort with nature, sustainability, lake, golf, wellness and hospitality at its core.",
+    href: "https://www.realdelaquinta.com/en/theproject",
+    action: "Explore the official project",
   },
   {
     number: "03",
