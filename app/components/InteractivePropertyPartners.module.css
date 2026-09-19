@@ -200,6 +200,19 @@
   box-shadow: 0 15px 34px rgba(21,18,13,.16);
 }
 
+.azureanCard {
+  grid-column: 2;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.azureanLogoImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .fixerImage {
   width: 100%;
   max-width: 92%;
@@ -263,6 +276,10 @@
 @media (max-width: 1180px) {
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .azureanCard {
+    grid-column: auto;
   }
 }
 

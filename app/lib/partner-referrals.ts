@@ -34,6 +34,11 @@ export const PARTNER_REFERRALS = {
     name: "Bremberg International Estate",
     category: "Sweden and international property partner",
   },
+  "azurean-residences": {
+    code: "AZU",
+    name: "Azurean Residences · Destination by Hyatt",
+    category: "Branded residences development partner",
+  },
   legal10: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",

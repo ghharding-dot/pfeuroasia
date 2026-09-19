@@ -145,8 +145,12 @@ function partnerEmail(code?: string) {
     AIMS: process.env.PARTNER_EMAIL_AIMS,
     EST: process.env.PARTNER_EMAIL_ESTUARY_FX,
     BRE: process.env.PARTNER_EMAIL_BREMBERG,
+    AZU: process.env.PARTNER_EMAIL_AZUREAN,
   };
   if (!code) return undefined;
+  if (code === "AZU") {
+    return configuredEmails.AZU || "neil.mailer@engelvoelkers.com";
+  }
   if (code === "BRE") return configuredEmails.BRE || "eric@brembergestate.com";
 
   const partner = getPartnerContact(code);

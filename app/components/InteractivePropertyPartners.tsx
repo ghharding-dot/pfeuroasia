@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import cardStyles from "./InteractiveLegalPartners.module.css";
@@ -209,6 +210,21 @@ export function InteractivePropertyPartners() {
       <Link className={styles.luxoCard} href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
         <span className={styles.luxoName}><span>Luxo</span><b>Estates</b></span>
         <small className={styles.luxoRepresentative}>Representative · Diogo Meira</small>
+      </Link>
+
+      <Link
+        className={`${styles.luxoCard} ${styles.azureanCard}`}
+        href="/go/azurean-residences"
+        aria-label="Enquire about Azurean Residences, Destination by Hyatt"
+      >
+        <Image
+          className={styles.azureanLogoImage}
+          src="/images/partner-azurean-residences.webp"
+          alt="Azurean Residences, Destination by Hyatt"
+          width={1983}
+          height={793}
+          sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1180px) 31vw, 24vw"
+        />
       </Link>
     </div>
   );
