@@ -350,7 +350,14 @@ export function EnquiryFlow({
   const isAsia = journey === "asia";
   const isAimsReferral = referralPartner?.code === "AIMS";
   const isBrembergReferral = referralPartner?.code === "BRE";
-  const isGuidedFlow = Boolean(preset || (isAsia && requestingGuide) || isAimsReferral || isBrembergReferral);
+  const isAzureanReferral = referralPartner?.code === "AZU";
+  const isGuidedFlow = Boolean(
+    preset ||
+    (isAsia && requestingGuide) ||
+    isAimsReferral ||
+    isBrembergReferral ||
+    isAzureanReferral,
+  );
   const goals = isAsia ? asiaGoals : spainGoals;
   const [step, setStep] = useState(isGuidedFlow ? 2 : 1);
   const initialGoal = preset?.enquiryType || (
@@ -372,6 +379,12 @@ export function EnquiryFlow({
             budget: "",
             message: `I would like further information and current availability for ${propertyContext.title} (${propertyContext.reference}).`,
           }
+        : isAzureanReferral
+          ? {
+              location: "Azurean Residences, Benahavís",
+              budget: "",
+              message: "I would like further information and current availability for Azurean Residences, Benahavís.",
+            }
         : isBrembergReferral
           ? {
               location: "Sweden",
