@@ -46,8 +46,8 @@ const featuredInvestments = [
     location: "Benahavís · Marbella",
     description:
       "A 200-hectare residential country club resort with nature, sustainability, lake, golf, wellness and hospitality at its core.",
-    href: "https://www.realdelaquinta.com/en/theproject",
-    action: "Explore the official project",
+    href: "/investment-property-marbella/real-de-la-quinta",
+    action: "View full resort",
   },
   {
     number: "03",
