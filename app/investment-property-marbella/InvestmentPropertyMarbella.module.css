@@ -470,6 +470,135 @@
   align-items: flex-end;
 }
 
+.realQuintaHero .heroImage {
+  object-position: center;
+}
+
+.realQuintaHero .detailHeroCopy h1 {
+  max-width: 760px;
+}
+
+.resortFactGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 78px;
+  border-top: 1px solid #b9b0a1;
+  border-left: 1px solid #b9b0a1;
+}
+
+.resortFactGrid article {
+  min-height: 145px;
+  padding: 27px;
+  border-right: 1px solid #b9b0a1;
+  border-bottom: 1px solid #b9b0a1;
+}
+
+.resortFactGrid strong,
+.resortFactGrid span {
+  display: block;
+}
+
+.resortFactGrid strong {
+  color: #9d7440;
+  font-family: var(--serif);
+  font-size: 33px;
+  font-weight: 400;
+}
+
+.resortFactGrid span {
+  max-width: 220px;
+  margin-top: 13px;
+  color: #555850;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.realQuintaLead {
+  max-width: 700px;
+  margin-top: 24px;
+  color: rgba(255, 255, 255, .72);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+.collectionList {
+  margin-top: 62px;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+}
+
+.collectionList article {
+  display: grid;
+  grid-template-columns: 60px 1fr minmax(150px, .35fr);
+  gap: 30px;
+  align-items: center;
+  min-height: 122px;
+  border-bottom: 1px solid rgba(255, 255, 255, .18);
+}
+
+.collectionList article > span {
+  color: var(--gold-light);
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+
+.collectionList h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.collectionList p {
+  margin: 7px 0 0;
+  color: rgba(255, 255, 255, .55);
+  font-size: 12px;
+}
+
+.collectionList strong {
+  color: #efd49e;
+  font-size: 10px;
+  letter-spacing: .09em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.pendingPrice {
+  display: grid;
+  grid-template-columns: .7fr 1.3fr auto;
+  gap: 28px;
+  align-items: center;
+  margin-top: 48px;
+  padding: 28px 30px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, .04);
+}
+
+.pendingPrice span {
+  color: rgba(255, 255, 255, .55);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.pendingPrice strong {
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 400;
+}
+
+.pendingPrice a {
+  color: #efd49e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
 .detailHeroShade {
   background:
     linear-gradient(90deg, rgba(6, 10, 9, .92), rgba(6, 10, 9, .54) 58%, rgba(6, 10, 9, .12)),
@@ -1005,7 +1134,8 @@
   .criteriaGrid,
   .modelCards,
   .specGrid,
-  .amenitiesGrid {
+  .amenitiesGrid,
+  .resortFactGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1032,6 +1162,10 @@
   .heroImage,
   .detailHero .heroImage {
     object-position: 63% center;
+  }
+
+  .realQuintaHero .heroImage {
+    object-position: 50% center;
   }
 
   .heroCopy {
@@ -1100,7 +1234,22 @@
   .criteriaGrid,
   .modelCards,
   .specGrid,
-  .amenitiesGrid {
+  .amenitiesGrid,
+  .resortFactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .collectionList article {
+    grid-template-columns: 38px 1fr;
+    gap: 18px;
+    padding-block: 24px;
+  }
+
+  .collectionList article > strong {
+    grid-column: 2;
+  }
+
+  .pendingPrice {
     grid-template-columns: 1fr;
   }
 
