@@ -30,6 +30,36 @@ const criteria = [
   },
 ];
 
+const featuredInvestments = [
+  {
+    number: "01",
+    name: "Azurean Marbella",
+    location: "Benahavís · Destination by Hyatt",
+    description:
+      "Branded, fully furnished residences with a structured hospitality and guest-stay model.",
+    href: "/investment-property-marbella/azurean-residences-benahavis",
+    action: "View full development",
+  },
+  {
+    number: "02",
+    name: "Nueva La Quinta",
+    location: "Benahavís · La Quinta",
+    description:
+      "A selected development opportunity in the hills above Marbella for international purchasers.",
+    href: "/enquire",
+    action: "Request current details",
+  },
+  {
+    number: "03",
+    name: "Vista Lago",
+    location: "Benahavís · Real de La Quinta",
+    description:
+      "Contemporary residences in a natural setting, presented for buyers seeking a distinctive Southern Spain investment.",
+    href: "/enquire",
+    action: "Request current details",
+  },
+];
+
 export default function InvestmentPropertyMarbellaPage() {
   return (
     <main className={styles.page}>
@@ -53,8 +83,8 @@ export default function InvestmentPropertyMarbellaPage() {
             management and short-term guest stays form part of the proposition.
           </p>
           <div className={styles.heroActions}>
-            <Link className="button button-gold" href="/investment-property-marbella/azurean-residences-benahavis">
-              Explore Azurean Marbella <span>→</span>
+            <Link className="button button-gold" href="#featured-international-investments">
+              Explore featured developments <span>→</span>
             </Link>
             <Link href="/enquire?partner=azurean-residences">Discuss your investment brief <span>→</span></Link>
           </div>
@@ -79,6 +109,46 @@ export default function InvestmentPropertyMarbellaPage() {
                 tax and financial review where required.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className={styles.investmentCollection}
+        id="featured-international-investments"
+        aria-labelledby="featured-international-investments-heading"
+      >
+        <div className="site-shell">
+          <div className={styles.collectionHeading}>
+            <div>
+              <p className="eyebrow">Marbella &amp; Benahavís</p>
+              <h2 id="featured-international-investments-heading">
+                Featured international
+                <em>investment properties.</em>
+              </h2>
+            </div>
+            <p>
+              Three selected development opportunities for international buyers,
+              with direct access to the available presentation or current details.
+            </p>
+          </div>
+
+          <div className={styles.investmentGrid}>
+            {featuredInvestments.map((investment) => (
+              <Link
+                className={styles.investmentCard}
+                href={investment.href}
+                key={investment.name}
+              >
+                <span>{investment.number}</span>
+                <div>
+                  <p>{investment.location}</p>
+                  <h3>{investment.name}</h3>
+                  <small>{investment.description}</small>
+                </div>
+                <strong>{investment.action} <b aria-hidden="true">→</b></strong>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
