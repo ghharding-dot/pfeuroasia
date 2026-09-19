@@ -214,8 +214,8 @@ export function InteractivePropertyPartners() {
 
       <Link
         className={`${styles.luxoCard} ${styles.azureanCard}`}
-        href="/go/azurean-residences"
-        aria-label="Enquire about Azurean Residences, Destination by Hyatt"
+        href="/investment-property-marbella/azurean-residences-benahavis"
+        aria-label="Explore Azurean Residences, Destination by Hyatt"
       >
         <Image
           className={styles.azureanLogoImage}

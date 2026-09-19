@@ -95,6 +95,13 @@
 .marbella-market-area-grid small b,
 .marbella-routes-grid small b { margin-left: 9px; color: var(--gold-light); font-size: 13px; font-weight: 400; }
 
+.marbella-investment-feature { position: relative; display: flex; min-height: 760px; align-items: flex-end; overflow: hidden; background: #101713; color: white; isolation: isolate; }
+.marbella-investment-feature-image { z-index: -2; object-fit: cover; object-position: center; }
+.marbella-investment-feature-overlay { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,rgba(5,10,8,.9),rgba(5,10,8,.45) 58%,rgba(5,10,8,.08)),linear-gradient(0deg,rgba(5,10,8,.7),transparent 62%); }
+.marbella-investment-feature-copy { padding-block: 105px; }
+.marbella-investment-feature h2 { max-width: 940px; margin: 0; font-family: var(--serif); font-size: clamp(52px,6.3vw,92px); font-weight: 400; letter-spacing: -.045em; line-height: .98; }
+.marbella-investment-feature-copy > p:not(.eyebrow) { max-width: 680px; margin: 28px 0 36px; color: rgba(255,255,255,.7); font-size: 15px; line-height: 1.85; }
+
 .marbella-property-routes { background: var(--ivory); }
 .marbella-routes-heading { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(50px,8vw,130px); align-items: end; }
 .marbella-routes-heading > p { margin: 0 0 6px; color: #5e6059; font-size: 14px; line-height: 1.85; }
@@ -171,4 +178,7 @@
   .marbella-routes-grid h3 { margin-top: 46px; }
   .marbella-process-list article { grid-template-columns: 38px 1fr; gap: 14px; }
   .marbella-market-faq-list details p { margin-right: 0; }
+  .marbella-investment-feature { min-height: 720px; }
+  .marbella-investment-feature-image { object-position: 62% center; }
+  .marbella-investment-feature-copy { padding-block: 80px; }
 }

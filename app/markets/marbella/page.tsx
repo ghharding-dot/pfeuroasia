@@ -193,6 +193,29 @@ export default function MarbellaPage() {
         </div>
       </section>
 
+      <section className="marbella-investment-feature" aria-labelledby="marbella-investment-heading">
+        <Image
+          className="marbella-investment-feature-image"
+          src="/images/azurean/azurean-hero.webp"
+          alt="Azurean Marbella branded residences in Benahavís"
+          fill
+          sizes="100vw"
+        />
+        <div className="marbella-investment-feature-overlay" aria-hidden="true" />
+        <div className="site-shell marbella-investment-feature-copy">
+          <p className="eyebrow light">Investment property · Marbella &amp; Southern Spain</p>
+          <h2 id="marbella-investment-heading">Licensed residences with a managed hospitality model.</h2>
+          <p>
+            Explore selected property where owner use, tourist accommodation and
+            professional management form part of the structure—beginning with
+            Azurean Marbella, Destination by Hyatt branded residences in Benahavís.
+          </p>
+          <Link className="button button-gold" href="/investment-property-marbella">
+            Explore investment property <span>→</span>
+          </Link>
+        </div>
+      </section>
+
       <section className="marbella-property-routes" aria-labelledby="marbella-routes-heading">
         <div className="site-shell">
           <div className="marbella-routes-heading">

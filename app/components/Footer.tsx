@@ -67,6 +67,7 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
         </div>
         <div className="footer-links footer-markets">
           <Link href="/markets/marbella">Marbella property</Link>
+          <Link href="/investment-property-marbella">Marbella investment property</Link>
           <Link href="/areas/la-zagaleta">La Zagaleta</Link>
           <Link href="/areas/el-madronal">El Madroñal</Link>
           <Link href="/markets/malaysia">Malaysia & Asia</Link>
