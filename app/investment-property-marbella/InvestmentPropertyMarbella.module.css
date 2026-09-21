@@ -183,7 +183,7 @@
 .investmentCardImage {
   z-index: -2;
   object-fit: cover;
-  opacity: .32;
+  opacity: .4;
   transition: opacity 240ms ease, transform 700ms cubic-bezier(.2, .7, .2, 1);
 }
 
