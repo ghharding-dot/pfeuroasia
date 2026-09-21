@@ -51,12 +51,12 @@ const featuredInvestments = [
   },
   {
     number: "03",
-    name: "Vista Lago",
-    location: "Benahavís · Real de La Quinta",
+    name: "Royal Park Residence & Resort",
+    location: "Estepona · New Golden Mile",
     description:
-      "Contemporary residences in a natural setting, presented for buyers seeking a distinctive Southern Spain investment.",
-    href: "/enquire",
-    action: "Request current details",
+      "Two, three and four-bedroom residences with extensive wellness, sport and lifestyle facilities close to the beach.",
+    href: "/investment-property-marbella/royal-park-residence-resort",
+    action: "View full development",
   },
 ];
 
