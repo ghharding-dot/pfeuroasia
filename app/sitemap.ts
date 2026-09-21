@@ -158,6 +158,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: absoluteUrl("/partners/robert-bazo"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "weekly",
