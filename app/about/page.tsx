@@ -19,6 +19,13 @@ const networkPeople = [
     linkLabel: "View bio",
   },
   {
+    name: "Juan Antonio Álvarez",
+    role: "Legal, tax & financial adviser",
+    organisation: "Legal 10 Abogados Marbella",
+    href: "/partners/juan-antonio-alvarez",
+    linkLabel: "View bio",
+  },
+  {
     name: "Robert Bazo",
     role: "Property adviser & problem solver",
     organisation: "The Fixer",
