@@ -59,14 +59,11 @@ export function Header({
         </Link>
 
         <nav className={`main-nav ${open ? "is-open" : ""}`} aria-label="Main navigation">
-          <Link className={styles.navButton} href="/#services" onClick={() => setOpen(false)}>Services</Link>
-          <Link className={styles.navButton} href="/#markets" onClick={() => setOpen(false)}>Markets</Link>
-          <Link className={styles.navButton} href="/luxury-villa-rentals" onClick={() => setOpen(false)}>Luxury Villa Rentals</Link>
-          <Link className={styles.navButton} href="/commercial" onClick={() => setOpen(false)}>Commercial</Link>
-          <Link className={styles.navButton} href="/private-portfolio" onClick={() => setOpen(false)}>Private portfolio</Link>
-          <Link className={styles.navButton} href="/property-owners" onClick={() => setOpen(false)}>Property owners</Link>
+          <Link className={styles.navButton} href="/spain-gateway" onClick={() => setOpen(false)}>Spain</Link>
+          <Link className={styles.navButton} href="/why-euroasia" onClick={() => setOpen(false)}>PF EuroAsia</Link>
+          <Link className={styles.navButton} href="/asia-gateway" onClick={() => setOpen(false)}>Malaysia &amp; Asia</Link>
+          <Link className={styles.navButton} href="/#collaboration-network" onClick={() => setOpen(false)}>Collaborators</Link>
           <Link className={styles.navButton} href="/knowledge-centre" onClick={() => setOpen(false)}>Knowledge</Link>
-          <Link className={styles.navButton} href="/about" onClick={() => setOpen(false)}>Our approach</Link>
           <Link className="nav-enquire" href={enquireHref} onClick={() => setOpen(false)}>
             {enquireLabel} <span>→</span>
           </Link>

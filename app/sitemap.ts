@@ -75,6 +75,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   routes.push(
     {
+      url: absoluteUrl("/spain-gateway"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
       url: absoluteUrl("/sv"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "monthly",

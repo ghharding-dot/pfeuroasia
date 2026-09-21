@@ -27,7 +27,7 @@ export function HomePhase2() {
         <div className={phase2Styles.gatewayCards}>
           <Link
             className={`${phase2Styles.gatewayCard} ${phase2Styles.spainPath}`}
-            href="#selected-opportunities-heading"
+            href="/spain-gateway"
           >
             <div className={phase2Styles.cardOverlay} />
             <div className={phase2Styles.cardTopline}>
@@ -45,7 +45,7 @@ export function HomePhase2() {
                 representation across Marbella, Benahavís and the Costa del
                 Sol.
               </p>
-              <strong>Explore Spain <span aria-hidden="true">↓</span></strong>
+              <strong>Enter Spain Gateway <span aria-hidden="true">→</span></strong>
             </div>
           </Link>
 
@@ -59,7 +59,7 @@ export function HomePhase2() {
               <span>Europe · Asia · Trusted partners</span>
             </div>
             <div className={phase2Styles.gatewayCardCopy}>
-              <span className={phase2Styles.pathLabel}>Our Network</span>
+              <span className={phase2Styles.pathLabel}>PF EuroAsia</span>
               <h2>PF EuroAsia</h2>
               <p className={phase2Styles.cardLead}>
                 Trusted professionals across borders.
@@ -82,8 +82,8 @@ export function HomePhase2() {
               <span>Malaysia · Wider Asia</span>
             </div>
             <div className={phase2Styles.gatewayCardCopy}>
-              <span className={phase2Styles.pathLabel}>Asia Gateway</span>
-              <h2>Asia</h2>
+              <span className={phase2Styles.pathLabel}>Malaysia &amp; Asia Gateway</span>
+              <h2>Malaysia</h2>
               <p className={phase2Styles.cardLead}>
                 Property, residency and business opportunities.
               </p>
@@ -91,19 +91,8 @@ export function HomePhase2() {
                 Explore property, relocation, residency and company formation
                 across Malaysia and carefully selected Asian markets.
               </p>
-              <strong>Enter Asia Gateway <span aria-hidden="true">→</span></strong>
+              <strong>Enter Malaysia &amp; Asia <span aria-hidden="true">→</span></strong>
             </div>
-          </Link>
-        </div>
-
-        <div className={phase2Styles.travelRoutes} aria-label="PF EuroAsia travel planning">
-          <Link href="/luxury-villa-rentals" className={phase2Styles.travelRoute}>
-            <span><small>Europe-bound travel</small>Travelling to Spain?</span>
-            <strong>Flights · Luxury villas · Local support <b aria-hidden="true">→</b></strong>
-          </Link>
-          <Link href="/travel/malaysia" className={phase2Styles.travelRoute}>
-            <span><small>Asia-bound travel</small>Travelling to Malaysia?</span>
-            <strong>Flights · Hotels · Discovery visits <b aria-hidden="true">→</b></strong>
           </Link>
         </div>
       </div>

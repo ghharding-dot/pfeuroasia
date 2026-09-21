@@ -1,0 +1,77 @@
+.hero {
+  position: relative;
+  min-height: 78svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding: 190px 0 92px;
+  background: #101416 url('/images/el-madronal-essence.webp') center 48% / cover no-repeat;
+  color: #fff;
+  isolation: isolate;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(5, 8, 10, 0.91), rgba(5, 8, 10, 0.5) 58%, rgba(5, 8, 10, 0.28)),
+    linear-gradient(0deg, rgba(5, 8, 10, 0.76), transparent 62%);
+}
+
+.heroInner {
+  width: 100%;
+}
+
+.heroInner h1 {
+  max-width: 940px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(58px, 7vw, 104px);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
+}
+
+.heroInner h1 em {
+  display: block;
+  color: var(--gold-light);
+  font-weight: 400;
+}
+
+.heroInner > p:not(:first-child) {
+  max-width: 680px;
+  margin: 28px 0 0;
+  color: rgba(255, 255, 255, 0.79);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+  margin-top: 34px;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 82svh;
+    padding: 150px 0 70px;
+    background-position: 62% center;
+  }
+
+  .heroInner h1 {
+    font-size: clamp(50px, 15vw, 72px);
+  }
+
+  .heroInner > p:not(:first-child) {
+    font-size: 15px;
+  }
+
+  .heroActions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

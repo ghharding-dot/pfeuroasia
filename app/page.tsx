@@ -1,152 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { HomePhase2 } from "./components/HomePhase2";
-import {
-  PublicPropertyCarousel,
-  type PublicPropertySlide,
-} from "./components/PublicPropertyCarousel";
-import { SpecialistOpportunities } from "./components/SpecialistOpportunities";
-import {
-  imageObjectPosition,
-  normalizePropertyMarket,
-  readProperties,
-} from "./lib/propertyStore";
 import { createMetadata } from "./lib/seo";
-import styles from "./HomeRegions.module.css";
+import styles from "./HomePhase2.module.css";
 import vaultButtonStyles from "./HomeVaultButton.module.css";
 
 export const metadata = createMetadata("homeEn");
-export const dynamic = "force-dynamic";
 
-const services = [
-  {
-    number: "01",
-    title: "Acquisition advisory",
-    text: "Strategic property acquisition for private clients, family offices and investors, including on-market and discreet off-market opportunities across Spain, Portugal, the Middle East and Asia.",
-    href: "/services/acquisition",
-  },
-  {
-    number: "02",
-    title: "International sales",
-    text: "Positioning exceptional Spanish, Middle Eastern and Malaysian properties for qualified international buyers through trusted private networks across Europe, the Middle East and Asia.",
-    href: "/services/international-sales",
-  },
-  {
-    number: "03",
-    title: "Relocation",
-    text: "Assistance with residency and visa applications, company formation and ownership structures through our trusted legal collaboration network in Spain, Portugal, Saudi Arabia and Asia.",
-    href: "/services/labuan-company-residency",
-  },
-  {
-    number: "04",
-    title: "Concierge services & luxury rentals",
-    text: "Access to high-quality villa rentals throughout Southern Spain, together with private aviation, luxury car hire, yacht charter, security and bespoke lifestyle services through our trusted partners.",
-    href: "/luxury-villa-rentals",
-  },
-];
-
-async function getPublicPropertySlides(): Promise<{
-  properties: PublicPropertySlide[];
-  developments: PublicPropertySlide[];
-  privateVillaValueMillions: number;
-}> {
-  try {
-    const properties = await readProperties();
-    const approvedProperties = properties.filter(
-      (property) =>
-        property.status === "published" &&
-        normalizePropertyMarket(property.market) === "spain" &&
-        (property.visibility === "teaser" || property.visibility === "public") &&
-        property.publicImageApproved === true &&
-        Boolean(property.image),
-    );
-    const uniqueVillaTitles = new Set<string>();
-    const privateVillaValue = approvedProperties.reduce((total, property) => {
-      if (property.listingType === "new-development" || property.priceCurrency !== "EUR") {
-        return total;
-      }
-
-      const titleKey = property.title.trim().toLowerCase().replace(/\s+/g, " ");
-      if (!titleKey || uniqueVillaTitles.has(titleKey)) return total;
-      uniqueVillaTitles.add(titleKey);
-      return total + (property.priceAmount || 0);
-    }, 0);
-    const approved = approvedProperties
-      .map((property) => {
-        const isTeaser = property.visibility === "teaser";
-        return {
-          listingType: property.listingType === "new-development" ? "new-development" : "resale",
-          slide: {
-            id: property.id,
-            reference: property.reference,
-            image: property.image,
-            secondaryImage: property.secondaryImage,
-            thirdImage: property.thirdImage,
-            fourthImage: property.fourthImage,
-            imagePosition: imageObjectPosition(property.imagePosition),
-            title:
-              property.publicTitle ||
-              (isTeaser ? "Private property opportunity" : property.title),
-            location:
-              property.publicLocation ||
-              (isTeaser ? "Southern Spain" : property.location),
-            visibility: property.visibility as "teaser" | "public",
-            price:
-              property.visibility === "public"
-                ? property.price || "Price on application"
-                : undefined,
-            priceTo:
-              property.visibility === "public" && property.listingType === "new-development"
-                ? property.priceTo
-                : undefined,
-            plotSize: property.plotSize || undefined,
-            builtSize: property.builtSize || undefined,
-            builtSizeTo: property.builtSizeTo || undefined,
-            bedrooms: property.bedrooms || undefined,
-            bedroomsTo: property.bedroomsTo || undefined,
-            bathrooms: property.bathrooms || undefined,
-            bathroomsTo: property.bathroomsTo || undefined,
-            terraces: property.terraces || undefined,
-            yearOfConstruction: property.yearOfConstruction || undefined,
-            amenities: property.amenities || undefined,
-            description: property.visibility === "public" ? property.description || undefined : undefined,
-            featuredOnHomepage: property.featuredOnHomepage === true,
-            homepagePriority: property.homepagePriority || 100,
-          },
-        };
-      });
-    const resaleSlides = approved
-      .filter((item) => item.listingType === "resale")
-      .map((item) => item.slide);
-    const uniqueResaleSlides = resaleSlides.filter((slide, index, items) => {
-      const titleKey = slide.title.trim().toLowerCase().replace(/\s+/g, " ");
-      return items.findIndex(
-        (candidate) => candidate.title.trim().toLowerCase().replace(/\s+/g, " ") === titleKey,
-      ) === index;
-    });
-    const featured = uniqueResaleSlides
-      .filter((slide) => slide.featuredOnHomepage)
-      .sort((a, b) => a.homepagePriority - b.homepagePriority);
-    const homepageProperties = [
-      ...featured,
-      ...uniqueResaleSlides.filter((slide) => !slide.featuredOnHomepage),
-    ].slice(0, 10);
-    return {
-      properties: homepageProperties,
-      developments: approved.filter((item) => item.listingType === "new-development").map((item) => item.slide),
-      privateVillaValueMillions: Math.floor(privateVillaValue / 1_000_000),
-    };
-  } catch (error) {
-    console.error("homepage-property-carousel-unavailable", error);
-    return { properties: [], developments: [], privateVillaValueMillions: 0 };
-  }
-}
-
-export default async function Home() {
-  const publicPropertySlides = await getPublicPropertySlides();
-
+export default function Home() {
   return (
     <main>
       <Header transparent />
@@ -158,208 +20,39 @@ export default async function Home() {
         The Vault
       </Link>
 
-      <section className="hero">
-        <Image
-          className="hero-image"
-          src="/images/hero-villa.webp"
-          alt="Luxury villa in Marbella represented by Property Facilitators EuroAsia"
-          fill
-          priority
-          sizes="100vw"
-        />
-        <div className="hero-shade" />
-        <div className="hero-grid site-shell">
-          <div className="hero-copy reveal-up">
-            <p className="eyebrow light">Europe & Asia connected</p>
-            <h1>
-              Your gateway to
-              <span>international opportunities.</span>
-            </h1>
-            <p className="hero-intro">
-              Property · Relocation · Residency · Business Expansion
-            </p>
-            <p className="hero-intro">
-              Helping investors, entrepreneurs, families and internationally mobile professionals unlock new opportunities across Europe and Asia through a trusted network of experienced local partners.
-            </p>
-            <p className="hero-intro">
-              From luxury real estate in Spain to business and residency opportunities in Malaysia, Hong Kong, Singapore and beyond, we make international investment, relocation and expansion straightforward and professionally supported.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-gold" href="#regions">
-                Explore opportunities <span>→</span>
-              </a>
-              <Link className="text-link light-link" href="/enquire">
-                Book a confidential consultation <span>→</span>
-              </Link>
-            </div>
-          </div>
-
-          <aside className="hero-note reveal-up delay-1">
-            <span className="gold-rule" />
-            <p>Trusted network across Europe & Asia</p>
-            <small>Spain · Malaysia · Hong Kong · Singapore<br />UAE · Thailand</small>
-            <a className="iberia-logo-link" href="https://pfiberia.com" target="_blank" rel="noreferrer" aria-label="Visit Property Facilitators Iberia">
-              <img src="/images/property-facilitators-iberia-logo.png" alt="Property Facilitators Iberia" />
-            </a>
-          </aside>
-        </div>
-
-        <div className="hero-footer site-shell">
-          <p>Property · Relocation · Residency · Business Expansion</p>
-          <p className="scroll-note">Scroll to discover</p>
-        </div>
-      </section>
-
       <HomePhase2 />
 
-      <PublicPropertyCarousel
-        slides={publicPropertySlides.properties}
-        portfolioValueMillions={publicPropertySlides.privateVillaValueMillions}
-        catalogueHref="/properties"
-      />
-      <PublicPropertyCarousel slides={publicPropertySlides.developments} variant="development" />
-
-      <section className={styles.regionsSection} id="regions">
-        <div className="site-shell">
-          <div className={styles.heading}>
-            <div>
-              <p className="eyebrow">Property in Spain</p>
-              <h2>Marbella Golden Mile &amp; Benahavís.<em>The Costa del Sol.</em></h2>
-            </div>
+      <section className={styles.missionSection} aria-labelledby="home-about-heading">
+        <div className={`site-shell ${styles.missionInner}`}>
+          <p className="eyebrow">Property Facilitators EuroAsia</p>
+          <h2 id="home-about-heading">
+            One trusted relationship.
+            <em>Three distinct pathways.</em>
+          </h2>
+          <div className={styles.missionCopy}>
             <p>
-              Continue through our established Spain property service, including
-              Marbella, La Zagaleta, El Madroñal, private estates and luxury
-              villa rentals.
+              PF EuroAsia connects clients with established property,
+              relocation, legal, residency and business specialists across
+              Spain, Malaysia and selected international markets.
             </p>
-          </div>
-
-          <div className={styles.regionGrid}>
-            <article className={`${styles.regionCard} ${styles.spain}`}>
-              <div className={styles.regionInner}>
-                <span className={styles.regionLabel}>Spain · Costa del Sol</span>
-                <div className={styles.regionCopy}>
-                  <h3>Spain</h3>
-                  <p>Luxury residential property, private estates and relocation across Marbella, Benahavís and the Costa del Sol.</p>
-                  <p className={styles.linkPrompt}>Click any of the area buttons below for local information and property opportunities.</p>
-                  <nav className={styles.subLinks} aria-label="Explore Spain">
-                    <Link href="/markets/marbella">Marbella</Link>
-                    <Link href="/areas/marbella-golden-mile">Golden Mile</Link>
-                    <Link href="/areas/benahavis">Benahavís</Link>
-                    <Link href="/areas/la-zagaleta">La Zagaleta</Link>
-                    <Link href="/areas/el-madronal">El Madroñal</Link>
-                    <Link href="/guides/marbella-property-international-buyers">International buyer guide</Link>
-                    <Link href="/private-portfolio">Private estates</Link>
-                    <Link href="/investment-property-marbella#featured-international-investments">Featured international investment properties</Link>
-                  </nav>
-                </div>
-                <Link className={styles.cardCta} href="/markets/marbella">Explore Spain property →</Link>
-              </div>
-            </article>
-          </div>
-
-          <article className={`${styles.rentalCard} ${styles.rentals}`}>
-            <div className={styles.rentalInner}>
-              <div className={styles.rentalCopy}>
-                <span className={styles.regionLabel}>Stay first · Explore Marbella</span>
-                <h3>Luxury Villa Rentals</h3>
-                <p>Come to Spain first and stay in one of our luxury villas before deciding where you would like to buy in Marbella.</p>
-              </div>
-              <Link className={styles.rentalCta} href="/luxury-villa-rentals">
-                View luxury villas <span>→</span>
-              </Link>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section className="services-section section-pad" id="services">
-        <div className="site-shell">
-          <div className="section-heading-row">
-            <div>
-              <p className="eyebrow light">What we do</p>
-              <h2>Private service.<br />Global perspective.</h2>
-            </div>
             <p>
-              A focused international advisory model for acquiring, selling,
-              relocating and arranging exceptional stays—with one trusted point
-              of contact throughout.
+              Choose the gateway that reflects your objective. We will
+              coordinate the right people and remain your trusted point of
+              contact throughout the journey.
             </p>
+            <Link className="text-link" href="/why-euroasia">
+              Discover PF EuroAsia and our network <span>→</span>
+            </Link>
           </div>
-
-          <div className="service-list">
-            {services.map((service) => (
-              <Link className="service-row" href={service.href} key={service.title}>
-                <span className="service-number">{service.number}</span>
-                <h3>{service.title}</h3>
-                <p>{service.text}</p>
-                <span className="round-arrow" aria-hidden="true">→</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="market-section section-pad" id="markets">
-        <div className="site-shell market-grid">
-          <div className="market-card image-card">
-            <div className="image-card-label">
-              <p className="eyebrow light">Spain</p>
-              <h3>Rare access to the Costa del Sol</h3>
-            </div>
-          </div>
-          <div className="market-copy">
-            <p className="eyebrow">Local intelligence</p>
-            <h2>Knowledge built over decades, not databases.</h2>
-            <p>
-              In prime residential markets, the best opportunities are not
-              always the most visible. Our work is grounded in long-standing
-              local relationships, direct market knowledge and an honest view
-              of value.
-            </p>
-            <ul>
-              <li><span>01</span> Prime and off-market property sourcing</li>
-              <li><span>02</span> Commercial and legal coordination</li>
-              <li><span>03</span> End-to-end ownership support</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="private-portfolio section-pad" id="private-portfolio">
-        <div className="site-shell">
-          <div className="portfolio-intro">
-            <div>
-              <p className="eyebrow light">Specialist private opportunities</p>
-              <h2>Some requirements begin beyond the conventional market.</h2>
-            </div>
-            <div>
-              <p>
-                We maintain discreet access to specialist residential and
-                property-led investment opportunities. Register your criteria
-                and we will respond personally with suitable public and private
-                introductions.
-              </p>
-              <Link className="button button-gold private-access-button" href="/private-portfolio/access">
-                Access Private Portfolio <span>→</span>
-              </Link>
-            </div>
-          </div>
-
-          <SpecialistOpportunities />
-
-          <p className="portfolio-disclaimer">
-            Opportunities may be available publicly or by private introduction.
-            Identifying details are disclosed only after appropriate qualification.
-          </p>
         </div>
       </section>
 
       <section className="cta-section">
         <div className="site-shell cta-inner">
           <p className="eyebrow light">A private conversation</p>
-          <h2>Tell us what you are looking to achieve.</h2>
+          <h2>Tell us which direction you are considering.</h2>
           <p>
-            Buying, selling or exploring a strategic partnership—we will
+            Spain, Malaysia or a wider cross-border opportunity—we will
             respond personally and in confidence.
           </p>
           <Link className="button button-gold" href="/enquire">
