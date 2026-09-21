@@ -27,10 +27,10 @@ const networkPeople = [
   },
   {
     name: "Robert Bazo",
-    role: "Property adviser & problem solver",
+    role: "Luxury property adviser & problem solver",
     organisation: "The Fixer",
-    href: "/go/the-fixer",
-    linkLabel: "Contact through PF EuroAsia",
+    href: "/partners/robert-bazo",
+    linkLabel: "View bio",
   },
   {
     name: "Jorge Gonzalez",
