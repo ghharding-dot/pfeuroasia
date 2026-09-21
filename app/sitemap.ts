@@ -131,6 +131,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: absoluteUrl("/partners/antonio-flores"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [absoluteAssetUrl("/images/partner-lawbird-antonio.webp")],
+    },
+    {
       url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "weekly",
