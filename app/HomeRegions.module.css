@@ -43,7 +43,7 @@
 .regionCard,
 .rentalCard {
   position: relative;
-  min-height: 530px;
+  min-height: 600px;
   overflow: hidden;
   color: white;
   isolation: isolate;
@@ -100,7 +100,7 @@
 
 .regionInner {
   display: flex;
-  min-height: 530px;
+  min-height: 600px;
   flex-direction: column;
   justify-content: space-between;
   padding: 38px;
@@ -146,32 +146,96 @@
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-  margin-top: 26px;
+  margin-top: 12px;
 }
 
 .subLinks a {
-  padding: 9px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  background: rgba(8, 10, 9, 0.16);
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 13px;
+  border: 1px solid rgba(222, 194, 141, 0.72);
+  background: rgba(8, 10, 9, 0.62);
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.2);
+  color: #fff;
   font-size: 9px;
-  font-weight: 650;
+  font-weight: 750;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   backdrop-filter: blur(7px);
-  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.subLinks a:hover {
+.subLinks a::after {
+  color: var(--gold-light);
+  content: "→";
+  font-size: 13px;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.subLinks a:hover,
+.subLinks a:focus-visible {
   border-color: var(--gold-light);
   background: var(--gold);
   color: var(--ink);
+  outline: none;
+  transform: translateY(-2px);
 }
 
-.cardCta {
-  align-self: flex-start;
+.subLinks a:hover::after,
+.subLinks a:focus-visible::after {
+  color: var(--ink);
+  transform: translateX(3px);
+}
+
+.areaGuideLabel {
+  margin-top: 22px !important;
+  color: #fff !important;
+  font-size: 9px !important;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.guideLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 17px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.guideLink span {
+  color: var(--gold-light);
+  font-size: 13px;
+  transition: transform 180ms ease;
+}
+
+.guideLink:hover span,
+.guideLink:focus-visible span {
+  transform: translateX(4px);
+}
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.cardCta,
+.investmentCta {
   min-height: 48px;
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   padding: 12px 16px;
   border: 1px solid var(--gold);
   background: rgba(13, 15, 13, 0.56);
@@ -182,11 +246,34 @@
   transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
+.investmentCta {
+  min-height: 58px;
+  padding-inline: 20px;
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.32);
+  font-size: 10px;
+}
+
+.investmentCta span,
+.cardCta span {
+  font-size: 14px;
+}
+
 .cardCta:hover,
 .cardCta:focus-visible,
 .cardCta:active {
   background: var(--gold);
   color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.investmentCta:hover,
+.investmentCta:focus-visible,
+.investmentCta:active {
+  background: var(--gold-light);
+  color: var(--ink);
+  outline: none;
   transform: translateY(-2px);
 }
 
@@ -241,7 +328,7 @@
 
   .regionCard,
   .regionInner {
-    min-height: 480px;
+    min-height: 560px;
   }
 }
 
@@ -264,7 +351,13 @@
 
   .regionCard,
   .regionInner {
-    min-height: 440px;
+    min-height: 590px;
+  }
+
+  .cardActions,
+  .investmentCta,
+  .cardCta {
+    width: 100%;
   }
 
   .rentalInner {

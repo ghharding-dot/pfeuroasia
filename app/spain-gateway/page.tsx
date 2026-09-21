@@ -226,24 +226,29 @@ export default async function SpainGatewayPage() {
                     Luxury residential property, private estates and relocation
                     across Marbella, Benahavís and the Costa del Sol.
                   </p>
-                  <nav className={styles.subLinks} aria-label="Explore Spain">
+                  <p className={styles.areaGuideLabel}>Area guides · Select a location</p>
+                  <nav className={styles.subLinks} aria-label="Spain area guides">
                     <Link href="/markets/marbella">Marbella</Link>
                     <Link href="/areas/marbella-golden-mile">Golden Mile</Link>
                     <Link href="/areas/benahavis">Benahavís</Link>
                     <Link href="/areas/la-zagaleta">La Zagaleta</Link>
                     <Link href="/areas/el-madronal">El Madroñal</Link>
-                    <Link href="/guides/marbella-property-international-buyers">
-                      International buyer guide
-                    </Link>
-                    <Link href="/private-portfolio">Private estates</Link>
-                    <Link href="/investment-property-marbella">
-                      Investment developments
-                    </Link>
                   </nav>
+                  <Link
+                    className={styles.guideLink}
+                    href="/guides/marbella-property-international-buyers"
+                  >
+                    International buyer guide <span>→</span>
+                  </Link>
                 </div>
-                <Link className={styles.cardCta} href="/properties">
-                  View Spain property →
-                </Link>
+                <div className={styles.cardActions}>
+                  <Link className={styles.investmentCta} href="/investment-property-marbella">
+                    Investment developments <span>→</span>
+                  </Link>
+                  <Link className={styles.cardCta} href="/properties">
+                    View Spain properties <span>→</span>
+                  </Link>
+                </div>
               </div>
             </article>
           </div>
