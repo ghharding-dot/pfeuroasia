@@ -119,6 +119,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
     },
     {
+      url: absoluteUrl("/markets/sweden"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: absoluteUrl("/partners/bremberg"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "monthly",
