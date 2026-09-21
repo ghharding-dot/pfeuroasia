@@ -130,6 +130,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      images: [absoluteAssetUrl("/images/kl-armani-skyline.webp")],
+    },
   );
 
   const properties = await readProperties();

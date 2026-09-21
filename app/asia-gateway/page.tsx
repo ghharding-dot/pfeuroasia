@@ -144,7 +144,7 @@ export default function AsiaGatewayPage() {
                   <p>Property, residency, relocation and business connections centred on Kuala Lumpur and Labuan.</p>
                   <nav className={regionStyles.subLinks} aria-label="Explore Malaysia">
                     <Link href="/markets/malaysia">Kuala Lumpur</Link>
-                    <Link href="/markets/malaysia">Developments</Link>
+                    <Link href="/malaysia-property-developments/armani-hallson-klcc">Property developments</Link>
                     <Link href="/asia-gateway/enquire">Relocation</Link>
                     <Link href="/asia-gateway/enquire">Labuan</Link>
                   </nav>

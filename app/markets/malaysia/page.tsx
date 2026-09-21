@@ -206,6 +206,10 @@ export default async function MalaysiaPage() {
               <li>Scheduled completion in 2029</li>
             </ul>
             <small>Availability, specifications and prices are subject to confirmation. Full details are provided privately.</small>
+            <div className="kl-feature-actions">
+              <Link className="button button-gold" href="/malaysia-property-developments/armani-hallson-klcc">View full development <span>→</span></Link>
+              <Link className="text-link light-link" href="/asia-gateway/enquire?development=armani-hallson-klcc">Request information <span>→</span></Link>
+            </div>
           </div>
         </article>
 

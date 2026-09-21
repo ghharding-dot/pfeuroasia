@@ -508,6 +508,45 @@
   max-width: 760px;
 }
 
+.armaniHero .heroImage {
+  object-position: center 42%;
+}
+
+.armaniAmenities .amenitiesImage {
+  object-position: center 54%;
+}
+
+.armaniAmenityList {
+  display: grid;
+  width: min(100%, 920px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, .18);
+}
+
+.armaniAmenityList article {
+  display: grid;
+  min-height: 150px;
+  align-content: start;
+  gap: 14px;
+  padding: 28px;
+  background: rgba(14, 17, 18, .74);
+  backdrop-filter: blur(10px);
+}
+
+.armaniAmenityList strong {
+  color: var(--gold-light);
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.armaniAmenityList span {
+  color: rgba(255, 255, 255, .72);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
 .resortFactGrid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1198,6 +1237,10 @@
     object-position: 50% center;
   }
 
+  .armaniHero .heroImage {
+    object-position: 58% center;
+  }
+
   .heroCopy {
     padding-block: 155px 78px;
   }
@@ -1362,6 +1405,14 @@
 
   .amenitiesGrid article {
     min-height: 100px;
+  }
+
+  .armaniAmenityList {
+    grid-template-columns: 1fr;
+  }
+
+  .armaniAmenityList article {
+    min-height: 0;
   }
 
   .locationGrid {

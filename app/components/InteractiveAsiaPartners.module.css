@@ -1,9 +1,37 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 320px);
+  grid-template-columns: repeat(2, minmax(0, 320px));
+  gap: 18px;
   justify-content: center;
   width: 100%;
   margin: 0 auto;
+}
+
+.armaniLogo {
+  display: flex;
+  min-height: 76px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #171916;
+  text-align: center;
+}
+
+.armaniLogo strong {
+  font-family: var(--serif);
+  font-size: clamp(27px, 2.7vw, 38px);
+  font-weight: 500;
+  letter-spacing: .13em;
+  line-height: 1;
+}
+
+.armaniLogo span {
+  margin-top: 9px;
+  color: #8c7249;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
 }
 
 .aimsLogo {
