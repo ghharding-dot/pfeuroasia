@@ -64,6 +64,17 @@ const featuredInvestments = [
     image: "/images/royal-park/royal-park-hero.webp",
     imageAlt: "Royal Park Residence and Resort",
   },
+  {
+    number: "04",
+    name: "The View Marbella",
+    location: "Benahavís · Marbella",
+    description:
+      "Fifty-eight sea-view residences and penthouses with private outdoor space and five-star community amenities.",
+    href: "/investment-property-marbella/the-view-marbella",
+    action: "View full development",
+    image: "/images/the-view-marbella/the-view-hero.webp",
+    imageAlt: "The View Marbella residences in Benahavís",
+  },
 ];
 
 export default function InvestmentPropertyMarbellaPage() {
@@ -134,7 +145,7 @@ export default function InvestmentPropertyMarbellaPage() {
               </h2>
             </div>
             <p>
-              Three selected development opportunities for international buyers,
+              Four selected development opportunities for international buyers,
               with direct access to the available presentation or current details.
             </p>
           </div>
@@ -151,7 +162,7 @@ export default function InvestmentPropertyMarbellaPage() {
                   src={investment.image}
                   alt={investment.imageAlt}
                   fill
-                  sizes="(max-width: 1040px) 100vw, 33vw"
+                  sizes="(max-width: 1040px) 100vw, 50vw"
                 />
                 <span className={styles.investmentCardShade} aria-hidden="true" />
                 <span>{investment.number}</span>
