@@ -71,13 +71,15 @@
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(211, 191, 150, .28);
-  background: #17182b;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(94, 96, 143, .28), transparent 58%),
+    #111225;
   box-shadow: 0 30px 70px rgba(0, 0, 0, .28);
 }
 
 .portrait {
-  object-fit: cover;
-  object-position: center 32%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .portraitWrap figcaption {
