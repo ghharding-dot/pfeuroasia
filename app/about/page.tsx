@@ -41,10 +41,10 @@ const networkPeople = [
   },
   {
     name: "Luis Recio",
-    role: "International legal counsel",
+    role: "Business Manager",
     organisation: "Martínez-Echevarría Lawyers",
-    href: "/go/martinezechevarria",
-    linkLabel: "Contact through PF EuroAsia",
+    href: "/partners/luis-recio",
+    linkLabel: "View bio",
   },
 ] as const;
 
