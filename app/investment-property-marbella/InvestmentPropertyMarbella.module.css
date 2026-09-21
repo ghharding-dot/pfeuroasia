@@ -167,14 +167,32 @@
 }
 
 .investmentCard {
+  position: relative;
   display: flex;
   min-height: 410px;
+  overflow: hidden;
   padding: 34px 30px;
   border-right: 1px solid #cbc3b5;
   border-bottom: 1px solid #cbc3b5;
   flex-direction: column;
   color: inherit;
-  transition: background 180ms ease, color 180ms ease;
+  isolation: isolate;
+  transition: color 180ms ease, transform 220ms ease;
+}
+
+.investmentCardImage {
+  z-index: -2;
+  object-fit: cover;
+  opacity: .32;
+  transition: opacity 240ms ease, transform 700ms cubic-bezier(.2, .7, .2, 1);
+}
+
+.investmentCardShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(241, 238, 230, .68), rgba(241, 238, 230, .94) 78%);
+  transition: background 220ms ease;
 }
 
 .investmentCard > span {
@@ -231,8 +249,20 @@
 
 .investmentCard:hover,
 .investmentCard:focus-visible {
-  background: #19221d;
   color: white;
+  outline: none;
+  transform: translateY(-4px);
+}
+
+.investmentCard:hover .investmentCardShade,
+.investmentCard:focus-visible .investmentCardShade {
+  background: linear-gradient(180deg, rgba(18, 27, 22, .7), rgba(18, 27, 22, .95) 78%);
+}
+
+.investmentCard:hover .investmentCardImage,
+.investmentCard:focus-visible .investmentCardImage {
+  opacity: .42;
+  transform: scale(1.045);
 }
 
 .investmentCard:hover p,

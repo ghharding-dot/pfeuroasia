@@ -39,6 +39,8 @@ const featuredInvestments = [
       "Branded, fully furnished residences with a structured hospitality and guest-stay model.",
     href: "/investment-property-marbella/azurean-residences-benahavis",
     action: "View full development",
+    image: "/images/azurean/azurean-hero.webp",
+    imageAlt: "Azurean Marbella residences in Benahavís",
   },
   {
     number: "02",
@@ -48,6 +50,8 @@ const featuredInvestments = [
       "A 200-hectare residential country club resort with nature, sustainability, lake, golf, wellness and hospitality at its core.",
     href: "/investment-property-marbella/real-de-la-quinta",
     action: "View full resort",
+    image: "https://www.realdelaquinta.com/sites/default/files/styles/16_9_large/public/2022-10/9D9A1207.jpg?itok=gliQ0KAz",
+    imageAlt: "El Lago Club at Real de La Quinta",
   },
   {
     number: "03",
@@ -57,6 +61,8 @@ const featuredInvestments = [
       "Two, three and four-bedroom residences with extensive wellness, sport and lifestyle facilities close to the beach.",
     href: "/investment-property-marbella/royal-park-residence-resort",
     action: "View full development",
+    image: "/images/royal-park/royal-park-hero.webp",
+    imageAlt: "Royal Park Residence and Resort",
   },
 ];
 
@@ -140,6 +146,14 @@ export default function InvestmentPropertyMarbellaPage() {
                 href={investment.href}
                 key={investment.name}
               >
+                <Image
+                  className={styles.investmentCardImage}
+                  src={investment.image}
+                  alt={investment.imageAlt}
+                  fill
+                  sizes="(max-width: 1040px) 100vw, 33vw"
+                />
+                <span className={styles.investmentCardShade} aria-hidden="true" />
                 <span>{investment.number}</span>
                 <div>
                   <p>{investment.location}</p>
@@ -149,38 +163,6 @@ export default function InvestmentPropertyMarbellaPage() {
                 <strong>{investment.action} <b aria-hidden="true">→</b></strong>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.featured} aria-labelledby="featured-investment-heading">
-        <div className={`site-shell ${styles.featuredGrid}`}>
-          <div className={styles.featuredImageWrap}>
-            <Image
-              src="/images/azurean/azurean-pool.webp"
-              alt="Panoramic infinity pool at Azurean Marbella"
-              fill
-              sizes="(max-width: 860px) 100vw, 52vw"
-            />
-          </div>
-          <div className={styles.featuredCopy}>
-            <p className="eyebrow light">First featured development · Benahavís</p>
-            <h2 id="featured-investment-heading">Azurean Marbella</h2>
-            <p className={styles.destination}>Destination by Hyatt branded residences</p>
-            <p>
-              133 freehold, fully furnished residences licensed under Andalucía&apos;s
-              Vivienda de Uso Turístico framework, with extensive resort facilities
-              and professional residence-management services available.
-            </p>
-            <dl className={styles.featuredFacts}>
-              <div><dt>Residences</dt><dd>133</dd></div>
-              <div><dt>Bedrooms</dt><dd>1–3</dd></div>
-              <div><dt>Guide prices</dt><dd>From €699,000</dd></div>
-              <div><dt>Anticipated completion</dt><dd>Q2 2029</dd></div>
-            </dl>
-            <Link className="button button-gold" href="/investment-property-marbella/azurean-residences-benahavis">
-              View the complete development <span>→</span>
-            </Link>
           </div>
         </div>
       </section>

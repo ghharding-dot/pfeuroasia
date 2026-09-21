@@ -63,7 +63,7 @@ export function HomePhase2() {
             </div>
             <div className={phase2Styles.gatewayCardCopy}>
               <span className={phase2Styles.pathLabel}>PF EuroAsia</span>
-              <h2>PF EuroAsia</h2>
+              <h2>About Us</h2>
               <p className={phase2Styles.cardLead}>
                 Trusted professionals across borders.
               </p>
@@ -71,7 +71,7 @@ export function HomePhase2() {
                 A coordinated network connecting property, legal, residency
                 and business expertise across Europe and Asia.
               </p>
-              <strong>Discover our network <span aria-hidden="true">→</span></strong>
+              <strong>Meet PF EuroAsia <span aria-hidden="true">→</span></strong>
             </div>
           </Link>
 
