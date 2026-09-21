@@ -6,9 +6,9 @@ import { Header } from "../../components/Header";
 import styles from "./JuanAntonioAlvarezProfile.module.css";
 
 export const metadata: Metadata = {
-  title: "Juan Antonio Álvarez | Legal 10 Abogados | PF EuroAsia",
+  title: "Juan Antonio López Álvarez | Legal 10 Abogados | PF EuroAsia",
   description:
-    "Meet Juan Antonio Álvarez of Legal 10 Abogados Marbella, providing personalised legal, tax, accounting and financial advice for residents, non-residents and businesses.",
+    "Meet Juan Antonio López Álvarez of Legal 10 Abogados Marbella, providing personalised legal, tax, accounting and financial advice for residents, non-residents and businesses.",
   alternates: {
     canonical: "https://www.pfeuroasia.com/partners/juan-antonio-alvarez",
   },
@@ -40,18 +40,25 @@ export default function JuanAntonioAlvarezProfilePage() {
                 priority
               />
             </div>
-            <h1>Juan Antonio Álvarez</h1>
+            <h1>Juan Antonio López Álvarez</h1>
             <p className={styles.role}>Legal 10 Abogados Marbella</p>
           </div>
 
-          <div className={styles.heroStatement} aria-hidden="true">
-            <span>10</span>
-            <small>Legal · Tax · Financial</small>
-          </div>
+          <figure className={styles.portraitWrap}>
+            <Image
+              className={styles.portrait}
+              src="/images/juan-antonio-lopez-alvarez.webp"
+              alt="Juan Antonio López Álvarez of Legal 10 Abogados Marbella"
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 32vw"
+            />
+            <figcaption>Legal · Tax · Financial</figcaption>
+          </figure>
 
           <div className={styles.heroCopy}>
             <p>
-              PF EuroAsia works with Juan Antonio Álvarez and Legal 10 Abogados
+              PF EuroAsia works with Juan Antonio López Álvarez and Legal 10 Abogados
               Marbella to provide international clients with personalised legal,
               tax and financial guidance in Spain.
             </p>

@@ -19,7 +19,7 @@ const networkPeople = [
     linkLabel: "View bio",
   },
   {
-    name: "Juan Antonio Álvarez",
+    name: "Juan Antonio López Álvarez",
     role: "Legal, tax & financial adviser",
     organisation: "Legal 10 Abogados Marbella",
     href: "/partners/juan-antonio-alvarez",

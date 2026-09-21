@@ -39,6 +39,8 @@ const partners: Partner[] = [
     description:
       "Legal, tax and financial advice with specialist criminal law services and offices in Marbella and Madrid.",
     mark: "10",
+    backgroundImage: "/images/juan-antonio-lopez-alvarez.webp",
+    backgroundPosition: "center 30%",
   },
   {
     key: "martinez",
