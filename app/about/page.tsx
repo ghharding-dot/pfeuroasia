@@ -15,8 +15,8 @@ const networkPeople = [
     name: "Antonio Flores",
     role: "Spanish legal partner",
     organisation: "Lawbird Legal Services",
-    href: "/go/lawbird",
-    linkLabel: "Contact through PF EuroAsia",
+    href: "/partners/antonio-flores",
+    linkLabel: "View bio",
   },
   {
     name: "Robert Bazo",
