@@ -60,13 +60,32 @@
   font-weight: 400;
 }
 
-.gatewayIntro > p {
+.gatewayServices {
   max-width: 500px;
   margin: 0 0 4px;
+}
+
+.gatewayServices p {
+  margin: 0;
   color: rgba(255, 255, 255, 0.7);
   font-family: var(--serif);
   font-size: 18px;
   line-height: 1.6;
+}
+
+.gatewayServices p span {
+  padding: 0 5px;
+  color: var(--gold-light);
+}
+
+.gatewayServices strong {
+  display: block;
+  margin-top: 18px;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .gatewayCards {
@@ -728,7 +747,7 @@
     font-size: clamp(48px, 14vw, 64px);
   }
 
-  .gatewayIntro > p {
+  .gatewayServices p {
     font-size: 16px;
   }
 

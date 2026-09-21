@@ -17,11 +17,14 @@ export function HomePhase2() {
               </span>
             </h1>
           </div>
-          <p>
-            Spain, our international network and Asia each offer a distinct
-            route forward. Select the direction that reflects what you want to
-            achieve.
-          </p>
+          <div className={phase2Styles.gatewayServices}>
+            <p>
+              Exclusive residential properties <span>·</span> Investment properties
+              <span>·</span> International monetary transfers <span>·</span> Top legal advice
+              <span>·</span> Local collaborative partners in all zones
+            </p>
+            <strong>Select your direction below.</strong>
+          </div>
         </div>
 
         <div className={phase2Styles.gatewayCards}>
