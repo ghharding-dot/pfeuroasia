@@ -1,0 +1,350 @@
+.page {
+  background: #f4f1ea;
+  color: #171916;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 0 96px;
+  background:
+    radial-gradient(circle at 76% 16%, rgba(82, 159, 171, .24), transparent 32%),
+    linear-gradient(135deg, #102027 0%, #19343b 62%, #0c1c22 100%);
+  color: #fff;
+}
+
+.hero::after {
+  position: absolute;
+  right: -8vw;
+  bottom: -150px;
+  width: 520px;
+  height: 520px;
+  border: 1px solid rgba(143, 201, 204, .2);
+  border-radius: 50%;
+  content: "";
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr .58fr .78fr;
+  align-items: center;
+  gap: clamp(34px, 5vw, 78px);
+}
+
+.logoPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 420px);
+  min-height: 138px;
+  margin: 38px 0 48px;
+  padding: 26px 30px;
+  border: 1px solid rgba(143, 201, 204, .4);
+  background: rgba(255, 255, 255, .96);
+}
+
+.logo {
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+}
+
+.identity h1 {
+  margin: 0;
+  font-size: clamp(38px, 4vw, 58px);
+}
+
+.role {
+  margin: 13px 0 0;
+  color: rgba(255, 255, 255, .6);
+  font-size: 13px;
+  letter-spacing: .1em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.heroStatement {
+  display: flex;
+  min-height: 430px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid rgba(143, 201, 204, .28);
+  background: rgba(5, 19, 24, .3);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, .3);
+}
+
+.heroStatement span {
+  font-family: var(--serif);
+  font-size: clamp(38px, 4vw, 56px);
+  line-height: 1;
+}
+
+.heroStatement b {
+  color: #80bbc1;
+  font-size: 22px;
+  font-weight: 400;
+  transform: rotate(90deg);
+}
+
+.heroCopy > p {
+  margin: 0 0 32px;
+  color: rgba(255, 255, 255, .72);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.introduction {
+  display: grid;
+  grid-template-columns: 1.35fr .65fr;
+  gap: 90px;
+  padding-top: 105px;
+  padding-bottom: 110px;
+}
+
+.story h2,
+.servicesHeading h2,
+.processCta h2 {
+  max-width: 780px;
+  margin: 18px 0 34px;
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.04;
+}
+
+.story > p:not(:global(.eyebrow)) {
+  max-width: 800px;
+  color: #55584f;
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.managementCard {
+  align-self: start;
+  padding: 34px;
+  border-top: 2px solid #5796a0;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(24, 25, 21, .08);
+}
+
+.managementCard > strong {
+  display: block;
+  margin-top: 28px;
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 400;
+  line-height: .9;
+}
+
+.managementCard > span {
+  color: #467d85;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.managementCard ul {
+  margin: 30px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.managementCard li {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(23, 25, 22, .11);
+  color: #50534b;
+  font-size: 15px;
+}
+
+.managementCard a {
+  color: #467d85;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.servicesSection {
+  padding: 100px 0 110px;
+  background: #e9eeeb;
+}
+
+.servicesHeading {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: end;
+  gap: 80px;
+  margin-bottom: 58px;
+}
+
+.servicesHeading h2 {
+  margin-bottom: 0;
+}
+
+.servicesHeading > p {
+  margin: 0 0 8px;
+  color: #62645d;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(58, 108, 116, .22);
+  border-left: 1px solid rgba(58, 108, 116, .22);
+}
+
+.serviceItem {
+  min-height: 176px;
+  padding: 26px;
+  border-right: 1px solid rgba(58, 108, 116, .22);
+  border-bottom: 1px solid rgba(58, 108, 116, .22);
+  background: rgba(255, 255, 255, .44);
+}
+
+.serviceItem span {
+  color: #4d8992;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.serviceItem p {
+  margin: 24px 0 0;
+  color: #333b38;
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.processSection {
+  padding: 100px 0;
+  background: #122329;
+  color: #fff;
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: 48px;
+  background: rgba(255, 255, 255, .14);
+}
+
+.processGrid article {
+  min-height: 280px;
+  padding: 28px 24px;
+  background: #122329;
+}
+
+.processGrid article > span {
+  color: #80bbc1;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.processGrid h3 {
+  margin: 45px 0 16px;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.processGrid p {
+  color: rgba(255, 255, 255, .62);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.processCta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 60px;
+  margin-top: 74px;
+}
+
+.processCta h2 {
+  margin-bottom: 20px;
+}
+
+.processCta p {
+  max-width: 760px;
+  color: rgba(255, 255, 255, .64);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+@media (max-width: 1000px) {
+  .processGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: 76px 0 70px;
+  }
+
+  .heroInner,
+  .introduction,
+  .servicesHeading,
+  .processCta {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .logoPanel {
+    margin: 30px 0 38px;
+  }
+
+  .heroStatement {
+    width: min(100%, 480px);
+    min-height: 400px;
+  }
+
+  .introduction,
+  .servicesSection,
+  .processSection {
+    padding-top: 72px;
+    padding-bottom: 74px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .logoPanel {
+    min-height: 118px;
+    padding: 22px;
+  }
+
+  .heroStatement {
+    min-height: 360px;
+  }
+
+  .managementCard {
+    padding: 26px 22px;
+  }
+
+  .servicesGrid,
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .serviceItem {
+    min-height: 138px;
+  }
+
+  .processGrid article {
+    min-height: auto;
+  }
+}
