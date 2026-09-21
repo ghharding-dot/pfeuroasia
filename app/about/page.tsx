@@ -3,6 +3,44 @@ import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 
+const networkPeople = [
+  {
+    name: "Eric Bremberg",
+    role: "International property partner · Sweden",
+    organisation: "Bremberg International Estate",
+    href: "/partners/bremberg",
+    linkLabel: "View profile",
+  },
+  {
+    name: "Antonio Flores",
+    role: "Spanish legal partner",
+    organisation: "Lawbird Legal Services",
+    href: "/go/lawbird",
+    linkLabel: "Contact through PF EuroAsia",
+  },
+  {
+    name: "Robert Bazo",
+    role: "Property adviser & problem solver",
+    organisation: "The Fixer",
+    href: "/go/the-fixer",
+    linkLabel: "Contact through PF EuroAsia",
+  },
+  {
+    name: "Jorge Gonzalez",
+    role: "Holiday rentals & property management",
+    organisation: "Rent2Holiday",
+    href: "/go/rent2holiday",
+    linkLabel: "Contact through PF EuroAsia",
+  },
+  {
+    name: "Luis Recio",
+    role: "International legal counsel",
+    organisation: "Martínez-Echevarría Lawyers",
+    href: "/go/martinezechevarria",
+    linkLabel: "Contact through PF EuroAsia",
+  },
+] as const;
+
 export default function AboutPage() {
   return (
     <main>
@@ -60,6 +98,30 @@ export default function AboutPage() {
               <div><dt>Europe &amp; Asia</dt><dd>International trading since 1994</dd></div>
               <div><dt>Prime property</dt><dd>Trusted relationships since 2002</dd></div>
             </dl>
+          </div>
+        </div>
+      </section>
+      <section className="about-network section-pad" aria-labelledby="about-network-title">
+        <div className="site-shell">
+          <div className="about-network-heading">
+            <div>
+              <p className="eyebrow">People &amp; professional network</p>
+              <h2 id="about-network-title">Trusted people.<br /><em>Connected expertise.</em></h2>
+            </div>
+            <p>
+              PF EuroAsia brings together experienced property and professional
+              partners across Spain, Scandinavia and the wider international market.
+            </p>
+          </div>
+          <div className="about-network-grid">
+            {networkPeople.map((person) => (
+              <Link className="about-person-card" href={person.href} key={person.name}>
+                <span className="about-person-role">{person.role}</span>
+                <h3>{person.name}</h3>
+                <p>{person.organisation}</p>
+                <span className="about-person-link">{person.linkLabel} <b>→</b></span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
