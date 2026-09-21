@@ -152,6 +152,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: [absoluteAssetUrl("/images/partner-martinez-marbella-office.webp")],
     },
     {
+      url: absoluteUrl("/partners/jorge-gonzalez"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "weekly",
