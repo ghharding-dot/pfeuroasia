@@ -118,8 +118,7 @@ function FrontLogo({ partner }: { partner: Partner }) {
   if (partner.key === "rent2holiday") {
     return (
       <div className={styles.rent2Logo} aria-label="Rent2Holiday">
-        <img src="/images/partner-rent2holiday.svg" alt="" />
-        <span className={styles.rent2Wordmark}><span>Rent</span><b>2</b><span>Holiday</span></span>
+        <img src="/images/partner-rent2holiday.webp" alt="Rent2Holiday" />
       </div>
     );
   }

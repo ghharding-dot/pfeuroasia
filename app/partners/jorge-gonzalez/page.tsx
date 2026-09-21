@@ -45,10 +45,10 @@ export default function JorgeGonzalezProfilePage() {
             <div className={styles.logoPanel}>
               <Image
                 className={styles.logo}
-                src="/images/partner-rent2holiday.svg"
+                src="/images/partner-rent2holiday.webp"
                 alt="Rent2Holiday"
-                width={420}
-                height={120}
+                width={800}
+                height={800}
                 priority
               />
             </div>
