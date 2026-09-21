@@ -162,6 +162,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "monthly",
       priority: 0.8,
+      images: [absoluteAssetUrl("/images/robert-bazo-profile.webp")],
     },
     {
       url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),

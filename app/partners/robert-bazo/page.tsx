@@ -56,10 +56,17 @@ export default function RobertBazoProfilePage() {
             <p className={styles.role}>Luxury property adviser &amp; problem solver · The Fixer</p>
           </div>
 
-          <div className={styles.heroStatement}>
-            <span>Not just a brand.</span>
-            <strong>A responsibility.</strong>
-          </div>
+          <figure className={styles.portraitWrap}>
+            <Image
+              className={styles.portrait}
+              src="/images/robert-bazo-profile.webp"
+              alt="Robert Bazo, luxury property adviser and founder of The Fixer"
+              fill
+              priority
+              sizes="(max-width: 900px) 100vw, 32vw"
+            />
+            <figcaption>Not just a brand. A responsibility.</figcaption>
+          </figure>
 
           <div className={styles.heroCopy}>
             <p>
