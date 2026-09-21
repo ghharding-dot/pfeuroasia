@@ -138,6 +138,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: [absoluteAssetUrl("/images/partner-lawbird-antonio.webp")],
     },
     {
+      url: absoluteUrl("/partners/juan-antonio-alvarez"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [absoluteAssetUrl("/images/partner-legal10.jpg")],
+    },
+    {
       url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "weekly",
