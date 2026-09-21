@@ -145,6 +145,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: [absoluteAssetUrl("/images/partner-legal10.jpg")],
     },
     {
+      url: absoluteUrl("/partners/luis-recio"),
+      lastModified: SEO_LAST_UPDATED,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [absoluteAssetUrl("/images/partner-martinez-marbella-office.webp")],
+    },
+    {
       url: absoluteUrl("/malaysia-property-developments/armani-hallson-klcc"),
       lastModified: SEO_LAST_UPDATED,
       changeFrequency: "weekly",
