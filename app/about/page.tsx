@@ -34,10 +34,10 @@ const networkPeople = [
   },
   {
     name: "Jorge Gonzalez",
-    role: "Holiday rentals & property management",
+    role: "Vacation home management & rentals",
     organisation: "Rent2Holiday",
-    href: "/go/rent2holiday",
-    linkLabel: "Contact through PF EuroAsia",
+    href: "/partners/jorge-gonzalez",
+    linkLabel: "View bio",
   },
   {
     name: "Luis Recio",
