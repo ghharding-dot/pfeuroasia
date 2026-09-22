@@ -62,7 +62,7 @@ export function Header({
           <Link className={styles.navButton} href="/spain-gateway" onClick={() => setOpen(false)}>Spain</Link>
           <Link className={styles.navButton} href="/markets/sweden" onClick={() => setOpen(false)}>Sweden</Link>
           <Link className={styles.navButton} href="/asia-gateway" onClick={() => setOpen(false)}>Malaysia &amp; Asia</Link>
-          <Link className={styles.navButton} href="/guides/malaysia-residency-options" onClick={() => setOpen(false)}>Residency</Link>
+          <Link className={styles.navButton} href="/guides/mm2h-malaysia" onClick={() => setOpen(false)}>Residency</Link>
           <Link className={styles.navButton} href="/services/malaysia-company-formation" onClick={() => setOpen(false)}>Company Formation</Link>
           <Link className={styles.navButton} href="/why-euroasia" onClick={() => setOpen(false)}>About Us</Link>
           <Link className={styles.navButton} href="/#collaboration-network" onClick={() => setOpen(false)}>Collaborators</Link>

@@ -11,21 +11,29 @@ const pathways = [
     title: "Malaysia My Second Home (MM2H)",
     text: "A long-stay programme for eligible applicants who can meet the current financial, property, age and presence conditions for the chosen category.",
     points: ["Long-stay lifestyle route", "Family applications may be possible", "Conditions must be checked before applying"],
+    href: "/guides/mm2h-malaysia",
+    linkLabel: "View the 2026 MM2H guide",
   },
   {
     title: "DE Rantau Nomad Pass",
     text: "A route designed for qualifying digital professionals and remote workers who want to live and work from Malaysia for a defined period.",
     points: ["Digital and remote-work focus", "Professional evidence required", "Administered through Malaysia Digital"],
+    href: "https://www.mdec.my/md-programmes/digital-nomad-pass",
+    linkLabel: "View the official programme",
   },
   {
     title: "Employment Pass",
     text: "A company-sponsored route for eligible expatriate roles. The employer, position, salary and duration must meet the applicable requirements.",
     points: ["Linked to genuine employment", "Employer registration and approval", "Dependants considered separately"],
+    href: "https://esd.imi.gov.my/portal/",
+    linkLabel: "View the official portal",
   },
   {
     title: "Labuan business-led pathway",
     text: "For suitable entrepreneurs, a genuine Labuan company may support a work-permit conversation, subject to company activity, substance and regulatory approval.",
     points: ["Company and immigration reviewed together", "Not automatic residency", "Ongoing compliance required"],
+    href: "/services/labuan-company-residency",
+    linkLabel: "Explore the Labuan pathway",
   },
 ];
 
@@ -77,7 +85,7 @@ export default function MalaysiaResidencyOptionsPage() {
       <section className={styles.cardsSection}>
         <div className="site-shell">
           <div className={styles.sectionHeading}><div><p className="eyebrow light">Four starting points</p><h2>Which pathway matches the plan?</h2></div><p>This is an initial orientation, not an eligibility decision. Every route remains subject to the current official criteria and approval.</p></div>
-          <div className={styles.cardGrid}>{pathways.map((pathway, index) => <article className={styles.card} key={pathway.title}><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><h3>{pathway.title}</h3><p>{pathway.text}</p><ul>{pathway.points.map((point) => <li key={point}>{point}</li>)}</ul></article>)}</div>
+          <div className={styles.cardGrid}>{pathways.map((pathway, index) => <article className={styles.card} key={pathway.title}><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><h3>{pathway.title}</h3><p>{pathway.text}</p><ul>{pathway.points.map((point) => <li key={point}>{point}</li>)}</ul><Link className="text-link light-link" href={pathway.href}>{pathway.linkLabel} <span>→</span></Link></article>)}</div>
         </div>
       </section>
 
