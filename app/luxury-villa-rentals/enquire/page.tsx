@@ -34,7 +34,7 @@ export default function LuxuryVillaEnquiryPage() {
 
     const payload = {
       _subject: "New luxury villa rental enquiry from pfeuroasia.com",
-      _cc: "villas@theluxuryvillacollection.com",
+      _cc: "reservations@theluxuryvillacollection.com",
       _template: "table",
       enquiry_type: "Luxury villa rental",
       preferred_location: form.get("location"),

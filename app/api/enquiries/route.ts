@@ -323,7 +323,7 @@ export async function POST(request: NextRequest) {
       mainRecipient,
       routedPartnerEmail,
       enquiryType === "luxury-rental"
-        ? process.env.PARTNER_EMAIL_LVC || "villas@theluxuryvillacollection.com"
+        ? "reservations@theluxuryvillacollection.com"
         : undefined,
     ].filter(Boolean) as string[]),
   );

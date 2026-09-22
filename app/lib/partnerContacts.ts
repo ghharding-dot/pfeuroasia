@@ -45,7 +45,7 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
   LVC: {
     code: "LVC",
     name: "The Luxury Villa Collection",
-    email: "villas@theluxuryvillacollection.com",
+    email: "reservations@theluxuryvillacollection.com",
     loginEmails: ["villas@theluxuryvillacollection.com"],
   },
   FIX: {
