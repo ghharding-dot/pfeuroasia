@@ -34,7 +34,13 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
           </Link>
           <div className="footer-contact">
             <p><strong>Property Facilitators EuroAsia</strong></p>
-            <p><strong>Labuan, Malaysia</strong></p>
+            <p>
+              <strong>Labuan office, Malaysia</strong><br />
+              Unit Level 11(A), Main Office Tower<br />
+              Financial Park Labuan, Jalan Merdeka<br />
+              87000 FT Labuan, Malaysia
+            </p>
+            <p>Tel: <a href="tel:+608745179">+60 87 451 79</a></p>
             <p><a href="mailto:enquiry@pfeuroasia.com">enquiry@pfeuroasia.com</a></p>
             {whatsappHref && (
               <p>
