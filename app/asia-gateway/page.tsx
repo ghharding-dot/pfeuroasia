@@ -232,7 +232,8 @@ export default function AsiaGatewayPage() {
               around the globe. There is a lot of interesting information.
             </p>
           </div>
-          <figure className={styles.nomadVideo}>
+          <div style={{ display: "grid", gap: 28, minWidth: 0 }}>
+            <figure className={styles.nomadVideo}>
             <div className={styles.nomadVideoFrame}>
               <iframe
                 src="https://www.youtube-nocookie.com/embed/hGvgJ1FYUlY?rel=0"
@@ -248,7 +249,25 @@ export default function AsiaGatewayPage() {
               <strong>Live Like a King in Kuala Lumpur</strong>
               <span>Watch here without leaving PF EuroAsia</span>
             </figcaption>
-          </figure>
+            </figure>
+            <figure className={styles.nomadVideo}>
+            <div className={styles.nomadVideoFrame}>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/NMFW7fgCUtU?rel=0"
+                title="My Favorite Place in Kuala Lumpur by Nomad Capitalist"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+            <figcaption className={styles.nomadVideoCopy}>
+              <small>Nomad Capitalist · Malaysia</small>
+              <strong>My Favorite Place in Kuala Lumpur</strong>
+              <span>Watch here without leaving PF EuroAsia</span>
+            </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
