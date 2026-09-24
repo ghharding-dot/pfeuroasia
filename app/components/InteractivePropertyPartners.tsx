@@ -221,8 +221,10 @@ export function InteractivePropertyPartners() {
       })}
 
       <Link className={styles.luxoCard} href="/go/luxoestates" aria-label="Enquire through LuxoEstates">
-        <span className={styles.luxoName}><span>Luxo</span><b>Estates</b></span>
-        <small className={styles.luxoRepresentative}>Representative · Diogo Meira</small>
+        <span className={styles.staticFront}>
+          <span className={styles.luxoName}><span>Luxo</span><b>Estates</b></span>
+          <small className={styles.luxoRepresentative}>Representative · Diogo Meira</small>
+        </span>
       </Link>
 
       <Link
@@ -230,14 +232,16 @@ export function InteractivePropertyPartners() {
         href="/investment-property-marbella/azurean-residences-benahavis"
         aria-label="Explore Azurean Residences, Destination by Hyatt"
       >
-        <Image
-          className={styles.azureanLogoImage}
-          src="/images/partner-azurean-residences.webp"
-          alt="Azurean Residences, Destination by Hyatt"
-          width={1983}
-          height={793}
-          sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1180px) 31vw, 24vw"
-        />
+        <span className={`${styles.staticFront} ${styles.azureanFront}`}>
+          <Image
+            className={styles.azureanLogoImage}
+            src="/images/partner-azurean-residences.webp"
+            alt="Azurean Residences, Destination by Hyatt"
+            width={1983}
+            height={793}
+            sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1180px) 31vw, 24vw"
+          />
+        </span>
       </Link>
     </div>
   );
