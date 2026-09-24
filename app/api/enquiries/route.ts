@@ -146,12 +146,14 @@ function partnerEmail(code?: string) {
     EST: process.env.PARTNER_EMAIL_ESTUARY_FX,
     BRE: process.env.PARTNER_EMAIL_BREMBERG,
     AZU: process.env.PARTNER_EMAIL_AZUREAN,
+    INM: process.env.PARTNER_EMAIL_INMOLUX,
   };
   if (!code) return undefined;
   if (code === "AZU") {
     return configuredEmails.AZU || "neil.mailer@engelvoelkers.com";
   }
   if (code === "BRE") return configuredEmails.BRE || "eric@brembergestate.com";
+  if (code === "INM") return configuredEmails.INM || "info@inmoluxgroup.com";
 
   const partner = getPartnerContact(code);
   return configuredEmails[code] || partner.email || partner.loginEmails?.[0];
