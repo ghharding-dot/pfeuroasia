@@ -19,6 +19,7 @@
   width: min(92%, 252px);
   height: auto;
   max-height: 96px !important;
+  filter: brightness(.16);
   object-fit: contain;
 }
 

@@ -34,7 +34,7 @@ export default function IvanMunozGarciaProfilePage() {
             <p className="eyebrow light">Construction, development &amp; real estate collaboration</p>
             <div className={styles.logoPanel}>
               <Image
-                className={styles.logo}
+                className={`${styles.logo} ${styles.darkLogo}`}
                 src="/images/partner-inmolux-group.svg"
                 alt="Inmolux Group Construction and Real Estate"
                 width={151}
@@ -46,16 +46,14 @@ export default function IvanMunozGarciaProfilePage() {
             <p className={styles.role}>Commercial Director · Inmolux Group</p>
           </div>
 
-          <figure
-            className={styles.portraitWrap}
-            style={{ display: "grid", placeItems: "center", padding: "48px", background: "#fff" }}
-          >
+          <figure className={styles.portraitWrap}>
             <Image
-              className={styles.logo}
-              src="/images/partner-inmolux-group.svg"
-              alt="Inmolux Group Construction and Real Estate"
-              width={302}
-              height={96}
+              className={styles.portrait}
+              src="/images/inmolux-ivan-munoz-garcia.jpg"
+              alt="Iván Muñoz García, Commercial Director of Inmolux Group"
+              fill
+              sizes="(max-width: 900px) 100vw, 30vw"
+              priority
             />
           </figure>
 
