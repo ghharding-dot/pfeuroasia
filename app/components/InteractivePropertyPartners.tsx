@@ -7,7 +7,7 @@ import cardStyles from "./InteractiveLegalPartners.module.css";
 import partnerStyles from "./PartnerStrip.module.css";
 import styles from "./InteractivePropertyPartners.module.css";
 
-type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "bremberg" | "fixer" | "rent2holiday" | "madronalvillas";
+type PartnerKey = "pfiberia" | "aylesford" | "housecountry" | "inmolux" | "bremberg" | "fixer" | "rent2holiday" | "madronalvillas";
 
 type Partner = {
   key: PartnerKey;
@@ -51,6 +51,16 @@ const partners: Partner[] = [
     description:
       "A trusted local property relationship providing access to selected homes, estates and opportunities across Marbella and the wider Andalusian market.",
     mark: "HC",
+  },
+  {
+    key: "inmolux",
+    name: "Inmolux Group",
+    representative: "Iván Muñoz García",
+    href: "/partners/ivan-munoz-garcia",
+    kicker: "Construction, development & real estate",
+    description:
+      "A Marbella-based full-service group covering property sales, investment, construction and project management, represented in our network by Commercial Director Iván Muñoz García.",
+    mark: "IN",
   },
   {
     key: "bremberg",
@@ -113,6 +123,10 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
   if (partner.key === "housecountry") {
     return <img src="/images/partner-house-country.png" alt="House and Country Real Estate" />;
+  }
+
+  if (partner.key === "inmolux") {
+    return <img className={styles.inmoluxLogoImage} src="/images/partner-inmolux-group.svg" alt="Inmolux Group Construction and Real Estate" />;
   }
 
   if (partner.key === "rent2holiday") {

@@ -34,6 +34,11 @@ export const PARTNER_REFERRALS = {
     name: "Bremberg International Estate",
     category: "Sweden and international property partner",
   },
+  inmolux: {
+    code: "INM",
+    name: "Inmolux Group",
+    category: "Construction, development and real estate partner",
+  },
   "azurean-residences": {
     code: "AZU",
     name: "Azurean Residences · Destination by Hyatt",

@@ -19,6 +19,7 @@ const listingPartners = [
   ["LUX", "LuxoEstates"],
   ["FIX", "The Fixer"],
   ["BRE", "Bremberg International Estate"],
+  ["INM", "Inmolux Group"],
 ] as const;
 
 function safeFilename(name: string) {
