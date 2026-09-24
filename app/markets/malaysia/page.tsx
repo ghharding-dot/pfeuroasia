@@ -158,6 +158,21 @@ export default async function MalaysiaPage() {
               <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/" target="_blank" rel="noreferrer">Explore Pangkor Laut at YTL Hotels <span>→</span></a>
             </div>
           </article>
+          <article className="hotel-recommendation-card">
+            <div className="hotel-recommendation-image">
+              <Image src="/images/majestic-hotel-kuala-lumpur.jpg" alt="The Majestic Hotel Kuala Lumpur heritage entrance" fill sizes="(max-width: 620px) 100vw, 50vw" />
+              <div className="hotel-recommendation-shade" />
+              <div className="hotel-recommendation-number">04</div>
+              <div className="hotel-recommendation-title">
+                <span>Heritage city stay</span>
+                <h2>The Majestic Hotel<br />Kuala Lumpur</h2>
+              </div>
+            </div>
+            <div className="hotel-recommendation-copy">
+              <p>A restored Kuala Lumpur landmark in the YTL Hotels portfolio, combining the character of its historic Majestic Wing with a city stay.</p>
+              <a className="text-link light-link" href="https://www.ytlhotels.com/hotels-and-resorts/malaysia/autograph-collection/" target="_blank" rel="noreferrer">View at YTL Hotels <span>→</span></a>
+            </div>
+          </article>
         </div>
       </div>
     </section>

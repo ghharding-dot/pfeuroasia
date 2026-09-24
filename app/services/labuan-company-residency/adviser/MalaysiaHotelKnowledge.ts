@@ -18,7 +18,7 @@ export const malaysiaHotelKnowledge: AdviserKnowledgeEntry[] = [
       "preferred hotels",
     ],
     answer:
-      "PF EuroAsia's preferred starting recommendations in Malaysia are within the YTL Hotels portfolio. In Kuala Lumpur, we recommend The Ritz-Carlton, Kuala Lumpur for a more traditional five-star luxury stay and JW Marriott Kuala Lumpur for a lively, central city base with convenient access to business and shopping districts. For a genuine retreat rather than a city hotel, we recommend Pangkor Laut Resort in Perak, an island resort focused on natural surroundings, privacy and relaxation. If you tell me where you are going, your budget and whether the trip is business, family, romantic or a retreat, I can narrow the choice down further.",
+      "PF EuroAsia's preferred starting recommendations in Malaysia are within the YTL Hotels portfolio. In Kuala Lumpur, we recommend The Ritz-Carlton for a traditional five-star luxury stay, JW Marriott for a lively central base, and The Majestic Hotel Kuala Lumpur for a restored heritage landmark. For a retreat rather than a city hotel, we recommend Pangkor Laut Resort in Perak. If you tell me where you are going, your budget and whether the trip is business, family, romantic or a retreat, I can narrow the choice down further.",
     source: "YTL Hotels official Malaysia portfolio — checked August 2026; PF EuroAsia preferred hotel selection",
     followUps: [
       "Which would you choose in Kuala Lumpur, Ritz-Carlton or JW Marriott?",
@@ -62,6 +62,24 @@ export const malaysiaHotelKnowledge: AdviserKnowledgeEntry[] = [
     followUps: [
       "How does JW Marriott compare with the Ritz-Carlton Kuala Lumpur?",
       "What should I do in Kuala Lumpur for three or four days?",
+    ],
+  },
+  {
+    id: "hotel-majestic-kl",
+    title: "The Majestic Hotel Kuala Lumpur",
+    keywords: [
+      "hotel majestic kuala lumpur",
+      "the majestic hotel kuala lumpur",
+      "majestic hotel kl",
+      "ytl majestic hotel",
+      "heritage hotel kuala lumpur",
+    ],
+    answer:
+      "The Majestic Hotel Kuala Lumpur is a restored heritage hotel in the YTL Hotels portfolio and part of Marriott's Autograph Collection. We recommend it for visitors who want a city stay with the character of the historic Majestic Wing. You can find it in the YTL Hotels Autograph Collection at https://www.ytlhotels.com/hotels-and-resorts/malaysia/autograph-collection/.",
+    source: "YTL Hotels — Autograph Collection / The Majestic Hotel Kuala Lumpur, checked September 2026; PF EuroAsia preferred hotel selection",
+    followUps: [
+      "How does The Majestic compare with the Ritz-Carlton Kuala Lumpur?",
+      "What should I do while staying in Kuala Lumpur?",
     ],
   },
   {
