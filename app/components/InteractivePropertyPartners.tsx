@@ -183,7 +183,7 @@ export function InteractivePropertyPartners() {
               aria-label={`${revealed ? "Hide" : "Show"} details about ${partner.name}`}
               onClick={() => setActive(revealed ? null : partner.key)}
             >
-              <span className={cardStyles.front}>
+              <span className={`${cardStyles.front} ${partner.key === "fixer" ? styles.fixerFront : ""}`}>
                 <span className={cardStyles.logoWrap}><FrontLogo partner={partner} /></span>
                 <span className={cardStyles.hint}>Hover or tap to discover <b>+</b></span>
               </span>

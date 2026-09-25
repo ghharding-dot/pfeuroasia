@@ -250,6 +250,13 @@
   transform-origin: center;
 }
 
+.fixerFront {
+  width: calc(100% - 40px);
+  min-height: 108px;
+  gap: 7px;
+  padding: 10px 16px 9px;
+}
+
 .rent2Logo {
   display: flex;
   align-items: center;
@@ -314,6 +321,11 @@
     width: calc(100% - 16px);
     min-height: 122px;
     padding: 16px 14px 13px;
+  }
+
+  .fixerFront {
+    width: calc(100% - 34px);
+    min-height: 106px;
   }
 
   .propertyReveal {
