@@ -8,13 +8,13 @@ import styles from "../InvestmentPropertyMarbella.module.css";
 export const metadata = createMetadata("azureanMarbellaEn");
 
 const residenceTypes = [
-  ["1-bedroom residence", "100 m²", "€699,000"],
-  ["1-bedroom garden", "115 m²", "€785,000"],
-  ["1-bedroom Aqua", "105 m²", "€905,000"],
-  ["2-bedroom residence", "170 m²", "€1,140,000"],
-  ["2-bedroom Double", "195 m²", "€1,500,000"],
-  ["2-bedroom garden", "230 m²", "€1,750,000"],
-  ["Grand penthouse", "465 m²", "€3,240,000"],
+  ["1-bedroom residence", "100 m²"],
+  ["1-bedroom garden", "115 m²"],
+  ["1-bedroom Aqua", "105 m²"],
+  ["2-bedroom residence", "170 m²"],
+  ["2-bedroom Double", "195 m²"],
+  ["2-bedroom garden", "230 m²"],
+  ["Grand penthouse", "465 m²"],
 ];
 
 const paymentSteps = [
@@ -43,15 +43,15 @@ const faqs = [
   },
   {
     question: "Can an owner live in the residence all year?",
-    answer: "No. The supplied factsheet provides for eight weeks of personal use per year, including up to 14 nights in July and August, subject to availability. The tourist-accommodation structure does not permit full-time occupation. The precise usage terms must be confirmed in the purchase and management documentation.",
+    answer: "No. Owners have 8 weeks per year for personal stays, of which up to 14 nights may be used in July and August (subject to availability). Short-term rental accommodation in Andalucía requires an official tourist-rental licence, which does not permit full-time occupancy. The residences are licensed and legally authorised to be rented to guests when not in personal use.",
   },
   {
-    question: "Is rental income guaranteed?",
-    answer: "No guaranteed return is stated in the supplied documents. Rental performance will depend on demand, achieved rates, occupancy, operating costs, management terms and the owner's selected usage periods. Any income illustration should therefore be treated as a scenario, not a promise.",
+    question: "Is participation in the rental programme optional?",
+    answer: "No. When not in personal use, the residence forms part of the mandatory professionally managed rental programme, in accordance with the applicable rental programme agreement.",
   },
   {
     question: "What is the relationship with Hyatt?",
-    answer: "The supplied material states that Hyatt has granted the developer the right to offer and sell the residences using the Destination by Hyatt name and trademarks under a revocable licence agreement. The developer, Insignia Suites S.L., remains responsible for development, marketing and sale; Hyatt does not warrant those activities or the operation of the residences.",
+    answer: "Insignia Suites S.L. and its affiliates are solely responsible for the marketing and sale of the residences. Hyatt has granted the developer the right to offer and sell the residences using the Destination by Hyatt name and trademarks pursuant to a revocable licence agreement. Neither Hyatt nor any affiliate is responsible for, or makes any representation or warranty concerning, the development, marketing, sale or operation of the residences.",
   },
   {
     question: "What tax is shown on the supplied price list?",
@@ -99,11 +99,11 @@ export default function AzureanResidencesPage() {
             height={793}
             priority
           />
-          <h1>Own the residence.<br />Use it. Let it work.</h1>
+          <h1>The place<br />for every mood.</h1>
           <p>
-            Fully furnished freehold residences with tourist-rental licensing,
-            extensive resort facilities and professional management services in
-            the hills beside La Zagaleta.
+            A new vision of branded real estate: beautifully appointed freehold
+            residences with private terraces, spectacular views and extensive
+            resort facilities in Benahavís.
           </p>
           <div className={styles.detailHeroActions}>
             <Link className="button button-gold" href="/enquire?partner=azurean-residences">Request current availability <span>→</span></Link>
@@ -113,7 +113,7 @@ export default function AzureanResidencesPage() {
         <dl className={styles.heroFacts}>
           <div><dt>Residences</dt><dd>133</dd></div>
           <div><dt>Bedrooms</dt><dd>1–3</dd></div>
-          <div><dt>Guide prices</dt><dd>€699K–€3.24M</dd></div>
+          <div><dt>Prices from</dt><dd>€708,442</dd></div>
           <div><dt>Completion</dt><dd>Q2 2029</dd></div>
         </dl>
       </section>
@@ -122,7 +122,7 @@ export default function AzureanResidencesPage() {
         <div className={`site-shell ${styles.modelGrid}`}>
           <div>
             <p className="eyebrow">The ownership model</p>
-            <h2 id="azurean-model-heading">A residence designed around hospitality.</h2>
+            <h2 id="azurean-model-heading">Beautifully appointed residences with private terraces &amp; spectacular views.</h2>
           </div>
           <div className={styles.modelCopy}>
             <p>
@@ -132,18 +132,19 @@ export default function AzureanResidencesPage() {
               under the Vivienda de Uso Turístico framework.
             </p>
             <p>
-              Owners are allocated eight weeks of personal use per year, with up
-              to 14 nights during July and August, subject to availability. When
-              not occupied by the owner, the residence can participate in the
-              short-term guest model under the applicable agreements.
+              Owners have 8 weeks per year for personal stays, of which up to 14
+              nights may be used in July and August (subject to availability).
+              When not in personal use, the residence forms part of the mandatory
+              professionally managed rental programme, in accordance with the
+              applicable rental programme agreement.
             </p>
           </div>
         </div>
         <div className={`site-shell ${styles.modelCards}`}>
           <article><span>01</span><h3>Freehold title</h3><p>Individual ownership, subject to the development&apos;s contractual, community and operational framework.</p></article>
           <article><span>02</span><h3>Licensed stays</h3><p>The supplied material describes all residences as licensed under Andalucía&apos;s tourist-accommodation rules.</p></article>
-          <article><span>03</span><h3>Managed operation</h3><p>A professional property-management service is available and is described as operating in alignment with Hyatt brand standards.</p></article>
-          <article><span>04</span><h3>No invented yield</h3><p>The documents do not promise a fixed return. Income must be modelled from verified rates, costs, occupancy and owner use.</p></article>
+          <article><span>03</span><h3>Mandatory rental programme</h3><p>When not in personal use, each residence forms part of the professionally managed rental programme under the applicable agreement.</p></article>
+          <article><span>04</span><h3>Property management</h3><p>A professional property team is available to care for owners&apos; homes throughout the year, operating in alignment with Hyatt&apos;s brand standards.</p></article>
         </div>
       </section>
 
@@ -155,23 +156,23 @@ export default function AzureanResidencesPage() {
       <section className={styles.residences} aria-labelledby="azurean-residences-heading">
         <div className="site-shell">
           <div className={styles.sectionHeading}>
-            <div><p className="eyebrow light">Residence collection</p><h2 id="azurean-residences-heading">Seven ways to own.</h2></div>
-            <p>Average sizes and guide prices supplied in September 2026. Individual units vary and availability changes.</p>
+            <div><p className="eyebrow light">Residence collection</p><h2 id="azurean-residences-heading">The residences.</h2></div>
+            <p>Average sizes are taken from the supplied September 2026 factsheet. Current unit availability and pricing change and should be reconfirmed before reservation.</p>
           </div>
-          <div className={styles.residenceTable} role="table" aria-label="Azurean Marbella residence types and guide prices">
-            <div className={styles.tableHead} role="row"><span role="columnheader">Residence type</span><span role="columnheader">Average size</span><span role="columnheader">Prices from</span></div>
-            {residenceTypes.map(([type, size, price]) => (
-              <div role="row" key={type}><strong role="cell">{type}</strong><span role="cell">{size}</span><span role="cell">{price}</span></div>
+          <div className={styles.residenceTable} role="table" aria-label="Azurean Marbella residence types and average sizes">
+            <div className={styles.tableHead} role="row"><span role="columnheader">Residence type</span><span role="columnheader">Average size</span><span role="columnheader">Current pricing</span></div>
+            {residenceTypes.map(([type, size]) => (
+              <div role="row" key={type}><strong role="cell">{type}</strong><span role="cell">{size}</span><span role="cell">On request</span></div>
             ))}
           </div>
-          <p className={styles.sourceNote}>Current supplied availability ranged from €708,442 to €3,404,105. Prices, areas and availability must be reconfirmed for the selected unit. The supplied price material states that prices are subject to 21% VAT.</p>
+          <p className={styles.sourceNote}><strong>Current prices from €708,442.</strong> Prices, areas and availability must be reconfirmed for the selected unit. The supplied price material states that all prices are subject to 21% VAT.</p>
         </div>
       </section>
 
       <section className={styles.payment} aria-labelledby="azurean-payment-heading">
         <div className="site-shell">
           <div className={styles.sectionHeading}>
-            <div><p className="eyebrow">Payment structure</p><h2 id="azurean-payment-heading">Staged to completion.</h2></div>
+            <div><p className="eyebrow">Payment structure</p><h2 id="azurean-payment-heading">Payment plan.</h2></div>
             <p>Anticipated completion is Q2 2029. Each payment, guarantee and trigger should be checked in the unit-specific private contract.</p>
           </div>
           <ol className={styles.paymentSteps}>
@@ -190,7 +191,7 @@ export default function AzureanResidencesPage() {
         <div className={`site-shell ${styles.amenitiesInner}`}>
           <div className={styles.amenitiesIntro}>
             <p className="eyebrow light">Resort scale</p>
-            <h2 id="azurean-amenities-heading">A complete hospitality environment.</h2>
+            <h2 id="azurean-amenities-heading">Spaces for every mood.</h2>
           </div>
           <div className={styles.amenitiesGrid}>
             {amenities.map(([size, label]) => <article key={label}><strong>{size}</strong><span>{label}</span></article>)}
@@ -203,7 +204,7 @@ export default function AzureanResidencesPage() {
           <div className={styles.servicesImageWrap}><Image src="/images/azurean/azurean-lobby.webp" alt="Azurean Marbella reception and residents lounge" fill sizes="(max-width: 860px) 100vw, 52vw" /></div>
           <div className={styles.servicesCopy}>
             <p className="eyebrow">Residential services</p>
-            <h2 id="azurean-services-heading">Supported when you are here—and when you are not.</h2>
+            <h2 id="azurean-services-heading">Residential services.</h2>
             <div className={styles.serviceColumns}>
               <div><h3>Core services</h3><ul><li>24/7 reception and security</li><li>Priority check-in and check-out</li><li>Concierge and doorman</li><li>Common-area management</li><li>Underground parking and storage</li><li>Repairs and maintenance</li></ul></div>
               <div><h3>Available à la carte</h3><ul><li>Residence management</li><li>In-residence housekeeping</li><li>Private chef and catering</li><li>Transfers and excursions</li><li>Childcare and pet care</li><li>Personal security and butler service</li></ul></div>
@@ -215,11 +216,11 @@ export default function AzureanResidencesPage() {
       <section className={styles.specification} aria-labelledby="azurean-spec-heading">
         <div className="site-shell">
           <div className={styles.sectionHeading}>
-            <div><p className="eyebrow light">Specification</p><h2 id="azurean-spec-heading">Delivered ready to use.</h2></div>
+            <div><p className="eyebrow light">Specification</p><h2 id="azurean-spec-heading">Elegant contemporary furnishings and premium finishes.</h2></div>
             <p>The supplied specification is preliminary and subject to the final contract, construction documentation and permitted substitutions.</p>
           </div>
           <div className={styles.specGrid}>
-            <article><span>Interiors</span><h3>Fully furnished</h3><p>Designer furniture, integrated kitchens and natural-material finishes intended to meet Hyatt&apos;s stated five-star standards.</p></article>
+            <article><span>Interiors</span><h3>Fully furnished</h3><p>Elegant contemporary furnishings and premium finishes created by the international design firm Room 1804.</p></article>
             <article><span>Comfort</span><h3>Climate &amp; connectivity</h3><p>Aerothermal technology, ducted air conditioning, controlled ventilation and professional Wi-Fi throughout each residence.</p></article>
             <article><span>Private exterior</span><h3>Terrace or garden</h3><p>Furnished terraces, with efficient rainwater irrigation specified for private gardens.</p></article>
             <article><span>Sustainability</span><h3>Energy rating A</h3><p>Designed toward BREEAM Excellent criteria, with attention to energy, water, materials, air quality and waste.</p></article>
@@ -231,7 +232,7 @@ export default function AzureanResidencesPage() {
         <div className={`site-shell ${styles.locationGrid}`}>
           <div>
             <p className="eyebrow">Benahavís · The Golden Triangle</p>
-            <h2 id="azurean-location-heading">Six minutes from La Zagaleta.</h2>
+            <h2 id="azurean-location-heading">A location that just works.</h2>
             <p>Azurean sits among golf courses and protected hills, 7.1 km from San Pedro Beach and within practical reach of Puerto Banús, Marbella and Málaga Airport.</p>
             <dl className={styles.locationTimes}>
               <div><dt>La Zagaleta</dt><dd>6 min</dd></div>
@@ -257,7 +258,7 @@ export default function AzureanResidencesPage() {
         <div className={styles.detailCtaShade} aria-hidden="true" />
         <div className={`site-shell ${styles.detailCtaCopy}`}>
           <p className="eyebrow light">Private presentation</p>
-          <h2>Choose the right residence—not simply the next available one.</h2>
+          <h2>Request current availability.</h2>
           <p>Request the current unit list, plans and a discussion of owner use, management and acquisition costs.</p>
           <Link className="button button-gold" href="/enquire?partner=azurean-residences">Request current availability <span>→</span></Link>
         </div>
