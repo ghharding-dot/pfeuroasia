@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { InstagramBridge } from "../../components/InstagramBridge";
 import { TopicPathway } from "../../components/TopicPathway";
 import styles from "./page.module.css";
 
@@ -154,6 +155,10 @@ export default function InternationalBuyerGuidePage() {
           <Link className="button button-gold" href="/enquire">Start a confidential conversation <span>→</span></Link>
         </div>
       </section>
+      <InstagramBridge
+        context="marbella_international_buyer_guide"
+        description="Follow discreet Marbella opportunities, international-buyer guidance and the PF EuroAsia Spain ↔ Asia property series."
+      />
       <Footer />
     </main>
   );

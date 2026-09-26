@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { InstagramBridge } from "../components/InstagramBridge";
 import { PrivatePortfolioRegistration } from "../components/PrivatePortfolioRegistration";
 import { createMetadata } from "../lib/seo";
 import "./private-portfolio.css";
@@ -98,6 +99,10 @@ export default function PrivatePortfolioPage() {
             })),
           }),
         }}
+      />
+      <InstagramBridge
+        context="private_portfolio"
+        description="Follow selected public previews, Marbella market insight and the discreet PF EuroAsia property series. Confidential opportunities remain protected."
       />
       <Footer />
     </main>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
+import { InstagramBridge } from "./InstagramBridge";
 
 type AreaPageProps = {
   eyebrow: string;
@@ -43,6 +44,10 @@ export function AreaPage({ eyebrow, title, subtitle, imageClass, overview, chara
     {details}
     <section className="area-advice section-pad"><div className="site-shell area-advice-grid"><div><p className="eyebrow">Buying intelligently</p><h2>Local knowledge changes the search.</h2></div><div><p>{buyerNote}</p><Link className="text-link" href="/services/acquisition">Our acquisition service <span>→</span></Link></div></div></section>
     <section className="mini-cta"><div className="site-shell"><p className="eyebrow light">Private and considered</p><h2>Let us open the right doors.</h2><Link className="button button-gold" href="/enquire">Make an enquiry <span>→</span></Link></div></section>
+    <InstagramBridge
+      context={`area_${title.toLowerCase().replaceAll(" ", "_")}`}
+      description={`Follow selected ${title} property, Marbella market insight and the PF EuroAsia Spain ↔ Asia series.`}
+    />
     <Footer />
   </main>;
 }

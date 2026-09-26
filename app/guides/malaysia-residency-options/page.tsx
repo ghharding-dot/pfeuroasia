@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { AuthorityReview } from "../../components/AuthorityReview";
+import { InstagramBridge } from "../../components/InstagramBridge";
 import { TopicPathway } from "../../components/TopicPathway";
 import styles from "../MalaysiaSeoGuide.module.css";
 
@@ -122,6 +123,10 @@ export default function MalaysiaResidencyOptionsPage() {
 
       <section className={styles.cta}><div className={`site-shell ${styles.ctaGrid}`}><div><p className="eyebrow">Private assessment</p><h2>Considering a move to Malaysia?</h2></div><div className={styles.ctaCopy}><p>Tell us about your nationality, family, intended activity, present residence and timing. We will help organise the appropriate first conversation.</p><Link className="button button-dark" href="/asia-gateway/enquire">Discuss Malaysia residency <span>→</span></Link></div></div></section>
       <section className={styles.disclaimer}><div className="site-shell"><p>General information only. Immigration, tax, employment and company rules can change and depend on individual circumstances. PF EuroAsia coordinates introductions; formal advice and applications are provided by the appropriately licensed professionals.</p></div></section>
+      <InstagramBridge
+        context="malaysia_residency_options"
+        description="Follow the PF EuroAsia series covering Malaysia residency, relocation, company formation, property and practical life between Europe and Asia."
+      />
       <Footer />
     </main>
   );
