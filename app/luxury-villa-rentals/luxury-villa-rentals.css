@@ -392,6 +392,21 @@
 .rental-form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
 .rental-form-grid .wide { grid-column: 1 / -1; }
 
+.rental-date-field {
+  display: grid;
+  gap: 7px;
+}
+
+.rental-date-field > span {
+  color: rgba(255,255,255,.58);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.rental-date-field > input { width: 100%; }
+
 .rental-form input,
 .rental-form select,
 .rental-form textarea {
