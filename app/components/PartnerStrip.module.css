@@ -30,7 +30,7 @@
   z-index: 1;
 }
 
-.europeanStatement {
+.rentalStatement.europeanStatement {
   color: rgba(255, 255, 255, .76);
 }
 
