@@ -28,17 +28,28 @@ export function PartnerStrip() {
       <div className="site-shell">
         <p className="partner-strip-title" id="partner-strip-title">Our collaboration network</p>
 
-        <div className={styles.partnerGroup}>
-          <p className={styles.groupEyebrow}>European property collaborations</p>
-          <p className={styles.rentalStatement}>Hover on desktop or tap once on mobile to discover each partner.</p>
-          <InteractivePropertyPartners />
-        </div>
+        <div className={styles.europeanCollaborations}>
+          <Image
+            className={styles.europeanBackdrop}
+            src="/images/la-concha-european-collaborations.jpg"
+            alt=""
+            fill
+            sizes="(max-width: 760px) 100vw, 1180px"
+          />
+          <div className={styles.europeanOverlay} aria-hidden="true" />
 
-        <div className={styles.partnerGroup}>
-          <div className={styles.groupDivider} aria-hidden="true" />
-          <p className={styles.groupEyebrow}>Legal collaborations</p>
-          <p className={styles.rentalStatement}>Hover on desktop or tap once on mobile to discover each firm.</p>
-          <InteractiveLegalPartners />
+          <div className={`${styles.partnerGroup} ${styles.europeanPartnerGroup}`}>
+            <p className={styles.groupEyebrow}>European property collaborations</p>
+            <p className={`${styles.rentalStatement} ${styles.europeanStatement}`}>Hover on desktop or tap once on mobile to discover each partner.</p>
+            <InteractivePropertyPartners />
+          </div>
+
+          <div className={`${styles.partnerGroup} ${styles.europeanPartnerGroup}`}>
+            <div className={`${styles.groupDivider} ${styles.europeanDivider}`} aria-hidden="true" />
+            <p className={styles.groupEyebrow}>Legal collaborations</p>
+            <p className={`${styles.rentalStatement} ${styles.europeanStatement}`}>Hover on desktop or tap once on mobile to discover each firm.</p>
+            <InteractiveLegalPartners />
+          </div>
         </div>
 
         <div className={styles.partnerGroup}>
