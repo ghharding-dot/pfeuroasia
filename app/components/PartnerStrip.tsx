@@ -29,13 +29,6 @@ export function PartnerStrip() {
         <p className="partner-strip-title" id="partner-strip-title">Our collaboration network</p>
 
         <div className={styles.europeanCollaborations}>
-          <Image
-            className={styles.europeanBackdrop}
-            src="/images/la-concha-european-collaborations.jpg"
-            alt=""
-            fill
-            sizes="(max-width: 760px) 100vw, 1180px"
-          />
           <div className={styles.europeanOverlay} aria-hidden="true" />
 
           <div className={`${styles.partnerGroup} ${styles.europeanPartnerGroup}`}>
