@@ -10,6 +10,22 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "marbellavillacollection.com" }],
+        destination: "https://www.pfeuroasia.com/luxury-villa-rentals",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.marbellavillacollection.com" }],
+        destination: "https://www.pfeuroasia.com/luxury-villa-rentals",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       { source: "/da/:path*", headers: [{ key: "Content-Language", value: "da-DK" }] },
