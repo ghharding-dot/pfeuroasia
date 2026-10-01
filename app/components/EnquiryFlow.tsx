@@ -352,13 +352,15 @@ export function EnquiryFlow({
   const isBrembergReferral = referralPartner?.code === "BRE";
   const isAzureanReferral = referralPartner?.code === "AZU";
   const isTyrianReferral = referralPartner?.code === "TYR";
+  const isFairmontLaHaciendaReferral = referralPartner?.code === "FHL";
   const isGuidedFlow = Boolean(
     preset ||
     (isAsia && requestingGuide) ||
     isAimsReferral ||
     isBrembergReferral ||
     isAzureanReferral ||
-    isTyrianReferral,
+    isTyrianReferral ||
+    isFairmontLaHaciendaReferral,
   );
   const goals = isAsia ? asiaGoals : spainGoals;
   const [step, setStep] = useState(isGuidedFlow ? 2 : 1);
@@ -392,6 +394,12 @@ export function EnquiryFlow({
               location: "Tyrian Residences, Estepona",
               budget: "",
               message: "I would like the current availability, price list and brochure for Tyrian Residences, Estepona.",
+            }
+        : isFairmontLaHaciendaReferral
+          ? {
+              location: "Fairmont Residences La Hacienda, San Roque",
+              budget: "",
+              message: "I would like the current availability, price list and brochure for Fairmont Residences La Hacienda.",
             }
         : isBrembergReferral
           ? {

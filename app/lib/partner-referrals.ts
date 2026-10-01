@@ -49,6 +49,11 @@ export const PARTNER_REFERRALS = {
     name: "Tyrian Residences",
     category: "Beachfront residences development",
   },
+  "fairmont-la-hacienda": {
+    code: "FHL",
+    name: "Fairmont Residences La Hacienda",
+    category: "Branded villas development",
+  },
   legal10: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",

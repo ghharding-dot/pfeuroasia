@@ -86,6 +86,17 @@ const featuredInvestments = [
     image: "/images/tyrian-residences/tyrian-hero.webp",
     imageAlt: "Tyrian Residences on the beachfront in Estepona",
   },
+  {
+    number: "06",
+    name: "Fairmont Residences La Hacienda",
+    location: "San Roque · Fairmont branded villas",
+    description:
+      "Thirty-one fully furnished branded villas beside the Mediterranean and La Hacienda Links Golf Resort.",
+    href: "/investment-property-marbella/fairmont-residences-la-hacienda",
+    action: "View full development",
+    image: "/images/fairmont-la-hacienda/fairmont-hero.webp",
+    imageAlt: "Fairmont Residences La Hacienda beside the Mediterranean and golf course",
+  },
 ];
 
 export default function InvestmentPropertyMarbellaPage() {
@@ -149,14 +160,14 @@ export default function InvestmentPropertyMarbellaPage() {
         <div className="site-shell">
           <div className={styles.collectionHeading}>
             <div>
-              <p className="eyebrow">Marbella · Benahavís · Estepona</p>
+              <p className="eyebrow">Marbella · Benahavís · Estepona · Sotogrande</p>
               <h2 id="featured-international-investments-heading">
                 Featured international
                 <em>investment properties.</em>
               </h2>
             </div>
             <p>
-              Five selected development opportunities for international buyers,
+              Six selected development opportunities for international buyers,
               with direct access to the available presentation or current details.
             </p>
           </div>
