@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
         destination: "https://www.pfeuroasia.com/luxury-villa-rentals",
         permanent: true,
       },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "malaysiaresidencyoptions.com" }],
+        destination: "https://www.pfeuroasia.com/guides/malaysia-residency-options",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.malaysiaresidencyoptions.com" }],
+        destination: "https://www.pfeuroasia.com/guides/malaysia-residency-options",
+        permanent: true,
+      },
     ];
   },
   async headers() {
