@@ -183,7 +183,7 @@
 .investmentCardImage {
   z-index: -2;
   object-fit: cover;
-  opacity: .48;
+  opacity: .67;
   transition: opacity 240ms ease, transform 700ms cubic-bezier(.2, .7, .2, 1);
 }
 
@@ -191,7 +191,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(241, 238, 230, .54), rgba(241, 238, 230, .916) 78%);
+  background: linear-gradient(180deg, rgba(241, 238, 230, .54), rgba(241, 238, 230, .87) 78%);
   transition: background 220ms ease;
 }
 
