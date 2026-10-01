@@ -44,6 +44,11 @@ export const PARTNER_REFERRALS = {
     name: "Azurean Residences · Destination by Hyatt",
     category: "Branded residences development partner",
   },
+  "tyrian-residences": {
+    code: "TYR",
+    name: "Tyrian Residences",
+    category: "Beachfront residences development",
+  },
   legal10: {
     code: "LEG",
     name: "Legal 10 Abogados Marbella",

@@ -351,12 +351,14 @@ export function EnquiryFlow({
   const isAimsReferral = referralPartner?.code === "AIMS";
   const isBrembergReferral = referralPartner?.code === "BRE";
   const isAzureanReferral = referralPartner?.code === "AZU";
+  const isTyrianReferral = referralPartner?.code === "TYR";
   const isGuidedFlow = Boolean(
     preset ||
     (isAsia && requestingGuide) ||
     isAimsReferral ||
     isBrembergReferral ||
-    isAzureanReferral,
+    isAzureanReferral ||
+    isTyrianReferral,
   );
   const goals = isAsia ? asiaGoals : spainGoals;
   const [step, setStep] = useState(isGuidedFlow ? 2 : 1);
@@ -384,6 +386,12 @@ export function EnquiryFlow({
               location: "Azurean Residences, Benahavís",
               budget: "",
               message: "I would like further information and current availability for Azurean Residences, Benahavís.",
+            }
+        : isTyrianReferral
+          ? {
+              location: "Tyrian Residences, Estepona",
+              budget: "",
+              message: "I would like the current availability, price list and brochure for Tyrian Residences, Estepona.",
             }
         : isBrembergReferral
           ? {

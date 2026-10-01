@@ -75,6 +75,17 @@ const featuredInvestments = [
     image: "/images/the-view-marbella/the-view-hero.webp",
     imageAlt: "The View Marbella residences in Benahavís",
   },
+  {
+    number: "05",
+    name: "Tyrian Residences",
+    location: "Estepona · Beachfront",
+    description:
+      "Forty fully serviced beachfront residences combining villa-like scale, privacy, wellness and five-star support.",
+    href: "/investment-property-marbella/tyrian-residences-estepona",
+    action: "View full development",
+    image: "/images/tyrian-residences/tyrian-hero.webp",
+    imageAlt: "Tyrian Residences on the beachfront in Estepona",
+  },
 ];
 
 export default function InvestmentPropertyMarbellaPage() {
@@ -138,14 +149,14 @@ export default function InvestmentPropertyMarbellaPage() {
         <div className="site-shell">
           <div className={styles.collectionHeading}>
             <div>
-              <p className="eyebrow">Marbella &amp; Benahavís</p>
+              <p className="eyebrow">Marbella · Benahavís · Estepona</p>
               <h2 id="featured-international-investments-heading">
                 Featured international
                 <em>investment properties.</em>
               </h2>
             </div>
             <p>
-              Four selected development opportunities for international buyers,
+              Five selected development opportunities for international buyers,
               with direct access to the available presentation or current details.
             </p>
           </div>
