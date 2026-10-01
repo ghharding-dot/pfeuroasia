@@ -191,7 +191,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(241, 238, 230, .68), rgba(241, 238, 230, .94) 78%);
+  background: linear-gradient(180deg, rgba(241, 238, 230, .62), rgba(241, 238, 230, .93) 78%);
   transition: background 220ms ease;
 }
 
