@@ -15,8 +15,13 @@ async function unlockFairmont(formData: FormData) {
   "use server";
 
   const password = String(formData.get("password") ?? "").trim();
+  const matchingPasswordVariable = Object.entries(process.env).find(
+    ([name]) => name.replace(/[^a-z0-9]/gi, "").toLowerCase() === "fairmontaccesspassword",
+  );
   const configuredPassword = (
-    process.env["Fairmont_Access-password"] ?? process.env.FAIRMONT_ACCESS_PASSWORD
+    process.env["Fairmont_Access-password"] ??
+    process.env.FAIRMONT_ACCESS_PASSWORD ??
+    matchingPasswordVariable?.[1]
   )?.trim();
 
   if (!configuredPassword) {
