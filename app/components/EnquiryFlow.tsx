@@ -460,7 +460,7 @@ export function EnquiryFlow({
       language: document.documentElement.lang || "en",
       website_region: form.get("desk") || (isAsia ? "Asia & Malaysia desk" : "International"),
       website_journey: journey,
-      company_website: form.get("company_website"),
+      company_website: form.get("pfe_contact_check"),
     };
 
     try {
@@ -470,7 +470,7 @@ export function EnquiryFlow({
         body: JSON.stringify(payload),
       });
       const result = (await response.json()) as SubmissionResponse;
-      if (!response.ok || !result.reference) {
+      if (!response.ok || !result.reference || result.reference === "PFE-RECEIVED") {
         throw new Error(result.error || "Submission failed");
       }
 
@@ -557,8 +557,8 @@ export function EnquiryFlow({
 
       <form className="enquiry-form" onSubmit={submit}>
         <label aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
-          Company website
-          <input name="company_website" tabIndex={-1} autoComplete="off" />
+          Leave this field empty
+          <input name="pfe_contact_check" type="text" tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore="true" />
         </label>
 
         {!preset && step === 1 && (
