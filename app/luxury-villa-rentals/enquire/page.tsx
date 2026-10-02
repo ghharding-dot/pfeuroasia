@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../../lib/submitEnquiry";
+
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Footer } from "../../components/Footer";
@@ -33,33 +35,23 @@ export default function LuxuryVillaEnquiryPage() {
     const selectedServices = conciergeOptions.filter((service) => form.getAll("concierge_services").includes(service));
 
     const payload = {
-      _subject: "New luxury villa rental enquiry from pfeuroasia.com",
-      _cc: "reservations@theluxuryvillacollection.com",
-      _template: "table",
-      enquiry_type: "Luxury villa rental",
-      preferred_location: form.get("location"),
-      arrival_date: form.get("arrival"),
-      departure_date: form.get("departure"),
-      number_of_guests: form.get("guests"),
-      minimum_bedrooms: form.get("bedrooms"),
-      approximate_weekly_budget: form.get("budget"),
-      concierge_services: selectedServices.join(", ") || "None specified",
-      additional_requirements: form.get("requirements"),
+      enquiry_type: "luxury-rental",
+      preferred_area_or_property: form.get("location"),
+      requirements: ["Arrival: " + form.get("arrival"), "Departure: " + form.get("departure"), "Guests: " + form.get("guests"), "Bedrooms: " + form.get("bedrooms"), "Concierge services: " + (selectedServices.join(", ") || "None specified"), "Additional requirements: " + (form.get("requirements") || "Not provided")].join(" · "),
+      contact_desk: "Spain rental desk",
+      website_journey: "spain",
+      website_region: "Luxury villa concierge",
+      language: "en",
+      indicative_budget_or_value: form.get("budget"),
       full_name: form.get("name"),
       email: form.get("email"),
       telephone_or_whatsapp: form.get("phone"),
-      country_of_residence: form.get("country"),
-      preferred_contact_method: form.get("contact_method"),
+      current_location: form.get("country"),
+      preferred_channel: form.get("contact_method"),
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) throw new Error("Submission failed");
+      await submitEnquiry(payload);
       setSubmitted(true);
     } catch {
       setError("We could not send your enquiry. Please try again shortly.");

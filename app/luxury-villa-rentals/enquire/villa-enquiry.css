@@ -287,3 +287,19 @@
     width: 100%;
   }
 }
+
+.villa-enquiry-options input[type="checkbox"],
+.villa-enquiry-consent input[type="checkbox"] {
+  appearance: auto;
+  flex: 0 0 28px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  accent-color: var(--gold);
+}
+.villa-enquiry-consent { cursor: pointer; min-height: 44px; }
+.villa-enquiry-consent > span { min-width: 0; }

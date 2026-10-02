@@ -712,8 +712,20 @@ img {
 .zh-form input, .zh-form select, .zh-form textarea { width: 100%; padding: 13px 0; border: 0; border-bottom: 1px solid #c7c4bb; border-radius: 0; outline: 0; background: transparent; font-size: 13px; }
 .zh-form textarea { padding: 13px; border: 1px solid #c7c4bb; resize: vertical; }
 .zh-form input:focus, .zh-form select:focus, .zh-form textarea:focus { border-color: var(--gold); }
-.zh-consent { display: flex; gap: 9px; margin: 25px 0; color: #6a6b65; font-size: 11px; }
-.zh-consent input { accent-color: var(--gold); }
+.zh-consent { display: flex; align-items: flex-start; gap: 14px; min-height: 44px; margin: 25px 0; color: #45463f; font-size: 14px; line-height: 1.6; cursor: pointer; }
+.zh-consent input[type="checkbox"] {
+  appearance: auto;
+  flex: 0 0 28px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  accent-color: var(--gold);
+}
+.zh-consent > span { min-width: 0; }
 .zh-enquiry-success { padding: 70px 50px; background: var(--paper); color: var(--ink); text-align: center; }
 .zh-enquiry-success > span { display: grid; width: 60px; height: 60px; margin: 0 auto 24px; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: #98784c; }
 .zh-enquiry-success h3 { margin: 0; font-size: 40px; font-weight: 400; }

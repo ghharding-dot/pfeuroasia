@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../lib/submitEnquiry";
+
 import { FormEvent, useState } from "react";
 import styles from "../ar/ArabicHome.module.css";
 
@@ -15,28 +17,22 @@ export function ArEnquiry() {
 
     const form = new FormData(event.currentTarget);
     const payload = {
-      _subject: "استفسار عربي جديد من pfeuroasia.com",
       enquiry_type: form.get("purpose"),
-      preferred_area: form.get("area"),
-      budget: form.get("budget"),
+      preferred_area_or_property: form.get("area"),
+      indicative_budget_or_value: form.get("budget"),
       preferred_channel: form.get("channel"),
       full_name: form.get("name"),
       email: form.get("email"),
-      whatsapp: form.get("whatsapp"),
-      telephone: form.get("phone"),
+      telephone_or_whatsapp: form.get("whatsapp") || form.get("phone"),
       requirements: form.get("message"),
       language: "Arabic - Saudi Arabia",
-      _template: "table",
+      contact_desk: "Spain desk",
+      website_journey: "spain",
+      website_region: "Arabic website",
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) throw new Error("Submission failed");
+      await submitEnquiry(payload);
       setSent(true);
     } catch {
       setError("تعذر إرسال الطلب حالياً. يرجى المحاولة مرة أخرى أو مراسلتنا على enquiry@pfeuroasia.com");

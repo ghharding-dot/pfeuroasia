@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../../lib/submitEnquiry";
+
 import { FormEvent, useState } from "react";
 
 export function ZhRentalEnquiryForm() {
@@ -12,34 +14,27 @@ export function ZhRentalEnquiryForm() {
     setSending(true);
     setError("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const payload = {
-      _subject: "New Chinese luxury villa availability request",
-      _cc: "reservations@theluxuryvillacollection.com",
-      _template: "table",
-      enquiry_type: "Luxury villa rental - Chinese website",
+      enquiry_type: "luxury-rental",
       full_name: form.get("name"),
       email: form.get("email"),
-      telephone_wechat_or_whatsapp: form.get("phone"),
-      arrival_date: form.get("arrival"),
-      departure_date: form.get("departure"),
-      number_of_guests: form.get("guests"),
-      bedrooms_required: form.get("bedrooms"),
-      preferred_location: form.get("location"),
-      budget_range: form.get("budget"),
-      additional_requirements: form.get("requirements"),
+      telephone_or_whatsapp: form.get("phone"),
+      requirements: ["Arrival: " + form.get("arrival"), "Departure: " + form.get("departure"), "Guests: " + form.get("guests"), "Bedrooms: " + form.get("bedrooms"), "Additional requirements: " + (form.get("requirements") || "Not provided")].join(" · "),
+      contact_desk: "Spain rental desk",
+      preferred_channel: "telephone_or_whatsapp",
+      website_journey: "spain",
+      website_region: "Chinese villa rentals",
+      language: "zh",
+      preferred_area_or_property: form.get("location"),
+      indicative_budget_or_value: form.get("budget"),
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) throw new Error("Unable to send enquiry");
+      await submitEnquiry(payload);
       setSent(true);
-      event.currentTarget.reset();
+      formElement.reset();
     } catch {
       setError("您的咨询暂时无法发送，请稍后重试。");
     } finally {
