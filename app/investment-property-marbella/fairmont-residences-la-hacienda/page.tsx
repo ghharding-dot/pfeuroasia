@@ -17,8 +17,12 @@ async function unlockFairmont(formData: FormData) {
   const password = String(formData.get("password") ?? "").trim();
   const configuredPassword = process.env.FAIRMONT_ACCESS_PASSWORD?.trim();
 
-  if (!configuredPassword || password !== configuredPassword) {
-    redirect("/investment-property-marbella/fairmont-residences-la-hacienda?error=1");
+  if (!configuredPassword) {
+    redirect("/investment-property-marbella/fairmont-residences-la-hacienda?error=config");
+  }
+
+  if (password !== configuredPassword) {
+    redirect("/investment-property-marbella/fairmont-residences-la-hacienda?error=password");
   }
 
   const cookieStore = await cookies();
@@ -87,8 +91,10 @@ export default async function FairmontLaHaciendaPage({
                 autoComplete="current-password"
                 required
               />
-              {query.error === "1" ? (
+              {query.error === "password" ? (
                 <p className={styles.accessError} role="alert">The password entered was not recognised.</p>
+              ) : query.error === "config" ? (
+                <p className={styles.accessError} role="alert">Private access is being configured. Please try again shortly.</p>
               ) : null}
               <button className="button button-gold" type="submit">
                 Access presentation <span>→</span>
