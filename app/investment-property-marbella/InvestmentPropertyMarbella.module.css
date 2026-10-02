@@ -4,6 +4,111 @@
   color: #171a17;
 }
 
+.accessGate {
+  position: relative;
+  display: grid;
+  min-height: 780px;
+  padding: 150px 24px 90px;
+  place-items: center;
+  overflow: hidden;
+  background: #101614;
+  color: white;
+  isolation: isolate;
+}
+
+.accessGateImage {
+  z-index: -3;
+  object-fit: cover;
+}
+
+.accessGateShade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(6, 11, 10, .88), rgba(6, 11, 10, .54)),
+    linear-gradient(0deg, rgba(5, 9, 8, .64), transparent 62%);
+}
+
+.accessGateCard {
+  width: min(100%, 570px);
+  padding: clamp(34px, 6vw, 58px);
+  border: 1px solid rgba(219, 186, 126, .55);
+  background: rgba(12, 21, 18, .9);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .34);
+  backdrop-filter: blur(16px);
+}
+
+.accessGateCard h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(47px, 6vw, 68px);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: .98;
+}
+
+.accessGateCard > p:not(.eyebrow) {
+  margin: 26px 0 32px;
+  color: rgba(255, 255, 255, .74);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.accessForm {
+  display: grid;
+  gap: 12px;
+}
+
+.accessForm label {
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.accessForm input {
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 15px;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 0;
+  outline: none;
+  background: rgba(255, 255, 255, .08);
+  color: white;
+  font: inherit;
+}
+
+.accessForm input:focus {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 2px rgba(219, 186, 126, .18);
+}
+
+.accessForm button {
+  width: 100%;
+  margin-top: 8px;
+  border: 0;
+  cursor: pointer;
+}
+
+.accessError {
+  margin: 2px 0 0;
+  color: #f0b7aa;
+  font-size: 13px;
+}
+
+.accessBackLink {
+  display: inline-block;
+  margin-top: 25px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, .42);
+  color: rgba(255, 255, 255, .72);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
 .hero,
 .detailHero,
 .amenities,

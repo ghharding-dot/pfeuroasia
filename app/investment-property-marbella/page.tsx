@@ -93,7 +93,7 @@ const featuredInvestments = [
     description:
       "Thirty-one fully furnished branded villas beside the Mediterranean and La Hacienda Links Golf Resort.",
     href: "/investment-property-marbella/fairmont-residences-la-hacienda",
-    action: "View full development",
+    action: "Password protected",
     image: "/images/fairmont-la-hacienda/fairmont-hero.webp",
     imageAlt: "Fairmont Residences La Hacienda beside the Mediterranean and golf course",
   },

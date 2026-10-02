@@ -1,11 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { createMetadata } from "../../lib/seo";
 import styles from "../InvestmentPropertyMarbella.module.css";
 
 export const metadata = createMetadata("fairmontLaHaciendaEn");
+
+const fairmontAccessCookie = "pf_fairmont_access";
+
+async function unlockFairmont(formData: FormData) {
+  "use server";
+
+  const password = String(formData.get("password") ?? "").trim();
+
+  if (!process.env.FAIRMONT_ACCESS_PASSWORD || password !== process.env.FAIRMONT_ACCESS_PASSWORD) {
+    redirect("/investment-property-marbella/fairmont-residences-la-hacienda?error=1");
+  }
+
+  const cookieStore = await cookies();
+  cookieStore.set(fairmontAccessCookie, "granted", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/investment-property-marbella/fairmont-residences-la-hacienda",
+    maxAge: 60 * 60 * 24 * 30,
+  });
+
+  redirect("/investment-property-marbella/fairmont-residences-la-hacienda");
+}
 
 const amenities = [
   ["Fairmont service", "24-hour residential concierge, private check-in and ownership support"],
@@ -23,7 +48,61 @@ const residenceTypes = [
   ["Presidential residence", "Signature multi-bedroom layout", "Up to 1,149 m²"],
 ];
 
-export default function FairmontLaHaciendaPage() {
+export default async function FairmontLaHaciendaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const [cookieStore, query] = await Promise.all([cookies(), searchParams]);
+  const hasAccess = cookieStore.get(fairmontAccessCookie)?.value === "granted";
+
+  if (!hasAccess) {
+    return (
+      <main className={styles.page}>
+        <Header enquireHref="/enquire?partner=fairmont-la-hacienda" enquireLabel="Fairmont enquiry" />
+        <section className={styles.accessGate} aria-labelledby="fairmont-access-heading">
+          <Image
+            className={styles.accessGateImage}
+            src="/images/fairmont-la-hacienda/fairmont-hero.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+          />
+          <div className={styles.accessGateShade} aria-hidden="true" />
+          <div className={styles.accessGateCard}>
+            <p className="eyebrow light">Private project access</p>
+            <h1 id="fairmont-access-heading">Fairmont Residences<br />La Hacienda.</h1>
+            <p>
+              This development presentation is reserved for authorised PF EuroAsia
+              clients and collaboration partners. Enter the supplied password to continue.
+            </p>
+            <form className={styles.accessForm} action={unlockFairmont}>
+              <label htmlFor="fairmont-password">Password</label>
+              <input
+                id="fairmont-password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+              />
+              {query.error === "1" ? (
+                <p className={styles.accessError} role="alert">The password entered was not recognised.</p>
+              ) : null}
+              <button className="button button-gold" type="submit">
+                Access presentation <span>→</span>
+              </button>
+            </form>
+            <Link className={styles.accessBackLink} href="/investment-property-marbella">
+              ← Return to featured developments
+            </Link>
+          </div>
+        </section>
+        <Footer />
+      </main>
+    );
+  }
+
   return (
     <main className={styles.page}>
       <Header enquireHref="/enquire?partner=fairmont-la-hacienda" enquireLabel="Fairmont enquiry" />
