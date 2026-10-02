@@ -25,7 +25,7 @@ function clean(value: unknown, maxLength = 5000) {
 
 async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: string) {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
+  if (!apiKey) throw new Error("Collaborator notification email is not configured.");
 
   const partnerNotificationsEmail =
     process.env.PARTNER_NOTIFICATIONS_EMAIL || "partner-notifications@pfeuroasia.com";
@@ -63,7 +63,7 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
     `Review in the Vault: https://www.pfeuroasia.com/vault/properties/${property.id}/preview`,
   ].join("\n");
 
-  await fetch("https://api.resend.com/emails", {
+  const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${apiKey}`,
@@ -77,6 +77,10 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
       reply_to: collaboratorEmail,
     }),
   });
+  if (!response.ok) throw new Error(`Collaborator update email rejected: ${response.status}`);
+  const result = (await response.json()) as { id?: string };
+  if (!result.id) throw new Error("Collaborator update email ID was not returned.");
+  console.info("collaborator-property-update-email-accepted", { reference: property.reference, emailId: result.id });
 }
 
 export async function PATCH(

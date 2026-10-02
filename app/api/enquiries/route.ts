@@ -176,7 +176,7 @@ async function sendWithResend(args: {
   fromName?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return false;
+  if (!apiKey) throw new Error("Enquiry email sending is not configured.");
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -197,29 +197,15 @@ async function sendWithResend(args: {
     const detail = await response.text();
     throw new Error(`Resend failed: ${response.status} ${detail}`);
   }
+  const result = (await response.json()) as { id?: string };
+  if (!result.id) throw new Error("Resend did not return an email ID.");
+  console.info("enquiry-email-accepted", { emailId: result.id, subject: args.subject });
   return true;
 }
 
 function enquirySubjectType(record: Record<string, string>) {
   if (record.enquiry_type === "international-payments") return "international payments enquiry";
   return record.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
-}
-
-async function sendFormSubmitFallback(recipient: string, record: Record<string, string>) {
-  const response = await fetch(
-    `https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        ...record,
-        _subject: `New confidential ${enquirySubjectType(record)} via ${record.partner_name}`,
-        _template: "table",
-      }),
-    },
-  );
-
-  if (!response.ok) throw new Error(`FormSubmit failed: ${response.status}`);
 }
 
 async function storeRecord(reference: string, record: Record<string, string>) {
@@ -259,7 +245,15 @@ export async function POST(request: NextRequest) {
   }
 
   if (clean(payload.company_website)) {
-    return NextResponse.json({ ok: true, reference: "PFE-RECEIVED" });
+    console.warn("enquiry-spam-check-rejected", {
+      full_name: clean(payload.full_name, 160),
+      email: clean(payload.email, 320),
+      enquiry_type: clean(payload.enquiry_type, 80),
+    });
+    return NextResponse.json(
+      { ok: false, error: "Your enquiry could not be sent. Please refresh the page and try again, or email enquiry@pfeuroasia.com." },
+      { status: 422 },
+    );
   }
 
   const fullName = clean(payload.full_name, 160);
@@ -376,7 +370,7 @@ export async function POST(request: NextRequest) {
     .join("\n");
 
   try {
-    const sentWithResend = await sendWithResend({
+    await sendWithResend({
       to: recipients,
       subject: `New confidential ${enquirySubjectType(record)} via ${
         partner ? partner.name : "PF EuroAsia website"
@@ -389,8 +383,7 @@ export async function POST(request: NextRequest) {
           : "PF EuroAsia Partner Enquiries",
     });
 
-    if (sentWithResend) {
-      try {
+    try {
         await sendWithResend({
           to: [email],
           subject: `Your PF EuroAsia enquiry ${reference}`,
@@ -399,20 +392,18 @@ export async function POST(request: NextRequest) {
         });
       } catch (error) {
         console.error("enquiry-client-confirmation-failed", error);
-      }
-    } else {
-      await Promise.all(recipients.map((recipient) => sendFormSubmitFallback(recipient, record)));
     }
   } catch (error) {
-    console.error("enquiry-email-routing-failed", error);
+    console.error("enquiry-email-routing-failed", { reference, error });
     return NextResponse.json(
       {
-        ok: true,
+        ok: false,
         reference,
-        delivery: "browser-fallback",
+        delivery: "failed",
+        error: "Your enquiry could not be delivered. Please try again or email enquiry@pfeuroasia.com.",
         partner: partner ? { code: partner.code, name: partner.name } : null,
       },
-      { status: 202 },
+      { status: 502 },
     );
   }
 

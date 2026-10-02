@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../lib/submitEnquiry";
+
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
@@ -15,27 +17,23 @@ export function ZhEnquiry() {
 
     const form = new FormData(event.currentTarget);
     const payload = {
-      _subject: "来自 pfeuroasia.com 的新中文咨询",
       enquiry_type: form.get("purpose"),
-      preferred_area: form.get("area"),
-      budget: form.get("budget"),
+      preferred_area_or_property: form.get("area"),
+      indicative_budget_or_value: form.get("budget"),
       preferred_channel: form.get("channel"),
       full_name: form.get("name"),
       email: form.get("email"),
       wechat_id: form.get("wechat"),
-      telephone: form.get("phone"),
+      telephone_or_whatsapp: form.get("phone"),
       requirements: form.get("message"),
       language: "Simplified Chinese",
-      _template: "table",
+      contact_desk: "Spain desk",
+      website_journey: "spain",
+      website_region: "Chinese website",
     };
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/enquiry@pfeuroasia.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!response.ok) throw new Error("Submission failed");
+      await submitEnquiry(payload);
       setSent(true);
     } catch {
       setError("暂时无法发送。请重试，或发送电子邮件至 enquiry@pfeuroasia.com。");

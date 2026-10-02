@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../lib/submitEnquiry";
+
 import { FormEvent, useState } from "react";
 import { trackEvent } from "../lib/analytics";
 
@@ -13,7 +15,8 @@ export function RentalEnquiryForm({ selectedVilla = "" }: { selectedVilla?: stri
     setSending(true);
     setError("");
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const form = new FormData(formElement);
     const stay = [
       `Arrival: ${form.get("arrival")}`,
       `Departure: ${form.get("departure")}`,
@@ -41,17 +44,10 @@ export function RentalEnquiryForm({ selectedVilla = "" }: { selectedVilla?: stri
     };
 
     try {
-      const response = await fetch("/api/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-      if (!response.ok || !result.reference) throw new Error("Unable to send enquiry");
+      await submitEnquiry(payload);
       trackEvent("rental_enquiry_submitted", { source: "luxury_villa_rentals" });
       setSent(true);
-      event.currentTarget.reset();
+      formElement.reset();
     } catch {
       setError("Your enquiry could not be sent. Please try again shortly.");
     } finally {

@@ -655,17 +655,28 @@
 .consent {
   display: flex;
   align-items: flex-start;
-  gap: 9px;
+  gap: 14px;
+  min-height: 44px;
   margin: 25px 0;
-  color: #6a6b65;
-  font-size: 11px;
+  color: #45463f;
+  font-size: 14px;
+  line-height: 1.6;
+  cursor: pointer;
 }
 
-.consent input {
-  width: auto;
-  margin-top: 2px;
+.consent input[type="checkbox"] {
+  appearance: auto;
+  flex: 0 0 28px;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
   accent-color: var(--gold);
 }
+.consent > span { min-width: 0; }
 
 .formError {
   margin: 0 0 18px;

@@ -22,7 +22,7 @@ function clean(value: unknown, maxLength = 5000) {
 
 async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: string) {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
+  if (!apiKey) throw new Error("Collaborator notification email is not configured.");
 
   const partnerNotificationsEmail =
     process.env.PARTNER_NOTIFICATIONS_EMAIL || "partner-notifications@pfeuroasia.com";
@@ -77,7 +77,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
     "Property Facilitators EuroAsia",
   ].join("\n");
 
-  await Promise.all([
+  const responses = await Promise.all([
     fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
@@ -101,6 +101,12 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
       }),
     }),
   ]);
+  for (const [index, response] of responses.entries()) {
+    if (!response.ok) throw new Error(`Collaborator email ${index} rejected: ${response.status}`);
+    const result = (await response.json()) as { id?: string };
+    if (!result.id) throw new Error("Collaborator email ID was not returned.");
+    console.info("collaborator-property-email-accepted", { reference: property.reference, emailId: result.id, kind: index === 0 ? "review-notification" : "submission-confirmation" });
+  }
 }
 
 export async function GET() {

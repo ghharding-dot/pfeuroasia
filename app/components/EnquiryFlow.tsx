@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../lib/submitEnquiry";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -250,13 +252,6 @@ type EnquiryFlowProps = {
   };
 };
 
-type SubmissionResponse = {
-  ok?: boolean;
-  reference?: string;
-  delivery?: "sent" | "browser-fallback";
-  error?: string;
-};
-
 type EnquiryPayload = {
   enquiry_type: string;
   preferred_area_or_property: string;
@@ -275,66 +270,6 @@ type EnquiryPayload = {
   website_journey: EnquiryJourney;
   company_website: FormDataEntryValue | null;
 };
-
-function asText(value: FormDataEntryValue | string | null) {
-  return typeof value === "string" ? value : "";
-}
-
-async function deliverFromBrowser(
-  payload: EnquiryPayload,
-  reference: string,
-  partner: ReturnType<typeof getPartnerReferral>,
-) {
-  const recipients = ["enquiry@pfeuroasia.com"];
-
-  const subjectType = payload.website_journey === "asia" ? "Asia enquiry" : "property enquiry";
-  const record = {
-    reference,
-    submitted_at: new Date().toISOString(),
-    status: "New",
-    priority: "Unqualified",
-    partner_code: partner?.code || "DIRECT",
-    partner_name: partner?.name || "Direct website enquiry",
-    partner_slug: payload.partner_slug || "direct",
-    website_region: asText(payload.website_region) || "International",
-    website_journey: payload.website_journey,
-    language: payload.language || "en",
-    enquiry_type: payload.enquiry_type,
-    preferred_area_or_property: payload.preferred_area_or_property,
-    indicative_budget_or_value: payload.indicative_budget_or_value,
-    requirements: payload.requirements,
-    full_name: asText(payload.full_name),
-    email: asText(payload.email),
-    contact_desk: asText(payload.contact_desk),
-    preferred_channel: asText(payload.preferred_channel),
-    telephone_or_whatsapp: asText(payload.telephone_or_whatsapp),
-    wechat_id: asText(payload.wechat_id),
-    current_location: asText(payload.current_location),
-    _subject: `New confidential ${subjectType} via ${partner ? partner.name : "PF EuroAsia website"}`,
-    _template: "table",
-    _replyto: asText(payload.email),
-  };
-
-  await Promise.all(
-    recipients.map(async (recipient) => {
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify(record),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error(`Browser delivery failed: ${response.status}`);
-      }
-    }),
-  );
-}
 
 export function EnquiryFlow({
   partnerSlug,
@@ -464,20 +399,7 @@ export function EnquiryFlow({
     };
 
     try {
-      const response = await fetch("/api/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const result = (await response.json()) as SubmissionResponse;
-      if (!response.ok || !result.reference || result.reference === "PFE-RECEIVED") {
-        throw new Error(result.error || "Submission failed");
-      }
-
-      if (result.delivery === "browser-fallback") {
-        await deliverFromBrowser(payload, result.reference, partner);
-      }
-
+      const result = await submitEnquiry(payload);
       setReference(result.reference);
       trackEvent("enquiry_submitted", {
         enquiry_type: goal,

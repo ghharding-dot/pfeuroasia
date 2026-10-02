@@ -1,5 +1,7 @@
 "use client";
 
+import { submitEnquiry } from "../lib/submitEnquiry";
+
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 
@@ -31,17 +33,11 @@ export function SpanishEnquiry() {
       language: "es",
       website_region: "Sitio web en español",
       website_journey: journey,
-      company_website: form.get("company_website"),
+      company_website: form.get("pfe_contact_check"),
     };
 
     try {
-      const response = await fetch("/api/enquiries", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const result = await response.json();
-      if (!response.ok || !result.reference) throw new Error();
+      const result = await submitEnquiry(payload);
       setReference(result.reference);
       setSent(true);
     } catch {
@@ -74,7 +70,7 @@ export function SpanishEnquiry() {
         <small>Directo a nuestro equipo internacional</small>
       </aside>
       <form className="enquiry-form" onSubmit={submit}>
-        <label aria-hidden="true" style={{ position: "absolute", left: "-10000px" }}>Sitio web de la empresa<input name="company_website" tabIndex={-1} /></label>
+        <label aria-hidden="true" style={{ position: "absolute", left: "-10000px" }}>Dejar vacío<input name="pfe_contact_check" type="text" tabIndex={-1} autoComplete="off" data-lpignore="true" data-1p-ignore="true" /></label>
         <fieldset>
           <legend>Cuéntenos qué desea conseguir.</legend>
           <p className="form-hint">Una breve descripción es suficiente. Nosotros ampliaremos los detalles personalmente.</p>
