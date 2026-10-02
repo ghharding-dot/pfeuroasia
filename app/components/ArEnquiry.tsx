@@ -23,7 +23,10 @@ export function ArEnquiry() {
       preferred_channel: form.get("channel"),
       full_name: form.get("name"),
       email: form.get("email"),
-      telephone_or_whatsapp: form.get("whatsapp") || form.get("phone"),
+      telephone_or_whatsapp: [
+        form.get("whatsapp") ? "WhatsApp: " + form.get("whatsapp") : "",
+        form.get("phone") ? "Telephone: " + form.get("phone") : "",
+      ].filter(Boolean).join(" · "),
       requirements: form.get("message"),
       language: "Arabic - Saudi Arabia",
       contact_desk: "Spain desk",
