@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../lib/emailConfig";
 import { randomInt } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createCollaboratorChallenge } from "../../../lib/collaboratorAuth";
@@ -38,7 +39,7 @@ export async function POST(request: Request) {
         "",
         "Property Facilitators EuroAsia",
       ].join("\n"),
-      reply_to: "enquiry@pfeuroasia.com",
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 

@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../lib/emailConfig";
 import { NextResponse } from "next/server";
 import {
   normalizePropertyAccessLevel,
@@ -46,7 +47,7 @@ async function notifyRegistration(args: {
       to: [recipient],
       subject: `Verified listing lead — ${args.propertyReference} — ${args.fullName}`,
       text,
-      reply_to: args.email,
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 

@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../lib/emailConfig";
 import { createHash, randomInt } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createCollaboratorChallenge } from "../../../lib/collaboratorAuth";
@@ -76,7 +77,7 @@ export async function POST(request: Request) {
       to: [partner.loginEmail],
       subject: "Your PF EuroAsia collaborator login code",
       text,
-      reply_to: "enquiry@pfeuroasia.com",
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 

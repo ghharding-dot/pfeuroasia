@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../../lib/emailConfig";
 import { get, list, put } from "@vercel/blob";
 import { degrees, PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { NextRequest, NextResponse } from "next/server";
@@ -195,7 +196,7 @@ async function sendAccessNotification(args: {
       to: recipients,
       subject: `Verified brochure download — ${args.propertyReference} — ${args.propertyTitle}`,
       text,
-      reply_to: args.email,
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 

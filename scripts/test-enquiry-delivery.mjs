@@ -28,6 +28,7 @@ async function invoke({ spam = '', providerFailure = false, acknowledgementFailu
   const sandbox = {
     process: { env: configured ? { RESEND_API_KEY: 'test-only-not-a-real-key' } : {} },
     console: { info: (...args) => logs.push(args), warn: (...args) => logs.push(args), error: (...args) => logs.push(args) },
+    WEBSITE_REPLY_TO: "ghh@pfeuroasia.com",
     NextResponse: { json: (body, init = {}) => ({ status: init.status || 200, body }) },
     getPartnerReferral: () => undefined,
     getPartnerContact: () => ({}),
@@ -46,6 +47,7 @@ async function invoke({ spam = '', providerFailure = false, acknowledgementFailu
 const success = await invoke();
 assert.equal(success.result.body.delivery, 'sent');
 assert.equal(success.sends.length, 2);
+assert.ok(success.sends.every((email) => email.reply_to === "ghh@pfeuroasia.com"));
 assert.ok(success.sends[0].to.includes('enquiry@pfeuroasia.com'));
 assert.ok(success.sends[0].to.includes('reservations@theluxuryvillacollection.com'));
 assert.ok(success.logs.some(([kind]) => kind === 'enquiry-record'));

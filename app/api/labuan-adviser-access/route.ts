@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../lib/emailConfig";
 import { NextRequest, NextResponse } from "next/server";
 import { recordMalaysiaAdviserAccess } from "../../lib/malaysiaAdviserLeadStore";
 
@@ -37,7 +38,7 @@ async function sendNotification(fullName: string, email: string, source: string)
     body: JSON.stringify({
       from: `PF EuroAsia Adviser <${notificationAddress()}>`,
       to: [recipient],
-      reply_to: email,
+      reply_to: WEBSITE_REPLY_TO,
       subject: "New Malaysia Adviser access",
       text: [
         "A visitor has unlocked the Ask EuroAsia Malaysia Adviser.",

@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../lib/emailConfig";
 import { NextRequest, NextResponse } from "next/server";
 import { getPartnerReferral } from "../../lib/partner-referrals";
 import { getPartnerContact } from "../../lib/partnerContacts";
@@ -172,7 +173,6 @@ async function sendWithResend(args: {
   to: string[];
   subject: string;
   text: string;
-  replyTo?: string;
   fromName?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
@@ -189,7 +189,7 @@ async function sendWithResend(args: {
       to: args.to,
       subject: args.subject,
       text: args.text,
-      reply_to: args.replyTo,
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 
@@ -376,7 +376,6 @@ export async function POST(request: NextRequest) {
         partner ? partner.name : "PF EuroAsia website"
       }`,
       text: internalText,
-      replyTo: email,
       fromName:
         websiteJourney === "asia"
           ? "PF EuroAsia Asia Enquiries"
@@ -388,7 +387,6 @@ export async function POST(request: NextRequest) {
           to: [email],
           subject: `Your PF EuroAsia enquiry ${reference}`,
           text: clientText,
-          replyTo: mainRecipient,
         });
       } catch (error) {
         console.error("enquiry-client-confirmation-failed", error);

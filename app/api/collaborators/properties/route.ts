@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../lib/emailConfig";
 import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../lib/collaboratorSession";
 import { formatPropertyCurrency, normalizePriceAmount, normalizePropertyCurrency } from "../../../lib/propertyPrice";
@@ -86,7 +87,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
         to: [partnerNotificationsEmail],
         subject: `Collaborator property awaiting review — ${property.reference}`,
         text: adminText,
-        reply_to: collaboratorEmail,
+        reply_to: WEBSITE_REPLY_TO,
       }),
     }),
     fetch("https://api.resend.com/emails", {
@@ -97,7 +98,7 @@ async function sendSubmissionEmails(property: VaultProperty, collaboratorEmail: 
         to: [collaboratorEmail],
         subject: `Property submitted for PF EuroAsia review — ${property.reference}`,
         text: collaboratorText,
-        reply_to: partnerNotificationsEmail,
+        reply_to: WEBSITE_REPLY_TO,
       }),
     }),
   ]);

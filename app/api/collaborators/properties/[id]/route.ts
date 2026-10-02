@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../../lib/emailConfig";
 import { NextResponse } from "next/server";
 import { getCollaboratorSession } from "../../../../lib/collaboratorSession";
 import {
@@ -74,7 +75,7 @@ async function sendUpdateEmails(property: VaultProperty, collaboratorEmail: stri
       to: [partnerNotificationsEmail],
       subject: `Collaborator property updated — ${property.reference}`,
       text,
-      reply_to: collaboratorEmail,
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
   if (!response.ok) throw new Error(`Collaborator update email rejected: ${response.status}`);

@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../lib/emailConfig";
 import { NextResponse } from "next/server";
 import {
   registerPrivateClient,
@@ -24,7 +25,6 @@ async function sendEmail(args: {
   to: string[];
   subject: string;
   text: string;
-  replyTo?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
@@ -40,7 +40,7 @@ async function sendEmail(args: {
       to: args.to,
       subject: args.subject,
       text: args.text,
-      reply_to: args.replyTo || "enquiry@pfeuroasia.com",
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 
@@ -155,7 +155,6 @@ export async function POST(request: Request) {
         to: [mainRecipient],
         subject: `Private Collection application — ${client.fullName}`,
         text: internalText,
-        replyTo: client.email,
       }),
       sendEmail({
         to: [client.email],

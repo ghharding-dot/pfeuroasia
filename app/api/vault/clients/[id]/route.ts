@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../../lib/emailConfig";
 import { NextRequest, NextResponse } from "next/server";
 import {
   updatePrivateClientStatus,
@@ -72,7 +73,7 @@ async function sendStatusEmail(args: {
       to: [args.email],
       subject,
       text,
-      reply_to: "enquiry@pfeuroasia.com",
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 

@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../lib/emailConfig";
 import { NextRequest, NextResponse } from "next/server";
 import { recordMalaysiaAdviserQuestion } from "../../lib/malaysiaAdviserLeadStore";
 
@@ -27,7 +28,6 @@ async function sendWithResend(args: {
   to: string[];
   subject: string;
   text: string;
-  replyTo?: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) return false;
@@ -43,7 +43,7 @@ async function sendWithResend(args: {
       to: args.to,
       subject: args.subject,
       text: args.text,
-      reply_to: args.replyTo,
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 
@@ -125,7 +125,6 @@ export async function POST(request: NextRequest) {
       to: [recipient],
       subject: `Malaysia Adviser follow-up question — ${fullName}`,
       text: internalText,
-      replyTo: email,
     });
 
     if (sent) {
@@ -133,7 +132,6 @@ export async function POST(request: NextRequest) {
         to: [email],
         subject: "We received your Malaysia Adviser question",
         text: clientText,
-        replyTo: recipient,
       }).catch((error) => console.error("malaysia-adviser-client-confirmation-failed", error));
     }
   } catch (error) {

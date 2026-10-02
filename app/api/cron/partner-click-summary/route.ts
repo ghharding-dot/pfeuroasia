@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../lib/emailConfig";
 import { NextRequest, NextResponse } from "next/server";
 import { previousPartnerClickKey, redisCommand } from "../../../lib/partner-clicks";
 
@@ -40,6 +41,7 @@ async function sendSummary(text: string, week: string) {
     },
     body: JSON.stringify({
       from: sender,
+      reply_to: WEBSITE_REPLY_TO,
       to: [recipient],
       subject: `Weekly collaboration partner page activity — ${week}`,
       text,

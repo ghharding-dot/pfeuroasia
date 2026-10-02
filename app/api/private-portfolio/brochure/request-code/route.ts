@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../../lib/emailConfig";
 import { randomInt } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { createBrochureChallenge } from "../../../../lib/brochureAccess";
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
       to: [email],
       subject: `Your Private Collection verification code — ${property.title}`,
       text: emailText,
-      reply_to: "enquiry@pfeuroasia.com",
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 

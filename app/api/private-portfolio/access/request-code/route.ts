@@ -1,3 +1,4 @@
+import { WEBSITE_REPLY_TO } from "../../../../lib/emailConfig";
 import { randomInt } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createPrivateClientChallenge } from "../../../../lib/portfolioAuth";
@@ -79,7 +80,7 @@ export async function POST(request: Request) {
       to: [client.email],
       subject: "Your PF EuroAsia Private Collection access code",
       text,
-      reply_to: "enquiry@pfeuroasia.com",
+      reply_to: WEBSITE_REPLY_TO,
     }),
   });
 
