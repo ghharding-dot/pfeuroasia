@@ -15,8 +15,9 @@ async function unlockFairmont(formData: FormData) {
   "use server";
 
   const password = String(formData.get("password") ?? "").trim();
+  const configuredPassword = process.env.FAIRMONT_ACCESS_PASSWORD?.trim();
 
-  if (!process.env.FAIRMONT_ACCESS_PASSWORD || password !== process.env.FAIRMONT_ACCESS_PASSWORD) {
+  if (!configuredPassword || password !== configuredPassword) {
     redirect("/investment-property-marbella/fairmont-residences-la-hacienda?error=1");
   }
 
