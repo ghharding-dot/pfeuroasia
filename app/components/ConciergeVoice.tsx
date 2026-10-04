@@ -107,7 +107,7 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
         try { event = JSON.parse(data); } catch { return; }
         if (event.type === "session.started") {
           clearTimeout(r.ready); setState("live"); setStatus("Listening — ask your question."); activity();
-          r.timer = setTimeout(() => stop("Your five-minute voice session has ended. You can continue typing or start voice again."), 300000);
+          r.timer = setTimeout(() => stop("Your eight-minute voice session has ended. You can continue typing or start voice again."), 480000);
           send({ type: "session.instructions.append", event_id: crypto.randomUUID(), delegation_id: null, content: "Greet the visitor now in English: Hello, I am EuroAsia's AI assistant. How can I help you? Then pause and listen." });
         } else if (event.type === "session.closed") { cleanup(); setState("off"); }
         else if (event.type === "error") { stop("Voice encountered a problem. Please type your question for now."); }
@@ -183,6 +183,6 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
     {state !== "off" && <audio ref={audio} autoPlay controls aria-label="EuroAsia AI voice playback" />}
     {state !== "off" && heard && <p><strong>You:</strong> {heard}</p>}
     {state !== "off" && spoken && <p><strong>EuroAsia voice:</strong> {spoken}</p>}
-    <p className={styles.note}>Voice is processed by OpenAI. Sessions end after five minutes or a quiet minute. <a href="/privacy">Privacy notice</a>.</p>
+    <p className={styles.note}>Voice is processed by OpenAI. Sessions end after eight minutes or a quiet minute. <a href="/privacy">Privacy notice</a>.</p>
   </div>;
 }

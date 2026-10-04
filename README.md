@@ -16,7 +16,7 @@ After those live checks, enable the same flag in Production and redeploy.
 The voice service uses GPT-Live with the feminine Willow voice (Irish English),
 while factual requests go to the existing `/api/concierge` backend.
 
-The controls close sessions after five minutes, one minute without transcript
+The controls close sessions after eight minutes, one minute without transcript
 activity, leaving the tab, closing the widget, or opening the enquiry form.
 The instance-local start limit is best-effort abuse protection, not a durable
 monthly spending cap. Configure billing controls in the provider account before
