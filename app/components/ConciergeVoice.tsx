@@ -176,9 +176,10 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
   if (!available) return null;
   return <div className={styles.voice}>
     <button type="button" disabled={state === "ending"} onClick={() => state === "off" ? void start() : stop()}>
-      {state === "off" ? "Talk to EuroAsia" : state === "connecting" ? "Cancel voice" : state === "ending" ? "Ending voice…" : "End voice"}
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>
+      {state === "off" ? "Speak to our AI advisor" : state === "connecting" ? "Cancel voice" : state === "ending" ? "Ending voice…" : "End voice"}
     </button>
-    <p role="status">{status || "AI voice · microphone starts only when you choose Talk."}</p>
+    <p role="status">{status || "Tap above to start a live voice conversation. You can also type below."}</p>
     {state !== "off" && <audio ref={audio} autoPlay controls aria-label="EuroAsia AI voice playback" />}
     {state !== "off" && heard && <p><strong>You:</strong> {heard}</p>}
     {state !== "off" && spoken && <p><strong>EuroAsia voice:</strong> {spoken}</p>}
