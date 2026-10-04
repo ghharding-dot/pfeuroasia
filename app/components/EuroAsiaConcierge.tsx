@@ -72,7 +72,7 @@ export function EuroAsiaConcierge() {
   return <div className={styles.root}>
     {open && <section className={styles.panel} role="dialog" aria-labelledby="euroasia-concierge-title">
       <header className={styles.header}>
-        <div><h2 id="euroasia-concierge-title">Ask EuroAsia</h2><p>AI concierge · Spain & Asia</p></div>
+        <div><h2 id="euroasia-concierge-title">Ask EuroAsia</h2><p>Your online AI advisor</p></div>
         <button type="button" onClick={close} aria-label="Close AI concierge" className={styles.close}>×</button>
       </header>
       <div className={styles.content}>
@@ -88,7 +88,7 @@ export function EuroAsiaConcierge() {
           <label className={styles.consent}><input type="checkbox" required/><span>I agree to be contacted about this enquiry and understand relevant partners may receive my details. <Link href="/privacy">Privacy notice</Link>.</span></label>
           <button type="submit" className={styles.primary} disabled={sending}>{sending?"Sending…":"Send enquiry"}</button>
         </form> : <>
-          <div className={styles.welcome}><p>Hello. I can help you explore properties, luxury rentals, Malaysia relocation and currency transfers.</p><p>What would you like to know?</p></div>
+          <div className={styles.welcome}><p>Welcome to Ask EuroAsia, our online AI advisor. Please ask anything you like.</p><p>I can help you explore property sales and purchases, luxury rentals, relocation, residency, company formation and international money transfers, and guide you to the relevant pages.</p></div>
           {!messages.length && <div className={styles.suggestions}>{suggestions.map(text=><button type="button" key={text} onClick={()=>void ask(text)} disabled={busy}>{text}</button>)}</div>}
           <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
             {messages.map((message,index)=><div key={index} className={`${styles.message} ${message.role === "user" ? styles.user : styles.assistant}`}><span className={styles.speaker}>{message.role === "user" ? "You" : "EuroAsia AI"}</span><p>{message.text}</p>{Boolean(message.sources?.length) && <div className={styles.links}>{message.sources?.map(source=><Link href={source.url} key={source.url} onClick={()=>setOpen(false)}>{source.label}</Link>)}</div>}</div>)}
@@ -102,13 +102,13 @@ export function EuroAsiaConcierge() {
         <ConciergeVoice history={messages} onQuestion={ask}/>
         <form onSubmit={e=>{e.preventDefault();void ask(question);}} className={styles.composer}>
           <label className={styles.srOnly} htmlFor="euroasia-question">Your question</label>
-          <textarea ref={input} id="euroasia-question" value={question} onChange={e=>setQuestion(e.target.value)} placeholder="Ask a question…" maxLength={2000} rows={2} disabled={busy} onKeyDown={e=>{if(e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing){e.preventDefault();void ask(question);}}}/>
+          <textarea ref={input} id="euroasia-question" value={question} onChange={e=>setQuestion(e.target.value)} placeholder="Please ask anything you like…" maxLength={2000} rows={2} disabled={busy} onKeyDown={e=>{if(e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing){e.preventDefault();void ask(question);}}}/>
           <button type="submit" disabled={busy || !question.trim()} aria-label="Send question">Send</button>
         </form>
         <button type="button" className={styles.team} disabled={busy} onClick={startEnquiry}>Speak with the EuroAsia team</button>
         <p className={styles.note}>AI guidance. Availability and individual tax or residency advice require confirmation. Avoid sharing sensitive documents here.</p>
       </footer>}
     </section>}
-    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Open Ask EuroAsia AI concierge"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span>Ask EuroAsia</span></button>}
+    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Ask EuroAsia — Your online AI advisor. Please ask anything you like."><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span className={styles.launcherCopy}><strong>Ask EuroAsia</strong><span>Your online AI advisor</span><span>Please ask anything you like.</span></span></button>}
   </div>;
 }
