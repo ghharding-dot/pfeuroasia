@@ -858,3 +858,48 @@
     border-left: 0;
   }
 }
+
+/* Give the two client gateways priority while retaining the centre About card. */
+.weightedCards { height: auto; min-height: 640px; }
+.weightedCards .gatewayCard { display: flex; flex-direction: column; justify-content: flex-end; flex: 1.2 1 0; }
+.weightedCards .gatewayCardCopy { position: relative; inset: auto; width: 100%; padding-top: 100px; }
+.weightedCards .gatewayCard:hover,
+.weightedCards .gatewayCard:focus-visible { flex: 1.4 1 0; }
+.weightedCards .aboutPath { flex: .62 1 0; align-self: center; min-height: 490px; height: auto; }
+.weightedCards .aboutPath:hover,
+.weightedCards .aboutPath:focus-visible { flex: .72 1 0; }
+.weightedCards .aboutPath .gatewayCardCopy { padding: 90px 22px 28px; }
+.weightedCards .aboutPath h2 { font-size: clamp(32px, 3vw, 44px); }
+.weightedCards .aboutPath .cardLead { font-size: 20px; }
+.weightedCards .gatewayCardCopy p { font-size: 1rem; line-height: 1.55; margin-bottom: 18px; }
+.weightedCards .gatewayCardCopy h2 { font-size: clamp(46px, 4.2vw, 66px); line-height: 1; }
+.weightedCards .aboutPath h2 { font-size: clamp(32px, 3vw, 44px); }
+.weightedCards .gatewayCardCopy .cardLead { font-size: clamp(18px, 1.55vw, 23px); }
+.weightedCards .gatewayCardCopy h2 em { display: block; color: var(--gold-light); font-weight: 400; }
+.weightedCards .gatewayCardCopy strong { font-size: .875rem; letter-spacing: .04em; }
+.weightedCards .pathLabel { font-size: .75rem; line-height: 1.3; }
+.weightedCards .cardTopline { font-size: .75rem; letter-spacing: .08em; }
+.cardHighlights { list-style: none; padding: 0; margin: 0 0 22px; }
+.cardHighlights li { padding: 8px 0; border-top: 1px solid rgba(222,194,141,.3); font-size: .875rem; line-height: 1.35; color: rgba(255,255,255,.9); }
+.cardHighlights b { color: var(--gold-light); font-weight: 700; }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .weightedCards { min-height: 700px; }
+  .weightedCards .gatewayCardCopy { padding-inline: 22px; }
+  .weightedCards .aboutPath .gatewayCardCopy { padding-inline: 18px; }
+  .weightedCards .gatewayCardCopy strong { width: 100%; }
+}
+@media (max-width: 900px) {
+  .weightedCards .gatewayCard,
+  .weightedCards .gatewayCard:hover,
+  .weightedCards .gatewayCard:focus-visible { flex: none; min-height: 580px; }
+  .weightedCards .spainPath { order: 1; }
+  .weightedCards .asiaPath { order: 2; }
+  .weightedCards .aboutPath,
+  .weightedCards .aboutPath:hover,
+  .weightedCards .aboutPath:focus-visible { order: 3; height: auto; min-height: 290px; width: 100%; align-self: stretch; }
+  .weightedCards .aboutPath .gatewayCardCopy { padding: 28px 24px; }
+  .weightedCards { min-height: 0; }
+  .weightedCards .aboutPath .cardTopline { display: none; }
+  .weightedCards .gatewayCardCopy h2 { font-size: 52px; }
+  .weightedCards .aboutPath h2 { font-size: 36px; }
+}

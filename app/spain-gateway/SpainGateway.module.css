@@ -75,3 +75,6 @@
     flex-direction: column;
   }
 }
+
+.secondaryAction { border: 1px solid var(--gold-light); background: rgba(8,12,12,.6); color: #fff; }
+.secondaryAction:hover,.secondaryAction:focus-visible { background: var(--gold); color: var(--ink); }

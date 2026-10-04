@@ -1,0 +1,10 @@
+.section { padding: 38px 0; border-block: 1px solid var(--line); background: var(--ivory); }
+.inner { display: grid; grid-template-columns: minmax(170px,.55fr) minmax(0,1.65fr) minmax(180px,.65fr); align-items: center; gap: 36px; }
+.partner span { display: block; margin-bottom: 12px; color: #66645d; font-size: .75rem; font-weight: 600; line-height: 1.5; }
+.partner img { display: block; width: min(100%,200px); height: 66px; object-fit: contain; object-position: left center; }
+.copy h2 { margin: 0 0 12px; font-family: var(--serif); font-size: clamp(26px,2.3vw,36px); font-weight: 400; line-height: 1.1; }
+.copy p { margin: 0; color: #61645d; font-size: 1rem; line-height: 1.65; }
+.link { display: inline-flex; justify-content: center; padding: 16px 18px; border: 1px solid #987644; color: #392e1e; font-size: .875rem; font-weight: 650; line-height: 1.4; text-align: center; }
+.link:hover,.link:focus-visible { background: var(--gold); color: var(--ink); }
+@media (max-width: 1050px) { .inner { grid-template-columns: 180px minmax(0,1fr); gap: 26px; } .link { grid-column: 2; justify-self: start; } }
+@media (max-width: 640px) { .inner { grid-template-columns: 1fr; gap: 22px; } .link { grid-column: 1; width: 100%; } }

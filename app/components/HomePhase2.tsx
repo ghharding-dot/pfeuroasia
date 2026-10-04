@@ -8,7 +8,7 @@ export function HomePhase2() {
       <div className={`site-shell ${phase2Styles.gatewayInner}`}>
         <div className={phase2Styles.gatewayIntro}>
           <div>
-            <p className="eyebrow light">Three gateways · One trusted network</p>
+            <p className="eyebrow light">Spain &amp; Malaysia · One trusted network</p>
             <h1 id="gateway-heading">
               Choose your direction.
               <em>We will guide the journey.</em>
@@ -19,15 +19,15 @@ export function HomePhase2() {
           </div>
           <div className={phase2Styles.gatewayServices}>
             <p>
-              Exclusive residential properties <span>·</span> Investment properties
-              <span>·</span> International monetary transfers <span>·</span> Top legal advice
-              <span>·</span> Local collaborative partners in all zones
+              Luxury property &amp; developments <span>·</span> 100+ rental villas
+              <span>·</span> Malaysia residency &amp; company formation
+              <span>·</span> International currency transfers
             </p>
             <strong>Select your direction below.</strong>
           </div>
         </div>
 
-        <div className={phase2Styles.gatewayCards}>
+        <div className={`${phase2Styles.gatewayCards} ${phase2Styles.weightedCards}`}>
           <Link
             className={`${phase2Styles.gatewayCard} ${phase2Styles.spainPath}`}
             href="/spain-gateway"
@@ -41,14 +41,18 @@ export function HomePhase2() {
               <span className={phase2Styles.pathLabel}>Spain Gateway</span>
               <h2>Spain</h2>
               <p className={phase2Styles.cardLead}>
-                Luxury property and trusted local expertise.
+                Luxury homes, developments &amp; villa rentals.
               </p>
               <p>
-                Selected villas, discreet opportunities and personal
-                representation across Marbella, Benahavís and the Costa del
-                Sol.
+                Buy, invest or rent along the Costa del Sol, with personal
+                support in Marbella, Benahavís, La Zagaleta and El Madroñal.
               </p>
-              <strong>Enter Spain Gateway <span aria-hidden="true">→</span></strong>
+              <ul className={phase2Styles.cardHighlights} aria-label="Spain services">
+                <li>Luxury properties for sale</li>
+                <li>New developments &amp; investment residences</li>
+                <li><b>100+ luxury villas to rent</b></li>
+              </ul>
+              <strong>Explore Spain</strong>
             </div>
           </Link>
 
@@ -59,19 +63,18 @@ export function HomePhase2() {
             <div className={phase2Styles.cardOverlay} />
             <div className={phase2Styles.cardTopline}>
               <span>02</span>
-              <span>Europe · Asia · Trusted partners</span>
+              <span>Our network</span>
             </div>
             <div className={phase2Styles.gatewayCardCopy}>
               <span className={phase2Styles.pathLabel}>PF EuroAsia</span>
               <h2>About Us</h2>
               <p className={phase2Styles.cardLead}>
-                Trusted professionals across borders.
+                Your trusted connection.
               </p>
               <p>
-                A coordinated network connecting property, legal, residency
-                and business expertise across Europe and Asia.
+                Meet the people and partners supporting your plans.
               </p>
-              <strong>Meet PF EuroAsia <span aria-hidden="true">→</span></strong>
+              <strong>About us</strong>
             </div>
           </Link>
 
@@ -86,15 +89,21 @@ export function HomePhase2() {
             </div>
             <div className={phase2Styles.gatewayCardCopy}>
               <span className={phase2Styles.pathLabel}>Malaysia &amp; Asia Gateway</span>
-              <h2>Malaysia</h2>
+              <h2>Malaysia <em>&amp; Asia</em></h2>
               <p className={phase2Styles.cardLead}>
-                Property, residency and business opportunities.
+                Residency, relocation &amp; business setup.
               </p>
               <p>
-                Explore property, relocation, residency and company formation
-                across Malaysia and carefully selected Asian markets.
+                Plan your move from Europe: compare residency routes,
+                tax-residence considerations and company formation. Our
+                Malaysia property collection is being prepared.
               </p>
-              <strong>Enter Malaysia &amp; Asia <span aria-hidden="true">→</span></strong>
+              <ul className={phase2Styles.cardHighlights} aria-label="Malaysia and Asia services">
+                <li>Malaysia residency &amp; relocation</li>
+                <li>Malaysia &amp; Labuan company formation</li>
+                <li>Tax residence &amp; living-cost guidance</li>
+              </ul>
+              <strong>Explore Malaysia &amp; Asia</strong>
             </div>
           </Link>
         </div>

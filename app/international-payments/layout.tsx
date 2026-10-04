@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "International Currency Transfers | Estuary FX Partner",
-  description: "Specialist property, personal and business currency transfers between Spain, Europe, Dubai, the UAE and Asia through our Estuary FX collaboration.",
+  title: "International Transfers & Business Finance | Estuary FX",
+  description: "International property, rental and relocation transfers, currency exchange and trade or invoice finance introductions through Estuary FX.",
   alternates: { canonical: "/international-payments" },
 };
 

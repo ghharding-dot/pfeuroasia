@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { HomePhase2 } from "./components/HomePhase2";
 import { createMetadata } from "./lib/seo";
 import styles from "./HomePhase2.module.css";
+import { InternationalMoneySupport } from "./components/InternationalMoneySupport";
 import vaultButtonStyles from "./HomeVaultButton.module.css";
 
 export const metadata = createMetadata("homeEn");
@@ -22,12 +23,14 @@ export default function Home() {
 
       <HomePhase2 />
 
+      <InternationalMoneySupport />
+
       <section className={styles.missionSection} aria-labelledby="home-about-heading">
         <div className={`site-shell ${styles.missionInner}`}>
           <p className="eyebrow">Property Facilitators EuroAsia</p>
           <h2 id="home-about-heading">
             One trusted relationship.
-            <em>Three distinct pathways.</em>
+            <em>Spain &amp; Malaysia connected.</em>
           </h2>
           <div className={styles.missionCopy}>
             <p>

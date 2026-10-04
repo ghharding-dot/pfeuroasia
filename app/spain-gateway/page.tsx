@@ -14,11 +14,12 @@ import {
 } from "../lib/propertyStore";
 import styles from "../HomeRegions.module.css";
 import pageStyles from "./SpainGateway.module.css";
+import { InternationalMoneySupport } from "../components/InternationalMoneySupport";
 
 export const metadata: Metadata = {
-  title: "Spain Gateway | Marbella & Benahavís Property | PF EuroAsia",
+  title: "Spain Property, Developments & 100+ Villa Rentals | PF EuroAsia",
   description:
-    "Explore selected villas, new developments, investment property, luxury rentals and private opportunities across Marbella, Benahavís and the Costa del Sol.",
+    "Luxury properties for sale, new developments and access to 100+ luxury rental villas across Marbella, Benahavís and the Costa del Sol.",
   alternates: { canonical: "https://www.pfeuroasia.com/spain-gateway" },
 };
 
@@ -45,7 +46,7 @@ const services = [
   },
   {
     number: "04",
-    title: "Luxury villa rentals",
+    title: "100+ luxury villa rentals",
     text: "A selection from more than 100 luxury villas, supported by local concierge and practical arrival services.",
     href: "/luxury-villa-rentals",
   },
@@ -168,24 +169,27 @@ export default async function SpainGatewayPage() {
         <div className={`site-shell ${pageStyles.heroInner}`}>
           <p className="eyebrow light">Spain Gateway</p>
           <h1>
-            Property in Spain.
-            <em>Personally represented.</em>
+            Luxury property in Spain.
+            <em>Buy, invest or rent.</em>
           </h1>
           <p>
-            Selected villas, new developments, investment opportunities and
-            luxury stays across Marbella, Benahavís and the Costa del Sol,
-            supported by trusted local professionals.
+            Luxury properties for sale, selected new developments and access
+            to more than 100 luxury rental villas along the Costa del Sol.
+            Explore Marbella, Benahavís, La Zagaleta and El Madroñal with
+            trusted local support.
           </p>
           <div className={pageStyles.heroActions}>
             <a className="button button-gold" href="#spain-properties">
-              Explore Spain property <span>→</span>
+              Luxury properties for sale
             </a>
-            <Link className="text-link light-link" href="/enquire">
-              Make a confidential enquiry <span>→</span>
-            </Link>
+            <Link className={`button ${pageStyles.secondaryAction}`} href="/investment-property-marbella">New developments</Link>
+            <Link className={`button ${pageStyles.secondaryAction}`} href="/luxury-villa-rentals">100+ luxury villas to rent</Link>
+            <Link className="text-link light-link" href="/enquire">Make a confidential enquiry</Link>
           </div>
         </div>
       </section>
+
+      <InternationalMoneySupport />
 
       <div id="spain-properties">
         <PublicPropertyCarousel
@@ -257,14 +261,16 @@ export default async function SpainGatewayPage() {
             <div className={styles.rentalInner}>
               <div className={styles.rentalCopy}>
                 <span className={styles.regionLabel}>Stay first · Explore Marbella</span>
-                <h3>Luxury Villa Rentals</h3>
+                <h3>100+ Luxury Villas to Rent</h3>
                 <p>
-                  Come to Spain first and stay in one of our luxury villas
-                  before deciding where you would like to buy in Marbella.
+                  Access a collection of more than 100 luxury rental villas across
+                  Marbella, Benahavís and the Costa del Sol through The Luxury
+                  Villa Collection. Send your dates, guests and budget for a
+                  tailored shortlist, or rent in Marbella before you buy.
                 </p>
               </div>
               <Link className={styles.rentalCta} href="/luxury-villa-rentals">
-                View luxury villas <span>→</span>
+                Explore 100+ rental villas
               </Link>
             </div>
           </article>

@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import { TopicPathway } from "../components/TopicPathway";
 import regionStyles from "../HomeRegions.module.css";
 import styles from "./AsiaGateway.module.css";
+import { InternationalMoneySupport } from "../components/InternationalMoneySupport";
 
 const services = [
   {
@@ -61,30 +62,29 @@ export default function AsiaGatewayPage() {
             formation in Singapore and Hong Kong through experienced local advisers.
           </p>
           <div className={styles.heroActions}>
-            <Link className={`${styles.heroAction} ${styles.heroActionPrimary}`} href="/asia-gateway/enquire">
-              Arrange a confidential consultation <span>→</span>
-            </Link>
-            <Link className={styles.heroAction} href="/services/labuan-company-residency/adviser">
-              Ask the Malaysia &amp; Labuan Adviser <span>→</span>
-            </Link>
-            <Link className={styles.heroAction} href="/asia-gateway/company-residency">
-              Compare company &amp; residency options <span>→</span>
-            </Link>
-            <Link className={styles.heroAction} href="/markets/malaysia">
-              View Malaysia property <span>→</span>
-            </Link>
-            <Link className={styles.heroAction} href="/guides/malaysia-tax-residency-for-foreigners">
-              Malaysia tax residency guide <span>→</span>
-            </Link>
-            <Link className={styles.heroAction} href="/guides/malaysia-residency-options">
-              Compare Malaysia residency options <span>→</span>
-            </Link>
-            <Link className={styles.heroAction} href="/services/malaysia-company-formation">
-              Malaysia company formation <span>→</span>
-            </Link>
+            <Link className={`${styles.heroAction} ${styles.heroActionPrimary}`} href="/asia-gateway/enquire">Discuss your move to Malaysia</Link>
+            <Link className={styles.heroAction} href="/guides/malaysia-residency-options">Residency &amp; visa options</Link>
+            <Link className={styles.heroAction} href="/asia-gateway/company-residency">Company formation in Malaysia &amp; Asia</Link>
+            <Link className={styles.heroAction} href="/guides/malaysia-tax-residency-for-foreigners">Tax-residence guidance</Link>
+          </div>
+          <div className={styles.secondaryLinks}>
+            <Link href="/services/labuan-company-residency/adviser">Ask the Malaysia &amp; Labuan Adviser</Link>
+            <Link href="/markets/malaysia">Preview Malaysia property</Link>
+            <Link href="/services/malaysia-company-formation">Mainland Malaysia company setup</Link>
           </div>
         </div>
       </section>
+
+      <TopicPathway
+        title="Considering a move from Europe? Start here."
+        intro="Compare the decisions that shape your move: permission to live in Malaysia, tax residence, company setup, family living costs and transferring funds."
+        links={[
+          { label: "Residency", title: "Malaysia residency options", description: "Compare MM2H, DE Rantau, employment and business-led pathways.", href: "/guides/malaysia-residency-options" },
+          { label: "Tax", title: "Malaysia tax residency", description: "Understand day counts, connected periods and cross-border evidence.", href: "/guides/malaysia-tax-residency-for-foreigners" },
+          { label: "Company", title: "Malaysia or Labuan company", description: "Compare the structures by where and how the business will operate.", href: "/guides/malaysia-company-vs-labuan-company" },
+          { label: "Lifestyle & costs", title: "Malaysia or Spain: living costs", description: "Plan housing, healthcare, schooling, transport and currency costs.", href: "/guides/cost-of-living-malaysia-vs-spain" },
+        ]}
+      />
 
       <section className={styles.introSection}>
         <div className={`site-shell ${styles.introGrid}`}>
@@ -109,6 +109,9 @@ export default function AsiaGatewayPage() {
               coordinate company formation in Singapore and Hong Kong through
               experienced local advisers.
             </p>
+            <p>Our Malaysia property collection is being prepared. Share your preferred location, budget and plans now so we can discuss suitable options as they become available.</p>
+            <Link className="text-link" href="/knowledge-centre">Explore all relocation and business guides</Link>
+            <br /><br />
             <Link className="text-link" href="/guides/malaysia-vs-dubai-tax-residency">
               Compare Malaysia with Dubai <span>→</span>
             </Link>
@@ -119,6 +122,8 @@ export default function AsiaGatewayPage() {
           </div>
         </div>
       </section>
+
+      <InternationalMoneySupport />
 
       <section className={regionStyles.regionsSection}>
         <div className="site-shell">
@@ -270,17 +275,6 @@ export default function AsiaGatewayPage() {
           </div>
         </div>
       </section>
-
-      <TopicPathway
-        title="Choose a question and follow the evidence."
-        intro="The Asia Gateway now connects into focused guidance for residency, tax residence, company structure and the practical move to Malaysia."
-        links={[
-          { label: "Residency", title: "Malaysia residency options", description: "Compare MM2H, DE Rantau, employment and business-led pathways.", href: "/guides/malaysia-residency-options" },
-          { label: "Tax", title: "Malaysia tax residency", description: "Understand day counts, connected periods and cross-border evidence.", href: "/guides/malaysia-tax-residency-for-foreigners" },
-          { label: "Company", title: "Malaysia or Labuan company", description: "Compare the structures by where and how the business will operate.", href: "/guides/malaysia-company-vs-labuan-company" },
-          { label: "All guidance", title: "EuroAsia Knowledge Centre", description: "Search every authority guide from one organised research index.", href: "/knowledge-centre" },
-        ]}
-      />
 
       <section className={styles.comingSoon}>
         <div className={`site-shell ${styles.comingSoonInner}`}>

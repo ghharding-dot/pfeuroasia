@@ -430,3 +430,7 @@
     padding: 16px 18px 18px;
   }
 }
+
+.secondaryLinks { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 24px; color: var(--gold-light); font-size: .875rem; line-height: 1.6; }
+.secondaryLinks a { padding-block: 6px; text-decoration: underline; text-underline-offset: 5px; }
+.heroAction { font-size: .875rem; letter-spacing: .03em; }
