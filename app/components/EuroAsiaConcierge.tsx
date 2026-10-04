@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { submitEnquiry } from "../lib/submitEnquiry";
@@ -72,7 +73,7 @@ export function EuroAsiaConcierge() {
   return <div className={styles.root}>
     {open && <section className={styles.panel} role="dialog" aria-labelledby="euroasia-concierge-title">
       <header className={styles.header}>
-        <div><h2 id="euroasia-concierge-title">Live AI Chat</h2><p>Maya · Your EuroAsia AI advisor</p></div>
+        <div className={styles.identity}><Image src="/images/maya-ai-advisor.webp" alt="Maya, EuroAsia’s AI advisor" width={48} height={48} className={styles.avatar}/><div><h2 id="euroasia-concierge-title">Maya</h2><p>Your EuroAsia AI advisor</p></div></div>
         <button type="button" onClick={close} aria-label="Close AI concierge" className={styles.close}>×</button>
       </header>
       <div className={styles.content}>
@@ -109,6 +110,6 @@ export function EuroAsiaConcierge() {
         <p className={styles.note}>AI guidance. Availability and individual tax or residency advice require confirmation. Avoid sharing sensitive documents here.</p>
       </footer>}
     </section>}
-    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Speak to Maya, our AI chat advisor. Open the chat to speak or type your question."><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span className={styles.launcherCopy}><strong>Speak to Maya</strong><span>Our AI chat advisor</span><span>Speak or type your question</span></span></button>}
+    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Speak to Maya, our AI chat advisor. Open the chat to speak or type your question."><Image src="/images/maya-ai-advisor.webp" alt="" width={48} height={48} className={styles.avatar}/><span className={styles.launcherCopy}><strong>Speak to Maya</strong><span>Our AI chat advisor</span><span>Speak or type your question</span></span></button>}
   </div>;
 }

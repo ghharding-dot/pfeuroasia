@@ -14,3 +14,5 @@
 .launcherCopy{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;line-height:1.3}.launcherCopy strong{font-size:1rem;font-weight:600}.launcherCopy>span{font-size:.875rem}.launcherCopy>span:last-child{color:#f5e4c3}.launcher{max-width:calc(100vw - 36px)}
 
 .voice>button{display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;font-weight:600;font-size:1rem;background:#c9a669;color:#101b17}.voice>button svg{flex-shrink:0}
+
+.identity{display:flex;align-items:center;gap:12px;min-width:0}.identity>div{min-width:0}.avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid #c9a669;flex-shrink:0}.close{flex-shrink:0}.header{gap:8px}
