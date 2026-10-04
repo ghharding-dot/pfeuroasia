@@ -109,6 +109,6 @@ export function EuroAsiaConcierge() {
         <p className={styles.note}>AI guidance. Availability and individual tax or residency advice require confirmation. Avoid sharing sensitive documents here.</p>
       </footer>}
     </section>}
-    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Open Live AI Chat with Maya, your EuroAsia AI advisor. Speak or type your question."><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span className={styles.launcherCopy}><strong>Live AI Chat</strong><span>Maya · EuroAsia AI advisor</span><span>Speak or type your question</span></span></button>}
+    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Speak to Maya, our AI chat advisor. Open the chat to speak or type your question."><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span className={styles.launcherCopy}><strong>Speak to Maya</strong><span>Our AI chat advisor</span><span>Speak or type your question</span></span></button>}
   </div>;
 }
