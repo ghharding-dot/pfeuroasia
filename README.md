@@ -6,3 +6,21 @@ Bilingual luxury property website connecting Spain and Asia.
 
 This repository is configured for deployment on Vercel using standard Next.js settings.
 
+## Concierge voice activation
+
+Voice is prepared but disabled by default. Set `OPENAI_API_KEY` as a sensitive
+server environment variable in Vercel, never in source or a `NEXT_PUBLIC_` variable.
+Set `CONCIERGE_VOICE_ENABLED=true` first in Preview and redeploy to test microphone,
+playback, transcript delegation, Labuan client prices and verified page buttons.
+After those live checks, enable the same flag in Production and redeploy.
+The voice service uses GPT-Live with the feminine Willow voice (Irish English),
+while factual requests go to the existing `/api/concierge` backend.
+
+The controls close sessions after five minutes, one minute without transcript
+activity, leaving the tab, closing the widget, or opening the enquiry form.
+The instance-local start limit is best-effort abuse protection, not a durable
+monthly spending cap. Configure billing controls in the provider account before
+public activation. Set `CONCIERGE_VOICE_ENABLED=false` and redeploy to disable voice.
+
+Verified locally: TypeScript, ESLint and simulated session-route requests.
+Live audio and provider-account access still require verification after the key is added.

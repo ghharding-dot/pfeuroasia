@@ -26,7 +26,7 @@ export default function PrivacyPage() {
         <div className="site-shell about-story-grid">
           <div>
             <p className="eyebrow">Last updated</p>
-            <h2>3 August 2026</h2>
+            <h2>4 October 2026</h2>
           </div>
           <div>
             <h2>Information we collect</h2>
@@ -44,6 +44,26 @@ export default function PrivacyPage() {
               address rather than displaying or emailing the complete address.
               Network-location information is approximate and may be affected
               by VPNs, mobile networks and corporate routing.
+            </p>
+
+            <h2>AI concierge and optional voice</h2>
+            <p>
+              Questions entered into the AI concierge are processed by our AI
+              service providers to generate answers from public website information.
+              If you choose to start voice, your microphone audio is sent to
+              OpenAI for speech processing and replies. Voice starts only after
+              you select the voice control and allow microphone access. You can
+              end it at any time and continue using text.
+            </p>
+            <p>
+              Conversations appear in your current browser session. We do not
+              save voice recordings in our website systems. Relevant text from
+              the conversation is sent to the concierge to answer follow-up
+              questions. If you submit an enquiry, you can review and edit the
+              conversation text before sharing it with our team. AI providers
+              may process and retain service data under their own applicable
+              terms. Please avoid entering passwords, identity documents or
+              other sensitive information in the concierge.
             </p>
 
             <h2>Verified brochure access</h2>

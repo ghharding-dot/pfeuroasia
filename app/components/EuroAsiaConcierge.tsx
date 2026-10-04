@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { submitEnquiry } from "../lib/submitEnquiry";
 import styles from "./EuroAsiaConcierge.module.css";
+import { ConciergeVoice } from "./ConciergeVoice";
 
 type Source = {label:string;url:string};
 type Message = {role:"user"|"assistant";text:string;sources?:Source[]};
@@ -26,6 +27,7 @@ export function EuroAsiaConcierge() {
   const input=useRef<HTMLTextAreaElement>(null);
   const launcher=useRef<HTMLButtonElement>(null);
   const bottom=useRef<HTMLDivElement>(null);
+  const requesting=useRef(false);
   const hidden=/^\/(vault|collaborators)(\/|$)/.test(pathname);
   function close() {setOpen(false);launcher.current?.focus();}
   useEffect(()=> {if (open && !enquiry) input.current?.focus();},[open,enquiry]);
@@ -37,7 +39,8 @@ export function EuroAsiaConcierge() {
     return ()=>document.removeEventListener("keydown",escape);
   },[open]);
   async function ask(text:string) {
-    const next=text.trim();if (!next || busy) return;
+    const next=text.trim();if (!next || requesting.current) return;
+    requesting.current=true;
     setQuestion("");setError("");setBusy(true);
     const history=messages.slice(-6);
     setMessages(previous=>[...previous,{role:"user",text:next}]);
@@ -46,10 +49,11 @@ export function EuroAsiaConcierge() {
       const result=await response.json();
       if (!response.ok || !result.answer) throw new Error(result.error || "Please try again or send your question to our team.");
       setMessages(previous=>[...previous,{role:"assistant",text:result.answer,sources:Array.isArray(result.sources)?result.sources.filter((s:Source)=>s && typeof s.url === "string" && safeLink(s.url)):[]}]);
+      return {answer:result.answer as string};
     } catch(cause) {
       setError(cause instanceof Error && cause.name !== "TimeoutError" ? cause.message : "The assistant took too long to respond. Please try again or contact our team.");
       setQuestion(next);
-    } finally {setBusy(false);input.current?.focus();}
+    } finally {requesting.current=false;setBusy(false);input.current?.focus();}
   }
   function startEnquiry() {
     setRequirements(messages.map(m=>`${m.role === "user" ? "Visitor" : "AI concierge"}: ${m.text}`).join("\n\n").slice(-4500));
@@ -95,6 +99,7 @@ export function EuroAsiaConcierge() {
         {error && <p className={styles.error} role="alert">{error}</p>}
       </div>
       {!enquiry && <footer className={styles.footer}>
+        <ConciergeVoice history={messages} onQuestion={ask}/>
         <form onSubmit={e=>{e.preventDefault();void ask(question);}} className={styles.composer}>
           <label className={styles.srOnly} htmlFor="euroasia-question">Your question</label>
           <textarea ref={input} id="euroasia-question" value={question} onChange={e=>setQuestion(e.target.value)} placeholder="Ask a question…" maxLength={2000} rows={2} disabled={busy} onKeyDown={e=>{if(e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing){e.preventDefault();void ask(question);}}}/>
