@@ -72,7 +72,7 @@ export function EuroAsiaConcierge() {
   return <div className={styles.root}>
     {open && <section className={styles.panel} role="dialog" aria-labelledby="euroasia-concierge-title">
       <header className={styles.header}>
-        <div><h2 id="euroasia-concierge-title">Live AI Chat</h2><p>EuroAsia · Your online AI advisor</p></div>
+        <div><h2 id="euroasia-concierge-title">Live AI Chat</h2><p>Maya · Your EuroAsia AI advisor</p></div>
         <button type="button" onClick={close} aria-label="Close AI concierge" className={styles.close}>×</button>
       </header>
       <div className={styles.content}>
@@ -88,10 +88,10 @@ export function EuroAsiaConcierge() {
           <label className={styles.consent}><input type="checkbox" required/><span>I agree to be contacted about this enquiry and understand relevant partners may receive my details. <Link href="/privacy">Privacy notice</Link>.</span></label>
           <button type="submit" className={styles.primary} disabled={sending}>{sending?"Sending…":"Send enquiry"}</button>
         </form> : <>
-          <div className={styles.welcome}><p>Welcome to EuroAsia Live AI Chat. Speak to our AI advisor or type your question below. Please ask anything you like.</p><p>I can help you explore property sales and purchases, luxury rentals, relocation, residency, company formation and international money transfers, and guide you to the relevant pages.</p></div>
+          <div className={styles.welcome}><p>Hello, I’m Maya, your EuroAsia AI advisor. Speak to me or type your question below. Please ask anything you like.</p><p>I can help you explore property sales and purchases, luxury rentals, relocation, residency, company formation and international money transfers, and guide you to the relevant pages.</p></div>
           {!messages.length && <div className={styles.suggestions}>{suggestions.map(text=><button type="button" key={text} onClick={()=>void ask(text)} disabled={busy}>{text}</button>)}</div>}
           <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
-            {messages.map((message,index)=><div key={index} className={`${styles.message} ${message.role === "user" ? styles.user : styles.assistant}`}><span className={styles.speaker}>{message.role === "user" ? "You" : "EuroAsia AI"}</span><p>{message.text}</p>{Boolean(message.sources?.length) && <div className={styles.links}>{message.sources?.map(source=><Link href={source.url} key={source.url} onClick={()=>setOpen(false)}>{source.label}</Link>)}</div>}</div>)}
+            {messages.map((message,index)=><div key={index} className={`${styles.message} ${message.role === "user" ? styles.user : styles.assistant}`}><span className={styles.speaker}>{message.role === "user" ? "You" : "Maya"}</span><p>{message.text}</p>{Boolean(message.sources?.length) && <div className={styles.links}>{message.sources?.map(source=><Link href={source.url} key={source.url} onClick={()=>setOpen(false)}>{source.label}</Link>)}</div>}</div>)}
           </div>
           {busy && <p className={styles.thinking} role="status">Checking our website information…</p>}
           <div ref={bottom}/>
@@ -109,6 +109,6 @@ export function EuroAsiaConcierge() {
         <p className={styles.note}>AI guidance. Availability and individual tax or residency advice require confirmation. Avoid sharing sensitive documents here.</p>
       </footer>}
     </section>}
-    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Open EuroAsia Live AI Chat. Speak or type your question."><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span className={styles.launcherCopy}><strong>Live AI Chat</strong><span>EuroAsia AI advisor</span><span>Speak or type your question</span></span></button>}
+    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Open Live AI Chat with Maya, your EuroAsia AI advisor. Speak or type your question."><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8H4l-2 2v-10a9 9 0 0 1 18 0Z"/><path d="M7 10h8M7 14h5"/></svg><span className={styles.launcherCopy}><strong>Live AI Chat</strong><span>Maya · EuroAsia AI advisor</span><span>Speak or type your question</span></span></button>}
   </div>;
 }

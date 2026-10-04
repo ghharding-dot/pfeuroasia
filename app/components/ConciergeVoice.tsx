@@ -92,7 +92,7 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
       peer.ontrack = event => {
         if (audio.current && resources.current === r) {
           audio.current.srcObject = new MediaStream([event.track]);
-          void audio.current.play().catch(() => setStatus("Press play below to hear EuroAsia."));
+          void audio.current.play().catch(() => setStatus("Press play below to hear Maya."));
         }
       };
       peer.onconnectionstatechange = () => {
@@ -108,7 +108,7 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
         if (event.type === "session.started") {
           clearTimeout(r.ready); setState("live"); setStatus("Listening — ask your question."); activity();
           r.timer = setTimeout(() => stop("Your eight-minute voice session has ended. You can continue typing or start voice again."), 480000);
-          send({ type: "session.instructions.append", event_id: crypto.randomUUID(), delegation_id: null, content: "Greet the visitor now in English: Hello, I am EuroAsia's AI assistant. How can I help you? Then pause and listen." });
+          send({ type: "session.instructions.append", event_id: crypto.randomUUID(), delegation_id: null, content: "Greet the visitor now in English: Hello, I’m Maya, your EuroAsia AI advisor. How can I help you today? Then pause and listen." });
         } else if (event.type === "session.closed") { cleanup(); setState("off"); }
         else if (event.type === "error") { stop("Voice encountered a problem. Please type your question for now."); }
         else if (event.type === "session.input_transcript.delta" && typeof event.delta === "string") {
@@ -177,12 +177,12 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
   return <div className={styles.voice}>
     <button type="button" disabled={state === "ending"} onClick={() => state === "off" ? void start() : stop()}>
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10v2a7 7 0 0 0 14 0v-2M12 19v3M8 22h8"/></svg>
-      {state === "off" ? "Speak to our AI advisor" : state === "connecting" ? "Cancel voice" : state === "ending" ? "Ending voice…" : "End voice"}
+      {state === "off" ? "Speak to Maya" : state === "connecting" ? "Cancel voice" : state === "ending" ? "Ending voice…" : "End voice"}
     </button>
     <p role="status">{status || "Tap above to start a live voice conversation. You can also type below."}</p>
-    {state !== "off" && <audio ref={audio} autoPlay controls aria-label="EuroAsia AI voice playback" />}
+    {state !== "off" && <audio ref={audio} autoPlay controls aria-label="Maya, EuroAsia AI voice playback" />}
     {state !== "off" && heard && <p><strong>You:</strong> {heard}</p>}
-    {state !== "off" && spoken && <p><strong>EuroAsia voice:</strong> {spoken}</p>}
+    {state !== "off" && spoken && <p><strong>Maya:</strong> {spoken}</p>}
     <p className={styles.note}>Voice is processed by OpenAI. Sessions end after eight minutes or a quiet minute. <a href="/privacy">Privacy notice</a>.</p>
   </div>;
 }
