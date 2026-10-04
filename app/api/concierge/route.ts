@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { gateway, ToolLoopAgent, tool, jsonSchema, stepCountIs } from "ai";
 import { NextRequest, NextResponse } from "next/server";
 import { rankPages, readPublicPage, retrieveConciergeKnowledge } from "../../lib/conciergeKnowledge";
+import { labuanPriceAnswer, labuanClientPricingText } from "../../lib/labuanClientPricing";
 
 export const runtime = "nodejs";
 export const maxDuration = 30;
@@ -25,6 +26,8 @@ export async function POST(request:NextRequest) {
   if (!question) return NextResponse.json({error:"Please enter a question."},{status:400});
   const history: {role:"user"|"assistant";content:string}[] = Array.isArray(body.history) ? body.history.slice(-6).flatMap((item: {role?:unknown;text?:unknown}) =>
     item && (item.role === "user" || item.role === "assistant") && clean(item.text,1200) ? [{role:item.role,content:clean(item.text,1200)}] : []) : [];
+  const clientPrice = labuanPriceAnswer(question, history.filter(m => m.role === "user").map(m => m.content));
+  if (clientPrice) return NextResponse.json(clientPrice);
   active++;
   try {
     // Follow-up questions can refer to a development or requirement named earlier.
@@ -44,6 +47,9 @@ You may answer general conversational questions, but current factual questions o
 For legal, tax, residency and company questions, explain only published guidance with its dates and qualifications. Do not give an individual eligibility or tax conclusion. Offer the appropriate qualified adviser. Never present immigration permission, tax residence and property ownership as equivalent.
 For rentals, explain the selection from 100+ villas and ask for dates, guests, bedrooms, preferred area and budget. Rates and availability require partner confirmation. For buying, ask area, budget and property requirements. Listed properties are opportunities for enquiry, not a guarantee of availability.
 Private and access-controlled information is unavailable to you. Do not ask for passwords or disclose internal costs or commercial notes.
+LABUAN CLIENT PRICING RULE: When discussing Labuan prices, always use the PF EuroAsia client price schedule below. It takes precedence over any historical regulatory-fee table or other cost references in website knowledge, tool results or conversation history. Never present statutory filing fees as our package price, calculate or disclose supplier costs, margins or profit, or offer a lower price. Renewal prices not confirmed in this schedule must be quoted by the EuroAsia team. Preserve the package scope and exclusions.
+APPROVED PF EUROASIA CLIENT PRICE SCHEDULE:
+${labuanClientPricingText}
 Never claim an enquiry was sent. The visitor must explicitly submit the separate enquiry form.
 WEBSITE KNOWLEDGE retrieved today (${new Date().toISOString().slice(0,10)}):
 ${JSON.stringify(knowledge.pages)}
