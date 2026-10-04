@@ -4,8 +4,10 @@ import { searchGuides } from "./searchGuides";
 import { readProperties, normalizePropertyAccessLevel } from "./propertyStore";
 import { readRentalVillas } from "./rentalVillaStore";
 import { retrieveMalaysiaAdviserKnowledge, formatHybridKnowledgeContext } from "../services/labuan-company-residency/adviser/MalaysiaAdviserHybridRetrieval";
+import snapshot from "./conciergeSnapshot.json";
 
-export type ConciergePage = { title: string; href: string; text: string };
+export type ConciergePage = { title: string; href: string; text: string; capturedAt?: string };
+const bundledPages = snapshot.pages as Record<string, { text: string; capturedAt: string }>;
 const extras: ConciergePage[] = [
   { title: "Spain Gateway — luxury properties, developments and 100+ rental villas", href: "/spain-gateway", text: "Marbella Costa del Sol Spain buy sale rent luxury villa" },
   { title: "Current property collection", href: "/properties", text: "Spain villas apartments plots developments budget bedrooms price" },
@@ -66,22 +68,33 @@ export async function readPublicPage(page: ConciergePage) {
   const url = new URL(page.href, "https://www.pfeuroasia.com");
   if (!["www.pfeuroasia.com","www.pfiberia.com"].includes(url.hostname) || url.protocol !== "https:") return page;
   if (/fairmont|vault|collaborators|private-portfolio|\/access|\/adviser/.test(url.pathname)) return page;
-  try {
-    const response = await fetch(url, {next:{revalidate:3600},signal:AbortSignal.timeout(5000),redirect:"error"});
-    if (!response.ok || !response.headers.get("content-type")?.includes("text/html")) return page;
-    const text = htmlText(await response.text());
-    return {...page,text: text || page.text};
-  } catch { return page; }
+  const guide = Object.values(searchGuides).find(g => page.href === `/guides/${g.slug}`);
+  if (guide) return {...page,text:JSON.stringify(guide)};
+  const reference = bundledPages[page.href];
+  return reference ? {...page, ...reference} : page;
+}
+let publicCatalogue: { pages: ConciergePage[]; expires: number } | undefined;
+let catalogueLoading: Promise<ConciergePage[]> | undefined;
+async function readPublicCatalogue() {
+  if (publicCatalogue && publicCatalogue.expires > Date.now()) return publicCatalogue.pages;
+  if (catalogueLoading) return catalogueLoading;
+  catalogueLoading = (async () => {
+    const catalogue = await Promise.allSettled([readProperties(),readRentalVillas()]);
+    const pages: ConciergePage[] = [];
+    if (catalogue[0].status === "fulfilled") pages.push(...visiblePropertyPages(catalogue[0].value));
+    if (catalogue[1].status === "fulfilled") pages.push(...catalogue[1].value
+      .filter(p => p.status === "published" && p.approvalStatus === "approved")
+      .map(p => ({title:p.title,href:`/luxury-villa-rentals?villa=${encodeURIComponent(p.reference)}#villa-enquiry`,text:
+        `${p.location}; ${p.bedrooms} bedrooms; ${p.guests} guests. ${p.description}. ${p.amenities || ""}. Dates, rates and availability must be confirmed by the rental partner.`})));
+    if (catalogue.every(result => result.status === "fulfilled")) publicCatalogue = { pages, expires: Date.now() + 60000 };
+    return pages;
+  })();
+  try { return await catalogueLoading; } finally { catalogueLoading = undefined; }
 }
 export async function retrieveConciergeKnowledge(question: string) {
-  const pages = publicPageRegistry();
-  const catalogue = await Promise.allSettled([readProperties(),readRentalVillas()]);
-  if (catalogue[0].status === "fulfilled") pages.push(...visiblePropertyPages(catalogue[0].value));
-  if (catalogue[1].status === "fulfilled") pages.push(...catalogue[1].value
-    .filter(p => p.status === "published" && p.approvalStatus === "approved")
-    .map(p => ({title:p.title,href:`/luxury-villa-rentals?villa=${encodeURIComponent(p.reference)}#villa-enquiry`,text:
-      `${p.location}; ${p.bedrooms} bedrooms; ${p.guests} guests. ${p.description}. ${p.amenities || ""}. Dates, rates and availability must be confirmed by the rental partner.`})));
-  const selected = rankPages(question,pages);
+  const pages = await Promise.all(publicPageRegistry().map(readPublicPage));
+  if (/propert|villa|apartment|bedroom|rental|\brent\b|alquil|inmueble|vivienda|zagaleta|madro[nñ]al|\b[defh]\s?\d{1,2}\b/i.test(question)) pages.push(...await readPublicCatalogue());
+  const selected = rankPages(question,pages,4);
   const contents = await Promise.all(selected.map(page => {
     const guide = Object.values(searchGuides).find(g => page.href === `/guides/${g.slug}`);
     if (guide) return {...page,text:JSON.stringify(guide)};

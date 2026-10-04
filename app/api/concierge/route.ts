@@ -51,7 +51,7 @@ LABUAN CLIENT PRICING RULE: When discussing Labuan prices, always use the PF Eur
 APPROVED PF EUROASIA CLIENT PRICE SCHEDULE:
 ${labuanClientPricingText}
 Never claim an enquiry was sent. The visitor must explicitly submit the separate enquiry form.
-WEBSITE KNOWLEDGE retrieved today (${new Date().toISOString().slice(0,10)}):
+WEBSITE KNOWLEDGE: Bundled published page references carry capturedAt timestamps. They are not a live availability check. Preserve their dates and qualifications; current prices and availability require confirmation. Current conversation date: ${new Date().toISOString().slice(0,10)}.
 ${JSON.stringify(knowledge.pages)}
 APPROVED MALAYSIA KNOWLEDGE (preserve source dates and qualifications):
 ${knowledge.malaysiaContext}`,

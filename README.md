@@ -24,3 +24,20 @@ public activation. Set `CONCIERGE_VOICE_ENABLED=false` and redeploy to disable v
 
 Verified locally: TypeScript, ESLint and simulated session-route requests.
 Live audio and provider-account access still require verification after the key is added.
+
+## Concierge knowledge
+
+`scripts/prepare-concierge-knowledge.mjs` captures the currently published,
+allowlisted public pages before builds into a server-side JSON reference. Guides,
+Malaysia adviser knowledge and approved Labuan client prices use their local
+source data. Questions and search tools read these references without fetching
+HTML pages. Each captured page retains its capture time; failed captures retain
+the previous reference when available, otherwise the page metadata is used.
+
+After a content release, run the preparation script and deploy its updated JSON
+to capture the newly published wording; prebuild also refreshes published pages
+on subsequent deployments. This is a snapshot, not a live verification of legal
+rules or availability. Property and rental records are loaded for relevant
+questions and cached for up to 60 seconds per running server instance, with the
+same publication and approval filters. Protected pages and property records are
+excluded from the bundled snapshot.
