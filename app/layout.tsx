@@ -4,6 +4,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FloatingHomeButton } from "./components/FloatingHomeButton";
+import { EuroAsiaConcierge } from "./components/EuroAsiaConcierge";
 import { ImageProtection } from "./components/ImageProtection";
 import "./globals.css";
 import "./premium-buttons.css";
@@ -196,6 +197,7 @@ export default function RootLayout({
         {children}
         <ImageProtection />
         <FloatingHomeButton />
+        <EuroAsiaConcierge />
         <Analytics />
         <SpeedInsights />
       </body>
