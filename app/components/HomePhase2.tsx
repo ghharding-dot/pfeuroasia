@@ -8,16 +8,20 @@ export function HomePhase2() {
       <div className={`site-shell ${phase2Styles.gatewayInner}`}>
         <div className={phase2Styles.gatewayIntro}>
           <div>
-            <p className="eyebrow light">Spain &amp; Malaysia · One trusted network</p>
+            <p className="eyebrow light">Spain · Europe · Asia · UAE · One trusted network</p>
             <h1 id="gateway-heading">
               Choose your direction.
-              <em>We will guide the journey.</em>
+              <em>We can guide you through the journey.</em>
               <span className={phase2Styles.gatewayPromise}>
                 But ultimately, go where you’re treated best.
               </span>
             </h1>
           </div>
           <div className={phase2Styles.gatewayServices}>
+            <p>
+              Property to sell or buy, a change of residence or a new location.
+              We can guide you through the journey, be it Spain, Europe, Asia or the UAE.
+            </p>
             <p>
               Luxury property &amp; developments <span>·</span> 100+ rental villas
               <span>·</span> Malaysia residency &amp; company formation
