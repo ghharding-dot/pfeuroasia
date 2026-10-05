@@ -7,8 +7,8 @@
 .villa-rentals-hero {
   position: relative;
   display: flex;
-  min-height: 820px;
-  height: 92svh;
+  min-height: max(820px, 92svh);
+  height: auto;
   overflow: hidden;
   background: #11161a;
   color: white;
@@ -441,7 +441,7 @@
 .rental-form-success p { margin: 18px auto 12px; max-width: 480px; color: rgba(255,255,255,.65); line-height: 1.6; }
 
 @media (max-width: 980px) {
-  .villa-rentals-hero { min-height: 760px; }
+  .villa-rentals-hero { min-height: max(760px, 92svh); }
   .villa-rentals-intro-grid,
   .villa-rentals-concierge-grid,
   .villa-rentals-partnership-inner,
@@ -453,7 +453,7 @@
 }
 
 @media (max-width: 680px) {
-  .villa-rentals-hero { min-height: 700px; height: 92svh; }
+  .villa-rentals-hero { min-height: max(700px, 92svh); height: auto; }
   .villa-rentals-hero-image { object-position: 62% center; }
   .villa-rentals-hero-inner { padding-block: 160px 70px; }
   .villa-rentals-hero h1 { font-size: clamp(48px,15vw,70px); }
