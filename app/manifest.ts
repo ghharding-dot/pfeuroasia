@@ -20,7 +20,13 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
       {
-        src: "/images/pf-gold-symbol.png",
+        src: "/images/property-facilitators-euroasia-logo.png",
+        sizes: "any",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "/images/property-facilitators-euroasia-logo.png",
         sizes: "any",
         type: "image/png",
         purpose: "maskable",
