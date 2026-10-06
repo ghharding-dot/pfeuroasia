@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { FloatingHomeButton } from "./components/FloatingHomeButton";
 import { EuroAsiaConcierge } from "./components/EuroAsiaConcierge";
 import { ImageProtection } from "./components/ImageProtection";
+import { PWARegister } from "./components/PWARegister";
 import "./globals.css";
 import "./premium-buttons.css";
 import "./news-ticker.css";
@@ -37,6 +38,13 @@ export const metadata: Metadata = {
   description:
     "Independent luxury property advisers connecting qualified buyers and property owners across Marbella, La Zagaleta, El Madroñal, Malaysia and Asia.",
   applicationName: "Property Facilitators EuroAsia",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "PF EuroAsia",
+    statusBarStyle: "black-translucent",
+  },
+  themeColor: "#111210",
   authors: [{ name: "Property Facilitators EuroAsia", url: siteUrl }],
   creator: "Property Facilitators EuroAsia",
   publisher: "Property Facilitators EuroAsia",
@@ -195,6 +203,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
         />
         {children}
+        <PWARegister />
         <ImageProtection />
         <FloatingHomeButton />
         <EuroAsiaConcierge />
