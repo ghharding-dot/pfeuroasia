@@ -13,7 +13,7 @@ const actions = [
     copy: "Luxury homes and selected developments in Spain.",
   },
   {
-    href: "/rentals",
+    href: "/luxury-villa-rentals",
     number: "02",
     title: "Luxury Rentals",
     copy: "Access our wider collection of 100+ villas along the Costa del Sol.",
