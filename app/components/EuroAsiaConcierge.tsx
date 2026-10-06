@@ -32,6 +32,11 @@ export function EuroAsiaConcierge() {
   const hidden=/^\/(vault|collaborators)(\/|$)/.test(pathname);
   function close() {setOpen(false);launcher.current?.focus();}
   useEffect(()=> {if (open && !enquiry && window.matchMedia("(pointer: fine)").matches) input.current?.focus();},[open,enquiry]);
+  useEffect(()=> {
+    const openConcierge=()=>setOpen(true);
+    window.addEventListener("euroasia:open-maya", openConcierge);
+    return ()=>window.removeEventListener("euroasia:open-maya", openConcierge);
+  },[]);
   useEffect(()=> {bottom.current?.scrollIntoView({block:"nearest"});},[messages,busy,enquiry]);
   useEffect(()=> {
     if (!open) return;
