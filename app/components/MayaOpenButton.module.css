@@ -1,0 +1,14 @@
+.button {
+  margin-top: 12px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid #dec28d;
+  border-radius: 999px;
+  background: #dec28d;
+  color: #111210;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .04em;
+  cursor: pointer;
+}
