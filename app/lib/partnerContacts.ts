@@ -98,6 +98,11 @@ const PARTNER_CONTACTS: Record<string, PartnerContact> = {
     name: "AIMS Trust Group",
     email: process.env.PARTNER_EMAIL_AIMS || "abid@aimsconsulting.my",
   },
+  EST: {
+    code: "EST",
+    name: "Estuary FX",
+    email: process.env.PARTNER_EMAIL_ESTUARY_FX || "info@estuaryfx.co.uk",
+  },
 };
 
 export function getPartnerContact(code?: string | null) {
