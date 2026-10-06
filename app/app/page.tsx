@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { InstallEuroAsiaApp } from "../components/InstallEuroAsiaApp";
+import { MayaOpenButton } from "../components/MayaOpenButton";
 import styles from "./EuroAsiaApp.module.css";
 
 export const metadata: Metadata = {
@@ -92,9 +93,9 @@ export default function EuroAsiaAppPage() {
             <p>EuroAsia AI Advisor</p>
             <h2>Speak to Maya</h2>
             <span>
-              Tap the Maya button on your screen and ask about property,
-              rentals, residency, company formation or relocation.
+              Ask about property, rentals, residency, company formation or relocation.
             </span>
+            <MayaOpenButton />
           </div>
         </div>
 
