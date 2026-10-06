@@ -4,8 +4,8 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Property Facilitators EuroAsia",
     short_name: "EuroAsia",
-    description: "Property, rentals, residency, relocation and business support across Spain, Malaysia and Asia.",
-    start_url: "/",
+    description: "Direct access to EuroAsia property, rentals, Malaysia, residency and relocation services.",
+    start_url: "/app",
     scope: "/",
     display: "standalone",
     background_color: "#10120f",
