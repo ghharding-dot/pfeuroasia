@@ -154,8 +154,7 @@ export default function AboutPage() {
                 <div className={podcastStyles.copy}>
                   <p className="eyebrow">{index === 0 ? "Latest podcast" : "Podcast"} · {podcast.series}</p>
                   <h3>{podcast.title}</h3>
-                  <p>Watch the full conversation here or on YouTube.</p>
-                  <a className="button button-gold" href={podcast.youtubeUrl} target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                  <p>Watch the full conversation here.</p>
                 </div>
               </article>
             ))}
