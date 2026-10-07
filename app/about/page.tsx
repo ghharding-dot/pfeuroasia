@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { podcasts } from "../lib/podcasts";
+import podcastStyles from "../Podcast.module.css";
 
 const networkPeople = [
   {
@@ -128,6 +130,34 @@ export default function AboutPage() {
                 <p>{person.organisation}</p>
                 <span className="about-person-link">{person.linkLabel} <b>→</b></span>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section id="podcasts" className={`section-pad ${podcastStyles.section}`} aria-labelledby="podcasts-heading">
+        <div className="site-shell">
+          <p className="eyebrow">Conversations with our partners</p>
+          <h2 id="podcasts-heading" className={podcastStyles.heading}>Our podcasts</h2>
+          <div className={podcastStyles.episodes}>
+            {podcasts.map((podcast, index) => (
+              <article key={podcast.videoId} className={podcastStyles.episode}>
+                <div className={podcastStyles.player}>
+                  <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${podcast.videoId}`}
+                    title={podcast.title}
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <div className={podcastStyles.copy}>
+                  <p className="eyebrow">{index === 0 ? "Latest podcast" : "Podcast"} · {podcast.series}</p>
+                  <h3>{podcast.title}</h3>
+                  <p>Watch the full conversation here or on YouTube.</p>
+                  <a className="button button-gold" href={podcast.youtubeUrl} target="_blank" rel="noopener noreferrer">Watch on YouTube</a>
+                </div>
+              </article>
             ))}
           </div>
         </div>

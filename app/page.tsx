@@ -6,6 +6,8 @@ import { createMetadata } from "./lib/seo";
 import styles from "./HomePhase2.module.css";
 import { InternationalMoneySupport } from "./components/InternationalMoneySupport";
 import vaultButtonStyles from "./HomeVaultButton.module.css";
+import { podcasts } from "./lib/podcasts";
+import podcastStyles from "./Podcast.module.css";
 
 export const metadata = createMetadata("homeEn");
 
@@ -22,6 +24,18 @@ export default function Home() {
       </Link>
 
       <HomePhase2 />
+
+      <section className={podcastStyles.homeSection} aria-label="Latest podcast">
+        <div className={`site-shell ${podcastStyles.homeInner}`}>
+          <div>
+            <p className="eyebrow">Conversations with our partners</p>
+            <h2>{podcasts[0].title}</h2>
+          </div>
+          <Link className="button button-gold" href="/about#podcasts">
+            View our latest podcast
+          </Link>
+        </div>
+      </section>
 
       <InternationalMoneySupport />
 
