@@ -60,16 +60,38 @@
 .homeInner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 32px;
 }
 
-.homeInner > div {
-  max-width: 760px;
+.homeCopy {
+  max-width: 600px;
 }
 
-.homeInner > a {
+.photoRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 358px;
+  max-width: 100%;
   flex-shrink: 0;
+}
+
+.photoRow img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  background: var(--paper);
+}
+
+.homeCopy h2 em {
+  color: #917750;
+  font-style: normal;
+}
+
+.homeCopy > a {
+  margin-top: 20px;
 }
 
 @media (max-width: 900px) {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { HomePhase2 } from "./components/HomePhase2";
@@ -6,7 +7,6 @@ import { createMetadata } from "./lib/seo";
 import styles from "./HomePhase2.module.css";
 import { InternationalMoneySupport } from "./components/InternationalMoneySupport";
 import vaultButtonStyles from "./HomeVaultButton.module.css";
-import { podcasts } from "./lib/podcasts";
 import podcastStyles from "./Podcast.module.css";
 
 export const metadata = createMetadata("homeEn");
@@ -27,13 +27,16 @@ export default function Home() {
 
       <section className={podcastStyles.homeSection} aria-label="Latest podcast">
         <div className={`site-shell ${podcastStyles.homeInner}`}>
-          <div>
-            <p className="eyebrow">Conversations with our partners</p>
-            <h2>{podcasts[0].title}</h2>
-          </div>
-          <Link className="button button-gold" href="/about#podcasts">
-            View our latest podcast
+          <Link className={podcastStyles.photoRow} href="/about#podcasts" aria-label="View our latest podcast">
+            <Image src="/images/podcasts/prestige-euroasia.webp" alt="Prestige EuroAsia cover featuring La Zagaleta" width={114} height={152} sizes="114px" />
+            <Image src="/images/podcasts/terrace-recording.webp" alt="Our partners recording the podcast on the terrace" width={114} height={152} sizes="114px" />
+            <Image src="/images/podcasts/terrace-walk.webp" alt="Our partners walking together on the La Zagaleta terrace" width={114} height={152} sizes="114px" />
           </Link>
+          <div className={podcastStyles.homeCopy}>
+            <p className="eyebrow">Conversations with our partners</p>
+            <h2>View our latest podcast <em>— now live</em></h2>
+            <Link className="button button-gold" href="/about#podcasts">Click here</Link>
+          </div>
         </div>
       </section>
 
