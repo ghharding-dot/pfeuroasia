@@ -18,9 +18,14 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
             <strong>Collaborators & professional partners</strong>
             <span>Access the private collaborator area, shared resources and partner information.</span>
           </div>
-          <Link className={`button button-gold ${styles.collaboratorButton}`} href="/collaborators">
-            Collaborator access <span>→</span>
-          </Link>
+          <div className={styles.collaboratorActions}>
+            <Link className={`button button-gold ${styles.collaboratorButton}`} href="/collaborators">
+              Collaborator access <span>→</span>
+            </Link>
+            <Link className={`button button-gold ${styles.collaboratorButton}`} href="/app">
+              Download EuroAsia App <span>→</span>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="site-shell footer-top">
