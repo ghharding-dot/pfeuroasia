@@ -45,7 +45,7 @@ export default function RoyalParkResidencePage() {
             "@context": "https://schema.org",
             "@type": "ApartmentComplex",
             name: "Royal Park Residence & Resort",
-            description: "A gated collection of luxury two, three and four-bedroom residences with resort facilities on Estepona's New Golden Mile.",
+            description: "A three-phase masterplan for 255 apartments with an adjoining resort on Estepona's New Golden Mile: 57 in Phase 1, 88 in Phase 2 and 110 in Phase 3.",
             url: "https://www.pfeuroasia.com/investment-property-marbella/royal-park-residence-resort",
             image: "https://www.pfeuroasia.com/images/royal-park/royal-park-hero.webp",
             address: {
@@ -72,9 +72,9 @@ export default function RoyalParkResidencePage() {
           <p className="eyebrow light">New Golden Mile · Estepona · Resort residences</p>
           <h1>Royal Park<br />Residence &amp; Resort.</h1>
           <p>
-            Spacious two, three and four-bedroom residences combining private
-            terraces, sea views and a complete resort lifestyle within a gated
-            community close to the beach.
+            A masterplanned community of 255 apartments across three residential
+            phases, alongside the Royal Park Resort. Spacious homes, private
+            terraces and resort-style amenities close to the beach.
           </p>
           <div className={styles.detailHeroActions}>
             <Link className="button button-gold" href="/enquire?partner=royal-park-residence">
@@ -86,7 +86,7 @@ export default function RoyalParkResidencePage() {
           </div>
         </div>
         <dl className={styles.heroFacts}>
-          <div><dt>Phase 1</dt><dd>57 apartments</dd></div>
+          <div><dt>Planned total · 3 phases</dt><dd>255 apartments</dd></div>
           <div><dt>Bedrooms</dt><dd>2–4</dd></div>
           <div><dt>Beach</dt><dd>10-minute walk</dd></div>
           <div><dt>Prices</dt><dd>On request</dd></div>
@@ -106,9 +106,15 @@ export default function RoyalParkResidencePage() {
               landscaped outdoor spaces on Estepona&apos;s New Golden Mile.
             </p>
             <p>
-              Phase 1 comprises 57 apartments, including garden homes and
-              penthouses with solariums. Each residence is presented with two
-              underground parking spaces and one storage unit.
+              The brochure masterplan shows 255 planned apartments: 57 in Phase 1,
+              88 in Phase 2 and 110 in Phase 3. The 57-apartment figure refers only
+              to the first phase, rather than the whole development.
+            </p>
+            <p>
+              Phase 1 includes two, three and four-bedroom garden homes and
+              penthouses with solariums, with two underground parking spaces
+              and one storage unit per apartment. Later-phase layouts and
+              availability should be confirmed from the current developer information.
             </p>
           </div>
         </div>
@@ -117,6 +123,22 @@ export default function RoyalParkResidencePage() {
           <article><span>02</span><h3>Private outside space</h3><p>Generous terraces, landscaped gardens and selected penthouses with private solariums.</p></article>
           <article><span>03</span><h3>Parking &amp; storage</h3><p>Two underground parking spaces and one private storage unit are allocated to each apartment.</p></article>
           <article><span>04</span><h3>Secure community</h3><p>A gated environment with 24-hour security technology and managed communal areas.</p></article>
+        </div>
+      </section>
+
+      <section className={styles.payment} aria-labelledby="royal-park-masterplan-heading">
+        <div className="site-shell">
+          <div className={styles.sectionHeading}>
+            <div><p className="eyebrow">The wider masterplan</p><h2 id="royal-park-masterplan-heading">Three residential phases. One resort destination.</h2></div>
+            <p>The brochure distinguishes Royal Park Residence from the adjoining Royal Park Resort, with sport, wellness and family leisure areas within the wider concept.</p>
+          </div>
+          <div className={styles.modelCards}>
+            <article><span>Phase 1</span><h3>57 apartments</h3><p>The first residential phase on Plots 7 and 8, with resort amenities shown in the masterplan.</p></article>
+            <article><span>Phase 2</span><h3>88 apartments</h3><p>A further residential phase within the wider Royal Park Residence masterplan.</p></article>
+            <article><span>Phase 3</span><h3>110 apartments</h3><p>Two groups of 60 and 50 apartments shown in the brochure masterplan.</p></article>
+            <article><span>Planned total</span><h3>255 apartments</h3><p>Across all three residential phases. This is the planned scale, rather than the number currently available for sale.</p></article>
+          </div>
+          <p>Phase release dates, completion schedules and resort opening dates are available on request, subject to current developer confirmation.</p>
         </div>
       </section>
 
@@ -141,7 +163,7 @@ export default function RoyalParkResidencePage() {
             <article><span>02 beds</span><h3>Two-bedroom residences</h3><p>Generous open-plan homes with private terraces and selected ground-floor gardens.</p></article>
             <article><span>03 beds</span><h3>Three-bedroom residences</h3><p>Spacious family layouts across garden, upper-floor and penthouse positions.</p></article>
             <article><span>04 beds</span><h3>Four-bedroom residences</h3><p>Limited larger homes, including garden apartments and penthouses with solariums.</p></article>
-            <article><span>Phase 1</span><h3>57 residences</h3><p>Current unit-specific plans, areas, orientation and availability are supplied on request.</p></article>
+            <article><span>Part of the wider masterplan</span><h3>Phase 1 · 57 residences</h3><p>The first phase within the planned 255-apartment community. Current unit-specific plans and availability are supplied on request.</p></article>
           </div>
           <div className={styles.pendingPrice}>
             <span>Current prices &amp; availability</span>
@@ -187,7 +209,7 @@ export default function RoyalParkResidencePage() {
           <div className={styles.servicesCopy}>
             <p className="eyebrow">Everyday convenience</p>
             <h2 id="royal-park-services-heading">A community designed for daily life.</h2>
-            <p>Residents are presented with free access to the gym and spa areas, together with coworking zones, meeting rooms, a restaurant and an on-site retail store.</p>
+            <p>The brochure presents free gym and spa access for Royal Park residents. The adjoining resort concept also includes coworking zones, meeting rooms, a restaurant and a retail store. Opening dates and access terms should be confirmed for the chosen phase.</p>
             <p>Families are also considered, with playgrounds, labyrinths and a children&apos;s zipline adventure area included in the resort concept.</p>
           </div>
         </div>
