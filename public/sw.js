@@ -1,5 +1,5 @@
 const CACHE = "pfeuroasia-app-v1";
-const CORE = ["/", "/app", "/images/pf-gold-symbol.png"];
+const CORE = ["/", "/app", "/images/property-facilitators-euroasia-logo.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(CORE)).catch(() => undefined));
