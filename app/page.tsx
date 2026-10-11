@@ -27,16 +27,17 @@ export default function Home() {
 
       <section className={podcastStyles.homeSection} aria-label="Latest podcast">
         <div className={`site-shell ${podcastStyles.homeInner}`}>
-          <Link className={podcastStyles.photoRow} href="/about#podcasts" aria-label="View our latest podcast">
-            <Image src="/images/podcasts/prestige-euroasia.webp" alt="Prestige EuroAsia cover featuring La Zagaleta" width={114} height={152} sizes="114px" />
-            <Image src="/images/podcasts/terrace-recording.webp" alt="Our partners recording the podcast on the terrace" width={114} height={152} sizes="114px" />
-            <Image src="/images/podcasts/terrace-walk.webp" alt="Our partners walking together on the La Zagaleta terrace" width={114} height={152} sizes="114px" />
+          <Link className={podcastStyles.homePortrait} href="/about#podcasts" aria-label="View the Prestige EuroAsia podcast">
+            <Image src="/images/podcasts/prestige-euroasia.webp" alt="Prestige EuroAsia cover featuring La Zagaleta" width={228} height={304} sizes="(max-width: 600px) 42vw, 228px" />
           </Link>
           <div className={podcastStyles.homeCopy}>
             <p className="eyebrow">Conversations with our partners</p>
             <h2>View our latest podcast <em>— now live</em></h2>
-            <Link className="button button-gold" href="/about#podcasts">Click here</Link>
+            <Link className="button button-gold" href="/about#podcasts">View our latest podcast</Link>
           </div>
+          <Link className={podcastStyles.homePortrait} href="/about#podcasts" aria-label="Watch our conversation with the partners">
+            <Image src="/images/podcasts/terrace-walk.webp" alt="Geoff and our partners together on the La Zagaleta terrace" width={228} height={304} sizes="(max-width: 600px) 42vw, 228px" />
+          </Link>
         </div>
       </section>
 
