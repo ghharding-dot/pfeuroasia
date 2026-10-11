@@ -29,6 +29,13 @@
   text-transform: uppercase;
 }
 
+.collaboratorActions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 12px;
+}
+
 .collaboratorButton {
   flex: 0 0 auto;
   min-width: 220px;
@@ -44,6 +51,11 @@
 
   .collaboratorCopy strong {
     font-size: 24px;
+  }
+
+  .collaboratorActions {
+    width: 100%;
+    flex-direction: column;
   }
 
   .collaboratorButton {
