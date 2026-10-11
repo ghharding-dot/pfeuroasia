@@ -98,3 +98,85 @@
   .episode { grid-template-columns: 1fr; gap: 24px; }
   .homeInner { flex-direction: column; align-items: flex-start; gap: 24px; }
 }
+
+/* Homepage podcast feature: full terrace backdrop with two enlarged portraits. */
+.homeSection {
+  position: relative;
+  isolation: isolate;
+  padding: 64px 0;
+  background: #111b20;
+  color: #fff;
+}
+.homeSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("/images/podcasts/terrace-recording.webp") center / cover no-repeat;
+}
+.homeSection::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(8,16,21,.55), rgba(8,16,21,.76) 50%, rgba(8,16,21,.55));
+}
+.homeInner {
+  display: grid;
+  grid-template-columns: 228px minmax(0,1fr) 228px;
+  gap: clamp(24px,4vw,64px);
+  align-items: center;
+}
+.homePortrait {
+  display: block;
+  width: 228px;
+  max-width: 100%;
+  border: 1px solid rgba(222,194,141,.6);
+  box-shadow: 0 12px 32px rgba(0,0,0,.35);
+}
+.homePortrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+}
+.homeCopy {
+  justify-self: center;
+  text-align: center;
+}
+.homeCopy :global(.eyebrow) {
+  color: #edd4a3;
+  font-size: .875rem;
+  line-height: 1.6;
+}
+.homeCopy h2 {
+  color: #fff;
+  font-size: clamp(30px,3.2vw,46px);
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+.homeCopy h2 em {
+  display: block;
+  margin-top: 8px;
+  color: #edd4a3;
+}
+@media (max-width: 900px) {
+  .homeInner {
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+    justify-items: center;
+    gap: 28px;
+  }
+  .homeCopy {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    max-width: 600px;
+  }
+  .homePortrait { grid-row: 2; }
+}
+@media (max-width: 600px) {
+  .homeSection { padding: 40px 0; }
+  .homeInner { gap: 24px 14px; }
+  .homePortrait { width: 100%; max-width: 228px; }
+  .homeCopy h2 { font-size: clamp(28px,7vw,36px); }
+  .homeCopy :global(.eyebrow) { letter-spacing: .12em; }
+}
