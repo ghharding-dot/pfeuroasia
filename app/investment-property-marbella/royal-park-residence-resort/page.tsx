@@ -4,6 +4,7 @@ import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { createMetadata } from "../../lib/seo";
 import styles from "../InvestmentPropertyMarbella.module.css";
+import galleryStyles from "./RoyalParkGallery.module.css";
 
 export const metadata = createMetadata("royalParkResidenceEn");
 
@@ -126,12 +127,33 @@ export default function RoyalParkResidencePage() {
         </div>
       </section>
 
+      <section className={galleryStyles.overview} aria-labelledby="royal-park-sea-overview-heading">
+        <div className="site-shell">
+          <div className={styles.sectionHeading}>
+            <div><p className="eyebrow">The complete urbanisation</p><h2 id="royal-park-sea-overview-heading">The whole setting. Looking towards the sea.</h2></div>
+            <p>A brochure illustration of the wider Royal Park community, showing the residences, landscaped grounds and resort setting in relation to the Mediterranean coast.</p>
+          </div>
+          <figure className={galleryStyles.figure}>
+            <a href="/images/royal-park/royal-park-full-sea-overview.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the complete Royal Park sea-facing overview at full size">
+              <Image src="/images/royal-park/royal-park-full-sea-overview.webp" alt="Brochure aerial illustration of the full Royal Park urbanisation looking towards the Mediterranean Sea, with residential blocks, gardens and resort facilities" width={1400} height={991} sizes="(max-width: 1400px) 100vw, 1320px" className={galleryStyles.image} />
+            </a>
+            <figcaption>Full urbanisation looking towards the sea · Brochure illustration · Tap to view full-size</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section className={styles.payment} aria-labelledby="royal-park-masterplan-heading">
         <div className="site-shell">
           <div className={styles.sectionHeading}>
             <div><p className="eyebrow">The wider masterplan</p><h2 id="royal-park-masterplan-heading">Three residential phases. One resort destination.</h2></div>
             <p>The brochure distinguishes Royal Park Residence from the adjoining Royal Park Resort, with sport, wellness and family leisure areas within the wider concept.</p>
           </div>
+          <figure className={galleryStyles.figure}>
+            <a href="/images/royal-park/royal-park-phase-masterplan.webp" target="_blank" rel="noopener noreferrer" aria-label="Open the labelled Royal Park phase masterplan at full size">
+              <Image src="/images/royal-park/royal-park-phase-masterplan.webp" alt="Royal Park masterplan showing Phase 1 with 57 apartments, Phase 2 with 88, Phase 3 with 110, and the resort sport and wellness areas" width={1400} height={770} sizes="(max-width: 1400px) 100vw, 1320px" className={galleryStyles.image} />
+            </a>
+            <figcaption>The three residential phases and adjoining resort areas · Brochure masterplan · Tap to view full-size</figcaption>
+          </figure>
           <div className={styles.modelCards}>
             <article><span>Phase 1</span><h3>57 apartments</h3><p>The first residential phase on Plots 7 and 8, with resort amenities shown in the masterplan.</p></article>
             <article><span>Phase 2</span><h3>88 apartments</h3><p>A further residential phase within the wider Royal Park Residence masterplan.</p></article>
@@ -144,8 +166,8 @@ export default function RoyalParkResidencePage() {
 
       <section className={styles.galleryPair}>
         <figure>
-          <Image src="/images/royal-park/royal-park-aerial.webp" alt="Aerial view of Royal Park Residence and Resort" fill sizes="(max-width: 760px) 100vw, 60vw" />
-          <figcaption>Landscaped residential setting</figcaption>
+          <Image src="/images/royal-park/royal-park-landscaped-homes.webp" alt="Brochure illustration of Royal Park residences, landscaped gardens and communal pools" fill sizes="(max-width: 760px) 100vw, 60vw" />
+          <figcaption>Residences, gardens and pools · Brochure illustration</figcaption>
         </figure>
         <figure>
           <Image src="/images/royal-park/royal-park-terrace.webp" alt="Private terrace at Royal Park Residence" fill sizes="(max-width: 760px) 100vw, 40vw" />
