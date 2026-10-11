@@ -38,6 +38,10 @@ export const metadata: Metadata = {
   description:
     "Independent luxury property advisers connecting qualified buyers and property owners across Marbella, La Zagaleta, El Madroñal, Malaysia and Asia.",
   applicationName: "Property Facilitators EuroAsia",
+  icons: {
+    icon: "/images/property-facilitators-euroasia-logo.png",
+    apple: "/images/property-facilitators-euroasia-logo.png",
+  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
