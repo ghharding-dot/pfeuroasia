@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Property Facilitators EuroAsia",
-    short_name: "EuroAsia",
+    short_name: "PF EuroAsia",
     description: "Direct access to EuroAsia property, rentals, Malaysia, residency and relocation services.",
     start_url: "/app",
     scope: "/",
@@ -13,10 +13,16 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait",
     icons: [
       {
-        src: "/images/pf-gold-symbol.png",
-        sizes: "430x590",
+        src: "/images/property-facilitators-euroasia-logo.png",
+        sizes: "any",
         type: "image/png",
         purpose: "any"
+      },
+      {
+        src: "/images/property-facilitators-euroasia-logo.png",
+        sizes: "any",
+        type: "image/png",
+        purpose: "maskable"
       }
     ]
   };
