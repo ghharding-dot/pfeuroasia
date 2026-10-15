@@ -61,11 +61,12 @@
   text-transform: uppercase;
 }
 
-.juwaiLogoImage {
+.juwaiLogoImage.juwaiLogoImage {
   display: block;
-  width: min(230px, 88%);
-  height: auto;
-  max-height: 108px;
+  width: auto;
+  height: 82px;
+  max-width: 94%;
+  max-height: 82px;
   object-fit: contain;
 }
 
