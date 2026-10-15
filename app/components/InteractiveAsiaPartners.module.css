@@ -61,29 +61,12 @@
   text-transform: uppercase;
 }
 
-.juwaiLogo {
-  display: flex;
-  min-height: 76px;
-  align-items: baseline;
-  justify-content: center;
-  color: #c82127;
-  text-align: center;
-}
-
-.juwaiLogo strong {
-  font-family: var(--serif);
-  font-size: clamp(30px, 3vw, 42px);
-  font-weight: 600;
-  letter-spacing: .025em;
-  line-height: 1;
-}
-
-.juwaiLogo span {
-  margin-left: 4px;
-  color: #363936;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: .01em;
+.juwaiLogoImage {
+  display: block;
+  width: min(230px, 88%);
+  height: auto;
+  max-height: 108px;
+  object-fit: contain;
 }
 
 @media (max-width: 1040px) {

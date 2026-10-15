@@ -121,10 +121,11 @@ export function InteractiveAsiaPartners() {
         >
           <span className={styles.front}>
             <span className={styles.logoWrap}>
-              <span className={layoutStyles.juwaiLogo} aria-label="Juwai.asia">
-                <strong>JUWAI</strong>
-                <span>.asia</span>
-              </span>
+              <img
+                className={layoutStyles.juwaiLogoImage}
+                src="/images/partner-juwai-accredited-member.png"
+                alt="Juwai.com Chinese Accredited Member"
+              />
             </span>
             <span className={styles.hint}>Hover or tap to discover <b>+</b></span>
           </span>
