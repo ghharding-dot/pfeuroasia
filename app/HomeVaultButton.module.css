@@ -1,8 +1,8 @@
 .button {
   position: fixed;
-  right: 20px;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
-  z-index: 80;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(112px, calc(env(safe-area-inset-bottom, 0px) + 106px));
+  z-index: 96;
   display: inline-flex;
   min-height: 42px;
   align-items: center;
@@ -35,8 +35,8 @@
 
 @media (max-width: 760px) {
   .button {
-    right: 14px;
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+    right: 12px;
+    bottom: max(108px, calc(env(safe-area-inset-bottom, 0px) + 102px));
     min-height: 44px;
     padding-inline: 16px;
   }
