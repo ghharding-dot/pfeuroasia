@@ -4,8 +4,15 @@ import styles from "../Podcast.module.css";
 const videos = [
   {
     id: "Ih-xLTY8yMQ",
+    label: "An American perspective",
     title: "Considering Malaysia? An American perspective.",
     description: "Exploring a move from the United States? Watch this selected video, then speak with us about your own plans for life in Malaysia.",
+  },
+  {
+    id: "hVnzTM5LRa4",
+    label: "Dubai & Kuala Lumpur",
+    title: "From Dubai to Kuala Lumpur: a different perspective.",
+    description: "Watch Wanderlust Ventures explore Kuala Lumpur as an alternative to Dubai, then speak with us about your own property, lifestyle and relocation priorities.",
   },
 ];
 
@@ -29,7 +36,7 @@ export function MalaysiaVideos() {
                 />
               </div>
               <div className={styles.copy}>
-                <p className="eyebrow">An American perspective</p>
+                <p className="eyebrow">{video.label}</p>
                 <h3>{video.title}</h3>
                 <p>{video.description}</p>
                 <Link className="button button-gold" href="/asia-gateway/enquire">Discuss your move to Malaysia <span>→</span></Link>
