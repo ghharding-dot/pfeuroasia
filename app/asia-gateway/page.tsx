@@ -5,6 +5,7 @@ import { TopicPathway } from "../components/TopicPathway";
 import regionStyles from "../HomeRegions.module.css";
 import styles from "./AsiaGateway.module.css";
 import { InternationalMoneySupport } from "../components/InternationalMoneySupport";
+import { MalaysiaVideos } from "../components/MalaysiaVideos";
 
 const services = [
   {
@@ -74,6 +75,8 @@ export default function AsiaGatewayPage() {
           </div>
         </div>
       </section>
+
+      <MalaysiaVideos />
 
       <TopicPathway
         title="Considering a move from Europe? Start here."
