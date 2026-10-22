@@ -93,7 +93,8 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
         </div>
       </div>
       <div className="site-shell footer-bottom">
-        <p>© {new Date().getFullYear()} Property Facilitators EuroAsia</p>
+        <p>© {new Date().getFullYear()} PF EuroAsia Ltd.</p>
+        <p>Company No. LL22582 · Incorporated in Labuan, Malaysia</p>
         <p>Marbella · Malaysia · Spain ↔ Asia</p>
       </div>
     </footer>
