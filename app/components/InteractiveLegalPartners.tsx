@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import styles from "./InteractiveLegalPartners.module.css";
 
-type PartnerKey = "lawbird" | "legal10" | "martinez";
+type PartnerKey = "lawbird" | "legal10" | "martinez" | "ruizballesteros";
 
 type Partner = {
   key: PartnerKey;
@@ -52,6 +52,17 @@ const partners: Partner[] = [
     mark: "ME",
     backgroundImage: "/images/partner-martinez-marbella-office.webp",
   },
+  {
+    key: "ruizballesteros",
+    name: "Ruiz Ballesteros",
+    href: "/partners/ruiz-ballesteros",
+    kicker: "Lawyers & tax advisers",
+    description:
+      "Marbella and Málaga specialists in Spanish and international taxation, accounting, corporate and commercial matters, and property law.",
+    mark: "RB",
+    backgroundImage: "/images/partner-ruiz-ballesteros-office.jpg",
+    backgroundPosition: "center",
+  },
 ];
 
 function FrontLogo({ partner }: { partner: Partner }) {
@@ -61,6 +72,10 @@ function FrontLogo({ partner }: { partner: Partner }) {
 
   if (partner.key === "legal10") {
     return <img src="/images/partner-legal10.jpg" alt="Legal 10 Abogados" />;
+  }
+
+  if (partner.key === "ruizballesteros") {
+    return <img src="/images/partner-ruiz-ballesteros-logo.png" alt="Ruiz Ballesteros Lawyers and Tax Advisors" />;
   }
 
   return (

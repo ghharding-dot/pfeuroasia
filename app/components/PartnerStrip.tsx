@@ -39,7 +39,7 @@ export function PartnerStrip() {
 
           <div className={`${styles.partnerGroup} ${styles.europeanPartnerGroup}`}>
             <div className={`${styles.groupDivider} ${styles.europeanDivider}`} aria-hidden="true" />
-            <p className={styles.groupEyebrow}>Legal collaborations</p>
+            <p className={styles.groupEyebrow}>Lawyers &amp; tax advisers</p>
             <p className={`${styles.rentalStatement} ${styles.europeanStatement}`}>Hover on desktop or tap once on mobile to discover each firm.</p>
             <InteractiveLegalPartners />
           </div>
