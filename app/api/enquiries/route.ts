@@ -318,6 +318,7 @@ export async function POST(request: NextRequest) {
     new Set([
       mainRecipient,
       routedPartnerEmail,
+      partner?.code === "EST" ? "ellie@estuaryfx.co.uk" : undefined,
       enquiryType === "luxury-rental"
         ? "reservations@theluxuryvillacollection.com"
         : undefined,
