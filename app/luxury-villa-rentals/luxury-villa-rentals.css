@@ -482,3 +482,14 @@
   .rental-form,
   .rental-form-success { padding: 26px 18px; }
 }
+
+#villa-enquiry { scroll-margin-top: 110px; padding-block: 72px; }
+.rental-form-grid label { display: grid; gap: 8px; min-width: 0; color: #eee6d8; font-size: 14px; }
+.rental-form input, .rental-form select, .rental-form textarea { font-size: 16px; }
+.rental-form-details { margin-top: 22px; border-block: 1px solid #ffffff30; }
+.rental-form-details summary { padding: 18px 0; cursor: pointer; color: #e0c48c; font-size: 14px; }
+.rental-form-details .rental-form-grid { margin-bottom: 22px; }
+.rental-form-consent { display: flex; align-items: start; gap: 10px; margin-top: 22px; font-size: 12px; line-height: 1.6; color: #ddd; }
+.rental-form .rental-form-consent input { width: 20px; height: 20px; flex-shrink: 0; accent-color: var(--gold-light); margin-top: 2px; }
+.rental-form-consent a { text-decoration: underline; }
+.rental-form-trap { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }

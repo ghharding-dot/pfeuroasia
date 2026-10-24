@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { NextStepPanel } from "../../components/NextStepPanel";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -57,7 +58,7 @@ const faqs = [
 export default function MalaysiaResidencyOptionsPage() {
   return (
     <main className={styles.page}>
-      <Header transparent enquireHref="/asia-gateway/enquire" enquireLabel="Malaysia enquiry" />
+      <Header transparent enquireHref="#malaysia-enquiry" enquireLabel="Malaysia enquiry" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) }) }} />
 
       <section className={styles.hero}>
@@ -68,12 +69,13 @@ export default function MalaysiaResidencyOptionsPage() {
           <h1>Malaysia residency options<em>for international clients.</em></h1>
           <p className={styles.heroCopy}>Compare the principal lifestyle, remote-work, employment and business-led pathways before choosing the route that fits your real plans.</p>
           <div className={styles.heroActions}>
-            <Link className="button button-gold" href="/asia-gateway/enquire">Request a private assessment <span>→</span></Link>
+            <Link className="button button-gold" href="#malaysia-enquiry">Discuss my Malaysia plans <span>→</span></Link>
             <Link className="text-link light-link" href="/guides/malaysia-tax-residency-for-foreigners">Understand tax residency <span>→</span></Link>
           </div>
         </div>
       </section>
 
+      <NextStepPanel topic="asia" />
       <AuthorityReview focus="malaysia" />
 
       <section className={styles.intro}>
@@ -121,7 +123,7 @@ export default function MalaysiaResidencyOptionsPage() {
 
       <section className={styles.faq}><div className={`site-shell ${styles.faqGrid}`}><div><p className="eyebrow light">Malaysia residency FAQ</p><h2>Questions clients ask first.</h2></div><div>{faqs.map((item) => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div></div></section>
 
-      <section className={styles.cta}><div className={`site-shell ${styles.ctaGrid}`}><div><p className="eyebrow">Private assessment</p><h2>Considering a move to Malaysia?</h2></div><div className={styles.ctaCopy}><p>Tell us about your nationality, family, intended activity, present residence and timing. We will help organise the appropriate first conversation.</p><Link className="button button-dark" href="/asia-gateway/enquire">Discuss Malaysia residency <span>→</span></Link></div></div></section>
+      <section className={styles.cta}><div className={`site-shell ${styles.ctaGrid}`}><div><p className="eyebrow">Private assessment</p><h2>Considering a move to Malaysia?</h2></div><div className={styles.ctaCopy}><p>Tell us about your nationality, family, intended activity, present residence and timing. We will help organise the appropriate first conversation.</p><Link className="button button-dark" href="#malaysia-enquiry">Discuss Malaysia residency <span>→</span></Link></div></div></section>
       <section className={styles.disclaimer}><div className="site-shell"><p>General information only. Immigration, tax, employment and company rules can change and depend on individual circumstances. PF EuroAsia coordinates introductions; formal advice and applications are provided by the appropriately licensed professionals.</p></div></section>
       <InstagramBridge
         context="malaysia_residency_options"
