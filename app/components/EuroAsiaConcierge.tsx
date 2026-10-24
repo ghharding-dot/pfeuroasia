@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { submitEnquiry } from "../lib/submitEnquiry";
+import { trackEvent } from "../lib/analytics";
 import styles from "./EuroAsiaConcierge.module.css";
 import { ConciergeVoice } from "./ConciergeVoice";
 
@@ -55,8 +56,27 @@ export function EuroAsiaConcierge() {
       setOpen(true);
     }
   },[pathname,hidden]);
+  useEffect(() => {
+    function openFromPage(event: Event) {
+      const detail = (event as CustomEvent<{ journey?: string; source?: string }>).detail;
+      if (hidden || !isJourney(detail?.journey || null)) return;
+      setJourney(detail.journey as Journey);
+      setMessages([]); setQuestion(""); setEnquiry(false); setError(""); setReference("");
+      setOpen(true);
+      trackEvent("maya_opened", { source: detail.source || pathname, journey: detail.journey || "" });
+    }
+    window.addEventListener("pfe:open-maya", openFromPage);
+    return () => window.removeEventListener("pfe:open-maya", openFromPage);
+  }, [hidden, pathname]);
+  function openLauncher() {
+    const selected: Journey | null = pathname.includes("luxury-villa-rentals") ? "rental" : pathname.includes("malaysia") || pathname.startsWith("/asia-gateway") ? "asia" : null;
+    if (!messages.length && selected) setJourney(selected);
+    setOpen(true);
+    trackEvent("maya_opened", { source: pathname, journey: selected || journey || "general" });
+  }
   async function ask(text:string) {
     const next=text.trim();if (!next || requesting.current) return;
+    trackEvent("maya_question_sent", { source: pathname, journey: journey || "general" });
     requesting.current=true;
     setQuestion("");setError("");setBusy(true);
     const history=messages.slice(-6);
@@ -74,6 +94,7 @@ export function EuroAsiaConcierge() {
   }
   function startEnquiry() {
     setRequirements((journey ? `Interest: ${journeys[journey].title}\n\n` : "") + messages.map(m=>`${m.role === "user" ? "Visitor" : "AI concierge"}: ${m.text}`).join("\n\n").slice(-4500));
+    trackEvent("enquiry_started", { source: "maya", journey: journey || "general" });
     setError("");setEnquiry(true);
   }
   async function sendEnquiry(event:FormEvent<HTMLFormElement>) {
@@ -81,6 +102,7 @@ export function EuroAsiaConcierge() {
     const form=new FormData(event.currentTarget);setSending(true);setError("");
     try {
       const result=await submitEnquiry({enquiry_type:form.get("topic"),full_name:form.get("name"),email:form.get("email"),telephone_or_whatsapp:form.get("phone"),requirements,contact_desk:"EuroAsia AI Concierge",preferred_channel:"Email",website_region:"International",website_journey:form.get("topic") === "asia-residency-company" ? "asia" : "spain",company_website:form.get("company_website")});
+      trackEvent("enquiry_submitted", { source: "maya", enquiry_type: String(form.get("topic") || "") });
       setReference(result.reference);
     } catch(cause) {setError(cause instanceof Error?cause.message:"Your enquiry could not be delivered. Please try again.");}
     finally {setSending(false);}
@@ -126,6 +148,6 @@ export function EuroAsiaConcierge() {
         <p className={styles.note}>AI guidance. Availability and individual tax or residency advice require confirmation. Avoid sharing sensitive documents here.</p>
       </footer>}
     </section>}
-    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={()=>setOpen(true)} aria-expanded={open} aria-label="Speak to Maya, our AI chat advisor. Open the chat to speak or type your question."><Image src="/images/maya-ai-advisor.webp" alt="" width={48} height={48} className={styles.avatar}/><span className={styles.launcherCopy}><strong>Speak to Maya</strong><span>Our AI chat advisor</span><span>Speak or type your question</span></span></button>}
+    {!open && <button ref={launcher} type="button" className={styles.launcher} onClick={openLauncher} aria-expanded={open} aria-label="Speak to Maya, our AI chat advisor. Open the chat to speak or type your question."><Image src="/images/maya-ai-advisor.webp" alt="" width={48} height={48} className={styles.avatar}/><span className={styles.launcherCopy}><strong>Speak to Maya</strong><span>Our AI chat advisor</span><span>Speak or type your question</span></span></button>}
   </div>;
 }
