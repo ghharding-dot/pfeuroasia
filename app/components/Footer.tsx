@@ -65,6 +65,7 @@ export function Footer({ hidePartnerStrip = false }: { hidePartnerStrip?: boolea
         </div>
         <p>Independent luxury property representation between Spain and Asia.</p>
         <div className="footer-links">
+          <Link href="/start">Choose your direction · Speak to Maya</Link>
           <Link href="/services/acquisition">Acquisition</Link>
           <Link href="/services/international-sales">International sales</Link>
           <Link href="/services/relocation-concierge">Relocation & concierge</Link>

@@ -10,6 +10,13 @@ import { ConciergeVoice } from "./ConciergeVoice";
 
 type Source = {label:string;url:string};
 type Message = {role:"user"|"assistant";text:string;sources?:Source[]};
+const journeys = {
+  sale: { title: "Property for sale", topic: "buy", greeting: "Hello, I’m Maya. Let’s find your property in Spain. What is your approximate budget, and which area interests you?", suggestions: ["A villa in Marbella", "La Zagaleta or El Madroñal", "New developments in Spain"] },
+  rental: { title: "Luxury rentals", topic: "luxury-rental", greeting: "Hello, I’m Maya. I can help with a selection from over 100 luxury villas along the Costa del Sol. What dates do you have in mind, how many guests, and what is your approximate budget?", suggestions: ["Help me choose a rental area", "I’d like a villa with concierge service", "Rent in Marbella before buying"] },
+  asia: { title: "Residence & investment in Asia", topic: "asia-residency-company", greeting: "Hello, I’m Maya. Are you exploring residence, property investment or setting up a company in Asia? Which country interests you?", suggestions: ["Malaysia residency options", "Property investment in Malaysia", "Labuan company and residence"] },
+} as const;
+type Journey = keyof typeof journeys;
+function isJourney(value: string | null): value is Journey { return value !== null && Object.hasOwn(journeys, value); }
 const suggestions = ["Find a villa in Spain", "Rent a Marbella villa", "Malaysia residency options", "International money transfers"];
 function safeLink(url:string) {
   return (url.startsWith("/") && !url.startsWith("//")) || url.startsWith("https://www.pfiberia.com/");
@@ -17,6 +24,7 @@ function safeLink(url:string) {
 export function EuroAsiaConcierge() {
   const pathname=usePathname() || "/";
   const [open,setOpen]=useState(false);
+  const [journey,setJourney]=useState<Journey | null>(null);
   const [messages,setMessages]=useState<Message[]>([]);
   const [question,setQuestion]=useState("");
   const [busy,setBusy]=useState(false);
@@ -39,6 +47,14 @@ export function EuroAsiaConcierge() {
     document.addEventListener("keydown",escape);
     return ()=>document.removeEventListener("keydown",escape);
   },[open]);
+  useEffect(()=> {
+    const selected = new URLSearchParams(window.location.search).get("maya");
+    if (isJourney(selected) && !hidden) {
+      setJourney(selected);
+      setMessages([]);setQuestion("");setEnquiry(false);setError("");setReference("");
+      setOpen(true);
+    }
+  },[pathname,hidden]);
   async function ask(text:string) {
     const next=text.trim();if (!next || requesting.current) return;
     requesting.current=true;
@@ -46,7 +62,7 @@ export function EuroAsiaConcierge() {
     const history=messages.slice(-6);
     setMessages(previous=>[...previous,{role:"user",text:next}]);
     try {
-      const response=await fetch("/api/concierge",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:next,history:history.map(({role,text})=>({role,text}))}),signal:AbortSignal.timeout(35000)});
+      const response=await fetch("/api/concierge",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question:journey ? `Visitor interest: ${journeys[journey].title}. Visitor question: ${next}` : next,history:history.map(({role,text})=>({role,text}))}),signal:AbortSignal.timeout(35000)});
       const result=await response.json();
       if (!response.ok || !result.answer) throw new Error(result.error || "Please try again or send your question to our team.");
       setMessages(previous=>[...previous,{role:"assistant",text:result.answer,sources:Array.isArray(result.sources)?result.sources.filter((s:Source)=>s && typeof s.url === "string" && safeLink(s.url)):[]}]);
@@ -57,7 +73,7 @@ export function EuroAsiaConcierge() {
     } finally {requesting.current=false;setBusy(false);if (window.matchMedia("(pointer: fine)").matches) input.current?.focus();}
   }
   function startEnquiry() {
-    setRequirements(messages.map(m=>`${m.role === "user" ? "Visitor" : "AI concierge"}: ${m.text}`).join("\n\n").slice(-4500));
+    setRequirements((journey ? `Interest: ${journeys[journey].title}\n\n` : "") + messages.map(m=>`${m.role === "user" ? "Visitor" : "AI concierge"}: ${m.text}`).join("\n\n").slice(-4500));
     setError("");setEnquiry(true);
   }
   async function sendEnquiry(event:FormEvent<HTMLFormElement>) {
@@ -80,7 +96,7 @@ export function EuroAsiaConcierge() {
         {enquiry ? reference ? <div className={styles.success} role="status"><h3>Your enquiry has been sent.</h3><p>Reference: {reference}</p><p>The EuroAsia team will contact you using the details you provided.</p><button type="button" onClick={()=>{setEnquiry(false);setReference("");}}>Back to conversation</button></div> : <form onSubmit={sendEnquiry} className={styles.form}>
           <button type="button" className={styles.back} onClick={()=>{setEnquiry(false);setError("");}}>Back to conversation</button>
           <h3>Speak with our team</h3><p>Review your message and share your contact details.</p>
-          <label>Interested in<select name="topic" required defaultValue="buy"><option value="buy">Buying property</option><option value="luxury-rental">Luxury villa rentals</option><option value="asia-residency-company">Malaysia residency or company setup</option><option value="international-payments">Currency transfers</option><option value="partner">Another enquiry</option></select></label>
+          <label>Interested in<select name="topic" required defaultValue={journey ? journeys[journey].topic : "buy"}><option value="buy">Buying property</option><option value="luxury-rental">Luxury villa rentals</option><option value="asia-residency-company">Malaysia residency or company setup</option><option value="international-payments">Currency transfers</option><option value="partner">Another enquiry</option></select></label>
           <label>Name<input name="name" autoComplete="name" required maxLength={160}/></label>
           <label>Email<input name="email" type="email" autoComplete="email" required maxLength={320}/></label>
           <label>Telephone / WhatsApp (optional)<input name="phone" type="tel" autoComplete="tel" maxLength={80}/></label>
@@ -89,8 +105,8 @@ export function EuroAsiaConcierge() {
           <label className={styles.consent}><input type="checkbox" required/><span>I agree to be contacted about this enquiry and understand relevant partners may receive my details. <Link href="/privacy">Privacy notice</Link>.</span></label>
           <button type="submit" className={styles.primary} disabled={sending}>{sending?"Sending…":"Send enquiry"}</button>
         </form> : <>
-          <div className={styles.welcome}><p>Hello, I’m Maya, your EuroAsia AI advisor. Speak to me or type your question below. Please ask anything you like.</p><p>I can help you explore property sales and purchases, luxury rentals, relocation, residency, company formation and international money transfers, and guide you to the relevant pages.</p></div>
-          {!messages.length && <div className={styles.suggestions}>{suggestions.map(text=><button type="button" key={text} onClick={()=>void ask(text)} disabled={busy}>{text}</button>)}</div>}
+          <div className={styles.welcome}>{journey ? <p>{journeys[journey].greeting}</p> : <><p>Hello, I’m Maya, your EuroAsia AI advisor. Speak to me or type your question below. Please ask anything you like.</p><p>I can help you explore property sales and purchases, luxury rentals, relocation, residency, company formation and international money transfers, and guide you to the relevant pages.</p></>}</div>
+          {!messages.length && <div className={styles.suggestions}>{(journey ? journeys[journey].suggestions : suggestions).map(text=><button type="button" key={text} onClick={()=>void ask(text)} disabled={busy}>{text}</button>)}</div>}
           <div role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
             {messages.map((message,index)=><div key={index} className={`${styles.message} ${message.role === "user" ? styles.user : styles.assistant}`}><span className={styles.speaker}>{message.role === "user" ? "You" : "Maya"}</span><p>{message.text}</p>{Boolean(message.sources?.length) && <div className={styles.links}>{message.sources?.map(source=><Link href={source.url} key={source.url} onClick={()=>setOpen(false)}>{source.label}</Link>)}</div>}</div>)}
           </div>
@@ -100,7 +116,7 @@ export function EuroAsiaConcierge() {
         {error && <p className={styles.error} role="alert">{error}</p>}
       </div>
       {!enquiry && <footer className={styles.footer}>
-        <ConciergeVoice history={messages} onQuestion={ask}/>
+        <ConciergeVoice greeting={journey ? journeys[journey].greeting : undefined} history={journey ? [{role:"assistant",text:journeys[journey].greeting},...messages] : messages} onQuestion={ask}/>
         <form onSubmit={e=>{e.preventDefault();void ask(question);}} className={styles.composer}>
           <label className={styles.srOnly} htmlFor="euroasia-question">Your question</label>
           <textarea ref={input} id="euroasia-question" value={question} onChange={e=>setQuestion(e.target.value)} placeholder="Please ask anything you like…" maxLength={2000} rows={2} disabled={busy} onKeyDown={e=>{if(e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing){e.preventDefault();void ask(question);}}}/>

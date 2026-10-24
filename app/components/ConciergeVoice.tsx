@@ -5,24 +5,24 @@ import styles from "./EuroAsiaConcierge.module.css";
 
 type Message = { role: "user" | "assistant"; text: string };
 type Answer = { answer: string };
-type Props = { history: Message[]; onQuestion: (question: string) => Promise<Answer | undefined> };
+type Props = { greeting?: string; history: Message[]; onQuestion: (question: string) => Promise<Answer | undefined> };
 type VoiceResources = {
   peer: RTCPeerConnection; channel: RTCDataChannel; microphone: MediaStream;
   controller: AbortController; timer?: ReturnType<typeof setTimeout>; idle?: ReturnType<typeof setTimeout>;
   finish?: ReturnType<typeof setTimeout>; ready?: ReturnType<typeof setTimeout>;
 };
 
-export function ConciergeVoice({ history, onQuestion }: Props) {
+export function ConciergeVoice({ greeting, history, onQuestion }: Props) {
   const [available, setAvailable] = useState(false);
   const [state, setState] = useState<"off" | "connecting" | "live" | "ending">("off");
   const [status, setStatus] = useState("");
   const [heard, setHeard] = useState("");
   const [spoken, setSpoken] = useState("");
   const audio = useRef<HTMLAudioElement>(null);
-  const latest = useRef({ history, onQuestion });
+  const latest = useRef({ greeting, history, onQuestion });
   const resources = useRef<VoiceResources | null>(null);
   const generation = useRef(0);
-  useEffect(() => { latest.current = { history, onQuestion }; }, [history, onQuestion]);
+  useEffect(() => { latest.current = { greeting, history, onQuestion }; }, [greeting, history, onQuestion]);
   useEffect(() => {
     const controller = new AbortController();
     void fetch("/api/concierge/voice", { signal: controller.signal }).then(r => r.json()).then(r => setAvailable(r.enabled === true)).catch(() => {});
@@ -108,7 +108,7 @@ export function ConciergeVoice({ history, onQuestion }: Props) {
         if (event.type === "session.started") {
           clearTimeout(r.ready); setState("live"); setStatus("Listening — ask your question."); activity();
           r.timer = setTimeout(() => stop("Your eight-minute voice session has ended. You can continue typing or start voice again."), 480000);
-          send({ type: "session.instructions.append", event_id: crypto.randomUUID(), delegation_id: null, content: "Greet the visitor now in English: Hello, I’m Maya, your EuroAsia AI advisor. How can I help you today? Then pause and listen." });
+          send({ type: "session.instructions.append", event_id: crypto.randomUUID(), delegation_id: null, content: `Greet the visitor now in English: ${latest.current.greeting || "Hello, I’m Maya, your EuroAsia AI advisor. How can I help you today?"} Then pause and listen.` });
         } else if (event.type === "session.closed") { cleanup(); setState("off"); }
         else if (event.type === "error") { stop("Voice encountered a problem. Please type your question for now."); }
         else if (event.type === "session.input_transcript.delta" && typeof event.delta === "string") {
