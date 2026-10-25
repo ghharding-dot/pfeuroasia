@@ -9,6 +9,8 @@ import { TopicPathway } from "../../components/TopicPathway";
 import styles from "../MalaysiaSeoGuide.module.css";
 
 const pathways = [
+  { title: "Residency for over 60s", text: "Compare MM2H, Johor SEZ, Sarawak, Sabah and business-led alternatives for mature applicants and couples.", points: ["Over-50 rules and conditions", "Property and fixed-deposit commitments", "Family and healthcare planning"], href: "/guides/malaysia-over-60-residency", linkLabel: "Explore over-60 residency" },
+  { title: "Digital nomad and remote working", text: "Explore DE Rantau for qualifying remote professionals, freelancers and digital marketers.", points: ["Temporary remote-work route", "Income and work evidence", "Family and tax considerations"], href: "/guides/malaysia-digital-nomad-pass", linkLabel: "Explore digital nomad options" },
   {
     title: "Malaysia My Second Home (MM2H)",
     text: "A long-stay programme for eligible applicants who can meet the current financial, property, age and presence conditions for the chosen category.",
@@ -87,7 +89,7 @@ export default function MalaysiaResidencyOptionsPage() {
 
       <section className={styles.cardsSection}>
         <div className="site-shell">
-          <div className={styles.sectionHeading}><div><p className="eyebrow light">Four starting points</p><h2>Which pathway matches the plan?</h2></div><p>This is an initial orientation, not an eligibility decision. Every route remains subject to the current official criteria and approval.</p></div>
+          <div className={styles.sectionHeading}><div><p className="eyebrow light">Six starting points</p><h2>Which pathway matches the plan?</h2></div><p>This is an initial orientation, not an eligibility decision. Every route remains subject to the current official criteria and approval.</p></div>
           <div className={styles.cardGrid}>{pathways.map((pathway, index) => <article className={styles.card} key={pathway.title}><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><h3>{pathway.title}</h3><p>{pathway.text}</p><ul>{pathway.points.map((point) => <li key={point}>{point}</li>)}</ul><Link className="text-link light-link" href={pathway.href}>{pathway.linkLabel} <span>→</span></Link></article>)}</div>
         </div>
       </section>
