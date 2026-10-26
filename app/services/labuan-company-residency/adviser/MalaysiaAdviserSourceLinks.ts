@@ -4,6 +4,13 @@ export type AdviserSourceLink = {
 };
 
 const sourceLinksByKnowledgeId: Record<string, AdviserSourceLink> = {
+  "mm2h-over60": { label: "PF EuroAsia — Residency for over 60s", url: "/guides/malaysia-over-60-residency" },
+  "mm2h-federal": { label: "PF EuroAsia — Malaysia residency options", url: "/guides/malaysia-residency-options" },
+  "mm2h-johor": { label: "PF EuroAsia — Residency for over 60s", url: "/guides/malaysia-over-60-residency" },
+  "mm2h-sarawak-sabah": { label: "PF EuroAsia — Residency for over 60s", url: "/guides/malaysia-over-60-residency" },
+  "de-rantau-nomad": { label: "MDEC — DE Rantau", url: "https://mdec.my/derantau" },
+  "immigration-dependants": { label: "PF EuroAsia — Residency for over 60s", url: "/guides/malaysia-over-60-residency" },
+  "immigration-business-vs-retirement": { label: "PF EuroAsia — Malaysia residency options", url: "/guides/malaysia-residency-options" },
   "tax-residency-overview": {
     label: "PF EuroAsia — Malaysia tax residency guide",
     url: "/guides/malaysia-tax-residency-for-foreigners",

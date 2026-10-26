@@ -1,4 +1,5 @@
 import type { AdviserKnowledgeEntry } from "./LabuanKnowledge";
+import { malaysiaImmigrationKnowledge } from "./MalaysiaImmigrationKnowledge";
 import { labuanKnowledge } from "./LabuanKnowledge";
 import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
@@ -74,8 +75,10 @@ function uniqueMatches(matches: HybridKnowledgeMatch[]) {
 
 export function retrieveMalaysiaAdviserKnowledge(question: string, limit = 6) {
   const intent = detectMalaysiaAdviserIntent(question);
-  const sensitive = intent === "labuan" || intent === "tax-residency";
-  const pool = intent === "tax-residency"
+  const sensitive = intent === "labuan" || intent === "tax-residency" || intent === "immigration";
+  const pool = intent === "immigration"
+    ? malaysiaImmigrationKnowledge
+    : intent === "tax-residency"
     ? [...malaysiaTaxResidencyKnowledge, ...labuanKnowledge]
     : sensitive
       ? labuanKnowledge

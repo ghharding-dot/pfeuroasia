@@ -49,9 +49,9 @@ export function LabuanAdviser({ visitor, locale = "en" }: { visitor: Visitor; lo
       id: 1,
       role: "assistant",
       text: isSpanish
-        ? `Bienvenido/a ${visitor.fullName.split(" ")[0] || ""}. Pregúnteme con naturalidad sobre Malasia: destinos, actividades, épocas para viajar, Kuala Lumpur, comida, coste de vida, propiedad, sanidad, transporte y estilo de vida; o sobre residencia fiscal en Malasia y la vía de sociedad y residencia de PF EuroAsia en Labuan. Las preguntas sobre empresa, fiscalidad personal, residencia e inmigración utilizan respuestas controladas basadas en información verificada. Si no dispongo de información suficiente, registraré la pregunta para que nuestro equipo la revise en lugar de adivinar.`
+        ? `Bienvenido/a ${visitor.fullName.split(" ")[0] || ""}. Pregúnteme con naturalidad sobre Malasia: destinos, actividades, épocas para viajar, Kuala Lumpur, comida, coste de vida, propiedad, sanidad, transporte y estilo de vida; o sobre residencia fiscal en Malasia y la vía de sociedad y residencia de PF EuroAsia en Labuan. Las preguntas sobre empresa, fiscalidad personal, residencia, MM2H, DE Rantau e inmigración utilizan respuestas controladas basadas en información verificada. Si no dispongo de información suficiente, registraré la pregunta para que nuestro equipo la revise en lugar de adivinar.`
         : `Welcome ${visitor.fullName.split(" ")[0] || ""}. Ask me naturally about Malaysia — where to go, what to do, travel seasons, Kuala Lumpur, food, living costs, property, healthcare, transport and lifestyle — or about Malaysia tax residency and the PF EuroAsia Labuan company and residency pathway. For general Malaysia questions I can combine relevant facts from our verified knowledge into a more useful answer. Company, personal tax, residency and immigration questions use controlled answers from our verified knowledge. If I do not have enough information, I will register the question for our team rather than guess.`,
-      source: isSpanish ? "Base verificada de PF EuroAsia sobre Malasia y Labuan — actualizada en agosto de 2026" : "PF EuroAsia verified Malaysia & Labuan knowledge base — updated August 2026",
+      source: isSpanish ? "Base verificada de PF EuroAsia sobre Malasia y Labuan — actualizada en octubre de 2026" : "PF EuroAsia verified Malaysia & Labuan knowledge base — updated October 2026",
       mode: "controlled",
       followUps: suggestions.slice(0, 3),
     },
@@ -224,7 +224,7 @@ export function LabuanAdviser({ visitor, locale = "en" }: { visitor: Visitor; lo
           <span className={styles.statusDot} />
           <span>{isSpanish ? "Asesor híbrido de Malasia · información verificada + síntesis con IA" : "Hybrid Malaysia adviser · verified knowledge + AI synthesis"}</span>
         </div>
-        <span>{isSpanish ? "Actualizado en agosto de 2026" : "Updated August 2026"}</span>
+        <span>{isSpanish ? "Actualizado en octubre de 2026" : "Updated October 2026"}</span>
       </div>
 
       <div ref={messagesPanelRef} className={styles.messages} aria-live="polite">
