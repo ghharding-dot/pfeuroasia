@@ -434,3 +434,16 @@
 .secondaryLinks { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 24px; color: var(--gold-light); font-size: .875rem; line-height: 1.6; }
 .secondaryLinks a { padding-block: 6px; text-decoration: underline; text-underline-offset: 5px; }
 .heroAction { font-size: .875rem; letter-spacing: .03em; }
+
+
+.residencyFeature { padding: 92px 0; background: #f5f1e9; color: #24231f; }
+.residencyFeature h2 { max-width: 900px; margin: 12px 0 34px; font-family: var(--serif); font-size: clamp(36px, 4vw, 62px); font-weight: 400; line-height: 1.08; }
+.residencyFeatureGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.residencyFeatureCard { display: flex; flex-direction: column; gap: 16px; min-height: 315px; padding: 30px; border: 1px solid #bba47a; background: #191d1d; color: #fff; text-decoration: none; transition: transform 160ms ease; }
+.residencyFeatureCard:hover, .residencyFeatureCard:focus-visible { transform: translateY(-4px); }
+.residencyFeatureCard > span { color: #d6b879; font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.residencyFeatureCard h3 { margin: 0; font-family: var(--serif); font-size: clamp(25px, 2.5vw, 36px); font-weight: 400; line-height: 1.15; }
+.residencyFeatureCard p { margin: 0; color: #d1d1cd; font-size: 14px; line-height: 1.65; }
+.residencyFeatureCard strong { margin-top: auto; color: #e4c58b; font-size: 12px; }
+.residencyFeatureNote { margin-top: 20px; color: #625e56; font-size: 12px; }
+@media (max-width: 850px) { .residencyFeatureGrid { grid-template-columns: 1fr; } .residencyFeatureCard { min-height: 230px; } .residencyFeature { padding: 60px 0; } }
