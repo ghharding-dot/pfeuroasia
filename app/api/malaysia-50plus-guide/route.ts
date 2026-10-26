@@ -63,13 +63,13 @@ export async function POST(request: NextRequest) {
   heading("1  Federal Malaysia My Second Home (MM2H)");
   line("Silver, Gold and Platinum are separate categories. They differ in required fixed deposits, qualifying property purchases, pass duration and other conditions. Applicants aged 50 and above may benefit from different minimum-stay rules; verify the latest wording rather than assuming all obligations are waived.");
   line("Ask for: current fixed deposit and permitted withdrawal, property threshold and holding restrictions, minimum presence, dependants, medical cover, renewals and work rights.");
-  next();
   heading("2  Johor / Forest City Special Economic Zone");
   line("A distinct MM2H pathway linked to qualifying property in the designated area. Deposit arrangements may differ for applicants aged 50+, but property commitment, resale restrictions and total cost can be material. It is not simply a cheaper version of standard MM2H.");
   heading("3  Sarawak MM2H and Sabah MM2H");
   line("These state programmes have their own eligibility, financial evidence, minimum-stay, family and renewal requirements. Federal MM2H terms should not be applied to them. Confirm whether the intended place of residence is compatible with the issuing programme.");
   heading("4  Other routes");
   line("An active entrepreneur may need an appropriate Employment Pass linked to genuine business activity, including where Labuan is involved. Premium Visa Programme is another higher-capital route. DE Rantau is a separate temporary option for qualifying remote professionals, not a retirement pass.");
+  next();
   line("BEFORE YOU APPLY",17,true,ink,10);
   line("The 50+ and 60+ decision checklist",14,true,gold,13);
   heading("Financial commitments");
