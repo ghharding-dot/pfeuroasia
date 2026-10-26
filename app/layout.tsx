@@ -206,6 +206,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
         />
         {children}
+        <div
+          aria-label="Website credit"
+          style={{ background: "#0d0e0c", color: "#c4c5be", padding: "20px 24px", textAlign: "center", fontSize: "12px", lineHeight: 1.8, borderTop: "1px solid rgba(255,255,255,0.12)" }}
+        >
+          Website creation and copyright © {new Date().getFullYear()}{" "}
+          <a href="https://www.pfeuroasia.com" style={{ color: "#dec28d", textDecoration: "underline", textUnderlineOffset: "3px", display: "inline-block", padding: "4px 0" }}>
+            PfEuroAsia.com
+          </a>
+        </div>
         <ServiceWorkerRegister />
         <ImageProtection />
         <FloatingHomeButton />
