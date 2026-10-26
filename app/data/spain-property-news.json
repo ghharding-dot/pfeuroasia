@@ -1,0 +1,45 @@
+{
+  "updatedAt": "2026-10-26",
+  "nextReviewAt": "2026-11-09",
+  "items": [
+    {
+      "id": "st-regis-marbella-2026-10-20",
+      "category": "Branded residences",
+      "location": "Las Dunas · Marbella East",
+      "date": "2026-10-20",
+      "title": "St. Regis signs for Marbella",
+      "summary": "Sierra Blanca Estates, Platinum Estates and Marriott have signed for a beachfront resort with 169 hotel rooms and 151 luxury residences. The announced investment exceeds €500 million, with opening targeted for 2031. Urbanisation and licensing steps remain outstanding; this is a planned development, with no residential sales prices confirmed here.",
+      "status": "Agreement signed · Opening planned for 2031",
+      "figure": "€500m+",
+      "figureLabel": "Announced project investment",
+      "source": "Marbella Town Hall",
+      "sourceUrl": "https://www.marbella.es/actualidad/noticias/la-alcaldesa-destaca-que-el-complejo-hotelero-y-residencial-st-regis-que-abrira-en-2031-es-un-proyecto-que-generara-empleo-mejorara-las-infraestructuras-y-devolvera-espacios-publicos-a-la-ciudad.html"
+    },
+    {
+      "id": "oakmond-marbella-2026-10-21",
+      "category": "Hospitality & wellness",
+      "location": "Former Incosol · Marbella",
+      "date": "2026-10-21",
+      "title": "Oakmond reaches its first-stone milestone",
+      "summary": "The first-stone ceremony marks progress for Ilanga Capital’s redevelopment of the former Incosol. The announced investment exceeds €260 million and the resort is planned to open in 2029, combining hotel accommodation, private residences and a 10,000 m² preventive-medicine clinic. Opening dates remain targets, rather than completed delivery.",
+      "status": "First stone laid · Opening planned for 2029",
+      "figure": "€260m+",
+      "figureLabel": "Announced project investment",
+      "source": "Marbella Town Hall",
+      "sourceUrl": "https://www.marbella.es/actualidad/noticias/la-alcaldesa-destaca-que-el-futuro-oakmond-marbella-que-abrira-sus-puertas-en-2029-situara-a-la-ciudad-como-referente-internacional-en-salud-bienestar-y-longevidad.html"
+    },
+    {
+      "id": "spain-investment-q3-2026",
+      "category": "Investment market",
+      "location": "Spain · January–September 2026",
+      "date": "2026-10-19",
+      "title": "Living leads Spain’s investment market",
+      "summary": "Colliers reports €16.849 billion of Spanish real-estate investment through September, up 28.2% year on year. Living attracted €5.958 billion and hotels €3.302 billion. These are national investment transaction volumes, rather than Marbella house prices or asking-price comparisons; regulatory uncertainty remains a factor in investment decisions.",
+      "status": "Q3 report · Recorded investment volumes",
+      "figure": "€16.849bn",
+      "figureLabel": "Spanish investment through September",
+      "source": "Colliers · Q3 2026 Snapshot",
+      "sourceUrl": "https://www.colliers.com/en-es/research/snapshot-inversion-inmobiliaria-en-espana-q3-2026"
+    }
+  ]
+}
