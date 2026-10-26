@@ -26,7 +26,7 @@ export default function PrivacyPage() {
         <div className="site-shell about-story-grid">
           <div>
             <p className="eyebrow">Last updated</p>
-            <h2>4 October 2026</h2>
+            <h2>26 October 2026</h2>
           </div>
           <div>
             <h2>Information we collect</h2>
@@ -64,6 +64,17 @@ export default function PrivacyPage() {
               may process and retain service data under their own applicable
               terms. Please avoid entering passwords, identity documents or
               other sensitive information in the concierge.
+            </p>
+
+            <h2>Guide downloads and email registration</h2>
+            <p>
+              When you register for a complimentary guide, we store the email
+              address you submit, the requested guide, your acceptance of the
+              privacy notice and the registration time. We use these details to
+              provide the download and respond about the related property or
+              residency enquiry. Registration does not subscribe you to a general
+              newsletter. You can ask us to stop follow-up or delete your details
+              using the contact information below.
             </p>
 
             <h2>Verified brochure access</h2>

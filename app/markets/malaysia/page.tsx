@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MalaysiaPropertyGuideDownload } from "../../components/MalaysiaPropertyGuideDownload";
 import Link from "next/link";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
@@ -109,6 +110,8 @@ export default async function MalaysiaPage() {
     </section>
 
     <section className="market-landing-intro section-pad"><div className="site-shell narrow-grid"><p className="eyebrow">Spain made closer</p><div><h2>Local representation across borders.</h2><p>For clients based in Malaysia, we provide an accountable presence in Spain—qualifying opportunities, arranging focused visits, coordinating advisers and representing the client through the commercial process.</p></div></div></section>
+
+    <MalaysiaPropertyGuideDownload />
 
     <MalaysiaVideos />
 

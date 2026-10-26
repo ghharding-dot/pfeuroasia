@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { MalaysiaPropertyGuideDownload } from "./MalaysiaPropertyGuideDownload";
 import Link from "next/link";
 import { AuthorityReview } from "./AuthorityReview";
 import { Footer } from "./Footer";
@@ -51,6 +52,8 @@ export function SearchAuthorityGuide({ guide }: { guide: SearchGuideData }) {
           </div>
         </div>
       </section>
+
+      {guide.slug === "buying-property-in-malaysia-as-a-foreigner" && <MalaysiaPropertyGuideDownload />}
 
       <AuthorityReview focus={guide.focus} />
 

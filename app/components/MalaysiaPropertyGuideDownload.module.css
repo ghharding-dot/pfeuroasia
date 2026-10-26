@@ -1,0 +1,24 @@
+.section { padding: 78px 0; background: #f3eee6; color: #172f32; scroll-margin-top: 110px; }
+.grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 6vw, 90px); align-items: center; }
+.copy h2 { font-size: clamp(32px, 3.8vw, 56px); line-height: 1.08; margin: 14px 0 24px; }
+.copy p { line-height: 1.7; max-width: 660px; }
+.copy ul { padding-left: 20px; line-height: 1.7; margin: 22px 0; }
+.copy li { margin-bottom: 6px; }
+.note { font-size: 14px; color: #485b5c; }
+.panel { padding: clamp(24px, 3vw, 42px); border: 1px solid #bca777; background: #173438; color: #fff9ec; box-shadow: 0 16px 40px #17343812; }
+.badge { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; color: #ead1a0; }
+.panel h3 { font-size: clamp(28px, 3vw, 39px); line-height: 1.12; margin: 20px 0; color: #fff9ec; }
+.panel p { line-height: 1.6; }
+.form { display: grid; gap: 12px; margin-top: 24px; position: relative; }
+.form > label { font-size: 14px; }
+.form > input { width: 100%; min-width: 0; box-sizing: border-box; padding: 14px; border: 1px solid #b9c5c2; border-radius: 0; background: white; color: #173438; font: inherit; font-size: 16px; }
+.form input:focus-visible, .form button:focus-visible, .form a:focus-visible { outline: 3px solid #dfc28c; outline-offset: 3px; }
+.form .consent { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; line-height: 1.6; margin: 6px 0; }
+.consent input { flex: 0 0 17px; width: 17px; height: 17px; margin-top: 3px; accent-color: #cbaa70; }
+.consent a { color: #fff3d8; text-decoration: underline; }
+.form button { white-space: normal; text-align: center; justify-content: center; width: 100%; min-height: 52px; }
+.form button:disabled { opacity: .7; cursor: wait; }
+.form .status { margin: 0; min-height: 20px; font-size: 12px; color: #e4e9df; }
+.form .error { color: #ffe0c7; font-size: 14px; margin: 0; }
+.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 760px) { .section { padding: 48px 0; } .grid { grid-template-columns: 1fr; gap: 30px; } }

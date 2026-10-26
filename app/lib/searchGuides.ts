@@ -371,7 +371,9 @@ export const searchGuides: Record<string, SearchGuideData> = {
       { label: "Malaysia Ministry of Economy — foreign property acquisition guideline", href: "https://ekonomi.gov.my/sites/default/files/2025-01/GPPH%2013%20Julai%202022.pdf" },
       { label: "Federal Lands and Mines Department — land-owner guidance", href: "https://www.jkptg.gov.my/index.php/en/pemilik-tanah" },
       { label: "MOTAC — MM2H terms and property conditions", href: "https://motac.gov.my/wp-content/uploads/2026/01/Terms-And-Regulations-For-New-Participants-Under-The-Malaysia-My-Second-Home-MM2H-.pdf" },
-      { label: "Malaysia government — property and investment entry point", href: "https://rai.malaysia.gov.my/invest" },
+      { label: "HASiL — current stamp duty guidance", href: "https://www.hasil.gov.my/en/perundangan/garis-panduan/" },
+      { label: "Kuala Lumpur land office — consent and title enquiries", href: "https://www.ptgwp.gov.my/portal/" },
+      { label: "Juwai.asia — further reading on buying in Malaysia", href: "https://www.juwai.asia/main/news/15734" },
     ],
     related: [
       { label: "Current Malaysia properties", href: "/markets/malaysia#malaysia-property-carousel-heading" },
@@ -388,7 +390,7 @@ export const searchGuides: Record<string, SearchGuideData> = {
     ctaText: "Tell us the preferred location, budget, intended use, timing and whether residency is also being explored. We can coordinate property access and the appropriate local legal and professional introductions.",
     ctaHref: "/asia-gateway/enquire",
     ctaLabel: "Discuss a Malaysia purchase",
-    disclaimer: "Updated 1 September 2026. General information only; not legal, conveyancing, tax, immigration, financial or investment advice. State rules, thresholds, consent requirements and programme conditions can change. Appoint an independent Malaysian lawyer before paying or signing.",
+    disclaimer: "Updated 26 October 2026. General information only; not legal, conveyancing, tax, immigration, financial or investment advice. State rules, thresholds, consent requirements and programme conditions can change. Appoint an independent Malaysian lawyer before paying or signing.",
   },
 
   "spain-golden-visa-alternatives": {
