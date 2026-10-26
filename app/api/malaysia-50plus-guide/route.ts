@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
-import { recordMalaysiaAdviserAccess } from "../../../lib/malaysiaAdviserLeadStore";
+import { recordMalaysiaAdviserAccess } from "../../lib/malaysiaAdviserLeadStore";
 
 export const runtime = "nodejs";
 const ink = rgb(0.12, 0.18, 0.24);
