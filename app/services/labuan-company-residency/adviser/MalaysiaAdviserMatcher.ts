@@ -1,4 +1,5 @@
 import type { AdviserKnowledgeEntry } from "./LabuanKnowledge";
+import { malaysiaImmigrationKnowledge } from "./MalaysiaImmigrationKnowledge";
 import { labuanKnowledge } from "./LabuanKnowledge";
 import { malaysiaCostKnowledge } from "./MalaysiaCostKnowledge";
 import { malaysiaFoodKnowledge } from "./MalaysiaFoodKnowledge";
@@ -9,6 +10,7 @@ import { malaysiaTourismKnowledge } from "./MalaysiaTourismKnowledge";
 import { malaysiaTravelClimateKnowledge } from "./MalaysiaTravelClimateKnowledge";
 
 export type AdviserIntent =
+  | "immigration"
   | "labuan"
   | "tax-residency"
   | "hotels"
@@ -23,6 +25,8 @@ export type AdviserIntent =
   | "general";
 
 export const adviserSuggestions = [
+  "What are the Malaysia residency options for over 60s?",
+  "Can I apply for the DE Rantau digital nomad pass?",
   "How does Malaysia tax residency work?",
   "Does a Malaysian visa make me tax resident?",
   "How does Malaysia compare with Dubai?",
@@ -36,6 +40,8 @@ export const adviserSuggestions = [
 ];
 
 export const adviserSuggestionsEs = [
+  "¿Qué opciones de residencia hay en Malasia para mayores de 60 años?",
+  "¿Puedo solicitar el visado de nómada digital DE Rantau?",
   "¿Cómo funciona la residencia fiscal en Malasia?",
   "¿Un visado de Malasia me convierte en residente fiscal?",
   "¿Cómo se compara Malasia con Dubái?",
@@ -65,6 +71,10 @@ const labuanProfessionalSignals = [
   "work permit", "director", "dependant", "dependent", "renewal", "lfsa",
   "substance", "corporate tax", "holding company", "trading company", "bank account",
   "banking for the company",
+];
+
+const immigrationSignals = [
+  "mm2h", "my second home", "de rantau", "digital nomad", "nomad visa", "retirement visa", "retire in malaysia", "over 60", "over sixty", "over 50", "forest city", "johor residency", "sarawak mm2h", "sabah mm2h", "elderly parent", "family visa", "residency options", "residence options", "residence programme", "residency program",
 ];
 
 const taxResidencySignals = [
@@ -185,6 +195,7 @@ function normalise(value: string) {
 
   const spanishAliases: Array<[RegExp, string]> = [
     [/residencia fiscal|residente fiscal|domicilio fiscal/g, " tax residency tax resident "],
+    [/mayores de 60|mas de 60|mayores de 50|jubilacion|jubilados|nomada digital|residencia en malasia/g, " mm2h digital nomad retirement visa "],
     [/impuesto personal|impuestos personales|fiscalidad personal/g, " personal tax "],
     [/doble imposicion|convenio fiscal/g, " double tax tax treaty "],
     [/salir de espana|dejar espana/g, " leaving spain "],
@@ -242,6 +253,7 @@ export function detectMalaysiaAdviserIntent(question: string): AdviserIntent {
   // Personal tax-residence questions are controlled separately from corporate
   // Labuan taxation so a visa or company is never presented as automatic proof.
   if (hasTaxResidencyContext) return "tax-residency";
+  if (containsAny(q, immigrationSignals)) return "immigration";
 
   // "Labuan" can mean either the business/residency pathway or the island itself.
   // Leisure intent wins only when there is no company/tax/immigration signal.
@@ -280,6 +292,8 @@ function generalEntries(ids: Set<string>) {
 
 export function entriesForMalaysiaAdviserIntent(intent: AdviserIntent): AdviserKnowledgeEntry[] {
   switch (intent) {
+    case "immigration":
+      return malaysiaImmigrationKnowledge;
     case "labuan":
       return labuanKnowledge;
     case "tax-residency":
