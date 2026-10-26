@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MalaysiaGuideDownload } from "../guides/malaysia-over-60-residency/MalaysiaGuideDownload";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { TopicPathway } from "../components/TopicPathway";
@@ -100,6 +101,7 @@ export default function AsiaGatewayPage() {
               <strong>Start the residency finder →</strong>
             </Link>
           </div>
+          <MalaysiaGuideDownload />
           <p className={styles.residencyFeatureNote}>Guidance only, not an eligibility determination. Immigration and tax rules must be checked before applying.</p>
         </div>
       </section>
