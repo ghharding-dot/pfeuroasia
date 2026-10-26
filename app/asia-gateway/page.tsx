@@ -76,6 +76,34 @@ export default function AsiaGatewayPage() {
         </div>
       </section>
 
+      <section className={styles.residencyFeature} aria-labelledby="malaysia-residency-heading">
+        <div className="site-shell">
+          <p className="eyebrow">Malaysia residency · New guides</p>
+          <h2 id="malaysia-residency-heading">Explore the right route for your next chapter.</h2>
+          <div className={styles.residencyFeatureGrid}>
+            <Link href="/guides/malaysia-over-60-residency" className={styles.residencyFeatureCard}>
+              <span>For over-50s &amp; over-60s</span>
+              <h3>Malaysia retirement &amp; long-stay residency</h3>
+              <p>Compare MM2H, Johor, Sarawak, Sabah and business-led alternatives, including family and property commitments.</p>
+              <strong>Explore over-60 options →</strong>
+            </Link>
+            <Link href="/guides/malaysia-digital-nomad-pass" className={styles.residencyFeatureCard}>
+              <span>For remote professionals</span>
+              <h3>Digital nomad &amp; DE Rantau</h3>
+              <p>Understand remote-work eligibility, income evidence, duration, dependants and the difference from an Employment Pass.</p>
+              <strong>Explore digital nomad options →</strong>
+            </Link>
+            <Link href="/asia-gateway/residency-finder" className={styles.residencyFeatureCard}>
+              <span>Not sure which applies?</span>
+              <h3>Find your Malaysia residency pathway</h3>
+              <p>Answer a few questions about your age, family, budget and work plans to identify routes worth discussing with an adviser.</p>
+              <strong>Start the residency finder →</strong>
+            </Link>
+          </div>
+          <p className={styles.residencyFeatureNote}>Guidance only, not an eligibility determination. Immigration and tax rules must be checked before applying.</p>
+        </div>
+      </section>
+
       <MalaysiaVideos />
 
       <TopicPathway
