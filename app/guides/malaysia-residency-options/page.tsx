@@ -77,6 +77,13 @@ export default function MalaysiaResidencyOptionsPage() {
         </div>
       </section>
 
+      <section className={styles.cardsSection}>
+        <div className="site-shell">
+          <div className={styles.sectionHeading}><div><p className="eyebrow light">Six starting points</p><h2>Which pathway matches the plan?</h2></div><p>This is an initial orientation, not an eligibility decision. Every route remains subject to the current official criteria and approval.</p></div>
+          <div className={styles.cardGrid}>{pathways.map((pathway, index) => <article className={styles.card} key={pathway.title}><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><h3>{pathway.title}</h3><p>{pathway.text}</p><ul>{pathway.points.map((point) => <li key={point}>{point}</li>)}</ul><Link className="text-link light-link" href={pathway.href}>{pathway.linkLabel} <span>→</span></Link></article>)}</div>
+        </div>
+      </section>
+
       <NextStepPanel topic="asia" />
       <AuthorityReview focus="malaysia" />
 
@@ -84,13 +91,6 @@ export default function MalaysiaResidencyOptionsPage() {
         <div className={`site-shell ${styles.introGrid}`}>
           <div><p className="eyebrow">Choose by purpose</p><h2>Residency is not a single product.</h2></div>
           <div className={styles.lead}><p>Malaysia offers several possible routes, but they serve different people. A family seeking a long-term lifestyle base has different needs from a remote professional, an employed expatriate or an entrepreneur establishing genuine operations.</p><p>PF EuroAsia helps define the objective, compare suitable pathways and coordinate the right licensed immigration, corporate and tax specialists.</p></div>
-        </div>
-      </section>
-
-      <section className={styles.cardsSection}>
-        <div className="site-shell">
-          <div className={styles.sectionHeading}><div><p className="eyebrow light">Six starting points</p><h2>Which pathway matches the plan?</h2></div><p>This is an initial orientation, not an eligibility decision. Every route remains subject to the current official criteria and approval.</p></div>
-          <div className={styles.cardGrid}>{pathways.map((pathway, index) => <article className={styles.card} key={pathway.title}><span className={styles.cardNumber}>{String(index + 1).padStart(2, "0")}</span><h3>{pathway.title}</h3><p>{pathway.text}</p><ul>{pathway.points.map((point) => <li key={point}>{point}</li>)}</ul><Link className="text-link light-link" href={pathway.href}>{pathway.linkLabel} <span>→</span></Link></article>)}</div>
         </div>
       </section>
 

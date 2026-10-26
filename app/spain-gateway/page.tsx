@@ -15,6 +15,7 @@ import {
 import styles from "../HomeRegions.module.css";
 import pageStyles from "./SpainGateway.module.css";
 import { InternationalMoneySupport } from "../components/InternationalMoneySupport";
+import { SpainPropertyNews } from "../components/SpainPropertyNews";
 
 export const metadata: Metadata = {
   title: "Spain Property, Developments & 100+ Villa Rentals | PF EuroAsia",
@@ -202,6 +203,8 @@ export default async function SpainGatewayPage() {
         slides={publicPropertySlides.developments}
         variant="development"
       />
+
+      <SpainPropertyNews />
 
       <section className={styles.regionsSection} id="spain-areas">
         <div className="site-shell">
