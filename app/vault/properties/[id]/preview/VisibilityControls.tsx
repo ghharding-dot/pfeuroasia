@@ -95,7 +95,7 @@ export function VisibilityControls({ property }: { property: VaultProperty }) {
               max="100"
               defaultValue={property.homepagePriority || 100}
             />
-            <small>1 appears first. The homepage displays a maximum of ten villas.</small>
+            <small>1 appears first. The property carousel displays a maximum of 15 villas.</small>
           </label>
           <label>
             <span>Market / country</span>
