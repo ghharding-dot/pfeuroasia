@@ -89,7 +89,7 @@ async function getSpanishPropertySlides(): Promise<{
     const homepageProperties = [
       ...uniqueResale.filter((item) => item.featuredOnHomepage).sort((a, b) => a.homepagePriority - b.homepagePriority),
       ...uniqueResale.filter((item) => !item.featuredOnHomepage),
-    ].slice(0, 10).map((item) => item.slide);
+    ].slice(0, 15).map((item) => item.slide);
     return {
       properties: homepageProperties,
       developments: approved.filter((item) => item.listingType === "new-development").map((item) => item.slide),
