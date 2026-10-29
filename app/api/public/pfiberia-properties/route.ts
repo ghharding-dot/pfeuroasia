@@ -39,7 +39,7 @@ export async function GET() {
         }
         return (a.homepagePriority || 100) - (b.homepagePriority || 100);
       })
-      .slice(0, 10)
+      .slice(0, 15)
       .map((property) => {
         const isPublic = property.visibility === "public";
         return {
