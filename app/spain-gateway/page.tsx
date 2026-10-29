@@ -145,7 +145,7 @@ async function getSpainPropertySlides(): Promise<{
         ...featured,
         ...uniqueResale.filter((item) => !item.featuredOnHomepage),
       ]
-        .slice(0, 10)
+        .slice(0, 15)
         .map((item) => item.slide),
       developments: approved
         .filter((item) => item.listingType === "new-development")
