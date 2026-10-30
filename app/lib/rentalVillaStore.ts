@@ -177,6 +177,15 @@ export async function writeRentalVillas(villas: RentalVilla[]) {
   });
 }
 
+export const RENTAL_CAROUSEL_LIMIT = 15;
+
+export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
+  return villas
+    .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
+    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    .slice(0, RENTAL_CAROUSEL_LIMIT);
+}
+
 export function generateRentalReference(villas: RentalVilla[]) {
   const year = new Date().getFullYear().toString().slice(-2);
   const prefix = "LVC" + year + "-";
