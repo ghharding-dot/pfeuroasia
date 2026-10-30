@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { SkyscannerFlightSearch } from "../components/SkyscannerFlightSearch";
-import { readRentalVillas } from "../lib/rentalVillaStore";
+import { readRentalVillas, selectRentalCarouselVillas } from "../lib/rentalVillaStore";
 import { RentalEnquiryForm } from "./RentalEnquiryForm";
 import { RentalVillaCarousel } from "./RentalVillaCarousel";
 import { rentalAreas as areas, rentalConciergeServices as conciergeServices } from "./rentalContent";
@@ -37,9 +37,7 @@ export default async function LuxuryVillaRentalsPage({
   searchParams: Promise<{ villa?: string }>;
 }) {
   const [params, allVillas] = await Promise.all([searchParams, readRentalVillas()]);
-  const villas = allVillas
-    .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
-    .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+  const villas = selectRentalCarouselVillas(allVillas);
   const selectedVilla = villas.find((villa) => villa.reference === params.villa);
 
   return (
