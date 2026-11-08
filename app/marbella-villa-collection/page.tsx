@@ -22,7 +22,7 @@ export default async function MarbellaVillaCollection({ searchParams }: {
   return <main className={styles.site}>
     <header className={styles.header}>
       <Link href="/marbella-villa-collection" className={styles.brand}><span>MARBELLA</span><strong>VILLA COLLECTION</strong></Link>
-      <nav aria-label="Main navigation"><a href="#collection">The collection</a><a href="#locations">Locations</a><a href="#concierge">Concierge</a><a href="#enquire" className={styles.navAction}>Private enquiry</a></nav>
+      <nav aria-label="Main navigation"><Link href="/marbella-villa-collection/ar" lang="ar">العربية</Link><a href="#collection">The collection</a><a href="#locations">Locations</a><a href="#concierge">Concierge</a><a href="#enquire" className={styles.navAction}>Private enquiry</a></nav>
     </header>
     <section className={styles.hero}>
       <Image src="/images/hero-villa.webp" fill priority sizes="100vw" alt="Luxury villa overlooking Marbella and the Mediterranean" className={styles.heroImage}/>
