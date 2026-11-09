@@ -1,45 +1,71 @@
 {
-  "updatedAt": "2026-10-26",
-  "nextReviewAt": "2026-11-09",
+  "updatedAt": "2026-11-09",
+  "nextReviewAt": "2026-11-23",
   "items": [
+    {
+      "id": "spain-foreign-buyers-q3-2026",
+      "category": "Transactions & buyer flows",
+      "location": "Spain · Q3 2026",
+      "date": "2026-11-05",
+      "title": "Foreign buyers reach a record share as sales slow",
+      "summary": "Spain’s registrars report that foreign nationals accounted for 16.05% of Q3 home purchases, just over 26,300 registered transactions. Total sales fell 5.9% year on year to 164,148. Málaga province’s average registered price reached €3,400/m². These are completed, registered sales across the wider market, rather than luxury asking prices.",
+      "status": "Q3 report published · Registered transactions",
+      "figure": "16.05%",
+      "figureLabel": "Foreign share of Spain’s Q3 home purchases",
+      "source": "Colegio de Registradores · 5 November 2026",
+      "sourceUrl": "https://www.registradores.org/actualidad/detalle-nota-prensa/-/asset_publisher/VkEXepWEVFi3/?p_r_p_assetEntryId=26556272"
+    },
+    {
+      "id": "marbella-planning-consultation-2026-10-28",
+      "category": "Planning & regulation",
+      "location": "Marbella · Municipal planning",
+      "date": "2026-10-28",
+      "title": "Marbella opens consultation on planning changes",
+      "summary": "Public consultation runs from 28 October to 25 November on amendments to Marbella’s 1986 planning rules for productive and tourism uses. The town hall’s package covers 15 rules, including conditional hotel-development flexibility. These remain proposed changes under consultation; the announced aim is entry into force in 2027, subject to the statutory process.",
+      "status": "Public consultation · Proposed rules, not enacted",
+      "figure": "25 Nov",
+      "figureLabel": "2026 public-consultation deadline",
+      "source": "Marbella Town Hall · Official consultation",
+      "sourceUrl": "https://consultas.marbella.es/consultas/mpgou-de-1986-para-conferir-una-respuesta-mas-agil-a-la-evolucion-del-tejido-productivo-y-turistico-de-nucleos-urbanos-resid.html"
+    },
+    {
+      "id": "marbella-asking-prices-october-2026",
+      "category": "Residential pricing",
+      "location": "Marbella · October 2026 data",
+      "date": "2026-10-31",
+      "title": "Marbella asking prices edge higher in October",
+      "summary": "Idealista’s October data put Marbella’s advertised housing price at €5,974/m², up 0.1% month on month and 3.1% annually. Nagüeles–Golden Mile stood at €8,245/m², down 1.0% over the month. The date marks the reporting month’s end. These are asking-price indicators across listed housing, not completed-sale prices or individual villa valuations.",
+      "status": "Month ended 31 October · Asking-price data",
+      "figure": "€5,974/m²",
+      "figureLabel": "Marbella advertised housing price · October",
+      "source": "idealista/data · October 2026 price report",
+      "sourceUrl": "https://www.idealista.com/sala-de-prensa/informes-precio-vivienda/venta/andalucia/malaga-provincia/marbella/"
+    },
+    {
+      "id": "kategora-malak-launch-2026-10-29",
+      "category": "Managed hospitality",
+      "location": "Rincón de la Victoria · Eastern Costa del Sol",
+      "date": "2026-10-29",
+      "title": "Kategora launches Malak’s managed apartments",
+      "summary": "Kategora announced sales of 120 hotel apartments at Malak, a planned €36 million project, with asking prices from €278,000. Kora Living is to operate the complex under a hotel licence, with opening targeted for 2029. The developer’s estimated 6% net return is a projection, not an achieved or guaranteed yield.",
+      "status": "Sales launch · Opening targeted for 2029",
+      "figure": "€278,000",
+      "figureLabel": "Developer’s starting asking price",
+      "source": "Kategora company release via Europa Press · 29 October 2026",
+      "sourceUrl": "https://www.europapress.es/comunicados/empresas-00908/noticia-comunicado-kategora-lanza-nueva-oportunidad-inversion-hotelera-malaga-20261029094006.html"
+    },
     {
       "id": "st-regis-marbella-2026-10-20",
       "category": "Branded residences",
       "location": "Las Dunas · Marbella East",
       "date": "2026-10-20",
       "title": "St. Regis signs for Marbella",
-      "summary": "Sierra Blanca Estates, Platinum Estates and Marriott have signed for a beachfront resort with 169 hotel rooms and 151 luxury residences. The announced investment exceeds €500 million, with opening targeted for 2031. Urbanisation and licensing steps remain outstanding; this is a planned development, with no residential sales prices confirmed here.",
-      "status": "Agreement signed · Opening planned for 2031",
+      "summary": "The 20 October agreement between Sierra Blanca Estates, Platinum Estates and Marriott envisages 169 hotel rooms and 151 luxury residences, with announced investment above €500 million and opening targeted for 2031. At announcement, urbanisation and licensing steps remained pending. Retained after review: the agreement does not establish completed delivery or confirmed residential sale prices.",
+      "status": "20 October agreement · Opening targeted for 2031",
       "figure": "€500m+",
       "figureLabel": "Announced project investment",
       "source": "Marbella Town Hall",
       "sourceUrl": "https://www.marbella.es/actualidad/noticias/la-alcaldesa-destaca-que-el-complejo-hotelero-y-residencial-st-regis-que-abrira-en-2031-es-un-proyecto-que-generara-empleo-mejorara-las-infraestructuras-y-devolvera-espacios-publicos-a-la-ciudad.html"
-    },
-    {
-      "id": "oakmond-marbella-2026-10-21",
-      "category": "Hospitality & wellness",
-      "location": "Former Incosol · Marbella",
-      "date": "2026-10-21",
-      "title": "Oakmond reaches its first-stone milestone",
-      "summary": "The first-stone ceremony marks progress for Ilanga Capital’s redevelopment of the former Incosol. The announced investment exceeds €260 million and the resort is planned to open in 2029, combining hotel accommodation, private residences and a 10,000 m² preventive-medicine clinic. Opening dates remain targets, rather than completed delivery.",
-      "status": "First stone laid · Opening planned for 2029",
-      "figure": "€260m+",
-      "figureLabel": "Announced project investment",
-      "source": "Marbella Town Hall",
-      "sourceUrl": "https://www.marbella.es/actualidad/noticias/la-alcaldesa-destaca-que-el-futuro-oakmond-marbella-que-abrira-sus-puertas-en-2029-situara-a-la-ciudad-como-referente-internacional-en-salud-bienestar-y-longevidad.html"
-    },
-    {
-      "id": "spain-investment-q3-2026",
-      "category": "Investment market",
-      "location": "Spain · January–September 2026",
-      "date": "2026-10-19",
-      "title": "Living leads Spain’s investment market",
-      "summary": "Colliers reports €16.849 billion of Spanish real-estate investment through September, up 28.2% year on year. Living attracted €5.958 billion and hotels €3.302 billion. These are national investment transaction volumes, rather than Marbella house prices or asking-price comparisons; regulatory uncertainty remains a factor in investment decisions.",
-      "status": "Q3 report · Recorded investment volumes",
-      "figure": "€16.849bn",
-      "figureLabel": "Spanish investment through September",
-      "source": "Colliers · Q3 2026 Snapshot",
-      "sourceUrl": "https://www.colliers.com/en-es/research/snapshot-inversion-inmobiliaria-en-espana-q3-2026"
     }
   ]
 }
