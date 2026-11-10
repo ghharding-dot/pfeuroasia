@@ -236,6 +236,35 @@ const villaMariviShowcase: RentalVilla = {
   updatedAt: "2026-11-10T12:05:00.000Z",
 };
 
+
+const villaTulaShowcase: RentalVilla = {
+  id: "lvc-villa-tula",
+  reference: "LVC26-TULA",
+  title: "Villa Tula",
+  location: "Sierra Blanca Country Club, Istán, Marbella",
+  bedrooms: 4,
+  bathrooms: 5,
+  guests: 8,
+  priceFrom: "13520",
+  currency: "GBP",
+  description:
+    "A distinctive four-bedroom designer villa by architect Carlos Lamas, in Sierra Blanca Country Club near Istán. Panoramic views extend across Lake Istán, the Marbella coastline and the Mediterranean. Enjoy a private 8 x 4 m pool, scenic terraces, a cinema and games room, gym, study and stylish indoor-outdoor dining. The rental includes a weekly full clean and linen change plus one additional light housekeeping visit. Rates and availability are subject to confirmation.",
+  amenities:
+    "Panoramic lake and sea views, Private 8 x 4 m swimming pool, Four bedrooms, Five bathrooms, Private gym, Cinema and games room, Pool table, Cocktail bar, Office, Outdoor terraces, Outdoor dining, Gas BBQ, Sonos sound system, Fast Wi-Fi, Four parking spaces, Weekly housekeeping and linen change, Additional light housekeeping visit",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2023/07/1-Villa-Tula-in-Istan-villa-with-pool.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/07/2-Villa-Tula-designer-villa-living-room-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/07/8-Villa-Tula-games-room-and-bar-600x399.jpg",
+  fourthImage: "",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-10T14:10:00.000Z",
+  updatedAt: "2026-11-10T14:10:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
@@ -251,7 +280,13 @@ export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[]
     villa.title.trim().toLowerCase() === "villa marivi",
   );
   const candidates = hasVillaMarivi ? candidatesWithAluna : [villaMariviShowcase, ...candidatesWithAluna];
-  return candidates
+  const hasVillaTula = candidates.some((villa) =>
+    villa.id === villaTulaShowcase.id ||
+    villa.reference === villaTulaShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa tula",
+  );
+  const showcaseCandidates = hasVillaTula ? candidates : [villaTulaShowcase, ...candidates];
+  return showcaseCandidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, RENTAL_CAROUSEL_LIMIT);
