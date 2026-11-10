@@ -207,6 +207,35 @@ const villaAlunaShowcase: RentalVilla = {
   updatedAt: "2026-11-10T12:00:00.000Z",
 };
 
+
+const villaMariviShowcase: RentalVilla = {
+  id: "lvc-villa-marivi",
+  reference: "LVC26-MARIVI",
+  title: "Villa Marivi",
+  location: "Beachfront, Marbella Golden Mile",
+  bedrooms: 10,
+  bathrooms: 10,
+  guests: 16,
+  priceFrom: "68000",
+  currency: "GBP",
+  description:
+    "An exceptional private beachfront estate on Marbella's Golden Mile, beside Marbella Club. Approximately 2,400 m² of living space is set within 6,000 m² of gardens, with sea-view terraces and direct access to the beach. Facilities include an outdoor pool, heated indoor spa pool, sauna, hot tub, gym, floodlit tennis court, private cinema, piano cocktail lounge and games room. Daily housekeeping and dedicated villa concierge support. Occupancy, rates, event permissions and availability require confirmation.",
+  amenities:
+    "Direct beachfront access, 6,000 m² private estate, 2,400 m² living accommodation, Outdoor swimming pool, Heated indoor swimming pool, Children's pool, Sauna and hot tub, Gym, Floodlit tennis court, Private cinema, Games room, Piano cocktail bar, Lift, Daily housekeeping, Dedicated concierge, Sea-view terraces, Events on request",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/1-Villa-Marivi-luxury-beachfront-mansion-Marbella-528x400.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/1-Villa-Marivi-private-pool-directly-on-Marbella-beach-Edit-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/2-Villa-Marivi-spectacular-entrance-hall-528x400.jpg",
+  fourthImage: "",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-10T12:05:00.000Z",
+  updatedAt: "2026-11-10T12:05:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
@@ -215,7 +244,13 @@ export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[]
     villa.reference === villaAlunaShowcase.reference ||
     villa.title.trim().toLowerCase() === "villa aluna",
   );
-  const candidates = hasVillaAluna ? villas : [villaAlunaShowcase, ...villas];
+  const candidatesWithAluna = hasVillaAluna ? villas : [villaAlunaShowcase, ...villas];
+  const hasVillaMarivi = candidatesWithAluna.some((villa) =>
+    villa.id === villaMariviShowcase.id ||
+    villa.reference === villaMariviShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa marivi",
+  );
+  const candidates = hasVillaMarivi ? candidatesWithAluna : [villaMariviShowcase, ...candidatesWithAluna];
   return candidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
