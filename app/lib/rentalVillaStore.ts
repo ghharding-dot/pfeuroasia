@@ -294,6 +294,36 @@ const villaAcquaShowcase: RentalVilla = {
   updatedAt: "2026-11-10T14:15:00.000Z",
 };
 
+
+const villaLoreneaShowcase: RentalVilla = {
+  id: "lvc-villa-lorenea",
+  reference: "LVC26-LORENEA",
+  title: "Villa Lorenea",
+  location: "Marbella Golden Mile, near Puente Romano",
+  bedrooms: 7,
+  bathrooms: 8,
+  guests: 14,
+  priceFrom: "47300",
+  priceTo: "117460",
+  currency: "GBP",
+  description:
+    "A beautifully renewed single-storey private estate on Marbella's prestigious Golden Mile, with 6,500 m² of landscaped grounds, expansive lawn, an outdoor swimming pool and a private padel court. Seven garden-facing bedroom suites sleep up to 14 guests, including two suites in a separate annexe. Daily housekeeping, chef-prepared breakfast service and dedicated villa concierge are part of the stay. Close to Puente Romano and Marbella Club. All rates and availability require confirmation for selected dates.",
+  amenities:
+    "6,500 m² landscaped gardens, Private padel court, Outdoor swimming pool, Seven bedroom suites, Eight bathrooms, Two-bedroom annexe, Single-storey layout, Wheelchair accessible, Garden terraces, Summer dining room and BBQ, Chef-prepared breakfast, Daily housekeeping, Dedicated villa concierge, Fast Wi-Fi, Air conditioning, Gated parking for up to nine cars, Marbella Golden Mile, Private events by arrangement",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2026/02/1-Villa-Lorenea-Serviced-Luxury-Villa-Marbella-Mediterranean-Gardens.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2026/02/9.-Villa-Lorenea-Luxury-Private-Villa-Golden-Mile-Shaded-Garden-Seating-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2026/02/6-Villa-Lorenea-Luxury-7-Bed-Villa-Marbella-Principal-Bedroom-with-Fireplace-528x400.jpg",
+  fourthImage: "",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-10T14:20:00.000Z",
+  updatedAt: "2026-11-10T14:20:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
@@ -321,7 +351,13 @@ export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[]
     villa.title.trim().toLowerCase() === "villa acqua",
   );
   const finalCandidates = hasVillaAcqua ? showcaseCandidates : [villaAcquaShowcase, ...showcaseCandidates];
-  return finalCandidates
+  const hasVillaLorenea = finalCandidates.some((villa) =>
+    villa.id === villaLoreneaShowcase.id ||
+    villa.reference === villaLoreneaShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa lorenea",
+  );
+  const allCandidates = hasVillaLorenea ? finalCandidates : [villaLoreneaShowcase, ...finalCandidates];
+  return allCandidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, RENTAL_CAROUSEL_LIMIT);
