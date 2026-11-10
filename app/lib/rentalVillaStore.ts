@@ -324,6 +324,35 @@ const villaLoreneaShowcase: RentalVilla = {
   updatedAt: "2026-11-10T14:20:00.000Z",
 };
 
+
+const villaEspaceShowcase: RentalVilla = {
+  id: "lvc-villa-espace",
+  reference: "LVC26-ESPACE",
+  title: "Villa Espace",
+  location: "Los Flamingos, Benahavís — Villa Padierna Golf",
+  bedrooms: 6,
+  bathrooms: 6,
+  guests: 14,
+  priceFrom: "14500",
+  currency: "GBP",
+  description:
+    "A spectacular contemporary villa designed by architect Marcos Sainz, overlooking Villa Padierna Golf in Los Flamingos. The property offers approximately 900 m² of accommodation on a 1,400 m² plot, with panoramic golf, mountain and sea views, a dramatic 16 x 5 m heated floating infinity pool and a roof terrace. Six bedrooms sleep 12 guests, with up to two additional children on sofa beds by arrangement. The villa features a private mini-spa, fitness studio, TrackMan golf simulator, games lounge and outdoor kitchen. Housekeeping six days weekly and breakfast preparation are included; breakfast ingredients and optional extras are charged separately. Rates and availability are subject to confirmation.",
+  amenities:
+    "Six bedrooms, Six bathrooms, 12 guests plus 2 children on request, Heated 16 x 5 m infinity pool, Direct access to golf course, TrackMan golf simulator, Gym, Sauna and infrared mini-spa, Games room and pool table, Petanque court, Roof terrace, Panoramic sea and golf views, Outdoor kitchen and BBQ, Lift, Parking for four vehicles, Daily housekeeping six days weekly, Breakfast service (ingredients extra), Golf buggy on request (fees apply), Concierge",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2021/10/Villa-Espace-open-plan-BBQ-deck-1024x566.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2021/10/Villa-Espace-lounge-to-sundeck-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2021/10/Villa-Espace-bedroom-1-528x400.jpg",
+  fourthImage: "https://theluxuryvillacollection.com/wp-content/uploads/2021/10/Villa-Espace-hidden-windows-bedroom-6-528x400.jpg",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-10T15:10:00.000Z",
+  updatedAt: "2026-11-10T15:10:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
@@ -357,7 +386,13 @@ export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[]
     villa.title.trim().toLowerCase() === "villa lorenea",
   );
   const allCandidates = hasVillaLorenea ? finalCandidates : [villaLoreneaShowcase, ...finalCandidates];
-  return allCandidates
+  const hasVillaEspace = allCandidates.some((villa) =>
+    villa.id === villaEspaceShowcase.id ||
+    villa.reference === villaEspaceShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa espace",
+  );
+  const rentalCandidates = hasVillaEspace ? allCandidates : [villaEspaceShowcase, ...allCandidates];
+  return rentalCandidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, RENTAL_CAROUSEL_LIMIT);
