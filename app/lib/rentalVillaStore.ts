@@ -222,9 +222,9 @@ const villaMariviShowcase: RentalVilla = {
     "An exceptional private beachfront estate on Marbella's Golden Mile, beside Marbella Club. Approximately 2,400 m² of living space is set within 6,000 m² of gardens, with sea-view terraces and direct access to the beach. Facilities include an outdoor pool, heated indoor spa pool, sauna, hot tub, gym, floodlit tennis court, private cinema, piano cocktail lounge and games room. Daily housekeeping and dedicated villa concierge support. Occupancy, rates, event permissions and availability require confirmation.",
   amenities:
     "Direct beachfront access, 6,000 m² private estate, 2,400 m² living accommodation, Outdoor swimming pool, Heated indoor swimming pool, Children's pool, Sauna and hot tub, Gym, Floodlit tennis court, Private cinema, Games room, Piano cocktail bar, Lift, Daily housekeeping, Dedicated concierge, Sea-view terraces, Events on request",
-  image: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/1-Villa-Marivi-luxury-beachfront-mansion-Marbella-528x400.jpg",
-  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/1-Villa-Marivi-private-pool-directly-on-Marbella-beach-Edit-528x400.jpg",
-  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/2-Villa-Marivi-spectacular-entrance-hall-528x400.jpg",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/1-Villa-Marivi-Marbella-beach-front-villa.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/03/1-Villa-Marivi-Marbella-villa-with-private-tennis-court-1024x682.jpg",
+  thirdImage: "",
   fourthImage: "",
   galleryImages: [],
   listingPartnerCode: "LVC",
