@@ -265,6 +265,35 @@ const villaTulaShowcase: RentalVilla = {
   updatedAt: "2026-11-10T14:10:00.000Z",
 };
 
+
+const villaAcquaShowcase: RentalVilla = {
+  id: "lvc-villa-acqua",
+  reference: "LVC26-ACQUA",
+  title: "Villa Acqua",
+  location: "Marbella Golden Mile, 300 m from Playa Casablanca",
+  bedrooms: 4,
+  bathrooms: 6,
+  guests: 10,
+  priceFrom: "11750",
+  currency: "GBP",
+  description:
+    "An architect-designed four-bedroom villa just 300 metres from Playa Casablanca on Marbella's Golden Mile. Distinctive features include vertical living walls, a circular glass lift, a glass-sided deep aquarium pool with counter-current swimming, a sea-view roof terrace with hot tub, designer Bulthaup kitchen and a small fitness area. Sleeps eight in four en-suite bedrooms plus two using the sofa bed. Seasonal winter spa and pool heating by advance arrangement, with possible supplements. Light housekeeping included. Rates and availability subject to confirmation.",
+  amenities:
+    "300 m to Playa Casablanca, Glass-sided aquarium swimming pool, Counter-current swimming, Pool heating on request, Rooftop hot tub, Sea-view roof terrace, Four en-suite bedrooms, Six bathrooms, Circular glass lift, Vertical living walls, Bulthaup kitchen, Fitness area, Seasonal winter spa by advance booking, Sauna, Steam room, BBQ and fire-pit terrace, Smart home automation, Light housekeeping, Dog considered on request",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2023/05/1-Villa-Acqua-infinity-pool-terrace-528x400.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/05/2-Villa-Acqua-open-plan-living-space-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2023/05/9-Villa-Acqua-Rooftop-hot-tub-600x401.jpg",
+  fourthImage: "",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-10T14:15:00.000Z",
+  updatedAt: "2026-11-10T14:15:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
@@ -286,7 +315,13 @@ export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[]
     villa.title.trim().toLowerCase() === "villa tula",
   );
   const showcaseCandidates = hasVillaTula ? candidates : [villaTulaShowcase, ...candidates];
-  return showcaseCandidates
+  const hasVillaAcqua = showcaseCandidates.some((villa) =>
+    villa.id === villaAcquaShowcase.id ||
+    villa.reference === villaAcquaShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa acqua",
+  );
+  const finalCandidates = hasVillaAcqua ? showcaseCandidates : [villaAcquaShowcase, ...showcaseCandidates];
+  return finalCandidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, RENTAL_CAROUSEL_LIMIT);
