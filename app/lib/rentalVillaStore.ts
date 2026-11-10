@@ -177,10 +177,46 @@ export async function writeRentalVillas(villas: RentalVilla[]) {
   });
 }
 
+
+// Curated LVC partner showcase listing. Enquiries stay within PF EuroAsia.
+const villaAlunaShowcase: RentalVilla = {
+  id: "lvc-villa-aluna",
+  reference: "LVC26-ALUNA",
+  title: "Villa Aluna",
+  location: "Hacienda Las Chapas, Marbella East",
+  bedrooms: 7,
+  bathrooms: 7,
+  guests: 14,
+  priceFrom: "15800",
+  currency: "GBP",
+  description:
+    "Contemporary seven-suite private villa set among mature pines in Hacienda Las Chapas. Highlights include a sunken lounge, landscaped pool gardens, outdoor kitchen and dining, private cinema, Technogym fitness room, yoga studio and garden spa with sauna, Japanese hot bath and cold plunge. Daily housekeeping and concierge support included. Weekly rates and availability are subject to confirmation.",
+  amenities:
+    "Private swimming pool, 7 en-suite bedrooms, Landscaped gardens, Garden sauna, Japanese hot bath, Cold plunge, Private cinema, Technogym gym, Yoga and meditation studio, Outdoor kitchen and BBQ, EV charger, Daily housekeeping, Concierge service, High-speed Wi-Fi",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2026/08/2-Villa-Aluna-Private-Luxury-Villa-Marbella-Entrance-and-TV-Snug-528x400.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2026/08/1-Villa-Aluna-Luxury-Designer-Villa-Marbella-Outdoor-Spa-Circuit-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2026/08/6-Villa-Aluna-Private-Luxury-Villa-Marbella-Bedroom-1A-528x400.jpg",
+  fourthImage: "",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-10T12:00:00.000Z",
+  updatedAt: "2026-11-10T12:00:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
-  return villas
+  const hasVillaAluna = villas.some((villa) =>
+    villa.id === villaAlunaShowcase.id ||
+    villa.reference === villaAlunaShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa aluna",
+  );
+  const candidates = hasVillaAluna ? villas : [villaAlunaShowcase, ...villas];
+  return candidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, RENTAL_CAROUSEL_LIMIT);
