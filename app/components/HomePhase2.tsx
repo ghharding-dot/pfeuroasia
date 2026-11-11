@@ -82,10 +82,7 @@ export function HomePhase2() {
             </div>
           </Link>
 
-          <Link
-            className={`${phase2Styles.gatewayCard} ${phase2Styles.asiaPath}`}
-            href="/asia-gateway"
-          >
+          <div className={`${phase2Styles.gatewayCard} ${phase2Styles.asiaPath}`}>
             <div className={phase2Styles.cardOverlay} />
             <div className={phase2Styles.cardTopline}>
               <span>03</span>
@@ -107,9 +104,12 @@ export function HomePhase2() {
                 <li>Malaysia &amp; Labuan company formation</li>
                 <li>Tax residence &amp; living-cost guidance</li>
               </ul>
-              <strong>Explore Malaysia &amp; Asia</strong>
+              <div className={phase2Styles.asiaActions}>
+                <Link href="/asia-gateway">Explore Malaysia &amp; Asia</Link>
+                <Link href="/travel/malaysia">Hotels &amp; Travel</Link>
+              </div>
             </div>
-          </Link>
+          </div>
         </div>
       </div>
     </section>
