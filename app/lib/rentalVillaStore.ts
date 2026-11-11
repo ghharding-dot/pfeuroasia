@@ -382,7 +382,7 @@ const villaEirenaShowcase: RentalVilla = {
   updatedAt: "2026-11-11T00:08:00.000Z",
 };
 
-export const RENTAL_CAROUSEL_LIMIT = 15;
+export const RENTAL_CAROUSEL_LIMIT = 16;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
   const hasVillaAluna = villas.some((villa) =>
