@@ -353,6 +353,35 @@ const villaEspaceShowcase: RentalVilla = {
   updatedAt: "2026-11-10T15:10:00.000Z",
 };
 
+
+const villaEirenaShowcase: RentalVilla = {
+  id: "lvc-villa-eirena",
+  reference: "LVC26-EIRENA",
+  title: "Villa Eirena",
+  location: "Los Flamingos, Benahavís",
+  bedrooms: 14,
+  bathrooms: 16,
+  guests: 32,
+  priceFrom: "36300",
+  currency: "GBP",
+  description:
+    "A private 14-bedroom wellness estate in the gated Los Flamingos golf resort near Villa Padierna, ideal for large family holidays, wellness retreats and corporate gatherings. The villa accommodates up to 32 guests, with separate staff accommodation for up to three. Facilities include an infinity pool overlooking the fairways, a heated indoor spa pool, sauna, steam room, treatment suites, professional Technogym gym, rooftop spinning terrace, yoga and meditation studios, rooftop outdoor cinema, professional kitchen and juice bar. Daily housekeeping and concierge support are included. Published starting rate; availability and final quotation subject to confirmation.",
+  amenities:
+    "14 en-suite bedrooms, 16 bathrooms, Sleeps 32 guests, Separate staff apartment, Outdoor infinity swimming pool, Heated indoor spa pool, Sauna and steam room, Massage and treatment rooms, Technogym fitness suite, Rooftop spinning terrace, Yoga and meditation studios, Outdoor cinema, Rooftop sea-view terrace, Professional chef's kitchen, Guest kitchen, Juice bar, Meeting and retreat spaces, Daily housekeeping, Concierge support, Gated private estate, Parking for up to eight cars",
+  image: "https://theluxuryvillacollection.com/wp-content/uploads/2025/07/1-Villa-Eirena-luxury-golf-villa-Marbella-fairways-view-528x400.jpg",
+  secondaryImage: "https://theluxuryvillacollection.com/wp-content/uploads/2025/07/2-Villa-Eirena-luxury-private-villa-Benahavis-communal-living-2-528x400.jpg",
+  thirdImage: "https://theluxuryvillacollection.com/wp-content/uploads/2025/07/8-Villa-Eirena-luxury-private-villa-Benahavis-indoor-pool-1024x687.jpg",
+  fourthImage: "https://theluxuryvillacollection.com/wp-content/uploads/2025/07/9-Villa-Eirena-luxury-private-villa-Marbella-exterior-meditation-room_-528x400.jpg",
+  galleryImages: [],
+  listingPartnerCode: "LVC",
+  listingPartnerName: "The Luxury Villa Collection",
+  submittedBy: "admin",
+  approvalStatus: "approved",
+  status: "published",
+  createdAt: "2026-11-11T00:08:00.000Z",
+  updatedAt: "2026-11-11T00:08:00.000Z",
+};
+
 export const RENTAL_CAROUSEL_LIMIT = 15;
 
 export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[] {
@@ -392,7 +421,13 @@ export function selectRentalCarouselVillas(villas: RentalVilla[]): RentalVilla[]
     villa.title.trim().toLowerCase() === "villa espace",
   );
   const rentalCandidates = hasVillaEspace ? allCandidates : [villaEspaceShowcase, ...allCandidates];
-  return rentalCandidates
+  const hasVillaEirena = rentalCandidates.some((villa) =>
+    villa.id === villaEirenaShowcase.id ||
+    villa.reference === villaEirenaShowcase.reference ||
+    villa.title.trim().toLowerCase() === "villa eirena",
+  );
+  const expandedCandidates = hasVillaEirena ? rentalCandidates : [villaEirenaShowcase, ...rentalCandidates];
+  return expandedCandidates
     .filter((villa) => villa.status === "published" && villa.approvalStatus === "approved")
     .sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
     .slice(0, RENTAL_CAROUSEL_LIMIT);
