@@ -62,7 +62,7 @@ export function HomePhase2() {
 
           <Link
             className={`${phase2Styles.gatewayCard} ${phase2Styles.aboutPath}`}
-            href="/why-euroasia"
+            href="/about"
           >
             <div className={phase2Styles.cardOverlay} />
             <div className={phase2Styles.cardTopline}>
@@ -76,7 +76,7 @@ export function HomePhase2() {
                 Your trusted connection.
               </p>
               <p>
-                Meet the people and partners supporting your plans.
+                Meet Geoff Harding and the trusted professionals behind our international network.
               </p>
               <strong>About us</strong>
             </div>
