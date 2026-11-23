@@ -9,37 +9,43 @@ export const metadata = createMetadata("whyEn");
 
 const expertise = [
   {
+    number: "02",
+    title: "Meet Geoff & our partners",
+    text: "Get to know our founder and the people behind the trusted PF EuroAsia professional network.",
+    href: "/about",
+  },
+  {
     number: "01",
     title: "Property acquisition",
     text: "Private search and discreet representation for exceptional homes and selected investment opportunities.",
     href: "/services/acquisition",
   },
   {
-    number: "02",
+    number: "03",
     title: "International sales",
     text: "Positioning quality Spanish property for qualified buyers across Europe, the Middle East and Asia.",
     href: "/services/international-sales",
   },
   {
-    number: "03",
+    number: "04",
     title: "Relocation & residency",
     text: "Practical guidance and trusted local support for clients establishing a new life internationally.",
     href: "/asia-gateway",
   },
   {
-    number: "04",
+    number: "05",
     title: "Investment opportunities",
     text: "Selected residential, commercial, development and property-led opportunities by public or private introduction.",
     href: "/opportunities/investment-opportunities",
   },
   {
-    number: "05",
+    number: "06",
     title: "Professional partners",
     text: "Coordinated access to trusted legal, financial, tax and specialist advisers throughout the transaction.",
     href: "/about",
   },
   {
-    number: "06",
+    number: "07",
     title: "Cross-border representation",
     text: "One trusted relationship coordinating property interests between Spain, the Middle East and Asia.",
     href: "/about",
